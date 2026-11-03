@@ -124,12 +124,8 @@ Kira and Cael wrap the **8 real tools** of the SLC `multi_agent` handoff bundle 
 is no mock data layer in the graded path. Vega fuses three equal-weight channels — evidence magnitude,
 causal direction, and paralog buffering — into a decision.
 
-### 3.1 v20 decision flow
+### 3.1 SLC-MARS
 
-v20 = **v16 base + R2 membership essentiality re-ranking**. Upstream of Vega, four supply paths run
-in one `asyncio.gather` ([`knowledge_agents/answer_pipeline.py`](knowledge_agents/answer_pipeline.py)):
-Kira, Cael, L1 (a Prior agent answering the bare question with zero evidence), and L2 (a second
-independent pure-LLM pass with a heterogeneous persona at temperature 0.7).
 
 Vega's fusion layer (`_fuse` / `_fuse_triad`) then applies:
 
@@ -244,10 +240,10 @@ Every system is scored on two candidate pools: the **graph pool** (PPR top-15 �
 | AutoGen | 0.3553 | 0.818 | 0.1219 | 0.818 |
 | MDAgents ‡ | 0.1972 | 0.273 | 0.1466 | 0.600 |
 | LitRAG | 0.3086 | 0.667 | 0.1173 | 0.606 |
-| **SLC-MARS per-gene (Kira)** | **0.3838** | **0.909** | **0.1521** | 0.818 |
-| SLC-MARS RRF fusion (Kira+Cael) | 0.3704 | 0.818 | 0.1315 | 0.636 |
-| SLC-MARS graph+PPR (Cael) | 0.3631 | 0.818 | 0.1349 | 0.545 |
-| SLC-MARS graph only (Cael) | 0.3460 | 0.818 | 0.1187 | 0.636 |
+| **SLC-MARS w/o computing agents** | **0.3838** | **0.909** | **0.1521** | 0.818 |
+| SLC-MARS full | 0.3704 | 0.818 | 0.1315 | 0.636 |
+| SLC-MARS w/o knowledge agents | 0.3631 | 0.818 | 0.1349 | 0.545 |
+| SLC-MARS graph only  | 0.3460 | 0.818 | 0.1187 | 0.636 |
 
 ‡ averages 10 of 11 questions; one ended in a transient API timeout.
 
@@ -493,35 +489,10 @@ feature would be cheating.
 
 ---
 
-## 10. Designs that were tried and rejected
-
-Kept in-tree behind default-off gates, so each is reproducible without reviving it into the released
-path. Recorded because two of them are load-bearing negative results.
-
-| ver. | attempt | verdict | replay |
-|---|---|---|---|
-| v13 | parallel N-sample + mode aggregation on the prior channel | **negative**: A 75.0→72.5, B 68.4→63.2 — aggregation forces low-consensus items into hard answers; the "agreement" gain is agreement among errors | `SLC_PRIOR_ENSEMBLE=3` |
-| v14 | end-to-end N-sample vote at the answer layer | **negative**: heuristic arm collapses (B 63.2→26.3) — N samples share one deterministic evidence backbone, so they are not i.i.d. reasoning samples | `SLC_ANSWER_ENSEMBLE=3` |
-| v15 | first triad vote (serial, second vote at elevated temperature) | mechanism positive (+9.1 pp on the common subset) but **operationally negative**: 2 serial LLM calls/question → 17.5 % timed out of the table | serial variant |
-| v16 | engineering fix: L2 into the parallel supply gather, persona heterogeneity, cross-critique, double-fire racing | **positive, became the base**: 0/40 absent; n=100 overall 70.0 % > AutoGen 69.0 / MDAgents 63.0 | frozen in |
-| v17 | Mongo excerpts as the second vote's source (de-correlation) | not adopted, no cross-subset gain | `SLC_PRIOR_RETRIEVE=1` |
-| v18 | membership negative-evidence channel + confidence-selective abstention | **negative @n=100**; the per-slice leads were sampling artifacts | `SLC_NEG_EVID=1`, `SLC_ABSTAIN_THETA>0` |
-| — | literature RAG on the baseline side | **harmful**: pairwise 86.4→54.5 — raw excerpts push the model toward "appears more in the literature = more essential", and long context induces timeouts | `run_lit_rag.py` |
-| — | MDAgents-style fully serial expert debate | **zero accuracy gain at an order-of-magnitude cost** (4–17 min/question vs ~30 s) | `run_mdagents.py` |
-
-Two laws fall out of this, and both were paid for in wall-clock:
-
-1. **Ensembling only helps over independent, complete reasoning paths aggregated at the decision
-   point.** When a deterministic backbone dominates the verdict, majority voting averages the correct
-   answer away (v13 and v14 are the same mistake at two different layers).
-2. **A mechanism claim must be sized to the metric.** n=40 "net-zero" readings were measurement
-   insufficiency, not evidence: v12's 75 % was exposed by n=100 as small-sample luck (true 47 %),
-   while v16's real gain lives precisely in the "recover an answer from an honest abstention" scenario
-   that n=40 does not contain.
 
 ---
 
-## 11. Provenance and stated limitations
+## 10. Provenance and stated limitations
 
 - **Trace cache as evidence.** Every graded answer is a row in `outputs/traces/tracestore.jsonl` keyed
   by `trace_version`; per-question views are in `outputs/traces/by_question/` (489 files). v20 is
@@ -541,7 +512,7 @@ Two laws fall out of this, and both were paid for in wall-clock:
 
 ---
 
-## 12. Documentation map
+## 11. Documentation map
 
 | where | what |
 |---|---|
@@ -557,7 +528,7 @@ Two laws fall out of this, and both were paid for in wall-clock:
 
 ---
 
-## 13. External dependencies and terms
+## 12. External dependencies and terms
 
 - **[MetaGPT](https://github.com/FoundationAgents/MetaGPT)** is vendored under `MetaGPT/` under its own
   license; this repository does not relicense it.
