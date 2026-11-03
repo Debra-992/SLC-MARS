@@ -1,0 +1,720 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00220",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC5A8 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC5A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00220",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC5A8"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC5A8",
+              "protein_function": "Acts as an electrogenic sodium (Na+) and chloride (Cl-)-dependent sodium-coupled solute transporter.",
+              "aliases": "AIT, SMCT1",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC5A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC5 Sodium glucose  cotransporter family",
+              "target_properties": {
+                "name": "SLC5 Sodium glucose  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC5A8",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A8",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Transport by SLC5A8 with subsequent inhibition of histone deacetylase 1 (HDAC1) and HDAC3 underlies the antitumor activity of 3-bromopyruvate.",
+              "abstract": "3-bromopyruvate is an alkylating agent with antitumor activity. It is currently believed that blockade of adenosine triphosphate production from glycolysis and mitochondria is the primary mechanism responsible for this antitumor effect. The current studies uncovered a new and novel mechanism for the antitumor activity of 3-bromopyruvate. The transport of 3-bromopyruvate by sodium-coupled monocarboxylate transporter SMCT1 (SLC5A8), a tumor suppressor and a sodium (Na+)-coupled, electrogenic transporter for short-chain monocarboxylates, was studied using a mammalian cell expression and the Xenopus laevis oocyte expression systems. The effect of 3-bromopyruvate on histone deacetylases (HDACs) was monitored using the lysate of the human breast cancer cell line MCF7 and human recombinant HDAC isoforms as the enzyme sources. Cell viability was monitored by fluorescence-activated cell-sorting analysis and colony-formation assay. The acetylation status of histone H4 was evaluated by Western blot analysis. 3-Bromopyruvate is a transportable substrate for SLC5A8, and that transport process is Na+-coupled and electrogenic. MCF7 cells did not express SLC5A8 and were not affected by 3-bromopyruvate. However, when transfected with SLC5A8 or treated with inhibitors of DNA methylation, these cells underwent apoptosis in the presence of 3-bromopyruvate. This cell death was associated with the inhibition of HDAC1/HDAC3. Studies with different isoforms of human recombinant HDACs identified HDAC1 and HDAC3 as the targets for 3-bromopyruvate. 3-Bromopyruvate was transported into cells actively through the tumor suppressor SLC5A8, and the process was energized by an electrochemical Na+ gradient. Ectopic expression of the transporter in MCF7 cells led to apoptosis, and the mechanism involved the inhibition of HDAC1/HDAC3.",
+              "doi": "10.1002/cncr.24532",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "57c4bb57619c1445b8f468aadd58063795c7d28cb5feb6b42bd31ecbce6ec5c6"
+              }
+            },
+            {
+              "title": "Sodium-coupled transport of the short chain fatty acid butyrate by SLC5A8 and its relevance to colon cancer.",
+              "abstract": "SLC5A8, expressed predominantly in the colon, is a Na(+)-coupled transporter for short-chain fatty acids. In this paper, we report on the characterization of butyrate transport by SLC5A8 and the relevance of SLC5A8-mediated butyrate transport to colon cancer. SLC5A8 transports butyrate via a Na(+)-dependent electrogenic process. Na(+) activation of the transport process exhibits sigmoidal kinetics, indicating involvement of more than one Na(+) in the activation process. SLC5A8 is silenced in colon cancer in humans, in a mouse model of intestinal/colon cancer, and in colon cancer cell lines. The tumor-associated silencing of SLC5A8 involves DNA methylation by DNA methyltransferase 1. Reexpression of SLC5A8 in colon cancer cells leads to apoptosis but only in the presence of butyrate. SLC5A8-mediated entry of butyrate into cancer cells is associated with inhibition of histone deacetylation. The changes in gene expression in SLC5A8/butyrate-induced apoptosis include upregulation of pro-apoptotic genes and downregulation of anti-apoptotic genes. In addition, the expression of phosphatidylinositol-3-kinase subunits is affected differentially, with downregulation of p85alpha and upregulation of p55alpha and p50alpha. These studies show that SLC5A8 mediates the tumor-suppressive effects of the bacterial fermentation product butyrate in the colon.",
+              "doi": "10.1007/s11605-008-0573-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e926b4235f8ce8340e5b60035a7248ba2da23cfaa2d9b1e13d0ec694208d0694"
+              }
+            },
+            {
+              "title": "Activin A induces SLC5A8 expression through the Smad3 signaling pathway in human colon cancer RKO cells.",
+              "abstract": "SLC5A8 (Solute carrier family 5, member 8), proposed to be a potential tumor suppressor gene, is down-regulated by epigenetic changes in some colorectal cancer cells, and ectopic expression of SLC5A8 in SLC5A8-deficient colon cancer cell lines leads to suppression of the colony-forming ability of these cells. Activin A, a member of the transforming growth factor-β (TGF-β) superfamily, has been shown to inhibit the proliferation of a variety of tumor (and normal) human cell types. However, the mechanism(s) by which activin A exerts its inhibitory effects are not yet understood. In this study, we showed that activin A up-regulated SLC5A8 expression in colorectal cancer RKO cells and human embryonic kidney (HEK) 293T cells. To elucidate the underlying mechanism involved in this process, we investigated the activation of the Smad signaling pathway, and analyzed the effects of dominant negative Smad3 and Smad2 proteins on activin A-induced SLC5A8 expression. The results indicated that activin A-induced SLC5A8 expression was dependent on activation of Smad3. Further analysis showed that activin A induced SLC5A8 expression via transcriptional activation. Deletion analysis indicated that the CAGA elements located within the -273/-222 region of the human SLC5A8 promoter were responsive to activin A. Taken together, our results strongly suggest that activin A up-regulates SLC5A8 expression through the Smad signaling pathway, which also partially explains the inhibitory effects of activin A in RKO cells.",
+              "doi": "10.1016/j.biocel.2010.08.007",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b0705309c81d37e7be92f8080e6c8f57ab3871b63a5f5f36d278bf6776f3f1a4"
+              }
+            },
+            {
+              "title": "Role of SLC5A8, a plasma membrane transporter and a tumor suppressor, in the antitumor activity of dichloroacetate.",
+              "abstract": "There has been growing interest among the public and scientists in dichloroacetate (DCA) as a potential anticancer drug. Credible evidence exists for the antitumor activity of this compound, but high concentrations are needed for significant therapeutic effect. Unfortunately, these high concentrations produce detrimental side effects involving the nervous system, thereby precluding its use for cancer treatment. The mechanistic basis of the compound's antitumor activity is its ability to activate the pyruvate dehydrogenase complex through inhibition of pyruvate dehydrogenase kinase. As the compound inhibits the kinase at micromolar concentrations, it is not known why therapeutically prohibitive high doses are needed for suppression of tumor growth. We hypothesized that lack of effective mechanisms for the entry of DCA into tumor cells may underlie this phenomenon. Here we show that SLC5A8 transports DCA very effectively with high affinity. This transporter is expressed in normal cells, but expression is silenced in tumor cells by epigenetic mechanisms. The lack of the transporter makes tumor cells resistant to the antitumor activity of DCA. However, if the transporter is expressed in tumor cells ectopically, the cells become sensitive to the drug at low concentrations. This is evident in breast cancer cells, colon cancer cells and prostate cancer cells. Normal cells, which constitutively express the transporter, are however not affected by the compound, indicating tumor cell-selective therapeutic activity. The mechanism of the compound's antitumor activity still remains its ability to inhibit pyruvate dehydrogenase kinase and force mitochondrial oxidation of pyruvate. As silencing of SLC5A8 in tumors involves DNA methylation and its expression can be induced by treatment with DNA methylation inhibitors, our findings suggest that combining DCA with a DNA methylation inhibitor would offer a means to reduce the doses of DCA to avoid detrimental effects associated with high doses but without compromising antitumor activity.",
+              "doi": "10.1038/onc.2011.113",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "dc92c1389f5b690d3f3ed7c162080d56affb00cfd2da055bcaa59bc1788be8af"
+              }
+            },
+            {
+              "title": "Colon cancer cells maintain low levels of pyruvate to avoid cell death caused by inhibition of HDAC1/HDAC3.",
+              "abstract": "Human colon cancer cells and primary colon cancer silence the gene coding for LDH (lactate dehydrogenase)-B and up-regulate the gene coding for LDH-A, resulting in effective conversion of pyruvate into lactate. This is associated with markedly reduced levels of pyruvate in cancer cells compared with non-malignant cells. The silencing of LDH-B in cancer cells occurs via DNA methylation, with involvement of the DNMTs (DNA methyltransferases) DNMT1 and DNMT3b. Colon cancer is also associated with the expression of pyruvate kinase M2, a splice variant with low catalytic activity. We have shown recently that pyruvate is an inhibitor of HDACs (histone deacetylases). Here we show that pyruvate is a specific inhibitor of HDAC1 and HDAC3. Lactate has no effect on any of the HDACs examined. Colon cancer cells exhibit increased HDAC activity compared with non-malignant cells. HDAC1 and HDAC3 are up-regulated in colon cancer cells and in primary colon cancer, and siRNA (small interfering RNA)-mediated silencing of HDAC1 and HDAC3 in colon cancer cells induces apoptosis. Colon cancer cells silence SLC5A8, the gene coding for a Na(+)-coupled pyruvate transporter. Heterologous expression of SLC5A8 in the human colon cancer cell line SW480 leads to inhibition of HDAC activity when cultured in the presence of pyruvate. This process is associated with an increase in intracellular levels of pyruvate, increase in the acetylation status of histone H4, and enhanced cell death. These studies show that cancer cells effectively maintain low levels of pyruvate to prevent inhibition of HDAC1/HDAC3 and thereby to evade cell death.",
+              "doi": "10.1042/BJ20081132",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "077167ede8d86e4a0c27500a1c4322cda7c1310d6c6ee0756ef9b877022bc4ce"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC5A8 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC5A8 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC5A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC5A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC5A8",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC5A8": {
+          "status": "unavailable",
+          "gene": "SLC5A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC5A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC5A8",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC5A8"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A8": 8.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC5A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC5A8"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A8": 8.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC5A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A8']",
+        "status": "ok",
+        "summary": "SLC5A8/SMCT1 is a tumor-suppressive sodium-coupled monocarboxylate transporter that mediates uptake of growth-inhibitory metabolites such as butyrate; its silencing or loss is associated with cancer progression, including lymphoma/DLBCL contexts, so its functional activity would be expected to inhibit lymphoma tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC5A8"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC5A8/SMCT1 is a tumor-suppressive sodium-coupled monocarboxylate transporter that mediates uptake of growth-inhibitory metabolites such as butyrate; its silencing or loss is associated with cancer progression, including lymphoma/DLBCL contexts, so its functional activity would be expected to inhibit lymphoma tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:49:02Z"
+  }
+}

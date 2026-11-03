@@ -1,0 +1,400 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00018",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC16A8 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC16A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00018",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC16A8"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC16A8",
+              "protein_function": "Probable retinal pigment epithelium (RPE)-specific proton-coupled L-lactate transporter.",
+              "aliases": "MCT3",
+              "transport_type": "C / H+ (pH dependent but cotransport not confirmed experimentally)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC16A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC16 Monocarboxylate  transporter family",
+              "target_properties": {
+                "name": "SLC16 Monocarboxylate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC16A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC16A8",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The SLC16 gene family - structure, role and regulation in health and disease.",
+              "abstract": "The SLC16 gene family has fourteen members. Four (SLC16A1, SLC16A3, SLC16A7, and SLC16A8) encode monocarboxylate transporters (MCT1, MCT4, MCT2, and MCT3, respectively) catalysing the proton-linked transport of monocarboxylates such as l-lactate, pyruvate and ketone bodies across the plasma membrane. SLC16A2 encodes a high affinity thyroid hormone transporter (MCT8) and SLC16A10 an aromatic amino acid transporter (TAT1). The substrates and roles of the remaining eight members are unknown. All family members are predicted to have 12 transmembrane helices (TMs) with intracellular C- and N-termini and a large intracellular loop between TMs 6 and 7. This topology has been confirmed for MCT1 and a three-dimensional structure has been modelled that suggests a plausible molecular mechanism. For correct plasma membrane expression and activity MCTs1-4, but not MCT8, require association with basigin or embigin; these are glycoproteins with a single TM and 2-3 extracellular immunoglobulin domains. SLC16 family members are involved in a wide range of metabolic pathways including energy metabolism of the brain, skeletal muscle, heart and tumour cells, gluconeogenesis, T-lymphocyte activation, bowel metabolism, spermatogenesis, pancreatic β-cell malfunction, thyroid hormone metabolism, and drug transport. MCTs 1-4 have distinct properties, tissue distribution and subcellular localisation that are appropriate for these metabolic roles. Their potential as pharmacological targets has been recognised with the discovery of potent and specific MCT1 inhibitors that act as immunosuppressant drugs by preventing proliferation of T-lymphocytes. It is suggested that the development of other drugs specifically targeting different MCT isoforms may provide a novel approach to cancer chemotherapy.",
+              "doi": "10.1016/j.mam.2012.05.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b5e2bdc5bb5feb370085238c9e04e0445af076d5e78660fa7ddc40f5e1fd496d"
+              }
+            },
+            {
+              "title": "Impact of SLC16A8 on tumor microenvironment and angiogenesis in colorectal cancer: New therapeutic target insights.",
+              "abstract": "SLC16A8, a lactate efflux transporter, is upregulated in various cancers, but its effects on tumor microenvironments remain understudied. This research explores its role in colorectal cancer (CRC) and the impact on the associated microenvironment consisting of vascular endothelial cells. To explore the role in CRC and the impact on the associated microenvironment consisting of vascular endothelial cells. Hypoxic conditions prompted examination of SLC16A8 expression, glycolysis, lactate efflux, and Warburg effect correlations in CRC cell lines. Co-culture with HUVEC allowed for endothelial-mesenchymal transition (EndMT) characterization, revealing lactate efflux's influence. Knockdown of SLC16A8 in CRC cells enabled relevant phenotype tests and tumorigenesis experiments, investigating tumor growth, blood vessel distribution, and signaling pathway alterations. SLC16A8 expression was significantly upregulated in CRC tissues compared to adjacent normal tissues and correlated with disease progression ( < 0.05). Under hypoxic conditions, HIF-1α induced SLC16A8 expression, leading to enhanced metabolic reprogramming and increased lactate production. siRNA-mediated SLC16A8 knockdown effectively reversed hypoxia-induced changes, including reduced glucose consumption and lactate production. Co-culture experiments revealed that SLC16A8 knockdown significantly inhibited hypoxia-induced EndMT in HUVEC cells.  studies demonstrated that SLC16A8 knockdown suppressed tumor growth, reduced Ki67 expression, and decreased HIF-1α levels. Furthermore, SLC16A8 silencing led to decreased expression of key metabolic enzymes PKM2 and LDHA, indicating its role in glycolytic regulation. Our findings reveal that SLC16A8 functions as a critical mediator of hypoxia-induced metabolic reprogramming in CRC progression.",
+              "doi": "10.4251/wjgo.v17.i4.99188",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1258e4568702736b48041710e56b11d2704480ea3fcaccb3880f18a22e312b01"
+              }
+            },
+            {
+              "title": "The tissue expression of MCT3, MCT8, and MCT9 genes in women with breast cancer.",
+              "abstract": "Breast cancer (BC) is a common malignancy with a high mortality rate. Malignant cell transformation is associated with metabolic changes. One group of proteins that are affected is the monocarboxylate transporters (MCTs-SLC16A). The MCTs comprise 14 members, and they play an important role in the growth, proliferation, and metabolism of cancer cells by transporting monocarboxylates such as lactate, pyruvate and thyroid hormones. We aimed to evaluate the expression of MCT3 (SLC16A8), MCT8 (SLC16A2) and MCT9 (SLC16A9) genes in breast cancer samples, comparing to normal adjacent tissues. Forty paired breast cancer tumor samples, the adjacent non-tumor and five healthy tissues were collected. Three cancer cell lines (MCF-7, MDA-MB-231, and SKBR3) were also analyzed. The expression of SLC16A8, SLC16A2 and SLC16A9 were assessed using quantitative real-time PCR. The relationship between gene expression with the pathological features of the tumors, and the hormone receptors status of the patient's tumors were also analyzed. There was a significantly lower expression of the MCT3 gene in tumor samples compared to adjacent normal tissue and healthy samples (p value < 0.05). There was a significant difference in the expression of all three candidate genes between the BC tissues and normal tissues, and for the, tissues with different hormone receptor status and the molecular subtypes. Altered MCT8 and MCT9 gene expression was associated with a reduced survival CONCLUSION: MCT3 expression is significantly downregulated in breast cancer tissue. MCT3 may represent a novel therapeutic target in breast cancer patients, or in some hormone receptor subgroups.",
+              "doi": "10.1007/s13258-021-01116-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "38707298821aa3491fa582129b179315b1af07cc2079418626ef0bfd95983149"
+              }
+            },
+            {
+              "title": "A systemic analysis of monocarboxylate transporters in ovarian cancer and possible therapeutic interventions.",
+              "abstract": "Monocarboxylate transporters (MCTs) play an immense role in metabolically active solid tumors by regulating concentration-dependent transport of different important monocarboxylates including pyruvate and lactate and are encoded by the SLC16A family of genes. Given the vast array of functions, these transporters play in oncogenesis, our objective was to look into the association of MCT1 (SLC16A1), MCT2 (SLC16A7), MCT3 (SLC16A8), and MCT4 (SLC16A3) with Epithelial ovarian cancer (EOC) pathophysiology by exploiting various publicly available databases and web resources. Few of the  findings were confirmed via  experiments in EOC cell lines, SKOV3 and OAW-42. MCT1 and MCT4 were found to be upregulated at the mRNA level in OC tissues compared to normal. However, only higher level of MCT4 mRNA was found to be associated with poor patient survival. MCT4 was positively correlated with gene families responsible for invasion, migration, and immune modification, proving it to be one of the most important MCTs for therapeutic intervention. We compared the effects of MCT1/2 blocker SR13800 and a broad-spectrum MCT blocker α-Cyano Hydroxy Cinnamic Acid (α-CHCA) and discovered that α-CHCA has a greater effect on diminishing the invasive behavior of the cancer cells than MCT1/2 blocker SR13800. From our study, MCT4 has emerged as a prospective marker for predicting poor patient outcomes and a potential therapeutic target.",
+              "doi": "10.1080/19336950.2023.2273008",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9d9665f999660e93c237f0d3a1bf9faccc08cb95d1d552943950778e6e68f4a4"
+              }
+            },
+            {
+              "title": "Lactic Acid Metabolism and Transporter Related Three Genes Predict the Prognosis of Patients with Clear Cell Renal Cell Carcinoma.",
+              "abstract": "Lactic acid was previously considered a waste product of glycolysis, and has now become a key metabolite for cancer development, maintenance and metastasis. So far, numerous studies have confirmed that tumor lactic acid levels are associated with increased metastasis, tumor recurrence and poor prognosis. However, the prognostic value of lactic acid metabolism and transporter related genes in patients with clear cell renal cell carcinoma has not been explored. We selected lactic acid metabolism and transporter related twenty-one genes for LASSO cox regression analysis in the E-MTAB-1980 cohort, and finally screened three genes (PNKD, SLC16A8, SLC5A8) to construct a clinical prognostic model for patients with clear cell renal cell carcinoma. Based on the prognostic model we constructed, the over survival (hazard ratio = 4.117, 95% CI: 1.810−9.362, p < 0.0001) of patients in the high-risk group and the low-risk group in the training set E-MTAB-1980 cohort had significant differences, and similar results (hazard ratio = 1.909, 95% CI: 1.414−2.579 p < 0.0001) were also observed in the validation set TGCA cohort. Using the CIBERSORT algorithm to analyze the differences in immune cell infiltration in different risk groups, we found that dendritic cells, M1 macrophages, and CD4+ memory cells in the high-risk group were significantly lower than those in the low-risk group, while Treg cells were higher than in the low-risk group. Finally, through gene enrichment analysis, we found that the signal pathway that is strongly related to the prognostic model is the cell cycle.",
+              "doi": "10.3390/genes13040620",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cf06c45504721b5d619982683f73e93cd593359d5b37fae533d180ff41f6ab76"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC16A8 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC16A8 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC16A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC16A8",
+            "ppr_score": 3.1646827151550897e-06,
+            "degree_corrected_score": 9.265420855810974e-06,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC16A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC16A8",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC16A8": {
+          "status": "unavailable",
+          "gene": "SLC16A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC16A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC16A8",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC16A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A8"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A8": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC16A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC16A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A8"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A8": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC16A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A8']",
+        "status": "ok",
+        "summary": "SLC16A8/MCT8 is primarily a thyroid hormone transporter and is not well established as a tumor suppressor in acute lymphoblastic leukemia. Under the described ALL/NALM6 CRISPR context, there is no strong evidence that SLC16A8 inhibition suppresses tumor growth; therefore the membership answer is false.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A8"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC16A8/MCT8 is primarily a thyroid hormone transporter and is not well established as a tumor suppressor in acute lymphoblastic leukemia. Under the described ALL/NALM6 CRISPR context, there is no strong evidence that SLC16A8 inhibition suppresses tumor growth; therefore the membership answer is false.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T20:35:35Z"
+  }
+}

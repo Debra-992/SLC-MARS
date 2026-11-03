@@ -1,0 +1,406 @@
+{
+  "system": "v20rrf_llm_full",
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "cap": 16,
+  "k_rrf": 60,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC16A1",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC2A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC7A11",
+        "SLC3A2",
+        "SLC2A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=860]",
+      "tokens": {
+        "prompt": 562,
+        "completion": 298,
+        "total": 860,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.07546105234758076,
+      "kendall_tau": 0.0,
+      "precision5": 0.2,
+      "hit5": 1.0,
+      "mrr": 0.2
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC33A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC3A2",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC7A11",
+        "SLC2A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=870]",
+      "tokens": {
+        "prompt": 562,
+        "completion": 308,
+        "total": 870,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.08400948806854203,
+      "kendall_tau": 0.0,
+      "precision5": 0.2,
+      "hit5": 1.0,
+      "mrr": 0.2
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pool_size": 5,
+      "gt": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC25A51",
+        "SLC25A1",
+        "SLC25A11",
+        "SLC35F2",
+        "SLC30A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=524]",
+      "tokens": {
+        "prompt": 375,
+        "completion": 149,
+        "total": 524,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.8644814014370878,
+      "kendall_tau": -0.2,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pool_size": 19,
+      "gt": [
+        "SLC11A2",
+        "SLC16A1",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "ppr_named": 16,
+      "pred": [
+        "SLC1A5",
+        "SLC7A5",
+        "SLC7A11",
+        "SLC16A3",
+        "SLC9A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=879]",
+      "tokens": {
+        "prompt": 586,
+        "completion": 293,
+        "total": 879,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pool_size": 20,
+      "gt": [
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC1A5",
+        "SLC7A5",
+        "SLC7A11",
+        "SLC16A3",
+        "SLC9A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=926]",
+      "tokens": {
+        "prompt": 595,
+        "completion": 331,
+        "total": 926,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pool_size": 19,
+      "gt": [
+        "SLC7A5",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC7A11",
+        "SLC16A3",
+        "SLC25A4"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=885]",
+      "tokens": {
+        "prompt": 592,
+        "completion": 293,
+        "total": 885,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.5882425889677911,
+      "kendall_tau": 1.0,
+      "precision5": 0.4,
+      "hit5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pool_size": 5,
+      "gt": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC2A1",
+        "SLC25A26",
+        "SLC38A2",
+        "SLC25A32",
+        "SLC33A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=531]",
+      "tokens": {
+        "prompt": 358,
+        "completion": 173,
+        "total": 531,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.8673746067116417,
+      "kendall_tau": 0.0,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pool_size": 19,
+      "gt": [
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1",
+        "SLC7A11"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC3A2",
+        "SLC1A5"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=899]",
+      "tokens": {
+        "prompt": 595,
+        "completion": 304,
+        "total": 899,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.1950639905834524,
+      "kendall_tau": 0.0,
+      "precision5": 0.2,
+      "hit5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pool_size": 19,
+      "gt": [
+        "SLC35B1",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC3A2",
+        "SLC2A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=841]",
+      "tokens": {
+        "prompt": 579,
+        "completion": 262,
+        "total": 841,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pool_size": 5,
+      "gt": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC19A1",
+        "SLC16A1",
+        "SLC35A2",
+        "SLC25A32",
+        "SLC35A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=517]",
+      "tokens": {
+        "prompt": 373,
+        "completion": 144,
+        "total": 517,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.8404919746929073,
+      "kendall_tau": 0.0,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pool_size": 20,
+      "gt": [
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC1A5",
+        "SLC7A11",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC38A1"
+      ],
+      "ppr": null,
+      "seeds": [],
+      "n_seed_ok": 1,
+      "per_seed": [],
+      "rationale": "[llm_tokens=884]",
+      "tokens": {
+        "prompt": 610,
+        "completion": 274,
+        "total": 884,
+        "calls": 1
+      },
+      "error": "",
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0
+    }
+  ]
+}

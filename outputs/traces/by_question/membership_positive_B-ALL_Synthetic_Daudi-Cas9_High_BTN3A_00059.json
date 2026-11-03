@@ -1,0 +1,360 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC30A5 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC30A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC30A5"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC30A5",
+              "protein_function": "Together with SLC30A6 forms a functional proton-coupled zinc ion antiporter mediating zinc entry into the lumen of organelles along the secretory pathway.",
+              "aliases": "ZnT-5, ZNTL1, ZTL1, ZNT5, Solute Carrier Family 30 (Zinc Transporter), Member 5, Proton-Coupled Zinc Antiporter SLC30A5",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC30A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC30 Zinc efflux  family",
+              "target_properties": {
+                "name": "SLC30 Zinc efflux  family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Changes in Zn homeostasis during long term culture of primary endothelial cells and effects of Zn on endothelial cell senescence.",
+              "abstract": "Endothelial cell senescence and Zn nutritional status influence cardiovascular disease. The influence of Zn appears dichotomous, hence it is imperative to understand the relationship with cellular senescence to improve knowledge about the molecular and cellular basis of the disease. Here we aimed to determine: 1) the impact of chronic exposure to a moderately high dose of Zn on senescence of endothelial cells; 2) the changes in Zn homeostasis during the lifespan of primary cultured endothelial cells; and 3) the susceptibility of proliferating and senescent endothelial cells to cell death after short term exposure to increasing doses of Zn and of the Zn chelator TPEN. Chronic exposure to Zn accelerated senescence and untreated cells at later passages, where doubling time had increased, displayed relocation of labile Zn and altered expression of genes involved in the response to Zn toxicity, including SLC30A1, SLC39A6, SLC30A5, SLC30A10 and metallothioneins, indicating that senescent cells have altered zinc homeostasis. Most Zn-dependent genes that were expressed differently between early and late passages were correlated with changes in the expression of anti-apoptotic genes. Short-term treatment with a high dose of Zn leads to cell death, but only in the population of cells at both earlier and later passages that had already entered senescence. In contrast, Zn depletion led to death of cells at earlier but not later passages, which suggests that there are sub-populations of senescent cells that are resistant to Zn depletion. This resistant senescent cell population may accumulate under conditions of Zn deficiency and contribute to vascular pathology.",
+              "doi": "10.1016/j.exger.2017.09.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "976aafbc681f4938cbf50f90b17b4f0ffdc4fbd6e25361496e6e590fec73ac2e"
+              }
+            },
+            {
+              "title": "Integrated pan-cancer genomic analysis reveals the role of SLC30A5 in the proliferation, metastasis, and prognosis of hepatocellular carcinoma.",
+              "abstract": "SLC30A5, a member of the solute transporter protein family, is implicated in tumorigenesis and cancer progression. This study aimed to explore the expression and prognostic significance of SLC30A family genes in pan-cancer, with a specific emphasis on SLC30A5 in hepatocellular carcinoma (HCC).  Expression patterns and prognostic implications of SLC30A family genes were assessed across 33 cancer types, especially HCC. Co-expression analysis explored the relationship between SLC30A5 and immune cell infiltration, immune checkpoints, pathway molecules related to tumor angiogenesis and epithelial-mesenchymal transition (EMT). The role of SLC30A5 in HCC was evaluated through  and  assays, including CCK8 viability assay, EdU cell proliferation assay, colony formation assay, apoptosis assay, wound healing assay, transwell migration assay, and xenograft mouse model assay using Huh7 cells with targeted knockdown of SLC30A5.  SLC30A family genes exhibited overexpression in various tumors. In HCC, upregulation of SLC30A5 expression correlated with adverse prognosis. Significant associations were observed between SLC30A5 expression and immune cell infiltration, immune checkpoints, molecules involved in angiogenesis, and EMT. SLC30A5 overexpression was associated with advanced disease stages, higher histological grades, and vascular invasion. Single-cell RNA sequencing data (GSE112271) revealed notable SLC30A5 expression in malignant cells.  and  assays demonstrated that SLC30A5 knockdown in Huh7 cells reduced proliferation, migration, and invasion while promoting apoptosis.  This study highlights the clinical relevance of SLC30A5 in HCC, emphasizing its role in cell proliferation and migration. SLC30A5 emerges as a promising candidate for a prognostic marker and a potential target in HCC.",
+              "doi": "10.7150/jca.97214",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "fdf39ed47c525366ebc67beed9d48838ace920347b8b1629d6069f6d103e2002"
+              }
+            },
+            {
+              "title": "ATG10 overexpression is related to the dismal prognosis and promotes the growth and migration of hepatocellular carcinoma cells via cyclin B1/CDK1 and CDK2.",
+              "abstract": "Although the expression of autophagy-related 10 (ATG10) is known to be associated with the poor prognosis of cancer patients by enhancing cancer cell growth and migration, the roles of ATG10 in hepatocellular carcinoma (HCC) remains to be determined. In this study, the expression of ATG10 in HCC was analyzed using the data from TCGA databases and was further verified in the clinical samples from our patients. In addition, the relationships of ATG10 expression with clinical features, diagnosis and prognosis, as well as the predictive values of ATG10 expression in overall survival (OS), disease-specific survival (DSS) and progression-free interval (PFI) were explored. Furthermore, the expression and the prognostic values of ATG10 co-expressed genes were also identified in HCC, which was used to construct prognostic nomograms. Our data showed that the expression level of ATG10 was significantly increased in HCC, and the elevated ATG10 expression was associated with poor prognosis. Moreover, cells with ATG10 knockdown were used to investigate the effects of ATG10 on HCC cell proliferation and migration. We found that silencing ATG10 inhibited the proliferation, migration, and invasion of HCC cells, which was related to the protein expression of cyclin B1, CDK1, and CDK2. Similarly, the overexpression of ATG10 co-expressed genes ATG12, LARS1, CWC27, and SLC30A5 in HCC patients were also associated with the OS, DSS, and PFI. The risk models and nomograms based on ATG10 and ATG10 co-expressed genes indicated the correclation between their expression and the dismal prognosis in HCC patients. In conclusion, ATG10 expression was elevated in HCC and was associated with poor prognosis. Inhibition of ATG10 expression could attenuate cancer progression. ATG10-related nomograms and risk models could be used clinically to evaluate the prognosis of HCC patients.",
+              "doi": "PMID:37168332",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c8c6ea73e3fce1e7ac54983ef925e52278c11fb188658dbba55796e86d4870e6"
+              }
+            },
+            {
+              "title": "Transcriptome analysis reveals an altered expression profile of zinc transporters in colorectal cancer.",
+              "abstract": "Zinc is a transition metal and catalytic cofactor involved in many biological processes including proliferation, development, differentiation, and metabolism. Zinc transporters (ZnTs) play a fundamental role in cellular zinc homeostasis. ZnTs are responsible of zinc efflux and are encoded by 10 genes belonging to solute carrier family 30A (SLC30A1-10), while zinc-regulated transporter (ZRT)/iron-regulated transporter (IRT)-like protein (ZIP) transporters are responsible for the influx of zinc into the cytoplasm and are encoded by 14 genes belonging to solute carrier family 39A (SLC39A1-14). In this study, we analyzed, by transcriptome analysis, the microRNA levels of ZnT-encoding and ZIP-encoding genes in colorectal cancer (CRC) samples matched to normal colon tissues and in CRC cell lines. Results revealed an upregulation of specific ZnT and ZIP transcripts in CRC. Upregulation of SLC30A5, SLC30A6, SLC30A7 transcripts, encoding zinc efflux transporters ZnT5, ZnT6, ZnT7, localized on endoplasmic reticulum membranes, might be part of a coordinated transcriptional program associated to the increased activity of the early secretory pathway, while transcriptional upregulation of several specific ZIP transporters (SLC39A6, SLC39A7, SLC39A9, SLC39A10, and SLC39A11) could contribute in meeting the increased demand of zinc in cancer cells. Moreover, exon-level analysis of SLC30A9, a nuclear receptor coactivator involved in the transcriptional regulation of Wnt-responsive genes, revealed the differential expression of alternative transcripts in CRC and normal colonic mucosa.",
+              "doi": "10.1002/jcb.27285",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "232e8de0f44308f80ae064ceb42d25a68e6a8b935d214e25944e50048af64d57"
+              }
+            },
+            {
+              "title": "High-dose dietary zinc oxide mitigates infection with transmissible gastroenteritis virus in piglets.",
+              "abstract": "Zinc (Zn) supplementation has been shown to reduce the incidence of diarrhea and to protect animals from intestinal diseases, but the mechanisms of this protective effect against virus infection in vivo have not yet been elucidated. Transmissible gastroenteritis virus (TGEV) causes diarrhea in piglets with an age-dependent decrease of severity. We used 60 weaned piglets that were divided into three groups to evaluate the effect of different Zn levels added to a conventional diet (50 mg Zn/kg diet, Znlow, control group). The other groups received the diet supplemented with ZnO at final concentrations of 150 mg Zn/kg diet (Znmed), or 2,500 mg/kg diet (Znhigh). Oral challenge infection with TGEV was performed when the pigs had been fed for 1 week with the respective diet. Half of the piglets of each group were sacrificed at day 1 and 18 after challenge infection. Fecal consistency was improved and body weights increased in the Znhigh group when compared to the other groups, but no direct effect of Zn concentrations in the diet on fecal TGEV shedding and mucosal immune responses was detectable. However, in the Znhigh group, we found a prevention of villus atrophy and decreased caspase-3-mediated apoptosis of jejunal epithelium. Furthermore, pigs receiving high Zn diet showed a down-regulation of interferon (IFN)-α, oligoadenylate synthetase (OAS), Zn transporter SLC39A4 (ZIP4), but up-regulation of metallothionein-1 (MT1), as well as the Zn transporters SLC30A1 (ZnT1) and SLC30A5 (ZnT5). In addition, forskolin-induced chloride secretion and epithelial resistance were controlled at a physiological level in the Znhigh but not the other groups. Finally, in the Znhigh group, we documented an earlier and higher systemic TGEV-specific serum antibody response. These results suggest that high dietary Zn could provide enhanced protection in the intestinal tract and stimulate the systemic humoral immune response against TGEV infection.",
+              "doi": "10.1186/1746-6148-10-75",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "106c6216358f94cca8554a3735d501202e748215e6e0dd96fe865f2f6b2043d7"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC30A5 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC30A5 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC30A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC30A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC30A5",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC30A5": {
+          "status": "unavailable",
+          "gene": "SLC30A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC30A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC30A5",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A5"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.62；法官理由: No direct Daudi-Cas9/BTN3A MAGeCK depletion evidence supports SLC30A5 as a survival promoter; zinc transporter redundancy and all channels vote false. Evidence channel is weak but non-essential; two independent LLM false votes align.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A5']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 跨癌种类比：SLC30A5在HCC/CRC等肿瘤中呈高表达/不良预后关联，且HCC中敲低SLC30A5可降低增殖并促进凋亡；其作为SLC30锌外排家族成员参与内质网/高尔基体等分泌途径锌稳态，可迁移到B-lymphoblastic leukaemia中快速增殖B细胞、免疫相关膜蛋白 trafficking 与肿瘤存活需求。 | 目标癌种缺乏直接图谱邻近/组学证据，但不应据此判阴性。SLC30A5的已知生物学功能是质子偶联锌离子反转运体，主要维持分泌途径锌稳态；在肝癌中其高表达与增殖、迁移、侵袭及不良预后相关，敲低后细胞活力下降、凋亡增加，提示其具有促肿瘤存活方向。结直肠癌等也观察到SLC30A5上调与早期分泌途径活性相关。B-ALL/Daudi细胞作为高增殖B淋巴样肿瘤，可能依赖锌稳态、分泌途径和免疫相关膜蛋白表达来维持存活；在BTN3A低/高CRISPR筛选语境下，SLC30A5更可能作为支持肿瘤细胞存活或免疫相关蛋白稳态的促癌/存活基因。由于TIMER/KM不可用且跨癌种类推存在不确定性，置信度仅设为中低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC30A5"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] 跨癌种类比：SLC30A5在HCC/CRC等肿瘤中呈高表达/不良预后关联，且HCC中敲低SLC30A5可降低增殖并促进凋亡；其作为SLC30锌外排家族成员参与内质网/高尔基体等分泌途径锌稳态，可迁移到B-lymphoblastic leukaemia中快速增殖B细胞、免疫相关膜蛋白 trafficking 与肿瘤存活需求。 | 目标癌种缺乏直接图谱邻近/组学证据，但不应据此判阴性。SLC30A5的已知生物学功能是质子偶联锌离子反转运体，主要维持分泌途径锌稳态；在肝癌中其高表达与增殖、迁移、侵袭及不良预后相关，敲低后细胞活力下降、凋亡增加，提示其具有促肿瘤存活方向。结直肠癌等也观察到SLC30A5上调与早期分泌途径活性相关。B-ALL/Daudi细胞作为高增殖B淋巴样肿瘤，可能依赖锌稳态、分泌途径和免疫相关膜蛋白表达来维持存活；在BTN3A低/高CRISPR筛选语境下，SLC30A5更可能作为支持肿瘤细胞存活或免疫相关蛋白稳态的促癌/存活基因。由于TIMER/KM不可用且跨癌种类推存在不确定性，置信度仅设为中低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A5']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC30A5"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T04:57:06Z"
+  }
+}

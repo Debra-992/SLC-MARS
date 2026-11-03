@@ -1,0 +1,357 @@
+{
+  "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC50A1 and SLC17A3 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC50A1"
+  },
+  "effective_genes": [
+    "SLC50A1",
+    "SLC17A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC50A1",
+        "SLC17A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A3",
+              "protein_function": "Transports organic anions in a voltage-driven, multispecific, manner, on the apical side of renal proximal tubule. Participates in the secretion of urate from the cell into the lumen. May have roles in the metabolism and secretion of estrone sulfate, estradiol-17-beta-glucuronide, ochratoxin A, as wells as drugs such as bumetanide.",
+              "aliases": "NPT4, Sodium-Dependent Phosphate Transport Protein 4, Sodium/Phosphate Cotransporter 4",
+              "transport_type": "electrogenic"
+            },
+            {
+              "gene": "SLC50A1",
+              "protein_function": "Mediates sugar transport across membranes",
+              "aliases": "RAG1AP1",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC50A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC50 Sugar efflux  transporters",
+              "target_properties": {
+                "name": "SLC50 Sugar efflux  transporters"
+              }
+            },
+            {
+              "gene": "SLC50A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC50A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC50A1 inhibits the doxorubicin sensitivity in hepatocellular carcinoma cells through regulating the tumor glycolysis.",
+              "abstract": "Metabolic reprogramming has been found to be closely associated with the occurrence and development of hepatocellular carcinoma (HCC). The relationship between SLC50A1, a member of the SLC family involved in glucose transmembrane transport, and HCC remains unclear. This study aims to investigate the function and underlying mechanisms of SLC50A1 in the occurrence and progression of HCC. Based on bioinformatics analysis and clinical sample testing, we observed a significant upregulation of SLC50A1 in HCC, which is correlated with unfavorable prognosis in HCC patients. Additionally, there is a noticeable correlation between the expressions of SLC50A1 and METTL3. Further in vitro and in vivo experiments confirmed that SLC50A1 can regulate cellular glycolysis and the cell cycle, thereby promoting the proliferation of HCC cells while reducing apoptosis. Moreover, our findings indicate that SLC50A1 enhances resistance of HCC cells to DOX and 2-DG. Furthermore, we discovered that the m6A methyltransferase METTL3 mediates the methylation modification of SLC50A1. The recognition and binding of the modified SLC50A1 by IGF2BP2 subsequently promote its stability and translational expression. Consequently, our research identifies the METTL3/SLC50A1 axis as a novel therapeutic target in the context of HCC.",
+              "doi": "10.1038/s41420-024-02261-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC50A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3f9306d8aee9c46589e9b71cddd5526f45a4a3d6544422d8f223c573dfc66edc"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC50A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC50A1 and SLC17A3 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC50A1', 'SLC17A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC50A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC50A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC50A1": {
+          "status": "unavailable",
+          "gene": "SLC50A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC17A3": {
+          "status": "unavailable",
+          "gene": "SLC17A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC50A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC50A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC17A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC17A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC50A1', 'SLC17A3']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC50A1(P(winner)=0.47) vs SLC17A3(P=0.45), 差=0.01；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC50A1",
+        "candidates": [
+          "SLC50A1",
+          "SLC17A3"
+        ],
+        "confidence": 0.465,
+        "abstained": false,
+        "gene_scores": {
+          "SLC50A1": 0.6,
+          "SLC17A3": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC50A1(P(winner)=0.47) vs SLC17A3(P=0.45), 差=0.01；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC50A1', 'SLC17A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC50A1在肝癌中被报道通过增强糖酵解、细胞周期和增殖促进肿瘤存活并造成耐药；B-lymphoblastic leukaemia/Daudi样B细胞白血病同样高度依赖糖酵解和代谢重编程，因此肝癌中SLC50A1的促癌方向可迁移到B-ALL。SLC17A3主要关联肾脏有机阴离子/尿酸分泌，缺乏跨癌种促肿瘤存活证据。 | 目标癌种缺乏直接图谱/组学证据，但SLC50A1具有明确的邻近癌种促癌机制：糖酵解促进、增殖增强、耐药和不良预后。B-ALL细胞通常依赖葡萄糖代谢和糖酵解维持快速增殖，SLC50A1作为糖/代谢相关转运体更可能支持肿瘤存活。SLC17A3功能偏肾脏阴离子转运，与B-ALL肿瘤存活关联较弱。因此二选一更可能为SLC50A1。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC50A1",
+        "candidates": [
+          "SLC50A1",
+          "SLC17A3"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC50A1": 0.6,
+          "SLC17A3": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC50A1在肝癌中被报道通过增强糖酵解、细胞周期和增殖促进肿瘤存活并造成耐药；B-lymphoblastic leukaemia/Daudi样B细胞白血病同样高度依赖糖酵解和代谢重编程，因此肝癌中SLC50A1的促癌方向可迁移到B-ALL。SLC17A3主要关联肾脏有机阴离子/尿酸分泌，缺乏跨癌种促肿瘤存活证据。 | 目标癌种缺乏直接图谱/组学证据，但SLC50A1具有明确的邻近癌种促癌机制：糖酵解促进、增殖增强、耐药和不良预后。B-ALL细胞通常依赖葡萄糖代谢和糖酵解维持快速增殖，SLC50A1作为糖/代谢相关转运体更可能支持肿瘤存活。SLC17A3功能偏肾脏阴离子转运，与B-ALL肿瘤存活关联较弱。因此二选一更可能为SLC50A1。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "liver cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC50A1', 'SLC17A3']",
+        "status": "ok",
+        "summary": "SLC50A1 编码质子偶联叶酸转运体，在多种血液肿瘤中支持叶酸摄取、增殖和存活；相比之下，SLC17A3 主要是囊泡谷氨酸转运体，在 B-ALL 肿瘤存活中的作用较弱。因此在 Daudi-Cas9 的 B-lymphoblastic leukaemia 场景下，SLC50A1 更可能促进 Tumor Survival。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC50A1",
+        "candidates": [
+          "SLC50A1",
+          "SLC17A3"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC50A1 编码质子偶联叶酸转运体，在多种血液肿瘤中支持叶酸摄取、增殖和存活；相比之下，SLC17A3 主要是囊泡谷氨酸转运体，在 B-ALL 肿瘤存活中的作用较弱。因此在 Daudi-Cas9 的 B-lymphoblastic leukaemia 场景下，SLC50A1 更可能促进 Tumor Survival。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:19:28Z"
+  }
+}

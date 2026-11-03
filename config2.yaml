@@ -1,0 +1,19 @@
+# SLC-MARS LLM endpoint config (read by knowledge_agents.baselines.common.llm_settings).
+#
+# NO CREDENTIAL LIVES HERE ANYMORE.  The real api_key is injected from the process
+# environment, in this priority order:
+#   1. SLC_LLM_BASE_URL / SLC_LLM_API_KEY / SLC_LLM_MODEL env vars
+#      (exported by `secrets.local.ps1`, or by your shell profile / CI secret store);
+#   2. the values below -- which are placeholders and will be rejected at runtime.
+#
+# Setup:  Copy-Item secrets.example.ps1 secrets.local.ps1   then fill it in.
+#         . tools\slc_mars_env.ps1   (loads secrets + pins the v20 gates)
+#
+# MetaGPT itself does not read this file: it loads ~/.metagpt/config2.yaml.
+# Run `.\tools\sync_metagpt_config.ps1` to regenerate that home copy from the
+# environment instead of pasting a key into it by hand.
+llm:
+  api_type: openai
+  base_url: REPLACE_VIA_SECRETS_LOCAL_PS1
+  api_key: REPLACE_VIA_SECRETS_LOCAL_PS1
+  model: REPLACE_VIA_SECRETS_LOCAL_PS1

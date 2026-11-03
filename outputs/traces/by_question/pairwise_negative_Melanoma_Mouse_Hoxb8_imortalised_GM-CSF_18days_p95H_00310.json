@@ -1,0 +1,567 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00310",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nWhich gene between SLC22A7 and SLC22A2 is more likely to inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "winner": "SLC22A7"
+  },
+  "effective_genes": [
+    "SLC22A7",
+    "SLC22A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00310",
+      "status": "ok",
+      "summary": "检索到 4 类证据、20 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC22A7",
+        "SLC22A2"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A2",
+              "protein_function": "Electrogenic voltage-dependent transporter that mediates the transport of a variety of organic cations such as endogenous bioactive amines, cationic drugs and xenobiotics.",
+              "aliases": "OCT2, Organic Cation Transporter 2",
+              "transport_type": "F"
+            },
+            {
+              "gene": "SLC22A7",
+              "protein_function": "[Isoform 2]: Functions as a Na(+)-independent bidirectional multispecific transporter.",
+              "aliases": "OAT2, Organic Anion Transporter 2",
+              "transport_type": "F or E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC22A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC22A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC22A7|paclitaxel|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC22A7(OAT2) transports paclitaxel with high affinity (Km 0.14µM). As a hepatic uptake transporter, it facilitates drug entry; reduced expression may contribute to decreased intracellular paclitaxel accumulation.",
+                "paper": "Kobayashi Y 2005 J Pharm Pharmacol PMID:15901346",
+                "name": "SLC22A7|paclitaxel|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1211/0022357055966\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "paclitaxel"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC22A2",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "acute and chronic renal failure",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "acute and chronic renal failure",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A7",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A2",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "ovarian cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A7",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Functional roles of agmatinase during the peri-implantation period of pregnancy in sheep.",
+              "abstract": "This study investigated the effect of agmatine (Agm) in proliferation of ovine trophecdoderm cells (oTr1) as well as the importance of the arginine decarboxylase (ADC) and agmatinase (AGMAT) alternative pathway for synthesis of polyamines in ovine conceptuses during the peri-implantation period of pregnancy. Morpholino antisense oligonucleotides (MAOs) were used to inhibit translation of mRNAs for ODC1 alone, AGMAT alone, and their combination. Rambouillet ewes (N = 50) were assigned randomly to the following treatments on Day 8 of pregnancy: MAO control (n = 10); MAO-ODC1 (n = 8); MAO-ADC (n = 6); MAO-ODC1:MAO-ADC (n = 9); or MAO-ODC1:MAO-AGMAT (n = 9). Ewes were ovario-hysterectomized on Day 16 of pregnancy to obtain uterine flushings, uterine endometrium, and conceptus tissues. Inhibition of translation of both ODC1 and AGMAT resulted in 22% of ewes having morphologically and functionally normal (elongated and healthy) conceptuses designated MAO-ODC1:MAO-AGMAT (A). But, 78% of the MAO-ODC1:MAO-AGMAT ewes had morphologically and functionally abnormal (not elongated and fragmented) conceptuses designated MAO-ODC1:MAO-AGMAT (B). The pregnancy rate was less (22%; P < 0.05) for MAO-ODC1:MAO-AGMAT ewes than for MAO-control (80%), MAO-ODC1 (75%), MAO-ADC (84%), and MAO-ODC1:MAO-ADC (44%) ewes. Moreover, inhibition of translational of both ODC1 and AGMAT mRNAs increased expression of ADC, SLC22A1, SLC22A2, and SLC22A3 mRNAs, as well as abundances of agmatine, putrescine, spermindine, and spermine in conceptus tissue. However, MAO-ODC1:AGMAT(B) ewes had greater abundances of agmatine, putrescine, and spermidine and reduced amounts of spermine in uterine flushes. Thus, in vivo knockdown of translation of ODC1 and AGMAT mRNAs increased expression of genes for the synthesis and transport of polyamines in ovine conceptuses during the peri-implantation period of pregnancy.",
+              "doi": "10.1007/s00726-017-2515-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d90d0a6efa78999c898c4ea6e1212580ead4519a49011b48831de3476ea91e6d"
+              }
+            },
+            {
+              "title": "iTRAQ-based quantitative proteomic analysis reveals the toxic mechanism of diclofenac sodium on the kidney of broiler chicken.",
+              "abstract": "Diclofenac sodium (DS) is one of the nonsteroidal anti-inflammatory drugs (NSAIDs), which exhibits potent toxicity to birds. To search the molecular mechanism of DS induced nephrotoxicity in broiler chicken, 20 apparently healthy 30-day old broiler chickens were separated randomly into two groups (n = 10): Group A was kept as control while DS was administered at the dose rate of 10 mg/kg body weight in group B through oral gavage. Kidney samples were collected, and the proteins were identified and quantified by iTRAQ. 434 differentially expressed proteins (DEPs) were screened, including 277 up-regulated DEPs and 157 down-regulated DEPs. The functional annotation and classification results indicated that DEPs were significantly enriched in apoptosis and metabolism-related pathways via GO and KEGG analysis. Compared with the control group, the most significant enrichment pathways are \"ribosome\", \"metabolic pathways\" and \"protein processing in endoplasmic reticulum\". Based on the proteomic results and relevant literature, some DEPs that potentially related to the toxicity of DS were screened. The mRNA transcript levels of these DEPs were characterized by qRT-PCR, and the results showed that Slc22a7, Gatm, Glud1, Agxt2 and Gldc were significantly down-regulated, while Gsl, Gpt2 and Asns were significantly up-regulated. We speculate that the toxic mechanism of DS to chicken might be that it induces kidney cell apoptosis, interferes with purine metabolism and inhibits the expression of OAT2. The current study provides a reference for elucidating the nephrotoxic mechanism of diclofenac sodium to broiler chicken from the molecular perspective.",
+              "doi": "10.1016/j.cbpc.2021.109129",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ff286d2c114271353cdf111c168fcc37973bb65205b10628e7db60993783ee70"
+              }
+            },
+            {
+              "title": "Interaction of human organic anion transporter 2 (OAT2) and sodium taurocholate cotransporting polypeptide (NTCP) with antineoplastic drugs.",
+              "abstract": "The ability of an antineoplastic drug to exert its cytostatic effect depends largely on the balance between its uptake into and extrusion from the cancer cells. ATP driven efflux transporter proteins drive the export of antineoplastic drugs and play a pivotal role in the development of chemoresistance. As regards uptake transporters, comparably less is known on their impact in drug action. In the current study, we characterized the interactions of two uptake transporter proteins, expressed mainly in the liver; the organic anion transporter 2 (OAT2, encoded by the SLC22A7 gene) and the sodium taurocholate cotransporting polypeptide (NTCP, encoded by the SLC10A1 gene), stably transfected in human embryonic kidney cells, with some antineoplastic agents that are routinely being used in cancer chemotherapy. Whereas NTCP did not show any strong interactions with the cytostatics tested, we observed a very strong inhibition of OAT2 mediated [(3)H] cGMP uptake in the presence of bendamustine, irinotecan and paclitaxel. The Ki values of OAT2 for bendamustine, irinotecan and paclitaxel were determined to be 43.3±4.33μM, 26.4±2.34μM and 10.4±0.45μM, respectively. Incubation of bendamustine with OAT2 expressing cells increased the caspase-3 activity, and this increase was inhibited by simultaneous incubation with bendamustine and probenecid, a well-known inhibitor of OATs, suggesting that bendamustine is a substrate of OAT2. A higher accumulation of irinotecan was observed in OAT2 expressing cells compared to control pcDNA cells by HPLC analysis of cell lysates. The accumulation was diminished in the presence of cGMP, the substrate we used to functionally characterize OAT2, suggesting specificity of this uptake and the fact that OAT2 mediates uptake of irinotecan.",
+              "doi": "10.1016/j.phrs.2014.11.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c8e658544d53c24944fd3c8c28a9382ab7bb822e964f90a37aa9d9c601902f2a"
+              }
+            },
+            {
+              "title": "Substrate- and cell contact-dependent inhibitor affinity of human organic cation transporter 2: studies with two classical organic cation substrates and the novel substrate cd2+.",
+              "abstract": "Polyspecific organic cation transporter Oct2 from rat (gene Slc22A2) has been previously shown to transport Cs(+). Here we report that human OCT2 (hOCT2) is able to transport Cd(2+) showing substrate saturation with a Michaelis-Menten constant (Km) of 54 ± 5.8 μM. Uptake of Cd(2+) by hOCT2 was inhibited by typical hOCT2 ligands (unlabeled substrates and inhibitors), and the rate of uptake was decreased by a point mutation in a substrate binding domain of hOCT2. Incubation of hOCT2 overexpressing human embryonic kidney 293 cells (HEK-hOCT2-C) or rat renal proximal tubule cells expressing rOct2 (NRK-52E-C) with Cd(2+) resulted in an increased level of apoptosis that was reduced by OCT2 inhibitory ligand cimetidine(+). HEK-hOCT2-C exhibited different functional properties when they were confluent or had been dissociated by removal of Ca(2+) and Mg(2+). Only confluent HEK-hOCT2-C transported Cd(2+), and confluent and dissociated cells exhibited different potencies for inhibition of uptake of 1-methyl-4-phenylpyridinium(+) (MPP(+)) by Cd(2+), MPP(+), tetraethylammonium(+), cimetidine(+), and corticosterone. In confluent HEK-hOCT2-C, largely different inhibitor potencies were obtained upon comparison of inhibition of Cd(2+) uptake, 4-[4-(dimethylamino)styryl]-N-methylpyridinium(+) (ASP(+)) uptake, and MPP(+) uptake using substrate concentrations far below the respective Km values. Employing a point mutation in the previously identified substrate binding site of rat Oct1 produced evidence that short distance allosteric effects between binding sites for substrates and inhibitors are involved in substrate-dependent inhibitor potency. Substrate-dependent inhibitor affinity is probably a common property of OCTs. To predict interactions between drugs that are transported by OCTs and inhibitory drugs, it is necessary to employ the specific transported drug rather than a model substrate for in vitro measurements.",
+              "doi": "10.1021/mp400113d",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "133c452bc27c21caa91aceec1ce0ff8a10e7cf700ebebe4f7c14fd9b8d51d847"
+              }
+            },
+            {
+              "title": "Differential transport of platinum compounds by the human organic cation transporter hOCT2 (hSLC22A2).",
+              "abstract": "Solute carriers (SLCs), in particular organic cation transporters (OCTs), have been implicated in the cellular uptake of platinum-containing anticancer compounds. The activity of these carriers may determine the pharmacokinetics and the severity of side effects, including neuro- and nephrotoxicity of platinum-based chemotherapy. As decreased drug accumulation is a key mechanism of platinum resistance, SLCs may also contribute to the development of resistance. Here, we define the role of hSLC22A2 (OCT2) in the cellular uptake of platinum compounds. Human embryonic kidney (HEK) 293 cells stably expressing the hSLC22A2 gene (HEK293/hSLC22A2) were used in platinum accumulation studies. Following a 2 h exposure to various platinum compounds (100 microM), intracellular platinum levels were determined by flameless atomic absorption spectrometry. HEK293/hSLC22A2 cells, compared with HEK293/Neo control cells, displayed significant increases in oxaliplatin (28.6-fold), Pt[DACH]Cl(2) (20.6-fold), ormaplatin (8.1-fold), tetraplatin (4.5-fold), transplatin (3.7-fold) and cisplatin (1.3-fold), but not carboplatin. SLC22A2-mediated transport could be inhibited by 1-methyl-4-phenylpyridinium. Furthermore, hSLC22A2-mediated oxaliplatin and cisplatin accumulation was time- and concentration-dependent, but non-saturable. Expression of hSLC22A2 in HEK293 cells resulted in enhanced sensitivity to oxaliplatin (12-fold) and cisplatin (1.8-fold). Although, hSLC22A2 mRNA expression was frequently found in ovarian cancer cell lines, its expression in clinical ovarian cancer specimens (n= 80) was low and did not correlate with the treatment outcome of platinum-based regimens. The hSLC22A2 drug transporter is a critical determinant in the uptake and cytotoxicity of various platinum compounds, particularly oxaliplatin.",
+              "doi": "10.1111/j.1476-5381.2009.00569.x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9b0817610e6ea077a2082a8ffbefd444f3dddf73e48d678d8f826d902fbe1beb"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC22A7 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nWhich gene between SLC22A7 and SLC22A2 is more likely to inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC22A7', 'SLC22A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC22A7",
+            "ppr_score": 2.0611080031807597e-05,
+            "degree_corrected_score": 2.1904554046548473e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC22A2",
+            "ppr_score": 2.3681060750428924e-05,
+            "degree_corrected_score": 2.5167195231247474e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC22A7",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC22A7",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC22A7": {
+          "status": "unavailable",
+          "gene": "SLC22A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A2": {
+          "status": "unavailable",
+          "gene": "SLC22A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC22A7": {
+          "status": "unavailable",
+          "gene": "SLC22A7",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A2": {
+          "status": "unavailable",
+          "gene": "SLC22A2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A7', 'SLC22A2']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC22A2(P(winner)=0.49) vs SLC22A7(P=0.48), 差=0.01；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC22A7",
+        "candidates": [
+          "SLC22A7",
+          "SLC22A2"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A7": 2.3704,
+          "SLC22A2": 2.85
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC22A2': 1, 'W:SLC22A7': 2}，最终智能体辩论后裁决：winner=SLC22A7 answer=None conf=0.58；法官理由: Two independent LLM channels favor SLC22A7/OAT2; its bidirectional anion drug transport fits myeloid drug-pressure depletion and melanoma resistance. SLC22A2/OCT2 graph signals are association-level, near-tie, and less context-specific.。原证据通道判定: winner=SLC22A2 answer=None conf=0.486（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A7', 'SLC22A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC22A7/OAT2 has the strongest cross-cancer bridge to Melanoma drug resistance: in CRC it is linked to ferroptosis suppression, and literature directly ties OAT2 to uptake/activation of antineoplastic drugs (bendamustine, irinotecan, paclitaxel) and increased caspase-3–mediated death. Melanoma therapy resistance often depends on impaired drug accumulation, oxidative stress/ferroptosis evasion, and apoptotic resistance, so SLC22A7 is more transferable than SLC22A2, whose evidence is mainly renal OCT2/xenobiotic handling and ovarian migration rather than melanoma chemoresistance. | Between the two, SLC22A7 is more likely to inhibit Melanoma tumor drug resistance because it is an organic anion uptake transporter with direct pharmacological evidence in cancer drug handling and a CRC ferroptosis link; modulating SLC22A7 could increase intracellular cytotoxic drug exposure or restore ferroptotic/apoptotic vulnerability under therapy. SLC22A2/OCT2 is more tied to cation transport, kidney toxicity, and ovarian migration, giving weaker mechanistic support for melanoma drug resistance.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC22A7",
+        "candidates": [
+          "SLC22A7",
+          "SLC22A2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A7": 2.3704,
+          "SLC22A2": 2.85
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC22A7/OAT2 has the strongest cross-cancer bridge to Melanoma drug resistance: in CRC it is linked to ferroptosis suppression, and literature directly ties OAT2 to uptake/activation of antineoplastic drugs (bendamustine, irinotecan, paclitaxel) and increased caspase-3–mediated death. Melanoma therapy resistance often depends on impaired drug accumulation, oxidative stress/ferroptosis evasion, and apoptotic resistance, so SLC22A7 is more transferable than SLC22A2, whose evidence is mainly renal OCT2/xenobiotic handling and ovarian migration rather than melanoma chemoresistance. | Between the two, SLC22A7 is more likely to inhibit Melanoma tumor drug resistance because it is an organic anion uptake transporter with direct pharmacological evidence in cancer drug handling and a CRC ferroptosis link; modulating SLC22A7 could increase intracellular cytotoxic drug exposure or restore ferroptotic/apoptotic vulnerability under therapy. SLC22A2/OCT2 is more tied to cation transport, kidney toxicity, and ovarian migration, giving weaker mechanistic support for melanoma drug resistance. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "acute and chronic renal failure",
+          "colorectal cancer(CRC)",
+          "ovarian cancer",
+          "pancreatic ductal adenocarcinoma (PDAC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A7', 'SLC22A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC22A7",
+          "SLC22A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T00:56:10Z"
+  }
+}

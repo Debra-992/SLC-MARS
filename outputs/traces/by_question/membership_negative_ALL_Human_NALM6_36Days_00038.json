@@ -1,0 +1,354 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00038",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A33 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A33"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00038",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A33"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A33",
+              "protein_function": "Mitochondrial transporter that selectively transports uridine, thymidine, guanosine, cytosine, and inosine (deoxy)nucleoside di- and triphosphates. Participates in mitochondrial genome maintenance.",
+              "aliases": "BMSC-MCP, PNC1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A33",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Insulin-like growth factor 1 signaling is essential for mitochondrial biogenesis and mitophagy in cancer cells.",
+              "abstract": "Mitochondrial activity and metabolic reprogramming influence the phenotype of cancer cells and resistance to targeted therapy. We previously established that an insulin-like growth factor 1 (IGF-1)-inducible mitochondrial UTP carrier (PNC1/SLC25A33) promotes cell growth. This prompted us to investigate whether IGF signaling is essential for mitochondrial maintenance in cancer cells and whether this contributes to therapy resistance. Here we show that IGF-1 stimulates mitochondrial biogenesis in a range of cell lines. In MCF-7 and ZR75.1 breast cancer cells, IGF-1 induces peroxisome proliferator-activated receptor γ coactivator 1β (PGC-1β) and PGC-1α-related coactivator (PRC). Suppression of PGC-1β and PRC with siRNA reverses the effects of IGF-1 and disrupts mitochondrial morphology and membrane potential. IGF-1 also induced expression of the redox regulator nuclear factor-erythroid-derived 2-like 2 (NFE2L2 alias NRF-2). Of note, MCF-7 cells with acquired resistance to an IGF-1 receptor (IGF-1R) tyrosine kinase inhibitor exhibited reduced expression of PGC-1β, PRC, and mitochondrial biogenesis. Interestingly, these cells exhibited mitochondrial dysfunction, indicated by reactive oxygen species expression, reduced expression of the mitophagy mediators BNIP3 and BNIP3L, and impaired mitophagy. In agreement with this, IGF-1 robustly induced BNIP3 accumulation in mitochondria. Other active receptor tyrosine kinases could not compensate for reduced IGF-1R activity in mitochondrial protection, and MCF-7 cells with suppressed IGF-1R activity became highly dependent on glycolysis for survival. We conclude that IGF-1 signaling is essential for sustaining cancer cell viability by stimulating both mitochondrial biogenesis and turnover through BNIP3 induction. This core mitochondrial protective signal is likely to strongly influence responses to therapy and the phenotypic evolution of cancer.",
+              "doi": "10.1074/jbc.M117.792838",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A33"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6446adf34da20e47b04ec5525b3665e0a4ad2fa97da4075882d5bc94b181db55"
+              }
+            },
+            {
+              "title": "Targeting SLC25A33 Suppresses Vascular Smooth Muscle Cell Proliferation and Migration by Reducing Cytosolic mtDNA Levels: Implications for Occlusive Vascular Diseases.",
+              "abstract": "Vascular smooth muscle cells (VSMCs) play a crucial role in the development of occlusive vascular diseases through abnormal proliferation and migration. This pathological behavior is closely associated with mitochondrial reactive oxygen species (ROS)-mediated mitochondrial DNA (mtDNA) damage. The mitochondrial carrier protein solute carrier family 25 member 33 (SLC25A33), essential for nucleoside transport, is integral to mtDNA production. This study aimed to investigate the effects of SLC25A33 inhibition on the proliferation and migration of VSMCs, as well as its impact on neointima formation. VSMCs were isolated from the thoracic aorta of 4-week-old Sprague-Dawley rats. The effects of small interfering RNAinduced silencing of SLC25A33 mRNA on platelet-derived growth factor (PDGF)-induced proliferation and migration of VSMCs were analyzed. The in vivo effects of targeting the SLC25A33 gene on neointima formation were evaluated using a murine carotid artery ligation model by perivascularly applying Lenti-shSLC25A33 with Pluronic F-127 gel. First, we observed an upregulation of the SLC25A33 protein in the carotid artery ligation-induced neointima in mice. Silencing of SLC25A33 suppressed the PDGF-stimulated proliferation and migration of VSMCs and cell cycle progression. Knockdown of SLC25A33 inhibited PDGF-induced production of mtDNA and ROS, consequently inactivating the cyclic GMP-AMP synthesis (cGAS)-stimulator of interferon genes (STING)-TANK-binding kinase 1 (TBK1)-nuclear factor kappa B (NF-κB) pathway. Furthermore, the downregulation of SLC25A33 reduced carotid artery ligation-induced neointima in mice. This study suggests that targeting SLC25A33 in VSMCs could be a novel therapeutic strategy to prevent occlusive vascular diseases.",
+              "doi": "10.4093/dmj.2024.0632",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A33"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d6a0e221d53be7463fec10ab4c4520ab02c5f2197aaf9fc7ed552149ab0b27bc"
+              }
+            },
+            {
+              "title": "The response to neoadjuvant chemoradiotherapy with 5-fluorouracil in locally advanced rectal cancer patients: a predictive proteomic signature.",
+              "abstract": "Colorectal cancer is the third most common and the fourth most lethal cancer in the world. In the majority of cases, patients are diagnosed at an advanced stage or even metastatic, thus explaining the high mortality. The standard treatment for patients with locally advanced non-metastatic rectal cancer is neoadjuvant radio-chemotherapy (NRCT) with 5-fluorouracil (5-FU) followed by surgery, but the resistance rate to this treatment remains high with approximately 30% of non-responders. The lack of evidence available in clinical practice to predict NRCT resistance to 5-FU and to guide clinical practice therefore encourages the search for biomarkers of this resistance. From twenty-three formalin-fixed paraffin-embedded (FFPE) biopsies performed before NRCT with 5-FU of locally advanced non-metastatic rectal cancer patients, we extracted and analysed the tumor proteome of these patients. From clinical data, we were able to classify the twenty-three patients in our cohort into three treatment response groups: non-responders (NR), partial responders (PR) and total responders (TR), and to compare the proteomes of these different groups. We have highlighted 384 differentially abundant proteins between NR and PR, 248 between NR and TR and 417 between PR and TR. Among these proteins, we have identified many differentially abundant proteins identified as having a role in cancer (IFIT1, FASTKD2, PIP4K2B, ARID1B, SLC25A33: overexpressed in TR; CALD1, CPA3, B3GALT5, CD177, RIPK1: overexpressed in NR). We have also identified that DPYD, the main degradation enzyme of 5-FU, was overexpressed in NR, as well as several ribosomal and mitochondrial proteins also overexpressed in NR. Data are available via ProteomeXchange with identifier PXD008440. From these retrospective study, we implemented a protein extraction protocol from FFPE biopsy to highlight protein differences between different response groups to RCTN with 5-FU in patients with locally advanced non-metastatic rectal cancer. These results will pave the way for a larger cohort for better sensitivity and specificity of the signature to guide decisions in the choice of treatment.",
+              "doi": "10.1186/s12014-018-9192-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A33"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0c66768d02ef7566de38c342b5c538ef4b884f6451a4d3dd5aebaafc87e653e2"
+              }
+            },
+            {
+              "title": "Identification and validation of hub genes for diabetic retinopathy.",
+              "abstract": "Diabetic retinopathy (DR) is characterized by a gradually progressive alteration in the retinal microvasculature that leads to middle-aged adult acquired persistent blindness. Limited research has been conducted on DR pathogenesis at the gene level. Thus, we aimed to reveal novel key genes that might be associated with DR formation via a bioinformatics analysis. The GSE53257 dataset from the Gene Expression Omnibus was downloaded for gene co-expression analysis. We identified significant gene modules via the Weighted Gene Co-expression Network Analysis, which was conducted by the Protein-Protein Interaction (PPI) Network via Cytoscape and from this we screened for key genes and gene sets for particular functional and pathway-specific enrichments. The hub gene expression was verified by real-time PCR in DR rats modeling and an external database. Two significant gene modules were identified. Significant key genes were predominantly associated with mitochondrial function, fatty acid oxidation and oxidative stress. Among all key genes analyzed, six up-regulated genes (, SLC25A33, NDUFS1, MRPS23, CYB5R1, MECR, and MRPL15) were highly and significantly relevant in the context of DR formation. The PCR results showed that SLC25A33 and NDUFS1 expression were increased in DR rats modeling group. Gene co-expression network analysis highlights the importance of mitochondria and oxidative stress in the pathophysiology of DR. DR co-expressing gene module was constructed and key genes were identified, and both SLC25A33 and NDUFS1 may serve as potential biomarker and therapeutic target for DR.",
+              "doi": "10.7717/peerj.12126",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A33"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b0b75724d3e7d260496ec185728ac451df92552ed5dbc7f54c269b9b6687a12b"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A33 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A33 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A33']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A33",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A33",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A33",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A33": {
+          "status": "unavailable",
+          "gene": "SLC25A33",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A33": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A33",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A33']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A33 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A33"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A33": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A33 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A33']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 乳腺癌/IGF-1线粒体生物发生证据显示SLC25A33/PNC1为增殖存活所依赖；VSMC敲低SLC25A33降低增殖迁移；直肠癌/DR表达关联提示线粒体代谢与增殖应激参与。ALL尤其NALM6为高增殖B-ALL，线粒体dNTP供应和mtDNA维护对细胞周期、氧化应激和存活可能具有可迁移的依赖。 | SLC25A33是线粒体核苷酸载体，参与mtDNA维护；在多个增殖/疾病模型中其上调或功能促进生长，而敲低/抑制导致mtDNA、ROS、增殖或存活受损。尽管缺少ALL直接PPR/TIMER/KM/DE证据，且可能存在SLC家族冗余或糖酵解代偿，跨癌种生物学更支持CRISPR抑制SLC25A33会损害ALL细胞生长，因此membership判为true，置信度因间接证据而中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A33"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A33": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] 乳腺癌/IGF-1线粒体生物发生证据显示SLC25A33/PNC1为增殖存活所依赖；VSMC敲低SLC25A33降低增殖迁移；直肠癌/DR表达关联提示线粒体代谢与增殖应激参与。ALL尤其NALM6为高增殖B-ALL，线粒体dNTP供应和mtDNA维护对细胞周期、氧化应激和存活可能具有可迁移的依赖。 | SLC25A33是线粒体核苷酸载体，参与mtDNA维护；在多个增殖/疾病模型中其上调或功能促进生长，而敲低/抑制导致mtDNA、ROS、增殖或存活受损。尽管缺少ALL直接PPR/TIMER/KM/DE证据，且可能存在SLC家族冗余或糖酵解代偿，跨癌种生物学更支持CRISPR抑制SLC25A33会损害ALL细胞生长，因此membership判为true，置信度因间接证据而中等偏低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A33']",
+        "status": "ok",
+        "summary": "SLC25A33 encodes a mitochondrial carrier involved in glycine/heme-related mitochondrial metabolism; loss of function in NALM6 ALL cells under a MAGECK CRISPR screen is expected to impair proliferation/survival, thereby inhibiting ALL tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A33"
+        ],
+        "confidence": 0.55,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A33 encodes a mitochondrial carrier involved in glycine/heme-related mitochondrial metabolism; loss of function in NALM6 ALL cells under a MAGECK CRISPR screen is expected to impair proliferation/survival, thereby inhibiting ALL tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T05:13:39Z"
+  }
+}

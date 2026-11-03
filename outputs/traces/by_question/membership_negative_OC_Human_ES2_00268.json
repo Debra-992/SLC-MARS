@@ -1,0 +1,400 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00268",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC9A8 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC9A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00268",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC9A8"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC9A8",
+              "protein_function": "Mediates the electoneutral exchange of intracellular H(+) ions for extracellular Na(+) in 1:1 stoichiometry.",
+              "aliases": "NHE8, KIAA0939",
+              "transport_type": "E / Na+ (K+), H+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC9A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            },
+            {
+              "gene": "SLC9A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC9A8",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Downregulation of SLC9A8 Promotes Epithelial-Mesenchymal Transition and Metastasis in Colorectal Cancer Cells via the IL6-JAK1/STAT3 Signaling Pathway.",
+              "abstract": "SLC9A8 has been shown to be involved in mucus layer formation, intestinal mucosal integrity, and hyperproliferation of colitis-associated tumor development. However, its effects on the epithelial-mesenchymal transition (EMT) and the metastasis of colorectal cancer (CRC) remain unknown. To explore whether SLC9A8 participates in EMT and the metastasis of CRC. Western blotting and immunohistochemistry were performed to evaluate the expression of SLC9A8 in CRC patients. At the cellular level, the effect of SLC9A8 on proliferation, migration, and invasion was measured using cell viability analysis, flow cytometry analysis, and Transwell assays. Mouse tumor xenograft and metastasis models were established to analyze whether knockdown of SLC9A8 increased tumor volume, tumor weight, and metastasis. Moreover, whether downregulated expression of SLC9A8 promotes EMT via activation of the IL6-JAK1-STAT3 signaling pathway was investigated. SLC9A8 protein was downregulated in CRC tissues, and this downregulation was significantly associated with tumor size, lymph node status, pTNM stage, and poor prognosis. SLC9A8 overexpression markedly suppressed cell proliferation, migration, and invasion. Downregulation of SLC9A8 promoted CRC cell proliferation, migration, and invasion. Moreover, knockdown of SLC9A8 also increased tumor volume, tumor weight, and metastasis in vivo. Meanwhile, downregulation of SLC9A8 significantly promoted the in vitro migration of CRC cells via EMT by activating the IL6-JAK1/STAT3 signaling pathway. Downregulation of SLC9A8 plays an important role in EMT and metastasis of CRC progression and may become a new potential therapeutic target for the treatment of CRC.",
+              "doi": "10.1007/s10620-022-07805-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9b97989651e2ee07b602fc3aa84489471a558d2535b285c6381d265ec7f9b5ae"
+              }
+            },
+            {
+              "title": "Functional characterization of the sodium/hydrogen exchanger 8 and its role in proliferation of colonic epithelial cells.",
+              "abstract": "Intestinal NaCl, HCO, and fluid absorption are strongly dependent on apical Na/H exchange. The intestine expresses three presumably apical sodium-hydrogen exchanger (NHE) isoforms: NHE2, NHE3, and NHE8. We addressed the role of NHE8 [solute carrier 9A8 (SLC9A8)] and its interplay with NHE2 (SLC9A2) in luminal proton extrusion during acute and chronic enterocyte acidosis and studied the differential effects of NHE8 and NHE2 on enterocyte proliferation. In contrast to NHE3, which was upregulated in differentiated versus undifferentiated colonoids, the expression of NHE2 and NHE8 remained constant during differentiation of colonoids and Caco2Bbe cells. Heterogeneously expressed Flag-tagged rat (r)Nhe8 and human (h)NHE8 translocated to the apical membrane of Caco2Bbe cells. rNhe8 and hNHE8, when expressed in NHE-deficient PS120 fibroblasts showed higher sensitivity to HOE642 compared to NHE2. Lentiviral shRNA knockdown of endogenous NHE2 in Caco2Bbe cells (C2Bbe/shNHE2) resulted in a decreased steady-state intracellular pH (pH), an increased  mRNA expression, and augmented NHE8-mediated apical NHE activity. Lentiviral shRNA knockdown of endogenous NHE8 in Caco2Bbe cells (C2Bbe/shNHE8) resulted in a decreased steady-state pH as well, accompanied by decreased  mRNA expression and activity, which together contributed to reduced apical NHE activity in the NHE8-knockdown cells. Chronic acidosis increased  but not  mRNA expression. Alterations in NHE2 and NHE8 expression/activity affected proliferation, with C2Bbe/shNHE2 cells having lower and C2Bbe/shNHE8 having higher proliferative capacity, accompanied by amplified ERK1/2 signaling pathway and increased EGFR expression in the latter cell line. Thus, both Na/H exchangers have distinct functions during cellular homeostasis by triggering different signaling pathways to regulate cellular proliferation and pH control.",
+              "doi": "10.1152/ajpcell.00582.2020",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "745328d7d1a76bc203600268133d7425f2c203576977277f3c8d4d3fdf40d53b"
+              }
+            },
+            {
+              "title": "The Role of Plasma Membrane Sodium/Hydrogen Exchangers in Gastrointestinal Functions: Proliferation and Differentiation, Fluid/Electrolyte Transport and Barrier Integrity.",
+              "abstract": "The five plasma membrane Na/H exchanger (NHE) isoforms in the gastrointestinal tract are characterized by distinct cellular localization, tissue distribution, inhibitor sensitivities, and physiological regulation. NHE1 (Slc9a1) is ubiquitously expressed along the gastrointestinal tract in the basolateral membrane of enterocytes, but so far, an exclusive role for NHE1 in enterocyte physiology has remained elusive. NHE2 (Slc9a2) and NHE8 (Slc9a8) are apically expressed isoforms with ubiquitous distribution along the colonic crypt axis. They are involved in pH regulation of intestinal epithelial cells. Combined use of a knockout mouse model, intestinal organoid technology, and specific inhibitors revealed previously unrecognized actions of NHE2 and NHE8 in enterocyte proliferation and differentiation. NHE3 (Slc9a3), expressed in the apical membrane of differentiated intestinal epithelial cells, functions as the predominant nutrient-independent Na absorptive mechanism in the gut. The new selective NHE3 inhibitor (Tenapanor) allowed discovery of novel pathophysiological and drug-targetable NHE3 functions in cystic-fibrosis associated intestinal obstructions. NHE4, expressed in the basolateral membrane of parietal cells, is essential for parietal cell integrity and acid secretory function, through its role in cell volume regulation. This review focuses on the expression, regulation and activity of the five plasma membrane Na/H exchangers in the gastrointestinal tract, emphasizing their role in maintaining intestinal homeostasis, or their impact on disease pathogenesis. We point to major open questions in identifying NHE interacting partners in central cellular pathways and processes and the necessity of determining their physiological role in a system where their endogenous expression/activity is maintained, such as organoids derived from different parts of the gastrointestinal tract.",
+              "doi": "10.3389/fphys.2022.899286",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6ca1e00d76969e789166bbb912cbecab534d7682371e04f126a8941c7d63ee25"
+              }
+            },
+            {
+              "title": "{'sup': ['+', '+'], '#text': 'Na/H-Exchanger Family as Novel Prognostic Biomarkers in Colorectal Cancer.'}",
+              "abstract": "The acidic characteristics of the tumor microenvironment (TME) are attributed to cancer cells' needs of metabolism which produce a large amount of H. In order not to affect its own life activities, it needs to release H into the intercellular space through an efficient Na/H exchanger. On account of the intestine whose physiological function is highly dependent on intestinal pH value, NHE family members may play a critical role in the occurrence and development of colorectal cancer (CRC). TCGA, GEPIA2, ONCOMINE, UALCAN, STRING, TIMER, Cytoscape, TargetScan, ENCORI, LncBase v.2, DNMIVD, HPA, and CellMiner databases were used in our study. The mRNA expressions of SLC9A1, SLC9A2, SLC9A3, and SLC9A9 were evidently lower in COAD than in normal samples; however, the mRNA expressions of SLC9A5, SLC9A8, and SLC9B2 were higher. Besides, mRNA expressions of NHE family were extremely associated with clinicopathological features, tumor immune microenvironment and stemness score, DNA methylation, and patient prognosis in COAD. Moreover, we conjectured that NHE family may play a role through MAPK or ErbB signaling pathway according to the results of GO/KEGG enrichment analysis. At last, we found that NHE family members were key factors of various kinds of cancers. Our study indicated that NHE family represented new diagnostic and therapeutic targets for CRC, which could have important significance for the clinical treatment of CRC.",
+              "doi": "10.1155/2021/3241351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8e40a21ae51712935d6fe72d45c8c66be52e2b12b23680f3e6b9ac5b611dfac4"
+              }
+            },
+            {
+              "title": "Biomarker discovery for non-invasive diagnosis of inflammatory bowel disease using blood transcriptomics.",
+              "abstract": "Colonoscopy remains the gold standard for diagnosing inflammatory bowel disease (IBD) even though it is an invasive and costly procedure. To enable non-invasive diagnosis, we aimed to identify blood-based transcriptomic biomarkers that specifically distinguish IBD from healthy and inflammatory controls. Public microarray and RNA-seq datasets from whole blood of IBD, rheumatoid arthritis (RA), and control subjects were analyzed. RA was included as a positive control for systemic inflammation to filter out non-IBD-specific gene signatures. Differentially expressed genes (DEGs) were identified, followed by immune cell deconvolution (CIBERSORTx), pathway and network analysis, and diagnostic model construction using LASSO and SVM. A real-life cohort (36 IBD patients, 30 controls) was recruited for qRT-PCR validation. IBD blood transcriptomes exhibited altered immune profiles, including increased M0 macrophages, Tregs, and CD4 naïve T cells, and decreased memory B and activated NK cells. After excluding RA-overlapping DEGs, 25 IBD-specific DEGs with |log2FC| > 0.5 were prioritized. LASSO and SVM identified a three-mRNA panel-IL4R, EIF5A, and SLC9A8-which achieved 84% diagnostic accuracy in the discovery cohort and 99% accuracy in the real-life cohort. Network analysis highlighted NDUFB2 as a key downregulated hub gene linked to mitochondrial complex I dysfunction and oxidative phosphorylation disruption. Elevated oxidative stress in IBD was confirmed by increased Total Oxidant Status (TOS) levels in patient plasma. Our findings support the use of peripheral blood transcriptomics for IBD diagnosis and demonstrate that a focused three-gene panel can achieve high diagnostic accuracy. The inclusion of RA as an inflammatory control enabled the identification of IBD-specific markers, minimizing confounding from general immune activation. These results provide a practical foundation for developing non-invasive diagnostic tools for clinical use.",
+              "doi": "10.3389/fimmu.2025.1570374",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e24883aa2b928266a2c4889f87ba8be07fb4fe5fd7d3abdcaf1d8af1e134927c"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC9A8 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC9A8 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC9A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC9A8",
+            "ppr_score": 8.334439315388755e-06,
+            "degree_corrected_score": 2.4714205369956597e-05,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC9A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC9A8",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC9A8": {
+          "status": "unavailable",
+          "gene": "SLC9A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC9A8": {
+          "status": "unavailable",
+          "gene": "SLC9A8",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A8"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A8": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC9A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A8"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A8": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC9A8 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A8']",
+        "status": "ok",
+        "summary": "SLC9A8 encodes NHE8, an ion transporter more commonly associated with proliferation, pH/ion homeostasis, and cancer-related survival pathways rather than tumor suppression. In ovarian cancer ES2 CRISPR/MAGeCK-style screens, a gene that 'inhibits tumor growth' would be expected to behave like a tumor suppressor, whereas SLC9A8 is more plausibly growth-promoting or neutral; therefore the statement is judged false.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A8"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC9A8 encodes NHE8, an ion transporter more commonly associated with proliferation, pH/ion homeostasis, and cancer-related survival pathways rather than tumor suppression. In ovarian cancer ES2 CRISPR/MAGeCK-style screens, a gene that 'inhibits tumor growth' would be expected to behave like a tumor suppressor, whereas SLC9A8 is more plausibly growth-promoting or neutral; therefore the statement is judged false.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T00:03:33Z"
+  }
+}

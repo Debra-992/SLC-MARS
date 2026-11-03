@@ -1,0 +1,10 @@
+{
+  "alpha": 0.1,
+  "system": "pipeline_heuristic",
+  "seed": 13,
+  "calib_frac": 0.5,
+  "thresholds": {
+    "pairwise": 0.6
+  },
+  "note": "conf<threshold -> 弃答；由 SLC_CONFORMAL_FILE 载入决策层"
+}

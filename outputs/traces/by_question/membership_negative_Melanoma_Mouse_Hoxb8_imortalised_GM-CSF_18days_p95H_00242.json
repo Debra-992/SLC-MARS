@@ -1,0 +1,499 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00242",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC25A5 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC25A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00242",
+      "status": "ok",
+      "summary": "检索到 4 类证据、17 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A5"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A5",
+              "protein_function": "ADP:ATP antiporter that mediates import of ADP into the mitochondrial matrix for ATP synthesis, and export of ATP out to fuel the cell.",
+              "aliases": "ADT2",
+              "transport_type": "E / ADP, ATP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A5",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A5",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A5",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Inhibition of mitochondrial translocase SLC25A5 and histone deacetylation is an effective combination therapy in neuroblastoma.",
+              "abstract": "The mitochondrion is a gatekeeper of apoptotic processes, and mediates drug resistance to several chemotherapy agents used to treat cancer. Neuroblastoma is a common solid cancer in young children with poor clinical outcomes following conventional chemotherapy. We sought druggable mitochondrial protein targets in neuroblastoma cells. Among mitochondria-associated gene targets, we found that high expression of the mitochondrial adenine nucleotide translocase 2 (SLC25A5/ANT2), was a strong predictor of poor neuroblastoma patient prognosis and contributed to a more malignant phenotype in pre-clinical models. Inhibiting this transporter with PENAO reduced cell viability in a panel of neuroblastoma cell lines in a TP53-status-dependant manner. We identified the histone deacetylase inhibitor, suberanilohydroxamic acid (SAHA), as the most effective drug in clinical use against mutant TP53 neuroblastoma cells. SAHA and PENAO synergistically reduced cell viability, and induced apoptosis, in neuroblastoma cells independent of TP53-status. The SAHA and PENAO drug combination significantly delayed tumour progression in pre-clinical neuroblastoma mouse models, suggesting that these clinically advanced inhibitors may be effective in treating the disease.",
+              "doi": "10.1002/ijc.34349",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e03af093a23e39fcc4efa97763562e8ef4fdff3e98f9f28bd9a616e94241f348"
+              }
+            },
+            {
+              "title": "Decoding the role of SLC25A5 in osteosarcoma drug resistance and CD8+ T cell exhaustion: The therapeutic potential of phyllanthin.",
+              "abstract": "Osteosarcoma is an aggressive malignant bone tumor with an obscure etiology, as well as high prevalence and poor prognosis in children and adolescents. We aimed to investigate the pathogenesis of osteosarcoma through a comprehensive analysis of the tumor immune microenvironment (TIME) using multiple single-cell RNA sequencing datasets. SLC25A5, a gene implicated in cellular aging, significantly influenced osteosarcoma development by altering the TIME and promoting CD8+ T cell exhaustion, which contributed to reduced chemosensitivity. Experimental validation demonstrated that SLC25A5 enhanced the proliferative, migratory, invasive, and osteolytic properties of drug-resistant osteosarcoma cells while reducing apoptosis, intensifying cisplatin resistance. Phyllanthin inhibited the malignant phenotype of cisplatin-resistant osteosarcoma cells and enhanced their sensitivity to cisplatin by suppressing SLC25A5 expression. This study highlights a novel pathogenic role of SLC25A5 in osteosarcoma and presents Phyllanthin as a promising therapeutic agent. Our study offers a pioneering exploration of the single-cell spatiotemporal evolution of osteosarcoma and identifies SLC25A5 as a critical factor in drug resistance and immune evasion. By integrating advanced single-cell technologies and functional assays, we provided novel insights into the molecular mechanisms underlying osteosarcoma progression and treatment resistance, facilitating innovative therapeutic strategies.",
+              "doi": "10.1016/j.phymed.2024.156291",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d551fb1a7465ad0754dab5f43d2b4dc04c8a94786167061ad3909d16dd36f294"
+              }
+            },
+            {
+              "title": "Mitochondrial ATP transporter Ant2 depletion impairs erythropoiesis and B lymphopoiesis.",
+              "abstract": "Adenine nucleotide translocases (ANTs) transport ADP and ATP through mitochondrial inner membrane, thus playing an essential role for energy metabolism of eukaryotic cells. Mice have three ANT paralogs, Ant1 (Slc25a4), Ant2 (Slc25a5) and Ant4 (Slc25a31), which are expressed in a tissue-dependent manner. While knockout mice have been characterized with Ant1 and Ant4 genes, which resulted in exercise intolerance and male infertility, respectively, the role of the ubiquitously expressed Ant2 gene in animal development has not been fully demonstrated. Here, we generated Ant2 hypomorphic mice by targeted disruption of the gene, in which Ant2 expression is largely depleted. The mice showed apparently normal embryonic development except pale phenotype along with a reduced birth rate. However, postnatal growth was severely retarded with macrocytic anemia, B lymphocytopenia, lactic acidosis and bloated stomach, and died within 4 weeks. Ant2 depletion caused anemia in a cell-autonomous manner by maturation arrest of erythroid precursors with increased reactive oxygen species and premature deaths. B-lymphocyte development was similarly affected by Ant2 depletion, and splenocytes showed a reduction in maximal respiration capacity and cellular ATP levels as well as an increase in cell death accompanying mitochondrial permeability transition pore opening. In contrast, myeloid, megakaryocyte and T-lymphocyte lineages remained apparently intact. Erythroid and B-cell development may be particularly vulnerable to Ant2 depletion-mediated mitochondrial dysfunction and oxidative stress.",
+              "doi": "10.1038/cdd.2014.230",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f09570d6e089b71409641e79cca67fd04ef30b7e4c800fae74e79d3377ef8024"
+              }
+            },
+            {
+              "title": "An integrated bioinformatic investigation of mitochondrial solute carrier family 25 (SLC25) in colon cancer followed by preliminary validation of member 5 (SLC25A5) in tumorigenesis.",
+              "abstract": "Solute carrier family 25 (SLC25) encodes transport proteins at the inner mitochondrial membrane and functions as carriers for metabolites. Although SLC25 genetic variants correlate with human metabolic diseases, their roles in colon cancer remain unknown. Cases of colon cancer were retrieved from The Cancer Genome Atlas, and the transcriptionally differentially expressed members (DEMs) of SLC25 were identified. DNA level alterations, clinicopathological characteristics, and clinical survival were also investigated. A risk score model based on the DEMs was constructed to further evaluate their prognostic values in a clinical setting. The results were preliminarily validated using bioinformatic analysis of datasets from the Gene Expression Omnibus, immunohistochemical evaluations in clinical specimens, and functional experiments in colon cancer-derived cell lines. Thirty-seven DEMs were identified among 53 members of SLC25. Eight of 37 DEMs were introduced into a risk score model using integrated LASSO regression and multivariate Cox regression. Validated by GSE395282 and GSE175356, DEMs with high-risk scores were associated with the phenotypes of increasing tumor immune infiltration and decreasing glycolysis and apoptosis contents. SLC25A5 was downregulated in cancer, and its upregulation was related to better overall survival in patients from public datasets and in clinical cases. High SLC25A5 expression was an independent prognostic factor for 79 patients after surgical treatment. A negative correlation between CD8 and SLC25A5 was determined in specimens from 106 patients with advanced colon cancer. SLC25A5 attenuated cell proliferation, upregulated the expression of programmed cell death-related signatures, and exerted its biological function by inhibiting the MAPK signaling pathway. Our study reveals that mitochondrial SLC25 has prognostic value in patients with colon cancer. The bioinformatic analyses by following verification in situ and in vitro provide direction for further functional and mechanistic studies on the identified member of SLC25.",
+              "doi": "10.1038/s41419-022-04692-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "19fa9630cb6f41a2d136562b7ab7aa19e629d68d94c97f1022f0b107363c6d2f"
+              }
+            },
+            {
+              "title": "Down-regulated lncRNA SLC25A5-AS1 facilitates cell growth and inhibits apoptosis via miR-19a-3p/PTEN/PI3K/AKT signalling pathway in gastric cancer.",
+              "abstract": "Mounting evidence has illustrated the vital roles of long non-coding RNAs (lncRNAs in gastric cancer (GC). Nevertheless, the majority of their roles and mechanisms in GC are still largely unknown. In this study, we investigate the roles of lncRNA SLC25A5-AS1 on tumourigenesis and explore its potential mechanisms in GC. The results showed that the expressions of SLC25A5-AS1 in GC were significantly lower than that of adjacent normal tissues, which were significantly associated with tumour size, TNM stage and lymph node metastasis. Moreover, SLC25A5-AS1 could inhibit GC cell proliferation, induce G1/G1 cell cycle arrest and cell apoptosis in vitro, as well as GC growth in vivo. Dual-luciferase reporter assay confirmed the direct interaction between SLC25A5-AS1 and miR-19a-3p, rescue experiment showed that co-transfection miR-19a-3p mimics and pcDNA-SLC25A5-AS1 could partially restore the ability of GC cell proliferation and the inhibition of cell apoptosis. The mechanism analyses further found that SLC25A5-AS1 might act as a competing endogenous RNAs (ceRNA), which was involved in the derepression of PTEN expression, a target gene of miR-19a-3p, and regulate malignant phenotype via PI3K/AKT signalling pathway in GC. Taken together, this study indicated that SLC25A5-AS1 was down-regulated in GC and functioned as a suppressor in the progression of GC. Moreover, it could act as a ceRNA to regulate cellular behaviours via miR-19a-3p/PTEN/PI3K/AKT signalling pathway. Thus, SLC25A5-AS1 might be served as a potential target for cancer therapeutics in GC.",
+              "doi": "10.1111/jcmm.14200",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0d78069a5eba08d86e7e87d3e132d11cc89b5569f06e30157ba0902a1ffe04f1"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A5 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC25A5 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC25A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A5",
+            "ppr_score": 1.42420445004664e-05,
+            "degree_corrected_score": 1.172415711593963e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC25A5",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A5": {
+          "status": "unavailable",
+          "gene": "SLC25A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A5": {
+          "status": "unavailable",
+          "gene": "SLC25A5",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A5 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A5"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A5": 4.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.74；法官理由: Consensus supports true: CRISPR depletion at day18/p95H implies SLC25A5 loss impairs melanoma drug resistance, so inhibiting it suppresses resistance. Database evidence is association-level; two independent LLM signals reinforce direction.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A5 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A5"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A5": 4.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 2, 'A:False': 1}，最终智能体辩论后裁决：winner=None answer=True conf=0.68；法官理由: Evidence channel and L2 favor true; L1 false is zero-evidence and directionally inferred. Graph lacks melanoma resistance but CRISPR depletion under p95H supports essentiality/inhibition membership, so vote true with moderate confidence.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A5']",
+        "status": "ok",
+        "summary": "SLC25A5 encodes the mitochondrial ADP/ATP translocase ANT3, which supports mitochondrial energy metabolism and cell survival. In melanoma and other cancers, such metabolic support is generally associated with stress tolerance and potential drug resistance rather than suppression of resistance. Therefore, based on parameterized biological knowledge, SLC25A5 is not expected to inhibit melanoma tumor drug resistance under the described CRISPR/MAGeCK experimental setting.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A5"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A5 encodes the mitochondrial ADP/ATP translocase ANT3, which supports mitochondrial energy metabolism and cell survival. In melanoma and other cancers, such metabolic support is generally associated with stress tolerance and potential drug resistance rather than suppression of resistance. Therefore, based on parameterized biological knowledge, SLC25A5 is not expected to inhibit melanoma tumor drug resistance under the described CRISPR/MAGeCK experimental setting.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T05:57:08Z"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A47 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A47"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "status": "ok",
+      "summary": "检索到 4 类证据、3 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A47"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A47",
+              "protein_function": "Thought to be an uncoupling protein that uncouples mitochondrial respiration from ATP synthesis.",
+              "aliases": "C14orf68, HDCMP, HMFN1655",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A47",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Human umbilical cord-derived mesenchymal stem cells ameliorate liver fibrosis by improving mitochondrial function via Slc25a47-Sirt3 signaling pathway.",
+              "abstract": "Chronic Liver fibrosis may progress to liver cirrhosis and hepatocellular carcinoma (HCC), hence cause a substantial global burden. However, effective therapies for blocking fibrosis are still lacking. Although mesenchymal stem cells (MSCs) have been proven beneficial to liver regeneration after damage, the underlying mechanism of their therapeutic effects are not fully understood. Oxidative stress and mitochondrial functionality alteration directly contributes to the hepatocyte apoptosis and development of liver fibrosis. This study aims to elucidate the mechanism by which hUC-MSC alleviates liver fibrosis and mitochondrial dysfunction. RNA-sequencing was performed to characterize the transcriptomic changes after implantation of hUC-MSCs in mice with liver fibrosis. Next, western blot, RT-PCR, immunohistochemical and immunofluorescence staining were used to evaluate the expression of different genes in vitro and in vivo. Additionally, mitochondrial morphological and dynamic changes, ROS content, and ATP production were examined. Slc25a47, a newly identified liver-specific mitochondrial NAD transporter, was notably reduced in CCl-treated mice and HO-stimulated hepatocytes. Conversely, hUC-MSCs increased the Slc25a47 expression and NAD level within mitochondria, thereby enhanced Sirt3 protein activity and alleviated mitochondrial dysfunction in the liver. Furthermore, Slc25a47 knockdown could partially abrogate the protective effects of hUC-MSCs on HO-induced mitochondrial fission and oxidative stress in hepatocytes. Our study illustrates that Slc25a47 is a key molecular for hUC-MSCs to improve liver fibrosis and regulates mitochondrial function through Sirt3 for the first time, and providing a theoretical basis for the clinical translation of hUC-MSCs transplantation in the treatment of patients with liver fibrosis/cirrhosis.",
+              "doi": "10.1016/j.biopha.2024.116133",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A47"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2b90d03da5a9a87ab9232f5bea9dd7519fcb702ff1b9c9b4c817846d747039d9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A47 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A47 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A47']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A47",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A47",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A47": {
+          "status": "unavailable",
+          "gene": "SLC25A47",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A47": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A47",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A47']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A47 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A47"
+        ],
+        "confidence": 0.86,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A47": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.86；法官理由: No Daudi/B-ALL tumor survival evidence; SLC25A47 is liver/mitochondrial transporter, not established in B-lymphoblastic leukemia. Channels E, L1, L2 unanimously answer false; two independent LLM votes corroborate. Verdict false.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A47']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A47 的主要证据来自肝纤维化/肝细胞线粒体保护语境：其作为肝特异性线粒体 NAD 转运/解偶联相关蛋白，改善线粒体功能、降低氧化应激，更多表现为组织损伤保护因子，而非明确的肿瘤增殖驱动因子。将该邻近组织/疾病迁移到 B-lymphoblastic leukaemia 时，谱系差异很大：B 淋巴母细胞白血病依赖 B 细胞转录程序、BCR/PI3K、糖酵解/氧化磷酸化、免疫逃逸等，而 SLC25A47 在淋巴造血系中的表达和必需性均缺乏支持。 | 目标癌种 B-lymphoblastic leukaemia 中 TIMER/KM 不可用，图谱邻近仅显示其属于 SLC25 线粒体载体家族，不能直接推断促肿瘤生存。文献提示 SLC25A47 在肝损伤/纤维化中通过线粒体 NAD-Sirt3 轴保护肝细胞，这种作用更接近维持正常细胞线粒体稳态或抑制组织损伤，而非在 B-ALL 中促进肿瘤存活。若其具有解偶联/降低 ATP 合成效率的倾向，在依赖高能量代谢的白血病细胞中也可能不利或中性。跨癌种类比不确定度较高，因此给出低置信度的 false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A47"
+        ],
+        "confidence": 0.86,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A47": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.86；法官理由: No B-ALL/Daudi-Cas9 CRISPR evidence; SLC25A47 is liver-associated mitochondrial carrier/uncoupling, not lymphoid essentiality. Independent LLM votes and evidence channel agree false; database associations do not establish tumor survival pro。原证据通道判定: winner=None answer=False conf=0.32（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A47']",
+        "status": "ok",
+        "summary": "SLC25A47 主要作为溶质载体/胆汁酸相关转运蛋白，在肝脏和肠道功能中更常见，并不是 B-lymphoblastic leukaemia 中典型的肿瘤存活促进基因；在 Daudi-Cas9 细胞系的 MAGeCK 筛选语境下，没有强先验支持其 promote B-lymphoblastic leukaemia's Tumor Survival，因此判断为 false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A47"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A47 主要作为溶质载体/胆汁酸相关转运蛋白，在肝脏和肠道功能中更常见，并不是 B-lymphoblastic leukaemia 中典型的肿瘤存活促进基因；在 Daudi-Cas9 细胞系的 MAGeCK 筛选语境下，没有强先验支持其 promote B-lymphoblastic leukaemia's Tumor Survival，因此判断为 false。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T04:20:02Z"
+  }
+}

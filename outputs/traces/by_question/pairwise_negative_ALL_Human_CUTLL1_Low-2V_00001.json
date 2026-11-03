@@ -1,0 +1,564 @@
+{
+  "qid": "pairwise_negative_ALL_Human_CUTLL1_Low-2V_00001",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr 4days vs Crispr 7days Low-2V as the treatment condition, and MAGECK as the method.\nWhich gene between SLC20A1 and SLC1A4 is more likely to inhibit acute lymphoblastic leukemia's Tumor Growth?",
+  "constraints": {
+    "cancer": "acute lymphoblastic leukemia",
+    "cell_line": "CUTLL1",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 4days vs Crispr 7days Low-2V"
+  },
+  "ground_truth": {
+    "winner": "SLC20A1"
+  },
+  "effective_genes": [
+    "SLC20A1",
+    "SLC1A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_CUTLL1_Low-2V_00001",
+      "status": "ok",
+      "summary": "检索到 4 类证据、21 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC20A1",
+        "SLC1A4"
+      ],
+      "requested_context": {
+        "cancer": "acute lymphoblastic leukemia",
+        "cell_line": "CUTLL1",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 4days vs Crispr 7days Low-2V"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC1A4",
+              "protein_function": "Sodium-dependent neutral amino acid transporter that mediates transport of alanine, serine, cysteine, proline, hydroxyproline and threonine.",
+              "aliases": "ASCT1, SATT",
+              "transport_type": "C / Na+, E / amino acids"
+            },
+            {
+              "gene": "SLC20A1",
+              "protein_function": "Sodium-phosphate symporter which preferentially transports the monovalent form of phosphate with a stoichiometry of two sodium ions per phosphate ion. May play a role in extracellular matrix and cartilage calcification as well as in vascular calcification. Essential for cell proliferation but this function is independent of its phosphate transporter activity.",
+              "aliases": "PiT-1, Gibbon Ape Leukemia Virus Receptor 1, Glvr-1, GLVR1, PiT1",
+              "transport_type": "C / Na+, H2PO4-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC1A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC1 High-affinity glutamate and  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC1 High-affinity glutamate and  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC1A4",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ASCT1",
+              "target_properties": {
+                "name": "ASCT1"
+              }
+            },
+            {
+              "gene": "SLC20A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC20 Type III Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC20 Type III Na+-phosphate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC20A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "PiT-1",
+              "target_properties": {
+                "name": "PiT-1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC1A4",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Anal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC1A4",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Endometrial Cancer (EC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC1A4",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC1A4",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC1A4",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Skullcapflavone II Inhibits SLC1A4-Mediated L-Serine Uptake and Promotes Mitochondrial Damage in Gastric Cancer.",
+              "abstract": "Gastric cancer (GC) is one of the most lethal human malignancies worldwide. Serine metabolism is essential for meeting biosynthetic demands and regulating the redox state of GC cells. This study demonstrates that Skullcapflavone II (SkII) selectively inhibits the proliferation and metastasis of GC cells. Transcriptomic and metabolomic analyses reveal that SkII treatment significantly affects serine metabolism in GC cells, and isotope tracing experiments confirmed that SkII reduces intracellular L-serine levels by inhibiting uptake rather than de novo synthesis. Furthermore, IHC analysis reveal significant upregulation of the L-serine transporter SLC1A4 in GC tissues. Binding studies using PELSA, SPR, DARTS, CETSA, and MD suggest that SLC1A4 is a potential direct target of SkII. SkII-induced disruption of serine metabolism resulted in an imbalance in GSSG/GSH, leading to increased accumulation of intracellular ROS and oxidative stress. This metabolic disruption causes mitochondrial damage, impaired energy production, and increased apoptosis in GC cells. Additionally, in vivo studies reveal that a serine and glycine deficient diet significantly enhanced the antitumor efficacy of SkII, highlighting its potential as a combinatorial therapeutic strategy. These findings provide compelling evidence that SkII is a novel candidate for targeting serine metabolism, suggesting a promising therapeutic approach for treating GC.",
+              "doi": "10.1002/advs.202417225",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0d76b0e3bfb47fd507de74843b4388e63fc40f892497c522102eb23b6a976a0b"
+              }
+            },
+            {
+              "title": "Identification and experimental validation of G protein alpha inhibiting activity polypeptide 2 (GNAI2) as a microRNA-138 target in tongue squamous cell carcinoma.",
+              "abstract": "MicroRNA deregulation is a critical event in tumor initiation and progression. The down-regulation of microRNA-138 has been frequently observed in various cancers, including tongue squamous cell carcinoma (TSCC). Our previous studies suggest that deregulation of miR-138 is associated with the enhanced proliferation and invasion in TSCC cells. Here, we seek to identify the targets of miR-138 in TSCC, and explore their functional relevance in tumorigenesis. Our genome-wide expression profiling experiments identified a panel of 194 unique transcripts that were significantly down-regulated in TSCC cells transfected with miR-138. A comprehensive screening using six different sequence-based microRNA target prediction algorithms revealed that 51 out of these 194 down-regulated transcripts are potential direct targets for miR-138. These targets include: chloride channel, nucleotide-sensitive, 1A (CLNS1A), G protein alpha inhibiting activity polypeptide 2 (GNAI2), solute carrier family 20, member 1 (SLC20A1), eukaryotic translation initiation factor 4E binding protein 1 (EIF4EBP1), and Rho-related GTP-binding protein C (RhoC). GNAI2 is a known proto-oncogene that is involved in the initiation and progression of several different types of tumors. Direct targeting of miR-138 to two candidate binding sequences located in the 3'-untranslated region of GNAI2 mRNA was confirmed using luciferase reporter gene assays. Knockdown of miR-138 in TSCC cells enhanced the expression of GNAI2 at both mRNA and protein levels. In contrast, ectopic transfection of miR-138 reduced the expression of GNAI2, which, in consequence, led to reduced proliferation, cell cycle arrest and apoptosis. In summary, we identified a number of high-confident miR-138 target genes, including proto-oncogene GNAI2, which may play an important role in TSCC initiation and progression.",
+              "doi": "10.1007/s00439-010-0915-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8ca9ca38d5dfc2465cd39cde9b9e89c6c87ab8126283a76477dfb1e3f74d3be1"
+              }
+            },
+            {
+              "title": "Analysis of a new therapeutic target and construction of a prognostic model for breast cancer based on ferroptosis genes.",
+              "abstract": "Breast cancer, which is the most common malignant tumor among women worldwide and an important cause of death in women. The existing prognostic model for patients with breast cancer is not accurate as breast cancer is resistant to commonly used antitumor drugs. Ferroptosis is a novel mechanism of programmed cell death that depends on iron accumulation and lipid peroxidation. Various studies have confirmed the role of ferroptosis in tumor regulation and ferroptosis is now considered to play an important role in breast cancer development. At present, the association between breast cancer prognosis and ferroptosis-related gene expression remains unclear. Further exploration of this research area may optimize the evaluation and prediction of prognosis of patients with breast cancer and finding of new therapeutic targets. In this study, clinical factors and the expression of multiple genes were evaluated in breast cancer samples from the Cancer Genome Atlas (TCGA) database and Gene Expression Omnibus (GEO) database database. Eleven prognostication-related genes (TP63, IFNG, MT3, ANO6, FLT3, PTGS2, SLC1A4, JUN, SLC7A5, CHAC1, and TF) were identified from differentially expressed genes to construct a survival prediction model, which showed a good prediction ability. KEGG pathway analysis revealed that immune-related pathways were the primary pathways. ssGSEA analysis showed significant differences in the distribution of certain immune-related cell subsets, such as CD8T cells and B cells, and in the expression of multiple immune genes, including type II IFN response and APC coinhibition. In addition, 10 immune targets related to ferroptosis in breast cancer were found: CD276, CD80, HHLA2, LILRA2, NCR3LG1, NECTIN3, PVR, SLAMF9,TNFSF4, and BTN1A1. Using TCGA, new ferroptosis genes related to breast cancer prognosis were identified, a new reliable and accurate prognosis model was developed, and 10 new potential therapeutic targets different from the traditional targeted drugs were identified to provide a reference for improving the poor prognosis of patients with breast cancer.",
+              "doi": "10.1016/j.compbiomed.2023.107370",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11778940779fa70bdeebff42c394ff3fbc3e8722d0f280e1daad1e3987e69345"
+              }
+            },
+            {
+              "title": "Cellular abundance of sodium phosphate cotransporter SLC20A1/PiT1 and phosphate uptake are controlled post-transcriptionally by ESCRT.",
+              "abstract": "Inorganic phosphate is essential for human life. The widely expressed mammalian sodium/phosphate cotransporter SLC20A1/PiT1 mediates phosphate uptake into most cell types; however, while SLC20A1 is required for development, and elevated SLC20A1 expression is associated with vascular calcification and aggressive tumor growth, the mechanisms regulating SLC20A1 protein abundance are unknown. Here, we found that SLC20A1 protein expression is low in phosphate-replete cultured cells but is strikingly induced following phosphate starvation, whereas mRNA expression is high in phosphate-replete cells and only mildly increased by phosphate starvation. To identify regulators of SLC20A1 protein levels, we performed a genome-wide CRISPR-based loss-of-function genetic screen in phosphate-replete cells using SLC20A1 protein induction as readout. Our screen revealed that endosomal sorting complexes required for transport (ESCRT) machinery was essential for proper SLC20A1 protein downregulation in phosphate-replete cells. We show that SLC20A1 colocalizes with ESCRT and that ESCRT deficiency increases SLC20A1 protein and phosphate uptake into cells. We also found numerous additional candidate regulators of mammalian phosphate homeostasis, including genes modifying protein ubiquitination and the Krebs cycle and oxidative phosphorylation pathways. Many of these targets have not been previously implicated in this process. We present here a model in which SLC20A1 protein abundance and phosphate uptake are tonically negatively regulated post-transcriptionally in phosphate-replete cells through direct ESCRT-mediated SLC20A1 degradation. Moreover, our screening results provide a comprehensive resource for future studies to elucidate the mechanisms governing cellular phosphate homeostasis. We conclude that genome-wide CRISPR-based genetic screening is a powerful tool to discover proteins and pathways relevant to physiological processes.",
+              "doi": "10.1016/j.jbc.2022.101945",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cc9fc546e846fdaf642df9dbf07929b0fa8f4bb34f13fd190d374981d898f594"
+              }
+            },
+            {
+              "title": "Targeted metabolomics analysis identified the role of FOXA1 in the change in glutamate-glutamine metabolic pattern of BaP malignantly transformed 16HBE cells.",
+              "abstract": "The carcinogenic mechanism of benzo[a]pyrene (BaP) is far from being elucidated. FOXA1 has been confirmed to play an oncogenic role in BaP-transformed cell THBEc1. To explore the changes in amino acid metabolic patterns, especially glutamate-glutamine (Glu-Gln) metabolic pattern caused by BaP-induced transformation and the possible role FOXA1 might play in it, we compared amino acid metabolic characteristics between THBEc1 cells and control 16HBE cells using a targeted metabolomics method and determined the effects of FOXA1 knockout on the amino acid metabolic pattern using FOXA1 knockout cell THBEc1-ΔFOXA1-c34. The amino acid metabolic patterns of THBEc1 and 16HBE cells were different, which was manifested by the differential consumption of 18 amino acids and the difference in the intracellular content of 21 amino acids. The consumption and intracellular content of Glu and Gln are different between the two types of cells, accompanied by upregulation of FOXA1, GLUL, SLC1A3, SLC1A4, SLC1A5 and SLC6A14, and downregulation of FOXA2 and GPT2 in THBEc1 cells. FOXA1 knockout changed the consumption of 19 amino acids and the intracellular content of 21 amino acids and reversed the metabolic pattern of Glu and the changes in FOXA2, GLUL, SLC1A3 and SLC6A14 in THBEc1 cells. Additionally, FOXA1 knockout inhibited cell proliferation and further increased the dependence of THBEc1 cells on Glu. In conclusion, FOXA1 knockout partially reversed the change in Glu-Gln metabolism caused by BaP-induced transformation by upregulating the expression of GLUL and SLC1A3. Our findings provide a clue for the possible role of FOXA1 in amino acid metabolism regulation.",
+              "doi": "10.1016/j.taap.2023.116402",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "15bbf35034d6098a9ba10ea9581c94f17d6572174dadb4c190e3ad5b89fd5174"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC20A1 cancer=acute lymphoblastic leukemia bucket=pairwise Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr 4days vs Crispr 7days Low-2V as the treatment condition, and MAGECK as the method.\nWhich gene between SLC20A1 and SLC1A4 is more likely to inhibit acute lymphoblastic leukemia's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC20A1', 'SLC1A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC20A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC1A4",
+            "ppr_score": 5.201551233968409e-05,
+            "degree_corrected_score": 6.81056048144801e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC20A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC20A1",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC20A1": {
+          "status": "unavailable",
+          "gene": "SLC20A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A4": {
+          "status": "unavailable",
+          "gene": "SLC1A4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC20A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC20A1",
+          "cancer_type": "acute lymphoblastic leukemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A4": {
+          "status": "unsupported_cancer",
+          "gene": "SLC1A4",
+          "cancer_type": "acute lymphoblastic leukemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC1A4']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC1A4(P(winner)=0.52) vs SLC20A1(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC1A4",
+        "candidates": [
+          "SLC20A1",
+          "SLC1A4"
+        ],
+        "confidence": 0.516,
+        "abstained": false,
+        "gene_scores": {
+          "SLC20A1": 0.4,
+          "SLC1A4": 4.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC1A4(P(winner)=0.52) vs SLC20A1(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC1A4']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC1A4(P(winner)=0.52) vs SLC20A1(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC1A4",
+        "candidates": [
+          "SLC20A1",
+          "SLC1A4"
+        ],
+        "confidence": 0.516,
+        "abstained": false,
+        "gene_scores": {
+          "SLC20A1": 0.4,
+          "SLC1A4": 4.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC1A4(P(winner)=0.52) vs SLC20A1(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC1A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC20A1",
+          "SLC1A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:57:54Z"
+  }
+}

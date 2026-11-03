@@ -1,0 +1,754 @@
+{
+  "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00277",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC38A5 and SLC19A1 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "winner": "SLC19A1"
+  },
+  "effective_genes": [
+    "SLC38A5",
+    "SLC19A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_MDS_Human_MDS-L_AZA_00277",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC38A5",
+        "SLC19A1"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC19A1",
+              "protein_function": "Antiporter that mediates the import of reduced folates or a subset of cyclic dinucleotides, driven by the export of organic anions. Acts as a secondary active transporter, which exports intracellular organic anions down their concentration gradients to facilitate the uptake of its substrates.",
+              "aliases": "IFC-1, RFT-1, FOLT, RFC1, HRFC, RFC, Folate:Anion Antiporter SLC19A1, Intestinal Folate Carrier 1, Solute Carrier Family 19 (Folate Transporter), Member 1, Cyclic Dinucleotide:Anion Antiporter SLC19A1, Reduced Folate Carrier Protein, Placental Folate Transporter, Reduced Folate Transporter 1, Reduced Folate Transporter, Reduced Folate Carrier 1, Folate Transporter 1, HSLC19A1, IMD114, MEGAF, FLOT1, CHMD, IFC1, REFC",
+              "transport_type": "E / organic phosphates"
+            },
+            {
+              "gene": "SLC38A5",
+              "protein_function": "Symporter that cotransports neutral amino acids and sodium ions from the extracellular to the intracellular side of the cell membrane. The transport is sodium-dependent, electrogenic, and driven by the Na(+) electrochemical gradient. Expressed in multiple tissues and may be involved in amino acid uptake and distribution. Supports cell growth and proliferation. Plays a role in the cellular response to nutrient starvation.",
+              "aliases": "SNAT5, ATA4, Sodium-Coupled Neutral Amino Acid Transporter 5, Sodium-Coupled Neutral Amino Acid Symporter 5, System A Amino Acid Transporter 4, System N Amino Acid Transporter 5, Amino Acid Transporter A5, Solute Carrier Family 38, Member 5, Amino Acid Transporter System A5, PRO1163",
+              "transport_type": "C / Na+, E / H+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC19A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC19 Folate/thiamine  transporter family",
+              "target_properties": {
+                "name": "SLC19 Folate/thiamine  transporter family"
+              }
+            },
+            {
+              "gene": "SLC19A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC19A1|5-FU|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC19A1(RFC) is the reduced folate carrier, the major route for reduced-folate uptake. Adequate intracellular reduced folate is required for FdUMP-mediated thymidylate synthase inhibition; higher RFC activity supports the folate-dependent component of 5-FU cytotoxicity (sensitization).",
+                "paper": "Matherly LH 2008 Vitam Horm(RFC) PMID:18804694",
+                "name": "SLC19A1|5-FU|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1016/S0083-6729(08)00405-6\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "5-FU"
+              }
+            },
+            {
+              "gene": "SLC19A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "RFC",
+              "target_properties": {
+                "name": "RFC"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC38A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Osteosarcoma(OS)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Prostate Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Sarcoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "ischemic proliferative retinopathies",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "ischemic proliferative retinopathies",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "ischemic proliferative retinopathies",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "ischemic proliferative retinopathies",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "ischemic proliferative retinopathies",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Extracellular vesicle-derived circ_SLC19A1 promotes prostate cancer cell growth and invasion through the miR-497/septin 2 pathway.",
+              "abstract": "The occurrence and development of prostate cancer (PCa) is complex, and the related mechanism is not fully understood. Current studies have found that extracellular vesicles (EVs) and circular RNAs (circRNAs) have important functions in various tumours and other diseases. In this study, the detection of circRNAs in PCa showed that circ_SLC19A1 was increased in PCa cells and their secreted EVs. EVs with high expression of circ_SLC19A1 could be taken up by PCa cells, which promoted cell proliferation and invasion. The sequence of circ_SLC19A1 contained multiple binding sites for miR-497, and circ_SLC19A1 could bind directly to miR-497 in cells. The expression of miR-497 was downregulated in PCa cells, while the expression of its target gene septin 2 (SEPT2) was upregulated significantly. Transfection of circ_SLC19A1 small interfering RNA (siRNA) or miR-497 mimics could significantly inhibit the expression of SEPT2 and the phosphorylation of extracellular signal-regulated kinase 1 and 2 (ERK1/2). After co-transfection of circ_SLC19A1 siRNA and miR-497 inhibitors or SEPT2 overexpression vector, the expression of SEPT2 and ERK1/2 phosphorylation levels showed no significant changes. Similar results were obtained with co-transfection of miR-497 mimics and the SEPT2 overexpression vector. Therefore, cancer cells can regulate the expression of SEPT2 through miR-497 by secreting EVs with high expression of circ_SLC19A1, thus affecting the activation of the downstream ERK1/2 pathway and ultimately regulating PCa cell growth and invasion. Therefore, EV-derived circ_SLC19A1 plays an important regulatory role in PCa and may be an important target for PCa prevention and treatment.",
+              "doi": "10.1002/cbin.11303",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b82cb4a149a86e18a94e4ba95b242d1703f537c264676dc99a3edc9876f09601"
+              }
+            },
+            {
+              "title": "Neurodevelopmental consequences of Smn depletion in a mouse model of spinal muscular atrophy.",
+              "abstract": "Deletions or mutations in survival of motor neuron 1 (SMN1) cause motor neuron loss and spinal muscular atrophy (SMA), a neuromuscular disorder, with the most severe type manifesting in utero. Whether SMA is a disease of defects in neurodevelopment and/or neuromaintenance remains unclear. We performed an analysis of Smn gene and protein expression during murine embryogenesis. Furthermore, we examined Smn(-/-);SMN2 mice, a model of very severe SMA, for developmental, morphological, and molecular abnormalities. We demonstrate that Smn transcript levels are regulated in a tissue- and developmental stage-specific manner and that the Smn protein expression pattern generally followed that of the Smn mRNA. Cell death and pathological foci were observed in E10.5 Smn-depleted embryos, and this increased in the telencephalon at E14.5. Furthermore, we show an altered morphology of cranial nerves as well as truncated lumbar spinal nerves in a subset of E10.5 Smn(-/-);SMN2 embryos. Finally, we compared the splicing of a subset of genes shown recently to be aberrantly spliced in phenotypic-stage SMA mice. Changes in alternative splicing of the Slc38a5 and Uspl1 genes were detectable in prephenotypic-stage embryos and neonates but became more pronounced with the severity of the phenotype. By comparison, Hif3a alternative splicing was affected only at the end stage of disease. This result suggests that alterations in mRNA splicing in SMA occur, in part, as a result of disease progression. Overall, we conclude that Smn depletion affects developmental processes, which ultimately may also contribute to SMA pathogenesis.",
+              "doi": "10.1002/jnr.22189",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6db93f427ffcb4f8ac56fcbcaeea69953cc01be7b8ac67d39e50c3275b740657"
+              }
+            },
+            {
+              "title": "SLC38A5 promotes glutamine metabolism and inhibits cisplatin chemosensitivity in breast cancer.",
+              "abstract": "Solute carrier family 38 member 5 (SLC38A5), as an amino acid transporter, play a vital role in cellular biological processes. In this study, we analyzed the function of SLC38A5 and its potential mechanism in breast cancer (BC) progression. The expression of SLC38A5 in cancer and adjacent-normal tissues was analyzed by qRT-PCR and Western blot, and its correlation with patient prognosis was analyzed. The immunohistochemical staining of cancer tissues and adjacent-normal tissues was performed on SLC38A5-positive specimens. BC mice were successfully applied to examine the role of SLC38A5 on tumor proliferation using the CCK-8 assay. In BC cells and mouse tumor tissues, SLC38A5 and PCNA expression were determined by Western blotting. The study found that SLC38A5 was highly expressed in BC patients and associated with a poor survival. SLC38A5 silencing inhibited BC cell viability and glutamine uptake. In addition, SLC38A5 overexpression promoted BC cell viability via the glutamine metabolism. SLC38A5 inhibited cisplatin chemosensitivity in BC cells. Importantly, SLC38A5 silencing inhibited tumor growth in vivo. Our findings suggest that SLC38A5 enhances BC cell viability by glutamine metabolism, inhibits the chemical sensitivity of cisplatin in BC cells, and promotes tumor growth, emphasizing the clinical relevance of SLC38A5 in BC management as a novel potential therapeutic target.",
+              "doi": "10.1007/s12282-023-01516-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1a5131f16302ba126b90fe37c2e9eacd040489d7da527bc13103a72cb87dfa57"
+              }
+            },
+            {
+              "title": "Amino Acid Transporter Slc38a5 Controls Glucagon Receptor Inhibition-Induced Pancreatic α Cell Hyperplasia in Mice.",
+              "abstract": "Glucagon supports glucose homeostasis by stimulating hepatic gluconeogenesis, in part by promoting the uptake and conversion of amino acids into gluconeogenic precursors. Genetic disruption or pharmacologic inhibition of glucagon signaling results in elevated plasma amino acids and compensatory glucagon hypersecretion involving expansion of pancreatic α cell mass. Recent findings indicate that hyperaminoacidemia triggers pancreatic α cell proliferation via an mTOR-dependent pathway. We confirm and extend these findings by demonstrating that glucagon pathway blockade selectively increases expression of the sodium-coupled neutral amino acid transporter Slc38a5 in a subset of highly proliferative α cells and that Slc38a5 controls the pancreatic response to glucagon pathway blockade; most notably, mice deficient in Slc38a5 exhibit markedly decreased α cell hyperplasia to glucagon pathway blockade-induced hyperaminoacidemia. These results show that Slc38a5 is a key component of the feedback circuit between glucagon receptor signaling in the liver and amino-acid-dependent regulation of pancreatic α cell mass in mice.",
+              "doi": "10.1016/j.cmet.2017.05.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0f15f0baa1e8b4852c7353c331141b039d2855fa626a3b56783743f29e8c3d28"
+              }
+            },
+            {
+              "title": "Tumor Reliance on Cytosolic versus Mitochondrial One-Carbon Flux Depends on Folate Availability.",
+              "abstract": "Folate metabolism supplies one-carbon (1C) units for biosynthesis and methylation and has long been a target for cancer chemotherapy. Mitochondrial serine catabolism is considered the sole contributor of folate-mediated 1C units in proliferating cancer cells. Here, we show that under physiological folate levels in the cell environment, cytosolic serine-hydroxymethyltransferase (SHMT1) is the predominant source of 1C units in a variety of cancers, while mitochondrial 1C flux is overly repressed. Tumor-specific reliance on cytosolic 1C flux is associated with poor capacity to retain intracellular folates, which is determined by the expression of SLC19A1, which encodes the reduced folate carrier (RFC). We show that silencing SHMT1 in cells with low RFC expression impairs pyrimidine biosynthesis and tumor growth in vivo. Overall, our findings reveal major diversity in cancer cell utilization of the cytosolic versus mitochondrial folate cycle across tumors and SLC19A1 expression as a marker for increased reliance on SHMT1.",
+              "doi": "10.1016/j.cmet.2020.12.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a507fa7f16693d375c87bebe2d2c4722b83875b16507c23897d0ea5ed5f7c27e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC38A5 cancer=MDS(Myelodysplastic Neoplasms) bucket=pairwise Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC38A5 and SLC19A1 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC38A5', 'SLC19A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC38A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC38A5",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC38A5": {
+          "status": "unavailable",
+          "gene": "SLC38A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC19A1": {
+          "status": "ok",
+          "gene": "SLC19A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC19A1.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC38A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A5",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC19A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC19A1",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A5', 'SLC19A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC38A5(P(winner)=0.63) vs SLC19A1(P=0.45), 差=0.18；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC19A1",
+        "candidates": [
+          "SLC38A5",
+          "SLC19A1"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A5": 8.15,
+          "SLC19A1": 0.3
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC38A5': 1, 'W:SLC19A1': 2}，最终智能体辩论后裁决：winner=SLC19A1 answer=None conf=0.61；法官理由: Two independent LLMs favor SLC19A1 via folate/antimetabolite stress buffering; E’s graph proxy is non-CRISPR and SLC38A5 amino-acid transport is less directly linked to AZA resistance. Moderate confidence.。原证据通道判定: winner=SLC38A5 answer=None conf=0.634（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A5', 'SLC19A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC38A5在乳腺癌中促进谷氨酰胺代谢并抑制顺铂敏感性，在骨肉瘤/骨肿瘤/肉瘤中与抑制铁死亡相关，在前列腺癌中促进糖酵解；这些跨癌种证据均指向其通过营养摄取、mTOR/代谢应激耐受和抗细胞死亡通路增强肿瘤在化疗压力下的存活。MDS为髓系肿瘤，AZA治疗压力同样要求细胞在代谢应激、增殖与凋亡/铁死亡边界中存活，因此该逻辑可类比迁移。SLC19A1主要与还原叶酸/5-FU敏感性相关，高RFC活性反而支持5-FU细胞毒，与AZA耐药方向不一致。 | 尽管MDS直接图谱/组学证据缺失，SLC38A5在多个邻近实体瘤中表现出促进肿瘤生长、代谢重编程、抑制铁死亡及降低化疗敏感性的功能，最符合“促进MDS肿瘤耐药”的方向。SLC19A1虽有促增殖关联，但其核心药理证据更偏向增强抗代谢药敏感性，因此相对更不支持其作为MDS/AZA耐药促进基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC19A1",
+        "candidates": [
+          "SLC38A5",
+          "SLC19A1"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A5": 8.15,
+          "SLC19A1": 0.3
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC38A5': 1, 'W:SLC19A1': 2}，最终智能体辩论后裁决：winner=SLC19A1 answer=None conf=0.66；法官理由: Two independent LLM channels agree SLC19A1’s folate/nucleotide transport better supports AZA stress survival than SLC38A5’s redundant amino-acid uptake; E’s cross-cancer evidence is not MDS/AZA-specific.。原证据通道判定: winner=SLC38A5 answer=None conf=0.61（保留于溯源）。",
+        "analogy_cancers": [
+          "Bone cancer",
+          "Osteosarcoma(OS)",
+          "Prostate Cancer",
+          "Sarcoma",
+          "colorectal cancer(CRC)",
+          "ischemic proliferative retinopathies",
+          "liver cancer"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A5', 'SLC19A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC38A5",
+          "SLC19A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T03:44:09Z"
+  }
+}

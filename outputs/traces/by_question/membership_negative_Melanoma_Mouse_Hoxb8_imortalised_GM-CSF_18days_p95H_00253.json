@@ -1,0 +1,388 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00253",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC22A6 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC22A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00253",
+      "status": "ok",
+      "summary": "检索到 4 类证据、8 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC22A6"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A6",
+              "protein_function": "Secondary active transporter that functions as a Na(+)-independent organic anion (OA)/dicarboxylate antiporter.",
+              "aliases": "OAT1, Organic Anion Transporter 1",
+              "transport_type": "E / organic anions"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "OAT1",
+              "target_properties": {
+                "name": "OAT1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Prophylactic vitamin C supplementation regulates DNA demethylation to protect against cisplatin-induced acute kidney injury in mice.",
+              "abstract": "Cisplatin-induced acute kidney injury (AKI) restricts the use of cisplatin as a first-line chemotherapeutic agent. Our previous study showed that prophylactic vitamin C supplementation may act as an epigenetic modulator in alleviating cisplatin-induced AKI in mice. However, the targets of vitamin C and the mechanisms underlying the epigenetics changes remain largely unknown. Herein, whole-genome bisulfite sequencing and bulk RNA sequencing were performed on the kidney tissues of mice treated with cisplatin with prophylactic vitamin C supplementation (treatment mice) or phosphate-buffered saline (control mice) at 24 h after cisplatin treatment. Ascorbyl phosphate magnesium (APM), an oxidation-resistant vitamin C derivative, was found that led to global hypomethylation in the kidney tissue and regulated different functional genes in the promoter region and gene body region. Integrated evidence suggested that APM enhanced renal ion transport and metabolism, and reduced apoptosis and inflammation in the kidney tissues. Strikingly, Mapk15, Slc22a6, Cxcl5, and Cd44 were the potential targets of APM that conferred protection against cisplatin-induced AKI. Moreover, APM was found to be difficult to rescue cell proliferation and apoptosis caused by cisplatin in the Slc22a6 knockdown cell line. These results elucidate the mechanism by which vitamin C as an epigenetic regulator to protects against cisplatin-induced AKI and provides a new perspective and evidence support for controlling the disease process through regulating DNA methylation.",
+              "doi": "10.1016/j.bbrc.2023.149463",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f4b76658281dc52a0929f77d658dd18110d67e2ec353f1ab7e2efb90e0c5961b"
+              }
+            },
+            {
+              "title": "Safety evaluation of conditionally immortalized cells for renal replacement therapy.",
+              "abstract": "End-stage kidney disease represents irreversible kidney failure. Dialysis and transplantation, two main treatment options currently available, present various drawbacks and complications. Innovative cell-based therapies, such as a bioartificial kidney, have not reached the clinic yet, mostly due to safety and/or functional issues. Here, we assessed the safety of conditionally immortalized proximal tubule epithelial cells (ciPTECs) for bioartificial kidney application, by using  assays and athymic nude rats. We demonstrate that these cells do not possess key properties of oncogenically transformed cells, including anchorage-independent growth, lack of contact inhibition and apoptosis-resistance. In late-passage cells we did observe complex chromosomal abnormalities favoring near-tetraploidy, indicating chromosomal instability. However, time-lapse imaging of ciPTEC-OAT1, confined to a 3D extracellular matrix (ECM)-based environment, revealed that the cells were largely non-invasive. Furthermore, we determined the viral integration sites of SV40 Large T antigen (SV40T), human telomerase (hTERT) and OAT1 (SLC22A6), the transgenes used for immortalization and cell function enhancement. All integrations sites were found to be located in the intronic regions of endogenous genes. Among these genes, early endosome antigen 1 (EEA1) involved in endocytosis, and BCL2 Like 1 (BCL2L1) known for its role in regulating apoptosis, were identified. Nevertheless, both gene products appeared to be functionally intact. Finally, after subcutaneous injection in athymic nude rats we show that ciPTEC-OAT1 lack tumorigenic and oncogenic effects , confirming the  findings. Taken together, this study lays an important foundation towards bioartificial kidney (BAK) development by confirming the safety of the cell line intended for incorporation.",
+              "doi": "10.18632/oncotarget.27152",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06f159fc4419ef1523f2810dbe6af1712ac1789477d519dff0710d93919d19bd"
+              }
+            },
+            {
+              "title": "Subchronic exposure to individual and combined ochratoxin A and citrinin affects the expression of rat renal organic anion transporters.",
+              "abstract": "Ochratoxin A (OTA) and citrinin (CIT) are mycotoxins known to co-contaminate human/animal food/feed. Their prominent nephrotoxic effects pose a threat to human and animal health. Studies have shown synergistic or additive effects of these two mycotoxins, but a clear consensus on this phenomenon does not exist. In vitro/vivo studies on OTA and CIT effects showed they elevate oxidative stress parameters. Some in vitro studies tested resveratrol (RSV) as a potential antioxidant to counteract these OTA and CIT effects. However, data on the combined effects of OTA + CIT mycotoxins and RSV on their in vivo toxicity is lacking. We used immunofluorescence microscopy and Western blotting to study the subchronic effects of individual/combined OTA (0.125 and 0.250 mg kg b.w.) and CIT (20 mg kg b.w.) on the localization/expression of rat renal organic anion transporters (rOats) (rOat1/Slc22a6, rOat2/Slc22a7, rOat3/Slc22a8, rOat5/Slc22a19) that mediate the secretion/reabsorption of organic anions in kidney proximal tubules. We investigated if RSV (20 mg kg b.w.) can counteract the effects of both mycotoxins on the localization/expression of studied transporters. Results revealed Oat- and dose-dependent changes in protein expression of rOats. When combined with both mycotoxins, RSV decreased the protein expression of all of the studied rOats. Its effect was additive on Oat1/2/5. Thus, RSV failed to ameliorate OTA- and/or CIT-related nephrotoxic effects on the expression of studied rOats in rat kidneys.",
+              "doi": "10.1007/s12550-020-00399-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ab243d651bd4d482683c680b8d716f17e084b0bb0b8a82e3ff3292a2a940a283"
+              }
+            },
+            {
+              "title": "Impaired renal organic anion transport 1 (SLC22A6) and its regulation following acute myocardial infarction and reperfusion injury in rats.",
+              "abstract": "Acute kidney injury (AKI) is a high frequent and common complication following acute myocardial infarction (AMI). This study examined and identified the effect of AMI-induced AKI on organic anion transporter 1 (Oat1) and Oat3 transport using clinical setting of pre-renal AKI in vivo. Cardiac ischaemia (CI) and cardiac ischaemia and reperfusion (CIR) were induced in rats by 30-min left anterior descending coronary artery occlusion and 30-min occlusion followed by 120-min reperfusion, respectively. Renal hemodynamic parameters, mitochondrial function and Oat1/Oat3 expression and function were determined along with biochemical markers. Results showed that CI markedly reduced renal blood flow and pressure by approximately 40%, while these parameters were recovered during reperfusion. CI and CIR progressively attenuated renal function and induced oxidative stress by increasing plasma BUN, creatinine and malondialdehyde levels. Correspondingly, SOD, GPx, CAT mRNAs were decreased, while TNFα, IL1β, COX2, iNOS, NOX2, NOX4, and xanthine oxidase were increased. Mitochondrial dysfunction as indicated by increasing ROS, membrane depolarisation, swelling and caspase3 activation were shown. Early significant detection of AKI; KIM1, IL18, was found. All of which deteriorated para-aminohippurate transport by down-regulating Oat1 during sudden ischaemia. This consequent blunted the trafficking rate of Oat1/Oat3 transport via down-regulating PKCζ/Akt and up-regulating PKCα/NFκB during CI and CIR. Thus, this promising study indicates that CI and CIR abruptly impaired renal Oat1 and regulatory proteins of Oat1/Oat3, which supports dysregulation of remote sensing and signalling and inter-organ/organismal communication. Oat1, therefore, could potentially worsen AKI and might be a potential therapeutic target for early reversal of such injury.",
+              "doi": "10.1016/j.bbadis.2019.05.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cf02e70f10ba648ce43f83f8d64e88823d5b9ead88fab5f01779622aa0f4605a"
+              }
+            },
+            {
+              "title": "Uremic toxins activate CREB/ATF1 in endothelial cells related to chronic kidney disease.",
+              "abstract": "Uremic toxins, such as p-cresyl sulfate (PCS) and indoxyl sulfate (IS), contribute to endothelial dysfunction in chronic kidney disease (CKD). This process is mediated by several cellular pathways, but it is unclear whether cAMP-responsive element-binding protein (CREB) and activating transcription factor 1 (ATF1) participate in endothelial dysfunction in uremic conditions despite playing roles in inflammatory modulation. This study aimed to evaluate the expression, activation, and transcriptional activity of CREB/ATF1 in endothelial cells exposed to PCS, IS, and uremic serum (US). In vitro, ATF1 protein levels were increased by PCS and IS, whereas CREB levels were enhanced only by IS. Activation through CREB-Ser and ATF1-Ser phosphorylation was induced by PCS, IS, and US. We evaluated the CREB/ATF1 transcriptional activity by analyzing the expression of their target genes, including ICAM1, PTGS2, NOX1, and SLC22A6, which are related to endothelial dysfunction through their roles in vascular inflammation, oxidative stress, and cellular uptake of PCS and IS. The expression of ICAM1, PTGS2 and NOX1 genes was increased by PCS, IS, and US, whereas that of SLC22A6 was induced only by IS. KG-501, a CREB inhibitor, restored the inductive effects of PCS on ICAM1, PTGS2, and NOX1 expression; IS on ICAM1, PTGS2 and SLC22A6 expression; and US on NOX1 expression. The presence of CREB and ATF1 was observed in healthy arteries and in arteries of patients with CKD, which were structurally damaged. These findings suggest that CREB/ATF1 is activated by uremic toxins and may play a relevant role in endothelial dysfunction in CKD.",
+              "doi": "10.1016/j.bcp.2022.114984",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "560144945d8677ad8b81beb47b67687f5a306259afa6efc7d2852d3ddef9a738"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC22A6 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC22A6 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC22A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC22A6",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC22A6",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC22A6",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC22A6": {
+          "status": "unavailable",
+          "gene": "SLC22A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC22A6": {
+          "status": "unavailable",
+          "gene": "SLC22A6",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A6']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC22A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC22A6"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A6": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: Observations show SLC22A6 is renal OAT1, not melanoma resistance evidence. Channel E conflates essentiality with inhibition; no CRISPR depletion or direction. Two independent LLM votes agree false, outweighing weak true. Verdict false.。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A6']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC22A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC22A6"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A6": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: Observations show SLC22A6/OAT1 renal anion transporter; no melanoma CRISPR directional evidence. E’s MAGeCK essentiality score is non-directional and weak. Two independent LLMs correctly flag conflation and lack of mechanistic basis for inh。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC22A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:46:06Z"
+  }
+}

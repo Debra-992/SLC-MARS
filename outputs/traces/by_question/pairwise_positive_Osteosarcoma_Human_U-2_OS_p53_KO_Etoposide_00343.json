@@ -1,0 +1,435 @@
+{
+  "qid": "pairwise_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00343",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with p53.KO Crispr 96hours vs p53.KO Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC29A4 is more likely to promote Osteosarcoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Osteosarcoma",
+    "cell_line": "U-2 OS",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "p53.KO Crispr 96hours vs p53.KO Crispr 96hours Etoposide"
+  },
+  "ground_truth": {
+    "winner": "SLC25A26"
+  },
+  "effective_genes": [
+    "SLC25A26",
+    "SLC29A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00343",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A26",
+        "SLC29A4"
+      ],
+      "requested_context": {
+        "cancer": "Osteosarcoma",
+        "cell_line": "U-2 OS",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "p53.KO Crispr 96hours vs p53.KO Crispr 96hours Etoposide"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            },
+            {
+              "gene": "SLC29A4",
+              "protein_function": "Electrogenic voltage-dependent transporter that mediates the transport of a variety of endogenous bioactive amines, cationic xenobiotics and drugs.",
+              "aliases": "ENT4, PMAT, FLJ34923, etc.",
+              "transport_type": "unclear, possibly proton-linked"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC29A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC29 Facilitative nucleoside  transporter family",
+              "target_properties": {
+                "name": "SLC29 Facilitative nucleoside  transporter family"
+              }
+            },
+            {
+              "gene": "SLC29A4",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ENT4",
+              "target_properties": {
+                "name": "ENT4"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Negative correlation between endoglin levels and coronary atherosclerosis.",
+              "abstract": "Coronary artery disease (CAD) is a common cardiovascular disease, and abnormal blood lipid metabolism is an important risk factor. Transforming growth factor-ß (TGF-ß) and its receptor (TGF-ßR) can inhibit the release of inflammatory factors through the SMAD pathway-mediated immune response, thereby suppressing the progression of CAD. Endoglin (TGF-ßRIII), a TGF-ßR family homologous receptor protein, is directly involved in the immunoregulatory process, but the exact mechanism is unclear. This study aimed to clarify the pathophysiological effects of endoglin on the development of atherosclerosis and to explore the mechanism of the signalling pathway. We downloaded the GEO dataset to perform a functional analysis of SMAD family activity and TGF-ß receptor protein expression in the monocyte expression profiles of patients with familial hyperlipidaemia (FH). The effect of endoglin on endothelial cell proliferation, migration, and apoptosis was examined by disrupting the endoglin gene in human umbilical vein endothelial cells (HUVECs) and validated by western blotting. The related genes and pathways regulated by endoglin were obtained by analysing the sequencing data. Research has shown that interference with endoglin can promote the proliferation and migration and significantly inhibit the apoptosis of vascular endothelial cells. Interference with endoglin particularly encourages the expression of VEGFB in vascular endothelial cells. The endoglin gene in vascular endothelial cells regulates the PI3K-Akt, Wnt, TNF, and cellular metabolism pathways by activating the SMAD pathway. RAB26, MR1, CCL2, SLC29A4, IBTK, VEGFB, and GOLGA8B play critical roles. Endoglin interacts closely with 11 proteins such as CCL2 and SEPRINE1, which participate in the vital pathway of plaque formation. Interference with endoglin can alter the course of coronary atherosclerosis.",
+              "doi": "10.1186/s12944-021-01545-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6332b51bf899903151fe85f310a35ec70f67bef52d2772af2d45807380b4c50a"
+              }
+            },
+            {
+              "title": "Identification and characterization of novel compound variants in SLC25A26 associated with combined oxidative phosphorylation deficiency 28.",
+              "abstract": "Combined oxidative phosphorylation deficiency 28 (COXPD28) is associated with mitochondrial dysfunction caused by mutations in SLC25A26, the gene which encodes the mitochondrial S-adenosylmethionine carrier (SAMC) that responsible for the transport of S-adenosylmethionine (SAM) into the mitochondria. To identify and characterize pathogenic variants of SLC25A26 in a Chinese pedigree, provide a basis for clinical diagnosis and genetic counseling. We conducted a systematic analysis of the clinical characteristics of a female with COXPD28. Whole-exome and mitochondrial genome sequencing was applied for the genetic analysis, together with bioinformatic analysis of predicted consequences of the identified variant. A homotrimer model was built to visualize the affected region and predict possible outcomes of this mutation. Then a literature review was performed by online searching all cases reported with COXPD28. The novel compound heterozygous SLC25A26 variants (c.34G > C, p.A12P; c.197C > A; p.A66E) were identified in a Chinese patient with COXPD28. These two variants are located in the transmembrane region 1 and transmembrane region 2, respectively. As a member of the mitochondrial carrier family, the transmembrane region of SAMC is highly conserved. The variants were predicted to be pathogenic by in silico analysis and lead to a change in the protein structure of SAMC. And the change of the SAMC structure may lead to insufficient methylation and cause disease by affecting the SAM transport. The variants in this region probably resulted in a variable loss of mitochondrial SAMC transport function and cause the COXPD28. This study that further refine genotype-phenotype associations can provide disease prognosis with a basis and families with reproductive planning options.",
+              "doi": "10.1016/j.gene.2021.145891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "253c99a7b6948508df5208fa39cdfb9e1989f9691e1780308fe9c90dff97b9e6"
+              }
+            },
+            {
+              "title": "SLC25A26 overexpression impairs cell function via mtDNA hypermethylation and rewiring of methyl metabolism.",
+              "abstract": "Cancer cells down-regulate different genes to give them a selective advantage in invasiveness and/or metastasis. The SLC25A26 gene encodes the mitochondrial carrier that catalyzes the import of S-adenosylmethionine (SAM) into the mitochondrial matrix, required for mitochondrial methylation processes, and is down-regulated in cervical cancer cells. In this study we show that SLC25A26 is down-regulated due to gene promoter hypermethylation, as a mechanism to promote cell survival and proliferation. Furthermore, overexpression of SLC25A26 in CaSki cells increases mitochondrial SAM availability and promotes hypermethylation of mitochondrial DNA, leading to decreased expression of key respiratory complex subunits, reduction of mitochondrial ATP and release of cytochrome c. In addition, increased SAM transport into mitochondria leads to impairment of the methionine cycle with accumulation of homocysteine at the expense of glutathione, which is strongly reduced. All these events concur to arrest the cell cycle in the S phase, induce apoptosis and enhance chemosensitivity of SAM carrier-overexpressing CaSki cells to cisplatin.",
+              "doi": "10.1111/febs.14028",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a35cbdfba4cc47f6c38bf04172b57648ed17274cd6425a061da8d7455fb77a3f"
+              }
+            },
+            {
+              "title": "Oxidative Stress, Folate Receptor Autoimmunity, and CSF Findings in Severe Infantile Autism.",
+              "abstract": "Biomarkers such as oxidative stress, folate receptor alpha (FR) autoimmunity, and abnormal brain serotonin turnover are common in autism. Oxidative stress biomarkers with pro- and antioxidants were measured in the severe form of infantile autism ( = 38) and controls ( = 24). Children and parents had repeated testing for serum FR autoantibodies, spinal fluid dopamine and serotonin metabolites, pterins, and N-methyltetrahydrofolate (MTHF). Statistical analysis assessed correlations between variables. Genetic analysis included the SLC6A4 and SLC29A4 genes encoding synaptic serotonin reuptake proteins. Compared to controls, the autism group showed a significant increase in oxidative DNA damage in lymphocytes, plasma ceruloplasmin and copper levels with a high copper/zinc ratio, thiol proteins, and superoxide dismutase (SOD) activity. Vitamin C levels were significantly diminished. In most autistic patients, the vitamin A (64%) and D (70%) levels were low. Serum FR autoantibodies fluctuating over 5-7 week periods presented in 68% of all autistic children, 41% of parents vs. 3.3% of control children and their parents. CSF showed lowered serotonin 5-hydroxyindole acetic acid (5HIAA) metabolites in 13 (34%), a low 5HIAA to HVA (dopamine metabolite) ratio in 5 (13%), low 5HIAA and MTHF in 2 (5%), and low MTHF in 8 patients (21%). A known SLC6A4 mutation was identified only in 1 autistic child with low CSF 5HIAA and a novel SLC29A4 mutation was identified in identical twins. Low CSF MTHF levels among only 26% of subjects can be explained by the fluctuating FR antibody titers. Two or more aberrant pro-oxidant and/or antioxidant factors predisposed to low CSF serotonin metabolites. Three autistic children having low CSF 5HIAA and elevated oxidative stress received antioxidative supplements followed by CSF 5HIAA normalisation. In autism, we found diverse combinations for FR autoimmunity and/or oxidative stress, both amenable to treatment. Parental and postnatal FR autoantibodies tend to block folate passage to the brain affecting folate-dependent pathways restored by folinic acid treatment, while an abnormal redox status tends to induce reduced serotonin turnover, corrected by antioxidant therapy. . The case-controlled study was approved in 2008 by the IRB at Liège University (Belgian Number: B70720083916). . Children with severe infantile autism frequently have serum folate receptor autoantibodies that block the transport of the essential vitamin folate across the blood-brain barrier to the brain. Parents are often asymptomatic carriers of these serum folate receptor autoantibodies, which in mothers can block folate passage across the placenta to their unborn child. This folate deficiency during the child's intrauterine development may predispose to neural tube defects and autism. Oxidative stress represents a condition with the presence of elevated toxic oxygen derivatives attributed to an imbalance between the formation and protection against these toxic reactive oxygen derivatives. Oxidative stress was found to be present in autistic children where these reactive oxygen derivatives can cause damage to DNA, which changes DNA function and regulation of gene expression. In addition, excessive amounts of these toxic oxygen derivatives are likely to damage the enzyme producing the neuromessenger serotonin in the brain, diminished in about 1/3 of the autistic children. Testing children with autism for oxidative stress and its origin, as well as testing for serum folate receptor autoantibodies, could open new approaches towards more effective treatments.",
+              "doi": "10.1155/2020/9095284",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bfc2a0631e402bbc027bae5af89aa36b443c838322d8c9e41995cd96eae6c0d0"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A26 cancer=Osteosarcoma bucket=pairwise Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with p53.KO Crispr 96hours vs p53.KO Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC29A4 is more likely to promote Osteosarcoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A26', 'SLC29A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Osteosarcoma(OS)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC29A4",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A26",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A26",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A4": {
+          "status": "unavailable",
+          "gene": "SLC29A4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A26": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A26",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A4": {
+          "status": "unsupported_cancer",
+          "gene": "SLC29A4",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC29A4']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC29A4"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35,
+          "SLC29A4": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.62；法官理由: Two independent LLM channels agree SLC25A26; etoposide is not a nucleoside, weakening SLC29A4 relevance. SLC25A26 supports methylation/mitochondrial adaptation under drug, making conditional depletion more plausible for resistance. Evidence。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC29A4']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC29A4"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35,
+          "SLC29A4": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.58；法官理由: No direct CRISPR evidence; SLC29A4 is a nucleoside/organic-cation transporter less suited to etoposide. SLC25A26 supports mitochondrial methylation/OXPHOS, plausible for p53-KO drug-stress adaptation, and two independent LLM channels agree.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC29A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A26",
+          "SLC29A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T15:51:59Z"
+  }
+}

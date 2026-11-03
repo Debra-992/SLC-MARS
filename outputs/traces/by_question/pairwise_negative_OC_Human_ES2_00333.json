@@ -1,0 +1,576 @@
+{
+  "qid": "pairwise_negative_OC_Human_ES2_00333",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC25A4 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "winner": "SLC35B1"
+  },
+  "effective_genes": [
+    "SLC35B1",
+    "SLC25A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_OC_Human_ES2_00333",
+      "status": "ok",
+      "summary": "检索到 4 类证据、21 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B1",
+        "SLC25A4"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A4",
+              "protein_function": "ADP:ATP antiporter that mediates import of ADP into the mitochondrial matrix for ATP synthesis, and export of ATP out to fuel the cell.",
+              "aliases": "AAC1, ADP/ATP Translocase 1, ANT1",
+              "transport_type": "E / ADP, ATP"
+            },
+            {
+              "gene": "SLC35B1",
+              "protein_function": "ATP:ADP antiporter that catalyzes the exchange of ATP and ADP across the endoplasmic reticulum (ER) membrane. Regulates ER energy metabolism and protein biogenesis.",
+              "aliases": "SLC35B1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC35B1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A4",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A4",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A4",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A4",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A4",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A4",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Porcine β-defensin 2 confers enhanced resistance to swine flu infection in transgenic pigs and alleviates swine influenza virus-induced apoptosis possibly through interacting with host SLC25A4.",
+              "abstract": "Swine influenza virus (SIV) not only brings about great economic losses on the global pig industry, it also poses a significant threat to the public health for its interspecies transmission capacity. Porcine β-defensin 2 (PBD-2) is a host defense peptide and our previous study has shown that PBD-2 inhibits proliferation of enveloped pseudorabies virus both in vitro and in transgenic (TG) mice. The aim of this study is to investigate the possible anti-SIV ability of PBD-2 in a TG pig model created in our previous study. The in-contact challenge trial demonstrated that overexpression of PBD-2 in pigs could efficiently alleviate SIV-associated clinical signs. The SIV titers quantified by EID in lung tissues of infected TG pigs were significantly lower than that of wild-type littermates. In vitro, the cell viability assay revealed that PBD-2 mainly interfered with viral entry and post-infection stages. It was further confirmed that PBD-2 could enter porcine tracheal epithelial cells. The proteins interacting with PBD-2 inside host cells were identified with immunoprecipitation and the pathways involved were analyzed. Results showed that PBD-2 could interact with pro-apoptotic solute carrier family 25 member 4 (SLC25A4), also known as adenine nucleotide translocase 1, and thereby inhibited SIV-induced cell apoptosis. The molecular docking analysis suggested that PBD-2 interacted with porcine SLC25A4 mainly through strong hydrogen binding, with the predicted binding affinity being -13.23 kcal/mol. Altogether, these indicate that PBD-2 protects pigs against SIV infection, which may result from its role as a SLC25A4 blocker to alleviate cell apoptosis, providing a novel therapeutic and prophylactic strategy of using PBD-2 to combat SIV.",
+              "doi": "10.1016/j.antiviral.2022.105292",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9a5514690918479cb2f700a244bf50ac301c649dca321c83e6e3f3d2f0c65577"
+              }
+            },
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Mitochondrial ATP transporter Ant2 depletion impairs erythropoiesis and B lymphopoiesis.",
+              "abstract": "Adenine nucleotide translocases (ANTs) transport ADP and ATP through mitochondrial inner membrane, thus playing an essential role for energy metabolism of eukaryotic cells. Mice have three ANT paralogs, Ant1 (Slc25a4), Ant2 (Slc25a5) and Ant4 (Slc25a31), which are expressed in a tissue-dependent manner. While knockout mice have been characterized with Ant1 and Ant4 genes, which resulted in exercise intolerance and male infertility, respectively, the role of the ubiquitously expressed Ant2 gene in animal development has not been fully demonstrated. Here, we generated Ant2 hypomorphic mice by targeted disruption of the gene, in which Ant2 expression is largely depleted. The mice showed apparently normal embryonic development except pale phenotype along with a reduced birth rate. However, postnatal growth was severely retarded with macrocytic anemia, B lymphocytopenia, lactic acidosis and bloated stomach, and died within 4 weeks. Ant2 depletion caused anemia in a cell-autonomous manner by maturation arrest of erythroid precursors with increased reactive oxygen species and premature deaths. B-lymphocyte development was similarly affected by Ant2 depletion, and splenocytes showed a reduction in maximal respiration capacity and cellular ATP levels as well as an increase in cell death accompanying mitochondrial permeability transition pore opening. In contrast, myeloid, megakaryocyte and T-lymphocyte lineages remained apparently intact. Erythroid and B-cell development may be particularly vulnerable to Ant2 depletion-mediated mitochondrial dysfunction and oxidative stress.",
+              "doi": "10.1038/cdd.2014.230",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f09570d6e089b71409641e79cca67fd04ef30b7e4c800fae74e79d3377ef8024"
+              }
+            },
+            {
+              "title": "An integrated bioinformatic investigation of succinic acid metabolism related genes in ccRCC followed by preliminary validation of SLC25A4 in tumorigenesis.",
+              "abstract": "The defective function of succinate dehydrogenase promotes the development and progression of kidney renal clear cell renal cell carcinoma (ccRCC). However, the molecular mechanism of succinate metabolism-related genes (SMRGs) has not been extensively studied in KIRC. First, differentially expressed SMRGs (DE-SMRGs) were screened among genesets. Next, functional enrichment analysis was performed to investigate the functions of DE-SMRGs. The univariate Cox algorithm, LASSO, and multivariate Cox analysis were performed to obtain biomarkers and build a prognostic model. Afterward, enrichment and immune microenvironment analysis were carried out in two different risk subgroups. Finally, expression validation and expression intensity of prognostic gene was verified by in situ and in vitro experiments. In total, 138 DE-SMRGs were screened by overlapping SMRGs and differentially expressed genes. The functional enrichment results revealed that DE-SMRGs were implicated in retinoic acid metabolic process and retinol metabolism. Then, 8 succinate metabolism-related biomarkers were obtained, and prognostic model was developed and SLC25A4 ranked the highest in importance. SLC25A4 was down-regulated in KIRC, and its upregulation was related to better overall survival in patients from public datasets and in clinical cases. SLC25A4 attenuated cell proliferation, cell invasion, and exerted its biological function by inhibiting the STAT3 signaling pathway. Our study reveals that succinate metabolism-related biomarkers can provide a basis for exploring the prediction of prognosis in ccRCC.",
+              "doi": "10.1038/s41598-025-03102-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "484328ca983db82b6f890c1878ff664078621973eaffa45b357d03ef9c609461"
+              }
+            },
+            {
+              "title": "Mitophagy regulates mitochondrial network signaling, oxidative stress, and apoptosis during myoblast differentiation.",
+              "abstract": "Macroautophagy/autophagy is a degradative process essential for various cellular processes. We previously demonstrated that autophagy-deficiency causes myoblast apoptosis and impairs myotube formation. In this study, we continued this work with particular emphasis on mitochondrial remodelling and stress/apoptotic signaling. We found increased (p < 0.05) autophagic (e.g., altered LC3B levels, increased ATG7, decreased SQSTM1) and mitophagic (e.g., BNIP3 upregulation, mitochondrial localized GFP-LC3 puncta, and elevated mitochondrial LC3B-II) signaling during myoblast differentiation. shRNA-mediated knockdown of ATG7 (sh) decreased these autophagic and mitophagic responses, while increasing CASP3 activity and ANXA5/annexin V staining in differentiating myoblasts; ultimately resulting in dramatically impaired myogenesis. Further confirming the importance of mitophagy in these responses, CRISPR-Cas9-mediated knockout of  () resulted in increased CASP3 activity and DNA fragmentation as well as impaired myoblast differentiation. In addition, sh myoblasts displayed greater endoplasmic reticulum (e.g., increased CAPN activity and HSPA) and mitochondrial (e.g., mPTP formation, reduced mitochondrial membrane potential, elevated mitochondrial 4-HNE) stress. sh and  myoblasts also displayed altered mitochondria-associated signaling (e.g., PPARGC1A, DNM1L, OPA1) and protein content (e.g., SLC25A4, VDAC1, CYCS). Moreover, sh myoblasts displayed CYCS and AIFM1 release from mitochondria, and CASP9 activation. Similarly,  myoblasts had significantly higher CASP9 activation during differentiation. Importantly, administration of a chemical inhibitor of CASP9 (Ac-LEHD-CHO) or dominant-negative CASP9 (ad-DNCASP9) partially recovered differentiation and myogenesis in sh myoblasts. Together, these data demonstrate an essential role for autophagy in protecting myoblasts from mitochondrial oxidative stress and apoptotic signaling during differentiation, as well as in the regulation of mitochondrial network remodelling and myogenesis. : 3MA: 3-methyladenine; 4-HNE: 4-hydroxynonenal; ACT: actin; AIFM1/AIF: apoptosis-inducing factor, mitochondrion-associated 1; ANXA5: annexin V; ATG7: autophagy related 7; AU: arbitrary units; BAX: BCL2-associated X protein; BCL2: B cell leukemia/lymphoma 2; BECN1: beclin 1, autophagy related; BNIP3: BCL2/adenovirus E1B interacting protein 3; CAPN: calpain; CASP: caspase; CASP3: caspase 3; CASP8: caspase 8; CASP9: caspase 9; CASP12: caspase 12; CAT: catalase; CQ: chloroquine; CYCS: cytochrome c, somatic; DCF; 2',7'-dichlorofluorescein; DNM1L/DRP1: dynamin 1-like; DM: differentiation media; DMEM: Dulbecco's modified Eagle's medium; ER: endoplasmic reticulum; GAPDH: glyceraldehyde-3-phosphate dehydrogenase; GFP: green fluorescent protein; GM: growth media; p-H2AFX: phosphorylated H2A histone family, member X; H2BFM: H2B histone family, member M; HBSS: Hanks balanced salt solution; HSPA/HSP70: heat shock protein family A; JC-1: tetraethylbenzimidazolylcarbocyanine iodide; MAP1LC3B/LC3B: microtubule-associated protein 1 light chain 3 beta; mPTP: mitochondrial permeability transition pore; MYH: myosin heavy chain; MYOG: myogenin; OPA1: OPA1, mitochondrial dynamin like GTPase; PI: propidium iodide; PINK1: PTEN induced putative kinase 1; PPARGC1A/PGC1α: peroxisome proliferative activated receptor, gamma, coactivator 1 alpha; ROS: reactive oxygen species; SLC25A4/ANT1: solute carrier family 25 (mitochondrial carrier, adenine nucleotide translocator), member 4; SOD1: superoxide dismutase 1, soluble; SOD2: superoxide dismutase 2, mitochondrial; SQSTM1/p62: sequestosome 1; VDAC1: voltage-dependent anion channel 1.",
+              "doi": "10.1080/15548627.2019.1591672",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f0cacfa4ff3053e10f04fe741cc9df42eef3c009bde29ced1dc9ce694c1391b2"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B1 cancer=Ovarian cancer bucket=pairwise Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC25A4 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC35B1', 'SLC25A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC25A4",
+            "ppr_score": 7.276107416625136e-05,
+            "degree_corrected_score": 8.808333291557936e-05,
+            "graph_degree": 6,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC35B1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "stats_text": "P value: 0.9757",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B1": {
+          "status": "unavailable",
+          "gene": "SLC35B1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A4": {
+          "status": "ok",
+          "gene": "SLC25A4",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A4.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B1": {
+          "status": "ok",
+          "gene": "SLC35B1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.9757",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC25A4": {
+          "status": "ok",
+          "gene": "SLC25A4",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.0859",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A4_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC25A4']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC25A4(P(winner)=0.53) vs SLC35B1(P=0.45), 差=0.08；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC25A4"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC25A4": 4.7033
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A4': 2, 'W:SLC35B1': 1}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.62；法官理由: SLC35B1 ER ATP transporter supports essential protein biogenesis with low redundancy; SLC25A4 is redundant with SLC25A5/6 and muscle-specific. L2's high-confidence vote aligns, despite flawed UDP-sugar wording; E/L1 association priors weak.。原证据通道判定: winner=SLC25A4 answer=None conf=0.528（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC25A4']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 邻近癌种CRC/PDAC与卵巢癌同属上皮性恶性肿瘤，能量代谢、氧化应激、线粒体功能和增殖通路具有较强可迁移性；SLC25A4作为线粒体ADP/ATP转运体，其扰动更可能影响肿瘤细胞生长存活，而SLC35B1仅有弱关联证据。 | 目标卵巢癌缺乏直接图谱/组学证据，但跨癌种证据明显偏向SLC25A4：其PPR疾病邻近有值(SLC25A4=8.8e-5，SLC35B1=None)，KM p=0.0859较SLC35B1的0.9757更接近显著，且文献涉及CRC/PDAC/ccRCC中的增殖、氧化应激、凋亡和STAT3等肿瘤生长相关机制；SLC35B1仅在CRC SLC预后signature中出现，无直接功能验证且TIMER/PPR证据缺失。因此二选一中SLC25A4更可能在卵巢癌CRISPR筛选中表现为影响肿瘤生长的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A4",
+        "candidates": [
+          "SLC35B1",
+          "SLC25A4"
+        ],
+        "confidence": 0.55,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC25A4": 4.7033
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A4': 2, 'W:SLC35B1': 1}，最终智能体辩论后裁决：winner=SLC25A4 answer=None conf=0.55；法官理由: Evidence channel and corrected L2 favor SLC25A4; L1 relies on false UDP-GlcNAc annotation. Though cross-cancer association is weak, SLC25A4’s mitochondrial ATP/ADP role makes depletion more plausible in ovarian growth than SLC35B1.。原证据通道判定: winner=SLC25A4 answer=None conf=0.58（保留于溯源）。",
+        "analogy_cancers": [
+          "colorectal cancer(CRC)",
+          "pancreatic ductal adenocarcinoma (PDAC)"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC25A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35B1",
+          "SLC25A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:09:55Z"
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00083",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC7A10 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC7A10"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00083",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A10"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC7A10",
+              "protein_function": "Associates with SLC3A2/4F2hc to form a functional heterodimeric complex that translocates small neutral L- and D-amino acids across the plasma membrane.",
+              "aliases": "Asc-1, Solute Carrier Family 7 (Neutral Amino Acid Transporter Light Chain, Asc System), Member 10",
+              "transport_type": "preferentially E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC7A10",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family",
+              "target_properties": {
+                "name": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family"
+              }
+            },
+            {
+              "gene": "SLC7A10",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "Asc-1",
+              "target_properties": {
+                "name": "Asc-1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Role of the Neutral Amino Acid Transporter SLC7A10 in Adipocyte Lipid Storage, Obesity, and Insulin Resistance.",
+              "abstract": "Elucidation of mechanisms that govern lipid storage, oxidative stress, and insulin resistance may lead to improved therapeutic options for type 2 diabetes and other obesity-related diseases. Here, we find that adipose expression of the small neutral amino acid transporter SLC7A10, also known as alanine-serine-cysteine transporter-1 (ASC-1), shows strong inverse correlates with visceral adiposity, insulin resistance, and adipocyte hypertrophy across multiple cohorts. Concordantly, loss of Slc7a10 function in zebrafish in vivo accelerates diet-induced body weight gain and adipocyte enlargement. Mechanistically, SLC7A10 inhibition in human and murine adipocytes decreases adipocyte serine uptake and total glutathione levels and promotes reactive oxygen species (ROS) generation. Conversely, SLC7A10 overexpression decreases ROS generation and increases mitochondrial respiratory capacity. RNA sequencing revealed consistent changes in gene expression between human adipocytes and zebrafish visceral adipose tissue following loss of SLC7A10, e.g., upregulation of  (lipid storage) and downregulation of  (lipid oxidation). Interestingly, ROS scavenger reduced lipid accumulation and attenuated the lipid-storing effect of SLC7A10 inhibition. These data uncover adipocyte SLC7A10 as a novel important regulator of adipocyte resilience to nutrient and oxidative stress, in part by enhancing glutathione levels and mitochondrial respiration, conducive to decreased ROS generation, lipid accumulation, adipocyte hypertrophy, insulin resistance, and type 2 diabetes.",
+              "doi": "10.2337/db20-0096",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5925aa5b1412c39a298e6eaa41bf5d8333c65f3c94387b5d0d653306ec86a91d"
+              }
+            },
+            {
+              "title": "CD98 heavy chain as a prognostic biomarker and target for cancer treatment.",
+              "abstract": "The SLC3A2 gene encodes for a cell-surface transmembrane protein CD98hc (4F2). CD98hc serves as a chaperone for LAT1 (SLC7A5), LAT2 (SLC7A8), yLAT1 (SLC7A7), yLAT2 (SLC7A6), xCT (SLC7A11) and Asc1 (SLC7A10) providing their recruitment to the plasma membrane. Together with the light subunits, it constitutes heterodimeric transmembrane amino acid transporters. CD98hc interacts with other surface molecules, such as extracellular matrix metalloproteinase inducer CD147 (EMMPRIN) and adhesion receptors integrins, and regulates glucose uptake. In this way, CD98hc connects the signaling pathways sustaining cell proliferation and migration, biosynthesis and antioxidant defense, energy production, and stem cell properties. This multifaceted role makes CD98hc one of the critical regulators of tumor growth, therapy resistance, and metastases. Indeed, the high expression levels of CD98hc were confirmed in various tumor tissues, including head and neck squamous cell carcinoma, glioblastoma, colon adenocarcinoma, pancreatic ductal adenocarcinoma, and others. A high expression of CD98hc has been linked to clinical prognosis and response to chemo- and radiotherapy in several types of cancer. In this mini-review, we discuss the physiological functions of CD98hc, its role in regulating tumor stemness, metastases, and therapy resistance, and the clinical significance of CD98hc as a tumor marker and therapeutic target.",
+              "doi": "10.3389/fonc.2023.1251100",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "616386904b8f3fb0ad0fdc8fbf175bc1b1c1218d4b0f3c45c5426b3ac194e797"
+              }
+            },
+            {
+              "title": "Effects of the SLC38A2-mTOR Pathway Involved in Regulating the Different Compositions of Dietary Essential Amino Acids-Lysine and Methionine on Growth and Muscle Quality in Rabbits.",
+              "abstract": "In recent years, ensuring food security has been an important challenge for the world. It is important to make good use of China’s domestic local feed resources to provide safe, stable, efficient, and high-quality rabbit meat products for China and the world. Lysine and methionine are the two most limiting essential amino acids in the rabbit diet. However, little is known about the rational composition of lysine and methionine in rabbit diets and the mechanisms that affect growth and development. Accordingly, in this study, we sought to address this knowledge gap by examining the effects of different compositions of lysine and methionine in rabbit diets. Subsequently, the growth status, nitrogen metabolism, blood biochemical indexes, muscle development, muscle quality, and the growth of satellite cells were evaluated in the animals. The results showed that diets containing 0.80% Lys and 0.40% Met improved average daily weight gain, feed conversion, nitrogen use efficiency, and muscle quality in the rabbits (p < 0.05). Additionally, it altered the amino acid transport potential in muscle by upregulating the expression of the SLC7A10 gene (p < 0.05). Meanwhile, the cell viability and the rate of division and migration of SCs in the 0.80% Lys/0.40 % Met composition group were increased (p < 0.05). SLC38A2 and P−mTOR protein expression was upregulated in the 0.80% lysine/0.40% methionine composition group (p < 0.05). In conclusion, 0.80% Lys/0.40% Met was the most suitable lysine and methionine composition in all tested diets. SLC38A2 acted as an amino acid sensor upstream of mTOR and was involved in the 0.80% Lys/0.40% Met regulation of muscle growth and development, thus implicating the mTOR signaling pathway in these processes.",
+              "doi": "10.3390/ani12233406",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7b1e3afec599bb62a55d7596000578bf72407b23b8dded80a5a308594fc481f6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A10 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC7A10 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC7A10']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC7A10",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A10.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC7A10",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A10": {
+          "status": "ok",
+          "gene": "SLC7A10",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A10.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A10": {
+          "status": "unsupported_cancer",
+          "gene": "SLC7A10",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A10']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A10 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.25 -> P(必需)=0.516 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A10"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A10": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No direct Daudi MAGeCK BTN3A survival evidence; observations are generic transporter/adipocyte literature. SLC7A10 loss likely buffered by redundant neutral amino-acid transporters, so claim it promotes B-ALL tumor survival is unsupported.。原证据通道判定: winner=None answer=True conf=0.516（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A10']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A10 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.25 -> P(必需)=0.516 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A10"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A10": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.63；法官理由: No direct MAGeCK depletion evidence; observations are generic transporter/adipocyte literature. L1/L2 independently call nonessential/redundant. E's 0.516 prior is weak and not condition-specific. Therefore SLC7A10 unlikely promotes Daudi-C。原证据通道判定: winner=None answer=True conf=0.516（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A10']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC7A10"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:41:37Z"
+  }
+}

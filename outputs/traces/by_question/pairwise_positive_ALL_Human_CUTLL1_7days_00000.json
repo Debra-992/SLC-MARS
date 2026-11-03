@@ -1,0 +1,776 @@
+{
+  "qid": "pairwise_positive_ALL_Human_CUTLL1_7days_00000",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr Low-2V vs Crispr High-20V as the treatment condition, and MAGECK as the method.\nWhich gene between SLC7A5 and SLC38A9 is more likely to promote acute lymphoblastic leukemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "acute lymphoblastic leukemia",
+    "cell_line": "CUTLL1",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low-2V vs Crispr High-20V"
+  },
+  "ground_truth": {
+    "winner": "SLC7A5"
+  },
+  "effective_genes": [
+    "SLC7A5",
+    "SLC38A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_ALL_Human_CUTLL1_7days_00000",
+      "status": "ok",
+      "summary": "检索到 4 类证据、39 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A5",
+        "SLC38A9"
+      ],
+      "requested_context": {
+        "cancer": "acute lymphoblastic leukemia",
+        "cell_line": "CUTLL1",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low-2V vs Crispr High-20V"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "protein_function": "Lysosomal amino acid transporter involved in the activation of mTORC1 in response to amino acid levels. Acts as an amino acid sensor.",
+              "aliases": "SNAT9, Sodium-Coupled Neutral Amino Acid Transporter 9",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC7A5",
+              "protein_function": "Heterodimer with SLC3A2 functions as a sodium-independent, high-affinity transporter that mediates uptake of large neutral amino acids.",
+              "aliases": "LAT1, MPE16, E16",
+              "transport_type": "E (similar intra- and extracellular selectivities, lower intracellular apparent affinity)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family",
+              "target_properties": {
+                "name": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC7A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC7A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Head and Neck Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "autism spectrum disorders",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "autism spectrum disorders",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "autism spectrum disorders",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A5",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "mTORC1 Selective Nano-Inhibitor by Disrupting the Lysosomal Arginine-SLC38A9- mTORC1-CDKs Axis for Precision Bladder Cancer Therapy.",
+              "abstract": "The absence of precise targeting and defined mechanisms, akin to small molecules, remains a major barrier to the clinical translation of nanomedicines. Mammalian target of rapamycin complex 1 (mTORC1), a key regulator of cell proliferation and metabolism, is linked to abnormal activation in various diseases like cancers. While small-molecule inhibitors of mTORC1 are limited, they remain a focus. Here, a strategy is presented for mTORC1-specific nano-inhibitors targeting the lysosomal arginine (Arg)-SLC38A9-mTORC1 pathway. Using [2Fe-2S]CO as a universal paradigm, nanomedicines are developed (e.g., ZnPc-SFeCO) that degrade Arg in the lysosome, inhibiting SLC38A9 activation and blocking mTORC1 recruitment. ZnPc-SFeCO inhibits mTORC1 at ultra-low concentrations (1.07 ng mL), with three orders of magnitude greater specificity than the clinical small molecule rapamycin. SLC38A9 knockout abolishes nanomedicine efficacy. Differential responses to the inhibitors are also observed in normal and bladder cancer cells, linked to SLC38A9 expression levels, suggesting potential for precise treatment of non-muscle invasive bladder cancer (NMIBC). In vivo, ZnPc-SFeCO combined with photodynamic therapy outperformed MMC in preventing tumor recurrence and extending survival. This work establishes a promising approach for developing mTORC1-specific nano-inhibitors with well-defined targets and mechanisms, offering new insights into the development of precision nanomedicines for cancer therapy.",
+              "doi": "10.1002/adma.202504798",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d2ad9693492cd86c0f42f73e9d93016f4530c6588bf81001817f8304068f2f92"
+              }
+            },
+            {
+              "title": "L-type amino-acid transporter 1 (LAT1): a therapeutic target supporting growth and survival of T-cell lymphoblastic lymphoma/T-cell acute lymphoblastic leukemia.",
+              "abstract": "The altered metabolism of cancer cells is a treasure trove to discover new antitumoral strategies. The gene (SLC7A5) encoding system L amino-acid transporter 1 (LAT1) is overexpressed in murine lymphoma cells generated via T-cell deletion of the pten tumor suppressor, and also in human T-cell acute lymphoblastic leukemia (T-ALL)/lymphoma (T-LL) cells. We show here that a potent and LAT1 selective inhibitor (JPH203) decreased leukemic cell viability and proliferation, and induced transient autophagy followed by apoptosis. JPH203 could also alter the in vivo growth of luciferase-expressing-tPTEN-/- cells xenografted into nude mice. In contrast, JPH203 was nontoxic to normal murine thymocytes and human peripheral blood lymphocytes. JPH203 interfered with constitutive activation of mTORC1 and Akt, decreased expression of c-myc and triggered an unfolded protein response mediated by the C/EBP homologous protein (CHOP) transcription factor associated with cell death. A JPH203-resistant tPTEN-/-clone appeared CHOP induction deficient. We also demonstrate that targeting LAT1 may be an efficient broad spectrum adjuvant approach to treat deadly T-cell malignancies as the molecule synergized with rapamycin, dexamethasone, doxorubicin, velcade and l-asparaginase to alter leukemic cell viability.",
+              "doi": "10.1038/leu.2014.338",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A5"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e9514c7d29c37d1ac26b008a59c9c73dfface9c1baf2de30a680c5026e3d4f38"
+              }
+            },
+            {
+              "title": "Function of SLC7A7 in T-Cell Acute Lymphoblastic Leukemia.",
+              "abstract": "Y+LAT1 protein, encoded by the SLC7A7 gene (a member of the SLC7 family), forms the cationic amino acid transport system y+L (system y+L). This system transports cationic amino acids such as arginine and lysine out of the cell. Arginine, in particular, is critical for T-cell activation and function in the immune response. We analyzed the role of the SLC7A7 gene in the cellular activities of Jurkat cells, specifically the cell cycle and cell proliferation, apoptosis, migration, and invasion. Cell proliferation was assessed using the Cell Counting Kit-8. Apoptosis and the cell cycle were determined with a FACSCalibur flow cytometer. A Transwell chamber was used to measure cell invasion and migration. The proliferative ability of Jurkat cells was not significantly altered by transfection with SLC7A7 overexpression vectors. However, SLC7A7 overexpression significantly decreased the percentage of apoptotic Jurkat cells (P = 0.007) but significantly increased the proportion of G1 phase cells (P = 0.029) and cell migration (P < 0.001) and invasion (P < 0.001). Knockdown of SLC7A7 increased the cell apoptosis rate (P = 0.006) but decreased the G1 phase ratio (P = 0.002) and cell migration (P < 0.001) and invasion (P < 0.001). SLC7A7 plays a significant role in the pathogenesis of T-cell acute lymphoblastic leukemia.",
+              "doi": "10.1159/000491899",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A5"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d02248f7674a9ba83fba82b4fe14d9ad1f21def51d5fcc51394c99f76a09a4d9"
+              }
+            },
+            {
+              "title": "Oncogenic KRAS mutations enhance amino acid uptake by colorectal cancer cells via the hippo signaling effector YAP1.",
+              "abstract": "Oncogenic KRAS mutations develop unique metabolic dependencies on nutrients to support tumor metabolism and cell proliferation. In particular, KRAS mutant cancer cells exploit amino acids (AAs) such as glutamine and leucine, to accelerate energy metabolism, redox balance through glutathione synthesis and macromolecule biosynthesis. However, the identities of the amino acid transporters (AATs) that are prominently upregulated in KRAS mutant cancer cells, and the mechanism regulating their expression have not yet been systematically investigated. Here, we report that the majority of the KRAS mutant colorectal cancer (CRC) cells upregulate selected AATs (SLC7A5/LAT1, SLC38A2/SNAT2, and SLC1A5/ASCT2), which correlates with enhanced uptake of AAs such as glutamine and leucine. Consistently, knockdown of oncogenic KRAS downregulated the expression of AATs, thereby decreasing the levels of amino acids taken up by CRC cells. Moreover, overexpression of mutant KRAS upregulated the expression of AATs (SLC7A5/LAT1, SLC38A2/SNAT2, and SLC1A5/ASCT2) in KRAS wild-type CRC cells and mouse embryonic fibroblasts. In addition, we show that the YAP1 (Yes-associated protein 1) transcriptional coactivator accounts for increased expression of AATs and mTOR activation in KRAS mutant CRC cells. Specific knockdown of AATs by shRNAs or pharmacological blockage of AATs effectively inhibited AA uptake, mTOR activation, and cell proliferation. Collectively, we conclude that oncogenic KRAS mutations enhance the expression of AATs via the hippo effector YAP1, leading to mTOR activation and CRC cell proliferation.",
+              "doi": "10.1002/1878-0261.12999",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "35c9b3e225f7226429f309c75cb7328f5b99fa9958907e27b31ca7302d8d3025"
+              }
+            },
+            {
+              "title": "RTN4IP1 Contributes to ESCC via Regulation of Amino Acid Transporters.",
+              "abstract": "Esophageal squamous cell carcinoma (ESCC) accounts for about 90% of esophageal cancer cases. The lack of effective therapeutic targets makes it difficult to improve the overall survival of patients with ESCC. Reticulon 4 Interacting Protein 1 (RTN4IP1) is a novel mitochondrial oxidoreductase. Here, a notable upregulation of RTN4IP1 is demonstrated, which is associated with poor survival in patients with ESCC. RTN4IP1 depletion impairs cell proliferation and induces apoptosis of ESCC cells. Furthermore, c-Myc regulates RTN4IP1 expression via iron regulatory protein 2 (IRP2) at the post-transcriptional level. Mechanistically, RTN4IP1 mRNA harbors functional iron-responsive elements (IREs) in the 3' UTR, which can be targeted by IRP2, resulting in increased mRNA stability. Finally, RTN4IP1 depletion abrogates amino acid uptake and induces amino acid starvation via downregulation of the amino acid transporters SLC1A5, SLC3A2, and SLC7A5, indicating a possible pathway through which RTN4IP1 contributes to ESCC carcinogenesis and progression. In vivo studies using cell-derived xenograft and patient-derived xenograft mouse models as well as a 4-nitroquinoline 1-oxide-induced ESCC model in esophageal-specific Rtn4ip1 knockout mice demonstrate the essential role of RTN4IP1 in ESCC development. Thus, RTN4IP1 emerges as a key cancer-promoting protein in ESCC, suggesting therapeutic RTN4IP1 suppression as a promising strategy for ESCC treatment.",
+              "doi": "10.1002/advs.202406220",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "093d4bd3ced07e28a3715b86233010d71347e941f27f231da21333ff43f9d2e5"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A5 cancer=acute lymphoblastic leukemia bucket=pairwise Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr Low-2V vs Crispr High-20V as the treatment condition, and MAGECK as the method.\nWhich gene between SLC7A5 and SLC38A9 is more likely to promote acute lymphoblastic leukemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC7A5', 'SLC38A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC7A5",
+            "ppr_score": 0.0007151391776032232,
+            "degree_corrected_score": 0.00027978957778917676,
+            "graph_degree": 56,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC38A9",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC7A5",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A5.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC7A5",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A5": {
+          "status": "ok",
+          "gene": "SLC7A5",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A5.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC38A9": {
+          "status": "unavailable",
+          "gene": "SLC38A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC7A5",
+          "cancer_type": "acute lymphoblastic leukemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A9",
+          "cancer_type": "acute lymphoblastic leukemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A5', 'SLC38A9']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC7A5(P(winner)=0.64) vs SLC38A9(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC7A5",
+        "candidates": [
+          "SLC7A5",
+          "SLC38A9"
+        ],
+        "confidence": 0.639,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A5": 10.2,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC7A5(P(winner)=0.64) vs SLC38A9(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A5', 'SLC38A9']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 目标样本 CUTLL1 属于 T 细胞急性淋巴细胞白血病谱系，而 SLC7A5/LAT1 在 T-ALL/T-LL 中已有直接功能证据：其抑制降低白血病细胞活力、增殖和体内生长，并削弱 mTORC1/Akt 信号；这比 SLC38A9 主要依赖膀胱癌 mTORC1 轴的证据更贴近 ALL 的淋巴样肿瘤代谢依赖。 | SLC7A5 作为 LAT1 介导大中性氨基酸摄取，支持肿瘤细胞增殖、mTORC1/Akt 激活和存活；文献显示 JPH203 抑制 SLC7A5 可在 T-ALL/T-LL 模型中诱导凋亡并降低肿瘤生长，提示该基因更可能促进 ALL 的 Tumor Survival。SLC38A9 虽参与溶酶体氨基酸感应和 mTORC1 激活，但其证据主要来自膀胱癌，且缺乏 ALL/T-ALL 直接关联；计算证据也仅显示 SLC7A5 有疾病邻近信号，SLC38A9 无。因此二选一判定 SLC7A5。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC7A5",
+        "candidates": [
+          "SLC7A5",
+          "SLC38A9"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A5": 10.2,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] 目标样本 CUTLL1 属于 T 细胞急性淋巴细胞白血病谱系，而 SLC7A5/LAT1 在 T-ALL/T-LL 中已有直接功能证据：其抑制降低白血病细胞活力、增殖和体内生长，并削弱 mTORC1/Akt 信号；这比 SLC38A9 主要依赖膀胱癌 mTORC1 轴的证据更贴近 ALL 的淋巴样肿瘤代谢依赖。 | SLC7A5 作为 LAT1 介导大中性氨基酸摄取，支持肿瘤细胞增殖、mTORC1/Akt 激活和存活；文献显示 JPH203 抑制 SLC7A5 可在 T-ALL/T-LL 模型中诱导凋亡并降低肿瘤生长，提示该基因更可能促进 ALL 的 Tumor Survival。SLC38A9 虽参与溶酶体氨基酸感应和 mTORC1 激活，但其证据主要来自膀胱癌，且缺乏 ALL/T-ALL 直接关联；计算证据也仅显示 SLC7A5 有疾病邻近信号，SLC38A9 无。因此二选一判定 SLC7A5。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Head and Neck Cancer",
+          "Multicancer",
+          "autism spectrum disorders",
+          "breast cancer(BC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A5', 'SLC38A9']",
+        "status": "ok",
+        "summary": "SLC7A5 (LAT1) mediates uptake of large neutral amino acids such as leucine, supporting MYC-driven proliferation and mTORC1 signaling in T-ALL; in CUTLL1 CRISPR screens, its loss is more likely to impair tumor survival than loss of the lysosomal arginine transporter SLC38A9.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC7A5",
+        "candidates": [
+          "SLC7A5",
+          "SLC38A9"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC7A5 (LAT1) mediates uptake of large neutral amino acids such as leucine, supporting MYC-driven proliferation and mTORC1 signaling in T-ALL; in CUTLL1 CRISPR screens, its loss is more likely to impair tumor survival than loss of the lysosomal arginine transporter SLC38A9.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T04:21:41Z"
+  }
+}

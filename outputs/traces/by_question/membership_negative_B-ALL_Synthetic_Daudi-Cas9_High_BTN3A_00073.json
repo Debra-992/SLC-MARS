@@ -1,0 +1,480 @@
+{
+  "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00073",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A51 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC25A51"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00073",
+      "status": "ok",
+      "summary": "检索到 4 类证据、17 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A51"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A51",
+              "protein_function": "Mediates the import of NAD(+) into mitochondria.",
+              "aliases": "MCART1",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A51",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "{'sup': '+', '#text': 'SLC25A51 decouples the mitochondrial NAD/NADH ratio to control proliferation of AML cells.'}",
+              "abstract": "SLC25A51 selectively imports oxidized NAD into the mitochondrial matrix and is required for sustaining cell respiration. We observed elevated expression of SLC25A51 that correlated with poorer outcomes in patients with acute myeloid leukemia (AML), and we sought to determine the role SLC25A51 may serve in this disease. We found that lowering SLC25A51 levels led to increased apoptosis and prolonged survival in orthotopic xenograft models. Metabolic flux analyses indicated that depletion of SLC25A51 shunted flux away from mitochondrial oxidative pathways, notably without increased glycolytic flux. Depletion of SLC25A51 combined with 5-azacytidine treatment limits expansion of AML cells in vivo. Together, the data indicate that AML cells upregulate SLC25A51 to decouple mitochondrial NAD/NADH for a proliferative advantage by supporting oxidative reactions from a variety of fuels. Thus, SLC25A51 represents a critical regulator that can be exploited by cancer cells and may be a vulnerability for refractory AML.",
+              "doi": "10.1016/j.cmet.2024.01.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c6204c6776ee02d08b8b6d7ac511bd590b517a29a5027671f28dc4ab5c1938f2"
+              }
+            },
+            {
+              "title": "Overexpression of SLC25A51 promotes hepatocellular carcinoma progression by driving aerobic glycolysis through activation of SIRT5.",
+              "abstract": "Solute carrier family 25 member 20 (SLC25A51) is a newly identified mammalian mitochondrial NAD transporter. However, the clinicopathological and biological significance of SLC25A51 in human cancers, including hepatocellular carcinoma (HCC), remains unclear. The aim of this study was to define the role of SLC25A51 in HCC progression. Here we demonstrate that SLC25A51 is significantly overexpressed in human HCC specimens and cell lines, caused by, at least in partial, the decrease of miR-212-3p. SLC25A51 overexpression is positively correlated with the clinicopathological characteristics of vascular invasion and tumor diameter, as well as poor survival in patients with HCC. Knockdown of SLC25A51 attenuated, while overexpression of SLC25A51 enhanced the growth and metastasis of HCC cells both in vitro and in vivo. Mechanistically, glucose metabolism reprogramming from oxidative phosphorylation to glycolysis by activation of mitochondrial sirtuin 5 (SIRT5) was found to contribute to the promotion of growth and metastasis by SLC25A51 in HCC cells. Together, these findings reveal important roles of SLC25A51 in HCC tumorigenesis and suggest SLC25A51 as a promising prognostic marker and therapeutic target for treating HCC.",
+              "doi": "10.1016/j.freeradbiomed.2022.02.014",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "876f034e82711e6f2a58143545116f714a4f6195b9ab6fdd663535838c6fc929"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of mitochondrial solute carrier family 25 (SLC25) identifies member 19 (SLC25A19) as a regulatory factor in hepatocellular carcinoma.",
+              "abstract": "The mitochondrial solute carrier family 25 (SLC25) is known to play a pivotal role in oncogenesis, yet its specific involvement in hepatocellular carcinoma (HCC) remains poorly elucidated. In this study, we performed a clustering analysis of HCC patients in the Cancer Genome Atlas database based on the expression levels of SLC25 members, and conducted clinical feature analysis for each patient within the clusters. Subsequently, we developed a prognostic model using a Lasso regression approach with SLC25A19, SLC25A49, and SLC25A51 as features, and generated a risk score for each HCC patient. We then identified SLC25A19 as a potential prognostic marker for HCC through single-cell analysis, and validated this finding using in vitro and in vivo experiments. Our results revealed significant differences in the expression of most SLC25 family members in HCC patients, enabling the stratification of patients into three clusters, with those in cluster 1 exhibiting the most favorable prognosis and showing a correlation with enhanced immune infiltration. The risk scores derived from the features SLC25A19, SLC25A49, and SLC25A51 effectively predicted the prognosis of HCC patients, with area under the curve (AUC) values exceeding 0.7 in the test group. Single-cell analysis further demonstrated h eightened expression of SLC25A19 in the immune microenvironment of HCC, and in vitro experiments indicated that SLC25A19 may regulate the proliferation, migration, invasion, cycle, and apoptosis of liver cancer cells through the Wnt pathway. In the HepG2 animal model, overexpression of SLC25A19 significantly promotes tumor growth, while knockdown inhibits tumor growth. Analysis of patient tumor tissues shows that SLC25A19 is highly expressed in liver cancer tissues and is associated with CD8 T cell infiltration. In conclusion, our comprehensive analysis of the role of SLC25 in HCC unveiled SLC25A19 as a potential regulatory factor in HCC.",
+              "doi": "10.1016/j.gene.2025.149299",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bb75480306db9ee3c3e199a42a5ce0a1e1c97185b3d2e86b5fe3f9ed12b33df6"
+              }
+            },
+            {
+              "title": "SLC25A51 promotes tumor growth through sustaining mitochondria acetylation homeostasis and proline biogenesis.",
+              "abstract": "Solute carrier family 25 member 51 (SLC25A51) was recently identified as the mammalian mitochondrial NAD+ transporter essential for mitochondria functions. However, the role of SLC25A51 in human disease, such as cancer, remains undefined. Here, we report that SLC25A51 is upregulated in multiple cancers, which promotes cancer cells proliferation. Loss of SLC25A51 elevates the mitochondrial proteins acetylation levels due to SIRT3 dysfunctions, leading to the impairment of P5CS enzymatic activity, which is the key enzyme in proline biogenesis, and the reduction in proline contents. Notably, we find fludarabine phosphate, an FDA-approved drug, is able to bind with and inhibit SLC25A51 functions, causing mitochondrial NAD decrease and proteins hyperacetylation, which could further synergize with aspirin to reinforce the anti-tumor efficacy. Our study reveals that SLC25A51 is an attractive anti-cancer target, and provides a novel drug combination of fludarabine phosphate with aspirin as a potential cancer therapy strategy.",
+              "doi": "10.1038/s41418-023-01185-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0c1eae9d28a0211f65f51b6430665db93f8c22b2ca218195d151230a99ac765c"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'BACH1 deficiency improves placental angiogenesis via SLC25A51-mediated mitochondrial NAD transport in intrahepatic cholestasis of pregnancy.'}",
+              "abstract": "Placental angiogenesis is particularly important in the treatment of intrahepatic cholestasis of pregnancy (ICP). Although BACH1 has been implicated in angiogenesis associated with cardiovascular diseases, its specific role and underlying mechanisms in ICP remain unclear. This study aims to investigate the role of BACH1 in ICP. The study used clinical samples and two distinct mouse models of ICP to validate BACH1 alterations in ICP through immunohistochemistry (IHC), immunofluorescence (IF), and western blot (WB) analyses. Subsequently, global BACH1-knockout mice were employed to investigate the phenotypic effects of BACH1 deficiency on ICP progression. The molecular mechanisms underlying the regulatory role of BACH1 in ICP were further elucidated using multi-omics approaches (e.g., transcriptomics and proteomics), combined with dual-luciferase reporter assays and electrophoretic mobility shift assays (EMSA). The expression of BACH1 was significantly upregulated in ICP, and its expression level positively correlated with clinicopathological indicators of ICP. Experiments using BACH1-knockout mice demonstrated that BACH1 deletion effectively ameliorated ICP-related placental tissue damage and significantly enhanced the expression levels of angiogenesis markers such as vascular endothelial growth factor (VEGF). Mechanistic investigations indicated that BACH1 deficiency activated the transcriptional expression of solute carrier family 25 member 51 (SLC25A51), thereby promoting the mitochondrial transport of nicotinamide adenine dinucleotide (NAD), restoring mitochondrial function, and improving the activities of electron transport chain complexes I, II, and IV. Notably, BACH1 deficiency promoted taurocholic acid (TCA)-induced proliferation of human umbilical vein endothelial cells (HUVECs), whereas this phenotype could be reversed by shRNA-mediated knockdown of SLC25A51. Further studies confirmed that administration of the specific BACH1 inhibitor HPPE effectively alleviated TCA-induced suppression of HUVECs proliferation. BACH1 may suppress placental angiogenesis by inhibiting the transcriptional expression of SLC25A51, making it a potential therapeutic target. Specifically, pharmacological inhibition of BACH1 could provide a targeted therapeutic strategy for placental angiogenesis associated with ICP.",
+              "doi": "10.1186/s10020-025-01215-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d3463367d798abdb4929360d8ceac2de9e8fb6bf534837a24689174a92473178"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A51 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A51 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A51']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A51",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A51",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A51": {
+          "status": "unavailable",
+          "gene": "SLC25A51",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A51": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A51",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A51']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A51 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A51"
+        ],
+        "confidence": 0.819,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A51": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A51 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A51']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A51 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A51"
+        ],
+        "confidence": 0.819,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A51": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A51 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A51']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A51"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T18:34:31Z"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-10-28T02:39:09Z",
+  "dataset_a_n": 3,
+  "counters": {
+    "stable": 1,
+    "novel": 1,
+    "unstable": 1,
+    "probe_error": 0
+  },
+  "template_version": "2",
+  "reused_rows": 0,
+  "probe_model": "qwen3.8-flash",
+  "note": "GT 仅在此标注工具内读取对照；B := novel ∪ unstable",
+  "labels": [
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00002",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00003",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    }
+  ]
+}

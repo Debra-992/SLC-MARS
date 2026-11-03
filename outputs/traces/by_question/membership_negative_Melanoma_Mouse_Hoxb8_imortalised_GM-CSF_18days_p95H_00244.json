@@ -1,0 +1,533 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00244",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC9A1 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC9A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00244",
+      "status": "ok",
+      "summary": "检索到 4 类证据、20 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC9A1"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC9A1",
+              "protein_function": "Electroneutral Na(+) /H(+) antiporter that extrudes Na(+) in exchange for external protons driven by the inward sodium ion chemical gradient, protecting cells from acidification that occurs from metabolism. Exchanges intracellular H(+) ions for extracellular Na(+) in 1:1 stoichiometry. Plays a key role in maintaining intracellular pH neutral and cell volume, and thus is important for cell growth, proliferation, migration and survival.",
+              "aliases": "NHE1, APNH, NHE-1",
+              "transport_type": "E / Na+, H+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC9A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC9A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NHE1",
+              "target_properties": {
+                "name": "NHE1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC9A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC9A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC9A1",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC9A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC9A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC9A1",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Contribution of Na+,HCO3(-)-cotransport to cellular pH control in human breast cancer: a role for the breast cancer susceptibility locus NBCn1 (SLC4A7).",
+              "abstract": "Genome-wide association studies recently linked the locus for Na(+),HCO(3)(-)-cotransporter NBCn1 (SLC4A7) to breast cancer susceptibility, yet functional insights have been lacking. To determine whether NBCn1, by transporting HCO(3)(-) into cells, may dispose of acid produced during high metabolic activity, we studied the expression of NBCn1 and the functional impact of Na(+),HCO(3)(-)-cotransport in human breast cancer. We found that the plasmalemmal density of NBCn1 was 20-30% higher in primary breast carcinomas and metastases compared to matched normal breast tissue. The increase in NBCn1 density was similar in magnitude to that observed for Na(+)/H(+)-exchanger NHE1 (SLC9A1), a transporter previously implicated in cell migration, proliferation and malignancy. In primary breast carcinomas, the apparent molecular weight for NBCn1 was increased compared to normal tissue. Using pH-sensitive fluorophores, we showed that Na(+),HCO(3)(-)-cotransport is the predominant mechanism of acid extrusion and is inhibited 34 ± 9% by 200 μM 4,4'-diisothiocyanatostilbene-2,2'-disulfonic acid in human primary breast carcinomas. At intracellular pH (pH(i) ) levels >6.6, CO(2)/HCO(3)(-)-dependent mechanisms accounted for >90% of total net acid extrusion. Na(+)/H(+)-exchange activity was prominent only at lower pH(i) -values. Furthermore, steady-state pH(i) was 0.35 ± 0.06 units lower in the absence than in the presence of CO(2)/HCO(3)(-). In conclusion, expression of NBCn1 is upregulated in human primary breast carcinomas and metastases compared to normal breast tissue. Na(+),HCO(3)(-)-cotransport is a major determinant of pH(i) in breast cancer and the modest DIDS-sensitivity is consistent with NBCn1 being predominantly responsible. Hence, our results suggest a major pathophysiological role for NBCn1 that may be clinically relevant.",
+              "doi": "10.1002/ijc.27782",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5bfda7c4ab0c0690195c3d853105ef7c0055c9216bc03fa43d11b9f98a864b25"
+              }
+            },
+            {
+              "title": "{'sup': ['+', '+'], '#text': 'Na /H exchanger NHE1 and NHE2 have opposite effects on migration velocity in rat gastric surface cells.'}",
+              "abstract": "Following superficial injury, neighbouring gastric epithelial cells close the wound by rapid cell migration, a process called epithelial restitution. Na /H exchange (NHE) inhibitors interfere with restitution, but the role of the different NHE isoforms expressed in gastric pit cells has remained elusive. The role of the basolaterally expressed NHE1 (Slc9a1) and the presumably apically expressed NHE2 (Slc9a2) in epithelial restitution was investigated in the nontransformed rat gastric surface cell line RGM1. Migration velocity was assessed by loading the cells with the fluorescent dye DiR and following closure of an experimental wound over time. Since RGM1 cells expressed very low NHE2 mRNA and have low transport activity, NHE2 was introduced by lentiviral gene transfer. In medium with pH 7.4, RGM1 cells displayed slow wound healing even in the absence of growth factors and independently of NHE activity. Growth factors accelerated wound healing in a partly NHE1-dependent fashion. Preincubation with acidic pH 7.1 stimulated restitution in a NHE1-dependent fashion. When pH 7.1 was maintained during the restitution period, migratory speed was reduced to ∼10% of the speed at pH 7,4, and the residual restitution was further inhibited by NHE1 inhibition. Lentiviral NHE2 expression increased the steady-state pH and reduced the restitution velocity after low pH preincubation, which was reversible by pharmacological NHE2 inhibition. The results demonstrate that in RGM1 cells, migratory velocity is increased by NHE1 activation, while NHE2 activity inhibit this process. A differential activation of NHE1 and NHE2 may therefore, play a role in the initiation and completion of the epithelial restitution process.",
+              "doi": "10.1002/jcp.25758",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "dc205a1c78a8fe475f22f8480e2cc70ff3785cf136285d76081f351bff2bfb44"
+              }
+            },
+            {
+              "title": "Sodium/proton exchanger isoform 1 regulates intracellular pH and cell proliferation in human ovarian cancer.",
+              "abstract": "Cancer cells generate protons (H) that are extruded to the extracellular medium mainly via the Na/H exchanger 1 (NHE1), which regulates intracellular pH (pHi) and cell proliferation. In primary cultures of human ascites-derived ovarian cancer cells (haOC) we assayed whether NHE1 was required for pHi modulation and cell proliferation. Human ovary expresses NHE1, which is higher in haOC and A2780 (ovarian cancer cells) compared with HOSE cells (normal ovarian cells). Basal pHi and pHi recovery (following a NHCl pulse) was higher in haOC and A2780, compared with HOSE cells. Zoniporide (NHE1 inhibitor) caused intracellular acidification and pHi recovery was independent of intracellular buffer capacity, but reduced in NHE1 knockdown A2780 cells. Zoniporide reduced the maximal proliferation capacity, cell number, thymidine incorporation, and ki67 (marker of proliferation) fluorescence in haOC cells. SLC9A1 (for NHE1) amplification associated with lower overall patient survival. In conclusion, NHE1 is expressed in human ovarian cancer where it has a pro-proliferative role. Increased NHE1 expression and activity constitute an unfavourable prognostic factor in these patients.",
+              "doi": "10.1016/j.bbadis.2016.10.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "74acec0f33a616b3eb13634d1ae86efb2e4a734624ac5ce5cf27c4301f315b0e"
+              }
+            },
+            {
+              "title": "{'sup': ['+', '+', '+', '-'], 'sub': '3', '#text': 'Na/H-exchange inhibition by cariporide is compensated via Na,HCO-cotransport and has no net growth consequences for ErbB2-driven breast carcinomas.'}",
+              "abstract": "Defense against intracellular acidification of breast cancer tissue depends on net acid extrusion via Na,HCO-cotransporter NBCn1/Slc4a7 and Na/H-exchanger NHE1/Slc9a1. NBCn1 is increasingly recognized as breast cancer susceptibility protein and promising therapeutic target, whereas evidence for targeting NHE1 is discordant. Currently, selective small molecule inhibitors exist against NHE1 but not NBCn1. Cellular assays-with some discrepancies-link NHE1 activity to proliferation, migration, and invasion; and disrupted NHE1 expression can reduce triple-negative breast cancer growth. Studies on human breast cancer tissue associate high NHE1 expression with reduced metastasis and-in some molecular subtypes-improved patient survival. Here, we evaluate Na/H-exchange and therapeutic potential of the NHE1 inhibitor cariporide/HOE-642 in murine ErbB2-driven breast cancer. Ex vivo, cariporide inhibits net acid extrusion in breast cancer tissue (IC = 0.18 μM) and causes small decreases in steady-state intracellular pH (pH). In vivo, we deliver cariporide orally, by osmotic minipumps, and by intra- and peritumoral injections to address the low oral bioavailability and fast metabolism. Prolonged cariporide administration in vivo upregulates NBCn1 expression, shifts pH regulation towards CO/HCO-dependent mechanisms, and shows no net effect on the growth rate of ErbB2-driven primary breast carcinomas. Cariporide also does not influence proliferation markers in breast cancer tissue. Oral, but not parenteral, cariporide elevates serum glucose by ∼1.5 mM. In conclusion, acute administration of cariporide ex vivo powerfully inhibits net acid extrusion from breast cancer tissue but lowers steady-state pH minimally. Prolonged cariporide administration in vivo is compensated via NBCn1 and we observe no discernible effect on growth of ErbB2-driven breast carcinomas.",
+              "doi": "10.1016/j.bbadis.2024.167450",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75ddb11ee5f0d0edb2db64d126a76163e6589bf1414e0bc0260ed4bc054d1c89"
+              }
+            },
+            {
+              "title": "Constitutively active ErbB2 regulates cisplatin-induced cell death in breast cancer cells via pro- and antiapoptotic mechanisms.",
+              "abstract": "Despite the frequent expression of N-terminally truncated ErbB2 (ΔNErbB2/p95HER2) in breast cancer and its association with Herceptin resistance and poor prognosis, it remains poorly understood how ΔNErbB2 affects chemotherapy-induced cell death. Previously it was shown that ΔNErbB2 upregulates acid extrusion from MCF-7 breast cancer cells and that inhibition of the Na(+)/H(+) exchanger (SLC9A1/NHE1) strongly sensitizes ΔNErbB2-expressing MCF-7 cells to cisplatin chemotherapy. The aim of this study was to identify the mechanism through which ΔNErbB2 regulates cisplatin-induced breast cancer cell death, and determine how NHE1 regulates this process. Cisplatin treatment elicited apoptosis, ATM phosphorylation, upregulation of p53, Noxa (PMAIP1), and PUMA (BBC3), and cleavage of caspase-9, -7, fodrin, and PARP-1 in MCF-7 cells. Inducible ΔNErbB2 expression strongly reduced cisplatin-induced ATM- and p53-phosphorylation, augmented Noxa upregulation and caspase-9 and -7 cleavage, doubled p21(WAF1/Cip1) (CDKN1A) expression, and nearly abolished Bcl-2 expression. LC3-GFP analysis demonstrated that autophagic flux was reduced by cisplatin in a manner augmented by ΔNErbB2, yet did not contribute to cisplatin-induced death. Using knockdown approaches, it was shown that cisplatin-induced caspase-7 cleavage in ΔNErbB2-MCF-7 cells was Noxa- and caspase-9 dependent. This pathway was augmented by NHE1 inhibition, while the Na(+)/HCO3 (-) cotransporter (SLC4A7/NBCn1) was internalized following cisplatin exposure. This work reveals that ΔNErbB2 strongly affects several major pro- and antiapoptotic pathways and provides mechanistic insight into the role of NHE1 in chemotherapy resistance. These findings have relevance for defining therapy regimens in breast cancers with ΔNErbB2 and/or NHE1 overexpression.",
+              "doi": "10.1158/1541-7786.MCR-14-0011",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5119026ee65cb49350ab95c83de449635c75432ef9ccf2d7086041d47c86c76a"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC9A1 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC9A1 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC9A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC9A1",
+            "ppr_score": 9.616482915921675e-05,
+            "degree_corrected_score": 7.226615242657972e-05,
+            "graph_degree": 6,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC9A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC9A1",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC9A1": {
+          "status": "unavailable",
+          "gene": "SLC9A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC9A1": {
+          "status": "unavailable",
+          "gene": "SLC9A1",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.70 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A1"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A1": 4.7
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.74；法官理由: CRISPR 0d vs 18d MAGeCK measures growth essentiality, not drug-resistance modulation. NHE1/SLC9A1 promotes melanoma survival and resistance; its inhibition reduces resistance. Thus SLC9A1 itself does not inhibit resistance. Two independent 。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.70 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A1": 4.7
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: E measures MAGeCK essentiality, not drug-resistance direction; 0 vs 18d p95H lacks drug. Observations and LLM consensus indicate SLC9A1/NHE1 promotes survival/resistance, so it does not inhibit melanoma drug resistance.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A1']",
+        "status": "ok",
+        "summary": "SLC9A1 编码 NHE1，主要参与细胞内 pH 调节；在多种肿瘤中其活性或表达升高常与侵袭、增殖及化疗/靶向药物耐药正相关。对黑色素瘤而言，现有知识更支持 SLC9A1 促进而非抑制肿瘤药物耐药，因此判断其为 false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A1"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC9A1 编码 NHE1，主要参与细胞内 pH 调节；在多种肿瘤中其活性或表达升高常与侵袭、增殖及化疗/靶向药物耐药正相关。对黑色素瘤而言，现有知识更支持 SLC9A1 促进而非抑制肿瘤药物耐药，因此判断其为 false。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T21:59:47Z"
+  }
+}

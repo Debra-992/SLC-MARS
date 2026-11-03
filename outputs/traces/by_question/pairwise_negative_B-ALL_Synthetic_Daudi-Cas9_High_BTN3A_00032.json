@@ -1,0 +1,711 @@
+{
+  "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00032",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC25A51 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC25A1"
+  },
+  "effective_genes": [
+    "SLC25A1",
+    "SLC25A51"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00032",
+      "status": "ok",
+      "summary": "检索到 4 类证据、35 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A1",
+        "SLC25A51"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "protein_function": "Mitochondrial electroneutral antiporter that exports citrate from the mitochondria into the cytosol in exchange for malate.",
+              "aliases": "CTP, CIC, SLC20A3",
+              "transport_type": "E / citrate-H+, malate"
+            },
+            {
+              "gene": "SLC25A51",
+              "protein_function": "Mediates the import of NAD(+) into mitochondria.",
+              "aliases": "MCART1",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "A comprehensive analysis of SLC25A1 expression and its oncogenic role in pan-cancer.",
+              "abstract": "The solute carrier family 25 member 1 (SLC25A1) is currently the only known human transporter for citrate in the mitochondrial membrane. However, its role in cancer development remains to be elucidated. We aim to analyze the expression profile, prognostic value, potential immunological significance, and effect on tumor growth of SLC25A1 at a pan-cancer level. Herein, the role of SLC25A1 in tumorigenesis and progression was investigated based on the Cancer Genome Atlas (TCGA), Gene Expression Omnibus (GEO), Genotype-Tissue Expression (GTEx), Clinical Proteomic Tumor Analysis Consortium (CPTAC), GeneMANIA, STRING and Cancer Dependency Map Project (DepMap) database via online websites or the R software. The protein expression levels were validated in tissue microarrays, and the effects on tumor cell lines were accessed through MTS and colony formation assays. The expression of SLC25A1 increased in most cancers, and the upregulation of SLC25A1 in colon adenocarcinoma and lung adenocarcinoma was further confirmed by immunohistochemistry. Meanwhile, SLC25A1 was linked to clinical outcomes across multiple tumor types, particularly in lung adenocarcinoma, where its high expression predicted poor prognosis. Moreover, SLC25A1 was positively associated with MSI, TMB, and CD276 and tightly correlated with tumor-infiltrating immune cells. Furthermore, the knockout of SLC25A1 demonstrated inhibitory effects in most cancer cell lines in the DepMap project. Cellular experiments showed that SLC25A1 knockdown significantly reduced the proliferation of lung adenocarcinoma cells. Our findings suggest the potential of SLC25A1 as a prognostic biomarker for cancers and a therapeutic target for precise antitumor strategy and cancer immunotherapy.",
+              "doi": "10.1007/s12672-023-00830-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "25a58e6f8cd4b81556e598931c1ac18969ab1a0d9ce670758ab2fb561ca85d2a"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'SLC25A51 decouples the mitochondrial NAD/NADH ratio to control proliferation of AML cells.'}",
+              "abstract": "SLC25A51 selectively imports oxidized NAD into the mitochondrial matrix and is required for sustaining cell respiration. We observed elevated expression of SLC25A51 that correlated with poorer outcomes in patients with acute myeloid leukemia (AML), and we sought to determine the role SLC25A51 may serve in this disease. We found that lowering SLC25A51 levels led to increased apoptosis and prolonged survival in orthotopic xenograft models. Metabolic flux analyses indicated that depletion of SLC25A51 shunted flux away from mitochondrial oxidative pathways, notably without increased glycolytic flux. Depletion of SLC25A51 combined with 5-azacytidine treatment limits expansion of AML cells in vivo. Together, the data indicate that AML cells upregulate SLC25A51 to decouple mitochondrial NAD/NADH for a proliferative advantage by supporting oxidative reactions from a variety of fuels. Thus, SLC25A51 represents a critical regulator that can be exploited by cancer cells and may be a vulnerability for refractory AML.",
+              "doi": "10.1016/j.cmet.2024.01.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c6204c6776ee02d08b8b6d7ac511bd590b517a29a5027671f28dc4ab5c1938f2"
+              }
+            },
+            {
+              "title": "Overexpression of SLC25A51 promotes hepatocellular carcinoma progression by driving aerobic glycolysis through activation of SIRT5.",
+              "abstract": "Solute carrier family 25 member 20 (SLC25A51) is a newly identified mammalian mitochondrial NAD transporter. However, the clinicopathological and biological significance of SLC25A51 in human cancers, including hepatocellular carcinoma (HCC), remains unclear. The aim of this study was to define the role of SLC25A51 in HCC progression. Here we demonstrate that SLC25A51 is significantly overexpressed in human HCC specimens and cell lines, caused by, at least in partial, the decrease of miR-212-3p. SLC25A51 overexpression is positively correlated with the clinicopathological characteristics of vascular invasion and tumor diameter, as well as poor survival in patients with HCC. Knockdown of SLC25A51 attenuated, while overexpression of SLC25A51 enhanced the growth and metastasis of HCC cells both in vitro and in vivo. Mechanistically, glucose metabolism reprogramming from oxidative phosphorylation to glycolysis by activation of mitochondrial sirtuin 5 (SIRT5) was found to contribute to the promotion of growth and metastasis by SLC25A51 in HCC cells. Together, these findings reveal important roles of SLC25A51 in HCC tumorigenesis and suggest SLC25A51 as a promising prognostic marker and therapeutic target for treating HCC.",
+              "doi": "10.1016/j.freeradbiomed.2022.02.014",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "876f034e82711e6f2a58143545116f714a4f6195b9ab6fdd663535838c6fc929"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of mitochondrial solute carrier family 25 (SLC25) identifies member 19 (SLC25A19) as a regulatory factor in hepatocellular carcinoma.",
+              "abstract": "The mitochondrial solute carrier family 25 (SLC25) is known to play a pivotal role in oncogenesis, yet its specific involvement in hepatocellular carcinoma (HCC) remains poorly elucidated. In this study, we performed a clustering analysis of HCC patients in the Cancer Genome Atlas database based on the expression levels of SLC25 members, and conducted clinical feature analysis for each patient within the clusters. Subsequently, we developed a prognostic model using a Lasso regression approach with SLC25A19, SLC25A49, and SLC25A51 as features, and generated a risk score for each HCC patient. We then identified SLC25A19 as a potential prognostic marker for HCC through single-cell analysis, and validated this finding using in vitro and in vivo experiments. Our results revealed significant differences in the expression of most SLC25 family members in HCC patients, enabling the stratification of patients into three clusters, with those in cluster 1 exhibiting the most favorable prognosis and showing a correlation with enhanced immune infiltration. The risk scores derived from the features SLC25A19, SLC25A49, and SLC25A51 effectively predicted the prognosis of HCC patients, with area under the curve (AUC) values exceeding 0.7 in the test group. Single-cell analysis further demonstrated h eightened expression of SLC25A19 in the immune microenvironment of HCC, and in vitro experiments indicated that SLC25A19 may regulate the proliferation, migration, invasion, cycle, and apoptosis of liver cancer cells through the Wnt pathway. In the HepG2 animal model, overexpression of SLC25A19 significantly promotes tumor growth, while knockdown inhibits tumor growth. Analysis of patient tumor tissues shows that SLC25A19 is highly expressed in liver cancer tissues and is associated with CD8 T cell infiltration. In conclusion, our comprehensive analysis of the role of SLC25 in HCC unveiled SLC25A19 as a potential regulatory factor in HCC.",
+              "doi": "10.1016/j.gene.2025.149299",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bb75480306db9ee3c3e199a42a5ce0a1e1c97185b3d2e86b5fe3f9ed12b33df6"
+              }
+            },
+            {
+              "title": "Inhibition of citrate transport reduces HIF-1α/GABA-T-mediated succinate accumulation in macrophages: The role of astragaloside IV in ischemic stroke.",
+              "abstract": "The occurrence of ischemic stroke is closely associated with the inflammatory infiltration of peripheral monocytes/macrophages, and the inflammatory activation of macrophages is often affected by metabolic reprogramming. The Slc25a1 regulates mitochondrial citrate transport and has been shown to affect cell proliferation and migration in cancer. Astragaloside IV exhibits significant anti-inflammatory activity and improves ischemic stroke, but its regulatory effect on macrophage metabolic reprogramming has not been elucidated. This study aims to explore the effect of astragaloside IV on ischemic stroke injury from the perspective of Slc25a1-mediated cellular metabolic reprogramming. A total of 170 mice were used to establish the middle cerebral artery occlusion (MCAO) model. The therapeutic effect of astragaloside IV was evaluated by neurobehavioral scores and infarct volume, with its impact further verified through the depletion of peripheral macrophages. The modulation of Slc25a1 by astragaloside IV and its influence on macrophages were investigated in mouse bone marrow-derived macrophages (BMDMs) and peripheral blood mononuclear cell-derived macrophages (PBMC-derived macrophages). Astragaloside IV significantly mitigated neurological impairment and reduced cerebral infarction volume in MCAO mice by inhibition of peripheral monocytes/macrophage inflammatory infiltration. In activated BMDMs and PBMC-derived macrophages, astragaloside IV interacted with Slc25a1, attenuated citrate transport, maintained mitochondrial function, therefore enhancing the shift from the M1- to M2-like macrophages. Mechanistically, astragaloside IV inhibited the transcriptional regulation of HIF-1α on GABA-T via citate-mediated histone H3 and H4 deacetylation and promoted the resumption of the broken TCA cycle and mitochondrial OXPHOS in macrophages. Our study unveiled a therapeutic strategy for ischemic stroke by intervening in the inflammatory infiltration of peripheral monocytes/macrophages. Astragaloside IV, by binding to the mitochondrial citrate transporter Slc25a1, maintained the homeostasis of the TCA cycle and mitochondrial function, ultimately blocking the inflammation of peripheral macrophages to ameliorate ischemic stroke damage. This discovery provides data support for expanding the clinical application of astragaloside IV and offers research insights into the external treatment of encephalopathy.",
+              "doi": "10.1016/j.phymed.2025.156449",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "935c7270feb8330bcdd9081b1520130f8e75d6d0344e4170640836f08fd19ee9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC25A51 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A1', 'SLC25A51']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC25A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A1": {
+          "status": "ok",
+          "gene": "SLC25A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC25A51": {
+          "status": "unavailable",
+          "gene": "SLC25A51",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A51": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A51",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC25A51']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC25A51(P=0.51), 差=0.04；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A51",
+        "candidates": [
+          "SLC25A1",
+          "SLC25A51"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC25A51": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A1': 1, 'W:SLC25A51': 2}，最终智能体辩论后裁决：winner=SLC25A51 answer=None conf=0.72；法官理由: Database evidence is association-level and favors SLC25A1 weakly; two independent LLM channels plus mitochondrial biology support SLC25A51 NAD+ import as more essential for B-ALL survival, while SLC25A1 citrate transport is more redundant.。原证据通道判定: winner=SLC25A1 answer=None conf=0.551（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC25A51']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC25A51(P=0.51), 差=0.04；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A51",
+        "candidates": [
+          "SLC25A1",
+          "SLC25A51"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC25A51": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A1': 1, 'W:SLC25A51': 2}，最终智能体辩论后裁决：winner=SLC25A51 answer=None conf=0.68；法官理由: Two independent mechanistic LLM votes favor SLC25A51: mitochondrial NAD+ import loss disrupts OXPHOS, a stronger tumor-survival bottleneck than citrate export SLC25A1. E’s graph proxy is association-level and weak. Vote supports SLC25A51.。原证据通道判定: winner=SLC25A1 answer=None conf=0.551（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC25A51']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A1",
+          "SLC25A51"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T10:19:31Z"
+  }
+}

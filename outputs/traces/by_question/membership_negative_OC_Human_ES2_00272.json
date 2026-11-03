@@ -1,0 +1,376 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00272",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC30A9 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC30A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00272",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC30A9"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC30A9",
+              "protein_function": "Mitochondrial proton-coupled zinc ion antiporter mediating the export of zinc from the mitochondria and involved in zinc homeostasis.",
+              "aliases": "ZNT9, HUEL, C4orf1, GAC63, SLC30A9, Solute Carrier Family 30 (Zinc Transporter), Member 9",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC30A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC30 Zinc efflux  family",
+              "target_properties": {
+                "name": "SLC30 Zinc efflux  family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "N-acetyltransferase 10 facilitates tumorigenesis of diffuse large B-cell lymphoma by regulating AMPK/mTOR signalling through N4-acetylcytidine modification of SLC30A9.",
+              "abstract": "Accumulating studies suggested that posttranscriptional modifications exert a vital role in the tumorigenesis of diffuse large B-cell lymphoma (DLBCL). N4-acetylcytidine (ac4C) modification, catalyzed by the N-acetyltransferase 10 (NAT10), was a novel type of chemical modification that improves translation efficiency and mRNA stability. GEO databases and clinical samples were used to explore the expression and clinical value of NAT10 in DLBCL. CRISPER/Cas9-mediated knockout of NAT10 was performed to determine the biological functions of NAT10 in DLBCL. RNA sequencing, acetylated RNA immunoprecipitation sequencing (acRIP-seq), LC-MS/MS, RNA immunoprecipitation (RIP)-qPCR and RNA stability assays were performed to explore the mechanism by which NAT10 contributed to DLBCL progression. Here, we demonstrated that NAT10-mediated ac4C modification regulated the occurrence and progression of DLBCL. Dysregulated N-acetyltransferases expression was found in DLBCL samples. High expression of NAT10 was associated with poor prognosis of DLBCL patients. Deletion of NAT10 expression inhibited cell proliferation and induced G0/G1 phase arrest. Furthermore, knockout of NAT10 increased the sensitivity of DLBCL cells to ibrutinib. AcRIP-seq identified solute carrier family 30 member 9 (SLC30A9) as a downstream target of NAT10 in DLBCL. NAT10 regulated the mRNA stability of SLC30A9 in an ac4C-dependent manner. Genetic silencing of SLC30A9 suppressed DLBCL cell growth via regulating the activation of AMP-activated protein kinase (AMPK) pathway. Collectively, these findings highlighted the essential role of ac4C RNA modification mediated by NAT10 in DLBCL, and provided insights into novel epigenetic-based therapeutic strategies.",
+              "doi": "10.1002/ctm2.1747",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a8f04fa94f871cbf291d2e5b6f1572fbf89f791849a15190e7c6f261d7be99ab"
+              }
+            },
+            {
+              "title": "Transcriptome analysis reveals an altered expression profile of zinc transporters in colorectal cancer.",
+              "abstract": "Zinc is a transition metal and catalytic cofactor involved in many biological processes including proliferation, development, differentiation, and metabolism. Zinc transporters (ZnTs) play a fundamental role in cellular zinc homeostasis. ZnTs are responsible of zinc efflux and are encoded by 10 genes belonging to solute carrier family 30A (SLC30A1-10), while zinc-regulated transporter (ZRT)/iron-regulated transporter (IRT)-like protein (ZIP) transporters are responsible for the influx of zinc into the cytoplasm and are encoded by 14 genes belonging to solute carrier family 39A (SLC39A1-14). In this study, we analyzed, by transcriptome analysis, the microRNA levels of ZnT-encoding and ZIP-encoding genes in colorectal cancer (CRC) samples matched to normal colon tissues and in CRC cell lines. Results revealed an upregulation of specific ZnT and ZIP transcripts in CRC. Upregulation of SLC30A5, SLC30A6, SLC30A7 transcripts, encoding zinc efflux transporters ZnT5, ZnT6, ZnT7, localized on endoplasmic reticulum membranes, might be part of a coordinated transcriptional program associated to the increased activity of the early secretory pathway, while transcriptional upregulation of several specific ZIP transporters (SLC39A6, SLC39A7, SLC39A9, SLC39A10, and SLC39A11) could contribute in meeting the increased demand of zinc in cancer cells. Moreover, exon-level analysis of SLC30A9, a nuclear receptor coactivator involved in the transcriptional regulation of Wnt-responsive genes, revealed the differential expression of alternative transcripts in CRC and normal colonic mucosa.",
+              "doi": "10.1002/jcb.27285",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "232e8de0f44308f80ae064ceb42d25a68e6a8b935d214e25944e50048af64d57"
+              }
+            },
+            {
+              "title": "A mutation in SLC30A9, a zinc transporter, causes an increased sensitivity to oxidative stress in the nematode Caenorhabditis elegans.",
+              "abstract": "Oxygen is essential for aerobic organisms, but generates reactive oxygen species (ROS), which can cause cellular dysfunction by damaging cellular molecules. Many genes are involved in the regulation of ROS; however, much attention has not focused on them. To identify these genes, we screened for mutants with an altered sensitivity to oxidative stress in the nematode Caenorhabditis elegans. We isolated a novel mutant, oxy-7(qa5004) which showed an increased sensitivity to ROS in C. elegans. oxy-7 showed increased production of ROS and decreased longevity due to its increased oxidative stress. Genetic analysis revealed that oxy-7 has a causative mutation in Y71H2AM.9, a homologue of SLC30A9 which encodes a zinc transporter in mitochondria. We further showed that knockdown of human SLC30A9 caused increased ROS production in human cells as well. These results suggested an important role of mitochondrial zinc homeostasis in the regulation of ROS.",
+              "doi": "10.1016/j.bbrc.2022.09.107",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f442a0b73c0d99a4d5134a06e0bb428eaddb13b8f0b236de997c55d9f8b1b7a0"
+              }
+            },
+            {
+              "title": "Evolutionary rate covariation identifies SLC30A9 (ZnT9) as a mitochondrial zinc transporter.",
+              "abstract": "Recent advances in genome sequencing have led to the identification of new ion and metabolite transporters, many of which have not been characterized. Due to the variety of subcellular localizations, cargo and transport mechanisms, such characterization is a daunting task, and predictive approaches focused on the functional context of transporters are very much needed. Here we present a case for identifying a transporter localization using evolutionary rate covariation (ERC), a computational approach based on pairwise correlations of amino acid sequence evolutionary rates across the mammalian phylogeny. As a case study, we find that poorly characterized transporter SLC30A9 (ZnT9) coevolves with several components of the mitochondrial oxidative phosphorylation chain, suggesting mitochondrial localization. We confirmed this computational finding experimentally using recombinant human SLC30A9. SLC30A9 loss caused zinc mishandling in the mitochondria, suggesting that under normal conditions it acts as a zinc exporter. We therefore propose that ERC can be used to predict the functional context of novel transporters and other poorly characterized proteins.",
+              "doi": "10.1042/BCJ20210342",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "49c1a9faba1de5e9967d4d50be4c9022e417e46a6f3dd70197e914cbb65349a7"
+              }
+            },
+            {
+              "title": "Integrated Bioinformatics and Validation of lncRNA-Mediated ceRNA Network in Myocardial Ischemia/Reperfusion Injury.",
+              "abstract": "Myocardial ischemia/reperfusion (MI/R) injury is a common pathology in ischemia heart disease. Long noncoding RNAs (lncRNAs) are significant regulators related to many ischemia/reperfusion conditions. This study is aimed at exploring the molecule mechanism of lncRNA-mediated competing endogenous RNA (ceRNA) network in MI/R. The dataset profiles of MI/R and normal tissues (GSE130217 and GSE124176) were obtained from the GEO database. Integrated bioinformatics were performed to screen out differentially expressed genes (DEGs). Thereafter, an lncRNA-mediated ceRNA network was constructed by the starBase database. The GO annotations and KEGG pathway analysis were conducted to study action mechanism and related pathways of DEGs in MI/R. A model of hypoxia/reoxygenation- (H/R-) treated HL-1 cell was performed to verify the expression of lncRNAs through qRT-PCR. 2406 differentially expressed- (DE-) mRNAs, 70 DE-lncRNAs, and 156 DE-miRNAs were acquired. These DEGs were conducted to construct an lncRNA-mediated ceRNA network, and a subnetwork including lncRNA Xist/miRNA-133c/mRNA (Slc30a9) was screen out. The functional enrichment analyses revealed that the lncRNAs involved in the ceRNA network might functions in oxidative stress and calcium signaling pathway. The lncRNA Xist expression is reduced under H/R conditions, followed by the increased level of miRNA-133c, thus downregulating the expression of Slc30a9. In sum, the identified ceRNA network which included the lncRNA Xist/miR-133c/Slc30a9 axis might contribute a better understanding to the pathogenesis and development of MI/R injury and offer a novel targeted therapy way.",
+              "doi": "10.1155/2022/7260801",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bd7ca868d9a95e96ca3f846e9f5b9fb6af87874c5538d3678b85c2b7317eb82d"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC30A9 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC30A9 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC30A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC30A9",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC30A9",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC30A9",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC30A9": {
+          "status": "unavailable",
+          "gene": "SLC30A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC30A9": {
+          "status": "unavailable",
+          "gene": "SLC30A9",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC30A9"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A9": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.62；法官理由: No direct ES2 CRISPR readout, but SLC30A9 supports zinc homeostasis and tumor-associated expression; loss-of-function likely impairs fitness. Three independent channels vote true, so inhibit SLC30A9 reduces ovarian tumor growth.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC30A9"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A9": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.58；法官理由: Evidence is weak and not ovarian-specific, but E calls SLC30A9 essential (P=0.56), and two independent LLM channels agree that CRISPR loss would impair ES2 growth. Treat as membership in tumor-growth-inhibition via loss-of-function, moderat。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A9']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC30A9"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T02:00:37Z"
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00035",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC16A11 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC16A11"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00035",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC16A11"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC16A11",
+              "protein_function": "Proton-linked monocarboxylate transporter.",
+              "aliases": "MCT11",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC16A11",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC16 Monocarboxylate  transporter family",
+              "target_properties": {
+                "name": "SLC16 Monocarboxylate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC16A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC16A11",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "{'sup': '+', '#text': 'Polyunsaturated Fatty Acid Desaturation Is a Mechanism for Glycolytic NAD Recycling.'}",
+              "abstract": "The reactions catalyzed by the delta-5 and delta-6 desaturases (D5D/D6D), key enzymes responsible for highly unsaturated fatty acid (HUFA) synthesis, regenerate NAD from NADH. Here, we show that D5D/D6D provide a mechanism for glycolytic NAD recycling that permits ongoing glycolysis and cell viability when the cytosolic NAD/NADH ratio is reduced, analogous to lactate fermentation. Although lesser in magnitude than lactate production, this desaturase-mediated NAD recycling is acutely adaptive when aerobic respiration is impaired in vivo. Notably, inhibition of either HUFA synthesis or lactate fermentation increases the other, underscoring their interdependence. Consistent with this, a type 2 diabetes risk haplotype in SLC16A11 that reduces pyruvate transport (thus limiting lactate production) increases D5D/D6D activity in vitro and in humans, demonstrating a chronic effect of desaturase-mediated NAD recycling. These findings highlight key biologic roles for D5D/D6D activity independent of their HUFA end products and expand the current paradigm of glycolytic NAD regeneration.",
+              "doi": "10.1016/j.cmet.2018.12.023",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8b48eb8fedb1bba304765cfa1ce519e8387b0f26b63608b78999c4991a469bb0"
+              }
+            },
+            {
+              "title": "Epigenome-wide ovarian cancer analysis identifies a methylation profile differentiating clear-cell histology with epigenetic silencing of the HERG K+ channel.",
+              "abstract": "Ovarian cancer remains the leading cause of death in women with gynecologic malignancies, despite surgical advances and the development of more effective chemotherapeutics. As increasing evidence indicates that clear-cell ovarian cancer may have unique pathogenesis, further understanding of molecular features may enable us to begin to understand the underlying biology and histology-specific information for improved outcomes. To study epigenetics in clear-cell ovarian cancer, fresh frozen tumor DNA (n = 485) was assayed on Illumina Infinium HumanMethylation450 BeadChips. We identified a clear-cell ovarian cancer tumor methylation profile (n = 163) which we validated in two independent replication sets (set 1, n = 163; set 2, n = 159), highlighting 22 CpG loci associated with nine genes (VWA1, FOXP1, FGFRL1, LINC00340, KCNH2, ANK1, ATXN2, NDRG21 and SLC16A11). Nearly all of the differentially methylated CpGs showed a propensity toward hypermethylation among clear-cell cases. Several loci methylation inversely correlated with tumor gene expression, most notably KCNH2 (HERG, a potassium channel) (P = 9.5 × 10(-7)), indicating epigenetic silencing. In addition, a predicted methylation class mainly represented by the clear-cell cases (20 clear cell out of 23 cases) had improved survival time. Although these analyses included only 30 clear-cell carcinomas, results suggest that loss of expression of KCNH2 (HERG) by methylation could be a good prognostic marker, given that overexpression of the potassium (K(+)) channel Eag family members promotes increased proliferation and results in poor prognosis. Validation in a bigger cohort of clear-cell tumors of the ovary is warranted.",
+              "doi": "10.1093/hmg/ddt160",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "89f7c4c419bc69748d3bb5dda9f9fc36c0a45e1565262f081c1c0f5e283e9f8d"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC16A11 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC16A11 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC16A11']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC16A11",
+            "ppr_score": 2.7670606882847956e-06,
+            "degree_corrected_score": 8.101280323538593e-06,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC16A11",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC16A11",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC16A11": {
+          "status": "unavailable",
+          "gene": "SLC16A11",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC16A11": {
+          "status": "unsupported_cancer",
+          "gene": "SLC16A11",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC16A11 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A11"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A11": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC16A11 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A11']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC16A11在肝癌中表现为通过糖酵解相关单羧酸转运/代谢支持肿瘤进展；ALL/NALM6同样常依赖高强度糖酵解与乳酸/丙酮酸转运维持增殖，因此跨癌种类比提示SLC16A11敲除更可能削弱ALL生长。 | 直接ALL证据缺失，但SLC16A11是质子偶联单羧酸转运体，并已在liver cancer中通过glycolysis路径显示PROMOTION效应。若其功能在代谢重编程中支持肿瘤细胞糖酵解通量，则在NALM6的CRISPR 24天MAGeCK筛选中敲除该基因更可能导致负选择、抑制肿瘤生长。TIMER/KM不可用使置信度偏低，但不应将缺证据直接判为阴性。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A11"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A11": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No direct MAGeCK depletion evidence in NALM6. Liver-cancer glycolysis association is not a CRISPR readout for ALL growth inhibition. Two independent LLM false votes outweigh the weak analogy.。原证据通道判定: winner=None answer=True conf=0.42（保留于溯源）。",
+        "analogy_cancers": [
+          "liver cancer"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A11']",
+        "status": "ok",
+        "summary": "SLC16A11 is a monocarboxylate transporter family gene mainly linked to metabolic phenotypes, not a well-established tumor suppressor in acute lymphoblastic leukemia. In NALM6-based CRISPR/MAGeCK screens, genes that inhibit tumor growth would typically show enrichment upon knockout, but SLC16A11 is not known to have this effect in ALL; thus it is unlikely to inhibit ALL tumor growth under the stated conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A11"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC16A11 is a monocarboxylate transporter family gene mainly linked to metabolic phenotypes, not a well-established tumor suppressor in acute lymphoblastic leukemia. In NALM6-based CRISPR/MAGeCK screens, genes that inhibit tumor growth would typically show enrichment upon knockout, but SLC16A11 is not known to have this effect in ALL; thus it is unlikely to inhibit ALL tumor growth under the stated conditions.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T07:07:49Z"
+  }
+}

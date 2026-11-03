@@ -1,0 +1,438 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00321",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC4A3 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A26"
+  },
+  "effective_genes": [
+    "SLC25A26",
+    "SLC4A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00321",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A26",
+        "SLC4A3"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            },
+            {
+              "gene": "SLC4A3",
+              "protein_function": "Mediates electroneutral exchange of chloride for bicarbonate ions",
+              "aliases": "AE3",
+              "transport_type": "E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC4A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC4 Bicarbonate  transporter family",
+              "target_properties": {
+                "name": "SLC4 Bicarbonate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC4A3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "AE3",
+              "target_properties": {
+                "name": "AE3"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "What can we learn about acid-base transporters in cancer from studying somatic mutations in their genes?",
+              "abstract": "Acidosis is a chemical signature of the tumour microenvironment that challenges intracellular pH homeostasis. The orchestrated activity of acid-base transporters of the solute-linked carrier (SLC) family is critical for removing the end-products of fermentative metabolism (lactate/H) and maintaining a favourably alkaline cytoplasm. Given the critical role of pH homeostasis in enabling cellular activities, mutations in relevant SLC genes may impact the oncogenic process, emerging as negatively or positively selected, or as driver or passenger mutations. To address this, we performed a pan-cancer analysis of The Cancer Genome Atlas simple nucleotide variation data for acid/base-transporting SLCs (ABT-SLCs). Somatic mutation patterns of monocarboxylate transporters (MCTs) were consistent with their proposed essentiality in facilitating lactate/H efflux. Among all cancers, tumours of uterine corpus endometrial cancer carried more ABT-SLC somatic mutations than expected from median tumour mutation burden. Among these, somatic mutations in SLC4A3 had features consistent with meaningful consequences on cellular fitness. Definitive evidence for ABT-SLCs as 'cancer essential' or 'driver genes' will have to consider microenvironmental context in genomic sequencing because bulk approaches are insensitive to pH heterogeneity within tumours. Moreover, genomic analyses must be validated with phenotypic outcomes (i.e. SLC-carried flux) to appreciate the opportunities for targeting acid-base transport in cancers.",
+              "doi": "10.1007/s00424-023-02876-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c2e9bfb32fd92ec7351720e84d97b2f6e0f92c0fbcc821cc25ccd4b69b52414c"
+              }
+            },
+            {
+              "title": "CAMK1 phosphoinositide signal-mediated protein sorting and transport network in human hepatocellular carcinoma (HCC) by biocomputation.",
+              "abstract": "We data-analyzed and constructed the high-expression CAMK1 phosphoinositide signal-mediated protein sorting and transport network in human hepatocellular carcinoma (HCC) compared with low-expression (fold change ≥ 2) no-tumor hepatitis/cirrhotic tissues (HBV or HCV infection) in GEO data set, using integration of gene regulatory network inference method with gene ontology (GO). Our result showed that CAMK1 transport subnetwork upstream KCNQ3, LCN2, NKX2_5, NUP62, SORT1, STX1A activated CAMK1, and downstream CAMK1-activated AFP, ENAH, KPNA2, SLC4A3; CAMK1 signal subnetwork upstream BRCA1, DKK1, GPSM2, LEF1, NR5A1, NUP62, SORT1, SSTR5, TBL3 activated CAMK1, and downstream CAMK1-activated MAP2K6, SFRP4, SSTR5, TSHB, UBE2C in HCC. We proposed that CAMK1 activated network enhanced endosome to lysosome transport, endosome transport via multivesicular body sorting pathway, Golgi to endosome transport, intracellular protein transmembrane transport, intracellular protein transport, ion transport, mRNA transport, plasma membrane to endosome transport, potassium ion transport, protein transport, vesicle-mediated transport, anion transport, intracellular transport, androgen receptor signaling pathway, cell surface receptor-linked signal transduction, hormone-mediated signaling, induction of apoptosis by extracellular signals, signal transduction by p53 class mediator resulting in transcription of p21 class mediator, signal transduction resulting in induction of apoptosis, phosphoinositide-mediated signaling, Wnt receptor signaling pathway, as a result of inducing phosphoinositide signal-mediated protein sorting, and transport in HCC. Our hypothesis was verified by CAMK1 functional regulation subnetwork containing positive regulation of calcium ion transport via voltage gated calcium channel, cell proliferation, DNA repair, exocytosis, I-kappaB kinase/NF-kappaB cascade, immunoglobulin-mediated immune response, mast cell activation, natural killer cell-mediated cytotoxicity directed against tumor cell target, protein ubiquitination, sodium ion transport, survival gene product activity, T cell-mediated cytotoxicity, transcription, transcription from RNA polymerase II promoter, transcription initiation from RNA polymerase II promoter, transcription via serum response element binding, exit from mitosis, ubiquitin ligase activity during mitotic cell cycle, regulation of angiogenesis, apoptosis, cell growth, cell proliferation, cyclin-dependent protein kinase activity, gene expression, insulin secretion, steroid biosynthesis, transcription from RNA polymerase II promoter, transcription from RNA polymerase III promoter, cell cycle, cell migration, DNA recombination, and protein metabolism; also by CAMK1 negative functional regulation subnetwork including negative regulation of apoptosis, cell proliferation, centriole replication, fatty acid biosynthesis, lipoprotein lipase activity, MAPK activity, progression through cell cycle, transcription, transcription from RNA polymerase II promoter, cell growth, phosphorylation, and ubiquitin ligase activity during mitotic cell cycle in HCC.",
+              "doi": "10.1007/s12013-014-0011-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3058bba6c4682fdd72444d404a0095975a28a21dd013513121c875297285eb1e"
+              }
+            },
+            {
+              "title": "Identification and characterization of novel compound variants in SLC25A26 associated with combined oxidative phosphorylation deficiency 28.",
+              "abstract": "Combined oxidative phosphorylation deficiency 28 (COXPD28) is associated with mitochondrial dysfunction caused by mutations in SLC25A26, the gene which encodes the mitochondrial S-adenosylmethionine carrier (SAMC) that responsible for the transport of S-adenosylmethionine (SAM) into the mitochondria. To identify and characterize pathogenic variants of SLC25A26 in a Chinese pedigree, provide a basis for clinical diagnosis and genetic counseling. We conducted a systematic analysis of the clinical characteristics of a female with COXPD28. Whole-exome and mitochondrial genome sequencing was applied for the genetic analysis, together with bioinformatic analysis of predicted consequences of the identified variant. A homotrimer model was built to visualize the affected region and predict possible outcomes of this mutation. Then a literature review was performed by online searching all cases reported with COXPD28. The novel compound heterozygous SLC25A26 variants (c.34G > C, p.A12P; c.197C > A; p.A66E) were identified in a Chinese patient with COXPD28. These two variants are located in the transmembrane region 1 and transmembrane region 2, respectively. As a member of the mitochondrial carrier family, the transmembrane region of SAMC is highly conserved. The variants were predicted to be pathogenic by in silico analysis and lead to a change in the protein structure of SAMC. And the change of the SAMC structure may lead to insufficient methylation and cause disease by affecting the SAM transport. The variants in this region probably resulted in a variable loss of mitochondrial SAMC transport function and cause the COXPD28. This study that further refine genotype-phenotype associations can provide disease prognosis with a basis and families with reproductive planning options.",
+              "doi": "10.1016/j.gene.2021.145891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "253c99a7b6948508df5208fa39cdfb9e1989f9691e1780308fe9c90dff97b9e6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A26 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC4A3 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC25A26', 'SLC4A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC4A3",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A26",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC25A26",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.8837",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A26_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC4A3": {
+          "status": "unavailable",
+          "gene": "SLC4A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A26": {
+          "status": "ok",
+          "gene": "SLC25A26",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.8837",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A26_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC4A3": {
+          "status": "unavailable",
+          "gene": "SLC4A3",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC4A3']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC4A3"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.3527,
+          "SLC4A3": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.72；法官理由: Two independent LLM channels converge on SLC25A26; mitochondrial SAM/SAH transport supports methylation, mt-tRNA and OXPHOS, making it more likely essential than SLC4A3's redundant ion exchange. Database evidence is indirect but mechanistic。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC4A3']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC4A3"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.3527,
+          "SLC4A3": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.64；法官理由: Evidence channel abstained. Two independent LLM channels converge on SLC25A26, supported by its essential mitochondrial SAM/SAH transport role, whereas SLC4A3 is a bicarbonate/chloride exchanger likely buffered in melanoma. Moderate confide。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC4A3']",
+        "status": "ok",
+        "summary": "SLC25A26 encodes the mitochondrial S-adenosylmethionine transporter, supporting methylation and metabolic programs that many cancer cells rely on for proliferation. In a CRISPR/MAGeCK 0-day vs 18-day screen, loss of SLC25A26 is more likely to reduce cell fitness and inhibit melanoma tumor growth than loss of SLC4A3, whose role is less directly tied to core proliferative dependency.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC4A3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A26 encodes the mitochondrial S-adenosylmethionine transporter, supporting methylation and metabolic programs that many cancer cells rely on for proliferation. In a CRISPR/MAGeCK 0-day vs 18-day screen, loss of SLC25A26 is more likely to reduce cell fitness and inhibit melanoma tumor growth than loss of SLC4A3, whose role is less directly tied to core proliferative dependency.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T17:42:20Z"
+  }
+}

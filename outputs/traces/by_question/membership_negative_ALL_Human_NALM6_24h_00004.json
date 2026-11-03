@@ -1,0 +1,372 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC25A19 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC25A19"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_24h_00004",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A19"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A19",
+              "protein_function": "Mediates the transport of thiamine pyrophosphates into mitochondria.",
+              "aliases": "Mitochondrial Thiamine Pyrophosphate Carrier",
+              "transport_type": "E / thiamine pyrophosphate, thiamine monophosphate, thiamine; pyrophosphate, (deoxy)nucleotide"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A19",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC25A19 drives colorectal cancer progression by regulating p53.",
+              "abstract": "Investigating the molecular mechanism of colorectal cancer (CRC), a common lethal malignancies worldwide, is of great clinical significance. Solute carrier family 25 member 19 (SLC25A19) is a member of the solute carrier family that contribute to cellular functions, including tumor biology. Recently, many studies have attention on uncovering the relationship of SLC25A19 with malignant cancers, but its precise involvement in the regulation of CRC has not been thoroughly understood. This study sought to uncover the role and mechanism of SLC25A19 in CRC development. The GEPIA database and immunohistochemical staining were utilized to detect the expression of SLC25A19 in CRC tissues. The functional influences of SLC25A19 on CRC cell phenotypes were evaluated through a series of assays including celigo cell count, colony formation, CCK-8, flow cytometry, wound healing, and transwell assays following knocking down SLC25A19. Subsequently, the xenograft tumor model was constructed to evaluate the effect of SLC25A19 on tumor growth in vivo. The underlying mechanisms of SLC25A19 silencing were investigated using the human phospho-kinase array. This study demonstrated the upregulation of SLC25A19 in CRC and its significant correlation with unfavorable prognosis in CRC patients. Suppression of SLC25A19 resulted in significant inhibition of cell proliferation, colony formation, and cell migration, alongside a boost in cell apoptosis. In vivo experiments revealed that silenced SLC25A19 displayed reduced growth rates and formed smaller xenografts. Mechanistically, the p53 pathway was found to be upregulated by SLC25A19 knockdown and mediated the function of SLC25A19. Consequently, SLC25A19 was identified as a novel molecule with key regulatory ability in CRC development.",
+              "doi": "10.1002/cam4.70253",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "94b35d1516275d1528feb572bb21170c8c74909f2ec8be51d71330b1308f8da4"
+              }
+            },
+            {
+              "title": "Factors determining sensitivity or resistance of tumor cell lines towards artesunate.",
+              "abstract": "Clinical oncology is still challenged by the development of drug resistance of tumors that result in poor prognosis for patients. There is an urgent necessity to understand the molecular mechanisms of resistance and to develop novel therapy strategies. Artesunate (ART) is an anti-malarial drug, which also exerts profound cytotoxic activity towards cancer cells. We first applied a gene-hunting approach using cluster and COMPARE analyses of microarray-based transcriptome-wide mRNA expression profiles. Among the genes identified by this approach were genes from diverse functional groups such as structural constituents of ribosomes (RPL6, RPL7, RPS12, RPS15A), kinases (CABC1, CCT2, RPL41), transcriptional and translational regulators (SFRS2, TUFM, ZBTB4), signal transducers (FLNA), control of cell growth and proliferation (RPS6), angiogenesis promoting factors (ITGB1), and others (SLC25A19, NCKAP1, BST1, DBH, FZD7, NACA, MTHFD2). Furthermore, we applied a candidate gene approach and tested the role of resistance mechanisms towards established anti-cancer drugs for ART resistance. By using transfected or knockout cell models we found that the tumor suppressor p16(INK4A) and the anti-oxidant protein, catalase, conferred resistance towards ART, while the oncogene HPV-E6 conferred sensitivity towards ART. The tumor suppressor p53 and its downstream protein, p21, as well as the anti-oxidant manganese-dependent superoxide dismutase did not affect cellular response to ART. In conclusion, our pharmacogenomic approach revealed that response of tumor cells towards ART is multi-factorial and is determined by gene expression associated with either ART sensitivity or resistance. At least some of the functional groups of genes (e.g. angiogenesis promoting factors, cell growth and proliferation-associated genes signal transducers and kinases) are also implicated in clinical responsiveness of tumors towards chemotherapy. It merits further investigation, whether ART is responsive in clinically refractory tumors and whether the genes identified in the present study also determine clinical responsiveness towards ART.",
+              "doi": "10.1016/j.cbi.2010.02.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "111d9314c772cf0d5ec1de9d0b7f845db93ee5e5804051c8c65c19780db2882f"
+              }
+            },
+            {
+              "title": "SLC25A19 is required for NADH homeostasis and mitochondrial respiration.",
+              "abstract": "Mitochondrial transporters facilitate the translocation of metabolites between the cytoplasm and mitochondria and are critical for mitochondrial functional integrity. Although many mitochondrial transporters are associated with metabolic diseases, how they regulate mitochondrial function and their metabolic contributions at the cellular level are largely unknown. Here, we show that mitochondrial thiamine pyrophosphate (TPP) transporter SLC25A19 is required for mitochondrial respiration. SLC25A19 deficiency leads to reduced cell viability, increased integrated stress response (ISR), enhanced glycolysis and elevated cell sensitivity to 2-deoxyglucose (2-DG) treatment. Through a series of biochemical assays, we found that the depletion of mitochondrial NADH is the primary cause of the impaired mitochondrial respiration in SLC25A19 deficient cells. We also showed involvement of SLC25A19 in regulating the enzymatic activities of complexes I and III, the tricarboxylic acid (TCA) cycle, malate-aspartate shuttle and amino acid metabolism. Consistently, addition of idebenone, an analog of coenzyme Q10, restores mitochondrial respiration and cell viability in SLC25A19 deficient cells. Together, our findings provide new insight into the functions of SLC25A19 in mitochondrial and cellular physiology, and suggest that restoring mitochondrial respiration could be a novel strategy for treating SLC25A19-associated disorders.",
+              "doi": "10.1016/j.freeradbiomed.2024.06.019",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "85dadb3293c5c5b4c97a492c3cb465d50b90da33bd29efe213beaa2cc5485676"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of mitochondrial solute carrier family 25 (SLC25) identifies member 19 (SLC25A19) as a regulatory factor in hepatocellular carcinoma.",
+              "abstract": "The mitochondrial solute carrier family 25 (SLC25) is known to play a pivotal role in oncogenesis, yet its specific involvement in hepatocellular carcinoma (HCC) remains poorly elucidated. In this study, we performed a clustering analysis of HCC patients in the Cancer Genome Atlas database based on the expression levels of SLC25 members, and conducted clinical feature analysis for each patient within the clusters. Subsequently, we developed a prognostic model using a Lasso regression approach with SLC25A19, SLC25A49, and SLC25A51 as features, and generated a risk score for each HCC patient. We then identified SLC25A19 as a potential prognostic marker for HCC through single-cell analysis, and validated this finding using in vitro and in vivo experiments. Our results revealed significant differences in the expression of most SLC25 family members in HCC patients, enabling the stratification of patients into three clusters, with those in cluster 1 exhibiting the most favorable prognosis and showing a correlation with enhanced immune infiltration. The risk scores derived from the features SLC25A19, SLC25A49, and SLC25A51 effectively predicted the prognosis of HCC patients, with area under the curve (AUC) values exceeding 0.7 in the test group. Single-cell analysis further demonstrated h eightened expression of SLC25A19 in the immune microenvironment of HCC, and in vitro experiments indicated that SLC25A19 may regulate the proliferation, migration, invasion, cycle, and apoptosis of liver cancer cells through the Wnt pathway. In the HepG2 animal model, overexpression of SLC25A19 significantly promotes tumor growth, while knockdown inhibits tumor growth. Analysis of patient tumor tissues shows that SLC25A19 is highly expressed in liver cancer tissues and is associated with CD8 T cell infiltration. In conclusion, our comprehensive analysis of the role of SLC25 in HCC unveiled SLC25A19 as a potential regulatory factor in HCC.",
+              "doi": "10.1016/j.gene.2025.149299",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bb75480306db9ee3c3e199a42a5ce0a1e1c97185b3d2e86b5fe3f9ed12b33df6"
+              }
+            },
+            {
+              "title": "SLC25A19 is a novel prognostic biomarker related to immune invasion and ferroptosis in HCC.",
+              "abstract": "SLC25A19 is a mitochondrial thiamine pyrophosphate (TPP) carrier that mediates TPP entry into the mitochondria. SLC25A19 has been recognized to play a crucial role in many metabolic diseases, but its role in cancer has not been clearly reported. Based on clinical data from The Cancer Genome Atlas (TCGA), the following parameters were analyzed among HCC patients: SLC25A19 expression, enrichment analyses, immune infiltration, ferroptosis and prognosis analyses. In vitro, the SLC25A19 high expression was validated by qRT-PCR and Immunohistochemistry. Subsequently, a series of cell function experiments, including CCK8, EdU, clone formation, trans-well and scratch assays, were conducted to illustrate the effect of SLC25A19 on the growth and metastasis of cancer cells. Meanwhile, indicators related to ferroptosis were also detected. SCL25A19 is highly expressed in HCC and predicts a poor prognosis. Elevated SLC25A19 expression in HCC patients was markedly associated with T stage, pathological status (PS), tumor status (TS), histologic grade (HG), and AFP. Our results indicate that SLC25A19 has a generally good prognosis predictive and diagnostic ability. The results of gene enrichment analyses showed that SLC25A19 is significantly correlated with immune infiltration, fatty acid metabolism, and ferroptosis marker genes. In vitro experiments have confirmed that silencing SLC25A19 can significantly inhibit the proliferation and migration ability of cancer cells and induce ferroptosis in HCC. In conclusion, these findings indicate that SLC25A19 is novel prognostic biomarker related to immune invasion and ferroptosis in HCC, and it is an excellent candidate for therapeutic target against HCC.",
+              "doi": "10.1016/j.intimp.2024.112367",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "eca0f23263d4112c4575b38d26fa3360fce1588ff5b810d3609c3bc5c76c8ee8"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A19 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC25A19 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A19']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A19",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A19",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A19",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A19": {
+          "status": "unavailable",
+          "gene": "SLC25A19",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A19": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A19",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A19']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A19 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A19"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A19": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A19 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A19']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A19 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A19"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A19": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A19 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A19']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A19"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T05:34:20Z"
+  }
+}

@@ -1,0 +1,379 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00256",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC4A11 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC4A11"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00256",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC4A11"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC4A11",
+              "protein_function": "Multifunctional transporter with impact in cell morphology and differentiation.",
+              "aliases": "NaBC1, BTR1, Sodium-Coupled Borate Cotransporter 1",
+              "transport_type": "C"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC4A11",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC4 Bicarbonate  transporter family",
+              "target_properties": {
+                "name": "SLC4 Bicarbonate  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Deficiency in the α1 subunit of Na+/K+-ATPase enhances the anti-proliferative effect of high osmolality in nucleus pulposus intervertebral disc cells.",
+              "abstract": "Intervertebral disc cells are constantly exposed to a hyperosmotic environment. Among cellular responses towards this stress is the inhibition of proliferation through the activation of p38 MAPK and p53. In an effort to further elucidate the biochemical pathways triggered by hyperosmotic stress, we assessed the high osmolality-induced transcriptional changes of bovine nucleus pulposus cells using whole-genome arrays. A 5- and a 24-h hyperosmotic treatment led to the differential expression of >100 and >200 genes, respectively, including nine genes encoding transporters (SLC4A11, SLC5A3, ATP1A1, SLC38A2, KCNK17, KCTD20, KCTD11, SLC7A5, and CLCA2). Differences in the transcriptional profile of these selected genes, as indicated by the microarrays experiments, were validated by qRT-PCR in 2D and 3D cell cultures, under hyperosmolar salt and sorbitol conditions, revealing the presence of a common triggering signal for osmotic adaptation. The key signaling molecules p38 MAPK and p53 were demonstrated to differently participate in the regulation of the aforementioned transporters. Finally, siRNA-mediated knocking-down of each one of the three transporters with the highest and sustained over-expression (i.e., SLC4A11, SLC5A3, and ATP1A1) had a distinct outcome on the transcriptional profile of the other transporters, on p38 MAPK and p53 phosphorylation and consequently on cell cycle progression. The inhibition of ATP1A1 had the most prominent effect on the transcription of the rest of the transporters and was found to enhance the anti-proliferative effect of hyperosmotic conditions through an increased G2/M cell cycle block, ascribing to this pump a central role in the osmoregulatory response of nucleus pulposus cells.",
+              "doi": "10.1002/jcp.25040",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "305a6b8c646cdbe79b4b19d68652d42a8a114845e8e1e718e01976f51b0fba05"
+              }
+            },
+            {
+              "title": "Ammonia sensitive SLC4A11 mitochondrial uncoupling reduces glutamine induced oxidative stress.",
+              "abstract": "SLC4A11 is a NH sensitive membrane transporter with H channel-like properties that facilitates Glutamine catabolism in Human and Mouse corneal endothelium (CE). Loss of SLC4A11 activity induces oxidative stress and cell death, resulting in Congenital Hereditary Endothelial Dystrophy (CHED) with corneal edema and vision loss. However, the mechanism by which SLC4A11 prevents ROS production and protects CE is unknown. Here we demonstrate that SLC4A11 is localized to the inner mitochondrial membrane of CE and SLC4A11 transfected PS120 fibroblasts, where it acts as an NH-sensitive mitochondrial uncoupler that enhances glutamine-dependent oxygen consumption, electron transport chain activity, and ATP levels by suppressing damaging Reactive Oxygen Species (ROS) production. In the presence of glutamine, Slc4a11 (KO) mouse CE generate significantly greater mitochondrial superoxide, a greater proportion of damaged depolarized mitochondria, and more apoptotic cells than WT. KO CE can be rescued by MitoQ, reducing NH production by GLS1 inhibition or dimethyl αKetoglutarate supplementation, or by BAM15 mitochondrial uncoupling. Slc4a11 KO mouse corneal edema can be partially reversed by αKetoglutarate eye drops. Moreover, we demonstrate that this role for SLC4A11 is not specific to CE cells, as SLC4A11 knockdown in glutamine-addicted colon carcinoma cells reduced glutamine catabolism, increased ROS production, and inhibited cell proliferation. Overall, our studies reveal a unique metabolic mechanism that reduces mitochondrial oxidative stress while promoting glutamine catabolism.",
+              "doi": "10.1016/j.redox.2019.101260",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bd5675c9f556880b6db841ee599e4445c64011a15cdcee60af07b11e91f0b4a7"
+              }
+            },
+            {
+              "title": "SLC4A11 depletion impairs NRF2 mediated antioxidant signaling and increases reactive oxygen species in human corneal endothelial cells during oxidative stress.",
+              "abstract": "Corneal endothelial dystrophy is a progressive disease with gradual loss of vision and characterized by degeneration and dysfunction of corneal endothelial cells. Mutations in SLC4A11, a Na dependent OH transporter, cause congenital hereditary endothelial dystrophy (CHED) and Fuchs' endothelial corneal dystrophy (FECD), the two most common forms of endothelial degeneration. Along with genetic factors, oxidative stress plays a role in pathogenesis of several corneal diseases. In this study we looked into the role of SLC4A11 in antioxidant stress response in human corneal endothelial cells (HCEnC). We found increased expression of SLC4A11 in presence of oxidative stress. Depletion of SLC4A11 using targeted siRNA, caused an increase in reactive oxygen species, cytochrome c, lowered mitochondrial membrane potential, and reduced cell viability during oxidative stress. Moreover, SLC4A11 was found to be necessary for NRF2 mediated antioxidant gene expression in HCEnC. On the other hand, over expression of SLC4A11 reduces reactive oxygen species levels and increases cell viability. Lastly, CHED tissue specimens show evidence of oxidative stress and reduced expression of NRF2. In conclusion, our data suggests a possible role of SLC4A11 in regulating oxidative stress, and might be responsible for both the etiology and treatment of corneal endothelial dystrophy.",
+              "doi": "10.1038/s41598-017-03654-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f9a0786b7851587669915f97ddaae28907a032310124320d57e7e5d5af8c926e"
+              }
+            },
+            {
+              "title": "Elevated SLC4A11 expression promotes OV progression via interaction with EGFR.",
+              "abstract": "Ovarian cancer (OV) is one of the most prevalent and lethal gynecological malignancies worldwide, often diagnosed at advanced stages due to its asymptomatic early progression. Despite standard treatments, including tumor reduction surgery and platinum-based chemotherapy, the majority of patients face high risks of recurrence and metastasis, underscoring the need for a deeper understanding of the molecular mechanisms driving OV progression. This study focused on Solute Carrier Family 4 Member 11 (SLC4A11), a gene highly expressed in OV, to explore its functional role and underlying mechanisms. Analysis of public datasets (TCGA and GEO) revealed that SLC4A11 expression was significantly elevated in OV tissues compared to normal tissues and was associated with poorer overall survival and advanced clinical stages. Functional in vitro assays, including colony formation, migration, and CCK-8 experiments, demonstrated that SLC4A11 overexpression enhanced OV cell proliferation and migration, while its knockdown inhibited these processes. In vivo studies using a subcutaneous xenograft mouse model further validated the role of SLC4A11 in promoting tumor growth. Mechanistically, SLC4A11 was found to directly interact with the Epidermal growth factor receptor (EGFR), activating the PI3K/AKT signaling pathway, a critical driver of cancer progression. These findings highlight SLC4A11 as a key regulator of OV development and a potential therapeutic target, offering new insights for improving treatment strategies and patient outcomes in ovarian cancer.",
+              "doi": "10.1038/s41598-025-10255-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "563f07ff422a88e69084e5addafb1d37d2b186a18abdf0813d17949e8b103185"
+              }
+            },
+            {
+              "title": "Depletion of SLC4A11 causes cell death by apoptosis in an immortalized human corneal endothelial cell line.",
+              "abstract": "To investigate the effects of SLC4A11 gene depletion in human corneal endothelial cells. To achieve stable downregulation of SLC4A11 gene expression in immortalized human corneal endothelial cells (HCECs), short-hairpin RNA (shRNA) targeted against SLC4A11 was used. Cell growth and viability were determined using the real-time cell analyzer and trypan blue staining respectively. Apoptosis was investigated by Annexin V and TUNEL assays. Alterations in apoptotic gene expression following SLC4A11 silencing were determined using the RT(2)Profiler PCR array for human apoptosis while activation of the apoptotic pathway was ascertained by western analysis. SLC4A11 silencing in HCECs could be achieved by stable expression of shRNA targeted against SLC4A11. SLC4A11 knockdown suppressed HCEC growth and reduced HCEC viability compared to the control. This reduction in cell growth is associated with increased apoptosis in SLC4A11-silenced cells. Our data suggest that the reduction of cell number with time in SLC4A11-depleted HCECs is due to an increase in cell death by apoptosis. This suggests that SLC4A11 is necessary for cell survival and may explain the pathologic corneal endothelial cell loss in endotheliopathies due to SLC4A11 mutations.",
+              "doi": "10.1167/iovs.11-8724",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b3700a38379827c2aae3d01881e7e2a61f2f9ab20bacfb7b24ee63a99aa32a3b"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC4A11 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC4A11 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unavailable, de=error）；候选基因=['SLC4A11']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC4A11",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC4A11",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC4A11.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC4A11",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC4A11": {
+          "status": "ok",
+          "gene": "SLC4A11",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC4A11.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC4A11": {
+          "status": "unavailable",
+          "gene": "SLC4A11",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC4A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.50 -> P(必需)=0.619 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A11"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A11": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.7；法官理由: E conflates essentiality with drug-resistance inhibition. Observations only link SLC4A11 to osmotic transport, not melanoma resistance. Two independent LLM votes reject unsupported claim; no factual support for inhibition. Vote False.。原证据通道判定: winner=None answer=True conf=0.619（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC4A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.50 -> P(必需)=0.619 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A11"
+        ],
+        "confidence": 0.85,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A11": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.85；法官理由: Evidence channel infers essentiality, not inhibition of melanoma drug resistance; observations lack melanoma CRISPR drug-resistance data. Two independent LLM votes correctly reject conflating viability depletion with anti-resistance.。原证据通道判定: winner=None answer=True conf=0.619（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A11']",
+        "status": "ok",
+        "summary": "SLC4A11 主要作为钠/硼酸盐转运体参与角膜相关功能，现有参数化知识中缺乏其作为黑色素瘤肿瘤药物耐药抑制因子的明确证据；在该实验条件下将其判定为抑制黑色素瘤药物耐药缺乏可靠支持，因此选择 false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A11"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC4A11 主要作为钠/硼酸盐转运体参与角膜相关功能，现有参数化知识中缺乏其作为黑色素瘤肿瘤药物耐药抑制因子的明确证据；在该实验条件下将其判定为抑制黑色素瘤药物耐药缺乏可靠支持，因此选择 false。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:48:56Z"
+  }
+}

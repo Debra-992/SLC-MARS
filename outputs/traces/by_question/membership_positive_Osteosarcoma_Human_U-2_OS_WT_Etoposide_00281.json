@@ -1,0 +1,374 @@
+{
+  "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00281",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nIs SLC25A26 promote Osteosarcoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Osteosarcoma",
+    "cell_line": "U-2 OS",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC25A26"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00281",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A26"
+      ],
+      "requested_context": {
+        "cancer": "Osteosarcoma",
+        "cell_line": "U-2 OS",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Identification and characterization of novel compound variants in SLC25A26 associated with combined oxidative phosphorylation deficiency 28.",
+              "abstract": "Combined oxidative phosphorylation deficiency 28 (COXPD28) is associated with mitochondrial dysfunction caused by mutations in SLC25A26, the gene which encodes the mitochondrial S-adenosylmethionine carrier (SAMC) that responsible for the transport of S-adenosylmethionine (SAM) into the mitochondria. To identify and characterize pathogenic variants of SLC25A26 in a Chinese pedigree, provide a basis for clinical diagnosis and genetic counseling. We conducted a systematic analysis of the clinical characteristics of a female with COXPD28. Whole-exome and mitochondrial genome sequencing was applied for the genetic analysis, together with bioinformatic analysis of predicted consequences of the identified variant. A homotrimer model was built to visualize the affected region and predict possible outcomes of this mutation. Then a literature review was performed by online searching all cases reported with COXPD28. The novel compound heterozygous SLC25A26 variants (c.34G > C, p.A12P; c.197C > A; p.A66E) were identified in a Chinese patient with COXPD28. These two variants are located in the transmembrane region 1 and transmembrane region 2, respectively. As a member of the mitochondrial carrier family, the transmembrane region of SAMC is highly conserved. The variants were predicted to be pathogenic by in silico analysis and lead to a change in the protein structure of SAMC. And the change of the SAMC structure may lead to insufficient methylation and cause disease by affecting the SAM transport. The variants in this region probably resulted in a variable loss of mitochondrial SAMC transport function and cause the COXPD28. This study that further refine genotype-phenotype associations can provide disease prognosis with a basis and families with reproductive planning options.",
+              "doi": "10.1016/j.gene.2021.145891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "253c99a7b6948508df5208fa39cdfb9e1989f9691e1780308fe9c90dff97b9e6"
+              }
+            },
+            {
+              "title": "SLC25A26 overexpression impairs cell function via mtDNA hypermethylation and rewiring of methyl metabolism.",
+              "abstract": "Cancer cells down-regulate different genes to give them a selective advantage in invasiveness and/or metastasis. The SLC25A26 gene encodes the mitochondrial carrier that catalyzes the import of S-adenosylmethionine (SAM) into the mitochondrial matrix, required for mitochondrial methylation processes, and is down-regulated in cervical cancer cells. In this study we show that SLC25A26 is down-regulated due to gene promoter hypermethylation, as a mechanism to promote cell survival and proliferation. Furthermore, overexpression of SLC25A26 in CaSki cells increases mitochondrial SAM availability and promotes hypermethylation of mitochondrial DNA, leading to decreased expression of key respiratory complex subunits, reduction of mitochondrial ATP and release of cytochrome c. In addition, increased SAM transport into mitochondria leads to impairment of the methionine cycle with accumulation of homocysteine at the expense of glutathione, which is strongly reduced. All these events concur to arrest the cell cycle in the S phase, induce apoptosis and enhance chemosensitivity of SAM carrier-overexpressing CaSki cells to cisplatin.",
+              "doi": "10.1111/febs.14028",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a35cbdfba4cc47f6c38bf04172b57648ed17274cd6425a061da8d7455fb77a3f"
+              }
+            },
+            {
+              "title": "FBXO24 targets SLC25A26 for K6-linked polyubiquitylation to maintain mitochondrial function during spermiogenesis.",
+              "abstract": "Asthenozoospermia is one of the major causes of male infertility, typically resulting from malformed flagella and dysfunctional mitochondria. However, the pathogenic mechanisms underlying asthenozoospermia remain unclear. Here, we show that FBXO24, a F-box protein within the SCF E3 ubiquitin ligase complex, is required for maintaining mitochondrial function and ATP production during spermiogenesis. Using Fbxo24 knockout mice, we demonstrate that the depletion of FBXO24 leads to male infertility due to a malformed sperm head and severe motility defects. The decreased motility resulted from dysfunction of mitochondria that was characterized by disorganized mitochondrial clustering, reduced mitochondrial membrane potential and elevated reactive oxygen species levels. Based on quantitative proteomics, we identified SLC25A26, a mitochondrial S-adenosylmethionine transporter, as a previously unreported substrate for FBXO24. Mechanistically, FBXO24 mediates K6-linked polyubiquitylation of SLC25A26 at lysine residue 31, targeting it for degradation. Elevated SLC25A26 induced mitochondrial fragmentation, suppressed glycolysis and oxidative phosphorylation, and decreased ATP production. All these results suggest that FBXO24 safeguards mitochondrial integrity by controlling SLC25A26 stability, ensuring ATP production for sperm motility. It also suggests that some mutations of FBXO24 might be associated with asthenozoospermia in human.",
+              "doi": "10.1242/dev.204761",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ad9c9f2aea9034528fe49b0736b75581f7411c8ddab68d39fd16a4342cbf52f7"
+              }
+            },
+            {
+              "title": "[Identification and functional analysis of combined oxidative phosphorylation deficiency 28 gene mutation].",
+              "abstract": "To report a case of combined oxidative phosphorylation deficiency 28 (COXPD28) in China, identified the pathogenic mutation and explored the pathogenic mechanism preliminarily.  The clinical characteristics of a patient with COXPD28 were retrospectively analyzed and the pathogenic mutations were identified by mitochondrial gene sequencing and whole exome sequencing. The wild-type and mutant plasmids of pathogenic genes were constructed, and effect of mutation on protein expression by quantitative real-time PCR (qPCR) and Western blot were evaluated. Statistical methods mainly used one-way ANOVA and LSD test.  A 21 year old female patient presented with lactic acid poisoning due to repeated chest distress and wheezing since childhood. The sequencing of the whole exon group gene found that solute carrier family 25 member 26 (SLC25A26) gene had a compound heterozygous mutation (c.34G>C, p.A12P; c.197C>A, p.A66E), which was the first report in China.  function test showed that the expression levels of SLC25A26 mRNA and S-adenosylmethionine carrier (SAMC) protein in cells transfected with SLC25A26 mutant plasmid were significantly lower than those transfected with wild type plasmid. The p.A66E mutant plasmid reduced the expression level of SLC25A26 mRNA and SAMC protein to 6% and 26% of wild type plasmids respectively (both <0.001), while p.A12P mutant plasmid decreased to 62% and 82% of wild type plasmids respectively (<0.001, =0.044). When the double mutant (p.A66E+p.A12P) plasmids were co-transfected, the expression levels of SLC25A26 mRNA and SAMC protein decreased to 47% and 57% of the wild type plasmids, respectively (<0.001, =0.001).  The pathogenic mutation gene of this patient with COXPD28 is SLC25A26 gene mutation (p.A66E, p.A12P), which causes the decrease of SLC25A26 expression level, mitochondrial oxidative phosphorylation dysfunction, and induces COXPD28.",
+              "doi": "10.3760/cma.j.cn112138-20211208-00875",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "62d6cd78c35420e659c702e015739297cb80f60d5a9db384e45381f69228d073"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A26 cancer=Osteosarcoma bucket=membership Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nIs SLC25A26 promote Osteosarcoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A26']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Osteosarcoma(OS)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A26",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A26",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A26": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A26",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A26']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A26 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A26"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No direct CRISPR resistance evidence; SLC25A26 appears essential for baseline mitochondrial SAM transport, not etoposide enrichment. E’s essentiality signal does not establish drug-resistance promotion. Two independent LLM votes support fal。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A26']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A26 的直接证据主要来自宫颈癌等上皮性肿瘤，而非骨肉瘤；但其跨癌种生物学机制高度可迁移：SLC25A26 是线粒体 SAM/SAH 转运体，过高活性会增加线粒体 SAM 可用性、促进 mtDNA 异常甲基化、抑制呼吸链复合物表达、降低 ATP、诱发线粒体损伤和细胞凋亡，并增强化疗敏感性。骨肉瘤 U-2 OS 对线粒体代谢、氧化应激和 etoposide 诱导凋亡同样敏感，因此可类比推断：SLC25A26 更可能促进药物敏感性而非药物耐药；其缺失或低表达可能反而帮助肿瘤细胞在化疗压力下存活。 | 目标癌种 Osteosarcoma 缺乏直接图谱邻近/组学/计算证据，但文献背景一致显示 SLC25A26 过表达会损害细胞功能并增强化疗敏感性，而宫颈癌中其启动子甲基化下调被认为有利于细胞存活和增殖。结合 FBXO24 介导 SLC25A26 降解以维持线粒体功能、ATP 产生和避免氧化应激的证据，SLC25A26 更可能作为线粒体应激/凋亡敏感化因子，而不是肿瘤药物耐药促进因子。因此对‘SLC25A26 是否促进骨肉瘤肿瘤药物耐药’判断为 false。由于是跨癌种类推且无骨肉瘤直接 CRISPR 证据，置信度中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A26"
+        ],
+        "confidence": 0.43,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC25A26 的直接证据主要来自宫颈癌等上皮性肿瘤，而非骨肉瘤；但其跨癌种生物学机制高度可迁移：SLC25A26 是线粒体 SAM/SAH 转运体，过高活性会增加线粒体 SAM 可用性、促进 mtDNA 异常甲基化、抑制呼吸链复合物表达、降低 ATP、诱发线粒体损伤和细胞凋亡，并增强化疗敏感性。骨肉瘤 U-2 OS 对线粒体代谢、氧化应激和 etoposide 诱导凋亡同样敏感，因此可类比推断：SLC25A26 更可能促进药物敏感性而非药物耐药；其缺失或低表达可能反而帮助肿瘤细胞在化疗压力下存活。 | 目标癌种 Osteosarcoma 缺乏直接图谱邻近/组学/计算证据，但文献背景一致显示 SLC25A26 过表达会损害细胞功能并增强化疗敏感性，而宫颈癌中其启动子甲基化下调被认为有利于细胞存活和增殖。结合 FBXO24 介导 SLC25A26 降解以维持线粒体功能、ATP 产生和避免氧化应激的证据，SLC25A26 更可能作为线粒体应激/凋亡敏感化因子，而不是肿瘤药物耐药促进因子。因此对‘SLC25A26 是否促进骨肉瘤肿瘤药物耐药’判断为 false。由于是跨癌种类推且无骨肉瘤直接 CRISPR 证据，置信度中等偏低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A26']",
+        "status": "ok",
+        "summary": "SLC25A26 is primarily known as a mitochondrial phosphatidylcholine transporter and is not a well-established promoter of osteosarcoma drug resistance to etoposide; under U-2 OS MAGeCK WT vs WT+Etoposide conditions, there is no strong native-knowledge basis to classify it as a tumor-drug-resistance promoting gene.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A26"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A26 is primarily known as a mitochondrial phosphatidylcholine transporter and is not a well-established promoter of osteosarcoma drug resistance to etoposide; under U-2 OS MAGeCK WT vs WT+Etoposide conditions, there is no strong native-knowledge basis to classify it as a tumor-drug-resistance promoting gene.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:30:22Z"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "qid": "membership_negative_Melanoma_Human_A375_00238",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nIs SLC24A5 inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "A375",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 6days vs Crispr 10days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC24A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Human_A375_00238",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC24A5"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "A375",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 6days vs Crispr 10days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC24A5",
+              "protein_function": "Calcium, potassium:sodium antiporter that transports 1 Ca(2+) and 1 K(+) to the melanosome in exchange for 4 cytoplasmic Na(+)",
+              "aliases": "NCKX5, JSX, OCA6",
+              "transport_type": "E / 4 Na+, Ca2+, K+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC24A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC24 Na+/(Ca2+-K+)  exchanger family",
+              "target_properties": {
+                "name": "SLC24 Na+/(Ca2+-K+)  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Molecular genetic response of Xiphophorus maculatus-X. couchianus interspecies hybrid skin to UVB exposure.",
+              "abstract": "The phenotypic and genetic similarities between Xiphophorus and human melanoma render Xiphophorus a useful animal model for studying the genetic basis of melanoma etiology. In the Xiphophorus model, melanoma has been shown to be inducible by ultraviolet light (UVB) exposure among interspecies hybrids, but not in parental line fish similarly treated. This leads to questions of what genes are responsive to UVB exposure in the skin of the interspecies hybrids, as well as how parental alleles in hybrids may be differentially regulated and the potential roles they may play in induced melanomagenesis. To address these questions, we produced X. maculatus Jp 163 B×X. couchianus (Sp-Couch) F1 hybrid fish, exposed both hybrid and parental fish to UVB, and performed gene expression profiling of the skin using RNA-Seq methodology. We characterized a group of unique UVB-responsive genes in Sp-Couch hybrid including dct, pmela, tyr, tyrp1a, slc2a11b, rab38a, rab27, tspan10, slc45a2, oca2, slc24a5, ptn and mitfa. These genes are associated with melanin production and melanocyte proliferation. They were also up-regulated in Sp-Couch hybrid, indicating that their UVB response is hybridization initiated. In the hybrid, several melanin production and pigmentation related genes, including slc45a2, tspan10, dct, slc2a11b and ptn showed either X. couchianus or X. maculatus allele specific expression. The finding that these genes exhibit allele specific expression regulatory mechanisms in Sp-Couch hybrids, but do not exhibit a corresponding UVB response in either one of the parental fishes, may suggest UVB targets and imply mechanisms regarding the susceptibility of Sp-Couch to induced melanomagenesis.",
+              "doi": "10.1016/j.cbpc.2015.07.011",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A5"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2a23479621303554ab523f9a68c3ea04c0f505e7e68accf097cf901141644f0a"
+              }
+            },
+            {
+              "title": "The influences of genes, the environment, and social factors on the evolution of skin color diversity in India.",
+              "abstract": "Skin color is a highly visible and variable trait across human populations. It is not yet clear how evolutionary forces interact to generate phenotypic diversity. Here, we sought to unravel through an integrative framework the role played by three factors-demography and migration, sexual selection, and natural selection-in driving skin color diversity in India. Skin reflectance data were collected from 10 diverse socio-cultural populations along the latitudinal expanse of India, including both sexes. We first looked at how skin color varies within and between these populations. Second, we compared patterns of sexual dimorphism in skin color. Third, we studied the influence of ultraviolet radiation on skin color throughout India. Finally, we attempted to disentangle the interactions between these factors in the context of available genetic data. We found that the relative importance of these forces varied between populations. Social factors and population structure have played a stronger role than natural selection in shaping skin color diversity across India. Phenotypic overprinting resulted from additional genetic mutations overriding the skin lightening effect of variants such as the SLC24A5 rs1426654-A allele in some populations, in the context of the variable influence of sexual selection. Furthermore, specific genotypes are not associated reliably with specific skin color phenotypes. This result has relevance for DNA forensics and ancient DNA research. India is a crucible of macro- and micro-evolutionary forces, and the complex interactions of physical and social forces are visible in the patterns of skin color seen today in the country.",
+              "doi": "10.1002/ajhb.23170",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "34163a179e1a293b835dcb73f212d78fa02473adea1ef11724645a8baed79d17"
+              }
+            },
+            {
+              "title": "Transcriptome-based screening and validation of key genes for wool color in cashmere goats.",
+              "abstract": "Colored wool from cashmere goats is increasingly popular among consumers, but the transcriptomic differences between coat colors are poorly understood. This study aimed to screen for coat color regulation-associated genes in cashmere goats to ascertain their underlying molecular mechanisms. Transcriptomic sequencing of skin tissues from black (BC), brown (YC), and white cashmere (WC) goats was performed. Immunohistochemistry and western blotting were used to validate SLC24A4 and DCT expression, two essential genes identified for coat color determination. We identified 6,518 differentially expressed genes (DEGs) in the BC vs. WC group (3,919 upregulated, 2,599 downregulated). Next, 5,593 DEGs were identified in the YC vs. WC group (3,629 upregulated, 1,964 downregulated). Finally, 4,538 DEGs were expressed in both groups, with 1,980 and 1,055 DEGs exclusively expressed in either group. Functions and pathways associated with hair color were enriched, including melanosomes, melanocyte migration, melanin biosynthesis processes and functions, and melanogenesis pathways. TYRP1, SLC24A4, PMEL, OCA2, and DCT were significantly upregulated in BC goat skin, while ASIP was significantly upregulated in YC skin. Additionally, KIT, POMC, SLC24A5, Wnt3a, and EDN3 were DEGs for different coat colors. Immunohistochemistry revealed SLC24A4 and DCT expression in dermal papillae, inner and outer root sheaths, and the hair follicle matrix. Western blotting showed that SLC24A4 protein levels were highest in BC goat skin. DCT protein levels were also highest in BC goat skin, albeit not significantly. These results further our understanding of coat color regulation in cashmere goats, establishing a foundation for their molecular breeding.",
+              "doi": "10.1007/s13258-024-01562-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e8b73a4d6ab0081ce08a44cc4b9e9a1f4edadcc99efd4653b753652df9e18721"
+              }
+            },
+            {
+              "title": "Candidate genes underlying hypomelanistic morphs in squamate reptiles.",
+              "abstract": "Skin coloration is crucial for the survival of animals and ranges from spectacular colourful displays used to attract a mate to cryptic camouflage used to avoid predators. Among the three main types of chromatophores, melanophores are the most widespread in vertebrates and can set the skin tone by the amount of melanin they produce and store in dedicated vesicles, the melanosomes. Mutations associated with melanophore differentiation and maturation result in hypomelanistic and amelanistic phenotypes, both extensively studied in mammals but less so in snakes and lizards. Here, we characterise at the genomic, transcriptomic, and histological level, the Hypomelanistic corn snake morph and three hypomelanistic leopard gecko morphs. To minimize bias in studying leopard gecko colour morphs, we first assembled a chromosome-level genome from a wild-type individual, in terms of coloration. We propose that candidate mutations in three melanogenesis factors generate these phenotypes: (i) tyrosinase (TYR), an essential enzyme for melanin synthesis, (ii) NCKX5 (SLC24A5), an ion exchanger involved in melanosome maturation and (iii) the P protein (OCA2), a transmembrane transporter for tyrosine. Our extended bulk RNA sequencing analyses show that additional pigmentation-related genes, affecting melanin production, melanosome motility and melanophore migration, are dysregulated in the embryonic skin of the mutated animals. This observation highlights the likely associations among the corresponding pathways and is in line with our electron microscopy imaging results. Indeed, the subcellular structure of melanophores is uniquely altered at each of the four morphs and likely reflects a multigenic effect. These findings demonstrate that conserved pigmentation genes can produce species-specific effects, underscoring the modular nature of skin coloration in vertebrates. Our work establishes reptiles as comparative models for studying pigment cell biology and reveals evolutionary flexibility in the genetic regulation of melanogenesis.",
+              "doi": "10.1093/genetics/iyaf236",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c549ab788f0f4172b36d92ed6c6809d88ab0ab221b3048ca1663fec24eec02f2"
+              }
+            },
+            {
+              "title": "Population Genetics and Signatures of Selection in Early Neolithic European Farmers.",
+              "abstract": "Human expansion in the course of the Neolithic transition in western Eurasia has been one of the major topics in ancient DNA research in the last 10 years. Multiple studies have shown that the spread of agriculture and animal husbandry from the Near East across Europe was accompanied by large-scale human expansions. Moreover, changes in subsistence and migration associated with the Neolithic transition have been hypothesized to involve genetic adaptation. Here, we present high quality genome-wide data from the Linear Pottery Culture site Derenburg-Meerenstieg II (DER) (N = 32 individuals) in Central Germany. Population genetic analyses show that the DER individuals carried predominantly Anatolian Neolithic-like ancestry and a very limited degree of local hunter-gatherer admixture, similar to other early European farmers. Increasing the Linear Pottery culture cohort size to ∼100 individuals allowed us to perform various frequency- and haplotype-based analyses to investigate signatures of selection associated with changes following the adoption of the Neolithic lifestyle. In addition, we developed a new method called Admixture-informed Maximum-likelihood Estimation for Selection Scans that allowed us test for selection signatures in an admixture-aware fashion. Focusing on the intersection of results from these selection scans, we identified various loci associated with immune function (JAK1, HLA-DQB1) and metabolism (LMF1, LEPR, SORBS1), as well as skin color (SLC24A5, CD82) and folate synthesis (MTHFR, NBPF3). Our findings shed light on the evolutionary pressures, such as infectious disease and changing diet, that were faced by the early farmers of Western Eurasia.",
+              "doi": "10.1093/molbev/msac108",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e94cac01c2045fd0676052173f6fa0cfce10d460efbe8f3eba6ece846f0e0a97"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC24A5 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nIs SLC24A5 inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC24A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC24A5",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC24A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC24A5",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC24A5": {
+          "status": "unavailable",
+          "gene": "SLC24A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC24A5": {
+          "status": "unavailable",
+          "gene": "SLC24A5",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A5"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A5": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No A375 CRISPR evidence shows SLC24A5 inhibits melanoma growth. Observations are pigmentation/UVB-associated, not tumor-suppressor or depletion data. E’s 0.56 essentiality is weak and conflates loss-of-function growth reduction with inhibit。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A5"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A5": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: Essentiality evidence lacks direction; SLC24A5 is melanosome ion transporter/pigmentation gene, not established melanoma growth suppressor. A375 amelanotic context and two independent LLM votes support no inhibition.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A5']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC24A5"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T10:26:08Z"
+  }
+}

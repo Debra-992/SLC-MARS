@@ -1,0 +1,720 @@
+{
+  "qid": "membership_negative_CML_Human_eHAP_5Days_00129",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC3A2 inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC3A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_CML_Human_eHAP_5Days_00129",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC3A2"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC3A2",
+              "protein_function": "Acts as a chaperone that facilitates biogenesis and trafficking of functional transporters heterodimers to the plasma membrane.",
+              "aliases": "Lymphocyte Activation Antigen 4F2 Large Subunit",
+              "transport_type": "E (see details in SLC7 table)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC3A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC3 Heavy subunits of the  heteromeric amino acid transporters",
+              "target_properties": {
+                "name": "SLC3 Heavy subunits of the  heteromeric amino acid transporters"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC3A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Germ Cell Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Germ Cell Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Invasive Lobular Carcinoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Neuroendocrine Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Osteosarcoma(OS)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Testicular Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Vaginal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC3A2",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute lymphoblastic leukemia (ALL)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Patient-specific pharmacogenomics demonstrates xCT as predictive therapeutic target in colon cancer with possible implications in tumor connectivity.",
+              "abstract": "Colorectal cancer (CRC) represents the third leading cause of cancer-related deaths. Integrating cellular and molecular data from individual patients has become valuable for diagnosis, prognosis, and treatment selection. Here, we present a comparative mRNA-seq analysis of tissue samples from 32 CRC patients, pairing tumors with adjacent healthy tissues. Differential expression gene (DEG) analysis revealed dysregulated metabolic programs. We focused on the impact of overexpressed SLC7A11 (xCT) and SLC3A2, which compose the cystine/glutamate transporter (Xc-) system. To assess the oncogenic potential of the Xc- system, we analyzed gene perturbations from CRISPR screens across various cell types and used functional assays in five primary patient-derived organoid models. We identified a previously uncharacterized cell surface protein signature predicting chemotherapy resistance and highlighted the causality and potential of pharmacological blockage of ferroptosis as a promising avenue for cancer therapy. Redox homeostasis, ion/amino acid transporters, and regulators of neuronal survival and differentiation were pathways associated with these co-dependent genes in patient specimens. This study highlights several potential clinical targets for CRC therapy and promotes the use of patient-derived organoids oids to functionally validate in silico predictions.",
+              "doi": "10.1002/1878-0261.70129",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c72ef70422ca63fd258699fbc43b1cd32320622a99cad07c979920fa45135a55"
+              }
+            },
+            {
+              "title": "{'sup': '-', '#text': 'IFNγ-mediated repression of system xc drives vulnerability to induced ferroptosis in hepatocellular carcinoma cells.'}",
+              "abstract": "IFNγ released from CD8 T cells or natural killer cells plays a crucial role in antitumor host immunity. Several studies have found that IFNγ is involved in regulating tumor cell proliferation and apoptosis. However, few studies have examined its role in cell ferroptosis. Here, we found that IFNγ treatment enhanced glutathione depletion, promoted cell cycle arrested in G0/G1 phase, increased lipid peroxidation, and sensitized cells to ferroptosis activators. Additionally, IFNγ down-regulated the mRNA and protein levels of SLC3A2 and SLC7A11, two subunits of the glutamate-cystine antiporter system xc via activating the JAK/STAT pathway in hepatocellular carcinoma (HCC) cell lines. Furthermore, IFNγ increased reactive oxygen species levels and decreased mitochondiral membrane potential in Bel7402 and HepG2 cells. These changes were accompanied by decreased system xc activity. Cancer cells exposed to TGFβ1 for 48 h showed sensitization to IFNγ + erastin-induced ferroptosis, with decreased system xc expression. In conclusion, IFNγ repressed system xc activation via activating JAK/STAT signaling. Additionally, enhanced lipid peroxidation was associated with altered mitochondrial function in HCC cells. Our findings identified a role for IFNγ in sensitizing HCC cells to ferroptosis, which provided new insights for applying IFNγ as a cancer treatment.",
+              "doi": "10.1002/JLB.3MA1220-815RRR",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "62ae6c72d57072e6ad3c95ce25f756fc9762f19ef6d93b13e61d53b0b486a55a"
+              }
+            },
+            {
+              "title": "RTN4IP1 Contributes to ESCC via Regulation of Amino Acid Transporters.",
+              "abstract": "Esophageal squamous cell carcinoma (ESCC) accounts for about 90% of esophageal cancer cases. The lack of effective therapeutic targets makes it difficult to improve the overall survival of patients with ESCC. Reticulon 4 Interacting Protein 1 (RTN4IP1) is a novel mitochondrial oxidoreductase. Here, a notable upregulation of RTN4IP1 is demonstrated, which is associated with poor survival in patients with ESCC. RTN4IP1 depletion impairs cell proliferation and induces apoptosis of ESCC cells. Furthermore, c-Myc regulates RTN4IP1 expression via iron regulatory protein 2 (IRP2) at the post-transcriptional level. Mechanistically, RTN4IP1 mRNA harbors functional iron-responsive elements (IREs) in the 3' UTR, which can be targeted by IRP2, resulting in increased mRNA stability. Finally, RTN4IP1 depletion abrogates amino acid uptake and induces amino acid starvation via downregulation of the amino acid transporters SLC1A5, SLC3A2, and SLC7A5, indicating a possible pathway through which RTN4IP1 contributes to ESCC carcinogenesis and progression. In vivo studies using cell-derived xenograft and patient-derived xenograft mouse models as well as a 4-nitroquinoline 1-oxide-induced ESCC model in esophageal-specific Rtn4ip1 knockout mice demonstrate the essential role of RTN4IP1 in ESCC development. Thus, RTN4IP1 emerges as a key cancer-promoting protein in ESCC, suggesting therapeutic RTN4IP1 suppression as a promising strategy for ESCC treatment.",
+              "doi": "10.1002/advs.202406220",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "093d4bd3ced07e28a3715b86233010d71347e941f27f231da21333ff43f9d2e5"
+              }
+            },
+            {
+              "title": "Tumor Intrinsic METTL5 Modulates ATF4 Translation to Prevent T Cell-Induced Ferroptosis in Ovarian Cancer.",
+              "abstract": "Poor clinical responses to immune checkpoint blockade (ICB) observed in ovarian cancer (OC) highlight an unmet need to understand the mechanisms driving immune evasion in this disease. To address this, an integrative analysis is conducted by combining in vitro genome-wide immune screens, in vivo ICB screens, and clinical data mining, and METTL5 is identified as a crucial OC-intrinsic factor that promotes immune resistance. Immunologically \"cold\" OC tumors and poor responders to ICB exhibit elevated METTL5 expression. Mechanistically, knocking out (KO) METTL5 in OC disrupts ATF4 translation by altering 18S rRNA mA levels, leading to the downregulation of SLC7A11 and SLC3A2, whose function is to suppress ferroptosis activity. Consequently, METTL5 KO enhances tumor sensitivity to T cell-mediated antitumor immunity. Notably, the immune-sensitive phenotypes seen in METTL5-KO tumors can be reversed by either ATF4 overexpression or ferroptosis inhibition. These findings underscore the central role of the METTL5/ATF4/ferroptosis axis in controlling OC responses to immunotherapy.",
+              "doi": "10.1002/advs.202507718",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "fe210eca5efd81627ee7c5bba20b3b7d35924228e664d3d9a660e9b45a0763f3"
+              }
+            },
+            {
+              "title": "Drug library screening identifies histone deacetylase inhibition as a novel therapeutic strategy for choriocarcinoma.",
+              "abstract": "Choriocarcinoma is a rare and aggressive gynecological malignancy. The standard treatment is systemic chemotherapy as choriocarcinoma exhibits high chemosensitivity. However, refractory choriocarcinoma exhibits chemoresistance; thus, the prognosis remains very poor. This study aimed to identify novel therapeutic agents for choriocarcinoma by utilizing a drug repositioning strategy. Three choriocarcinoma cell lines (JAR, JEG-3, and BeWo) and a human extravillous trophoblast cell line (HTR-8/SVneo) were used for the analyses. The growth inhibitory effects of 1,271 FDA-approved compounds were evaluated in vitro screening assays and selected drugs were tested in tumor-bearing mice. Functional analyses of drug effects were performed based on RNA sequencing. Muti-step screening identified vorinostat, camptothecin (S, +), topotecan, proscillaridin A, and digoxin as exhibiting an anti-cancer effect in choriocarcinoma cells. Vorinostat, a histone deacetylase inhibitor, was selected as a promising candidate for validation and the IC50 values for choriocarcinoma cells were approximately 1 μM. RNA sequencing and subsequent pathway analysis revealed that the ferroptosis pathway was likely implicated, and key ferroptosis-related genes (i.e., GPX4, NRF2, and SLC3A2) were downregulated following vorinostat treatment. Furthermore, vorinostat repressed tumor growth and downregulated the expression of GPX4 and NRF2 in JAR cell-bearing mice model. Vorinostat, a clinically approved drug for the treatment of advanced primary cutaneous T-cell lymphoma, showed a remarkable anticancer effect both in vitro and in vivo by regulating the expression of ferroptosis-related genes. Therefore, vorinostat may be an effective therapeutic candidate for patients with choriocarcinoma.",
+              "doi": "10.1002/cam4.5243",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e8d07d6c22dc9a61568a305b00015f929b070eee0fb922d07317fee3aacf5c71"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC3A2 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC3A2 inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC3A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC3A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC3A2",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC3A2": {
+          "status": "unavailable",
+          "gene": "SLC3A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC3A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC3A2",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC3A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC3A2"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC3A2": 8.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC3A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC3A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC3A2"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC3A2": 8.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC3A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=8.80 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A2']",
+        "status": "ok",
+        "summary": "SLC3A2编码CD98重链，与SLC7A11形成氨基酸转运体，通常支持细胞增殖、抗氧化和肿瘤生长；在CML等肿瘤背景下更偏向促进生长/存活，而非抑制肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC3A2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC3A2编码CD98重链，与SLC7A11形成氨基酸转运体，通常支持细胞增殖、抗氧化和肿瘤生长；在CML等肿瘤背景下更偏向促进生长/存活，而非抑制肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:02:48Z"
+  }
+}

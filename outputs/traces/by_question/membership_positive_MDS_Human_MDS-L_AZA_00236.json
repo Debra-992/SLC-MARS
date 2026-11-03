@@ -1,0 +1,438 @@
+{
+  "qid": "membership_positive_MDS_Human_MDS-L_AZA_00236",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nIs SLC13A3 promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC13A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_MDS_Human_MDS-L_AZA_00236",
+      "status": "ok",
+      "summary": "检索到 4 类证据、13 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC13A3"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC13A3",
+              "protein_function": "High-affinity sodium-dicarboxylate cotransporter that accepts a range of substrates with 4-6 carbon atoms",
+              "aliases": "NADC3, SDCT2",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC13A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC13 Human Na+-sulfate/carboxylate  cotransporter family",
+              "target_properties": {
+                "name": "SLC13 Human Na+-sulfate/carboxylate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC13A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC13A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC13A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC13A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Neuroendocrine Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC13A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC13A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Itaconate transporter SLC13A3 impairs tumor immunity via endowing ferroptosis resistance.",
+              "abstract": "Immune checkpoint blockade (ICB) triggers tumor ferroptosis. However, most patients are unresponsive to ICB. Tumors might evade ferroptosis in the tumor microenvironment (TME). Here, we discover SLC13A3 is an itaconate transporter in tumor cells and endows tumor ferroptosis resistance, diminishing tumor immunity and ICB efficacy. Mechanistically, tumor cells uptake itaconate via SLC13A3 from tumor-associated macrophages (TAMs), thereby activating the NRF2-SLC7A11 pathway and escaping from immune-mediated ferroptosis. Structural modeling and molecular docking analysis identify a functional inhibitor for SLC13A3 (SLC13A3i). Deletion of ACOD1 (an essential enzyme for itaconate synthesis) in macrophages, genetic ablation of SLC13A3 in tumors, or treatment with SLC13A3i sensitize tumors to ferroptosis, curb tumor progression, and bolster ICB effectiveness. Thus, we identify the interplay between tumors and TAMs via the SLC13A3-itaconate-NRF2-SLC7A11 axis as a previously unknown immune ferroptosis resistant mechanism in the TME and SLC13A3 as a promising immunometabolic target for treating SLC13A3 cancer.",
+              "doi": "10.1016/j.ccell.2024.10.010",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "36ac831ead57a7de900d824f6901679145a776eabadbc7e227b20acfaefbfd8d"
+              }
+            },
+            {
+              "title": "Structure-Based Identification of Inhibitors for the SLC13 Family of Na(+)/Dicarboxylate Cotransporters.",
+              "abstract": "In mammals, citric acid cycle intermediates play a key role in regulating various metabolic processes, such as fatty acid synthesis and glycolysis. Members of the sodium-dependent SLC13 transporter family mediate the transport of di- and tricarboxylates into cells. SLC13 family members have been implicated in lifespan extension and resistance to high-fat diets; thus, they are emerging drug targets for aging and metabolic disorders. We previously characterized key structural determinants of substrate and cation binding for the human NaDC3/SLC13A3 transporter using a homology model. Here, we combine computational modeling and virtual screening with functional and biochemical testing, to identify nine previously unknown inhibitors for multiple members of the SLC13 family from human and mouse. Our results reveal previously unknown substrate selectivity determinants for the SLC13 family, including key residues that mediate ligand binding and transport, as well as promiscuous and specific SLC13 small molecule ligands. The newly discovered ligands can serve as chemical tools for further characterization of the SLC13 family or as lead molecules for the future development of potent inhibitors for the treatment of metabolic diseases and aging. Our results improve our understanding of the structural components that are important for substrate specificity in this physiologically important family as well as in other structurally related transport systems.",
+              "doi": "10.1021/acs.biochem.5b00388",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c760fcf0baea38f5b0e6c4acecc766a4248236d7ea69cbbba9111d5b6bdd3d72"
+              }
+            },
+            {
+              "title": "Role of sodium dependent SLC13 transporter inhibitors in various metabolic disorders.",
+              "abstract": "The sodium dependent SLC13 family transporters comprise of five genes SLC13A1, SLC13A2 (NaDC1), SLC13A3 (NaDC3), SLC13A4 and SLC13A5 (NaCT). Among them, NaDC1, NaDC3 and NaCT are sodium dependent transporters belonging to family of dicarboxylates (succinate, malate, α-ketoglutarate) and tricarboxylates (citrate). The mouse and the human NaCT structures have still not been crystallized, therefore structural information is taken from the related bacterial transporter of VcINDY. Citrate in the cytosol works as a precursor for the fatty acid synthesis, cholesterol, and low-density lipoproteins. The excess citrate from the matrix is translocated to the cytosol for fatty acid synthesis through these transporters and thus controls the energy balance by downregulating the glycolysis, tricarboxylic acid (TCA), and fatty acid breakdown. These transporters play an important role in regulating various metabolic diseases including cancer, diabetes, obesity, fatty liver diseases and CNS disorders. These di and tricarboxylate transporters are emerging as new targets for metabolic disorders such as obesity and diabetes. The mutation in the function of the NaCT causes several neurological diseases including neonatal epilepsy and impaired brain development whereas mutation of genes coding for citrate transport present in the liver may provide positive effect. Therefore, continued efforts from the earlier work on citrate transporters are required for the development of citrate inhibitors. This review discusses the structure, function, and regulation of the NaCT transporter. The review also highlights citrate role in diagnosing diseases such as cancer, diabetes, fatty liver, and diabetes. The therapeutic perspective of synthetic inhibitors against NaCT transporters is succinctly summarized.",
+              "doi": "10.1007/s11010-022-04618-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "01dd082f2d522a3596271074cba01f96657e6d7d56dd5f1e10452c0fbcf8e347"
+              }
+            },
+            {
+              "title": "SLC13A3 is a major effector downstream of activated β-catenin in liver cancer pathogenesis.",
+              "abstract": "Activated Wnt/β-catenin pathway is a key genetic event in liver cancer development. Solute carrier (SLC) transporters are promising drug targets. Here, we identify SLC13A3 as a drug-targetable effector downstream of β-catenin in liver cancer. SLC13A3 expression is elevated in human liver cancer samples with gain of function (GOF) mutant CTNNB1, the gene encoding β-catenin. Activation of β-catenin up-regulates SLC13A3, leading to intracellular accumulation of endogenous SLC13A3 substrates. SLC13A3 is identified as a low-affinity transporter for glutathione (GSH). Silencing of SLC13A3 downregulates the leucine transporter SLC7A5 via c-MYC signaling, leading to leucine depletion and mTOR inactivation. Furthermore, silencing of SLC13A3 depletes GSH and induces autophagic ferroptosis in β-catenin-activated liver cancer cells. Importantly, both genetic inhibition of SLC13A3 and a small molecule SLC13A3 inhibitor suppress β-catenin-driven hepatocarcinogenesis in mice. Altogether, our study suggests that SLC13A3 could be a promising therapeutic target for treating human liver cancers with GOF CTNNB1 mutations.",
+              "doi": "10.1038/s41467-024-51860-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f3c3e258258996427bccf30ede21a2b6cb08166671b489f7e8dd5ef8685adf94"
+              }
+            },
+            {
+              "title": "PITX2 is involved in stress response in cultured human trabecular meshwork cells through regulation of SLC13A3.",
+              "abstract": "Mutations of the PITX2 gene cause Axenfeld-Rieger syndrome (ARS) and glaucoma. In this study, the authors investigated genes directly regulated by the PITX2 transcription factor to gain insight into the mechanisms underlying these disorders. RNA from nonpigmented ciliary epithelium cells transfected with hormone-inducible PITX2 and activated by mifepristone was subjected to microarray analyses. Data were analyzed using dCHIP algorithms to detect significant differences in expression. Genes with significantly altered expression in multiple microarray experiments in the presence of activated PITX2 were subjected to in silico and biochemical analyses to validate them as direct regulatory targets. One target gene was further characterized by studying the effect of its knockdown in a cell model of oxidative stress, and its expression in zebrafish embryos was analyzed by in situ hybridization. Solute carrier family 13 sodium-dependent dicarboxylate transporter member 3 (SLC13A3) was identified as 1 of 47 potential PITX2 target genes in ocular cells. PITX2 directly regulates SLC13A3 expression, as demonstrated by luciferase reporter and chromatin immunoprecipitation assays. Reduction of PITX2 or SLC13A3 levels by small interfering RNA (siRNA)-mediated knockdown augmented the death of transformed human trabecular meshwork cells exposed to hydrogen peroxide. Zebrafish slc13a3 is expressed in anterior ocular regions in a pattern similar to that of pitx2. The results indicate that SLC13A3 is a direct downstream target of PITX2 transcriptional regulation and that levels of PITX2 and SLC13A3 modulate responses to oxidative stress in ocular cells.",
+              "doi": "10.1167/iovs.10-6967",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7a8ac923972d34f36452035871efc1ed4d3b7bc69b8e4967b767b44c6cbf51da"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC13A3 cancer=MDS(Myelodysplastic Neoplasms) bucket=membership Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nIs SLC13A3 promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC13A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC13A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC13A3",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC13A3": {
+          "status": "unavailable",
+          "gene": "SLC13A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC13A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC13A3",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC13A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.70 -> P(必需)=0.418 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC13A3"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC13A3": 1.7
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.58；法官理由: No direct MAGeCK AZA-resistance evidence; SLC13A3 is sodium-dicarboxylate transporter, not known MDS drug-resistance regulator. Database ferroptosis suppression links are unrelated to MDS/AZA. Consensus channels reject promotion.。原证据通道判定: winner=None answer=False conf=0.418（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC13A3 在结直肠癌、肝癌、神经内分泌肿瘤中通过 itaconate 摄取/NRF2-SLC7A11 轴和 GSH 相关机制抵抗 ferroptosis，并削弱免疫/治疗压力下的肿瘤清除。MDS 虽为髓系造血肿瘤、与实体瘤谱系不同，但 MDS 微环境中存在单核/巨噬细胞来源的代谢应激信号，AZA 治疗也伴随氧化/代谢应激；因此其“转运 itaconate/二羧酸并维持抗氧化与抗 ferroptosis 状态”的功能可类比迁移到 MDS 药物耐药场景。 | 目标癌种 MDS 缺乏直接图谱邻近、TIMER/KM 或 CRISPR 证据，不能据此判阴性。跨癌种文献显示 SLC13A3 的核心生物学效应是促进肿瘤在免疫/治疗压力下的存活，尤其是通过抑制 ferroptosis、增强抗氧化/代谢适应能力来造成耐药。MDS-L 在 DMSO vs 低剂量 AZA 的 CRISPR 条件下，如果 SLC13A3 维持类似 itaconate-NRF2-SLC7A11/GSH 抗应激通路，则更可能促进 AZA 耐受而非抑制肿瘤。由于缺乏 MDS 直接验证，置信度较低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC13A3"
+        ],
+        "confidence": 0.34,
+        "abstained": false,
+        "gene_scores": {
+          "SLC13A3": 1.7
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC13A3 在结直肠癌、肝癌、神经内分泌肿瘤中通过 itaconate 摄取/NRF2-SLC7A11 轴和 GSH 相关机制抵抗 ferroptosis，并削弱免疫/治疗压力下的肿瘤清除。MDS 虽为髓系造血肿瘤、与实体瘤谱系不同，但 MDS 微环境中存在单核/巨噬细胞来源的代谢应激信号，AZA 治疗也伴随氧化/代谢应激；因此其“转运 itaconate/二羧酸并维持抗氧化与抗 ferroptosis 状态”的功能可类比迁移到 MDS 药物耐药场景。 | 目标癌种 MDS 缺乏直接图谱邻近、TIMER/KM 或 CRISPR 证据，不能据此判阴性。跨癌种文献显示 SLC13A3 的核心生物学效应是促进肿瘤在免疫/治疗压力下的存活，尤其是通过抑制 ferroptosis、增强抗氧化/代谢适应能力来造成耐药。MDS-L 在 DMSO vs 低剂量 AZA 的 CRISPR 条件下，如果 SLC13A3 维持类似 itaconate-NRF2-SLC7A11/GSH 抗应激通路，则更可能促进 AZA 耐受而非抑制肿瘤。由于缺乏 MDS 直接验证，置信度较低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Neuroendocrine Tumor",
+          "colorectal cancer(CRC)",
+          "liver cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC13A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T21:38:35Z"
+  }
+}

@@ -1,0 +1,401 @@
+{
+  "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00289",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLCO5A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "winner": "SLC25A16"
+  },
+  "effective_genes": [
+    "SLCO5A1",
+    "SLC25A16"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_MDS_Human_MDS-L_AZA_00289",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLCO5A1",
+        "SLC25A16"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A16",
+              "protein_function": "May be involved in the transport of coenzyme A in the mitochondrial matrix. Very little is known about the physiological function of this carrier.",
+              "aliases": "GDC",
+              "transport_type": "O"
+            },
+            {
+              "gene": "SLCO5A1",
+              "protein_function": "Mediates the transport of prostaglandins and thromboxanes.",
+              "aliases": "OATP2A1, PGT, SLC21A2, Solute Carrier Family 21 (Prostaglandin Transporter), Member 2",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A16",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLCO5A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC21 Organic anion  transporter family",
+              "target_properties": {
+                "name": "SLC21 Organic anion  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A16"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "Characterization of SLCO5A1/OATP5A1, a solute carrier transport protein with non-classical function.",
+              "abstract": "Organic anion transporting polypeptides (OATP/SLCO) have been identified to mediate the uptake of a broad range of mainly amphipathic molecules. Human OATP5A1 was found to be expressed in the epithelium of many cancerous and non-cancerous tissues throughout the body but protein characterization and functional analysis have not yet been performed. This study focused on the biochemical characterization of OATP5A1 using Xenopus laevis oocytes and Flp-In T-REx-HeLa cells providing evidence regarding a possible OATP5A1 function. SLCO5A1 is highly expressed in mature dendritic cells compared to immature dendritic cells (∼6.5-fold) and SLCO5A1 expression correlates with the differentiation status of primary blood cells. A core- and complex- N-glycosylated polypeptide monomer of ∼105 kDa and ∼130 kDa could be localized in intracellular membranes and on the plasma membrane, respectively. Inducible expression of SLCO5A1 in HeLa cells led to an inhibitory effect of ∼20% after 96 h on cell proliferation. Gene expression profiling with these cells identified immunologically relevant genes (e.g. CCL20) and genes implicated in developmental processes (e.g. TGM2). A single nucleotide polymorphism leading to the exchange of amino acid 33 (L→F) revealed no differences regarding protein expression and function. In conclusion, we provide evidence that OATP5A1 might be a non-classical OATP family member which is involved in biological processes that require the reorganization of the cell shape, such as differentiation and migration.",
+              "doi": "10.1371/journal.pone.0083257",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO5A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d3218f4060c6e100745af6aadc5c0ce1ae7e40d0ce0719d6b2e4e67ef22d4b71"
+              }
+            },
+            {
+              "title": "Changes in calcium levels in the endometrium throughout pregnancy and the role of calcium on endometrial gene expression at the time of conceptus implantation in pigs.",
+              "abstract": "Calcium plays an essential role in regulating many cellular functions, including proliferation, differentiation, and apoptosis. In spite of its importance in the establishment and maintenance of pregnancy, changes in calcium levels at the maternal-conceptus interface during pregnancy and its action on endometrial gene expression are not well understood. Thus, we examined changes in calcium levels in the endometrium during pregnancy, calcium deposition at the maternal-conceptus interface during pregnancy, and the role of calcium on the expression of endometrial genes related to conceptus implantation during early pregnancy in pigs. The amounts of endometrial calcium increased during mid- to late pregnancy, and calcium deposition was mainly localized to endometrial and chorionic epithelial cells at the maternal-conceptus interface during pregnancy and conceptus tissues during early pregnancy. The amounts of total recoverable calcium in uterine flushings were greater on Day 12 of pregnancy than Day 12 of the estrous cycle, and estrogen increased absorption of calcium ions by endometrial tissues. Increasing endometrial calcium levels by treatment with A23187, a calcium ionophore, decreased the expression of the estrogen-responsive endometrial genes AKR1B1, ESR1, FGF7, IL1RAP, LPAR3, S100G, SPP1, and STC1 and increased the expression of genes related to prostaglandin synthesis and transport, namely PTGES, PTGS2, and SLCO5A1. These data suggest that calcium ions at the maternal-conceptus interface play a critical role in the establishment and maintenance of pregnancy in pigs by regulating the expression of endometrial genes involved in conceptus implantation, as well as the attachment of endometrial epithelial and conceptus trophectoderm/chorionic epithelial cells during pregnancy.",
+              "doi": "10.1002/mrd.23166",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO5A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0e2f1bd995827651f6a4265d1ce91c7104ce5fec50f5c047ee079968429eb686"
+              }
+            },
+            {
+              "title": "The effects of high glucose exposure on global gene expression and DNA methylation in human pancreatic islets.",
+              "abstract": "Type 2 diabetes (T2D) is a complex disease characterised by chronic hyperglycaemia. The effects of elevated glucose on global gene expression in combination with DNA methylation patterns have not yet been studied in human pancreatic islets. Our aim was to study the impact of 48 h exposure to high (19 mM) versus control (5.6 mM) glucose levels on glucose-stimulated insulin secretion, gene expression and DNA methylation in human pancreatic islets. While islets kept at 5.6 mM glucose secreted significantly more insulin in response to short term glucose-stimulation (p = 0.0067), islets exposed to high glucose for 48 h were desensitised and unresponsive to short term glucose-stimulation with respect to insulin secretion (p = 0.32). Moreover, the exposure of human islets to 19 mM glucose resulted in significantly altered expression of eight genes (FDR<5%), with five of these (GLRA1, RASD1, VAC14, SLCO5A1, CHRNA5) also exhibiting changes in DNA methylation (p < 0.05). A gene set enrichment analysis of the expression data showed significant enrichment of e.g. TGF-beta signalling pathway, Notch signalling pathway and SNARE interactions in vesicular transport; these pathways are of relevance for islet function and possibly also diabetes. We also found increased DNA methylation of CpG sites annotated to PDX1 in human islets exposed to 19 mM glucose for 48 h. Finally, we could functionally validate a role for Glra1 in insulin secretion. Our data demonstrate that high glucose levels affect human pancreatic islet gene expression and several of these genes also exhibit epigenetic changes. This might contribute to the impaired insulin secretion seen in T2D.",
+              "doi": "10.1016/j.mce.2017.11.019",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO5A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8ecfd7ce0472b207be9e0fcc1504e41c1379ab0ea95a90df95b1207c1be3660e"
+              }
+            },
+            {
+              "title": "Differential Expression Patterns of SLCO Solute Carriers in Human Breast Cancer Cell Lines and Tumour Samples.",
+              "abstract": "The cellular uptake of nutrients essential for cell growth and survival is facilitated by solute carrier (SLC) transporters. Members of the SLCO subfamily of SLCs mediate the uptake of substrates relevant to breast cancer (BC), including steroid hormones and anticancer drugs. Accumulating evidence suggests that altered expression of these transporters may affect BC pathogenesis by influencing cell proliferation and anticancer drug resistance. In this study, we investigated differential expression of 11 SLCO transporters using semi-quantitative and quantitative PCR in MCF-7 and MDA-MB-231 BC cell lines and in human BC tissue samples. Eight SLCO transporters were expressed in at least one cell line. Of these, SLCO1B1 and SLCO1B3 showed higher expression in MDA-MB-231 than MCF-7 cells. Conversely, SLCO2A1, SLCO4C1 and SLCO5A1 showed higher expression in MCF-7 than MDA-MB-231 cells. Quantitative PCR analysis of 18 patients' BC tissue samples revealed variable expression of a number of SLCO transporters, regardless of patients having been treated with or without endocrine therapy prior to tumour excision. Proliferation and gene expression studies were conducted on the cell lines following exposure to β-estradiol, which stimulated cell proliferation in MCF-7 cells, as well as causing a significant increase in SLCO4C1 gene expression.",
+              "doi": "10.1111/jcmm.70838",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO5A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d602800fc3405f188587d44ad5518084fb5138040362c4a720e115b538d3877c"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLCO5A1 cancer=MDS(Myelodysplastic Neoplasms) bucket=pairwise Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLCO5A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLCO5A1', 'SLC25A16']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLCO5A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLCO5A1",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLCO5A1": {
+          "status": "unavailable",
+          "gene": "SLCO5A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A16": {
+          "status": "unavailable",
+          "gene": "SLC25A16",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLCO5A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLCO5A1",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A16": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A16",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLCO5A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A16 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A16",
+        "candidates": [
+          "SLCO5A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.6,
+        "abstained": false,
+        "gene_scores": {
+          "SLCO5A1": 0.05,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A16': 2}，最终智能体辩论后裁决：winner=SLC25A16 answer=None conf=0.6；法官理由: Evidence is weak, but two independent LLM channels agree SLC25A16 is more plausible: mitochondrial/nucleotide-stress links to AZA resistance outweigh SLCO5A1’s prostaglandin transport role.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLCO5A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A16 is a mitochondrial carrier with tumor-associated expression/splicing evidence in COAD; mitochondrial carriers can support metabolic adaptation and apoptosis resistance, which are relevant to MDS progenitor survival and AZA response. SLCO5A1 is more linked to prostaglandin transport, differentiation/migration, and even anti-proliferative effects, making it less analogous to a drug-resistance promoter in MDS. | No direct MDS CRISPR evidence exists, so the decision relies on cross-cancer biology. SLC25A16 belongs to the SLC25 mitochondrial carrier family and is reported as tumor-upregulated and survival-associated in colorectal cancer, suggesting a possible role in mitochondrial metabolic rewiring and stress tolerance. In MDS, clonal hematopoietic progenitors often depend on mitochondrial adaptation and evasion of apoptosis, and hypomethylating-agent resistance can be tied to altered metabolism and survival signaling. SLCO5A1/OATP5A1 is primarily associated with prostaglandin/thromboxane transport and myeloid/dendritic differentiation; its forced expression has been reported to inhibit proliferation, which is less consistent with a tumor/drug-resistance promoting role. Therefore, SLC25A16 is the more plausible candidate to promote MDS tumor drug resistance, though confidence remains low because the evidence is indirect.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A16",
+        "candidates": [
+          "SLCO5A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLCO5A1": 0.05,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC25A16 is a mitochondrial carrier with tumor-associated expression/splicing evidence in COAD; mitochondrial carriers can support metabolic adaptation and apoptosis resistance, which are relevant to MDS progenitor survival and AZA response. SLCO5A1 is more linked to prostaglandin transport, differentiation/migration, and even anti-proliferative effects, making it less analogous to a drug-resistance promoter in MDS. | No direct MDS CRISPR evidence exists, so the decision relies on cross-cancer biology. SLC25A16 belongs to the SLC25 mitochondrial carrier family and is reported as tumor-upregulated and survival-associated in colorectal cancer, suggesting a possible role in mitochondrial metabolic rewiring and stress tolerance. In MDS, clonal hematopoietic progenitors often depend on mitochondrial adaptation and evasion of apoptosis, and hypomethylating-agent resistance can be tied to altered metabolism and survival signaling. SLCO5A1/OATP5A1 is primarily associated with prostaglandin/thromboxane transport and myeloid/dendritic differentiation; its forced expression has been reported to inhibit proliferation, which is less consistent with a tumor/drug-resistance promoting role. Therefore, SLC25A16 is the more plausible candidate to promote MDS tumor drug resistance, though confidence remains low because the evidence is indirect. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLCO5A1', 'SLC25A16']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLCO5A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:18:38Z"
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00274",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35F4 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC6A6"
+  },
+  "effective_genes": [
+    "SLC35F4",
+    "SLC6A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00274",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35F4",
+        "SLC6A6"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35F4",
+              "protein_function": "Putative solute transporter.",
+              "aliases": "C14orf36, Transmembrane Protein 22, TMEM22, Chromosome 14 Open Reading Frame 36, Solute Carrier Family 35, Member F4",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC6A6",
+              "protein_function": "Mediates sodium- and chloride-dependent transport of taurine and beta-alanine.",
+              "aliases": "TAUT",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35F4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The transcription factor, Nuclear factor, erythroid 2 (Nfe2), is a regulator of the oxidative stress response during Danio rerio development.",
+              "abstract": "Development is a complex and well-defined process characterized by rapid cell proliferation and apoptosis. At this stage in life, a developmentally young organism is more sensitive to toxicants as compared to an adult. In response to pro-oxidant exposure, members of the Cap'n'Collar (CNC) basic leucine zipper (b-ZIP) transcription factor family (including Nfe2 and Nfe2-related factors, Nrfs) activate the expression of genes whose protein products contribute to reduced toxicity. Here, we studied the role of the CNC protein, Nfe2, in the developmental response to pro-oxidant exposure in the zebrafish (Danio rerio). Following acute waterborne exposures to diquat or tert-buytlhydroperoxide (tBOOH) at one of three developmental stages, wildtype (WT) and nfe2 knockout (KO) embryos and larvae were morphologically scored and their transcriptomes sequenced. Early in development, KO animals suffered from hypochromia that was made more severe through exposure to pro-oxidants; this phenotype in the KO may be linked to decreased expression of alas2, a gene involved in heme synthesis. WT and KO eleutheroembryos and larvae were phenotypically equally affected by exposure to pro-oxidants, where tBOOH caused more pronounced phenotypes as compared to diquat. Comparing diquat and tBOOH exposed embryos relative to the WT untreated control, a greater number of genes were up-regulated in the tBOOH condition as compared to diquat (tBOOH: 304 vs diquat: 148), including those commonly found to be differentially regulated in the vertebrate oxidative stress response (OSR) (e.g. hsp70.2, txn1, and gsr). When comparing WT and KO across all treatments and times, there were 1170 genes that were differentially expressed, of which 33 are known targets of the Nrf proteins Nrf1 and Nrf2. More specifically, in animals exposed to pro-oxidants a total of 968 genes were differentially expressed between WT and KO across developmental time, representing pathways involved in coagulation, embryonic organ development, body fluid level regulation, erythrocyte differentiation, and oxidation-reduction, amongst others. The greatest number of genes that changed in expression between WT and KO occurred in animals exposed to diquat at 2h post fertilization (hpf). Across time and treatment, there were six genes (dhx40, cfap70, dnajb9b, slc35f4, spi-c, and gpr19) that were significantly up-regulated in KO compared to WT and four genes (fhad1, cyp4v7, nlrp12, and slc16a6a) that were significantly down-regulated. None of these genes have been previously identified as targets of Nfe2 or the Nrf family. These results demonstrate that the zebrafish Nfe2 may be a regulator of both primitive erythropoiesis and the OSR during development.",
+              "doi": "10.1016/j.aquatox.2016.09.019",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5f32eac4d814f5d6dc76c2f55e3a18be1c9c01328eb0a0f352f80e43201cd177"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'Taurine enhances the antitumor efficacy of PD-1 antibody by boosting CD8 T cell function.'}",
+              "abstract": "The functional state of CD8 T cells determines the therapeutic efficacy of PD-1 blockade antibodies in tumors. Amino acids are key nutrients for maintaining T cell antitumor immunity. In this study, we used samples from lung cancer patients treated with PD-1 blockade antibodies to assay the amino acids in their serum by mass spectrometry. We found that lung cancer patients with high serum taurine levels generally responded to PD-1 blockade antibody therapy, in parallel with the secretion of high levels of cytotoxic cytokines (IFN-γ and TNF-α). CD8 T cells cultured with exogenous taurine exhibited decreased apoptosis, enhanced proliferation, and increased secretion of cytotoxic cytokines. High SLC6A6 expression in CD8 T cells was positively associated with an effector T cell signature. SLC6A6 knockdown limited the function and proliferation of CD8 T cells. RNA sequencing revealed that SLC6A6 knockdown altered the calcium signaling pathway, oxidative phosphorylation, and T cell receptor signaling in CD8 T cells. Furthermore, taurine enhanced T cell proliferation and function in vitro by stimulation of PLCγ1-mediated calcium and MAPK signaling. Taurine plus immune checkpoint blockade antibody significantly attenuated tumor growth and markedly improved the function and proliferation of CD8 T cells in a mouse tumor model. Thus, our findings indicate that taurine is an important driver for improving CD8 T cell immune responses and could serve as a potential therapeutic agent for cancer patients.",
+              "doi": "10.1007/s00262-022-03308-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa0543d880aa3842529e24d47677bc24ea20198ed8009c4b1b99e0e86b2a4a98"
+              }
+            },
+            {
+              "title": "Unveiling the role of taurine and SLC6A6 in tumor immune evasion: Implications for gastric cancer therapy.",
+              "abstract": "Metabolic changes are key drivers of tumor progression. Understanding how metabolic reprogramming promotes tumor development and identifying key metabolic activities are essential for improving tumor diagnosis and treatment. Among the numerous transporters in the body, solute carriers (SLCs) are particularly significant, often overexpressed in cancer cells to meet the tumor's demand for nutrients and energy. While the role of SLCs in nutrient absorption within the gastrointestinal tract is well-established, their specific role in gastric cancer (GC) remains unclear. Recently, Xiaodi Zhao's team investigated the critical role of taurine and its transporter, SLC6A6, in anti-tumor immunity and clinical outcomes. Notably, this research marks the first instance of taurine exhibiting a dual role. It promotes tumor growth in immunodeficient mice while inhibiting it in immunocompetent mice. The study found that taurine exerts its anti-cancer effects by modulating CD8 T cells rather than directly inhibiting tumor cells, revealing the SP1-SLC6A6 axis as a key mechanism behind chemotherapy-induced immune evasion. Our work further explored the potential, advantages, and challenges of using taurine and SLC6A6 as biomarkers and therapeutic targets in gastric cancer. We aim to underscore their importance in both basic research and clinical applications, providing valuable insights and guidance for future investigations.",
+              "doi": "10.1016/j.biocel.2024.106661",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "992657d82d2b1b50c67e4a751e1650c5c5a838a4f377302e8ea8bcb53bc6e2fe"
+              }
+            },
+            {
+              "title": "Taurine, an osteocyte metabolite, protects against oxidative stress-induced cell death and decreases inhibitors of the Wnt/β-catenin signaling pathway.",
+              "abstract": "Taurine has been shown to have positive effects on bone mass, which are thought to be due in part to its cytoprotective effects on osteoblasts and here we show that taurine also protects osteocytes against cell death due to reactive oxygen species. Using the IDG-SW3 cell line, the expression of the taurine uptake transporter Taut/Slc6a6 is increased during osteoblast to osteocyte differentiation. Taurine had no effect on genes associated with osteoblast to osteocyte differentiation such as Dmp1, Phex or osteocalcin, even at high doses, but a slight yet significant inhibition of alkaline phosphatase was observed at the highest dose (50 mM). No effect was seen on the osteoclast regulatory genes Rankl and Opg, however the wnt antagonist Sost/sclerostin was potently and dose-dependently downregulated in response to taurine supplementation. Taurine also significantly inhibited Dkk1 mRNA expression, but only at 50 mM. Interestingly, osteocytes were found to also be able to synthesize taurine intracellularly, potentially as a self-protective mechanism, but do not secrete the metabolite. A highly significant increase in the expression of cysteine dioxygenase (Cdo), a key enzyme necessary for the production of taurine, was observed with osteoblast to osteocyte differentiation along with a decrease in methionine, the precursor of taurine. For the first time, we describe the synthesis of taurine by osteocytes, potentially to preserve viability and to regulate bone formation through inhibition of sclerostin.",
+              "doi": "10.1016/j.bone.2020.115374",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "76006161ff33bfd1e0ca717067ce48bc11b39b10106141dad3db2262f1d67641"
+              }
+            },
+            {
+              "title": "Deficiency of Pdk1 drives heart failure by impairing taurine homeostasis through Slc6a6.",
+              "abstract": "3-Phosphoinositide-dependent protein kinase-1 (Pdk1) as a serine/threonine protein kinase plays a critical role in multiple signaling pathways. Analysis of the gene expression omnibus database showed that Pdk1 was significantly downregulated in patients with heart diseases. Gene set enrichment analysis of the proteomics dataset identified apoptotic- and metabolism-related signaling pathways directly targeted by Pdk1. Previously, our research indicated that Pdk1 deletion-induced metabolic changes might be involved in the pathogenesis of heart failure; however, the underlying mechanism remains elusive. Here, we demonstrated that deficiency of Pdk1 resulted in apoptosis, oxidative damage, and disturbed metabolism, both in vivo and in vitro. Furthermore, profiling of metabonomics by  H-NMR demonstrated that taurine was the major differential metabolite in the heart of Pdk1-knockout mice. Taurine treatment significantly reduced the reactive oxygen species production and apoptosis, improved cardiac function, and prolonged the survival time in Pdk1 deficient mice. Proteomic screening identified solute carrier family 6 member 6 (Slc6a6) as the downstream that altered taurine levels in Pdk1-expression cells. Consistently, cellular apoptosis and oxidative damage were rescued by Slc6a6 in abnormal Pdk1 expression cells. These findings collectively suggest that Pdk1 deficiency induces heart failure via disturbances in taurine homeostasis, triggered by Slc6a6.",
+              "doi": "10.1096/fj.202300272R",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "17f46b34cc9ba9c67dc9ab07c5e0859830f76fa0c3a597b74bf163329b1b58f4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35F4 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35F4 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC35F4', 'SLC6A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35F4",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35F4",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35F4": {
+          "status": "unavailable",
+          "gene": "SLC35F4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unavailable",
+          "gene": "SLC6A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35F4": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35F4",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A6",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35F4', 'SLC6A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35F4 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35F4",
+        "candidates": [
+          "SLC35F4",
+          "SLC6A6"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35F4": 0.05,
+          "SLC6A6": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35F4': 2}，最终智能体辩论后裁决：winner=SLC35F4 answer=None conf=0.61；法官理由: Evidence channel abstained; observations only association-level and irrelevant. Two independent LLM votes converge on SLC35F4, with plausible essentiality over redundant SLC6A6 taurine transport, so select SLC35F4 at moderate confidence.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35F4', 'SLC6A6']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC6A6 is a taurine transporter with cross-cancer evidence that taurine/SLC6A6 supports CD8 T-cell effector function and antitumor immunity, especially in immunocompetent tumor models. DLBCL/lymphoma growth is sensitive to immune surveillance and metabolic stress responses, so an SLC6A6-associated pro-effector/anti-tumor axis is more plausibly transferable to Lymphoma than the SLC35F4 evidence, which is limited to zebrafish oxidative-stress/developmental erythropoiesis and lacks tumor-growth support. | SLC6A6 has direct literature linking it to enhanced CD8 T-cell proliferation, cytotoxic cytokine secretion, reduced apoptosis, and improved tumor control with taurine plus checkpoint blockade; gastric-cancer commentary further frames SLC6A6/taurine as an immune-modulatory axis with potential antitumor effects in immunocompetent settings. SLC35F4 has only weak, non-oncologic context: upregulation in zebrafish Nfe2-knockout oxidative-stress development, no TIMER/KM or lymphoma-specific evidence. Given the lack of direct Lymphoma data, the stronger cross-cancer biological inference favors SLC6A6 as the gene more likely to inhibit lymphoma tumor growth, while acknowledging uncertainty from the cell-line/CRISPR screen context and the possibility that tumor-intrinsic effects may differ from immune-cell effects.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35F4",
+        "candidates": [
+          "SLC35F4",
+          "SLC6A6"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35F4": 0.05,
+          "SLC6A6": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A6': 1, 'W:SLC35F4': 2}，最终智能体辩论后裁决：winner=SLC35F4 answer=None conf=0.72；法官理由: Two independent LLM channels favor SLC35F4 for cell-intrinsic 18-day MAGeCK depletion in DLBCL. Its nucleoside-sugar/glycosylation transport is likely a stronger growth dependency than SLC6A6, whose taurine uptake is medium-buffered/redunda。原证据通道判定: winner=SLC6A6 answer=None conf=0.62（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35F4', 'SLC6A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35F4",
+          "SLC6A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:27:30Z"
+  }
+}

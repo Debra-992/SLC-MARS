@@ -1,0 +1,151 @@
+{
+  "system": "v20rrf_pergene_purellm",
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC7A11",
+        "SLC38A1"
+      ],
+      "ndcg5": 0.0975319952917262,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC7A11",
+        "SLC38A1"
+      ],
+      "ndcg5": 0.10858068818098127,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pred": [
+        "SLC25A1",
+        "SLC25A11",
+        "SLC25A51",
+        "SLC35F2",
+        "SLC30A1"
+      ],
+      "ndcg5": 0.967537828280177,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pred": [
+        "SLC7A11",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC12A5",
+        "SLC39A8"
+      ],
+      "ndcg5": 0.15906783304646757,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pred": [
+        "SLC7A11",
+        "SLC7A5",
+        "SLC16A3",
+        "SLC9A1",
+        "SLC1A5"
+      ],
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pred": [
+        "SLC16A1",
+        "SLC7A5",
+        "SLC7A11",
+        "SLC1A5",
+        "SLC25A1"
+      ],
+      "ndcg5": 0.44120734160241787,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pred": [
+        "SLC2A1",
+        "SLC25A32",
+        "SLC38A2",
+        "SLC25A26",
+        "SLC33A1"
+      ],
+      "ndcg5": 0.8301080007176845,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC39A6"
+      ],
+      "ndcg5": 0.1950639905834524,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC3A2"
+      ],
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pred": [
+        "SLC19A1",
+        "SLC16A1",
+        "SLC35A2",
+        "SLC25A32",
+        "SLC35A1"
+      ],
+      "ndcg5": 0.8404919746929073,
+      "hit5": 1.0,
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC25A1",
+        "SLC38A1",
+        "SLC7A5"
+      ],
+      "ndcg5": 0.25211655044962455,
+      "hit5": 1.0,
+      "error": ""
+    }
+  ]
+}

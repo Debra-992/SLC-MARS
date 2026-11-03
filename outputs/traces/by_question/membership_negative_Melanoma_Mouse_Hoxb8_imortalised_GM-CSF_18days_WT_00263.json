@@ -1,0 +1,319 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00263",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC17A4 inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC17A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00263",
+      "status": "ok",
+      "summary": "检索到 4 类证据、4 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC17A4"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A4",
+              "protein_function": "Acts as a membrane potential-dependent organic anion transporter, the transport requires a low concentration of chloride ions. Mediates chloride-dependent transport of urate. Mediates sodium-independent high affinity transport of thyroid hormones including L-thyroxine (T4) and 3,3',5-triiodo-L-thyronine (T3). Can actively transport inorganic phosphate into cells via Na(+) cotransport.",
+              "aliases": "NPT1, Sodium-Dependent Phosphate Transport Protein 4, Sodium/Phosphate Cotransporter 4",
+              "transport_type": "unknown"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "miR-3614-5p downregulation promotes cadmium-induced breast cancer cell proliferation and metastasis by targeting TXNRD1.",
+              "abstract": "Cadmium (Cd), which is considered an endocrine disruptor, has been linked to the onset of breast cancer (BC). Our recent study demonstrated that Cd-induced BC progression has a strong correlation with miR-374c-5p dysregulation. The aim of our work was to investigate other potential miRNAs involved in Cd-induced BC cell proliferation and metastasis. In our study, the miRNA profiles of Cd-treated T-47D cells (10 μM, 72 h) were analyzed by miRNA-seq, and our results confirmed that miR-3614-5p was the top downregulated miRNA. Moreover, miR-3614-5p mimic transfection significantly decreased the proliferative ability, migration and invasive ability of BC cell lines (T-47D and MCF-7). Furthermore, we analyzed the overlapping genes from our RNA-seq data and predicted targets from the mirDIP database, and twelve genes (ALDH1A3, FBN1, GRIA3, NOS1, PLD5, PTGER4, RASGRF2, RELN, RNF150, SLC17A4, TG, and TXNRD1) were identified as potential binding targets of miR-3614-5p in the current model. Nonetheless, only miR-3614-5p inhibition caused an increase in TXNRD1 expression upon Cd exposure in T-47D and MCF-7 cell lines. Importantly, luciferase reporter assays further verified that miR-3614-5p suppressed the expression of TXNRD1 by directly binding to the 3'-untranslated region (UTR), and TXNRD1 inhibition significantly repressed the proliferation and metastasis capacity of BC cells upon Cd exposure. Together, our findings demonstrated that Cd exposure repressed the expression of miR-3614-5p, thus activating TXNRD1 expression, which promoted the abnormal proliferation and metastasis of BC cells.",
+              "doi": "10.1016/j.ecoenv.2022.114270",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "370f15abe46a1584851ecc103e2c6e2da219f1ffb78f33c8b2b2071a41d0811e"
+              }
+            },
+            {
+              "title": "A prognostic signature consisting of metabolism-related genes and SLC17A4 serves as a potential biomarker of immunotherapeutic prediction in prostate cancer.",
+              "abstract": "Prostate cancer (PCa), a prevalent malignant cancer in males worldwide, screening for patients might benefit more from immuno-/chemo-therapy remained inadequate and challenging due to the heterogeneity of PCa patients. Thus, the study aimed to explore the metabolic (Meta) characteristics and develop a metabolism-based signature to predict the prognosis and immuno-/chemo-therapy response for PCa patients. Differentially expressed genes were screened among 2577 metabolism-associated genes. Univariate Cox analysis and random forest algorithms was used for features screening. Multivariate Cox regression analysis was conducted to construct a prognostic Meta-model based on all combinations of metabolism-related features. Then the correlation between MetaScore and tumor was deeply explored from prognostic, genomic variant, functional and immunological perspectives, and chemo-/immuno-therapy response. Multiple algorithms were applied to estimate the immunotherapeutic responses of two MeteScore groups. Further  functional experiments were performed using PCa cells to validate the association between the expression of hub gene SLC17A4 which is one of the model component genes and tumor progression. GDSC database was employed to determine the sensitivity of chemotherapy drugs. Two metabolism-related clusters presented different features in overall survival (OS). A metabolic model was developed weighted by the estimated regression coefficients in the multivariate Cox regression analysis (0.5154*GAS2 + 0.395*SLC17A4 - 0.1211*NTM + 0.2939*GC). This Meta-scoring system highlights the relationship between the metabolic profiles and genomic alterations, gene pathways, functional annotation, and tumor microenvironment including stromal, immune cells, and immune checkpoint in PCa. Low MetaScore is correlated with increased mutation burden and microsatellite instability, indicating a superior response to immunotherapy. Several medications that might improve patients` prognosis in the MetaScore group were identified. Additionally, our cellular experiments suggested knock-down of SLC17A4 contributes to inhibiting invasion, colony formation, and proliferation in PCa cells . Our study supports the metabolism-based four-gene signature as a novel and robust model for predicting prognosis, and chemo-/immuno-therapy response in PCa patients. The potential mechanisms for metabolism-associated genes in PCa oncogenesis and progression were further determined.",
+              "doi": "10.3389/fimmu.2022.982628",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "814a6507cbf681f9051fdf262e4c501348a85c778c99cca390716e07fb75d5e5"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC17A4 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC17A4 inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC17A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC17A4",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC17A4",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC17A4",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC17A4": {
+          "status": "unavailable",
+          "gene": "SLC17A4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC17A4": {
+          "status": "unavailable",
+          "gene": "SLC17A4",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC17A4 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC17A4"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A4": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC17A4 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A4']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC17A4 在前列腺癌中显示敲低后抑制增殖、克隆形成和侵袭，提示其本身更可能是促肿瘤/代谢支持基因，而非抑制肿瘤生长；这种‘转运蛋白支持肿瘤代谢/生长’的方向可弱迁移到黑色素瘤，但缺乏 Melanoma 直接证据。 | 目标癌种 Melanoma 无直接 PPR/TIMER/KM/DE 证据，不能据此判定阴性。可迁移证据主要来自前列腺癌实验：SLC17A4 knock-down inhibits proliferation, colony formation, and invasion，说明 SLC17A4 缺失会抑制肿瘤细胞生长，反过来说 SLC17A4 本身不是抑制肿瘤生长，而是可能促进肿瘤进展。乳腺癌文献仅将 SLC17A4 作为 miR-3614-5p 预测靶点之一，未直接验证其对肿瘤生长的影响，证据较弱。综合跨癌种生物学推理，membership 问题‘SLC17A4 inhibit Melanoma's Tumor Growth?’更可能为 false；置信度因组织来源差异和直接证据缺失而保持中低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC17A4"
+        ],
+        "confidence": 0.41,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A4": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC17A4 在前列腺癌中显示敲低后抑制增殖、克隆形成和侵袭，提示其本身更可能是促肿瘤/代谢支持基因，而非抑制肿瘤生长；这种‘转运蛋白支持肿瘤代谢/生长’的方向可弱迁移到黑色素瘤，但缺乏 Melanoma 直接证据。 | 目标癌种 Melanoma 无直接 PPR/TIMER/KM/DE 证据，不能据此判定阴性。可迁移证据主要来自前列腺癌实验：SLC17A4 knock-down inhibits proliferation, colony formation, and invasion，说明 SLC17A4 缺失会抑制肿瘤细胞生长，反过来说 SLC17A4 本身不是抑制肿瘤生长，而是可能促进肿瘤进展。乳腺癌文献仅将 SLC17A4 作为 miR-3614-5p 预测靶点之一，未直接验证其对肿瘤生长的影响，证据较弱。综合跨癌种生物学推理，membership 问题‘SLC17A4 inhibit Melanoma's Tumor Growth?’更可能为 false；置信度因组织来源差异和直接证据缺失而保持中低。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC17A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T07:12:31Z"
+  }
+}

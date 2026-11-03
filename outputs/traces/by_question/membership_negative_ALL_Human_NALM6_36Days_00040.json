@@ -1,0 +1,376 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00040",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A20 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A20"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00040",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A20"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A20",
+              "protein_function": "Mediates the electroneutral exchange of acylcarnitines with free carnitine across the mitochondrial inner membrane.",
+              "aliases": "Carnitine/Acylcarnitine Translocase",
+              "transport_type": "E / carnitine, acylcarnitine; F (at slow rate)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A20",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Chronic acidosis rewires cancer cell metabolism through PPARα signaling.",
+              "abstract": "The mechanisms linking tumor microenvironment acidosis to disease progression are not understood. Here, we used mammary, pancreatic, and colon cancer cells to show that adaptation to growth at an extracellular pH (pH ) mimicking acidic tumor niches is associated with upregulated net acid extrusion capacity and elevated intracellular pH at physiological pH , but not at acidic pH . Using metabolic profiling, shotgun lipidomics, imaging and biochemical analyses, we show that the acid adaptation-induced phenotype is characterized by a shift toward oxidative metabolism, increased lipid droplet-, triacylglycerol-, peroxisome content and mitochondrial hyperfusion. Peroxisome proliferator-activated receptor-α (PPARA, PPARα) expression and activity are upregulated, at least in part by increased fatty acid uptake. PPARα upregulates genes driving increased mitochondrial and peroxisomal mass and β-oxidation capacity, including mitochondrial lipid import proteins CPT1A, CPT2 and SLC25A20, electron transport chain components, peroxisomal proteins PEX11A and ACOX1, and thioredoxin-interacting protein (TXNIP), a negative regulator of glycolysis. This endows acid-adapted cancer cells with increased capacity for utilizing fatty acids for metabolic needs, while limiting glycolysis. As a consequence, the acid-adapted cells exhibit increased sensitivity to PPARα inhibition. We conclude that PPARα is a key upstream regulator of metabolic changes favoring cancer cell survival in acidic tumor niches.",
+              "doi": "10.1002/ijc.34404",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A20"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "827c1b053500f73a74e263c3ea7079f1a7aaf37677a20b4e6f6257f0478d2830"
+              }
+            },
+            {
+              "title": "PDK4 is critical for metabolic regulation and progesterone production in bovine granulosa cells.",
+              "abstract": "Non-esterified fatty acids (NEFA) influence ovarian cell function, but the underlying molecular mechanisms remain incompletely understood. Our previous work showed that NEFA induces lipid accumulation and inhibits glucose uptake in bovine granulosa cells. Here, we investigated the effect of NEFA on energy metabolism and the transcriptome, with a focus on pyruvate dehydrogenase kinase 4 (PDK4). NEFA treatment significantly increased ATP levels and mitochondrial membrane potential. Transcriptome analysis revealed differential expression of 176 genes, with downregulation of steroidogenesis and fatty acid synthesis pathways, and upregulation of apoptosis, fatty acid oxidation, and innate immune responses in NEFA treated cells. Specifically, genes involved in fatty acid oxidation (e.g., CPT1A, CPT1B, HADHA, SLC25A20) were upregulated, whereas those related to glucose metabolism remained largely unchanged except for the marked upregulation of PDK4. Silencing PDK4 expression induced glucose utilization by upregulating glucose transporters (SLC2A1, SLC2A10) and glycolytic enzymes (GAPDH, ENO1, LDHA). In contrast, genes associated with fatty acid oxidation (SLC27A1, CPT1B) showed downregulation upon PDK4 silencing compared with controls, suggesting a metabolic shift favoring glucose oxidation even in the presence of NEFA. We observed that expression of PDK4, CPT1A and CPT1B was significantly upregulated in large luteal cells compared to granulosa cells. PDK4 knockdown significantly downregulated steroidogenic genes (STAR, HSD3B1, CYP11A1) and decreased progesterone production, suggesting that increased expression of PDK4 in luteal cells may supports steroidogenesis. Together, these findings identify PDK4 as a critical regulator of metabolic flexibility and progesterone production in granulosa cells.",
+              "doi": "10.1093/biolre/ioaf238",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A20"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "98bf2cc647b286d3a99a56c29cedda61b70631687a5f61e06575b58b60cf02c9"
+              }
+            },
+            {
+              "title": "Immune cell infiltration and drug response in glioblastoma multiforme: insights from oxidative stress-related genes.",
+              "abstract": "GBM, also known as glioblastoma multiforme, is the most prevalent and lethal type of brain cancer. The cell proliferation, invasion, angiogenesis, and treatment of gliomas are significantly influenced by oxidative stress. Nevertheless, the connection between ORGs and GBM remains poorly comprehended. The objective of this research is to investigate the predictive significance of ORGs in GBM and their potential as targets for therapy. We identified differentially expressed genes in glioma and ORGs from public databases. A risk model was established using LASSO regression and Cox analysis, and its performance was evaluated with ROC curves. We then performed consistent cluster analysis on the model, examining its correlation with immunity and drug response. Additionally, PCR, WB and IHC were employed to validate key genes within the prognostic model. 9 ORGs (H6PD, BMP2, SPP1, HADHA, SLC25A20, TXNIP, ACTA1, CCND1, EEF1A1) were selected via differential expression analysis, LASSO and Cox analysis, and incorporated into the risk model with high predictive accuracy. Enrichment analyses using GSVA and GSEA focused predominantly on malignancy-associated pathways. Subtype C of GBM had the best prognosis with the lowest risk score. Furthermore, the model exhibited a strong correlation with the infiltration of immune cells and had the capability to pinpoint potential targeted therapeutic medications for GBM. Ultimately, we selected HADHA for in vitro validation. The findings indicated that GBM exhibits a significant upregulation of HADHA. Knockdown of HADHA inhibited glioma cell proliferation and diminished their migration and invasion capacities and influenced the tumor growth in vivo. The risk model, built upon 9 ORGs and the identification of GBM subtypes, suggests that ORGs have a broad application prospect in the clinical immunotherapy and targeted drug treatment of GBM. HADHA significantly influences the development of gliomas, both in vivo and in vitro.",
+              "doi": "10.1186/s12935-024-03316-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A20"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6a6d08758dc967254a7c1e9f79ec95fc9d0c7dcba3d5fd6ad3e94c99d7ae89f7"
+              }
+            },
+            {
+              "title": "Acetyl-L-Carnitine Modulates TP53 and IL10 Gene Expression Induced by 3-NPA Evoked Toxicity in PC12 Cells.",
+              "abstract": "The neurotoxicity induced by the mitochondrial inhibitor 3-nitropropionic acid (3-NPA) is associated with a decrease of ATP synthesis and an increase of free radical production which can lead to apoptosis or necrosis. We have used the PC12, neuron-like rat pheochromocytoma cell line, to study further the mechanism of 3-NPA-evoked neurotoxicity and the effects of acetyl-L-carnitine (ALC) which has neuroprotective actions against various types of mitochondrial inhibitors.Cultured PC 12 cells were exposed to a low dose of 3-NPA 50 (microM) in the presence or absence of 5 mM ALC. The dose of 3-NPA was sub toxic and no changes in pro-apoptotic Bax or anti-apoptotic Bcl-2 gene expression were observed. We followed specific genetic markers to look for changes evoked by 3-NPA toxicity and also changes associated with neuroprotection exerted by the ALC treatment, using RT-PCR arrays (delta-delta method). 3-NPA exposure evoked a decrease in expression of the Tp53 gene. This down regulation was prevented by pretreatment of the cells with ALC. The Tp53 gene responds to cellular stresses and the effects seen here are possibly associated with the 3-NPA evoked changes in mitochondrial metabolism. Other genes associated with stress and apoptosis, Parp-1, Bcl-2, and Bax were not affected by 3-NPA or ALC. The decrease of inflammatory response Il-10 gene expression due to 3-NPA was further lowered by presence of ALC. Other inflammation related genes, Il1rn, Nr3c1 and Cxcr4 were not affected. Interestingly, the glutamate transporter slc17a7, carnitine-acylcarnitine translocase Slc25a20 and heat shock proteins genes, Hsp27, Hmox1 (Hsp32, HO1) as well as Hspa 1a (Hsp 70) increased only when both ALC and small dose of 3-NPA were present. The alterations in gene expression detected in this study suggest role of several intracellular pathways in the neurotoxicity of 3-NPA and the neuroprotection against 3-NPA-induced neurotoxicity by ALC.",
+              "doi": "10.2174/157015911795017182",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A20"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ccdc995bb7809d1c1a1d8638c03867ae896994c90e4ad2e015adfd0007e0aacb"
+              }
+            },
+            {
+              "title": "Nicotinamide nucleotide transhydrogenase dysfunction transcriptionally impacts mitochondrial β-oxidation and neuromuscular junction in M. Gastrocnemius of 24-day-old mice.",
+              "abstract": "Nicotinamide nucleotide transhydrogenase (NNT) is a key mitochondrial enzyme generating NADPH by utilizing the proton gradient produced by oxidative phosphorylation (OXPHOS), thereby linking redox homeostasis to mitochondrial energy metabolism. The commonly used C57BL/6 J mouse strain lacks functional NNT, yet its impact during early development remains unclear. This study aimed to characterize adaptive molecular responses in the gastrocnemius muscle of young mice with NNT deficiency. Congenic Nnt deficient (Nnt; BL6JRcc.BL6J-Nnt/Wuhap) and wild-type (Nnt; B6JRcc(B6J)-Nnt/Wuhap) mouse lines were newly created. Transcriptome profiling was performed on gastrocnemius muscles of 24-day-old male mice, followed by validation of key findings. Energy metabolism emerged as the most affected process, and Nnt mice exhibited significant reduced OXPHOS-related genes, particularly within complex I and complex V showing a downregulation of 42.2 % and 50 % of their subunits, respectively. Additionally, expression of Cpt1b, Cpt2, and Slc25a20, involved in fatty acid transport, was reduced by 33 %, 19 % and 23 %, respectively. These results may explain the trend toward decreased oxygen consumption rates using palmitoylcarnitine (29 %; P-value = 0.068) and octanoylcarnitine (18 %; P-value = 0.081). CHRNA1, a protein critical for neuromuscular junction (NMJ) function, was also downregulated by 31 %. These results suggest that functional loss of NNT impairs mitochondrial energy pathways and β-oxidation, potentially influencing NMJ in the gastrocnemius muscle during development.",
+              "doi": "10.1016/j.ijbiomac.2025.148609",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A20"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "92cb16918bac29f67b530351cd01e64a8dbaaa7bac427114e54fecdecf06fcb3"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A20 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A20 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A20']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A20",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A20",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A20",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A20": {
+          "status": "unavailable",
+          "gene": "SLC25A20",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A20": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A20",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A20']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A20 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A20"
+        ],
+        "confidence": 0.86,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A20": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.86；法官理由: CRISPR essentiality indicates knockout impairs growth, implying SLC25A20 supports proliferation, not inhibits it. Observations show metabolic/transport role and acidosis upregulation, no suppressive readout. Two independent LLM channels cor。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A20']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A20 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A20"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A20": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.66；法官理由: No direct NALM6 CRISPR evidence; database literature is association-level and not ALL-specific. E conflates essentiality with growth inhibition; two independent LLM votes favor nonessential/compensated. Thus SLC25A20 unlikely inhibits ALL t。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A20']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A20"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T09:59:47Z"
+  }
+}

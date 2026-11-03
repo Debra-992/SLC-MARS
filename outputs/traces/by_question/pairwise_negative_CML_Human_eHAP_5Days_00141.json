@@ -1,0 +1,425 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_5Days_00141",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC2A8 and SLC1A6 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "winner": "SLC1A6"
+  },
+  "effective_genes": [
+    "SLC2A8",
+    "SLC1A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_5Days_00141",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC2A8",
+        "SLC1A6"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "protein_function": "Sodium-dependent, high-affinity amino acid transporter that mediates the uptake of L-glutamate and also L-aspartate and D-aspartate.",
+              "aliases": "EAAT4",
+              "transport_type": "C / Na+, H+, K+"
+            },
+            {
+              "gene": "SLC2A8",
+              "protein_function": "Insulin-regulated facilitative hexose transporter that mediates the transport of glucose and fructose.",
+              "aliases": "GLUT8",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC1 High-affinity glutamate and  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC1 High-affinity glutamate and  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC1A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "EAAT4",
+              "target_properties": {
+                "name": "EAAT4"
+              }
+            },
+            {
+              "gene": "SLC2A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC2 Facilitative  GLUT transporter family",
+              "target_properties": {
+                "name": "SLC2 Facilitative  GLUT transporter family"
+              }
+            },
+            {
+              "gene": "SLC2A8",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "GLUT8",
+              "target_properties": {
+                "name": "GLUT8"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Transcriptomic profiling of nonneoplastic cortical tissues reveals epileptogenic mechanisms in dysembryoplastic neuroepithelial tumors.",
+              "abstract": "Low-grade dysembryoplastic neuroepithelial tumors (DNTs) are a frequent cause of drug-refractory epilepsy. Molecular mechanisms underlying seizure generation in these tumors are poorly understood. This study was conducted to identify altered genes in nonneoplastic epileptogenic cortical tissues (ECTs) resected from DNT patients during electrocorticography (ECoG)-guided surgery. RNA sequencing (RNAseq) was used to determine the differentially expressed genes (DEGs) in these high-spiking ECTs compared to non-epileptic controls. A total of 477 DEGs (180 upregulated; 297 downregulated) were observed in the ECTs compared to non-epileptic controls. Gene ontology analysis revealed enrichment of genes belonging to the following Kyoto Encyclopedia of Genes and Genomes (KEGG) pathways: (i) glutamatergic synapse; (ii) nitrogen metabolism; (iii) transcriptional misregulation in cancer; and (iv) protein digestion and absorption. The glutamatergic synapse pathway was enriched by DEGs such as GRM4, SLC1A6, GRIN2C, GRM2, GRM5, GRIN3A, and GRIN2B. Enhanced glutamatergic activity was observed in the pyramidal neurons of ECTs, which could be attributed to altered synaptic transmission in these tissues compared to non-epileptic controls. Besides glutamatergic synapse, altered expression of other genes such as GABRB1 (synapse formation), SLIT2 (axonal growth), and PROKR2 (neuron migration) could be linked to epileptogenesis in ECTs. Also, upregulation of GABRA6 gene in ECTs could underlie benzodiazepine resistance in these patients. Neural cell-type-specific gene set enrichment analysis (GSEA) revealed transcriptome of ECTs to be predominantly contributed by microglia and neurons. This study provides first comprehensive gene expression profiling of nonneoplastic ECTs of DNT patients and identifies genes/pathways potentially linked to epileptogenesis.",
+              "doi": "10.1007/s10142-022-00869-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "64da00f976903944256a7369ad8edfbc629f15d29079dc25950777659806ab53"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "GLUT8, the enigmatic intracellular hexose transporter.",
+              "abstract": "GLUT8 is a class III sugar transporter predominantly expressed in testis and brain. In contrast to the class I and class II transporters, hydrophobicity plots predict a short extracellular loop between transmembrane domain (TM)1 and TM2 and a long extracellular loop between TM9 and TM10 that contains the only N-glycosylation site. In vitro translated GLUT8 migrates as a 35-kDa protein that is glycosylated in the presence of microsomal membranes. In heterologous expression systems, glucose transport activity (Km of 2 mM) was inhibited by fructose and galactose. The transporter carries an NH2-terminal endosomal/lysosomal targeting motif ([DE]XXXL[LI]). Accordingly, constitutive GLUT8 has been found to be associated with endosomes and lysosomes but also with membranes of the endoplasmic reticulum. A similar distribution was detected after overexpression of wild-type or tagged GLUT8 in different cell systems. In these cells, none of the conventional signals tested induced a translocation of GLUT8 to the plasma membrane. Therefore, GLUT8 appears to catalyze transport of sugars or sugar derivatives through intracellular membranes. Slc2a8 knockout mice were viable, developed normally, and showed mild alterations in brain (increased proliferation of neuronal cells in dentate gyrus of the hippocampus, hyperactivity), heart (impaired transmission of electrical wave through the atrium), and sperm cells (reduced number of motile sperm cells associated with reduced mitochondrial membrane potential and ATP levels in sperm). The links between molecular function, cellular localization and phenotype of the knockout mouse is unclear and remains to be determined.",
+              "doi": "10.1152/ajpendo.91019.2008",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cafa855940c25d5dc9704502666fd8c970622b1a216e7fb963ff24a04b2bf596"
+              }
+            },
+            {
+              "title": "The effect of monosaccharide sugars and pyruvate on the differentiation and metabolism of sheep granulosa cells in vitro.",
+              "abstract": "The objective of this study was to investigate the effect of three monosaccharides or pyruvate on the ability of gonadotrophins to induce cellular proliferation and differentiation of cultured sheep granulosa cells. Lactate production and levels of mRNA expression for the glucose transporters SLC2A1, SLC2A4, SLC2A5 and SLC2A8 were also determined. No energy source in the culture media reduced cell number (50%) and oestradiol (E(2)) production. Dose and type of monosaccharide had a highly significant (P<0.001) effect on FSH-induced differentiation of the granulosa cells, and there was a highly significant interaction (P<0.001). Glucose supported higher levels of E(2) production than fructose, which was in turn higher than galactose (P<0.001). In contrast, pyruvate at low doses supported similar levels of E(2) production as glucose, but higher doses were markedly inhibitory to E(2) production (P<0.001). Cells responded positively to insulin (P<0.001) in the presence of all three monosaccharides. Glucose and the high doses of fructose resulted in the accumulation of lactate (P<0.001), but pyruvate, galactose and the low dose of fructose resulted in low lactate production. SLC2A5 expression was not detected and SLC2A8 expression was not affected, but SLC2A1 and SLC2A4 expression was depressed (P<0.05) by culture in the presence of fructose and glucose. These data show that glucose, metabolised under anoxic conditions to lactate, is the preferred energy substrate to support the gonadotrophin-induced differentiation of ovine granulosa cells in vitro, and that fructose and pyruvate, but not galactose, are alternative energy substrates despite marked differences in the way these substrates are metabolised.",
+              "doi": "10.1530/REP-10-0146",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3e158a4b3e66e0407e887c2f105ba8076b3b07f67327b1441e718a1d1396b65e"
+              }
+            },
+            {
+              "title": "Metabolic pathways utilized by the porcine conceptus, uterus, and placenta.",
+              "abstract": "Conceptus elongation and early placentation involve growth and remodeling that requires proliferation and migration of cells. This demands conceptuses expend energy before establishment of a placenta connection and when they are dependent upon components of histotroph secreted or transported into the uterine lumen from the uterus. Glucose and fructose, as well as many amino acids (including arginine, aspartate, glutamine, glutamate, glycine, methionine, and serine), increase in the uterine lumen during the peri-implantation period. Glucose and fructose enter cells via their transporters, SLC2A, SLC2A3, and SLC2A8, and amino acids enter the cells via specific transporters that are expressed by the conceptus trophectoderm. However, porcine conceptuses develop rapidly through extensive cellular proliferation and migration as they elongate and attach to the uterine wall resulting in increased metabolic demands. Therefore, coordination of multiple metabolic biosynthetic pathways is an essential aspect of conceptus development. Oxidative metabolism primarily occurs through the tricarboxylic acid (TCA) cycle and the electron transport chain, but proliferating and migrating cells, like the trophectoderm of pigs, enhance aerobic glycolysis. The glycolytic intermediates from glucose can then be shunted into the pentose phosphate pathway and one-carbon metabolism for the de novo synthesis of nucleotides. A result of aerobic glycolysis is limited availability of pyruvate for maintaining the TCA cycle, and trophectoderm cells likely replenish TCA cycle metabolites primarily through glutaminolysis to convert glutamine into TCA cycle intermediates. The synthesis of ATP, nucleotides, amino acids, and fatty acids through these biosynthetic pathways is essential to support elongation, migration, hormone synthesis, implantation, and early placental development of conceptuses.",
+              "doi": "10.1002/mrd.23570",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f65c93106c1eaa890e0e208aefcefba014bd3ac02beeb9329a0c3959914637d6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC2A8 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC2A8 and SLC1A6 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC2A8', 'SLC1A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC2A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC2A8",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC2A8": {
+          "status": "unavailable",
+          "gene": "SLC2A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A6": {
+          "status": "unavailable",
+          "gene": "SLC1A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC2A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC2A8",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC1A6",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A8', 'SLC1A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC1A6 strength=0.10, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC2A8",
+        "candidates": [
+          "SLC2A8",
+          "SLC1A6"
+        ],
+        "confidence": 0.6,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A8": 0.1,
+          "SLC1A6": 0.1
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC2A8': 2}，最终智能体辩论后裁决：winner=SLC2A8 answer=None conf=0.6；法官理由: Two independent LLM votes favor SLC2A8; SLC1A6/EAAT4 is neuronal and unlikely essential in eHAP CML. Graph data show transporter roles but no CRISPR readout, so confidence remains moderate.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A8', 'SLC1A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC1A6 strength=0.10, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC2A8",
+        "candidates": [
+          "SLC2A8",
+          "SLC1A6"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A8": 0.1,
+          "SLC1A6": 0.1
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC2A8': 2}，最终智能体辩论后裁决：winner=SLC2A8 answer=None conf=0.61；法官理由: Evidence channel abstained; no direct CRISPR readout. Two independent LLM votes favor SLC2A8: CML/eHAP likely depends more on GLUT8-mediated glucose uptake than neuronal EAAT4 glutamate transport, making SLC2A8 loss more plausible to inhibi。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A8', 'SLC1A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC2A8",
+          "SLC1A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T02:20:32Z"
+  }
+}

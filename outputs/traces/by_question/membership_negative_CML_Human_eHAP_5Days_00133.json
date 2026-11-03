@@ -1,0 +1,485 @@
+{
+  "qid": "membership_negative_CML_Human_eHAP_5Days_00133",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC38A7 inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC38A7"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_CML_Human_eHAP_5Days_00133",
+      "status": "ok",
+      "summary": "检索到 4 类证据、18 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC38A7"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A7",
+              "protein_function": "Symporter that selectively cotransports sodium ions and amino acids, such as L-glutamine and L-asparagine from the lysosome into the cytoplasm.",
+              "aliases": "SNAT7, Sodium-Coupled Neutral Amino Acid Transporter 7",
+              "transport_type": "/ Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC38A7",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A7",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A7",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A7",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A7",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A7",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Clinical and biological impact of SNAT7 in lung adenocarcinoma: implications for prognosis and treatment.",
+              "abstract": "Glutamine metabolism plays a crucial role in cancer cell proliferation and modulates the tumour microenvironment. High expression of glutamine transporters is associated with poor prognosis in non-small cell lung cancer. SNAT7, encoded by SLC38A7, facilitates glutamine transport from lysosomes. However, its function and clinical significance in lung adenocarcinoma remain unclear. Immunohistochemistry (IHC) was performed with samples from 373 patients with completely resected lung adenocarcinoma, and the association between SNAT7 expression, clinicopathological features, and prognosis was examined. In addition, the biological findings were investigated in lung adenocarcinoma cell lines. Based on IHC analysis, we classified patients into high (n = 226, 60.6%) and low SNAT7 expression (n = 147, 39.4%) groups. High SNAT7 expression was substantially associated with male sex, smoking status, high maximum standardised uptake value, advanced pathological stage, and pleural, lymphatic, and vascular invasion, compared to low SNAT7 expression. Patients with high SNAT7 expression demonstrated substantially worse recurrence-free survival (RFS) and overall survival rates. Multivariable analysis revealed that high SNAT7 expression was an independent prognostic factor for RFS. In addition, SLC38A7 knockdown induced a decrease in proliferation with G1 arrest in lung adenocarcinoma cell lines. Our findings demonstrate that SNAT7 plays a pivotal role in promoting tumour malignancy and is significantly associated with poor prognosis in lung adenocarcinoma. These findings suggest that SNAT7 is a potential therapeutic target in lung adenocarcinoma.",
+              "doi": "10.1007/s10147-025-02851-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "978b409a1984e3266f88eaf76e21b13faa33f5f41b5f69b1fa5ca999a0498a9f"
+              }
+            },
+            {
+              "title": "{'sup': '6', '#text': 'N-methyladenosine modification of SLC38A7 promotes cell migration, invasion, oxidative phosphorylation, and mitochondrial function in gastric cancer.'}",
+              "abstract": "Solute carrier (SLC) 38 family, responsible for trans-membrane transport of neutral amino acids, plays a role in the proliferation, invasion, and metastasis of cancer cells, but its role in gastric cancer (GC) progression remains unclear. This study aimed to explore the biological effects of SLC38A7 and its regulatory mechanisms in GC. RNA expression data, tumor tissue specimens, and GC cell lines were used for bioinformatics and experimental analyses. Cell Counting Kit-8 assay, wound healing assay, and Transwell invasion assay were used to evaluate cell viability, migration, and invasion, respectively. Oxidative phosphorylation, mitochondrial membrane potential, and expression of the critical proteins in the mitochondrial respiratory chain were assayed using extracellular flux analysis, flow cytometry, and Western blot, respectively. RNA immunoprecipitation assay was used to explore the mechanisms of N6-methyladenosine (mA) methylation. SLC38A7 was upregulated in GC tissue and cell lines. SLC38A7 silencing suppressed cell viability, migration, invasion, oxidative phosphorylation, and mitochondrial function in cancer cells. SLC38A7 overexpression had the opposite biological effects. Interactions between SLC38A7 and methyltransferase like 3 (METTL3) or insulin-like growth factor 2 mRNA-binding protein 2 (IGF2BP2) were detected. SLC38A7 mRNA stability was maintained by METTL3-IGF2BP2 axis in an mA-dependent manner. Our results suggest that SLC38A7, stabilized by METTL3 and IGF2BP2-mediated mA methylation, enhances cell viability, migration, invasion, oxidative phosphorylation, and mitochondrial function in GC, highlighting its role as a potential therapeutic target for GC.",
+              "doi": "10.1016/j.jbc.2024.107843",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "da6139a67c2eb23e05d72f586068419963c535b03f172d3bd423c598c3310c50"
+              }
+            },
+            {
+              "title": "A metabolic shift toward glycolysis enables cancer cells to maintain survival upon concomitant glutamine deprivation and V-ATPase inhibition.",
+              "abstract": "It is widely known that most cancer cells display an increased reliance on glutaminolysis to sustain proliferation and survival. Combining glutamine deprivation with additional anti-cancer therapies is an intensively investigated approach to increase therapeutic effectiveness. In this study, we examined a combination of glutamine deprivation by starvation or pharmacological tools, with the anti-cancer agent archazolid, an inhibitor of the lysosomal V-ATPase. We show that glutamine deprivation leads to lysosomal acidification and induction of pro-survival autophagy, which could be prevented by archazolid. Surprisingly, a combination of glutamine deprivation with archazolid did not lead to synergistic induction of cell death or reduction in proliferation. Investigating the underlying mechanisms revealed elevated expression and activity of amino acid transporters SLC1A5, SLC38A1 upon starvation, whereas archazolid had no additional effect. Furthermore, we found that the export of lysosomal glutamine derived from exogenous sources plays no role in the phenotype as knock-down of SLC38A7, the lysosomal glutamine exporter, could not increase V-ATPase inhibition-induced cell death or reduce proliferation. Analysis of the cellular metabolic phenotype revealed that glutamine deprivation led to a significant increase in glycolytic activity, indicated by an elevated glycolytic capacity and reserve, when V-ATPase function was inhibited concomitantly. This was confirmed by increased glutamine uptake, augmented lactate production, and an increase in hexokinase activity. Our study, therefore, provides evidence, that glutamine deprivation induces autophagy, which can be prevented by simultaneous inhibition of V-ATPase function. However, this does not lead to a therapeutic benefit, as cells are able to circumvent cell death and growth inhibition by a metabolic shift toward glycolysis.",
+              "doi": "10.3389/fnut.2023.1124678",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0c59a83aba2bd0cbf5c4d78aa984384f94df562bab21afe5d90c82b573620604"
+              }
+            },
+            {
+              "title": "Spatiotemporal modeling of chemoresistance evolution in breast tumors uncovers dependencies on SLC38A7 and SLC46A1.",
+              "abstract": "In solid tumors, drug concentrations decrease with distance from blood vessels. However, cellular adaptations accompanying the gradated exposure of cancer cells to drugs are largely unknown. Here, we modeled the spatiotemporal changes promoting chemotherapy resistance in breast cancer. Using pairwise cell competition assays at each step during the acquisition of chemoresistance, we reveal an important priming phase that renders cancer cells previously exposed to sublethal drug concentrations refractory to dose escalation. Therapy-resistant cells throughout the concentration gradient display higher expression of the solute carriers SLC38A7 and SLC46A1 and elevated intracellular concentrations of their associated metabolites. Reduced levels of SLC38A7 and SLC46A1 diminish the proliferative potential of cancer cells, and elevated expression of these SLCs in breast tumors from patients correlates with reduced survival. Our work provides mechanistic evidence to support dose-intensive treatment modalities for patients with solid tumors and reveals two members of the SLC family as potential actionable targets.",
+              "doi": "10.1016/j.celrep.2023.113191",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a484d5ec946fc3b4c2c1eca1a6d567cffbcd3175c07d94e1e26d37ced15e5df9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC38A7 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC38A7 inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC38A7']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC38A7",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC38A7",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC38A7": {
+          "status": "unavailable",
+          "gene": "SLC38A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC38A7": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A7",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC38A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.35 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC38A7"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A7": 3.35
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC38A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.35 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC38A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.35 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC38A7"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A7": 3.35
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC38A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.35 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A7']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC38A7"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T04:49:36Z"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "ablation": "ablate_compute",
+  "trace_version": "22",
+  "n": 1,
+  "seed": 5,
+  "buckets": [
+    "pairwise",
+    "membership"
+  ],
+  "n_valid": 1,
+  "summary": {
+    "n": 1,
+    "correct": 1,
+    "wrong": 0,
+    "abstain": 0,
+    "coverage": 1.0,
+    "acc_answered": 1.0,
+    "acc_overall": 1.0,
+    "net_vs_chance": 0.5
+  },
+  "baseline_v20": {
+    "n": 1,
+    "correct": 1,
+    "wrong": 0,
+    "abstain": 0,
+    "coverage": 1.0,
+    "acc_answered": 1.0,
+    "acc_overall": 1.0,
+    "net_vs_chance": 0.5
+  },
+  "results": [
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00104",
+      "bucket": "pairwise",
+      "task_type": "pairwise_negative",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr vs Crispr JQ1 as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC1A6 is more likely to inhibit Breast Cancer's Tumor Drug Resistence?",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr vs Crispr JQ1"
+      },
+      "ground_truth": {
+        "winner": "SLC25A1"
+      },
+      "effective_genes": [
+        "SLC25A1",
+        "SLC1A6"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A1', 'SLC1A6']",
+            "status": "ok",
+            "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC25A1",
+            "candidates": [
+              "SLC25A1",
+              "SLC1A6"
+            ],
+            "confidence": 0.551,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A1": 4.45,
+              "SLC1A6": 0.1
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A1', 'SLC1A6']",
+            "status": "ok",
+            "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC25A1",
+            "candidates": [
+              "SLC25A1",
+              "SLC1A6"
+            ],
+            "confidence": 0.551,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A1": 4.45,
+              "SLC1A6": 0.1
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:25:07Z"
+      }
+    }
+  ]
+}

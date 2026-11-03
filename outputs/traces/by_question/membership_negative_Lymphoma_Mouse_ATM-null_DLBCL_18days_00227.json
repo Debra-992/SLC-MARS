@@ -1,0 +1,288 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00227",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC17A8 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC17A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00227",
+      "status": "ok",
+      "summary": "检索到 4 类证据、3 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC17A8"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A8",
+              "protein_function": "Transports L-glutamate as well as multiple ions such as chloride, sodium and phosphate. Mediates the uptake of L-glutamate into synaptic vesicles.",
+              "aliases": "VGLUT3, VESLT, DFNA25",
+              "transport_type": "electrogenic, Cl- dependent"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "MicroRNA-626 inhibits mTOR pathways activity of retinal pigment epithelial cells by targeting SLC7A5 in human ARPE-19 Cells.",
+              "abstract": "Recent studies have shown that miRNAs are associated with the pathological process involved in age-related macular degeneration (AMD). However, the microRNA-mediated post-transcriptional regulation in human retinal pigment epithelium (RPE) cells has not been adequately investigated. We investigated how miR-626 inhibits mTOR activity pathways and pathway-related genes in retinal pigment epithelial cells by targeting the solute carrier family seven-member 5 (SLC7A5) in ARPE19 cells.    We transfected mir-626 mimic, mir-626 inhibitör and siRNA in human retinal pigment epithelial cell line was examined using RT-PCR and western blot, respectively. We knocked down mir-626 levels and overexpression by mir-626-siRNA transfection of human RPE cell lines, and using an MTT assay, we assessed the role of SLC7A5 on RPE cell proliferation. We additionally measured the expression of mTOR, Akt1, caspase 3, Bax, SLC17A7, SLC17A8, Creb1, Pten, HIF1A, HIFI. The findings demonstrate that mir-626 inhibits SLC7A5 gene expression and proliferation of ARPE-19 cells. Short interfering RNA (siRNA) mediated suppression of SLC7A5, a predicted target of mir-626, has the same effect on ARPE-19 cells. We identified how miR-626 causes apoptosis and macula degeneration in RPE cells by targeting SLC7A5 through the mTOR signaling pathway. miR-626 was an essential regulator of the expression of the Slc7a5 gene. Importantly, we determined that miR-626 is essential to play a role in AMD. This research project shows that SLC7A5 is a direct target of mir-626 in ARPE-19 cells for the first time.",
+              "doi": "10.14715/cmb/2023.69.10.3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9386e5dc0150924d7ed679bb831ae1520c1066195f2599de34a6bb6b04816957"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC17A8 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC17A8 inhibit Lymphoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=download_required）；候选基因=['SLC17A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC17A8",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC17A8.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC17A8",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC17A8": {
+          "status": "ok",
+          "gene": "SLC17A8",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC17A8.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC17A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC17A8",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC17A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC17A8"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A8": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC17A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC17A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC17A8"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A8": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC17A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC17A8']",
+        "status": "ok",
+        "summary": "SLC17A8（VGLUT3）主要作为囊泡谷氨酸转运体参与神经递质/内分泌释放，现有参数化知识中缺乏其在淋巴瘤、尤其是ATM-null DLBCL中抑制肿瘤生长的明确证据；在CRISPR/MAGeCK背景下，它更可能不是已知的淋巴瘤生长抑制因子。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC17A8"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC17A8（VGLUT3）主要作为囊泡谷氨酸转运体参与神经递质/内分泌释放，现有参数化知识中缺乏其在淋巴瘤、尤其是ATM-null DLBCL中抑制肿瘤生长的明确证据；在CRISPR/MAGeCK背景下，它更可能不是已知的淋巴瘤生长抑制因子。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T08:40:36Z"
+  }
+}

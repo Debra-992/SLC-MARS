@@ -1,0 +1,427 @@
+{
+  "qid": "pairwise_negative_Melanoma_Human_A375_00295",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC17A5 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "A375",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 6days vs Crispr 10days"
+  },
+  "ground_truth": {
+    "winner": "SLC35B1"
+  },
+  "effective_genes": [
+    "SLC35B1",
+    "SLC17A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Human_A375_00295",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B1",
+        "SLC17A5"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "A375",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 6days vs Crispr 10days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A5",
+              "protein_function": "Multifunctional anion transporter that operates via two distinct transport mechanisms, namely proton-coupled anion cotransport and membrane potential-dependent anion transport. Electroneutral proton-coupled acidic monosaccharide symporter, with a sugar to proton stoichiometry of 1:1. Exports glucuronic acid and free sialic acid derived from sialoglycoconjugate degradation out of lysosomes, driven by outwardly directed lysosomal pH gradient. May regulate lysosome function and metabolism of sialylated conjugates that impact oligodendrocyte lineage differentiation and myelinogenesis in the central nervous system. Electrogenic proton-coupled nitrate symporter that transports nitrate ions across the basolateral membrane of salivary gland acinar cells, with nitrate to proton stoichiometry of 2:1. Uses membrane potential to drive the uptake of acidic amino acids and peptides into synaptic vesicles. Responsible for synaptic vesicular storage of L-aspartate and L-glutamate in pinealocytes as well as vesicular uptake of N-acetyl-L-aspartyl-L-glutamate neuropeptide, relevant to aspartegic-associated glutamatergic neurotransmission and activation of metabotropic receptors that inhibit subsequent transmitter release. Receptor for CM101, a polysaccharide produced by group B Streptococcus with antipathoangiogenic properties.",
+              "aliases": "SIASD, SIALIN, ISSD, NSD, SLD, H(+)/Sialic Acid Cotransporter",
+              "transport_type": "C / H+"
+            },
+            {
+              "gene": "SLC35B1",
+              "protein_function": "ATP:ADP antiporter that catalyzes the exchange of ATP and ADP across the endoplasmic reticulum (ER) membrane. Regulates ER energy metabolism and protein biogenesis.",
+              "aliases": "SLC35B1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35B1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Dietary nitrate maintains intestinal epithelia homeostasis in aged mice.",
+              "abstract": "The intestinal tract, which is the primary site of digestion and absorption of nutrients, is one of the most vulnerable organs during aging. Dietary nitrate, which is mainly derived from the diet and absorbed in the intestinal tract, is a key messenger that connecting oral and general health. However, whether dietary nitrate regulates intestinal tract homeostasis remains unclear. Our data revealed that the serum and salivary nitrate levels decreased during mice aging. The functional proteins of the epithelial barrier (E-cadherin, Claudin-1 and Zonula Occludens-1) in the colon tissues decreased during the aging process. Long-term nitrate supplement in drinking water restored the serum and salivary nitrate levels and increased the functional proteins expression of the colon epithelial barrier. Dietary nitrates increase the relative abundance of some intestinal probiotics, particularly those associated with the production of short-chain fatty acids, such as Blautia, Alloprevotella, Butyricicoccus, and Ruminococcaceae, while promoting the butyric acid production in the colon. Moreover, the expression of Sialin (encoded by Slc17a5), which is a nitrate transporter, increased in the colon epithelial cells by nitrate supplementation. The epithelial cell-conditional Slc17a5-knockout mutant mice (K14-cre; Slc17a5) revealed that the functional proteins expression of the colon epithelial barrier and the proliferation of PCNA-positive intestinal epithelial cells in the colon crypts was significantly decreased compared with those of the K14-cre; Slc17a5 mice. Taken together, our findings suggested that nitrate supplementations were associated with the increased expression of colonic epithelial barriers-related proteins and the increased Sialin expression. Nitrate may serve as a potential therapeutic approach in maintaining aged colonic homeostasis.",
+              "doi": "10.1007/s10522-024-10127-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "48ce39fe89b10049277b1e1d7c63fac2c520fdb0e3cce0b55e400e8f2f442114"
+              }
+            },
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Inorganic nitrate attenuates neuroinflammation after traumatic brain injury via Sialin.",
+              "abstract": "Traumatic brain injury (TBI) is a significant concern in neurosurgery due to its severe consequences. Neuroinflammation is a critical response following the initial brain insult, leading to cumulative neuronal damage and chronic neurodegeneration, with limited effective treatments available. Inorganic nitrate, an essential nutrient known for its anti-inflammatory properties, is widely utilized in disease prevention and treatment. This study investigated the short-term effects of inorganic nitrate on neuroinflammation and explored the role of Sialin in neuroprotection during the early phase post-TBI. Male C57BL/6 mice underwent TBI using an electrically controlled cortical impactor (eCCI) model. Animals were administered nitrate or sterile saline intragastrically twice daily for 1,3 or 7 days post-injury (dpi) until sacrifice. Neurobehavioral function was evaluated, and brain tissues were collected for morphological, histopathological, and molecular analyses. Nitrate enhanced neurobehavioral function recovery and improved neurological outcomes at 3 dpi. While nitrate did not significantly reduce structural damage, it did decrease neuronal loss and apoptosis in the early stages of TBI. RNA-seq of injured brains at 3 dpi revealed more genes and signaling pathways linked to immune processes following early nitrate treatment compared to the vehicle, indicating inflammation inhibition. This was further confirmed at the mRNA and protein levels. Specifically, key gene markers of inflammatory mediators were notably suppressed by early nitrate compared to the corresponding TBI vehicle groups. However, the knockdown of Slc17a5 reduced the effectiveness of nitrate on short-term neurobehavior in TBI mice and nullified its anti-inflammatory effects. Inorganic nitrate can improve neurological outcomes and attenuate neuroinflammation following TBI, attributed in part to the normalisation of the inflammatory response mediated by Sialin. The discovery lays a promising groundwork for the protective effects of nitrate in TBI conditions.",
+              "doi": "10.1016/j.tice.2025.102955",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0646ce271ef9ff9b76efd9ff2f8f3e72526fbf4f34e1a31b852fd5d4f31444a3"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "Effects of glucose on lactose synthesis in mammary epithelial cells from dairy cow.",
+              "abstract": "Lactose, as the primary osmotic component in milk, is the major determinant of milk volume. Glucose is the primary precursor of lactose. However, the effect of glucose on lactose synthesis in dairy cow mammary glands and the mechanism governing this process are poorly understood. Here we showed that glucose has the ability to induce lactose synthesis in dairy cow mammary epithelial cells, as well as increase cell viability and proliferation. A concentration of 12 mM glucose was the optimum concentration to induce cell growth and lactose synthesis in cultured dairy cow mammary epithelial cells. In vitro, 12 mM glucose enhanced lactose content, along with the expression of genes involved in glucose transportation and the lactose biosynthesis pathway, including GLUT1, SLC35A2, SLC35B1, HK2, β4GalT-I, and AKT1. In addition, we found that AKT1 knockdown inhibited cell growth and lactose synthesis as well as expression of GLUT1, SLC35A2, SLC35B1, HK2, and β4GalT-I. Glucose induces cell growth and lactose synthesis in dairy cow mammary epithelial cells. Protein kinase B alpha acts as a regulator of metabolism in dairy cow mammary gland to mediate the effects of glucose on lactose synthesis.",
+              "doi": "10.1186/s12917-016-0704-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7481668337f5074651447ea1cfb0116331aac5b1e8041070989ba69ad4b4b891"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B1 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC17A5 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC35B1', 'SLC17A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC17A5",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC35B1",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.9757",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B1": {
+          "status": "unavailable",
+          "gene": "SLC35B1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC17A5": {
+          "status": "unavailable",
+          "gene": "SLC17A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B1": {
+          "status": "ok",
+          "gene": "SLC35B1",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.9757",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC17A5": {
+          "status": "unavailable",
+          "gene": "SLC17A5",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC17A5']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC17A5"
+        ],
+        "confidence": 0.34,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC17A5": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.34；法官理由: E abstained; L1/L2 independently chose SLC35B1. Although their sialylation reasoning is wrong, SLC35B1's ER ATP/ADP role in protein biogenesis makes it more plausible essential than SLC17A5 lysosomal sialic acid export. Weak but consistent 。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC17A5']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC17A5"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC17A5": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.58；法官理由: Evidence channel abstained, but two independent LLM votes favor SLC35B1. Its ER ATP/ADP antiporter role in protein biogenesis is more likely essential for A375 growth than SLC17A5 lysosomal sialic-acid export, which appears redundant. Confi。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC17A5']",
+        "status": "ok",
+        "summary": "SLC35B1 encodes a Golgi UDP-sugar transporter involved in glycosylation and glycosaminoglycan biosynthesis, processes that are often essential for melanoma cell proliferation. In a CRISPR screen comparing 6 vs 10 days, knockout of such a biosynthetic transporter is more likely to cause cell depletion and therefore inhibit A375 melanoma tumor growth than knockout of SLC17A5, a lysosomal phosphate transporter less commonly tied to core cancer-cell essentiality.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC17A5"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35B1 encodes a Golgi UDP-sugar transporter involved in glycosylation and glycosaminoglycan biosynthesis, processes that are often essential for melanoma cell proliferation. In a CRISPR screen comparing 6 vs 10 days, knockout of such a biosynthetic transporter is more likely to cause cell depletion and therefore inhibit A375 melanoma tumor growth than knockout of SLC17A5, a lysosomal phosphate transporter less commonly tied to core cancer-cell essentiality.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:24:54Z"
+  }
+}

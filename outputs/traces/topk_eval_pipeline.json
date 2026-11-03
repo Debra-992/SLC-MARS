@@ -1,0 +1,1275 @@
+{
+  "system": "pipeline",
+  "hint": "ppr_order",
+  "seeds": [
+    42,
+    7,
+    13
+  ],
+  "thinking": "OFF",
+  "dry_run": false,
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "elapsed_s": 33.165000438690186,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC16A1",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC2A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC2A1",
+        "SLC3A2"
+      ],
+      "ndcg5": 0.0885169904762701,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.27777777777777773,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": -0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.16666666666666666
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC2A1",
+            "SLC3A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"在ALL细胞系（如NALM6）中，SLC7A11、SLC1A5和SLC7A5是关键的氨基酸转运体，其缺失会严重限制谷胱甘肽合成及mTOR信号通路从而抑制肿瘤生长；SLC2A1负责葡萄糖",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 159,
+            "total": 590,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC3A2",
+            "SLC7A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A5\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC1A5/SLC7A5 are critical for glutamine/glutamate uptake and redox homeos",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 165,
+            "total": 596,
+            "calls": 1
+          },
+          "ndcg5": 0.0975319952917262,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC2A1",
+            "SLC3A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) and SLC1A5/SLC7A5 (glutamine/neut",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 180,
+            "total": 611,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"在ALL细胞系（如NALM6）中，SLC7A11、SLC1A5和SLC7A5是关键的氨基酸转运体，其缺失会严重限制谷胱甘肽合成及mTOR信号通路从而抑制肿瘤生长；SLC2A1负责葡萄糖",
+      "tokens": {
+        "prompt": 1293,
+        "completion": 504,
+        "total": 1797,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC33A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC2A1",
+        "SLC3A2"
+      ],
+      "ndcg5": 0.09352631411805074,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.25,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": -0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.16666666666666666
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC2A1",
+            "SLC3A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) and SLC1A5/SLC7A5 (glutamine/leuc",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 177,
+            "total": 608,
+            "calls": 1
+          },
+          "ndcg5": 0.09352631411805074,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC3A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) and SLC7A5/SLC1A5 (amino acid tra",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 176,
+            "total": 607,
+            "calls": 1
+          },
+          "ndcg5": 0.09352631411805074,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC2A1",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) is critical for glutathione synt",
+          "error": "",
+          "tokens": {
+            "prompt": 431,
+            "completion": 158,
+            "total": 589,
+            "calls": 1
+          },
+          "ndcg5": 0.09352631411805074,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) and SLC1A5/SLC7A5 (glutamine/leuc",
+      "tokens": {
+        "prompt": 1293,
+        "completion": 511,
+        "total": 1804,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pool_size": 5,
+      "gt": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC25A1",
+        "SLC25A11",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC30A1"
+      ],
+      "ndcg5": 0.9749409596636767,
+      "kendall_tau": 0.13333333333333333,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC25A1",
+            "SLC25A11",
+            "SLC35F2",
+            "SLC25A51",
+            "SLC30A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\"SLC25A1\", \"SLC25A11\", \"SLC35F2\", \"SLC25A51\", \"SLC30A1\"],\n  \"rationale\": \"SLC25A1 and SLC25A11 are critical mitochondrial citrate/malate transporters driving metabolic reprogramming in",
+          "error": "",
+          "tokens": {
+            "prompt": 342,
+            "completion": 158,
+            "total": 500,
+            "calls": 1
+          },
+          "ndcg5": 0.9699610412610776,
+          "kendall_tau": 0.0,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC25A1",
+            "SLC25A11",
+            "SLC30A1",
+            "SLC25A51",
+            "SLC35F2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC25A1\",\n    \"SLC25A11\",\n    \"SLC30A1\",\n    \"SLC25A51\",\n    \"SLC35F2\"\n  ],\n  \"rationale\": \"SLC25A1 and SLC25A11 are critical mitochondrial citrate/malate transporters driving le",
+          "error": "",
+          "tokens": {
+            "prompt": 342,
+            "completion": 155,
+            "total": 497,
+            "calls": 1
+          },
+          "ndcg5": 0.9774309188649764,
+          "kendall_tau": 0.2,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC25A1",
+            "SLC25A11",
+            "SLC30A1",
+            "SLC25A51",
+            "SLC35F2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC25A1\",\n    \"SLC25A11\",\n    \"SLC30A1\",\n    \"SLC25A51\",\n    \"SLC35F2\"\n  ],\n  \"rationale\": \"SLC25A1 and SLC25A11 are critical mitochondrial citrate/malate transporters driving me",
+          "error": "",
+          "tokens": {
+            "prompt": 342,
+            "completion": 153,
+            "total": 495,
+            "calls": 1
+          },
+          "ndcg5": 0.9774309188649764,
+          "kendall_tau": 0.2,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\"SLC25A1\", \"SLC25A11\", \"SLC35F2\", \"SLC25A51\", \"SLC30A1\"],\n  \"rationale\": \"SLC25A1 and SLC25A11 are critical mitochondrial citrate/malate transporters driving metabolic reprogramming in",
+      "tokens": {
+        "prompt": 1026,
+        "completion": 466,
+        "total": 1492,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pool_size": 19,
+      "gt": [
+        "SLC11A2",
+        "SLC16A1",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "ppr_named": 16,
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC9A1",
+        "SLC38A7"
+      ],
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0,
+      "ppr": {
+        "ndcg5": 0.13701357367329156,
+        "kendall_tau": 0.4,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.25
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC9A1",
+            "SLC38A7"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\",\n    \"SLC38A7\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is a critical driver of ferroptosis resistance and proliferation in MCF7; SLC",
+          "error": "",
+          "tokens": {
+            "prompt": 444,
+            "completion": 159,
+            "total": 603,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC38A7",
+            "SLC9A1",
+            "SLC7A11"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC38A7\",\n    \"SLC9A1\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"SLC7A5 and SLC1A5 are critical for glutamine uptake and mTORC1 activation, driving prolifer",
+          "error": "",
+          "tokens": {
+            "prompt": 444,
+            "completion": 144,
+            "total": 588,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC9A1",
+            "SLC38A7"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\",\n    \"SLC38A7\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and is a top dependency in MCF7; SLC1A5/SLC7A5 ",
+          "error": "",
+          "tokens": {
+            "prompt": 444,
+            "completion": 145,
+            "total": 589,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\",\n    \"SLC38A7\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is a critical driver of ferroptosis resistance and proliferation in MCF7; SLC",
+      "tokens": {
+        "prompt": 1332,
+        "completion": 448,
+        "total": 1780,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pool_size": 20,
+      "gt": [
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC16A3",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC9A1"
+      ],
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.0625
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC16A3",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC16A3\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 drives ferroptosis resistance and drug tolerance in MCF7; SLC16A3 (MCT4) mediates l",
+          "error": "",
+          "tokens": {
+            "prompt": 447,
+            "completion": 150,
+            "total": 597,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC16A3",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC16A3\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and drug tolerance in breast cancer; SLC16A3 (M",
+          "error": "",
+          "tokens": {
+            "prompt": 447,
+            "completion": 141,
+            "total": 588,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC7A5",
+            "SLC16A3",
+            "SLC1A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC16A3\",\n    \"SLC1A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC7A5 (LAT1) are key drivers of ferroptosis resistance and amino acid me",
+          "error": "",
+          "tokens": {
+            "prompt": 447,
+            "completion": 160,
+            "total": 607,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC16A3\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 drives ferroptosis resistance and drug tolerance in MCF7; SLC16A3 (MCT4) mediates l",
+      "tokens": {
+        "prompt": 1341,
+        "completion": 451,
+        "total": 1792,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pool_size": 19,
+      "gt": [
+        "SLC7A5",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC16A1",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC25A4",
+        "SLC39A8"
+      ],
+      "ndcg5": 0.31813566609293514,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.5,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.6,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.125
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC16A1",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC25A4",
+            "SLC39A8"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\"\n  ],\n  \"rationale\": \"SLC16A1 is the direct target of the knockout experiment, making it the primary determinant",
+          "error": "",
+          "tokens": {
+            "prompt": 453,
+            "completion": 155,
+            "total": 608,
+            "calls": 1
+          },
+          "ndcg5": 0.31813566609293514,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC16A1",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC25A4",
+            "SLC39A8"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\"\n  ],\n  \"rationale\": \"SLC16A1 (MCT1) is the direct target whose knockout inhibits lactate transport and tumor su",
+          "error": "",
+          "tokens": {
+            "prompt": 453,
+            "completion": 129,
+            "total": 582,
+            "calls": 1
+          },
+          "ndcg5": 0.31813566609293514,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC16A1",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC25A4",
+            "SLC39A8"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\"\n  ],\n  \"rationale\": \"SLC16A1 is the direct target whose knockout inhibits lactate efflux and tumor survival; SL",
+          "error": "",
+          "tokens": {
+            "prompt": 453,
+            "completion": 143,
+            "total": 596,
+            "calls": 1
+          },
+          "ndcg5": 0.31813566609293514,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.5
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\"\n  ],\n  \"rationale\": \"SLC16A1 is the direct target of the knockout experiment, making it the primary determinant",
+      "tokens": {
+        "prompt": 1359,
+        "completion": 427,
+        "total": 1786,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pool_size": 5,
+      "gt": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC2A1",
+        "SLC38A2",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC25A26"
+      ],
+      "ndcg5": 0.8066284613120982,
+      "kendall_tau": -0.5333333333333333,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC2A1",
+            "SLC38A2",
+            "SLC25A32",
+            "SLC33A1",
+            "SLC25A26"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC2A1\",\n    \"SLC38A2\",\n    \"SLC25A32\",\n    \"SLC33A1\",\n    \"SLC25A26\"\n  ],\n  \"rationale\": \"SLC2A1 (GLUT1) is the primary glucose transporter critical for DLBCL's high glycolytic ",
+          "error": "",
+          "tokens": {
+            "prompt": 326,
+            "completion": 175,
+            "total": 501,
+            "calls": 1
+          },
+          "ndcg5": 0.8029455636823465,
+          "kendall_tau": -0.6,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC2A1",
+            "SLC38A2",
+            "SLC25A32",
+            "SLC25A26",
+            "SLC33A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC2A1\",\n    \"SLC38A2\",\n    \"SLC25A32\",\n    \"SLC25A26\",\n    \"SLC33A1\"\n  ],\n  \"rationale\": \"SLC2A1 (GLUT1) is a critical driver of glycolysis in DLBCL, making it the top candidate",
+          "error": "",
+          "tokens": {
+            "prompt": 326,
+            "completion": 163,
+            "total": 489,
+            "calls": 1
+          },
+          "ndcg5": 0.8139942565716015,
+          "kendall_tau": -0.4,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC2A1",
+            "SLC38A2",
+            "SLC25A32",
+            "SLC33A1",
+            "SLC25A26"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC2A1\",\n    \"SLC38A2\",\n    \"SLC25A32\",\n    \"SLC33A1\",\n    \"SLC25A26\"\n  ],\n  \"rationale\": \"SLC2A1 (GLUT1) is a critical driver of glycolysis in DLBCL, making its inhibition highl",
+          "error": "",
+          "tokens": {
+            "prompt": 326,
+            "completion": 145,
+            "total": 471,
+            "calls": 1
+          },
+          "ndcg5": 0.8029455636823465,
+          "kendall_tau": -0.6,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC2A1\",\n    \"SLC38A2\",\n    \"SLC25A32\",\n    \"SLC33A1\",\n    \"SLC25A26\"\n  ],\n  \"rationale\": \"SLC2A1 (GLUT1) is the primary glucose transporter critical for DLBCL's high glycolytic ",
+      "tokens": {
+        "prompt": 978,
+        "completion": 483,
+        "total": 1461,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pool_size": 19,
+      "gt": [
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1",
+        "SLC7A11"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC3A2",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1"
+      ],
+      "ndcg5": 0.22306715327296642,
+      "kendall_tau": -0.3333333333333333,
+      "precision5": 0.26666666666666666,
+      "hit5": 1.0,
+      "mrr": 1.0,
+      "ppr": {
+        "ndcg5": 0.08400948806854204,
+        "kendall_tau": -0.2,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.25
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC3A2",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\"SLC7A11\", \"SLC3A2\", \"SLC7A5\", \"SLC1A5\", \"SLC2A1\"],\n  \"rationale\": \"SLC7A11 (xCT) and its partner SLC3A2 are key drivers of ferroptosis resistance in melanoma, while SLC7A5, SLC1A5, an",
+          "error": "",
+          "tokens": {
+            "prompt": 456,
+            "completion": 123,
+            "total": 579,
+            "calls": 1
+          },
+          "ndcg5": 0.1950639905834524,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC3A2",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC3A2\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC3A2 are key drivers of ferroptosis resistance and drug tolerance in mel",
+          "error": "",
+          "tokens": {
+            "prompt": 456,
+            "completion": 141,
+            "total": 597,
+            "calls": 1
+          },
+          "ndcg5": 0.1950639905834524,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC3A2",
+            "SLC7A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is the primary driver of ferroptosis resistance and drug tolerance in melanoma",
+          "error": "",
+          "tokens": {
+            "prompt": 456,
+            "completion": 160,
+            "total": 616,
+            "calls": 1
+          },
+          "ndcg5": 0.27907347865199444,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 1.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\"SLC7A11\", \"SLC3A2\", \"SLC7A5\", \"SLC1A5\", \"SLC2A1\"],\n  \"rationale\": \"SLC7A11 (xCT) and its partner SLC3A2 are key drivers of ferroptosis resistance in melanoma, while SLC7A5, SLC1A5, an",
+      "tokens": {
+        "prompt": 1368,
+        "completion": 424,
+        "total": 1792,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pool_size": 19,
+      "gt": [
+        "SLC35B1",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC40A1"
+      ],
+      "ndcg5": 0.04201942507493742,
+      "kendall_tau": 0.0,
+      "precision5": 0.06666666666666667,
+      "hit5": 0.3333333333333333,
+      "mrr": 0.1111111111111111,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.08333333333333333
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A3",
+            "SLC7A5",
+            "SLC40A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A3\",\n    \"SLC7A5\",\n    \"SLC40A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC2A1 (GLUT1) are critical for ovarian cancer survival via ferroptosis ",
+          "error": "",
+          "tokens": {
+            "prompt": 441,
+            "completion": 154,
+            "total": 595,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A1",
+            "SLC7A5",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"These genes are critical metabolic transporters (glutamate/cystine, glucose, lactate, and a",
+          "error": "",
+          "tokens": {
+            "prompt": 441,
+            "completion": 114,
+            "total": 555,
+            "calls": 1
+          },
+          "ndcg5": 0.12605827522481228,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC3A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC3A2\"\n  ],\n  \"rationale\": \"These genes are critical metabolic transporters (glutamate/cystine, glucose, amino acids) fr",
+          "error": "",
+          "tokens": {
+            "prompt": 441,
+            "completion": 117,
+            "total": 558,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A3\",\n    \"SLC7A5\",\n    \"SLC40A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC2A1 (GLUT1) are critical for ovarian cancer survival via ferroptosis ",
+      "tokens": {
+        "prompt": 1323,
+        "completion": 385,
+        "total": 1708,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pool_size": 5,
+      "gt": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC19A1",
+        "SLC35A2",
+        "SLC16A1",
+        "SLC25A32",
+        "SLC35A1"
+      ],
+      "ndcg5": 0.8481061785158076,
+      "kendall_tau": 0.0,
+      "precision5": 1.0,
+      "hit5": 1.0,
+      "mrr": 1.0,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC19A1",
+            "SLC35A2",
+            "SLC16A1",
+            "SLC25A32",
+            "SLC35A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC19A1\",\n    \"SLC35A2\",\n    \"SLC16A1\",\n    \"SLC25A32\",\n    \"SLC35A1\"\n  ],\n  \"rationale\": \"SLC19A1 is critical for folate metabolism and proliferation in leukemia; SLC35A2 mediat",
+          "error": "",
+          "tokens": {
+            "prompt": 341,
+            "completion": 152,
+            "total": 493,
+            "calls": 1
+          },
+          "ndcg5": 0.8272714358213781,
+          "kendall_tau": -0.2,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC19A1",
+            "SLC35A2",
+            "SLC35A1",
+            "SLC16A1",
+            "SLC25A32"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC19A1\",\n    \"SLC35A2\",\n    \"SLC35A1\",\n    \"SLC16A1\",\n    \"SLC25A32\"\n  ],\n  \"rationale\": \"SLC19A1 (RFC) is critical for folate uptake and nucleotide synthesis, essential for rap",
+          "error": "",
+          "tokens": {
+            "prompt": 341,
+            "completion": 141,
+            "total": 482,
+            "calls": 1
+          },
+          "ndcg5": 0.853721300593413,
+          "kendall_tau": 0.2,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC16A1",
+            "SLC19A1",
+            "SLC25A32",
+            "SLC35A2",
+            "SLC35A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC16A1\",\n    \"SLC19A1\",\n    \"SLC25A32\",\n    \"SLC35A2\",\n    \"SLC35A1\"\n  ],\n  \"rationale\": \"SLC16A1 (MCT1) and SLC19A1 (RFC) are critical for lactate export and folate uptake resp",
+          "error": "",
+          "tokens": {
+            "prompt": 341,
+            "completion": 151,
+            "total": 492,
+            "calls": 1
+          },
+          "ndcg5": 0.863325799132632,
+          "kendall_tau": 0.0,
+          "precision5": 1.0,
+          "hit5": 1.0,
+          "mrr": 1.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC19A1\",\n    \"SLC35A2\",\n    \"SLC16A1\",\n    \"SLC25A32\",\n    \"SLC35A1\"\n  ],\n  \"rationale\": \"SLC19A1 is critical for folate metabolism and proliferation in leukemia; SLC35A2 mediat",
+      "tokens": {
+        "prompt": 1023,
+        "completion": 444,
+        "total": 1467,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pool_size": 20,
+      "gt": [
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "ppr_named": 15,
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC25A4",
+        "SLC39A8",
+        "SLC48A1"
+      ],
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.0625
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC25A4",
+            "SLC39A8",
+            "SLC48A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\",\n    \"SLC48A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC1A5 are critical for glutamine metabolism and ferroptosis resistance",
+          "error": "",
+          "tokens": {
+            "prompt": 462,
+            "completion": 148,
+            "total": 610,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC25A4",
+            "SLC39A8"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC25A4\",\n    \"SLC39A8\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC1A5/SLC7A5 are critical for glutamine uptake and cystine/glutamate ex",
+          "error": "",
+          "tokens": {
+            "prompt": 462,
+            "completion": 144,
+            "total": 606,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC25A4",
+            "SLC39A8",
+            "SLC48A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\",\n    \"SLC48A1\"\n  ],\n  \"rationale\": \"SLC7A11 (cystine/glutamate antiporter) and SLC1A5 (glutamine transporter) are critical fo",
+          "error": "",
+          "tokens": {
+            "prompt": 462,
+            "completion": 154,
+            "total": 616,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC25A4\",\n    \"SLC39A8\",\n    \"SLC48A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC1A5 are critical for glutamine metabolism and ferroptosis resistance",
+      "tokens": {
+        "prompt": 1386,
+        "completion": 446,
+        "total": 1832,
+        "calls": 3
+      },
+      "error": ""
+    }
+  ]
+}

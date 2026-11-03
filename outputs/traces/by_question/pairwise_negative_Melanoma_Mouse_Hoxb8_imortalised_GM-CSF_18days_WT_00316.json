@@ -1,0 +1,784 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00316",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC7A11 and SLC38A5 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC7A11"
+  },
+  "effective_genes": [
+    "SLC7A11",
+    "SLC38A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00316",
+      "status": "ok",
+      "summary": "检索到 4 类证据、39 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A11",
+        "SLC38A5"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A5",
+              "protein_function": "Symporter that cotransports neutral amino acids and sodium ions from the extracellular to the intracellular side of the cell membrane. The transport is sodium-dependent, electrogenic, and driven by the Na(+) electrochemical gradient. Expressed in multiple tissues and may be involved in amino acid uptake and distribution. Supports cell growth and proliferation. Plays a role in the cellular response to nutrient starvation.",
+              "aliases": "SNAT5, ATA4, Sodium-Coupled Neutral Amino Acid Transporter 5, Sodium-Coupled Neutral Amino Acid Symporter 5, System A Amino Acid Transporter 4, System N Amino Acid Transporter 5, Amino Acid Transporter A5, Solute Carrier Family 38, Member 5, Amino Acid Transporter System A5, PRO1163",
+              "transport_type": "C / Na+, E / H+"
+            },
+            {
+              "gene": "SLC7A11",
+              "protein_function": "Heterodimer with SLC3A2, that functions as an antiporter by mediating the exchange of extracellular anionic L-cystine and intracellular L-glutamate across the cellular plasma membrane.",
+              "aliases": "XCT, Solute Carrier Family 7 (Anionic Amino Acid Transporter Light Chain, Xc System), Member 11",
+              "transport_type": "E (preferentially extracellular cystine against intracellular glutamate)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Bone Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A5",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cholangiocarcinoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC7A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Endometrial Cancer (EC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Neurodevelopmental consequences of Smn depletion in a mouse model of spinal muscular atrophy.",
+              "abstract": "Deletions or mutations in survival of motor neuron 1 (SMN1) cause motor neuron loss and spinal muscular atrophy (SMA), a neuromuscular disorder, with the most severe type manifesting in utero. Whether SMA is a disease of defects in neurodevelopment and/or neuromaintenance remains unclear. We performed an analysis of Smn gene and protein expression during murine embryogenesis. Furthermore, we examined Smn(-/-);SMN2 mice, a model of very severe SMA, for developmental, morphological, and molecular abnormalities. We demonstrate that Smn transcript levels are regulated in a tissue- and developmental stage-specific manner and that the Smn protein expression pattern generally followed that of the Smn mRNA. Cell death and pathological foci were observed in E10.5 Smn-depleted embryos, and this increased in the telencephalon at E14.5. Furthermore, we show an altered morphology of cranial nerves as well as truncated lumbar spinal nerves in a subset of E10.5 Smn(-/-);SMN2 embryos. Finally, we compared the splicing of a subset of genes shown recently to be aberrantly spliced in phenotypic-stage SMA mice. Changes in alternative splicing of the Slc38a5 and Uspl1 genes were detectable in prephenotypic-stage embryos and neonates but became more pronounced with the severity of the phenotype. By comparison, Hif3a alternative splicing was affected only at the end stage of disease. This result suggests that alterations in mRNA splicing in SMA occur, in part, as a result of disease progression. Overall, we conclude that Smn depletion affects developmental processes, which ultimately may also contribute to SMA pathogenesis.",
+              "doi": "10.1002/jnr.22189",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6db93f427ffcb4f8ac56fcbcaeea69953cc01be7b8ac67d39e50c3275b740657"
+              }
+            },
+            {
+              "title": "Transcription factor TFAP2A drives the growth and metastasis and blocks ferroptosis of triple-negative breast cancer by activating PRAME transcription.",
+              "abstract": "Triple-negative breast cancer (TNBC) is the subtype of breast cancer with the highest rates of recurrence and mortality. Transcription factor AP-2 alpha (TFAP2A) plays a key role in modulating the expression of various genes, affecting multiple biological processes such as ferroptosis, and driving the initiation and progression of tumors, including breast cancer. Furthermore, preferentially expressed antigen in melanoma (PRAME), an inhibitor of retinoic acid signaling, was reported to promote TNBC cell migration and invasion. This study aims to explore the effects of TFAP2A and PRAME in TNBC. TFAP2A and PRAME mRNA levels were detected by real-time quantitative polymerase chain reaction (RT-qPCR). TFAP2A, solute carrier family 7 member 11 (SLC7A11), glutathione peroxidase 4 (GPX4), and PRAME protein levels were determined using western blot. Cell invasion, migration, proliferation, and apoptosis were assessed using Transwell, wound healing, colony formation, and flow cytometry. Malondialdehyde (MDA), Fe level, glutathione (GSH), and reactive oxygen species (ROS) levels were determined using corresponding kits. After bioinformatics JASPAR analysis, the binding between TFAP2A and PRAME promoter was predicted and then verified using chromatin immunoprecipitation (ChIP) and dual-luciferase reporter assays. A xenograft model was applied to analyze the effects of TFAP2A on TNBC cell growth in vivo. TFAP2A and PRAME were highly expressed in TNBC tissues (n = 43) and TNBC cell lines compared with paracancerous non-tumor tissues (n = 43) and human non-tumorigenic breast epithelial cell line (MCF10A). Furthermore, the deficiency of TFAP2A by sh-TFAP2A inhibited TNBC cell invasion, migration, proliferation, and induced apoptosis and ferroptosis in vitro. At the molecular level, TFAP2A was a transcription factor of PRAME and increased the transcriptional activity of PRAME via binding to its promoter region. TFAP2A knockdown could repress TNBC tumor growth in xenograft mode in vivo. TFAP2A-activated PRAME promoted TNBC cell malignant behavior and constrained ferroptosis, which provided a promising therapeutic target in TNBC.",
+              "doi": "10.1007/s00210-025-04359-6",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A11"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "38e7217f3e14e348c76adbda678a02fb805f78b24524c3cdbeea843f6b0f8617"
+              }
+            },
+            {
+              "title": "A novel FTO-targeting nanodrug induces disulfidptosis and ameliorates the suppressive tumor immune environment to treat uveal melanoma.",
+              "abstract": "Uveal melanoma (UM) is the most prevalent primary ocular malignancy in adults, with high lethality and limited effective treatment options. Despite identified driver mutations in GNAQ, GNA11, and BAP1, therapeutic advancements have been minimal. This study highlights the pivotal role of N6-methyladenosine (mA) modifications in UM pathogenesis and progression, focusing on the demethylase FTO as a therapeutic target. Elevated FTO expression in UM tissues correlates with decreased mA levels, increased aggressiveness, and poor prognosis. The FTO inhibitor meclofenamic acid (MA) restored mA levels, upregulated SLC7A11, and induced disulfidptosis, a unique form of cell death triggered by GSH depletion and NADPH consumption. To address MA's limitations in bioavailability and tumor targeting, we developed an MA-loaded nucleic acid nanodrug (SNAMA). SNAMA demonstrated effective tumor growth inhibition in orthotopic and metastatic UM models through GSH-responsive release and mA-mediated disulfidptosis activation. Incorporating a PD-L1 aptamer into SNAMA further improved tumor targeting and immune modulation, enhancing therapeutic efficacy. This study identifies FTO as a critical target for UM therapy and introduces SNAMA-apt as a promising nanodrug. The findings offer a foundation for mA-targeted approaches in UM and other malignancies, addressing bioavailability, targeting, and immune evasion challenges.",
+              "doi": "10.1016/j.biomaterials.2025.123168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A11"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "da3b558b6d9ae2469bfa2cc967e658efa36ef5a541bc5a36969c5d7e50868375"
+              }
+            },
+            {
+              "title": "Gambogenic acid antagonizes the expression and effects of long non-coding RNA NEAT1 and triggers autophagy and ferroptosis in melanoma.",
+              "abstract": "In this study, we investigated the molecular mechanism underlying melanoma proliferation, with the aim to discover effective interventions which may markedly improve clinical prognosis. The results showed that gambogenic acid (GNA) could inhibit the proliferation of melanoma cells in vivo (C57BL/6 mice) and in vitro. Long non-coding RNA sequencing was used to identify the most significant long non-coding RNA, i.e., nuclear enriched abundant transcript 1 (NEAT1). NEAT1 was is up-regulated in melanoma, which was found to closely relate to cell proliferation. Melanoma cell lines either over-expressing NEAT1 or with NEAT1 knockdown was established through cloning experiments. A model of transplanted tumors was established to verify the inhibitory effect of GNA on the proliferation of melanoma cells in vitro and in vivo by downregulating NEAT1. Downregulation of NEAT1-induced ferroptosis and autophagy was demonstrated by detecting the effects of NEAT1 overexpressed and downregulated melanoma cell lines and melanoma transplantation model mice. Mechanistically, downregulation of NEAT1 can weaken the direct binding of Slc7a11, indirectly leading to inhibiting GPX-4 activity and subsequent ferroptosis, while, mediating the AMPK/mTOR signal axis-induced autophagy. The levels of Furthermore, NEAT1 decrease under the treatment of Gambogenic acid (GNA), a promising natural anticancer compound, while NEAT1 overexpression suppresses GNA inhibition on cell vitality and eliminates GNA-induced melanoma cell ferroptosis and autophagy.",
+              "doi": "10.1016/j.biopha.2022.113636",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A11"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b0a39e42d9310964ecdd2cc9fb7a0d07a4727d9d67baf92aba498a05ee8142de"
+              }
+            },
+            {
+              "title": "An Acquired Vulnerability of Drug-Resistant Melanoma with Therapeutic Potential.",
+              "abstract": "BRAF(V600E) mutant melanomas treated with inhibitors of the BRAF and MEK kinases almost invariably develop resistance that is frequently caused by reactivation of the mitogen activated protein kinase (MAPK) pathway. To identify novel treatment options for such patients, we searched for acquired vulnerabilities of MAPK inhibitor-resistant melanomas. We find that resistance to BRAF+MEK inhibitors is associated with increased levels of reactive oxygen species (ROS). Subsequent treatment with the histone deacetylase inhibitor vorinostat suppresses SLC7A11, leading to a lethal increase in the already-elevated levels of ROS in drug-resistant cells. This causes selective apoptotic death of only the drug-resistant tumor cells. Consistently, treatment of BRAF inhibitor-resistant melanoma with vorinostat in mice results in dramatic tumor regression. In a study in patients with advanced BRAF+MEK inhibitor-resistant melanoma, we find that vorinostat can selectively ablate drug-resistant tumor cells, providing clinical proof of concept for the novel therapy identified here.",
+              "doi": "10.1016/j.cell.2018.04.012",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A11"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f55058f44d2acd10e033ba704d514c65d4988a1d585a55d8f30e00f67dcaa12b"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A11 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC7A11 and SLC38A5 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 3 项（ppr=ok, timer=ok, km=ok, de=error）；候选基因=['SLC7A11', 'SLC38A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC7A11",
+            "ppr_score": 0.012772126451138783,
+            "degree_corrected_score": 0.0017101200589746163,
+            "graph_degree": 189,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC38A5",
+            "ppr_score": 0.0002517121756557633,
+            "degree_corrected_score": 0.00011963352171612031,
+            "graph_degree": 15,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC7A11",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A11.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC7A11",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.99",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC7A11_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A11": {
+          "status": "ok",
+          "gene": "SLC7A11",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A11.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC38A5": {
+          "status": "unavailable",
+          "gene": "SLC38A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A11": {
+          "status": "ok",
+          "gene": "SLC7A11",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.99",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC7A11_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC38A5": {
+          "status": "unavailable",
+          "gene": "SLC38A5",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A11', 'SLC38A5']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC7A11(P(winner)=0.68) vs SLC38A5(P=0.47), 差=0.21；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC7A11",
+        "candidates": [
+          "SLC7A11",
+          "SLC38A5"
+        ],
+        "confidence": 0.679,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A11": 8.9502,
+          "SLC38A5": 1.52
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC7A11(P(winner)=0.68) vs SLC38A5(P=0.47), 差=0.21；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A11', 'SLC38A5']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC7A11 在 Melanoma 中通过抑制 ferroptosis、促进化疗耐药和干性而支持肿瘤存活/生长；Bone Cancer 等邻近癌种中同样表现为 ferroptosis suppression，跨癌种可迁移为促肿瘤/促存活功能。SLC38A5 虽具氨基酸转运和营养应激相关生长支持功能，但在 Melanoma 的直接图谱/文献/PPR 证据较弱。 | 题目问哪个基因更可能‘抑制’ Melanoma 肿瘤生长，等价于哪个基因本身更可能是肿瘤生长/存活的正向依赖。SLC7A11 在 Melanoma 文献中反复与 ferroptosis 抑制、GSH/抗氧化、耐药和肿瘤恶性进展相关，因此敲低/抑制 SLC7A11 更可能触发 ferroptosis 或削弱肿瘤存活，从而抑制肿瘤生长。SLC38A5 更可能是氨基酸供给型生长支持基因，但缺乏 Melanoma 邻近证据且 PPR 极低。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC7A11",
+        "candidates": [
+          "SLC7A11",
+          "SLC38A5"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A11": 8.9502,
+          "SLC38A5": 1.52
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC7A11 在 Melanoma 中通过抑制 ferroptosis、促进化疗耐药和干性而支持肿瘤存活/生长；Bone Cancer 等邻近癌种中同样表现为 ferroptosis suppression，跨癌种可迁移为促肿瘤/促存活功能。SLC38A5 虽具氨基酸转运和营养应激相关生长支持功能，但在 Melanoma 的直接图谱/文献/PPR 证据较弱。 | 题目问哪个基因更可能‘抑制’ Melanoma 肿瘤生长，等价于哪个基因本身更可能是肿瘤生长/存活的正向依赖。SLC7A11 在 Melanoma 文献中反复与 ferroptosis 抑制、GSH/抗氧化、耐药和肿瘤恶性进展相关，因此敲低/抑制 SLC7A11 更可能触发 ferroptosis 或削弱肿瘤存活，从而抑制肿瘤生长。SLC38A5 更可能是氨基酸供给型生长支持基因，但缺乏 Melanoma 邻近证据且 PPR 极低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Melanoma",
+          "Bone Cancer",
+          "Bone cancer",
+          "Brain Tumor",
+          "Cervical Cancer",
+          "Cholangiocarcinoma",
+          "Endometrial Cancer (EC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC7A11', 'SLC38A5']",
+        "status": "ok",
+        "summary": "SLC7A11 (xCT) supports cystine uptake and glutathione/ferroptosis resistance in melanoma; its loss is more likely to impair melanoma tumor growth than SLC38A5, which has weaker and less consistent melanoma dependency evidence.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC7A11",
+        "candidates": [
+          "SLC7A11",
+          "SLC38A5"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC7A11 (xCT) supports cystine uptake and glutathione/ferroptosis resistance in melanoma; its loss is more likely to impair melanoma tumor growth than SLC38A5, which has weaker and less consistent melanoma dependency evidence.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:49:33Z"
+  }
+}

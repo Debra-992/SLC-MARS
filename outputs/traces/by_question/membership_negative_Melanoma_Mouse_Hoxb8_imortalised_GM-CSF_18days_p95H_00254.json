@@ -1,0 +1,349 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00254",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC35C2 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC35C2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00254",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35C2"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35C2",
+              "protein_function": "Transports UDP-glucuronic acid (UDP-GlcA) and UDP-N-acetylgalactosamine (UDP-GalNAc) from the cytoplasm to the ER lumen.",
+              "aliases": "SLC35D1, UGTREL7, UDP-Galactose Transporter-Related Protein 7",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35C2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35C2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC35C2",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC35C2 promotes stemness and progression in hepatocellular carcinoma by activating lipogenesis.",
+              "abstract": "Metabolic reprogramming plays a critical role in tumorigenesis and progression, including hepatocellular carcinoma (HCC). The Solute Carriers (SLCs) family is responsible for the transport of a range of nutrients and has been linked to various cancers. Cancer stem cells (CSC) are a contributing factor to the recurrence and metastasis of HCC. However, the regulatory genes that govern this process remain unclear. The present study identified SLC35C2 as a crucial factor in maintaining the stem-cell characteristics of HCC cells through CRISPR-dCas9 screening. Further investigation demonstrated that SLC35C2 was significantly elevated in HCC tissues and correlated with a poor prognosis in HCC patients. It is an independent prognostic factor for HCC patients. The knockdown and overexpression of SLC35C2 inhibited or promoted stemness in HCC cell. Both in vitro and in vivo studies demonstrated that SLC35C2 promoted the proliferation, migration, invasion and metastasis in HCC cells. Through RNA-seq and lipidomics analysis, it was found that SLC35C2 regulated lipid reprogramming, particularly triglyceride synthesis. Mechanistically, SLC35C2 stimulated lipogenesis through the up-regulation of SREBP1, ACC, FAS, and SCD-1, thereby increasing lipid accumulation in HCC cells. SLC35C2 interacted with ACSL4, which plays a critical role in lipogenesis, and to protect it from degradation. Inhibition of ACSL4 with PRGL493 can reverse the lipogenesis, stemness and proliferation induced by SLC35C2 overexpression. In conclusion, our study demonstrates the pivotal role of SLC35C2 in stemness and malignant progression in HCC by promoting lipogenesis. These findings suggest that SLC35C2 is a prognostic marker and promising therapeutic target for HCC treatment.",
+              "doi": "10.1016/j.cellsig.2025.111589",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5416b6591c55a95c9b85553f389ab3b3669dded2794f35cecc7f970168342d81"
+              }
+            },
+            {
+              "title": "Neuronatin is a modifier of estrogen receptor-positive breast cancer incidence and outcome.",
+              "abstract": "Understanding the molecular mediators of breast cancer survival is critical for accurate disease prognosis and improving therapies. Here, we identified Neuronatin (NNAT) as a novel antiproliferative modifier of estrogen receptor-alpha (ER+) breast cancer. Genomic regions harboring breast cancer modifiers were identified by congenic mapping in a rat model of carcinogen-induced mammary cancer. Tumors from susceptible and resistant congenics were analyzed by RNAseq to identify candidate genes. Candidates were prioritized by correlation with outcome, using a consensus of three breast cancer patient cohorts. NNAT was transgenically expressed in ER+ breast cancer lines (T47D and ZR75), followed by transcriptomic and phenotypic characterization. We identified a region on rat chromosome 3 (142-178 Mb) that modified mammary tumor incidence. RNAseq of the mammary tumors narrowed the candidate list to three differentially expressed genes: NNAT, SLC35C2, and FAM210B. NNAT mRNA and protein also correlated with survival in human breast cancer patients. Quantitative immunohistochemistry of NNAT protein revealed an inverse correlation with survival in a univariate analysis of patients with invasive ER+ breast cancer (training cohort: n = 444, HR = 0.62, p = 0.031; validation cohort: n = 430, HR = 0.48, p = 0.004). NNAT also held up as an independent predictor of survival after multivariable adjustment (HR = 0.64, p = 0.038). NNAT significantly reduced proliferation and migration of ER+ breast cancer cells, which coincided with altered expression of multiple related pathways. Collectively, these data implicate NNAT as a novel mediator of cell proliferation and migration, which correlates with decreased tumorigenic potential and prolonged patient survival.",
+              "doi": "10.1007/s10549-019-05307-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "15ee9a110c28adde24215bd66867d08aed3c5983be23f925c8068fa924e618e2"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35C2 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC35C2 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC35C2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35C2",
+            "ppr_score": 5.904095441982527e-05,
+            "degree_corrected_score": 0.00010867950782209612,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35C2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC35C2",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35C2": {
+          "status": "unavailable",
+          "gene": "SLC35C2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35C2": {
+          "status": "unavailable",
+          "gene": "SLC35C2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35C2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35C2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35C2"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35C2": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC35C2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35C2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35C2 在肝癌中的直接证据显示其促进干细胞性、脂质合成和恶性进展；这类表型通常与耐药/可塑性增强相关。若将该跨癌种机制迁移到 Melanoma，SLC35C2 更可能作为促耐药/促恶性状态因子，而不是抑制 Tumor Drug Resistance 的因子。 | 目标癌种 Melanoma 缺乏直接图谱邻近、TIMER、KM 或 DE 证据，但候选基因并非阴性，而是证据不足。已知最近关联癌种为 liver cancer，文献和 pathway 证据一致表明 SLC35C2 PROMOTION stemness/progression，并通过 lipogenesis、ACSL4、SREBP1/ACC/FAS/SCD-1 轴增强恶性表型。Melanoma 中肿瘤可塑性、stem-like states 和代谢重编程与耐药高度相关，因此跨癌种类推下 SLC35C2 更可能促进而非抑制耐药。PPR 邻近值极低、TIMER/KM 不可用只降低置信度，不改变基于已知效应方向的最佳判断。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35C2"
+        ],
+        "confidence": 0.38,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35C2": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC35C2 在肝癌中的直接证据显示其促进干细胞性、脂质合成和恶性进展；这类表型通常与耐药/可塑性增强相关。若将该跨癌种机制迁移到 Melanoma，SLC35C2 更可能作为促耐药/促恶性状态因子，而不是抑制 Tumor Drug Resistance 的因子。 | 目标癌种 Melanoma 缺乏直接图谱邻近、TIMER、KM 或 DE 证据，但候选基因并非阴性，而是证据不足。已知最近关联癌种为 liver cancer，文献和 pathway 证据一致表明 SLC35C2 PROMOTION stemness/progression，并通过 lipogenesis、ACSL4、SREBP1/ACC/FAS/SCD-1 轴增强恶性表型。Melanoma 中肿瘤可塑性、stem-like states 和代谢重编程与耐药高度相关，因此跨癌种类推下 SLC35C2 更可能促进而非抑制耐药。PPR 邻近值极低、TIMER/KM 不可用只降低置信度，不改变基于已知效应方向的最佳判断。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "liver cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35C2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35C2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:00:30Z"
+  }
+}

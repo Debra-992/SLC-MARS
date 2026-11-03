@@ -1,0 +1,358 @@
+{
+  "qid": "membership_negative_CML_Human_eHAP_5Days_00135",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC26A9 inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC26A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_CML_Human_eHAP_5Days_00135",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC26A9"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC26A9",
+              "protein_function": "Ion transporter that can act both as an ion channel and anion exchanger.",
+              "aliases": "-",
+              "transport_type": "E / Cl-, HCO3, Ch / Cl-, HCO3-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC26A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC26 Multifunctional anion  exchanger family",
+              "target_properties": {
+                "name": "SLC26 Multifunctional anion  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC26A9 deficiency causes gastric intraepithelial neoplasia in mice and aggressive gastric cancer in humans.",
+              "abstract": "Solute carrier family 26 member (SLC26A9) is a Cl uniporter with very high expression levels in the gastric mucosa. Here, we describe morphological and molecular alterations in gastric mucosa of slc26a9 mice and in selective parietal cell-deleted slc26a9/Atp4b-Cre mice and correlate SLC26A9 expression levels with morphological and clinical parameters in a cohort of gastric cancer (GC) patients. The expression patterns of genes related to transport and enzymatic function, proliferation, apoptosis, inflammation, barrier integrity, metaplasia and neoplasia development were studied by immunohistochemistry (IHC), quantitative RT-PCR, in situ hybridization and RNA microarray analysis. SLC26A9 expression and cellular/clinical phenotypes were studied in primary human GC tissues and GC cell lines. We found that both complete and parietal cell-selective Slc26a9 deletion in mice caused spontaneous development of gastric premalignant and malignant lesions. Dysregulated differentiation of gastric stem cells in an inflammatory environment, activated Wnt signaling, cellular hyperproliferation, apoptosis inhibition and metaplasia were observed. Analysis of human gastric precancerous and cancerous tissues revealed that SLC26A9 expression progressively decreased from atrophic gastritis to GC, and that downregulation of SLC26A9 was correlated with patient survival. Exogenous expression of SLC26A9 in GC cells induced upregulation of the Cl/HCO exchanger AE2, G2/M cell cycle arrest and apoptosis and suppressed their proliferation, migration and invasion. Our data indicate that SLC26A9 deletion in parietal cells is sufficient to trigger gastric metaplasia and the development of neoplastic lesions. In addition, we found that SLC26A9 expression decreases during human gastric carcinogenesis, and that exogenous SLC26A9 expression in GC cells reduces their malignant behavior.",
+              "doi": "10.1007/s13402-022-00672-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC26A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5b52800195f7eaf36a2da8c4a1a8eb2720a71b68bd86507b0b2242b2ea8be25d"
+              }
+            },
+            {
+              "title": "SLC26A9 promotes colorectal tumorigenesis by modulating Wnt/β-catenin signaling.",
+              "abstract": "Solute carrier family 26 member 9 (SLC26A9) is a member of the Slc26a family of multifunctional anion transporters that functions as a Cl channel in parietal cells during acid secretion. We explored the role of SLC26A9 in colorectal cancer (CRC) and its related mechanisms through clinical samples from CRC patients, CRC cell lines and mouse models. We observed that SLC26A9 was expressed at low levels in the cytoplasm of adjacent tissues, polyps and adenomas but was significantly increased in colorectal adenocarcinoma. Moreover, increased levels of SLC26A9 were associated with a high risk of disease and poor prognosis. In addition, downregulation of SLC26A9 in CRC cells induced cell cycle arrest and apoptosis but inhibited cell proliferation and xenograft tumor growth both in vitro and in vivo. Mechanistic analysis revealed that SLC26A9 was colocalized with β-catenin in the nucleus of CRC cells. The translocation of these two proteins from the cytoplasm to the nucleus reflected the activation of Wnt/β-catenin signaling, and promoted the transcription of downstream target proteins, including CyclinD1, c-Myc and Snail, but inhibited the expression of cytochrome C (Cyt-c), cleaved Caspase9, cleaved Caspase3 and apoptosis-inducing factor (AIF). CRC is accompanied by alteration of epithelial mesenchymal transition (EMT) markers. Meanwhile, further studies showed that in SW48 cells, overexpressing SLC26A9 was cocultured with the β-catenin inhibitor XAV-939, β-catenin was downregulated, and EMT was reversed. Our study demonstrated SLC26A9 may be responsible for alterations in the proliferative ability and aggressive potential of CRC by regulating the Wnt/β-catenin signaling pathway.",
+              "doi": "10.1038/s41420-024-01888-6",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC26A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa377fbec7200c1074b03b7d7bf55eeffdba4d33b3b616bbc01fdece6d3936b6"
+              }
+            },
+            {
+              "title": "Low dose cadmium exposure regulates miR-381-ANO1 interaction in airway epithelial cells.",
+              "abstract": "Chronic obstructive pulmonary disease (COPD) is the 3rd leading cause of death worldwide. Cigarette smoke which has approximately 2-3 µg of Cadmium (Cd) per cigarette contributes to the environmental exposure and development and severity of COPD. With the lack of a cadmium elimination mechanism in humans, the contribution of cadmium induced stress to lung epithelial cells remains unclear. Studies on cadmium responsive miRNAs suggest regulation of target genes with an emphasis on the critical role of miRNA-mRNA interaction for cellular homeostasis. Mir-381, the target miRNA in this study is negatively regulated by cadmium in airway epithelial cells. miR-381 is reported to also regulate ANO1 (Anoctamin 1) expression negatively and in this study low dose cadmium exposure to airway epithelial cells was observed to upregulate ANO1 mRNA expression via mir-381 inhibition. ANO1 which is a Ca-activated chloride channel has multiple effects on cellular functions such as proliferation, mucus hypersecretion and fibroblast differentiation in inflamed airways in chronic respiratory diseases. In vitro studies with cadmium at a high concentration range of 100-500 µM is reported to activate chloride channel, ANO1. The secretory epithelial cells are regulated by chloride channels like CFTR, ANO1 and SLC26A9. We examined \"ever\" smokers with COPD (n = 13) lung tissue sections compared to \"never\" smoker without COPD (n = 9). We found that \"ever\" smokers with COPD had higher ANO1 expression. Using mir-381 mimic to inhibit ANO1, we demonstrate here that ANO1 expression is significantly (p < 0.001) downregulated in COPD derived airway epithelial cells exposed to cadmium. Exposure to environmental cadmium contributes significantly to ANO1 expression.",
+              "doi": "10.1038/s41598-023-50471-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC26A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4f0cab1b0b551f68b62b688fc4f67992c9b07e0626c2d5b1e45865e121cc0023"
+              }
+            },
+            {
+              "title": "Loss of Slc26a9 anion transporter alters intestinal electrolyte and HCO3(-) transport and reduces survival in CFTR-deficient mice.",
+              "abstract": "Slc26a9 is an anion transporter that is strongly expressed in the stomach and lung. Slc26a9 variants were recently found associated with a higher incidence of meconium ileus in cystic fibrosis (CF) infants, raising the question whether Slc26a9 is expressed in the intestine and what its functional role is. Slc26a9 messenger RNA (mRNA) was found highly expressed in the mucosae of the murine and human upper gastrointestinal tract, with an abrupt decrease in expression levels beyond the duodenum. Absence of SLC26a9 expression strongly increased the intestinally related mortality in cystic fibrosis transmembrane conductance regulator (CFTR)-deficient mice. Proximal duodenal JHCO3(-) and fluid secretion were reduced in the absence of Slc26a9 expression. In the proximal duodenum of young Slc26a9 KO mice, the glands and villi/crypts were elongated and proliferation was enhanced. This difference was lost with ageing, as were the alterations in fluid movement, whereas the reduction in JHCO3(-) remained. Laser dissection followed by qPCR suggested Slc26a9 expression to be crypt-predominant in the duodenum. In summary, deletion of Slc26a9 caused bicarbonate secretory and fluid absorptive changes in the proximal duodenal mucosa and increased the postweaning death rates in CFTR-deficient mice. Functional alterations in the duodenum were most prominent at young ages. We assume that the association of meconium ileus and Slc26a9 variants may be related to maldigestion and impaired downstream signaling caused by loss of upper GI tract digestive functions, aggravating the situation of lack of secretion and sticky mucus at the site of obstruction in CF intestine.",
+              "doi": "10.1007/s00424-014-1543-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC26A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e092e0984da5fec235bfa4308e39c521320487d115b17b09588a717f2bfa70e0"
+              }
+            },
+            {
+              "title": "SLC26A9 promotes the initiation and progression of breast cancer by activating the PI3K/AKT signaling pathway.",
+              "abstract": "SLC26A9 is a member of the Slc26a family of multifunctional anion transporters that function as Cl channels in the stomach. We reported for the first time that SLC26A9 is involved in gastric tumorigenesis. However, the role of SLC26A9 in breast cancer has not yet been investigated. We first demonstrated that the upregulation of SLC26A9 is associated with the clinicopathological progression and poor prognosis of patients with breast cancer and is positively correlated with HER2 amplification. SLC26A9 alters the proliferation, migration, and invasion potential of breast cancer cells by regulating the PI3K/AKT signaling pathway. SLC26A9 acts as an oncogene in the development of breast cancer. These findings provide valuable insights for the development of future diagnostic and therapeutic strategies for BC.",
+              "doi": "10.1016/j.bbamcr.2025.119912",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC26A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "80bd655b27cf36c91e61499cca518f0bae769738ae4ac44facb3353e52ce9ea1"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC26A9 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC26A9 inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC26A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC26A9",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC26A9",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC26A9": {
+          "status": "unavailable",
+          "gene": "SLC26A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC26A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC26A9",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC26A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC26A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC26A9"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC26A9": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC26A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC26A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC26A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC26A9"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC26A9": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC26A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC26A9']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC26A9"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T14:07:20Z"
+  }
+}

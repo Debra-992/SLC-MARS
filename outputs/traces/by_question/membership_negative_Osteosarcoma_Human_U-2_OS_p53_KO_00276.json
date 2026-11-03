@@ -1,0 +1,304 @@
+{
+  "qid": "membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00276",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with p53.KO Crispr 0hour vs p53.KO Crispr 96hours as the treatment condition, and MAGECK as the method.\nIs SLC9C2 inhibit Osteosarcoma's Tumor Survival?",
+  "constraints": {
+    "cancer": "Osteosarcoma",
+    "cell_line": "U-2 OS",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "p53.KO Crispr 0hour vs p53.KO Crispr 96hours"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC9C2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00276",
+      "status": "ok",
+      "summary": "检索到 4 类证据、3 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC9C2"
+      ],
+      "requested_context": {
+        "cancer": "Osteosarcoma",
+        "cell_line": "U-2 OS",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "p53.KO Crispr 0hour vs p53.KO Crispr 96hours"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC9C2",
+              "protein_function": "Involved in pH regulation.",
+              "aliases": "SLC9A11, NHE11",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC9C2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identifying key genes and functionally enriched pathways in acute myeloid leukemia by weighted gene co-expression network analysis.",
+              "abstract": "Acute myeloid leukemia (AML) is characterized by the uncontrolled proliferation of myeloid leukemia cells in the bone marrow and other hematopoietic tissues and is highly heterogeneous. While with the progress of sequencing technology, understanding of the AML-related biomarkers is still incomplete. The purpose of this study is to identify potential biomarkers for prognosis of AML. Based on WGCNA analysis of gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases were employed for investigating potential biomarkers for the prognosis of AML. This study screened a total of 6153 genes by analyzing various changes in 103 acute myeloid leukemia (AML) samples, including gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases. Moreover, seven AML-related co-expression modules were mined by WGCNA analysis, and twelve biomarkers associated with the AML prognosis were identified from each top 10 genes of the seven co-expression modules. The AML samples were then classified into two subgroups, the prognosis of which is significantly different, based on the expression of these twelve genes. The differentially expressed 7 genes of two subgroups (HOXB-AS3, HOXB3, SLC9C2, CPNE8, MEG8, S1PR5, MIR196B) are mainly involved in glucose metabolism, glutathione biosynthesis, small G protein-mediated signal transduction, and the Rap1 signaling pathway. With the utilization of WGCNA mining, seven gene co-expression modules were identified from the TCGA database, and there are unreported genes that may be potential driver genes of AML and may be the direction to identify the possible molecular signatures to predict survival of AML patients and help guide experiments for potential clinical drug targets.",
+              "doi": "10.1007/s13353-024-00881-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11ee2a46d64d60350e43fff958f991225e20684b1f571930f8b5edb0b2c8fa1c"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC9C2 cancer=Osteosarcoma bucket=membership Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with p53.KO Crispr 0hour vs p53.KO Crispr 96hours as the treatment condition, and MAGECK as the method.\nIs SLC9C2 inhibit Osteosarcoma's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC9C2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Osteosarcoma(OS)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC9C2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC9C2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC9C2",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC9C2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC9C2",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9C2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9C2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9C2"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9C2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: Evidence channel only infers marginal essentiality from absence of contradiction, lacking CRISPR depletion or direction. SLC9C2 is pH-regulatory but likely redundant/testis-associated in U-2 OS; two independent LLM channels agree no tumor-s。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9C2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC9C2属于SLC9 Na+/H+交换体家族，主要参与细胞pH稳态与离子/代谢信号调控；在AML等癌种中它与预后相关模块及葡萄糖代谢、谷胱甘肽合成、小G蛋白/Rap1信号等通路关联。Osteosarcoma是高度增殖、侵袭性强且常处于酸性微环境的间叶来源肿瘤，对pH调节和代谢重编程依赖较高，因此可类比推断该家族成员在骨肿瘤中可能支持存活。 | 目标癌种缺少直接图谱/表达/KM/PPR证据，不能据此判阴性。跨癌种生物学上，SLC9家族通过Na+/H+交换维持胞内pH、影响增殖、迁移、侵袭和代谢适应；AML文献提示SLC9C2与预后相关共表达模块及代谢/信号通路有关。在p53.KO U-2 OS的CRISPR/MAGeCK背景下，若SLC9C2参与pH稳态和代谢适应，其敲除可能削弱肿瘤细胞存活，因此最可能方向是抑制肿瘤存活。但该推断依赖家族类比，证据间接，置信度较低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9C2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9C2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.62；法官理由: No direct U-2 OS MAGeCK evidence supports SLC9C2 knockout inhibiting survival. SLC9C2/NHE11 is tissue-restricted and functionally redundant with other pH transporters; two independent LLM votes favor false, while evidence channel is only we。原证据通道判定: winner=None answer=True conf=0.42（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9C2']",
+        "status": "ok",
+        "summary": "SLC9C2 主要是精子特异性的 Na+/H+ 交换体家族成员，在骨肉瘤细胞系 U-2 OS 中并非典型肿瘤存活抑制因子或必需基因；在 p53.KO CRISPR 0h vs 96h 的 MAGeCK 筛选语境下，没有充分依据认为 SLC9C2 会抑制骨肉瘤的 Tumor Survival。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9C2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC9C2 主要是精子特异性的 Na+/H+ 交换体家族成员，在骨肉瘤细胞系 U-2 OS 中并非典型肿瘤存活抑制因子或必需基因；在 p53.KO CRISPR 0h vs 96h 的 MAGeCK 筛选语境下，没有充分依据认为 SLC9C2 会抑制骨肉瘤的 Tumor Survival。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:12:25Z"
+  }
+}

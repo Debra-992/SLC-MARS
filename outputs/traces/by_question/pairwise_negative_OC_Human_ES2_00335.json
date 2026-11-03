@@ -1,0 +1,426 @@
+{
+  "qid": "pairwise_negative_OC_Human_ES2_00335",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "winner": "SLC35B1"
+  },
+  "effective_genes": [
+    "SLC35B1",
+    "SLC6A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_OC_Human_ES2_00335",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B1",
+        "SLC6A1"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35B1",
+              "protein_function": "ATP:ADP antiporter that catalyzes the exchange of ATP and ADP across the endoplasmic reticulum (ER) membrane. Regulates ER energy metabolism and protein biogenesis.",
+              "aliases": "SLC35B1",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC6A1",
+              "protein_function": "Mediates transport of GABA together with sodium and chloride, responsible for the reuptake of GABA from the synapse.",
+              "aliases": "GAT1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35B1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Overexpression of SLC6A1 associates with drug resistance and poor prognosis in prostate cancer.",
+              "abstract": "Solute Carrier Family 6 Member 1 (SLC6A1) has been identified as a cancer-promoting gene in various human cancers, such as clear cell renal cell carcinoma and ovarian cancer. However, its roles in prostate cancer (PCa) has not been fully elucidated. The aim of this study was to investigate the expression and clinical significance of SLC6A1 in PCa tissues and its effect on drug resistance to docetaxel in PCa. Expression patterns of SLC6A1 protein in PCa tissues were examined by immunohistochemistry based on Tissue microarray. Associations of SLC6A1 protein expression with various clinicopathological features and patients' prognosis of PCa were also statistically evaluated based on TCGA data. Roles of SLC6A1 deregulation in prostate carcinogenesis and drug resistance was further determined in vitro and in vivo experiments. Based on TCGA Dataset, SLC6A1 expression was markedly higher in patients with high Gleason score, advanced clinical stage and positive biochemical recurrence than those with control features (all P < 0.05). Both unvariate and multivariate analyses demonstrated that SLC6A1 expression was significantly associated with biochemical recurrence-free survival in PCa patients. In addition, enforced expression of SLC6A1 effectively promoted cell proliferation, migration and invasion of PCa cells in vitro. Moreover, the inhibition of SLC6A1 suppressed the tumor growth in vivo. Additionally, immunohistochemical notches of PCNA and MMP-9 in the low-expression cluster were pointedly lower compared to those of NC group. Finally, the cell viability revealed that the overexpression of SLC6A1 obviously promoted the PCa cell resistant to docetaxel (DTX), and the transplanted tumor in the overexpression group had no significant reduction compared with the untreated group. Our data suggest that SLC6A1 overexpression may be associated with aggressive progression and short biochemical recurrence-free survival of PCa, and may be related to the resistance to docetaxel therapy.",
+              "doi": "10.1186/s12885-020-06776-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "79a91be9a345f1bdf63811544c03e7a7d6f787c82c113e89a4d4970fe1aa931f"
+              }
+            },
+            {
+              "title": "SLC6A1-miR133a-CDX2 loop regulates SK-OV-3 ovarian cancer cell proliferation, migration and invasion.",
+              "abstract": "The present study assessed the expression of solute carrier 6 member 1 (SLC6A1) in ovarian cancer (OC) tissues and evaluated the effect of silencing SLC6A1 or caudal type homeobox 2 (CDX2) on the proliferation, migration, and invasion of SK-OV-3 OC cells. The levels of caudal type homeobox 2 (CDX2) and SLC6A1 mRNA were also examined in OC SK-OV-3, OVCAR3 and A2780 cell lines. The mRNA levels of CDX2 and SLC6A1 in SK-OV-3 OC cells were assessed following transection with microRNA (miR) 133a mimics; the mRNA and protein levels of SLC6A1 were determined following the silencing of CDX2, and the mRNA expression of CDX2 was gauged following the silencing of SLC6A1. A luciferase reporter assay was performed to assess the effect of miR133a on the CDX2 and SLC6A1 3'-untranslated regions (3'UTRs). The proliferation, migration and invasion rate of SK-OV-3 cells were then examined following the silencing of CDX2 or SLC6A1. The expression of SLC6A1 was increased in OC compared with adjacent tissue. The expression of CDX2 and SLC6A1 in SK-OV-3 and OVCAR3 cells was increased compared with A2780 cells (P<0.05). The level of CDX2 and SLC6A1 mRNA in SK-OV-3 cells decreased when the cells were transected with the miR133a mimics, compared with a negative control (P<0.05). Transfection with the miR133a mimics significantly reduced the luciferase activity of reporter plasmids with the SLC6A1 or CDX2 3'UTRs (P<0.05). The mRNA level of CDX2 was decreased subsequent to the silencing of SLC6A1; the mRNA and protein level of SLC6A1 were decreased when CDX2 was silenced (P<0.05). The proliferation, migration, and invasion of SK-OV-3 cells were significantly reduced following the silencing of CDX2 or SLC6A1 (P<0.05). CDX2 may therefore be inferred to promote the proliferation, migration and invasion in SK-OV-3 OC cells, acting as a competing endogenous RNA.",
+              "doi": "10.3892/ol.2018.9273",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cfc60ea8e8d23aecfd25b96fe7b93c5bc5befd76735d5b87641b08bb4c036fe6"
+              }
+            },
+            {
+              "title": "MiR-200c-3p inhibits cell migration and invasion of clear cell renal cell carcinoma via regulating SLC6A1.",
+              "abstract": "In this study, we investigated the mechanism of miR-200c-3p and SLC6A1 in regulating cell activity of clear cell renal cell carcinoma (CCRCC). The mRNA and miRNA expressions of tissue specimens were analyzed by CapitalBio Corporation (Beijing, China). The expression of SLC6A1 in CCRCC cells was examined through qRT-PCR and western blot. The migration and invasion ability of 786-O cells was testified by transwell assay after transfected. 786-O cell proliferation ability was detected by MTT assay. Dual luciferase reporter assay verified the association between SLC6A1 and miR-200c-3p. SLC6A1 was high expressed and miR-200c-3p was low expressed in CCRCC tissues and cells. Besides, lower SLC6A1 expression indicated longer survival time and higher survival rate. MiR-200c-3p could directly target at SLC6A1 and reduce its expression. MiR-200c-3p inhibited the proliferation, migration and invasion in 786-O cells by down-regulating SLC6A1 expression. The results suggested that the miR-200c-3p served as a suppressor for CCRCC via down-regulating SLC6A1.",
+              "doi": "10.1080/15384047.2017.1394551",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa911ac74481279f0badf3cba3f3ebdc4017cd302fc79217c0417a1c53afe7d5"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B1 cancer=Ovarian cancer bucket=pairwise Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC35B1', 'SLC6A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC6A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC35B1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "stats_text": "P value: 0.9757",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B1": {
+          "status": "unavailable",
+          "gene": "SLC35B1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B1": {
+          "status": "ok",
+          "gene": "SLC35B1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.9757",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC6A1"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC6A1": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.63；法官理由: SLC35B1 supports ER energy metabolism and glycosylation, making it more likely broadly essential in ovarian cancer cells. SLC6A1 is a neuronal GABA transporter, less likely required for ES2 tumor growth. Two independent LLM votes reinforce 。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC6A1 has direct ovarian cancer functional evidence in SK-OV-3 cells: SLC6A1 expression is increased in ovarian cancer tissues, and silencing SLC6A1 reduces proliferation, migration, and invasion. This is reinforced by cross-cancer evidence in prostate and clear cell renal cell carcinoma where SLC6A1 acts as a cancer-promoting gene and its inhibition suppresses tumor growth or associates with better survival. SLC35B1 lacks ovarian-specific functional evidence and only appears in a CRC prognostic signature without direct loss-of-function support. | Under ES2 ovarian cancer CRISPR screening, the gene more likely to inhibit tumor growth when knocked out is the one with oncogenic dependency in ovarian biology. SLC6A1 fits this pattern via direct ovarian cell-line evidence and consistent pro-tumorigenic roles in related epithelial cancers. SLC35B1 may be biologically plausible as an ER ATP/ADP transporter, but the available evidence is weaker and indirect, so SLC6A1 is the better pairwise choice.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC6A1"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC6A1": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A1': 1, 'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.66；法官理由: ES2 MAGeCK depletion favors core-fitness genes. SLC35B1 supports ER ATP/ADP exchange and glycosylation, likely required for proliferation. SLC6A1 is a neuronal GABA transporter; ovarian shRNA/expression evidence is weaker than CRISPR deplet。原证据通道判定: winner=SLC6A1 answer=None conf=0.74（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "SLC35B1 encodes a nucleotide-sugar transporter involved in glycosylation and cellular proliferation pathways, making its knockout more plausibly deleterious to ovarian cancer cell growth in a CRISPR/MAGeCK screen. SLC6A1 is primarily a neuronal GABA transporter and is less likely to be broadly required for tumor growth in ES2 ovarian cancer cells.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC6A1"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35B1 encodes a nucleotide-sugar transporter involved in glycosylation and cellular proliferation pathways, making its knockout more plausibly deleterious to ovarian cancer cell growth in a CRISPR/MAGeCK screen. SLC6A1 is primarily a neuronal GABA transporter and is less likely to be broadly required for tumor growth in ES2 ovarian cancer cells.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T07:04:35Z"
+  }
+}

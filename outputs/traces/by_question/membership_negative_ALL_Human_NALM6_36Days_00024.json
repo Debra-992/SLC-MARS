@@ -1,0 +1,716 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00024",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC5A2 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC5A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00024",
+      "status": "ok",
+      "summary": "检索到 4 类证据、36 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC5A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC5A2",
+              "protein_function": "Electrogenic Na(+)-coupled sugar symporter that actively transports D-glucose.",
+              "aliases": "SGLT2, Low Affinity Sodium-Glucose Cotransporter",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC5A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC5 Sodium glucose  cotransporter family",
+              "target_properties": {
+                "name": "SLC5 Sodium glucose  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A2",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "SGLT2",
+              "target_properties": {
+                "name": "SGLT2"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC5A2",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "prostate cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "prostate cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A2",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "prostate cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Dapagliflozin improves the dysfunction of human umbilical vein endothelial cells (HUVECs) by downregulating high glucose/high fat-induced autophagy through inhibiting SGLT-2.",
+              "abstract": "To investigate the effect of Dapagliflozin (Da) on the disorders of human umbilical vein endothelial cells (HUVECs) induced by high glucose and high fat (HG/HF). Immunohistochemistry and immunofluorescence were used to detect the SGLT-2 expression in thoracic aortic tissues. After transfected with overexpressed plasmid SLC5A2, autophagy and cell functions of HUVECs were detected with the treatment of autophagy inhibitor 3-MA (5 mM). HUVECs were exposed to mannitol (MAN), glucose/palmitate (Hg/PA), and Hg/PA/Da for 24 h, and the proliferation of HUVECs was detected by CCK-8. The protein expression levels, endothelial cell functions (cell proliferation, migration, tubular formation, apoptosis, and autophagy) in endothelial cells were evaluated. The SGLT-2 expression was found in atherosclerotic human thoracic aorta tissues and HG/PA induced HUVECs (P < 0.05). After the overexpression of SGLT-2 in HUVECs, the proliferation, migration and tubule formation ability of HUVECs were inhibited, and autophagy and apoptosis were increased, which were reversed by 3-MA (P < 0.05). After the addition of Sodium-glucose co-transporters 2 inhibitor, Dapagliflozin, the proliferation of HUVECs, the tubule formation, autophagy, apoptosis and migration ability of cells inhibited by HG/PA were significantly improved (P < 0.05). Moreover, the increased protein expression levels of autophagy and apoptosis in HG/PA induced HUVECs were also decreased by the treatment of Dapagliflozin (P < 0.05). Dapagliflozin can improve the dysfunction of high glucose/high fat-induced human umbilical vein endothelial cells by downregulate autophagy through inhibiting SGLT-2.",
+              "doi": "10.1016/j.jdiacomp.2024.108907",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cac609ac35e81820806e2117229fc2f190188d29f76d5a94b9ba439e3cdd7996"
+              }
+            },
+            {
+              "title": "Inhibitors of GLUT/SLC2A Enhance the Action of BCNU and Temozolomide against High-Grade Gliomas.",
+              "abstract": "Glucose transport across glioblastoma membranes plays a crucial role in maintaining the enhanced glycolysis typical of high-grade gliomas and glioblastoma. We tested the ability of two inhibitors of the glucose transporters GLUT/SLC2A superfamily, indinavir (IDV) and ritonavir (RTV), and of one inhibitor of the Na/glucose antiporter type 2 (SGLT2/SLC5A2) superfamily, phlorizin (PHZ), in decreasing glucose consumption and cell proliferation of human and murine glioblastoma cells. We found in vitro that RTV, active on at least three different GLUT/SLC2A transporters, was more effective than IDV, a specific inhibitor of GLUT4/SLC2A4, both in decreasing glucose consumption and lactate production and in inhibiting growth of U87MG and Hu197 human glioblastoma cell lines and primary cultures of human glioblastoma. PHZ was inactive on the same cells. Similar results were obtained when cells were grown in adherence or as 3D multicellular tumor spheroids. RTV treatment but not IDV treatment induced AMP-activated protein kinase (AMPKα) phosphorylation that paralleled the decrease in glycolytic activity and cell growth. IDV, but not RTV, induced an increase in GLUT1/SLC2A1 whose activity could compensate for the inhibition of GLUT4/SLC2A4 by IDV. RTV and IDV pass poorly the blood brain barrier and are unlikely to reach sufficient liquoral concentrations in vivo to inhibit glioblastoma growth as single agents. Isobologram analysis of the association of RTV or IDV and 1,3-bis(2-chloroethyl)-1-nitrosourea (BCNU) or 4-methyl-5-oxo-2,3,4,6,8-pentazabicyclo[4.3.0]nona-2,7,9-triene-9-carboxamide (TMZ) indicated synergy only with RTV on inhibition of glioblastoma cells. Finally, we tested in vivo the combination of RTV and BCNU on established GL261 tumors. This drug combination increased the overall survival and allowed a five-fold reduction in the dose of BCNU.",
+              "doi": "10.1016/j.neo.2017.02.009",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7089b5a362bf3efabf896b28c8d26c65cb9c12dda4ae12262a913f30a2304c1a"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'The Na-D-glucose cotransporters SGLT1 and SGLT2 are targets for the treatment of diabetes and cancer.'}",
+              "abstract": "Orally applied SGLT2 (SLC5A2) inhibitors that enter the blood and decrease renal reabsorption of glucose have been approved as antidiabetic drugs. They decrease blood glucose levels, slightly reduce body weight and blood pressure, and decrease the risk for diabetic nephropathy. The SGLT2 inhibitor empagliflozin has been shown to reduce the risk of severe cardiac failure. This review summarizes knowledge about the functions of SGLT2 and the pathophysiology of type 2 diabetes (T2D) and diabetic follow-up diseases. In addition, proposed pathophysiological mechanisms of therapeutic effects and of side effects of SGLT2 inhibitors are described. A recently investigated strategy to employ orally applied SGLT1 (SLC5A1) inhibitors for treatment of diabetes is discussed. The SGLT1 inhibitors reduce glucose absorption and decrease blood glucose excursions after the intake of glucose-rich food. Knowledge concerning the expression of SGLT1 in different organs is compiled and potential side effects of SGLT1 inhibitors entering the blood are discussed. Because selective targeting of SGLT1 expression presents a strategy to decrease SGLT1-mediated glucose absorption, current knowledge about the regulation of SGLT1 is also discussed. This includes the possibility to decrease SGLT1 abundance in the small intestinal brush-border membrane by a peptide derived from protein RS1 (RSC1A1) that regulates membrane trafficking. Finally the possibility to employ SGLT1 and SGLT2 as targets for anticancer therapy is discussed. SGLT1 and SGLT2 are expressed in various tumors where they supply the tumor cells with glucose for euglycemic glycolysis. Tumor growth of carcinoma expressing SGLT2 can be slowed down by an SGLT2 inhibitor.",
+              "doi": "10.1016/j.pharmthera.2016.10.017",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7b4971ba73352dcd758b551a13b78f91837d9226da62ea4b5227a05494e964b6"
+              }
+            },
+            {
+              "title": "Deubiquitinase OTUD4 Stabilizes SLC5A2 to Promote Pancreatic Cancer Proliferation and Migration Through Enchaining Glycolysis-Mediated Autophagy.",
+              "abstract": "Pancreatic ductal adenocarcinoma (PDAC) is a highly aggressive malignancy characterized by its insidious onset, rapid progression, and poor treatment outcomes. Sodium glucose transporter 2 (SLC5A2) is the predominant sodium-glucose transporter. Our study reveals that SLC5A2 interacted with ovarian tumor family deubiquitinase 4 (OTUD4) to stabilize and increase its expression in PDAC. SLC5A2 overexpression promoted pancreatic cancer cell proliferation in vitro and in vivo, while also promoting cell migration, invasion, and autophagy. Conversely, SLC5A2 knockdown reversed these effects. RNA-seq and GSEA revealed that glycolysis pathway activation was inhibited following SLC5A2 knockdown. Consistent with this, qRT-PCR and western blot analyses indicated reduced glycolysis-related gene expression levels. Metabolomics further revealed that knockdown of SLC5A2 decreased intermediate product levels in glycolysis, as well as glucose intake. Glycolysis inhibitor (2-DG) amplified the effect of SLC5A2 knockdown in promoting autophagy, resulting in decreased pancreatic cancer proliferation, migration, and invasion. Notably, the antitumor effects of SLC5A2 knockdown were reversed by Bafilomycin A1. Additionally, treatment with the SLC5A2 inhibitor, canagliflozin (CANA), inhibited pancreatic cancer growth by inhibiting glycolysis and enhancing autophagy in vitro/vivo. These findings suggest that SLC5A2 promotes pancreatic cancer progression by regulating the glycolysis-autophagy axis, suggesting it as a therapeutic target for improving PDAC treatment outcomes.",
+              "doi": "10.1096/fj.202501018R",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "14cf856b86b89e9f4ae698eb1f1ce03b0f5b90222e79e51d6708450aeba9f7cf"
+              }
+            },
+            {
+              "title": "Dapagliflozin Does Not Directly Affect Human α or β Cells.",
+              "abstract": "Selective inhibitors of sodium glucose cotransporter-2 (SGLT2) are widely used for the treatment of type 2 diabetes and act primarily to lower blood glucose by preventing glucose reabsorption in the kidney. However, it is controversial whether these agents also act on the pancreatic islet, specifically the α cell, to increase glucagon secretion. To determine the effects of SGLT2 on human islets, we analyzed SGLT2 expression and hormone secretion by human islets treated with the SGLT2 inhibitor dapagliflozin (DAPA) in vitro and in vivo. Compared to the human kidney, SLC5A2 transcript expression was 1600-fold lower in human islets and SGLT2 protein was not detected. In vitro, DAPA treatment had no effect on glucagon or insulin secretion by human islets at either high or low glucose concentrations. In mice bearing transplanted human islets, 1 and 4 weeks of DAPA treatment did not alter fasting blood glucose, human insulin, and total glucagon levels. Upon glucose stimulation, DAPA treatment led to lower blood glucose levels and proportionally lower human insulin levels, irrespective of treatment duration. In contrast, after glucose stimulation, total glucagon was increased after 1 week of DAPA treatment but normalized after 4 weeks of treatment. Furthermore, the human islet grafts showed no effects of DAPA treatment on hormone content, endocrine cell proliferation or apoptosis, or amyloid deposition. These data indicate that DAPA does not directly affect the human pancreatic islet, but rather suggest an indirect effect where lower blood glucose leads to reduced insulin secretion and a transient increase in glucagon secretion.",
+              "doi": "10.1210/endocr/bqaa080",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c22bfedde8ff17c2a5edddaa3a9b9fca606e277bf0f1cd293a83ececb47ebb74"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC5A2 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC5A2 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC5A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC5A2",
+            "ppr_score": 0.0001508199571043589,
+            "degree_corrected_score": 0.00011801297829000418,
+            "graph_degree": 14,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC5A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC5A2",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC5A2": {
+          "status": "unavailable",
+          "gene": "SLC5A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC5A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC5A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=9.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A2"
+        ],
+        "confidence": 0.76,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A2": 9.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.76；法官理由: No direct MAGECK NALM6 CRISPR depletion evidence; graph paths are association-level and not ALL. SLC5A2/SGLT2 is kidney-specific and redundant for glucose uptake, making tumor-growth inhibition unlikely. Two independent false votes outweigh。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=9.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A2": 9.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: E’s 0.821 essentiality is indirect and not NALM6 CRISPR; observations link SLC5A2 to liver cancer/glycolysis, not ALL. Two independent LLMs note low SLC5A2 expression/no ALL dependency. Thus knockout likely does not inhibit NALM6 tumor grow。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A2']",
+        "status": "ok",
+        "summary": "SLC5A2 encodes SGLT2, a sodium/glucose cotransporter mainly linked to renal glucose reabsorption and not an established tumor suppressor in ALL. In human NALM6 ALL cells under CRISPR/MAGeCK conditions, there is no strong prior evidence that SLC5A2 inhibits tumor growth; its loss would more plausibly be neutral or context-dependent rather than clearly tumor-suppressive.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A2"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC5A2 encodes SGLT2, a sodium/glucose cotransporter mainly linked to renal glucose reabsorption and not an established tumor suppressor in ALL. In human NALM6 ALL cells under CRISPR/MAGeCK conditions, there is no strong prior evidence that SLC5A2 inhibits tumor growth; its loss would more plausibly be neutral or context-dependent rather than clearly tumor-suppressive.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:15:40Z"
+  }
+}

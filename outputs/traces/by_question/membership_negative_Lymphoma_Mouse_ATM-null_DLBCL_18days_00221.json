@@ -1,0 +1,261 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00221",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC10A5 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC10A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00221",
+      "status": "ok",
+      "summary": "检索到 3 类证据、2 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC10A5"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC10A5",
+              "protein_function": "Involved in bile acid and bile salt transport.",
+              "aliases": "NTCP5, Sodium/Bile Acid Cotransporter 5",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC10A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC10 Sodium bile  salt cotransport family",
+              "target_properties": {
+                "name": "SLC10 Sodium bile  salt cotransport family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC10A5 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC10A5 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC10A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC10A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC10A5",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC10A5": {
+          "status": "unavailable",
+          "gene": "SLC10A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC10A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC10A5",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC10A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A5"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC10A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A5']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC10A5 属于 SLC10 钠/胆汁酸共转运家族，主要生物学背景是肝/肠等上皮组织的胆汁酸转运；其可迁移邻近癌种更偏向肝胆或消化道上皮肿瘤。Lymphoma/DLBCL 是淋巴造血系统肿瘤，组织来源、细胞谱系和代谢依赖与胆汁酸转运上皮明显不同。跨癌种类推时，不能把肝肠胆汁酸转运功能直接迁移到 ATM-null DLBCL 的增殖必需性上。 | 该基因在目标癌种缺乏 TIMER/KM/图谱邻近证据，且其已知功能与淋巴造血细胞肿瘤的核心生存通路关联很弱。若 SLC10A5 在 DLBCL 细胞系中低表达或不参与关键增殖/代谢依赖，CRISPR 敲除更可能表现为中性而非抑制肿瘤生长。因此 membership 判断为 false，但 confidence 保持较低以反映跨癌种类推的不确定性。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A5"
+        ],
+        "confidence": 0.38,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC10A5 属于 SLC10 钠/胆汁酸共转运家族，主要生物学背景是肝/肠等上皮组织的胆汁酸转运；其可迁移邻近癌种更偏向肝胆或消化道上皮肿瘤。Lymphoma/DLBCL 是淋巴造血系统肿瘤，组织来源、细胞谱系和代谢依赖与胆汁酸转运上皮明显不同。跨癌种类推时，不能把肝肠胆汁酸转运功能直接迁移到 ATM-null DLBCL 的增殖必需性上。 | 该基因在目标癌种缺乏 TIMER/KM/图谱邻近证据，且其已知功能与淋巴造血细胞肿瘤的核心生存通路关联很弱。若 SLC10A5 在 DLBCL 细胞系中低表达或不参与关键增殖/代谢依赖，CRISPR 敲除更可能表现为中性而非抑制肿瘤生长。因此 membership 判断为 false，但 confidence 保持较低以反映跨癌种类推的不确定性。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A5']",
+        "status": "ok",
+        "summary": "SLC10A5 encodes a sodium-dependent bile acid transporter and is not established as a tumor-growth inhibitor in lymphoma. In ATM-null DLBCL contexts, transporter/metabolic genes more often support proliferation or nutrient handling rather than suppress tumor growth, so the membership claim that SLC10A5 inhibits lymphoma tumor growth is best answered false.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A5"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC10A5 encodes a sodium-dependent bile acid transporter and is not established as a tumor-growth inhibitor in lymphoma. In ATM-null DLBCL contexts, transporter/metabolic genes more often support proliferation or nutrient handling rather than suppress tumor growth, so the membership claim that SLC10A5 inhibits lymphoma tumor growth is best answered false.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T17:59:50Z"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00249",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC3A1 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC3A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00249",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC3A1"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC3A1",
+              "protein_function": "Acts as a chaperone that facilitates biogenesis and trafficking of functional transporter heteromers to the plasma membrane.",
+              "aliases": "RBAT, NBAT, CSNU1, ATR1, D2H",
+              "transport_type": "E (see details in SLC7 table)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC3A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC3 Heavy subunits of the  heteromeric amino acid transporters",
+              "target_properties": {
+                "name": "SLC3 Heavy subunits of the  heteromeric amino acid transporters"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Oncogenic role of the SLC7A13-SLC3A1 cystine transporter in human luminal breast cancer and its cryo-EM structure.",
+              "abstract": "Breast cancer is a prevalent malignancy worldwide. The majority of breast cancers belong to the estrogen receptor (ER)-positive luminal subtype that can be effectively treated with antiestrogen therapies. However, a significant portion of such malignancies become hormone-refractory and incurable. Cancer cells often uptake more cystines to increase glutathione (GSH) biosynthesis and reduce reactive oxygen species (ROS), thereby preventing ROS-induced ferroptosis and leading to therapeutic resistance. However, few molecules of these processes are targetable for cancer therapy. However, few therapeutic targets have been established that target these processes. Here, we report that the gene for SLC7A13, a member of the SLC7A13-SLC3A1 cystine transporter, was amplified and overexpressed in 19.7% and 49.7% of breast cancers, respectively. SLC7A13 amplification and overexpression were associated with worse overall survival and disease-free survival in patients with luminal breast cancer. Functionally, SLC7A13 overexpression promoted, while its silencing attenuated, cell survival or proliferation. Molecularly, SLC7A13 silencing reduced cystine uptake and GSH biosynthesis, leading to increased lipid ROS levels. The cryo-EM structure of the human SLC7A13-SLC3A1 complex was determined at 2.64 Å, revealing a dimer-of-heterodimers architecture similar to that of other SLC3A1-linked transporters. A specific substrate-binding pocket was identified, containing distinct residues, which suggests a regulatory role in the cystine transporter. These findings suggest that the SLC7A13-SLC3A1 cystine transporter is a therapeutic target for treating luminal breast cancer. They also provide the structural insights for therapeutic development targeting the cystine transporter.",
+              "doi": "10.1093/procel/pwaf076",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96a2d7d1e908c88547cbb20f269947c44008bc132a239678371a122d410b807e"
+              }
+            },
+            {
+              "title": "Dihydrosanguinarine enhances tryptophan metabolism and intestinal immune function via AhR pathway activation in broilers.",
+              "abstract": "Tryptophan is essential for nutrition, immunity and neural activity, but cannot be synthesized endogenously. Certain natural products influence host health by modulating the gut microbiota to promote the production of tryptophan metabolites. Sanguinarine (SAN) enhances broiler immunity, however, its low bioavailability and underlying mechanisms remain unclear. This study aimed to decode the mechanisms by which sanguinarine enhances intestinal immune function in broilers. Liquid chromatography-tandem mass spectrometry (LC-MS/MS) was employed to identify the main metabolites of sanguinarine in the intestine. Subsequently, equal concentrations of sanguinarine and its metabolites were separately added to the diets. The effects of sanguinarine and its metabolites on the intestinal immune function of broiler chickens were evaluated using 16S rRNA gene amplicon sequencing and tryptophan metabolomics approaches. We determined that dihydrosanguinarine (DHSA) is the main metabolite of sanguinarine in the intestine. Both compounds increased average daily gain and reduced feed efficiency, thereby improving growth performance. They also enhanced ileal villus height and the villus-to-crypt (V/C) ratio while decreasing crypt depth and upregulating the mRNA expression of tight junction proteins ZO-1, occludin and claudin-1. Furthermore, both compounds promoted the proliferation of intestinal Lactobacillus species, a tryptophan-metabolizing bacterium, stimulated short-chain fatty acid production, and lowered intestinal pH. They regulated tryptophan metabolism by increasing the diversity and content of indole tryptophan metabolites, activating the aryl hydrocarbon receptor (AhR) pathway, and elevating the mRNA levels of CYP1A1, CYP1B1, SLC3A1, IDO2 and TPH1. Inflammatory cytokines IL-1β and IL-6 were inhibited, while anti-inflammatory cytokines IL-10 and IL-22, serum SIgA concentration, and intestinal MUC2 expression were increased. Notably, DHSA exhibited a more pronounced effect on enhancing immune function compared to SAN. SAN is converted to DHSA in vivo, which increases its bioavailability. DHSA regulates tryptophan metabolism by activating the AhR pathway and modulating immune-related factors through changes in the gut microbiota. Notably, DHSA significantly increases the abundance of Lactobacillus, a key tryptophan-metabolizing bacterium, thereby enhancing intestinal immune function and improving broiler growth performance.",
+              "doi": "10.1186/s40104-025-01220-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f56c83dcff35a21a284e8bd71d1dd12d0c74650eab09484cc35c3dc9f18cdb49"
+              }
+            },
+            {
+              "title": "Integrated Analysis of Lactate-Related Genes Identifies S100A4 as a Novel Marker Promoting the Migration and Invasion of Endometrial Stromal Cell in Endometriosis.",
+              "abstract": "Endometriosis is a prevalent gynecological disorder worldwide that significantly impairs the quality of life of patients and imposes a substantial economic burden. The limited efficacy and adverse effects of current pharmacological and surgical treatments highlight the urgent need for alternative diagnostic biomarkers and therapeutic targets. Recent evidence indicates that metabolic reprogramming, particularly lactate metabolism, plays a crucial role in the development and progression of endometriosis. In this study, we employed differential expression analysis to identify differentially expressed genes in endometriosis patients, and used Least Absolute Shrinkage and Selection Operator (LASSO) regression and Random Forest (RF) for feature selection and model construction. Five key genes (MRPS2, YARS2, SLC3A1, CALD1, and S100A4) were validated as highly accurate diagnostic markers. Furthermore, we conducted in-depth analysis of the regulatory activity of these key lactate metabolism-related genes and their association with immune infiltration. Additionally, we constructed a lncRNA-miRNA gene regulatory network, providing insights into the molecular mechanisms and potential therapeutic strategies. Among these key lactate metabolism-related genes, S100A4 was found to be significantly upregulated in the lesions of endometriosis and plays a pivotal role in regulating cellular invasion and metabolic reprogramming in endometriosis. Silencing of S100A4 significantly inhibited the migration and invasion ability of endometrial stromal cells, whereas overexpression of S100A4 reversed this inhibitory effect. This finding further underscores the importance of S100A4 as a potential therapeutic target. In conclusion, this study highlights the potential value of lactate-related genes as diagnostic biomarkers and therapeutic targets, especially targeting the S100A4 gene in endometrial stromal cells, which may serve as an effective therapeutic strategy to inhibit the progression of endometriosis, offering new directions for future clinical diagnosis and treatment.",
+              "doi": "10.1007/s43032-025-01914-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "33794aa12c4477387fbd1a93a5c4658fcbf7b8b0194dd23c3ce237802dcbf304"
+              }
+            },
+            {
+              "title": "Serum lncRNAs TUG1, H19, and NEAT1 and their target miR-29b/SLC3A1 axis as possible biomarkers of preeclampsia: Potential clinical insights.",
+              "abstract": "To date, the epigenetic signature of preeclampsia (PE) is not completely deciphered. Oxidative stress-responsive long non-coding RNAs (lncRNAs) are deregulated in preeclamptic placenta; however, their circulating profiles and diagnostic abilities are still unexplored. We investigated serum redox-sensitive lncRNAs TUG1, H19, and NEAT1, and their target miR-29b/cystine/neutral/dibasic amino acids transporter solute carrier family 3, member 1 (SLC3A1) as potential non-invasive biomarkers of PE risk, onset, and severity. We recruited 82 patients with PE and 78 healthy pregnant women. We classified PE patients into early-onset (EOPE) and late-onset (LOPE) subgroups at a cut-off 34 gestational weeks and into severe and mild PE subgroups by blood pressure and proteinuria criteria. Bioinformatics analysis was employed to select lncRNAs/microRNA/target gene interactions. Serum H19, NEAT1, and SLC3A1 mRNA expression were reduced, meanwhile miR-29b levels were elevated, whereas there was no significant difference in TUG1 levels between PE patients and healthy pregnancies. Serum H19 levels were lower, whereas miR-29b levels were higher in EOPE versus LOPE. Serum miR-29b and H19 levels were higher in severe versus mild PE. ROC analysis identified serum H19, NEAT1, miR-29b, and SLC3A1 as potential diagnostic markers, with H19 (AUC = 0.818, 95%CI = 0.744-0.894) and miR-29b (AUC = 0.82, 95%CI = 0.755-0.885) were superior discriminators. Only H19 and miR-29b discriminated EOPE and severe PE cases. In multivariate logistic analysis, miR-29b and H19 were associated with EOPE, using maternal age and gestational age as covariates, while miR-29b was associated with severe PE, using maternal age as covariate. Studied markers were correlated with clinical and ultrasound data in the overall PE group. Serum H19 and TUG1 were negatively correlated with albuminuria in EOPE and LOPE, respectively. NEAT1 and SLC3A1 were correlated with ultrasound data in EOPE. Likewise, TUG1, miR-29b, and SLC3A1 showed significant correlations with ultrasound data in LOPE. Conclusively, this study configures SLC3A1 expression as a novel potential serum biomarker of PE and advocates serum H19 and miR-29b as biomarkers of EOPE and miR-29b as a biomarker of PE severity.",
+              "doi": "10.1016/j.ncrna.2024.06.007",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "781076e9c6705392209611cf404fe4e0b7766a427fbf1354f6a7210db07d7108"
+              }
+            },
+            {
+              "title": "Tissue distribution, hormonal regulation, ontogeny, diurnal expression, and induction of mouse cystine transporters Slc3a1 and Slc7a9.",
+              "abstract": "Slc7a11 (xCT) and Slc3a1 (rBAT) are cystine uptake transporters that maintain intracellular concentrations of cysteine, the rate-limiting amino acid in glutathione synthesis. This study was conducted to first determine the tissue distribution of the two transporters in male and female mice. Because Slc3a1 was the primary cystine transporter in liver, its sex-divergent expression, ontogeny, diurnal rhythm and whether its mRNA expression is altered by transcription factors (AhR, CAR, PXR, PPARα, and Nrf2) was also investigated. Slc7a11 was expressed highest in brain and gonads. Slc3a1 was expressed highest in kidney and intestine, followed by liver. Duodenal and hepatic Slc3a1 was higher in females than males. Hepatic Slc3a1 was high during darkness and low during daytime. Hepatic Scl3a1 was lowest pre-birth, increased to near maximal levels at birth, decreased back to pre-birth levels between Days 3-10, and then returned to peak levels by Day 45. Except for CAR, activation of transcription factors did not increase hepatic mRNA expression of Slc3a1. Chemical activation of CAR significantly induced Slc3a1 1.4-fold in wild-type but not CAR-null mice. Slc3a1 mRNA was higher in livers of AhR- and Nrf2-null mice compared to wild-type mice. High doses of diquat but not acetaminophen induced Slc3a1, suggesting Slc3a1 may respond to oxidative stress but not necessarily to GSH depletion. Overall, Slc7a11 is mainly expressed in brain and gonads, whereas Slc3a1 is mainly expressed in kidney, small intestine and liver, and its hepatic expression is regulated by diurnal rhythm and certain xenobiotic treatments.",
+              "doi": "10.1080/10715762.2020.1812597",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC3A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a9419dbbb8cd2e725c193d3136b8f6a681ca634a53a5dd2f8572ca69a364cd03"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC3A1 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC3A1 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC3A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC3A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC3A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC3A1",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC3A1": {
+          "status": "unavailable",
+          "gene": "SLC3A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC3A1": {
+          "status": "unavailable",
+          "gene": "SLC3A1",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC3A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC3A1"
+        ],
+        "confidence": 0.83,
+        "abstained": false,
+        "gene_scores": {
+          "SLC3A1": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.83；法官理由: E conflates essentiality with inhibition; no melanoma CRISPR evidence shows SLC3A1 inhibits drug resistance. Literature links cystine transport to promoting resistance, not inhibiting it. Two independent LLM votes agree false.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC3A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC3A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC3A1": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: E’s essentiality score does not establish SLC3A1 inhibits melanoma drug resistance. Literature links SLC3A1/SLC7A13 to breast cancer therapeutic resistance, not mouse melanoma, and suggests promotion via cystine/GSH/ferroptosis. Two indepen。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC3A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC3A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:14:23Z"
+  }
+}

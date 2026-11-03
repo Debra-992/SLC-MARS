@@ -1,0 +1,771 @@
+{
+  "qid": "pairwise_negative_OC_Human_ES2_00331",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC16A1 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "winner": "SLC16A1"
+  },
+  "effective_genes": [
+    "SLC16A1",
+    "SLC6A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_OC_Human_ES2_00331",
+      "status": "ok",
+      "summary": "检索到 4 类证据、39 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC16A1",
+        "SLC6A1"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "protein_function": "Bidirectional proton-coupled monocarboxylate transporter that catalyzes the rapid transport across the plasma membrane of many monocarboxylates such as lactate, pyruvate, acetate and the ketone bodies acetoacetate and beta-hydroxybutyrate.",
+              "aliases": "MCT1, Monocarboxylate Transporter 1",
+              "transport_type": "C / H+ or E / monocarboxylate"
+            },
+            {
+              "gene": "SLC6A1",
+              "protein_function": "Mediates transport of GABA together with sodium and chloride, responsible for the reuptake of GABA from the synapse.",
+              "aliases": "GAT1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC16 Monocarboxylate  transporter family",
+              "target_properties": {
+                "name": "SLC16 Monocarboxylate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Head and Neck Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Laryngeal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Venous thromboembolism (VTE)",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Quantitative proteomics revealed energy metabolism pathway alterations in human epithelial ovarian carcinoma and their regulation by the antiparasite drug ivermectin: data interpretation in the context of 3P medicine.",
+              "abstract": "Energy metabolism abnormality is the hallmark in epithelial ovarian carcinoma (EOC). This study aimed to investigate energy metabolism pathway alterations and their regulation by the antiparasite drug ivermectin in EOC for the discovery of energy metabolism pathway-based molecular biomarker pattern and therapeutic targets in the context of predictive, preventive, and personalized medicine (PPPM) in EOC. iTRAQ-based quantitative proteomics was used to identify mitochondrial differentially expressed proteins (mtDEPs) between human EOC and control mitochondrial samples isolated from 8 EOC and 11 control ovary tissues from gynecologic surgery of Chinese patients, respectively. Stable isotope labeling with amino acids in cell culture (SILAC)-based quantitative proteomics was used to analyze the protein expressions of energy metabolic pathways in EOC cells treated with and without ivermectin. Cell proliferation, cell cycle, apoptosis, and important molecules in energy metabolism pathway were examined before and after ivermectin treatment of different EOC cells. In total, 1198 mtDEPs were identified, and various mtDEPs were related to energy metabolism changes in EOC, with an interesting result that EOC tissues had enhanced abilities in oxidative phosphorylation (OXPHOS), Kreb's cycle, and aerobic glycolysis, for ATP generation, with experiment-confirmed upregulations of UQCRH in OXPHOS; IDH2, CS, and OGDHL in Kreb's cycle; and PKM2 in glycolysis pathways. Importantly, PDHB that links glycolysis with Kreb's cycle was upregulated in EOC. SILAC-based quantitative proteomics found that the protein expression levels of energy metabolic pathways were regulated by ivermectin in EOC cells. Furthermore, ivermectin demonstrated its strong abilities to inhibit proliferation and cell cycle and promote apoptosis in EOC cells, through molecular networks to target PFKP in glycolysis; IDH2 and IDH3B in Kreb's cycle; ND2, ND5, CYTB, and UQCRH in OXPHOS; and MCT1 and MCT4 in lactate shuttle to inhibit EOC growth. Our findings revealed that the Warburg and reverse Warburg effects coexisted in human ovarian cancer tissues, provided the first multiomics-based molecular alteration spectrum of ovarian cancer energy metabolism pathways (aerobic glycolysis, Kreb's cycle, oxidative phosphorylation, and lactate shuttle), and demonstrated that the antiparasite drug ivermectin effectively regulated these changed molecules in energy metabolism pathways and had strong capability to inhibit cell proliferation and cell cycle progression and promote cell apoptosis in ovarian cancer cells. The observed molecular changes in energy metabolism pathways bring benefits for an in-depth understanding of the molecular mechanisms of energy metabolism heterogeneity and the discovery of effective biomarkers for individualized patient stratification and predictive/prognostic assessment and therapeutic targets/drugs for personalized therapy of ovarian cancer patients.",
+              "doi": "10.1007/s13167-020-00224-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "41f01a32df59ae7cdd36cca831bd858bc1f2b6d1de9e0f2ced7563bfe3c4628d"
+              }
+            },
+            {
+              "title": "Overexpression of SLC6A1 associates with drug resistance and poor prognosis in prostate cancer.",
+              "abstract": "Solute Carrier Family 6 Member 1 (SLC6A1) has been identified as a cancer-promoting gene in various human cancers, such as clear cell renal cell carcinoma and ovarian cancer. However, its roles in prostate cancer (PCa) has not been fully elucidated. The aim of this study was to investigate the expression and clinical significance of SLC6A1 in PCa tissues and its effect on drug resistance to docetaxel in PCa. Expression patterns of SLC6A1 protein in PCa tissues were examined by immunohistochemistry based on Tissue microarray. Associations of SLC6A1 protein expression with various clinicopathological features and patients' prognosis of PCa were also statistically evaluated based on TCGA data. Roles of SLC6A1 deregulation in prostate carcinogenesis and drug resistance was further determined in vitro and in vivo experiments. Based on TCGA Dataset, SLC6A1 expression was markedly higher in patients with high Gleason score, advanced clinical stage and positive biochemical recurrence than those with control features (all P < 0.05). Both unvariate and multivariate analyses demonstrated that SLC6A1 expression was significantly associated with biochemical recurrence-free survival in PCa patients. In addition, enforced expression of SLC6A1 effectively promoted cell proliferation, migration and invasion of PCa cells in vitro. Moreover, the inhibition of SLC6A1 suppressed the tumor growth in vivo. Additionally, immunohistochemical notches of PCNA and MMP-9 in the low-expression cluster were pointedly lower compared to those of NC group. Finally, the cell viability revealed that the overexpression of SLC6A1 obviously promoted the PCa cell resistant to docetaxel (DTX), and the transplanted tumor in the overexpression group had no significant reduction compared with the untreated group. Our data suggest that SLC6A1 overexpression may be associated with aggressive progression and short biochemical recurrence-free survival of PCa, and may be related to the resistance to docetaxel therapy.",
+              "doi": "10.1186/s12885-020-06776-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "79a91be9a345f1bdf63811544c03e7a7d6f787c82c113e89a4d4970fe1aa931f"
+              }
+            },
+            {
+              "title": "Curcumin derivative NL01 induces ferroptosis in ovarian cancer cells via HCAR1/MCT1 signaling.",
+              "abstract": "Curcumin has been shown to have anti-tumor proliferative properties, but its clinical application is limited by its low bioavailability, etc. Derivatives of curcumin have been developed and tested to improve its therapeutic efficacy. Derivative NL01 could induce ferroptosis through the HCAR1/MCT1 pathway. CCK-8 was used to detect curcumin and derivative IC, crystalline violet staining was used to detect the proliferation inhibition effect of NL01 in ovarian cancer, western blot and qPCR were used to detect downstream related molecular expression changes, Transwell and survival curve assays were used to detect malignant phenotypic. NL01 inhibited cell growth of Anglne and HO8910PM ovarian cancer cells by 13 times more potent than curcumin and induced ferroptosis of these two cells. we found that NL01 was able to reduce the expression of HCAR1/MCT1 and activate the AMPK signaling pathway, which in turn induced cellular ferroptosis via SREBP1 pathway. Knock-down HCAR1 expression revealed similar phenotype and pathway alterations to NL01 treatment. HCAR1 overexpression promoted a malignant phenotype and resistance to cisplatin in both cancer cells, whereas knockdown of HCAR1 showed the opposite phenotype. Subcutaneous transplantation tumor experiments in nude mice also showed that NL01 induced iron death and inhibited ovarian cancer proliferation. Further study showed that NL01 promoted the downregulation of GPX4 expression, which is related to ferroptosis, and that addition of ferrostatin-1 partially reversed NL01-mediated inhibition of the growth of two cell lines. NL01 exhibits better anti-tumor growth properties than curcumin, and NL01 induces ferroptosis in ovarian cancer cells.",
+              "doi": "10.1016/j.cellsig.2023.110791",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "93164fb6ee6e954765612047a368f3b3922e7c2d268330df30fa03a25d47b920"
+              }
+            },
+            {
+              "title": "SLC6A1-miR133a-CDX2 loop regulates SK-OV-3 ovarian cancer cell proliferation, migration and invasion.",
+              "abstract": "The present study assessed the expression of solute carrier 6 member 1 (SLC6A1) in ovarian cancer (OC) tissues and evaluated the effect of silencing SLC6A1 or caudal type homeobox 2 (CDX2) on the proliferation, migration, and invasion of SK-OV-3 OC cells. The levels of caudal type homeobox 2 (CDX2) and SLC6A1 mRNA were also examined in OC SK-OV-3, OVCAR3 and A2780 cell lines. The mRNA levels of CDX2 and SLC6A1 in SK-OV-3 OC cells were assessed following transection with microRNA (miR) 133a mimics; the mRNA and protein levels of SLC6A1 were determined following the silencing of CDX2, and the mRNA expression of CDX2 was gauged following the silencing of SLC6A1. A luciferase reporter assay was performed to assess the effect of miR133a on the CDX2 and SLC6A1 3'-untranslated regions (3'UTRs). The proliferation, migration and invasion rate of SK-OV-3 cells were then examined following the silencing of CDX2 or SLC6A1. The expression of SLC6A1 was increased in OC compared with adjacent tissue. The expression of CDX2 and SLC6A1 in SK-OV-3 and OVCAR3 cells was increased compared with A2780 cells (P<0.05). The level of CDX2 and SLC6A1 mRNA in SK-OV-3 cells decreased when the cells were transected with the miR133a mimics, compared with a negative control (P<0.05). Transfection with the miR133a mimics significantly reduced the luciferase activity of reporter plasmids with the SLC6A1 or CDX2 3'UTRs (P<0.05). The mRNA level of CDX2 was decreased subsequent to the silencing of SLC6A1; the mRNA and protein level of SLC6A1 were decreased when CDX2 was silenced (P<0.05). The proliferation, migration, and invasion of SK-OV-3 cells were significantly reduced following the silencing of CDX2 or SLC6A1 (P<0.05). CDX2 may therefore be inferred to promote the proliferation, migration and invasion in SK-OV-3 OC cells, acting as a competing endogenous RNA.",
+              "doi": "10.3892/ol.2018.9273",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cfc60ea8e8d23aecfd25b96fe7b93c5bc5befd76735d5b87641b08bb4c036fe6"
+              }
+            },
+            {
+              "title": "NMR metabolomics highlights sphingosine kinase-1 as a new molecular switch in the orchestration of aberrant metabolic phenotype in cancer cells.",
+              "abstract": "Strong experimental evidence in animal and cellular models supports a pivotal role of sphingosine kinase-1 (SK1) in oncogenesis. In many human cancers, SK1 levels are upregulated and these increases are linked to poor prognosis in patients. Here, by employing untargeted NMR-based metabolomic profiling combined with functional validations, we report the crucial role of SK1 in the metabolic shift known as the Warburg effect in A2780 ovarian cancer cells. Indeed, expression of SK1 induced a high glycolytic rate, characterized by increased levels of lactate along with increased expression of the proton/monocarboxylate symporter MCT1, and decreased oxidative metabolism, associated with the accumulation of intermediates of the tricarboxylic acid cycle and reduction in CO production. Additionally, SK1-expressing cells displayed a significant increase in glucose uptake paralleled by GLUT3 transporter upregulation. The role of SK1 is not limited to the induction of aerobic glycolysis, affecting metabolic pathways that appear to support the biosynthesis of macromolecules. These findings highlight the role of SK1 signaling axis in cancer metabolic reprogramming, pointing out innovative strategies for cancer therapies.",
+              "doi": "10.1002/1878-0261.12048",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e61100258fd689232e126d1d6be96478953e67b2be13756db40e913925893524"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC16A1 cancer=Ovarian cancer bucket=pairwise Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC16A1 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC16A1', 'SLC6A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC16A1",
+            "ppr_score": 0.00035700830216195927,
+            "degree_corrected_score": 0.00020373549372257468,
+            "graph_degree": 27,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC6A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC16A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC16A1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC16A1": {
+          "status": "unavailable",
+          "gene": "SLC16A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC16A1": {
+          "status": "unavailable",
+          "gene": "SLC16A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC6A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC6A1"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A1": 10.1,
+          "SLC6A1": 0.15
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC6A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC6A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC6A1"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A1": 10.1,
+          "SLC6A1": 0.15
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC6A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC6A1']",
+        "status": "ok",
+        "summary": "SLC16A1/MCT1 is a monocarboxylate transporter commonly implicated in cancer metabolism, lactate efflux, pH regulation, proliferation, and survival; its loss or inhibition is more likely to impair ovarian cancer tumor growth than SLC6A1, a GABA transporter with weaker direct evidence as an essential ovarian cancer growth regulator in ES2 CRISPR screens.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC6A1"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC16A1/MCT1 is a monocarboxylate transporter commonly implicated in cancer metabolism, lactate efflux, pH regulation, proliferation, and survival; its loss or inhibition is more likely to impair ovarian cancer tumor growth than SLC6A1, a GABA transporter with weaker direct evidence as an essential ovarian cancer growth regulator in ES2 CRISPR screens.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T03:30:05Z"
+  }
+}

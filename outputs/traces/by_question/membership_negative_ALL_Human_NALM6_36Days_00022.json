@@ -1,0 +1,427 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00022",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC6A9 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC6A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00022",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC6A9"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC6A9",
+              "protein_function": "Essential for regulating glycine concentrations at inhibitory glycinergic synapses.",
+              "aliases": "GlyT-1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC6A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A9",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A9",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC6A9",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A9",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Glycine supplementation in vitro enhances porcine preimplantation embryo cell number and decreases apoptosis but does not lead to live births.",
+              "abstract": "Most in vitro culture conditions are less-than-optimal for embryo development. Here, we used a transcriptional-profiling database to identify culture-induced differences in gene expression in porcine blastocysts compared to in vivo-produced counterparts. Genes involved in glycine transport (SLC6A9), glycine metabolism (GLDC, GCSH, DLD, and AMT), and serine metabolism (PSAT1, PSPH, and PHGDH) were differentially expressed. Addition of 10 mM glycine to the culture medium (currently containing 0.1 mM) reduced the abundance of SLC6A9 transcript and increased total cell number, primarily in the trophectoderm lineage (P = 0.003); this was likely by decreasing the percentage of apoptotic nuclei. As serine and glycine can be reversibly metabolized by serine hydroxymethyltransferase 2 (SHMT2), we assessed the abundance of SHMT2 transcript as well as its functional role by inhibiting it with aminomethylphosphonic acid (AMPA), a glycine analog, during in vitro culture. Both AMPA supplementation and elevated glycine decreased the mRNA abundance of SHMT2 and tumor protein p53 (TP53), which is activated in response to cellular stress, compared to controls (P ≤ 0.02). On the other hand, mitochondrial activity of blastocysts, mtDNA copy number, and abundance of mitochondria-related transcripts did not differ between control and 10 mM glycine culture conditions. Despite improvements to these metrics of blastocyst quality, transfer of embryos cultured in 10 mM glycine did not result in pregnancy whereas the transfer of in vitro-produced embryos cultured in control medium yielded live births. Mol. Reprod. Dev. 83: 246-258, 2016. © 2016 The Authors.",
+              "doi": "10.1002/mrd.22618",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "89099b3336d65b73107238826a032f7d5d0ade5831eb96d84ede9d6bcd41c405"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of microRNAs modulated by histone deacetylase inhibitors identifies microRNA-7-5p with anti-myeloma effect.",
+              "abstract": "Basic research to expand treatment options for multiple myeloma is greatly needed due to the refractory nature of the disease. Histone deacetylase (HDAC) inhibitors, which are epigenetic regulators, are attractive but have limited applications. MicroRNAs (miRNAs), which are also epigenetic regulators, are important molecules that may lead to future therapeutic breakthroughs. In this study, we comprehensively searched for miRNAs that are altered by HDAC inhibitors in myeloma cells. We identified miR-7-5p (miR-7) as a miRNA downregulated by HDAC inhibitors. Transfection of myeloma cell lines with miR-7 suppressed cell proliferation, induced apoptosis, and enhanced the effects of the HDAC inhibitor panobinostat. Expression of miR-7 was downregulated by c-Myc inhibition, but upregulated by bortezomib. Comprehensive examination of miR-7 targets revealed four candidates: SLC6A9, LRRC59, EXOSC2, and PSME3. Among these, we focused on PSME3, an oncogene involved in proteasome capacity in myeloma cells. PSME3 knockdown increases myeloma cell death and panobinostat sensitivity. In conclusion, miR-7, which is downregulated by HDAC inhibitors, is a tumor suppressor that targets PSME3. This miR-7 downregulation may be involved in HDAC inhibitor resistance. In addition, combinations of anti-myeloma drugs that complement changes in miRNA expression should be considered.",
+              "doi": "10.1007/s12185-024-03812-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "000a9ed1c832f22e652f3f6f72496aad0042a3ad73e18444fd70540c97481d31"
+              }
+            },
+            {
+              "title": "HTR1D regulates the PI3K/Akt signaling pathway to impact glioblastoma development and resistance to temozolomide.",
+              "abstract": "Glioblastoma (GBM), the most aggressive primary brain tumor, presents significant therapeutic challenges owing to limited treatment options beyond the cornerstone chemotherapy temozolomide (TMZ) and its intrinsic chemoresistance. This study elucidates additional mechanisms of the multimodal antidepressant vortioxetine in GBM, extending beyond the reported PI3K/Akt pathway modulation. RNA-sequencing analysis identified five potential vortioxetine-responsive targets in GBM cells: SCN5A, HTR1D, SLC6A9, KIF11, and ADRB2. Notably, only HTR1D overexpression correlated with poor disease-free survival in GBM patients. Vortioxetine-mediated HTR1D suppression suggests its potential role as an HTR1D inhibitor in GBM progression. HTR1D-overexpressing GBM cells exhibited enhanced proliferative and migratory capacities. LinkedOmics database analysis revealed the HTR1D regulation on PI3K/Akt axis, a dominant signaling pathway showing significant positive correlation with TMZ resistance. Crucially, HTR1D knockdown enhanced TMZ sensitivity in GBM cells. Moreover, the TMZ-vortioxetine combination demonstrated marked synergistic anti-tumor effects concomitant with HTR1D suppression. In vivo, the TMZ-vortioxetine combination more effectively suppressed GBM proliferation than either agent alone. Collectively, these findings identify HTR1D as a novel vortioxetine target in GBM that modulates proliferation, metastasis, and TMZ resistance via PI3K/Akt signaling. This study provides convincing preclinical evidence for TMZ-vortioxetine combination therapy, proposing both a new therapeutic target and a viable strategy to circumvent TMZ resistance in GBM.",
+              "doi": "10.1016/j.cbi.2025.111748",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "67beee935d26cf6b2867c279ae349a9f372dbff33f7d385f0d71c2f87de8bbdf"
+              }
+            },
+            {
+              "title": "Blocking glycine utilization inhibits multiple myeloma progression by disrupting glutathione balance.",
+              "abstract": "Metabolites in the tumor microenvironment are a critical factor for tumor progression. However, the lack of knowledge about the metabolic profile in the bone marrow (BM) microenvironment of multiple myeloma (MM) limits our understanding of MM progression. Here, we show that the glycine concentration in the BM microenvironment is elevated due to bone collagen degradation mediated by MM cell-secreted matrix metallopeptidase 13 (MMP13), while the elevated glycine level is linked to MM progression. MM cells utilize the channel protein solute carrier family 6 member 9 (SLC6A9) to absorb extrinsic glycine subsequently involved in the synthesis of glutathione (GSH) and purines. Inhibiting glycine utilization via SLC6A9 knockdown or the treatment with betaine suppresses MM cell proliferation and enhances the effects of bortezomib on MM cells. Together, we identify glycine as a key metabolic regulator of MM, unveil molecular mechanisms governing MM progression, and provide a promising therapeutic strategy for MM treatment.",
+              "doi": "10.1038/s41467-022-31248-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bc030ba64ca383798e5900d44d2a89ecf5e8dcb4b82c77e32b5079f1fa17d8b4"
+              }
+            },
+            {
+              "title": "GlyT1 inhibition by ALX-5407 attenuates allograft rejection through suppression of Th1 cell differentiation.",
+              "abstract": "Transplant rejection driven by Th1 cell-mediated immune responses remains a critical challenge. This study aimed to investigate the role of glycine transporter 1 (GlyT1/SLC6A9) in Th1 differentiation and evaluate the therapeutic potential of its inhibitor, ALX-5407, in attenuating allograft rejection. RNA sequencing, flow cytometry, and qRT-PCR were employed to analyze GlyT1 expression in Th1-polarized CD4T cells. ALX-5407 (0.5-500 nM) was tested  under Th1-polarizing conditions. A murine skin allograft model (BALB/c to C57BL/6) was established to assess graft survival and immune responses. Combination therapy with rapamycin and ALX-5407 was evaluated through histopathology, immunofluorescence, and splenocyte profiling. Mechanistic insights were derived from RNA-seq, KEGG/GO enrichment, and Western blotting. GlyT1 expression was significantly upregulated in Th1 cells and rejection cohorts. ALX-5407 suppressed Th1 differentiation, reducing IFN-γCD4T cells proportions (p < 0.05) and activation markers (CD25, CD69), while inducing apoptosis via caspase-3 activation and BCL-2 downregulation. Although ALX-5407 monotherapy failed to prolong graft survival, combination with rapamycin synergistically enhanced efficacy (p = 0.018), reduced inflammatory infiltration, and attenuated splenic Th1 polarization. Mechanistically, ALX-5407 inhibited MAPK signaling but activated the PI3K-AKT-mTOR pathway, which rapamycin counteracted to amplify suppression. GlyT1 serves as a metabolic checkpoint in Th1 differentiation, and its inhibition by ALX-5407 attenuates allograft rejection through dual suppression of Th1 function and apoptosis induction. Synergy with rapamycin highlights a novel combinatorial strategy to mitigate rejection with reduced toxicity. These findings position GlyT1 targeting as a promising approach for clinical translation in transplantation immunotherapy.",
+              "doi": "10.3389/fimmu.2025.1644529",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c4c05fe25a84172a000319c941711947fdbc19d6e581617416b7fbffb0aed03e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC6A9 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC6A9 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC6A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC6A9",
+            "ppr_score": 2.4910318817943576e-05,
+            "degree_corrected_score": 5.157025321026318e-05,
+            "graph_degree": 2,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC6A9",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC6A9",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC6A9": {
+          "status": "unavailable",
+          "gene": "SLC6A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC6A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A9",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC6A9 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC6A9"
+        ],
+        "confidence": 0.441,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A9": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC6A9 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A9']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC6A9 在 Brain Tumor 中与 proliferation/chemotherapy resistance 呈 PROMOTION；在 MM 中 SLC6A9 介导甘氨酸摄取，支持 GSH/嘌呤合成，敲低可抑制增殖。NALM6 为 B-ALL，与 MM 同属血液肿瘤谱系，且高增殖白血病/淋巴瘤细胞常依赖甘氨酸/一碳代谢与抗氧化体系，因此 SLC6A9 更可能在 ALL 中促进肿瘤生长，抑制 SLC6A9 则可能抑制 ALL 肿瘤生长。 | 目标 ALL 缺少直接 TIMER/KM/PPR 邻近证据，但跨癌种生物学证据一致指向 SLC6A9 为促生长/促耐药相关基因：图谱中 Brain Tumor 的 gene_disease_effect 为 PROMOTION；文献显示 MM 中 SLC6A9 knockdown 抑制增殖并增强治疗敏感性；miR-7 作为抑癌 miRNA 可靶向 SLC6A9，GBM 中 SLC6A9 也出现在增殖/耐药相关药物响应背景中。PPR 仅给出极小邻近值，TIMER/KM 不可用，因此置信度较低，但综合因果方向与代谢依赖类比，最可能答案为 true。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC6A9"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A9": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No direct ALL/NALM6 MAGECK evidence shows SLC6A9 knockout reduces tumor growth; observations are brain-tumor associations. Two independent LLM channels note redundant glycine transport and absent 24d depletion, outweighing weak cross-cancer。原证据通道判定: winner=None answer=True conf=0.42（保留于溯源）。",
+        "analogy_cancers": [
+          "Brain Tumor"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A9']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC6A9"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:39:16Z"
+  }
+}

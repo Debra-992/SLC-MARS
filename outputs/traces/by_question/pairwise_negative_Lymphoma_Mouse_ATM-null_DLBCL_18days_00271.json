@@ -1,0 +1,747 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00271",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A32 and SLC6A14 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A32"
+  },
+  "effective_genes": [
+    "SLC25A32",
+    "SLC6A14"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00271",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A32",
+        "SLC6A14"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "protein_function": "Facilitates flavin adenine dinucleotide (FAD) translocation across the mitochondrial inner membrane into the mitochondrial matrix where it acts as a redox cofactor.",
+              "aliases": "MFTC, Mitochondrial FAD Transporter",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC6A14",
+              "protein_function": "Amino acid transporter that plays an important role in the absorption of amino acids in the intestinal tract.",
+              "aliases": "BMIQ11, ATB0+, S6A14",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The interaction of HT-2 toxin and Akt1 on gene expression regulation in Kashin-Beck disease pathogenesis.",
+              "abstract": "This study investigates the effects of T-2 toxin metabolite HT-2 alone or combined with Akt1 on chondrocyte gene expression to elucidate their roles in Kashin-Beck disease (KBD) pathogenesis. Lentiviral transfection was employed to silence Akt1 in C28/I2 human chondrocytes. High-throughput RNA sequencing and bioinformatics analysis methods were used to identify and compare differentially expressed genes (DEGs) and pathways in HT-2, siAkt1, HT-2-siAkt1 and Control (non-treatment) group. Co-expressed genes and co-expressed modules were investigated using WGCNA. Protein-protein interaction (PPI) networks were constructed using the STRING database, and hub genes were identified by the MCC algorithm. A total of 2086 DEGs were identified in the HT-2 vs Control comparison, with significant upregulation observed for CCND2, MMP9 and TIMP4. The adhesion and PI3K-Akt signaling pathways were upregulated, while ECM-receptor interactions was downregulated. In the siAkt1 vs Control comparison, 695 DEGs were detected. VAMP7 and CXCR4 were significantly upregulated, while PFKL and ALDOA were significantly downregulated. Fructose and mannose metabolism, amino acid biosynthesis, and glucose/energy metabolic pathways were significantly downregulated. There were 411 DEGs when HT-2-siAkt1 vs HT-2, and CCND2, MMP9, WTAPP1 and TIMP4 were significantly downregulated. Adhesion, NF-κB signaling pathway and PI3K-Akt signaling pathway were significantly downregulated. Under, WGCNA, in the module most associated with HT-2, FRMD3B, ALDH1A3, ANTXR2, SERINC2 and SRGN were identified as hub genes; in the module most associated with siAkt1, TNFRSF11B, CECR2, TMOD1, ZNF704 and RHOBTB1 were identified as hub genes; in the module most associated with HT-2-siAkt1, the hub genes were GNAL, SLC25A32, ACADSB, CABLES1 and GINS4. Akt1 primarily affects the expression of genes in chondrocytes under HT-2 exposure that involved in autophagy, cell proliferation and glycolysis and other cell functions, potentially contributing to the pathogenesis of KBD.",
+              "doi": "10.1016/j.toxicon.2025.108432",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75447c29f9e02e261bc0ddbb1036edfd15138c7c33a4d308efcee037f6939d0a"
+              }
+            },
+            {
+              "title": "SLC6A14 Drives Mitochondrial Fusion and Oxidative Phosphorylation to Promote Cancer Stemness and Early-Onset of Breast Cancer.",
+              "abstract": "Early-onset breast cancer (EOBC), diagnosed before the age of 45, is associated with poor therapeutic outcomes and limited survival, yet the underlying mechanisms remain poorly defined. Identifying environmental risk factors and actionable therapeutic targets is an urgent clinical need. Notably, the largest survival gap between younger and older patients occurs in luminal breast cancer, implicating potential endocrine disruption. Here, an association is identified between elevated levels of di(2-ethylhexyl)phthalate (DEHP) in hair, a widely used endocrine-disrupting plasticizer, and earlier age at diagnosis of breast cancer. Mechanistically, DEHP exposure promotes tumor initiation by enhancing cancer stemness through mitochondrial fusion and glutamine-driven oxidative phosphorylation. DEHP upregulates the glutamine transporter SLC6A14 to enhance glutamine uptake, while suppressing mitochondrial fission factor (MFF), which exacerbates mitochondrial fusion. High SLC6A14 expression correlates with cancer stemness signatures and earlier onset in patient cohorts. Inhibition of SLC6A14 reduces stemness, impairs tumor growth, and sensitizes tumors to chemotherapy. Collectively, the findings uncover a novel environmental-metabolic axis linking plasticizer exposure to EOBC and establish SLC6A14 as a promising metabolic vulnerability. These results provide a strong preclinical rationale for targeting SLC6A14 in young breast cancer patients and offer new insights into mitigating the oncogenic impact of environmental pollutants.",
+              "doi": "10.1002/advs.202510811",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "24e4487f851903e878164bcde8ac5b5513e34da247a2e700db1ed2f563da22b4"
+              }
+            },
+            {
+              "title": "{'sup': '0,+', '#text': 'Resetting amino acid metabolism of cancer cells by ATB-targeted nanoparticles for enhanced anticancer therapy.'}",
+              "abstract": "Reprogramed cellular metabolism is one of the most significant hallmarks of cancer. All cancer cells exhibit increased demand for specific amino acids, and become dependent on either an exogenous supply or upregulated  synthesis. The resultant enhanced availability of amino acids supports the reprogramed metabolic pathways and fuels the malignant growth and metastasis of cancers by providing energy and critical metabolic intermediates, facilitating anabolism, and activating signaling networks related to cell proliferation and growth. Therefore, pharmacologic blockade of amino acid entry into cancer cells is likely to have a detrimental effect on cancer cell growth. Here we developed a nanoplatform (LJ@Trp-NPs) to therapeutically target two transporters, SLC6A14 (ATB) and SLC7A5 (LAT1), that are known to be essential for the sustenance of amino acid metabolism in most cancers. The LJ@Trp-NPs uses tryptophan to guide SLC6A14-targeted delivery of JPH203, a high-affinity inhibitor of SLC7A5. In the process, SLC6A14 is also down-regulated. We tested the ability of this strategy to synergize with the anticancer efficacy of lapatinib, an inhibitor of EGFR/HER1/HER2-assocated kinase. These studies show that blockade of amino acid entry amplifies the anticancer effect of lapatinib via interference with mTOR signaling, promotion of apoptosis, and suppression of cell proliferation and metastasis. This represents the first study to evaluate the impact of amino acid starvation on the anticancer efficacy of widely used kinase inhibitor.",
+              "doi": "10.1016/j.bioactmat.2021.07.009",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1d0df584d27ae28de569ccce63e240487e38773c6f250900cb23c975d9112fea"
+              }
+            },
+            {
+              "title": "{'sup': '0,+', '#text': 'ATB-targeted nanoparticles trigger STAT3-ferroptosis regulatory axis for enhanced gastric cancer therapy.'}",
+              "abstract": "Chemotherapy remains one of the main treatments for gastric cancer, but the efficacy of 5-fluorouracil (5-FU) is limited by drug resistance. Ferroptosis is a unique mode of regulated cell death characterized by iron accumulation and lipid peroxidation, and its induction by aberrant STAT3 signaling may contribute to chemotherapy resistance. Cryptotanshinone (Cpt) is a bioactive compound extracted from Salvia miltiorrhiza that acts as a STAT3 inhibitor and has shown efficacy against several malignancies, endowing its potential as an agent to overcome the chemotherapy of gastric cancer. Importantly, cancer cells-especially drug-resistant cells-often upregulate amino acid transporters to import indispensable nutrients that support rapid proliferation, and therefore these transporters could guide the target delivery of chemotherapeutics for enhanced delivery efficiency. Here, we developed an amino acid transporter-targeted nanoplatform (F/C@Trp-NPs) co-loaded with 5-FU and Cpt to target the SLC6A14 (ATB) transporter, which is abnormally upregulated in gastric cancer cells, and evaluated its anticancer effects. The F/C@Trp-NPs significantly inhibited gastric cancer cell proliferation in vitro, consistent with the in vivo results. This study provides a promising new therapeutic strategy for gastric cancer.",
+              "doi": "10.1016/j.colsurfb.2025.114918",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7a0885b8a4a8003b7c8eef795ad0f6ff456f4494f0ff0f664b757edc7621cb95"
+              }
+            },
+            {
+              "title": "{'sup': '0,+', '#text': 'ATB-targeted nanoparticles initiate autophagy suppression to overcome chemoresistance for enhanced colorectal cancer therapy.'}",
+              "abstract": "Oxaliplatin (OXA) resistance remains the major obstacle to the successful chemotherapy of colorectal cancer (CRC). As a self-protection mechanism, autophagy may contribute to tumor drug resistance, therefore autophagy suppression could be regarded as a possible treatment option in chemotherapy. Cancer cells, especially drug-resistant tumor cells, increase their demand for specific amino acids by expanding exogenous supply and up-regulating de novo synthesis, to meet the needs for excessive proliferation. Therefore, it is possible to inhibit cancer cell proliferation through pharmacologically blocking the entry of amino acid into cancer cells. SLC6A14 (ATB) is an essential amino acid transporter, that is often abnormally up-regulated in most cancer cells. Herein, in this study, we designed oxaliplatin/berbamine-coloaded, ATB-targeted nanoparticles ((O + B)@Trp-NPs) to therapeutically target SLC6A14 (ATB) and inhibit cancer proliferation. The (O + B)@Trp-NPs utilize the surface-modified tryptophan to achieve SLC6A14-targeted delivery of Berbamine (BBM), a compound that is found in a number of plants used in traditional Chinese medicine, which could suppress autolysosome formation though impairing autophagosome-lysosome fusion. We verified the feasibility of this strategy to overcome the OXA resistance during colorectal cancer treatment. The (O + B)@Trp-NPs significantly inhibited the proliferation and decreased the drug resistance of resistant colorectal cancer cells. In vivo, (O + B)@Trp-NPs greatly suppressed the tumor growth in tumor-bearing mice, which is consistent with the in vitro data. This research offers a unique and promising chemotherapeutic treatment for colorectal cancer.",
+              "doi": "10.1016/j.ijpharm.2023.123082",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7e83c45d8ee61d53c31dd1607e048b064177685ec0ae9a5c1d782c2c1e38c7c4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A32 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A32 and SLC6A14 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC25A32', 'SLC6A14']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A32",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A32",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A32": {
+          "status": "unavailable",
+          "gene": "SLC25A32",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A14": {
+          "status": "unavailable",
+          "gene": "SLC6A14",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A32": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A32",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A14": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A14",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A14']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC6A14(P(winner)=0.62) vs SLC25A32(P=0.45), 差=0.17；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A14"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.05,
+          "SLC6A14": 8.25
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A14': 1, 'W:SLC25A32': 2}，最终智能体辩论后裁决：winner=SLC25A32 answer=None conf=0.72；法官理由: Two independent LLM channels support SLC25A32: mitochondrial FAD/one-carbon metabolism likely causes MAGeCK depletion and tumor-growth inhibition. SLC6A14 evidence is association-level proliferation, less direct for CRISPR essentiality.。原证据通道判定: winner=SLC6A14 answer=None conf=0.624（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A14']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 邻近癌种（GC/膀胱/胰腺/乳腺癌）中，SLC6A14作为氨基酸/谷氨酰胺转运体被反复关联到增殖、肿瘤干性、化疗抵抗及mTOR/NF-kB相关生长；DLBCL虽属淋巴系统肿瘤，但ATM-null DLBCL常依赖代谢重编程、氨基酸供给和NF-kB/PI3K-mTOR信号，因此跨组织可迁移为代谢/信号脆弱性。SLC25A32仅有非肿瘤Kashin-Beck病背景，缺少癌症生长促进证据。 | 在两个候选中，SLC6A14更可能通过敲除/抑制造成肿瘤生长受限：其跨癌种证据显示抑制SLC6A14可降低增殖、削弱干性并增强化疗敏感性，且图谱中存在Rela/NF-kB promotion关联，这与DLBCL中常见的NF-kB依赖增殖逻辑更契合。SLC25A32为线粒体FAD转运体，理论上可影响氧化还原/代谢，但缺乏癌症邻近证据和肿瘤生长方向支持。因此选择SLC6A14；置信度偏低，反映目标Lymphoma无直接图谱/组学证据。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A14"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.05,
+          "SLC6A14": 8.25
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A14': 1, 'W:SLC25A32': 2}，最终智能体辩论后裁决：winner=SLC25A32 answer=None conf=0.72；法官理由: Two independent LLM channels favor SLC25A32 as a mitochondrial one-carbon/redox bottleneck in proliferating ATM-null DLBCL; SLC6A14 evidence is associative cross-cancer and likely buffered by transporter redundancy. CRISPR depletion is more。原证据通道判定: winner=SLC6A14 answer=None conf=0.52（保留于溯源）。",
+        "analogy_cancers": [
+          "Gastric cancer (GC)",
+          "bladder cancer",
+          "malignt cancers",
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A14']",
+        "status": "ok",
+        "summary": "SLC25A32参与线粒体叶酸/一碳代谢，对核苷酸合成和增殖至关重要；在DLBCL样细胞中敲除更可能导致生长抑制。SLC6A14主要介导氨基酸摄取，虽也可能支持肿瘤生长，但相对核心代谢依赖较弱。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A14"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A32参与线粒体叶酸/一碳代谢，对核苷酸合成和增殖至关重要；在DLBCL样细胞中敲除更可能导致生长抑制。SLC6A14主要介导氨基酸摄取，虽也可能支持肿瘤生长，但相对核心代谢依赖较弱。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:56:21Z"
+  }
+}

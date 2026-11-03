@@ -1,0 +1,425 @@
+{
+  "qid": "pairwise_negative_Melanoma_Human_A375_00294",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC9C2 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "A375",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 6days vs Crispr 10days"
+  },
+  "ground_truth": {
+    "winner": "SLC35B1"
+  },
+  "effective_genes": [
+    "SLC35B1",
+    "SLC9C2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Human_A375_00294",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B1",
+        "SLC9C2"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "A375",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 6days vs Crispr 10days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35B1",
+              "protein_function": "ATP:ADP antiporter that catalyzes the exchange of ATP and ADP across the endoplasmic reticulum (ER) membrane. Regulates ER energy metabolism and protein biogenesis.",
+              "aliases": "SLC35B1",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC9C2",
+              "protein_function": "Involved in pH regulation.",
+              "aliases": "SLC9A11, NHE11",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35B1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC9C2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Identifying key genes and functionally enriched pathways in acute myeloid leukemia by weighted gene co-expression network analysis.",
+              "abstract": "Acute myeloid leukemia (AML) is characterized by the uncontrolled proliferation of myeloid leukemia cells in the bone marrow and other hematopoietic tissues and is highly heterogeneous. While with the progress of sequencing technology, understanding of the AML-related biomarkers is still incomplete. The purpose of this study is to identify potential biomarkers for prognosis of AML. Based on WGCNA analysis of gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases were employed for investigating potential biomarkers for the prognosis of AML. This study screened a total of 6153 genes by analyzing various changes in 103 acute myeloid leukemia (AML) samples, including gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases. Moreover, seven AML-related co-expression modules were mined by WGCNA analysis, and twelve biomarkers associated with the AML prognosis were identified from each top 10 genes of the seven co-expression modules. The AML samples were then classified into two subgroups, the prognosis of which is significantly different, based on the expression of these twelve genes. The differentially expressed 7 genes of two subgroups (HOXB-AS3, HOXB3, SLC9C2, CPNE8, MEG8, S1PR5, MIR196B) are mainly involved in glucose metabolism, glutathione biosynthesis, small G protein-mediated signal transduction, and the Rap1 signaling pathway. With the utilization of WGCNA mining, seven gene co-expression modules were identified from the TCGA database, and there are unreported genes that may be potential driver genes of AML and may be the direction to identify the possible molecular signatures to predict survival of AML patients and help guide experiments for potential clinical drug targets.",
+              "doi": "10.1007/s13353-024-00881-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11ee2a46d64d60350e43fff958f991225e20684b1f571930f8b5edb0b2c8fa1c"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "Effects of glucose on lactose synthesis in mammary epithelial cells from dairy cow.",
+              "abstract": "Lactose, as the primary osmotic component in milk, is the major determinant of milk volume. Glucose is the primary precursor of lactose. However, the effect of glucose on lactose synthesis in dairy cow mammary glands and the mechanism governing this process are poorly understood. Here we showed that glucose has the ability to induce lactose synthesis in dairy cow mammary epithelial cells, as well as increase cell viability and proliferation. A concentration of 12 mM glucose was the optimum concentration to induce cell growth and lactose synthesis in cultured dairy cow mammary epithelial cells. In vitro, 12 mM glucose enhanced lactose content, along with the expression of genes involved in glucose transportation and the lactose biosynthesis pathway, including GLUT1, SLC35A2, SLC35B1, HK2, β4GalT-I, and AKT1. In addition, we found that AKT1 knockdown inhibited cell growth and lactose synthesis as well as expression of GLUT1, SLC35A2, SLC35B1, HK2, and β4GalT-I. Glucose induces cell growth and lactose synthesis in dairy cow mammary epithelial cells. Protein kinase B alpha acts as a regulator of metabolism in dairy cow mammary gland to mediate the effects of glucose on lactose synthesis.",
+              "doi": "10.1186/s12917-016-0704-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7481668337f5074651447ea1cfb0116331aac5b1e8041070989ba69ad4b4b891"
+              }
+            },
+            {
+              "title": "Proteomic identification of MHC class I-associated peptidome derived from non-obese diabetic mouse thymus and pancreas.",
+              "abstract": "The peptides repertoire presented to CD8 T cells by major histocompatibility complex (MHC) class I molecules is referred to as the MHC I-associated peptidome (MIP), which regulates thymus development, peripheral survival and function during lifetime of CD8 T cells. Type 1 diabetes (T1D) is an organ-specific autoimmune disease caused by pancreatic β cells destruction mediated primarily by autoreactive CD8 T cells. Non-obese diabetic (NOD) mouse is an important animal model of T1D. Here, we deeply analyzed the MIP derived from NOD mice thymus and pancreas, and demonstrated that the thymus MIP source proteins partially shared with the MIP source proteins derived from NOD mice pancreas and β cell line. One H-2Kd restricted peptide SLC35B1 which was shared by MIP derived from both NOD mice pancreatic tissues and islet β-cell line, but absent in MIP from NOD thymus tissues, showed ability to stimulate IFN-γ secretion and proliferation of NOD mice splenic CD8 T cells. The global view of the MHC I-associated self-peptides repertoire in the thymus and pancreas of NOD mice may serve as a biological reference to identify potential autoantigens targeted by autoreactive CD8 T cells in T1D. Data are available via ProteomeXchange with identifier PXD031966. SIGNIFICANCE: The peptides repertoire presented to CD8 T cells by major histocompatibility complex (MHC) class I molecules is referred to as the MHC I-associated peptidome (MIP). The MIP presented by thymic antigen presenting cells (APCs) is crucial for shaping CD8 T cell repertoire and self-tolerance, while the MIP presented by peripheral tissues and organs is not only involved in maintaining periphery CD8 T cell survival and homeostasis, but also mediates immune surveillance and autoimmune responses of CD8 T cells under pathological conditions. Type 1 diabetes (T1D) is an organ-specific autoimmune disease caused by the destruction of pancreatic β cells, mediated primarily by autoreactive CD8 T cells. Non-obese diabetic (NOD) mouse is one of important animal models of spontaneous autoimmune diabetes that shares several key features with human T1D. The global view of the MHC I-associated self-peptides repertoire in the thymus and pancreas of NOD mice may serve as a good biological reference to identify potential autoantigens targeted by autoreactive CD8 T cells in T1D. It has great significance for further clarifying the immune recognition and effect mechanism of autoreactive CD8 T cells in the pathogenesis of T1D, and then developing antigen-specific immune intervention strategies.",
+              "doi": "10.1016/j.jprot.2022.104746",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "89aa25ae5b8c3f5f847e37fc7589406880a3831234f59e0deecb800ff7cf9569"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B1 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC9C2 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC35B1', 'SLC9C2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC9C2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC35B1",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.9757",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B1": {
+          "status": "unavailable",
+          "gene": "SLC35B1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B1": {
+          "status": "ok",
+          "gene": "SLC35B1",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.9757",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC9C2']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC9C2"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC9C2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.65；法官理由: Two independent LLM votes favor SLC35B1; graph suggests ER ATP/ADP homeostasis essential in A375, while SLC9C2 is tissue-restricted pH transporter. Despite lacking direct CRISPR evidence and one LLM mislabel, agreement plus plausibility sup。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC9C2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35B1 在结直肠癌/结肠腺癌中被纳入预后或剪接风险模型，并在奶牛乳腺上皮细胞中与葡萄糖-AKT 促生长/代谢通路共变；其核心功能是 ER ATP:ADP 交换和 ER 能量/蛋白合成稳态，这类分泌-代谢依赖在增殖活跃的肿瘤中更易成为生长必需。SLC9C2 主要见于 AML 共表达/预后标志物，功能偏 pH 调节，缺乏直接干预或必需性线索。A375 黑色素瘤虽无直接图谱邻近证据，但可类比高增殖、高 ER/蛋白合成需求肿瘤，因此 SLC35B1 敲除更可能在 CRISPR 6d→10d 中表现为生长抑制。 | 目标癌种 Melanoma 缺少直接 TIMER/PPR/KM 或邻近证据，因此采用跨癌种生物学推理。SLC35B1 是 ER ATP:ADP antiporter，调控 ER 能量代谢和蛋白生物发生；在 CRC/COAD 文献中作为 SLC 预后/剪接模型成员出现，在乳腺上皮细胞中与葡萄糖诱导生长和 AKT 调控相关，提示其可能在依赖分泌/蛋白合成的肿瘤中具有一定功能重要性。SLC9C2 为 Na+/H+ 交换相关 pH 调节基因，AML 文献中主要是表达/共表达标志，缺少功能干预或必需性证据。综合来看，SLC35B1 更可能在 A375 黑色素瘤 CRISPR 筛选中因敲除导致肿瘤生长抑制；但证据为跨癌种类比，置信度中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC9C2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC9C2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC35B1 在结直肠癌/结肠腺癌中被纳入预后或剪接风险模型，并在奶牛乳腺上皮细胞中与葡萄糖-AKT 促生长/代谢通路共变；其核心功能是 ER ATP:ADP 交换和 ER 能量/蛋白合成稳态，这类分泌-代谢依赖在增殖活跃的肿瘤中更易成为生长必需。SLC9C2 主要见于 AML 共表达/预后标志物，功能偏 pH 调节，缺乏直接干预或必需性线索。A375 黑色素瘤虽无直接图谱邻近证据，但可类比高增殖、高 ER/蛋白合成需求肿瘤，因此 SLC35B1 敲除更可能在 CRISPR 6d→10d 中表现为生长抑制。 | 目标癌种 Melanoma 缺少直接 TIMER/PPR/KM 或邻近证据，因此采用跨癌种生物学推理。SLC35B1 是 ER ATP:ADP antiporter，调控 ER 能量代谢和蛋白生物发生；在 CRC/COAD 文献中作为 SLC 预后/剪接模型成员出现，在乳腺上皮细胞中与葡萄糖诱导生长和 AKT 调控相关，提示其可能在依赖分泌/蛋白合成的肿瘤中具有一定功能重要性。SLC9C2 为 Na+/H+ 交换相关 pH 调节基因，AML 文献中主要是表达/共表达标志，缺少功能干预或必需性证据。综合来看，SLC35B1 更可能在 A375 黑色素瘤 CRISPR 筛选中因敲除导致肿瘤生长抑制；但证据为跨癌种类比，置信度中等偏低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC9C2']",
+        "status": "ok",
+        "summary": "在A375黑色素瘤细胞系中，SLC35B1参与核苷酸糖转运和糖基化，更可能影响增殖相关通路；SLC9C2主要表达于精子，在黑色素瘤细胞中功能相关性较低，因此SLC35B1敲除更可能抑制肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC9C2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "在A375黑色素瘤细胞系中，SLC35B1参与核苷酸糖转运和糖基化，更可能影响增殖相关通路；SLC9C2主要表达于精子，在黑色素瘤细胞中功能相关性较低，因此SLC35B1敲除更可能抑制肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T04:29:20Z"
+  }
+}

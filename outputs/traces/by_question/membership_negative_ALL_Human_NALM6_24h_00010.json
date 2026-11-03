@@ -1,0 +1,376 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_24h_00010",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC31A2 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC31A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_24h_00010",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC31A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC31A2",
+              "protein_function": "Does not function as a copper(1+) importer in vivo. However, in vitro functions as a low-affinity copper(1+) importer.",
+              "aliases": "COPT2, HCTR2, CTR2, etc.",
+              "transport_type": "unknown"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC31A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC31 Copper  transporter family",
+              "target_properties": {
+                "name": "SLC31 Copper  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identifying somatic changes in drug transporters using whole genome and transcriptome sequencing data of advanced tumors.",
+              "abstract": "Drug resistance is a perpetual problem in cancer therapy with many underlying mechanisms. Alterations in drug transport over the cancer cell membrane can severely alter intratumoral drug exposure, contributing to resistance. Here, we present the somatic mutational landscape of 48 ATP-binding cassette and 416 solute carrier transporter genes in a cohort (CPCT-02; NCT01855477) of 3290 patients with different types of advanced and metastasized cancer through analysis of whole genome and transcriptome sequencing. In order to identify potential stressor mechanisms, we stratified patients based on previous systemic therapies and subsequently investigated the enrichment of mutations and copy-number alterations of transporter genes. In tumors from patients pretreated with protein kinase inhibitors (PKIs), genes encoding for specific copper (SLC31A1 and SLC31A2, χ-test adjusted p-values: 6.9e-09 and 2.5e-09) and nucleoside transporters (SLC28A2 and SLC28A3, χ-test adjusted p-values: 3.5e-06 and 6.8e-07) were deleted significantly more frequently than in patients pretreated with chemotherapy. Moreover, we detected 16 transporters that were differentially expressed at RNA level between these treatment groups. These findings contradict mechanisms of selective pressure, as they would be expected to originate during treatment with chemotherapy rather than with PKIs. Hence, they might constitute primary drug resistance mechanisms and, therefore, warrant further study.",
+              "doi": "10.1016/j.biopha.2022.114210",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "354a290bcf7fc8da24fd51ac6f8ce2e7a94d88059f2fb3896d598da4383aff93"
+              }
+            },
+            {
+              "title": "Whole-genome studies identify solute carrier transporters in cellular susceptibility to paclitaxel.",
+              "abstract": "The clinical use of paclitaxel is limited by variable responses and the potential for significant toxicity. To date, studies of associations between variants in candidate genes and paclitaxel effects have yielded conflicting results. We aimed to evaluate the relationships between global gene expression and paclitaxel sensitivity. We utilized well-genotyped lymphoblastoid cell lines derived from the International HapMap Project to evaluate the relationships between cellular susceptibility to paclitaxel and global gene expression. Cells were exposed to varying concentrations of paclitaxel to evaluate paclitaxel-induced cytotoxicity and apoptosis. Among the top genes, we identified solute carrier (SLC) genes associated with paclitaxel sensitivity and narrowed down the list to those that had single nucleotide polymorphisms associated with both the expression level of the SLC gene and also with paclitaxel sensitivity. We performed an independent validation in an independent set of cell lines and also conducted functional studies using RNA interference. Of all genes associated with paclitaxel-induced cytotoxicity at P less than 0.05 (1713 genes), there was a significant enrichment in SLC genes (31 genes). A subset of SLC genes, namely SLC31A2, SLC43A1, SLC35A5, and SLC41A2, was associated with paclitaxel sensitivity and had regulating single nucleotide polymorphisms that were also associated with paclitaxel-induced cytotoxicity. Multivariate modeling demonstrated that those four SLC genes together explained 20% of the observed variability in paclitaxel susceptibility. Using RNA interference, we demonstrated increased paclitaxel susceptibility with knockdown of three SLC genes, SLC31A2, SLC35A5, and SLC41A2. Our findings are novel and lend further support to the role of transporters, specifically solute carriers, in mediating cellular susceptibility to paclitaxel.",
+              "doi": "10.1097/FPC.0b013e328352f436",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4e4df9c3a5e592ef0d024d74e6dc20c2f02324118096a49af97f864a569dff08"
+              }
+            },
+            {
+              "title": "Tumor immune microenvironment score predicts efficacy of immune checkpoint inhibitors-based regimens in advanced non-small cell lung cancer.",
+              "abstract": "Immune checkpoint inhibitor (ICI)-based regimens have become the standard first-line treatment for advanced non-small cell lung cancer (NSCLC). However, response rates vary widely, emphasizing the need for a predictive model to optimize patient selection and improve treatment outcomes. We retrospectively analyzed 96 treatment-naïve patients with advanced NSCLC who received first-line ICI-based regimens (anti-PD-1 ± platinum chemotherapy) at Hunan Cancer Hospital. Pre-treatment tumor biopsies underwent bulk RNA sequencing to identify differentially expressed genes associated with progression-free survival (PFS). A five-gene Cox proportional hazards model, the Prediction model of Immunotherapy Efficacy (PIE), was developed and validated in two independent cohorts: ORIENT-11 (n = 113; chemo-ICI) and OAK (n = 344; ICI monotherapy). Multiplex immunofluorescence staining (CD8, CD56, CD16, Pan-CK, PD-L1, MAGEA2) was performed to validate immune-cell infiltration patterns and candidate biomarkers across PIE-defined risk groups. Patients in the long-survival group exhibited enrichment of IL7R NK cells, SLC4A10 CD8 T cells, and dendritic cells, which were significantly associated with longer PFS. PIE integrated transcriptomic signatures of five biomarkers (CD274, KRT14, FOLR2, SLC31A2, and EFCAB14) to predicting PFS. Compared with patients having low-risk PIE scores, those classified as high-risk demonstrated significantly worse PFS (HR = 2.37, p < 0.001). PIE demonstrated predictive accuracy for 24-month PFS (AUC = 0.768). Additionally, MAGEA2 and MAGEA12 were identified as potential therapeutic targets. PIE represents a clinically relevant, transcriptome-based predictive model for evaluating the benefit of ICI treatment in advanced NSCLC. With further prospective validation, PIE may facilitate personalized patient selection and guide the development of novel strategies to overcome primary resistance.",
+              "doi": "10.1186/s12967-025-07408-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c583d51d052b95a931389d825cdeac72bafb0472b2b0fe98ea91089b58e65e84"
+              }
+            },
+            {
+              "title": "The expression pattern of pyroptosis-related genes predicts the prognosis and drug response of melanoma.",
+              "abstract": "Cutaneous melanoma (CM, hereafter referred to as melanoma) is a highly malignant tumor that typically undergoes early metastasis. Pyroptosis, as a special programmed cell death process that releases inflammatory factors and has been widely studied in tumors, but its role in melanoma has not been fully elucidated. In this study, we examined the relationship between pyroptosis and the prognosis of melanoma through bioinformatic analysis of RNA-sequencing data. Our results demonstrated that pyroptosis is a protective factor associated with melanoma prognosis. A higher pyroptosis score was associated with a more favorable overall survival. We used weighted gene co-expression networks analysis (WGCNA) to establish an effective prognosis model based on 12 pyroptosis-related genes. We then validated it in two independent cohorts. Furthermore, a nomogram combining clinicopathological characteristics and a pyroptosis-related gene signature (PGS) score was designed to effectively evaluate the prognosis of melanoma. Additionally, we analyzed the potential roles of pyroptosis in the tumor immune microenvironment and drug response. Interestingly, we found that the elevated infiltration of multiple immune cells, such as CD4 T cells, CD8 T cells, dendritic cells, and M1 macrophages, may be associated with the occurrence of pyroptosis. Pyroptosis was also related to a better response of melanoma to interferon-α, paclitaxel, cisplatin and imatinib. Through Spearman correlation analysis of the 12 pyroptosis-related genes and 135 chemotherapeutic agents in the Genomics of Drug Sensitivity in Cancer database, we identified solute carrier family 31 member 2 (SLC31A2) and collagen type 4 alpha 5 chain (COL4A5) as being associated with resistance to most of these drugs. In conclusion, this PGS is an effective and novelty prognostic indicator in melanoma, and also has an association with the melanoma immune microenvironment and melanoma treatment decision-making.",
+              "doi": "10.1038/s41598-022-24879-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "217e0b76d280c05a5ca8bca6bc0f511a575a03106be63a9f4f05d126da95b0e2"
+              }
+            },
+            {
+              "title": "Identification of potential modifier genes in Chinese patients with Wilson disease.",
+              "abstract": "The mutations in modifier genes may contribute to some inherited diseases including Wilson disease (WD). This study was designed to identify potential modifier genes that contribute to WD. A total of 10 WD patients with single or no heterozygous ATP7B mutations were recruited for whole-exome sequencing (WES). Five hundred and thirteen candidate genes, of which the genetic variants present in at least two patients, were identified. In order to clarify which proteins might be involved in copper transfer or metabolism processes, the isobaric tags for relative and absolute quantitation (iTRAQ) was performed to identify the differentially expressed proteins between normal and CuSO4-treated cell lines. Thirteen genes/proteins were identified by both WES and iTRAQ, indicating that disease-causing variants of these genes may actually contribute to the aberrant copper ion accumulation. Additionally, the c.86C > T (p.S29L) mutation in the SLC31A2 gene (coding CTR2) has a relative higher frequency in our cohort of WD patients (6/191) than reported (0.0024 in gnomAD database) in our healthy donors (0/109), and CTR2S29L leads to increased intracellular Cu concentration and Cu-induced apoptosis in cultured cell lines. In conclusion, the WES and iTRAQ approaches successfully identified several disease-causing variants in potential modifier genes that may be involved in the WD phenotype.",
+              "doi": "10.1093/mtomcs/mfac024",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7a194ed07ba7151583e81082cf720a64c675fbd2bb54dce5cfccd42192ebc1c9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC31A2 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC31A2 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC31A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC31A2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC31A2",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC31A2.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC31A2",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC31A2": {
+          "status": "ok",
+          "gene": "SLC31A2",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC31A2.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC31A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC31A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC31A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.50 -> P(必需)=0.619 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC31A2"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC31A2": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.74；法官理由: No direct NALM6 CRISPR readout. SLC31A2 is low-affinity copper transporter, likely buffered by SLC31A1; literature deletion is association-level. Two independent LLM channels reject essentiality; evidence channel lacks direction. Verdict fa。原证据通道判定: winner=None answer=True conf=0.619（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC31A2 is a low-affinity copper transporter with strong redundancy to SLC31A1/other copper-homeostasis pathways. Its reported associations are mainly with drug sensitivity/resistance and prognostic models in NSCLC/melanoma/advanced tumors, not with baseline tumor-growth essentiality. In B-ALL/NALM6, proliferation is more likely dependent on BCR/PI3K, MYC, cell-cycle, and core metabolic programs than on SLC31A2-mediated copper import. | No direct ALL CRISPR/essentiality evidence is available for SLC31A2. The literature supports SLC31A2 in paclitaxel sensitivity, drug-resistance signatures, and prognostic risk models, but these are treatment-response or expression-association contexts, not proof that SLC31A2 knockout inhibits ALL tumor growth. Given its low-affinity transporter role and likely redundancy, SLC31A2 is more plausibly non-essential for NALM6 growth under 0h vs 36-day MAGeCK conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC31A2"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC31A2": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC31A2 is a low-affinity copper transporter with strong redundancy to SLC31A1/other copper-homeostasis pathways. Its reported associations are mainly with drug sensitivity/resistance and prognostic models in NSCLC/melanoma/advanced tumors, not with baseline tumor-growth essentiality. In B-ALL/NALM6, proliferation is more likely dependent on BCR/PI3K, MYC, cell-cycle, and core metabolic programs than on SLC31A2-mediated copper import. | No direct ALL CRISPR/essentiality evidence is available for SLC31A2. The literature supports SLC31A2 in paclitaxel sensitivity, drug-resistance signatures, and prognostic risk models, but these are treatment-response or expression-association contexts, not proof that SLC31A2 knockout inhibits ALL tumor growth. Given its low-affinity transporter role and likely redundancy, SLC31A2 is more plausibly non-essential for NALM6 growth under 0h vs 36-day MAGeCK conditions. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC31A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T18:14:39Z"
+  }
+}

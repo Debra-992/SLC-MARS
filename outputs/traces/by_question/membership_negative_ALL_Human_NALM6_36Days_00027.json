@@ -1,0 +1,469 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00027",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC27A5 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC27A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00027",
+      "status": "ok",
+      "summary": "检索到 4 类证据、15 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC27A5"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC27A5",
+              "protein_function": "May mediate the import of long-chain fatty acids (LCFA) by facilitating their transport across cell membranes.",
+              "aliases": "VLCS-H2, VLACSR, VLCSH2, FACVL3, ACSVL6, FATP5, ACSB, Fatty-Acid-Coenzyme A Ligase, Very Long-Chain 3, Solute Carrier Family 27 (Fatty Acid Transporter), Member 5, Very Long-Chain Acyl-CoA Synthetase-Related Protein, Very Long-Chain Acyl-CoA Synthetase Homolog 2, Long-Chain Fatty Acid Transport Protein 5",
+              "transport_type": "LCFA transport, bile acid conjugation"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC27A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC27 Fatty acid  transporter family",
+              "target_properties": {
+                "name": "SLC27 Fatty acid  transporter family"
+              }
+            },
+            {
+              "gene": "SLC27A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC27A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC27A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC27A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC27A5",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC27A5",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC27A5",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC27A5",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "UBAP2 contributes to radioresistance by enhancing homologous recombination through SLC27A5 ubiquitination in hepatocellular carcinoma.",
+              "abstract": "Radiotherapy stands as an effective method in the clinical treatment of hepatocellular carcinoma (HCC) patients. However, both primary and acquired radioresistance limit its clinical application in HCC. Therefore, investigating the mechanism of radioresistance may provide other options for treating HCC. Based on single-cell RNA sequencing (scRNA-seq) and HCC transcriptome datasets, 227 feature genes with prognostic value were selected to establish the tSNE score. The tSNE score emerged as an independent prognostic factor for HCC and correlated with cell proliferation and radioresistance-related biological functions. UBAP2 was identified as the most relevant gene with the tSNE score, consistently elevated in human HCC samples, and positively associated with patient prognosis. Functionally, UBAP2 knockdown impeded HCC development and reduced radiation resistance in vitro and in vivo. The ectopic expression of SLC27A5 reversed the effects of UBAP2. Mechanically, we uncovered that UBAP2, through the ubiquitin-proteasome system, decreased the homologous recombination-related gene RAD51, not the non-homologous end-joining (NHEJ)-related gene CTIP, by degrading the antioncogene SLC27A5, thereby generating radioresistance in HCC. The findings recapitulated that UBAP2 promoted HCC progression and radioresistance via SLC27A5 stability mediated by the ubiquitin-proteasome pathway. It was also suggested that targeting the UBAP2/SLC27A5 axis could be a valuable radiosensitization strategy in HCC.",
+              "doi": "10.1016/j.bbadis.2024.167481",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC27A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "932c67f6bc6ea605300acac0fa7a6bf3aa7df4c91c58170158240c2b86c60007"
+              }
+            },
+            {
+              "title": "Hypoxia reduces SLC27A5 to promote hepatocellular carcinoma proliferation by repressing HNF4A.",
+              "abstract": "Hepatocellular carcinoma (HCC) is the third most common cause of cancer-related mortality globally, with hypoxia recognized as a key factor in its progression. Solute carrier family 27 member 5 (SLC27A5/FATP5), a pivotal enzyme in hepatic fatty acid transport and bile acid metabolism, is frequently downregulated in hepatocellular carcinoma, resulting in poor prognosis. However, the link between hypoxia and the suppression of SLC27A5 in HCC remains to be elucidated. Here, we investigated the hypoxia-induced downregulation of SLC27A5 and its impact on HCC proliferation via the repression of hepatocyte nuclear factor 4 alpha (HNF4A). Utilizing in vitro and in vivo hepatocellular carcinoma models, we have demonstrated that hypoxic conditions significantly reduce SLC27A5 transcription, which is mediated by the suppression of HNF4A. This reduction leads to the activation of the AKT pathway and an increase in cyclin-dependent kinase 2 (CDK2) and Cyclin E1 (CCNE1) expression, promoting the transition from the G1 to S phase of the cell cycle and driving HCC proliferation. Furthermore, we show that the pharmacological activation of HNF4A using Benfluorex, in combination with the AKT inhibitor MK2206, significantly inhibits tumor growth in a subcutaneous MHCC-97H xenograft model, suggesting a synergistic therapeutic potential. Together, our study provides novel insights into the hypoxia-mediated regulatory mechanisms in HCC and highlights the HNF4A/SLC27A5/AKT axis as a promising target for combination therapy.",
+              "doi": "10.1016/j.bbamcr.2025.119916",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC27A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0261bd5d6b23c81d4add347eefc3b5a5df3e07ee62fde12697afeca6f1b7ecd1"
+              }
+            },
+            {
+              "title": "Targeted inhibition of gastric adenocarcinoma by nano-curcumin liposomes: Insights from combined machine learning and experimental analyses into the mechanisms of cuproptosis and metabolic reprogramming.",
+              "abstract": "Gastric adenocarcinoma is a highly aggressive malignancy characterized by a complex tumor microenvironment. Nano-curcumin liposomes hold great potential in inhibiting tumor growth and survival, as well as inducing cuproptosis and oxidative stress. Although the anticancer properties of curcumin have been demonstrated, the specific mechanisms by which curcumin inhibites gastric adenocarcinoma through cuproptosis remains unclear. This study investigated how nano-curcumin liposomes mediated the inhibition of gastric adenocarcinoma cell proliferation and survival via cuproptosis. This study utilized the gastric adenocarcinoma cell line AGS to establish 2D and 3D in vitro gastric adenocarcinoma models. Furthermore, we prepared nano-curcumin liposomes to investigate their effects and regulatory mechanisms on AGS gastric adenocarcinoma models. A series of in vitro assays, including flow cytometry, CCK-8, scratch assays and morphological assessments, were performed to evaluate the effects of nano-curcumin liposomes on cell apoptosis, proliferation and migration. Additionally, bioinformatics and machine learning methods were employed to identify key targets that inhibited gastric adenocarcinoma growth and survival associated with nano-curcumin liposomes, which were further validated through RT-qPCR and omics analysis. Computer simulations were also conducted to assess the stability of binding interactions between curcumin and key target proteins. Cellular experiments demonstrated that nano-curcumin liposomes significantly inhibited proliferation and invasive capacity of gastric adenocarcinoma cells while promoting cellular oxidative stress. Bioinformatics and machine learning analyses identified FDX1, GPX4, SERPINE1 and SLC27A5 as key targets. RT-qPCR results confirmed that nano-curcumin liposomes significantly downregulated the expression of these targets. Molecular dynamics simulations indicated that curcumin could form stable binding interactions with key protein targets. This study revealed that nano-curcumin liposomes inhibited growth and survival of gastric adenocarcinoma cells by interfering with the expression of FDX1, GPX4, SERPINE1 and SLC27A5, which were closely linked to copper-induced oxidative stress. Nano-curcumin liposomes downregulated the expression of FDX1 and GPX4, disrupted mitochondrial energy metabolism, and induced oxidative stress, thereby promoting tumor-associated programmed cell death linked to cuproptosis. Furthermore, by downregulating SERPINE1, nano-curcumin liposomes modulated cell adhesion and migration, inhibiting the invasive and metastatic potential of tumor cells. Finally, downregulation of SLC27A5 altered tumor metabolism and cellular homeostasis, induced oxidative stress, and disrupted intracellular environmental stability, thereby suppressing the growth of gastric adenocarcinoma.",
+              "doi": "10.1016/j.ijpharm.2025.126368",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC27A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9ec37f6a2093d3cc9eb03d9ab35209a845c4be6cf24a8f009aaae823e955a487"
+              }
+            },
+            {
+              "title": "SLC27A5 promotes sorafenib-induced ferroptosis in hepatocellular carcinoma by downregulating glutathione reductase.",
+              "abstract": "Sorafenib, a first-line drug for advanced hepatocellular carcinoma (HCC), shows a favorable anti-tumor effect while resistance is a barrier impeding patients from benefiting from it. Thus, more efforts are needed to lift this restriction. Herein, we first find that solute carrier family 27 member 5 (SLC27A5/FATP5), an enzyme involved in the metabolism of fatty acid and bile acid, is downregulated in sorafenib-resistant HCC. SLC27A5 deficiency facilitates the resistance towards sorafenib in HCC cells, which is mediated by suppressing ferroptosis. Further mechanism studies reveal that the loss of SLC27A5 enhances the glutathione reductase (GSR) expression in a nuclear factor erythroid 2-related factor 2 (NRF2)-dependent manner, which maintains glutathione (GSH) homeostasis and renders insensitive to sorafenib-induced ferroptosis. Notably, SLC27A5 negatively correlates with GSR, and genetic or pharmacological inhibition of GSR strengthens the efficacy of sorafenib through GSH depletion and the accumulation of lipid peroxide products in SLC27A5-knockout and sorafenib-resistant HCC cells. Based on our results, the combination of sorafenib and carmustine (BCNU), a selective inhibitor of GSR, remarkably hamper tumor growth by enhancing ferroptotic cell death in vivo. In conclusion, we describe that SLC27A5 serves as a suppressor in sorafenib resistance and promotes sorafenib-triggered ferroptosis via restraining the NRF2/GSR pathway in HCC, providing a potential therapeutic strategy for overcoming sorafenib resistance.",
+              "doi": "10.1038/s41419-023-05558-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC27A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1c5cd429a59a854555aa89faeb3ed4e988ec5c4e5ddfe0bd862affdd5abca1df"
+              }
+            },
+            {
+              "title": "Copper metabolism-related risk score identifies hepatocellular carcinoma subtypes and SLC27A5 as a potential regulator of cuproptosis.",
+              "abstract": "Dysregulated copper metabolism has been noticed in many types of cancer including hepatocellular carcinoma (HCC); however, a comprehensive understanding about this dysregulation still remains unclear in HCC. A set of bioinformatic tools was integrated to analyze the expression and prognostic significance of copper metabolism-related genes. A related risk score, termed as CMscore, was developed via univariate Cox regression, least absolute shrinkage and selection operator (LASSO) Cox regression and multivariate Cox regression. Pathway enrichment analyses and tumor immune cell infiltration were further investigated in CMscore stratified HCC patients. Weighted correlation network analysis (WGCNA) was used to identify potential regulator of cuproptosis. Copper metabolism was dysregulated in HCC. HCC patients in the high-CMscore group showed a significantly lower overall survival (OS) and enriched in most cancer-related pathways. Besides, HCC patients with high CMscore had higher expression of pro-tumor immune infiltrates and immune checkpoints. Moreover, cancer patients with high CMscore from two large cohorts exhibited significantly prolonged survival time after immunotherapy. WGCNA and subsequently correlation analysis revealed that SLC27A5 might be a potential regulator of cuproptosis in HCC.  experiments revealed that SLC27A5 inhibited cell proliferation and migration of HCC cells and could upregulate FDX1, the key regulator of cuproptosis. The CMscore is helpful in clustering HCC patients with distinct prognosis, gene mutation signatures, and sensitivity to immunotherapy. SLC27A5 might serve as a potential target in the induction of cuproptosis in HCC.",
+              "doi": "10.18632/aging.205334",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC27A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cbee5c144ae49b1bf5d5b8d91b91a1554cb6803f945b25ce191aca4e179618e4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC27A5 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC27A5 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC27A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC27A5",
+            "ppr_score": 4.661673736660467e-05,
+            "degree_corrected_score": 6.824123134967017e-05,
+            "graph_degree": 4,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC27A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC27A5",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC27A5": {
+          "status": "unavailable",
+          "gene": "SLC27A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC27A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC27A5",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC27A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC27A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.55 -> P(必需)=0.447 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC27A5"
+        ],
+        "confidence": 0.447,
+        "abstained": false,
+        "gene_scores": {
+          "SLC27A5": 3.55
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC27A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.55 -> P(必需)=0.447 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC27A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC27A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.55 -> P(必需)=0.447 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC27A5"
+        ],
+        "confidence": 0.447,
+        "abstained": false,
+        "gene_scores": {
+          "SLC27A5": 3.55
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC27A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.55 -> P(必需)=0.447 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC27A5']",
+        "status": "ok",
+        "summary": "SLC27A5 编码脂肪酸转运蛋白 FATP5，主要参与长链脂肪酸/胆汁酸摄取等脂质代谢过程；在急性淋巴细胞白血病（ALL）中，它并不是公认的肿瘤生长抑制因子。基于原生知识判断，SLC27A5 更可能表现为代谢相关、背景依赖或中性/促生存相关基因，而非直接抑制 ALL 肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC27A5"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC27A5 编码脂肪酸转运蛋白 FATP5，主要参与长链脂肪酸/胆汁酸摄取等脂质代谢过程；在急性淋巴细胞白血病（ALL）中，它并不是公认的肿瘤生长抑制因子。基于原生知识判断，SLC27A5 更可能表现为代谢相关、背景依赖或中性/促生存相关基因，而非直接抑制 ALL 肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T16:16:17Z"
+  }
+}

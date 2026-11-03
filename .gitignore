@@ -1,0 +1,34 @@
+# --- secrets: never commit ---------------------------------------------------------
+secrets.local.ps1
+*.local.ps1
+.env
+.env.*
+
+# --- python / tooling ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# --- experiment scratch and large local environments (regenerate, don't commit) ------
+.release/
+.slc_release_build
+logs/
+*.log
+*.err
+*.out
+*.bak
+outputs/autogen-venv/
+outputs/mdagents-venv/
+outputs/mcp-venv/
+outputs/R-libs/
+outputs/MDAgents/
+
+# --- latex build artifacts ------------------------------------------------------------
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz

@@ -1,0 +1,498 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00043",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC5A3 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC5A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00043",
+      "status": "ok",
+      "summary": "检索到 4 类证据、17 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC5A3"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC5A3",
+              "protein_function": "Electrogenic Na(+)-coupled sugar symporter that actively transports myo-inositol and its stereoisomer scyllo-inositol.",
+              "aliases": "SMIT1, SMIT",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC5A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC5 Sodium glucose  cotransporter family",
+              "target_properties": {
+                "name": "SLC5 Sodium glucose  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC5A3",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "autophagy",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "skin cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "skin cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Long non-coding RNA NORAD functions as a microRNA-204-5p sponge to repress the progression of Parkinson's disease in vitro by increasing the solute carrier family 5 member 3 expression.",
+              "abstract": "Parkinson's disease (PD) is one of the most common neurodegenerative disorders. Long non-coding RNAs have important regulatory values in various human diseases. Non-coding RNA Activated by DNA Damage (NORAD) was reported to regulate PD progression in vitro, but its functional mechanism is fully unknown. We used 1-methyl-4-phenylpyridinium (MPP ) to establish the cell-based PD model. NORAD, microRNA-204-5p (miR-204-5p), and solute carrier family 5 member 3 (SLC5A3) levels were quantified using the quantitative real-time polymerase chain reaction. Cell viability and apoptosis were determined by Cell Counting Kit-8 and flow cytometry, respectively. The protein levels were analyzed via western blot. Cytotoxicity was assessed by the released lactate dehydrogenase level in cell supernatant. Oxidative stress and inflammation were measured by the standard indicators. Dual-luciferase reporter and RNA immunoprecipitation assays were performed for intergenic combination. First, we found that NORAD was obviously reduced in MPP -treated neuroblastoma cells and lightened the MPP -induced cytotoxicity, oxidative stress, and inflammatory response. Then, NORAD was shown to be a miR-204-5p sponge and avoided the injury induced by MPP in neuroblastoma cells via targeting miR-204-5p. SLC5A3 was a miR-204-5p target and could be regulated by NORAD/miR-204-5p axis. SLC5A3 knockdown assuaged the anti-miR-204-5p-induced protection for neuroblastoma cells from MPP . Altogether, NORAD played a neuroprotective role against the progression of MPP -induced PD model in neuroblastoma cells relying on the miR-204-5p/SLC5A3 axis. This study afforded the clear elaboration on the PD pathomechanism concerning NORAD.",
+              "doi": "10.1002/iub.2344",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4702c583745d020418e38bcc4994b70de5205d425a4d0df8df2d5d77f8d8a7cc"
+              }
+            },
+            {
+              "title": "Deficiency in the α1 subunit of Na+/K+-ATPase enhances the anti-proliferative effect of high osmolality in nucleus pulposus intervertebral disc cells.",
+              "abstract": "Intervertebral disc cells are constantly exposed to a hyperosmotic environment. Among cellular responses towards this stress is the inhibition of proliferation through the activation of p38 MAPK and p53. In an effort to further elucidate the biochemical pathways triggered by hyperosmotic stress, we assessed the high osmolality-induced transcriptional changes of bovine nucleus pulposus cells using whole-genome arrays. A 5- and a 24-h hyperosmotic treatment led to the differential expression of >100 and >200 genes, respectively, including nine genes encoding transporters (SLC4A11, SLC5A3, ATP1A1, SLC38A2, KCNK17, KCTD20, KCTD11, SLC7A5, and CLCA2). Differences in the transcriptional profile of these selected genes, as indicated by the microarrays experiments, were validated by qRT-PCR in 2D and 3D cell cultures, under hyperosmolar salt and sorbitol conditions, revealing the presence of a common triggering signal for osmotic adaptation. The key signaling molecules p38 MAPK and p53 were demonstrated to differently participate in the regulation of the aforementioned transporters. Finally, siRNA-mediated knocking-down of each one of the three transporters with the highest and sustained over-expression (i.e., SLC4A11, SLC5A3, and ATP1A1) had a distinct outcome on the transcriptional profile of the other transporters, on p38 MAPK and p53 phosphorylation and consequently on cell cycle progression. The inhibition of ATP1A1 had the most prominent effect on the transcription of the rest of the transporters and was found to enhance the anti-proliferative effect of hyperosmotic conditions through an increased G2/M cell cycle block, ascribing to this pump a central role in the osmoregulatory response of nucleus pulposus cells.",
+              "doi": "10.1002/jcp.25040",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "305a6b8c646cdbe79b4b19d68652d42a8a114845e8e1e718e01976f51b0fba05"
+              }
+            },
+            {
+              "title": "Development and validation of a prognostic model for predicting survival and immunotherapy benefits in melanoma based on metabolism-relevant genes.",
+              "abstract": "Skin cutaneous melanoma (SKCM) is a fatal form of skin cancer. Metabolism-related genes (MRGs) comprise a group of genes that possess the ability to modulate and regulate metabolic pathways. In this study, the expression levels of MRGs were used to classify SKCM patients into three molecular subtypes. Then the differentially expressed genes (DEGs) among the three MRGs molecular clusters were applied into the LASSO and COX regression analysis to identify five signature genes. Furthermore, we developed a prognostic model to predict the prognosis of SKCM patients and evaluate the response of SKCM patients to immunotherapy based on the expression of signature genes. Pathological features were extracted using the ResNet50 deep learning framework and Cellprofiler software, and feature selection was performed using elastic regression and univariate Cox analysis to obtain 13 pathological features related to the MRGs prognostic model. Single-cell RNA sequencing (scRNA-seq) analysis identified the expression of MRGs in multiple cell types and found that SLC5A3 + malignant cells may mediate potential communication with tumor-associated fibroblasts through the PI3K-AKT pathway and cholesterol metabolism pathway. It is worth noting that, through in vitro experiments, including western blot (WB), quantitative PCR (qPCR), and immunohistochemistry (IHC) techniques, we found differences in the expression levels of signature genes between normal melanocytes and SKCM cells. In addition, suppressing the expression of the signature gene, SLC5A3, in a SKCM cell line through the utilization of small interfering RNAs (siRNAs) could inhibit the proliferation and migration of cells, as evidenced by the implementation of colony formation assay, CCK8, and cell transfection techniques.",
+              "doi": "10.1007/s12672-025-03186-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2a7fa41bcc29bacd963c4257ad1731421e2733da48831da714c4441972c2587f"
+              }
+            },
+            {
+              "title": "Myo-inositol: A potential game-changer in preventing gill cell death and alleviating \"gill rot\" in grass carp (Ctenopharyngodon idellus).",
+              "abstract": "Increasing evidence shows the potential threat of gill rot in freshwater fish culture. F. columnare is wide-spread in aquatic environments, which can cause fish gill rot and result in high mortality and losses of fish. This study investigated the effects of myo-inositol (MI) on the proliferation, structural integrity, and different death modes of grass carp (Ctenopharyngodon idella) gill epithelial cells, as well as its possible mechanism. 30 mg/L MI up-regulated CCK8 OD value and the protein level of solute carrier family 5A 3 (SLC5A3), and down-regulated the reactive oxygen species (ROS) content in gill cells and lactate dehydrogenase (LDH) release in the culture medium (P < 0.05). MI up-regulated the protein level of Beclin1, the protein level and fluorescence expression of microtubule-associated protein light chain 3B (LC3B) and down-regulated the protein level of sequestosome-1 (SQSTM1, also called p62) (P < 0.05). MI down-regulated the protein levels of Cysteine aspartate protease-1 (caspase-1), Gasdermin E (GSDME) and Cleaved interleukin 1 beta (IL-1β) (P < 0.05). MI up-regulated the protein level of caspase-8 (P < 0.05), but had no effect on apoptosis (P > 0.05). MI down-regulated the mRNA expressions and protein levels of tumor necrosis factor α (tnfα), TNF receptor 1 (tnfr1), receptor interacting protein 1 (ripk1), receptor interacting protein 3 (ripk3) and mixed lineage kinase domain-like protein (mlkl), and reduce the ratio of p-MLKL/MLKL (P < 0.05). The addition of MI or necrosulfonamide (NSA) alone, or the addition of MI after induction of necroptosis, significantly up-regulated the cell activity and the protein level of SLC5A3 in gill cells, and significantly reduced the LDH release in the culture medium and the intracellular ROS content, the number of necroptosis cells, the protein expression of TNFα, TNFR1 and RIPK1, and the ratio of p-RIPK3/RIPK3 and p-MLKL/MLKL (P < 0.05). It indicated MI induce autophagy may relate to Beclin1/LC3/p62 signaling pathway, inhibits pyroptosis may attribute to Caspase-1/GSDMD/IL-1β signaling pathway, and inhibits necroptosis via MLKL signaling pathway. However, MI had no effect on apoptosis.",
+              "doi": "10.1016/j.fsi.2024.109850",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ff3bbf465a7012ceee193f165bcd2c7bab3d26bc21e72e640a7a376cdedbc548"
+              }
+            },
+            {
+              "title": "The sodium/myo-inositol co-transporter SLC5A3 promotes non-small cell lung cancer cell growth.",
+              "abstract": "Identification of novel molecular signaling targets for non-small cell lung cancer (NSCLC) is important. The present study examined expression, functions and possible underlying mechanisms of the sodium/myo-inositol co-transporter SLC5A3 in NSCLC. The Cancer Genome Atlas (TCGA) database and local NSCLC tissue results demonstrated that SLC5A3 expression in NSCLC tissues (including patient-derived primary NSCLC cells) was significantly higher than that in normal lung tissues and lung epithelial cells. In primary NSCLC cells and immortalized lines, SLC5A3 depletion, using small hairpin RNA (shRNA) and CRSIRP/Cas9 methods, robustly impeded cell proliferation and migration, simultaneously provoking cell cycle arrest and apoptosis. Conversely, ectopic overexpression of SLC5A3 further enhanced proliferation and migration in primary NSCLC cells. The intracellular myo-inositol contents and Akt-mTOR activation were largely inhibited by SLC5A3 silencing or knockout (KO), but were augmented following SLC5A3 overexpression in primary NSCLC cells. Significantly, SLC5A3 KO-induced anti-NSCLC cell activity was largely ameliorated by exogenously adding myo-inositol or by a constitutively-active Akt construct. By employing the patient-derived xenograft (PDX) model, we found that the growth of subcutaneous NSCLC xenografts in nude mice was largely inhibited by intratumoral injection SLC5A3 shRNA adeno-associated virus (AAV). SLC5A3 silencing, myo-inositol depletion, Akt-mTOR inactivation and apoptosis induction were detected in SLC5A3 shRNA virus-injected NSCLC xenograft tissues. Together, elevated SLC5A3 promotes NSCLC cell growth possibly by maintaining myo-inositol contents and promoting Akt-mTOR activation.",
+              "doi": "10.1038/s41419-022-05017-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a56e7db6ddd92cf1b36ebe493f7ac1696be78b66402aba98345478551b0200c0"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC5A3 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC5A3 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC5A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC5A3",
+            "ppr_score": 6.16833614377397e-05,
+            "degree_corrected_score": 8.076403458785877e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC5A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC5A3",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC5A3": {
+          "status": "unavailable",
+          "gene": "SLC5A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC5A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC5A3",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A3 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC5A3"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A3": 4.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 2, 'A:False': 1}，最终智能体辩论后裁决：winner=None answer=True conf=0.74；法官理由: E gives high CRISPR essentiality probability and strong 24-day MAGeCK depletion; L2 corroborates. L1’s redundancy critique is speculative and lacks direct NALM6 counter-evidence. Despite non-specific KG links, loss-of-function SLC5A3 likely。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A3 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC5A3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A3": 4.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=True conf=0.62；法官理由: Evidence rerank reports CRISPR essentiality (P=0.821, strong magnitude, no redundancy); loss of an essential gene should inhibit NALM6 tumor growth. Generic LLM doubts lack direct screen evidence.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A3']",
+        "status": "ok",
+        "summary": "SLC5A3 encodes a sodium/myo-inositol cotransporter and is more likely to support leukemia-cell metabolism and proliferation through myo-inositol uptake rather than act as a tumor-growth suppressor in ALL. Under NALM6 CRISPR conditions, loss of SLC5A3 would be expected to impair growth if it is a dependency, so SLC5A3 itself is not best interpreted as inhibiting ALL tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A3"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC5A3 encodes a sodium/myo-inositol cotransporter and is more likely to support leukemia-cell metabolism and proliferation through myo-inositol uptake rather than act as a tumor-growth suppressor in ALL. Under NALM6 CRISPR conditions, loss of SLC5A3 would be expected to impair growth if it is a dependency, so SLC5A3 itself is not best interpreted as inhibiting ALL tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T20:27:30Z"
+  }
+}

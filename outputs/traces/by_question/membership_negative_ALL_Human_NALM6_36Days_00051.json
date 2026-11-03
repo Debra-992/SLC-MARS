@@ -1,0 +1,350 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00051",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A48 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A48"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00051",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A48"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A48",
+              "protein_function": "Predicted to be involved in acyl carnitine transport and amino acid transport.",
+              "aliases": "FLJ44862, CTC-321K16.1",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A48",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A48",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A48",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioblastoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC25A48 controls mitochondrial choline import and metabolism.",
+              "abstract": "Choline is an essential nutrient for the biosynthesis of phospholipids, neurotransmitters, and one-carbon metabolism with a critical step being its import into mitochondria. However, the underlying mechanisms and biological significance remain poorly understood. Here, we report that SLC25A48, a previously uncharacterized mitochondrial inner-membrane carrier protein, controls mitochondrial choline transport and the synthesis of choline-derived methyl donors. We found that SLC25A48 was required for brown fat thermogenesis, mitochondrial respiration, and mitochondrial membrane integrity. Choline uptake into the mitochondrial matrix via SLC25A48 facilitated the synthesis of betaine and purine nucleotides, whereas loss of SLC25A48 resulted in increased production of mitochondrial reactive oxygen species and imbalanced mitochondrial lipids. Notably, human cells carrying a single nucleotide polymorphism on the SLC25A48 gene and cancer cells lacking SLC25A48 exhibited decreased mitochondrial choline import, increased oxidative stress, and impaired cell proliferation. Together, this study demonstrates that SLC25A48 regulates mitochondrial choline catabolism, bioenergetics, and cell survival.",
+              "doi": "10.1016/j.cmet.2024.07.010",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A48"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "fe5b2781c7751b7445a355410684b44d2e3c1006ea9b7220b13222982c91a77b"
+              }
+            },
+            {
+              "title": "Establishment and validation of a recurrent prediction model for glioma: extrinsic apoptotic molecules FADD and CASP8 are closely associated with glioma recurrence.",
+              "abstract": "Glioma represents the most prevalent and aggressive primary brain tumor in humans. Tumor heterogeneity, the immunosuppressive tumor microenvironment, and therapeutic resistance contribute to the inevitable recurrence of gliomas, posing significant clinical challenges. Understanding the risk factors and molecular mechanisms underlying glioma recurrence and progression is critical for improving patient outcomes. In this study, we aimed to develop a recurrence-associated gene signature to predict clinical recurrence and survival outcomes while elucidating potential molecular mechanisms driving glioma recurrence. Gene expression profiles and clinicopathological data were obtained from the Chinese Glioma Genome Atlas (CGGA) database. The CGGA-693 cohort served as the training set, while the CGGA-325 cohort and TCGA database were used for validation. A prognostic model was constructed using LASSO regression analysis. Cox regression and Kaplan-Meier survival analyses were employed to assess prognostic significance. Functional enrichment analyses, including Gene Ontology (GO), Gene Set Variation Analysis (GSVA), and Pearson correlation analysis, were conducted to explore biological pathways. We applied the T-test to analyze the expression levels of apoptotic molecules in primary versus recurrent gliomas, low-grade versus high-grade gliomas, as well as in the high versus low recurrence score groups. Furthermore, correlation analysis was performed to elucidate the relationship between six classic apoptotic genes and the recurrence score. By utilizing the STRING protein-interaction network, we systematically investigated the correlations between these six classic apoptotic genes and the 9-gene signature. RNA expression levels of CASP8 and FADD across various tissues were obtained from the NCBI database and the Human Protein Atlas database. Additionally, the protein levels of CASP8 and FADD in normal brain tissues were retrieved from the Human Protein Atlas database. Statistical analyses and visualization were performed using R software. A 9-gene recurrence-associated signature (AC062021.1, CCT7P2, CTB-1I21.1, DGCR6, RP11- 158M2.5, SLC22A6, SLC25A48, ADAM12, and FAM225B) was established, demonstrating robust predictive performance. Multivariate analysis confirmed that the recurrence score serves as an independent prognostic factor for glioma patients. Functional annotation revealed a significant association between the signature and apoptotic pathways. Subsequent analysis indicated that extrinsic apoptosis-related molecules (FADD and CASP8), rather than intrinsic apoptotic molecules (BCL2 and CASP9), were strongly correlated with glioma recurrence. Additionally, we characterized the expression patterns of key extrinsic apoptotic mediators, FADD and CASP8, in both normal and tumor tissues. Our study successfully developed a predictive model based on 9 recurrence-related genes, enabling accurate stratification of glioma patients into high- and low-risk recurrence groups. Furthermore, we identified apoptosis, particularly the extrinsic apoptotic pathway involving FADD and CASP8, as a critical mechanism associated with glioma recurrence. These findings provide valuable insights into the molecular basis of glioma recurrence and may facilitate the development of targeted therapeutic strategies.",
+              "doi": "10.1186/s12865-025-00746-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A48"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11ff81ffcb2d481a6d9fd09b80eff2433ba44e6052bc6ca8574bfb473caf6d20"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A48 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A48 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A48']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A48",
+            "ppr_score": 1.3352448038093881e-05,
+            "degree_corrected_score": 3.909271850092072e-05,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A48",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A48",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A48": {
+          "status": "unavailable",
+          "gene": "SLC25A48",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A48": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A48",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A48']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A48 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A48"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A48": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A48 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A48']",
+        "status": "ok",
+        "summary": "[跨癌种类推] Although ALL lacks direct SLC25A48 evidence, the glioblastoma/oxidative-phosphorylation association and mechanistic literature show SLC25A48 supports mitochondrial choline import, purine nucleotide synthesis, membrane integrity, and bioenergetics. Loss of SLC25A48 causes oxidative stress and impaired cancer-cell proliferation. Highly proliferative B-ALL lines such as NALM6 are likely to share mitochondrial/metabolic dependencies, so CRISPR-mediated SLC25A48 inhibition would plausibly reduce ALL tumor growth. | SLC25A48 is a mitochondrial carrier required for choline metabolism and cell survival; knockout reduces proliferation in cancer cells. In ALL, no direct TIMER/KM/PPR evidence is available, so the inference is cross-cancer and moderate confidence. The mechanistic dependency on mitochondrial choline/bioenergetics is transferable to rapidly dividing NALM6 cells, making SLC25A48 loss likely inhibitory to tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A48"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A48": 1.9
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.68；法官理由: No direct NALM6 MAGeCK depletion evidence; E’s GBM/oxidative-phosphorylation extrapolation is association-level. Two independent LLM votes agree redundancy likely. Thus SLC25A48 is not supported as inhibiting ALL tumor growth.。原证据通道判定: winner=None answer=True conf=0.63（保留于溯源）。",
+        "analogy_cancers": [
+          "glioblastoma"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A48']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A48"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:49:25Z"
+  }
+}

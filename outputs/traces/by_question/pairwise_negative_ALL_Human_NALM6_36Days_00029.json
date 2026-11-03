@@ -1,0 +1,424 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00029",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC23A1 and SLC38A9 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "winner": "SLC23A1"
+  },
+  "effective_genes": [
+    "SLC23A1",
+    "SLC38A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_36Days_00029",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC23A1",
+        "SLC38A9"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC23A1",
+              "protein_function": "Mediates electrogenic uptake of vitamin C, with a stoichiometry of 2 Na(+) for each ascorbate",
+              "aliases": "SLC23A2, SVCT1, Na(+)/L-Ascorbic Acid Transporter 1",
+              "transport_type": "C / Na+"
+            },
+            {
+              "gene": "SLC38A9",
+              "protein_function": "Lysosomal amino acid transporter involved in the activation of mTORC1 in response to amino acid levels. Acts as an amino acid sensor.",
+              "aliases": "SNAT9, Sodium-Coupled Neutral Amino Acid Transporter 9",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC23A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC23 Na+-dependent ascorbic  acid transporter family",
+              "target_properties": {
+                "name": "SLC23 Na+-dependent ascorbic  acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "High-dose vitamin C potently induces apoptosis in acute lymphoblastic leukemia by activating ER stress response.",
+              "abstract": "IntroductionHigh-dose Vitamin C has shown significant anti-tumor effects in various cancers, including hematological malignancies. However, its therapeutic efficacy against acute lymphoblastic leukemia (ALL) remains underexplored.MethodsALL cell lines and normal bone marrow mononuclear cells were treated with Vitamin C to assess cell viability, apoptosis, proliferation, and cell cycle progression. Colony formation assays evaluated long-term growth. Additionally, transgenic mouse models were employed to evaluate the  antitumor activity of high-dose Vitamin C in ALL. Western blotting, ROS detection 2',7'-Dichlorofluorescin diacetate (DCFH-DA), and RNA sequencing with GSEA were conducted to explore Vitamin C's mechanism of action.ResultsOur results demonstrated that high-dose Vitamin C exhibited potent cytotoxicity toward ALL cells at relatively low concentrations (200 μM) while sparing normal human bone marrow mononuclear cells even at concentrations as high as 1 mM. Vitamin C effectively inhibited ALL cell line proliferation, induced apoptosis, and disrupted cell cycle progression. We further identified that the increased expression of Solute Carrier Family 23 Member 1 (SLC23A1) in ALL cells enhanced their sensitivity to Vitamin C. In SLC23A1 knockout cells, treatment with 200 μM Vitamin C significantly restored cell viability and reduced apoptosis compared to controls. Mechanistically, high-dose Vitamin C induced apoptosis in ALL cells by activating the ER stress response through the PERK/CHOP pathway.ConclusionTaken together, our findings suggest that high-dose Vitamin C demonstrated significant anti-leukemic effects in ALL, showing cytotoxicity at 200 μM. Furthermore, SLC23A1 may serve as a potential biomarker for predicting the therapeutic response to Vitamin C treatment in ALL patients.",
+              "doi": "10.1177/09603271251345656",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC23A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7d999f54716542852a8ad44ef97a705e3e6fb16829bbc41f827569c8f7642ee5"
+              }
+            },
+            {
+              "title": "mTORC1 Selective Nano-Inhibitor by Disrupting the Lysosomal Arginine-SLC38A9- mTORC1-CDKs Axis for Precision Bladder Cancer Therapy.",
+              "abstract": "The absence of precise targeting and defined mechanisms, akin to small molecules, remains a major barrier to the clinical translation of nanomedicines. Mammalian target of rapamycin complex 1 (mTORC1), a key regulator of cell proliferation and metabolism, is linked to abnormal activation in various diseases like cancers. While small-molecule inhibitors of mTORC1 are limited, they remain a focus. Here, a strategy is presented for mTORC1-specific nano-inhibitors targeting the lysosomal arginine (Arg)-SLC38A9-mTORC1 pathway. Using [2Fe-2S]CO as a universal paradigm, nanomedicines are developed (e.g., ZnPc-SFeCO) that degrade Arg in the lysosome, inhibiting SLC38A9 activation and blocking mTORC1 recruitment. ZnPc-SFeCO inhibits mTORC1 at ultra-low concentrations (1.07 ng mL), with three orders of magnitude greater specificity than the clinical small molecule rapamycin. SLC38A9 knockout abolishes nanomedicine efficacy. Differential responses to the inhibitors are also observed in normal and bladder cancer cells, linked to SLC38A9 expression levels, suggesting potential for precise treatment of non-muscle invasive bladder cancer (NMIBC). In vivo, ZnPc-SFeCO combined with photodynamic therapy outperformed MMC in preventing tumor recurrence and extending survival. This work establishes a promising approach for developing mTORC1-specific nano-inhibitors with well-defined targets and mechanisms, offering new insights into the development of precision nanomedicines for cancer therapy.",
+              "doi": "10.1002/adma.202504798",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d2ad9693492cd86c0f42f73e9d93016f4530c6588bf81001817f8304068f2f92"
+              }
+            },
+            {
+              "title": "The SLC38A9-mTOR axis is involved in autophagy in the juvenile yellow catfish (Pelteobagrus fulvidraco) under ammonia stress.",
+              "abstract": "The primary objective of this study was to examine the effect of acute ammonia stress on hepatic physiological alterations in yellow catfish by performing a comprehensive analysis of the metabolome and transcriptome. The present study showed that ammonia stress led to liver metabolic disruption, functional incapacitation, and oxidative damage. Transcriptomic and metabolomic analyses revealed transcriptional and metabolic differences in the liver of yellow catfish under control and high ammonia stress conditions. After 96 h of acute exposure to ammonia, the mRNA levels of 596 liver genes were upregulated, whereas those of 603 genes were downregulated. Enrichment analysis of the differentially expressed genes identified multiple signalling pathways associated with autophagy, including the endocytosis, autophagy-animal, and mammalian target of rapamycin signalling pathways. A total of 186 upregulated and 117 downregulated metabolites, primarily associated with amino acid biosynthesis pathways, were identified. Multi-omics integration revealed the solute carrier family 38 member 9 (SLC38A9)-mammalian target of rapamycin axis as a signalling nexus for amino acid-mediated modulation of autophagy flux, and q-PCR was used to assess the expression of autophagy-related genes (LC3a and sqstm1), revealing an initial inhibition followed by the restoration of autophagic flux during ammonia stress. Subsequent utilisation of arginine as a specific SLC38A9 activator during ammonia stress demonstrated that augmented SLC38A9 expression hindered autophagy, exacerbated ammonia toxicity, and caused a physiological decline (total cholesterol, total triglyceride, acid phosphatase, alkaline phosphatase, aspartate aminotransferase, and alanine aminotransferase levels were significantly increased), oxidative stress, and apoptosis. Autophagy activation may be an adaptive mechanism to resist ammonia stress.",
+              "doi": "10.1016/j.envpol.2023.123211",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c438b9a58bde3c5dc76ca0c3fac175c4ee12158b25c7c8854e716debbeebec58"
+              }
+            },
+            {
+              "title": "Cholesterol confers ferroptosis resistance onto myeloid-biased hematopoietic stem cells and prevents irradiation-induced myelosuppression.",
+              "abstract": "There is growing appreciation that hematopoietic alterations underpin the ubiquitous detrimental effects of metabolic disorders. The susceptibility of bone marrow (BM) hematopoiesis to perturbations of cholesterol metabolism is well documented, while the underlying cellular and molecular mechanisms remain poorly understood. Here we reveal a distinct and heterogeneous cholesterol metabolic signature within BM hematopoietic stem cells (HSCs). We further show that cholesterol directly regulates maintenance and lineage differentiation of long-term HSCs (LT-HSCs), with high levels of intracellular cholesterol favoring maintenance and myeloid bias of LT-HSCs. During irradiation-induced myelosuppression, cholesterol also safeguards LT-HSC maintenance and myeloid regeneration. Mechanistically, we unravel that cholesterol directly and distinctively enhances ferroptosis resistance and boosts myeloid but dampens lymphoid lineage differentiation of LT-HSCs. Molecularly, we identify that SLC38A9-mTOR axis mediates cholesterol sensing and signal transduction to instruct lineage differentiation of LT-HSCs as well as to dictate ferroptosis sensitivity of LT-HSCs through orchestrating SLC7A11/GPX4 expression and ferritinophagy. Consequently, myeloid-biased HSCs are endowed with a survival advantage under both hypercholesterolemia and irradiation conditions. Importantly, a mTOR inhibitor rapamycin and a ferroptosis inducer imidazole ketone erastin prevent excess cholesterol-induced HSC expansion and myeloid bias. These findings unveil an unrecognized fundamental role of cholesterol metabolism in HSC survival and fate decisions with valuable clinical implications.",
+              "doi": "10.1016/j.redox.2023.102661",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "da8e52adaae31ff098568a68c180dfabf4a661128d9eb2e4f819dc7529aba20a"
+              }
+            },
+            {
+              "title": "The FACT complex facilitates expression of lysosomal and antioxidant genes through binding to TFEB and TFE3.",
+              "abstract": "TFEB (transcription factor EB) and TFE3 (transcription factor binding to IGHM enhancer 3) orchestrate the cellular response to a variety of stressors, including nutrient deprivation, oxidative stress and pathogens. Here we describe a novel interaction of TFEB and TFE3 with the FAcilitates Chromatin Transcription (FACT) complex, a heterodimeric histone chaperone consisting of SSRP1 and SUPT16H that mediates nucleosome disassembly and assembly, thus facilitating transcription. Extracellular stimuli, such as nutrient deprivation or oxidative stress, induce nuclear translocation and activation of TFEB and TFE3, which then associate with the FACT complex to regulate stress-induced gene transcription. Depletion of FACT does not affect TFEB activation, stability, or binding to the promoter of target genes. In contrast, reduction of FACT levels by siRNA or treatment with the FACT inhibitor curaxin, severely impairs induction of numerous antioxidant and lysosomal genes, revealing a crucial role of FACT as a regulator of cellular homeostasis. Furthermore, upregulation of antioxidant genes induced by TFEB over-expression is significantly reduced by curaxin, consistent with a role of FACT as a TFEB transcriptional activator. Together, our data show that chromatin remodeling at the promoter of stress-responsive genes by FACT is important for efficient expression of TFEB and TFE3 targets, thus providing a link between environmental changes, chromatin modifications and transcriptional regulation. ADNP2, ADNP homeobox 2; ATP6V0D1, ATPase H+ transporting V0 subunit d1; ATP6V1A, ATPase H+ transporting V1 subunit A; ATP6V1C1, ATPase H+ transporting V1 subunit C1; CSNK2/CK2, casein kinase 2; CLCN7, chloride voltage-gated channel 7; CTSD, cathepsin D; CTSZ, cathepsin Z; EBSS, earle's balanced salt solution; FACT complex, facilitates chromatin transcription complex; FOXO3, forkhead box O3; HEXA, hexosaminidase subunit alpha; HIF1A, hypoxia inducible factor 1 subunit alpha; HMOX1, heme oxygenase 1; LAMP1, lysosomal associated membrane protein 1; MAFF, MAF bZIP transcription factor F; MAFG, MAF bZIP transcription factor G; MCOLN1, mucolipin TRP cation channel 1; MTORC1, mechanistic target of rapamycin kinase complex 1; NaAsO sodium arsenite; POLR2, RNA polymerase II; PPARGC1A, PPARG coactivator 1 alpha; PYROXD1, pyridine nucleotide-disulfide oxidoreductase domain 1; RRAGC, Ras related GTP binding C; SEC13, SEC13 homolog, nuclear pore and COPII coat complex component; SLC38A9, solute carrier family 38 member 9; SSRP1, structure specific recognition protein 1; SUPT16H, SPT16 homolog, facilitates chromatin remodeling subunit; TFEB, transcription factor EB; TFE3, transcription factor binding to IGHM enhancer 3; TXNRD1, thioredoxin reductase 1; UVRAG, UV radiation resistance associated; WDR59, WD repeat domain 59.",
+              "doi": "10.1080/15548627.2022.2029671",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6a4ff5da78fcf656f0550f4193125ef50aba25544f0af5f9fbc8313398dc2024"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC23A1 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC23A1 and SLC38A9 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC23A1', 'SLC38A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC23A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC38A9",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC23A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC23A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC23A1": {
+          "status": "unavailable",
+          "gene": "SLC23A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A9": {
+          "status": "unavailable",
+          "gene": "SLC38A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC23A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC23A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A9",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC38A9']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC23A1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC23A1",
+          "SLC38A9"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC23A1": 0.35,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC38A9': 2}，最终智能体辩论后裁决：winner=SLC38A9 answer=None conf=0.72；法官理由: SLC38A9 gates lysosomal amino acid sensing and mTORC1, a likely growth bottleneck in NALM6. SLC23A1 affects vitamin C uptake, less directly essential under CRISPR knockout. Two independent LLM votes favor SLC38A9.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC38A9']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC23A1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC23A1",
+          "SLC38A9"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC23A1": 0.35,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC38A9': 2}，最终智能体辩论后裁决：winner=SLC38A9 answer=None conf=0.62；法官理由: Two independent LLM channels favor SLC38A9; lysosomal amino-acid sensing/mTORC1 loss is more plausibly growth-limiting than redundant vitamin-C uptake. Database evidence is association-level, but agreement supports SLC38A9 as CRISPR-depleti。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC38A9']",
+        "status": "ok",
+        "summary": "SLC38A9 参与溶酶体氨基酸转运和 mTORC1 信号调控，敲除后更可能削弱白血病细胞增殖并抑制 ALL 肿瘤生长；SLC23A1 主要介导维生素 C 摄取，其缺失通常降低维生素 C 相关毒性，不更直接抑制肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC23A1",
+          "SLC38A9"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC38A9 参与溶酶体氨基酸转运和 mTORC1 信号调控，敲除后更可能削弱白血病细胞增殖并抑制 ALL 肿瘤生长；SLC23A1 主要介导维生素 C 摄取，其缺失通常降低维生素 C 相关毒性，不更直接抑制肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:53:38Z"
+  }
+}

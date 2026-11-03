@@ -1,0 +1,433 @@
+{
+  "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00287",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC19A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "winner": "SLC19A1"
+  },
+  "effective_genes": [
+    "SLC19A1",
+    "SLC25A16"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_MDS_Human_MDS-L_AZA_00287",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC19A1",
+        "SLC25A16"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC19A1",
+              "protein_function": "Antiporter that mediates the import of reduced folates or a subset of cyclic dinucleotides, driven by the export of organic anions. Acts as a secondary active transporter, which exports intracellular organic anions down their concentration gradients to facilitate the uptake of its substrates.",
+              "aliases": "IFC-1, RFT-1, FOLT, RFC1, HRFC, RFC, Folate:Anion Antiporter SLC19A1, Intestinal Folate Carrier 1, Solute Carrier Family 19 (Folate Transporter), Member 1, Cyclic Dinucleotide:Anion Antiporter SLC19A1, Reduced Folate Carrier Protein, Placental Folate Transporter, Reduced Folate Transporter 1, Reduced Folate Transporter, Reduced Folate Carrier 1, Folate Transporter 1, HSLC19A1, IMD114, MEGAF, FLOT1, CHMD, IFC1, REFC",
+              "transport_type": "E / organic phosphates"
+            },
+            {
+              "gene": "SLC25A16",
+              "protein_function": "May be involved in the transport of coenzyme A in the mitochondrial matrix. Very little is known about the physiological function of this carrier.",
+              "aliases": "GDC",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC19A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC19 Folate/thiamine  transporter family",
+              "target_properties": {
+                "name": "SLC19 Folate/thiamine  transporter family"
+              }
+            },
+            {
+              "gene": "SLC19A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC19A1|5-FU|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC19A1(RFC) is the reduced folate carrier, the major route for reduced-folate uptake. Adequate intracellular reduced folate is required for FdUMP-mediated thymidylate synthase inhibition; higher RFC activity supports the folate-dependent component of 5-FU cytotoxicity (sensitization).",
+                "paper": "Matherly LH 2008 Vitam Horm(RFC) PMID:18804694",
+                "name": "SLC19A1|5-FU|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1016/S0083-6729(08)00405-6\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "5-FU"
+              }
+            },
+            {
+              "gene": "SLC19A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "RFC",
+              "target_properties": {
+                "name": "RFC"
+              }
+            },
+            {
+              "gene": "SLC25A16",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Extracellular vesicle-derived circ_SLC19A1 promotes prostate cancer cell growth and invasion through the miR-497/septin 2 pathway.",
+              "abstract": "The occurrence and development of prostate cancer (PCa) is complex, and the related mechanism is not fully understood. Current studies have found that extracellular vesicles (EVs) and circular RNAs (circRNAs) have important functions in various tumours and other diseases. In this study, the detection of circRNAs in PCa showed that circ_SLC19A1 was increased in PCa cells and their secreted EVs. EVs with high expression of circ_SLC19A1 could be taken up by PCa cells, which promoted cell proliferation and invasion. The sequence of circ_SLC19A1 contained multiple binding sites for miR-497, and circ_SLC19A1 could bind directly to miR-497 in cells. The expression of miR-497 was downregulated in PCa cells, while the expression of its target gene septin 2 (SEPT2) was upregulated significantly. Transfection of circ_SLC19A1 small interfering RNA (siRNA) or miR-497 mimics could significantly inhibit the expression of SEPT2 and the phosphorylation of extracellular signal-regulated kinase 1 and 2 (ERK1/2). After co-transfection of circ_SLC19A1 siRNA and miR-497 inhibitors or SEPT2 overexpression vector, the expression of SEPT2 and ERK1/2 phosphorylation levels showed no significant changes. Similar results were obtained with co-transfection of miR-497 mimics and the SEPT2 overexpression vector. Therefore, cancer cells can regulate the expression of SEPT2 through miR-497 by secreting EVs with high expression of circ_SLC19A1, thus affecting the activation of the downstream ERK1/2 pathway and ultimately regulating PCa cell growth and invasion. Therefore, EV-derived circ_SLC19A1 plays an important regulatory role in PCa and may be an important target for PCa prevention and treatment.",
+              "doi": "10.1002/cbin.11303",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b82cb4a149a86e18a94e4ba95b242d1703f537c264676dc99a3edc9876f09601"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A16"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "Tumor Reliance on Cytosolic versus Mitochondrial One-Carbon Flux Depends on Folate Availability.",
+              "abstract": "Folate metabolism supplies one-carbon (1C) units for biosynthesis and methylation and has long been a target for cancer chemotherapy. Mitochondrial serine catabolism is considered the sole contributor of folate-mediated 1C units in proliferating cancer cells. Here, we show that under physiological folate levels in the cell environment, cytosolic serine-hydroxymethyltransferase (SHMT1) is the predominant source of 1C units in a variety of cancers, while mitochondrial 1C flux is overly repressed. Tumor-specific reliance on cytosolic 1C flux is associated with poor capacity to retain intracellular folates, which is determined by the expression of SLC19A1, which encodes the reduced folate carrier (RFC). We show that silencing SHMT1 in cells with low RFC expression impairs pyrimidine biosynthesis and tumor growth in vivo. Overall, our findings reveal major diversity in cancer cell utilization of the cytosolic versus mitochondrial folate cycle across tumors and SLC19A1 expression as a marker for increased reliance on SHMT1.",
+              "doi": "10.1016/j.cmet.2020.12.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a507fa7f16693d375c87bebe2d2c4722b83875b16507c23897d0ea5ed5f7c27e"
+              }
+            },
+            {
+              "title": "Functional regulations between genetic alteration-driven genes and drug target genes acting as prognostic biomarkers in breast cancer.",
+              "abstract": "Differences in genetic molecular features including mutation, copy number alterations and DNA methylation, can explain interindividual variability in response to anti-cancer drugs in cancer patients. However, identifying genetic alteration-driven genes and characterizing their functional mechanisms in different cancer types are still major challenges for cancer studies. Here, we systematically identified functional regulations between genetic alteration-driven genes and drug target genes and their potential prognostic roles in breast cancer. We identified two mutation and copy number-driven gene pairs (PARP1-ACSL1 and PARP1-SRD5A3), three DNA methylation-driven gene pairs (PRLR-CDKN1C, PRLR-PODXL2 and PRLR-SRD5A3), six gene pairs between mutation-driven genes and drug target genes (SLC19A1-SLC47A2, SLC19A1-SRD5A3, AKR1C3-SLC19A1, ABCB1-SRD5A3, NR3C2-SRD5A3 and AKR1C3-SRD5A3), and four copy number-driven gene pairs (ADIPOR2-SRD5A3, CASP12-SRD5A3, SLC39A11-SRD5A3 and GALNT2-SRD5A3) that all served as prognostic biomarkers of breast cancer. In particular, RARP1 was found to be upregulated by simultaneous copy number amplification and gene mutation. Copy number deletion and downregulated expression of ACSL1 and upregulation of SRD5A3 both were observed in breast cancers. Moreover, copy number deletion of ACSL1 was associated with increased resistance to PARP inhibitors. PARP1-ACSL1 pair significantly correlated with poor overall survival in breast cancer owing to the suppression of the MAPK, mTOR and NF-kB signaling pathways, which induces apoptosis, autophagy and prevents inflammatory processes. Loss of SRD5A3 expression was also associated with increased sensitivity to PARP inhibitors. The PARP1-SRD5A3 pair significantly correlated with poor overall survival in breast cancer through regulating androgen receptors to induce cell proliferation. These results demonstrate that genetic alteration-driven gene pairs might serve as potential biomarkers for the prognosis of breast cancer and facilitate the identification of combination therapeutic targets for breast cancers.",
+              "doi": "10.1038/s41598-022-13835-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0d6f867b2aeb1dc6600fbb8867f44f763ea4d59260dd5fade1834528255882b6"
+              }
+            },
+            {
+              "title": "MiR-595 Suppresses the Cellular Uptake and Cytotoxic Effects of Methotrexate by Targeting SLC19A1 in CEM/C1 Cells.",
+              "abstract": "The human solute carrier family 19 member 1 (SLC19A1) is the gene coding for reduced folate carrier 1 (RFC1). In our previous work, we showed that the miR-595-related polymorphism, rs1051296 G>T, which was located in the 3'-untranslated region (3'-UTR) of SLC19A1, was associated with high methotrexate (MTX) plasma concentrations in patients with paediatric acute lymphoblastic leukaemia (ALL). This study aimed to investigate the role of miR-595 in the regulation of SLC19A1 expression and its effects on the cellular uptake and cytotoxicity of MTX in ALL CEM/C1 cells. Luciferase reporter assay was performed to validate SLC19A1 as a miR-595 target. RFC1 protein expression was determined via Western blotting. Intracellular MTX concentrations were measured by enzyme-linked immunosorbent assay (ELISA). Cell viability and apoptosis were assessed using Cell Counting Kit-8 (CCK-8) assay and flow cytometer, respectively. Compared to the negative control, miR-595 mimics induced a significant decrease in the relative luciferase activity by binding to the 3'-UTR of SLC19A1 harbouring the rs1051296 T allele (p < 0.01). Treatment of CEM/C1 cells with miR-595 mimics substantially reduced RFC1 protein expression, intracellular MTX levels, MTX-induced cytotoxicity and apoptosis rates compared to those of negative control. However, opposite results were observed in cells transfected with a miR-595 inhibitor. These findings suggested that miR-595 acts as a phenotypic regulator of MTX sensitivity in CEM/C1 cells by targeting SLC19A1. This study helped us to understand the mechanisms underlying the variable MTX responses observed in patients with ALL.",
+              "doi": "10.1111/bcpt.12966",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC19A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "db0f752863b11c8d761298d4b223119b0f7b8a33249ee5cd027767d2e420cc3d"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC19A1 cancer=MDS(Myelodysplastic Neoplasms) bucket=pairwise Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC19A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC19A1', 'SLC25A16']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC19A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC19A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC19A1",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC19A1": {
+          "status": "ok",
+          "gene": "SLC19A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC19A1.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC25A16": {
+          "status": "unavailable",
+          "gene": "SLC25A16",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC19A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC19A1",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A16": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A16",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC19A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC19A1 strength=0.30, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A16",
+        "candidates": [
+          "SLC19A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC19A1": 0.3,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A16': 2}，最终智能体辩论后裁决：winner=SLC25A16 answer=None conf=0.62；法官理由: Evidence abstained. SLC19A1 mainly folate/5-FU uptake, less directly AZA resistance. Two independent LLMs favor SLC25A16 as buffered mitochondrial metabolic carrier that may alter AZA toxicity. Moderate confidence.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC19A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC19A1 在多种癌种中通过 reduced folate carrier / one-carbon metabolism / nucleotide biosynthesis 与药物代谢和细胞存活相连；MDS-L 是增殖性造血肿瘤细胞，AZA 是核苷类似物并引发甲基化与核苷酸代谢应激，因此可跨癌种迁移为支持耐药/存活。SLC25A16 仅有 COAD 剪接/表达关联，且功能为线粒体 CoA 转运，与 AZA 耐药通路联系更弱。 | 目标 MDS 缺乏直接图谱邻近或组学证据，但 SLC19A1 编码 RFC，介导还原型叶酸/有机阴离子交换，直接连接叶酸摄取、胞质/线粒体 one-carbon flux、嘧啶/嘌呤合成和甲基化稳态。文献显示 SLC19A1 表达影响细胞对叶酸可用性的依赖，并与 5-FU 等核苷/叶酸相关药物细胞毒效应有关；尽管 AZA 不是 5-FU，二者均涉及核苷酸代谢、DNA/RNA 掺入和甲基化应激。MDS-L 在低剂量 AZA 下若依赖叶酸/核苷酸代谢维持存活，SLC19A1 更可能作为耐药/适应性支持基因：其存在帮助细胞维持核苷酸池和代谢缓冲，敲除则可能削弱 AZA 处理下的存活。SLC25A16 为线粒体载体，可能涉及 CoA 转运，但生理功能不明确；现有证据主要来自 COAD 的 SLC 可变剪接和肿瘤/正常组织表达差异，未建立药物抵抗或 AZA 相关机制，且 TIMER/KM 证据不可用。因此跨癌种生物学类比下，SLC19A1 更可能促进 MDS 的药物抵抗。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC19A1",
+        "candidates": [
+          "SLC19A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC19A1": 0.3,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC19A1': 1, 'W:SLC25A16': 2}，最终智能体辩论后裁决：winner=SLC19A1 answer=None conf=0.58；法官理由: SLC19A1 has concrete folate/one-carbon and nucleotide-biosynthesis links to AZA-induced metabolic stress; SLC25A16 is poorly characterized, and the SAM/SAH rationale is speculative. Evidence outweighs two weak pure-LLM votes.。原证据通道判定: winner=SLC19A1 answer=None conf=0.64（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC19A1', 'SLC25A16']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC19A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T03:28:59Z"
+  }
+}

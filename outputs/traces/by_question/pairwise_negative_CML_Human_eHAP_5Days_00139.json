@@ -1,0 +1,414 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_5Days_00139",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC45A3 and SLC1A6 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "winner": "SLC45A3"
+  },
+  "effective_genes": [
+    "SLC45A3",
+    "SLC1A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_5Days_00139",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC45A3",
+        "SLC1A6"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "protein_function": "Sodium-dependent, high-affinity amino acid transporter that mediates the uptake of L-glutamate and also L-aspartate and D-aspartate.",
+              "aliases": "EAAT4",
+              "transport_type": "C / Na+, H+, K+"
+            },
+            {
+              "gene": "SLC45A3",
+              "protein_function": "Proton-associated sucrose transporter. May be able to transport also glucose and fructose.",
+              "aliases": "Prostein, PCANAP6, IPCA-6, Prostate Cancer Associated Protein 6",
+              "transport_type": "C / H+ [PMID: 25164149]"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC1 High-affinity glutamate and  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC1 High-affinity glutamate and  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC1A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "EAAT4",
+              "target_properties": {
+                "name": "EAAT4"
+              }
+            },
+            {
+              "gene": "SLC45A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC45 H+/sugar  cotransporter family",
+              "target_properties": {
+                "name": "SLC45 H+/sugar  cotransporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Transcriptomic profiling of nonneoplastic cortical tissues reveals epileptogenic mechanisms in dysembryoplastic neuroepithelial tumors.",
+              "abstract": "Low-grade dysembryoplastic neuroepithelial tumors (DNTs) are a frequent cause of drug-refractory epilepsy. Molecular mechanisms underlying seizure generation in these tumors are poorly understood. This study was conducted to identify altered genes in nonneoplastic epileptogenic cortical tissues (ECTs) resected from DNT patients during electrocorticography (ECoG)-guided surgery. RNA sequencing (RNAseq) was used to determine the differentially expressed genes (DEGs) in these high-spiking ECTs compared to non-epileptic controls. A total of 477 DEGs (180 upregulated; 297 downregulated) were observed in the ECTs compared to non-epileptic controls. Gene ontology analysis revealed enrichment of genes belonging to the following Kyoto Encyclopedia of Genes and Genomes (KEGG) pathways: (i) glutamatergic synapse; (ii) nitrogen metabolism; (iii) transcriptional misregulation in cancer; and (iv) protein digestion and absorption. The glutamatergic synapse pathway was enriched by DEGs such as GRM4, SLC1A6, GRIN2C, GRM2, GRM5, GRIN3A, and GRIN2B. Enhanced glutamatergic activity was observed in the pyramidal neurons of ECTs, which could be attributed to altered synaptic transmission in these tissues compared to non-epileptic controls. Besides glutamatergic synapse, altered expression of other genes such as GABRB1 (synapse formation), SLIT2 (axonal growth), and PROKR2 (neuron migration) could be linked to epileptogenesis in ECTs. Also, upregulation of GABRA6 gene in ECTs could underlie benzodiazepine resistance in these patients. Neural cell-type-specific gene set enrichment analysis (GSEA) revealed transcriptome of ECTs to be predominantly contributed by microglia and neurons. This study provides first comprehensive gene expression profiling of nonneoplastic ECTs of DNT patients and identifies genes/pathways potentially linked to epileptogenesis.",
+              "doi": "10.1007/s10142-022-00869-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "64da00f976903944256a7369ad8edfbc629f15d29079dc25950777659806ab53"
+              }
+            },
+            {
+              "title": "SLC45A3-ELK4 functions as a long non-coding chimeric RNA.",
+              "abstract": "Gene fusions in cancer typically lead to the expression of a fusion protein or disrupt the expression of one of the parental genes. Here we report a new phenomenon whereby a fusion transcript functions as a long non-coding chimeric RNA (lnccRNA). This fusion RNA, SLC45A3-ELK4, generated by cis-splicing between neighboring genes, was found in prostate cancer. The fusion RNA encodes the same protein as ELK4. Intriguingly, we found that the fusion RNA level is less than 1% of wild type ELK4, unlikely to perturb the general pool of ELK4 protein. Nonetheless, when the fusion RNA, but not ELK4 is silenced, cell proliferation is inhibited in both androgen-dependent and castration-resistant prostate cancer cells. This growth arrest can be rescued by exogenous expression of the fusion and a mutant designed to prevent translation of the ELK4 protein. In the same setting, the mutant could also suppress CDKN1A and several other targets of SLC45A3-ELK4. In addition, similar to many long non-coding RNAs, the fusion RNA is enriched in the nuclear fraction. Altogether, these results indicate that SLC45A3-ELK4 regulates cancer cell proliferation by its transcript, not translated protein.",
+              "doi": "10.1016/j.canlet.2017.07.007",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "720a7db52bf01e3c71dad9024d0216e5773d12e42729440318ebadc50afb90e9"
+              }
+            },
+            {
+              "title": "In vivo miR-138-5p inhibition alleviates monocrotaline-induced pulmonary hypertension and normalizes pulmonary KCNK3 and SLC45A3 expression.",
+              "abstract": "The pathogenesis of pulmonary arterial hypertension (PAH) involves many signalling pathways. MicroRNAs are potential candidates involved in simultaneously coordinating multiple genes under such multifactorial conditions. MiR-138-5p is overexpressed in pulmonary arterial smooth muscle cells (PASMCs) from PAH patients and in lungs from rats with monocrotaline-induced pulmonary hypertension (MCT-PH). MiR-138-5p is predicted to regulate the expression of the potassium channel KCNK3, whose loss is associated with the development and progression of PAH. We hypothesized that, in vivo, miR-138-5p inhibition would restore KCNK3 lung expression and subsequently alleviate PAH. Nebulization-based delivery of anti-miR-138-5p to rats with established MCT-PH significantly reduced the right ventricular systolic pressure and significantly improved the pulmonary arterial acceleration time (PAAT). These haemodynamic improvements were related to decrease pulmonary vascular remodelling, lung inflammation and pulmonary vascular cell proliferation in situ. In vivo inhibition of miR-138-5p restored KCNK3 mRNA expression and SLC45A3 protein expression in the lungs. We confirmed that in vivo inhibition of miR-138-5p reduces the development of PH in experimental MCT-PH. The possible curative mechanisms involve at least the normalization of lung KCNK3 as well as SLC45A3 expression.",
+              "doi": "10.1186/s12931-020-01444-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "de848fbe898b779d51b472da3a23583b171c70ca24b63544d6710cf812d49873"
+              }
+            },
+            {
+              "title": "Lipocalin 2 over-expression facilitates progress of castration-resistant prostate cancer via improving androgen receptor transcriptional activity.",
+              "abstract": "Castration-resistant prostate cancer (CRPC) is the lethal phenotype of prostate cancer. Lipocalin 2 (LCN2) is aberrantly expressed in many cancers including primary prostate cancer (PCa), but its role in CRPC has not been reported. LCN2 expression was upregulated in human primary PCa and CRPC tissues. Overexpression of LCN2 promoted C4-2B and 22RV1 cell proliferation while knockdown of LCN2 markedly inhibited C4-2B and 22RV1 cell growth. LCN2 overexpression led to increased AR downstream gene SLC45A3 without upregulating AR expression. In the xenograft model, overexpression of LCN2 significantly promoted tumor growth. LCN2 expression was detected in primary PCa and CRPC tissues and cell lines C4-2B and 22RV1 using immunohistochemistry and western blotting, respectively. Serum LCN2 level was detected vi ELISA. Lentiviruses-mediated over-expression of LCN2 and LCN2 knockdown were performed in CRPC cell lines. Expressions of androgen receptor (AR) downstream genes was examined in cell lines, in CRPC tissues, and in animal models. LCN2 could facilitate cell proliferation of CRPC via AR transcriptional activity. LCN2 could be a novel target in CRPC.",
+              "doi": "10.18632/oncotarget.11790",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f2f8b80e7131fbc05cee5dfd406587be9059b0b25a39389c8c6a88cfa67cb024"
+              }
+            },
+            {
+              "title": "N6-methyladenosine-mediated downregulation of miR-374c-5p promotes cadmium-induced cell proliferation and metastasis by targeting GRM3 in breast cancer cells.",
+              "abstract": "Cadmium (Cd) is a toxic heavy metal that can facilitate the development and progression of breast cancer (BC). Emerging evidence has indicated that the progression of Cd-exposed BC is related to the dysregulation of microRNAs (miRNAs). The purpose of our study was to investigate the expression pattern and underlying mechanisms of miR-374c-5p in Cd-mediated BC progression. In this study, T-47D cells and MCF-7 cells were treated with different concentrations of Cd (0.1, 1 and 10 μM) for 72 h. MiR-374c-5p expression was downregulated, and transfection of miR-374c-5p mimics significantly decreased BC cell proliferation, migration and invasion induced by 10 μM Cd. Importantly, we used the Cytoscape software plugin cytoHubba to analyse the intersected genes between our RNA-Seq results and the mirDIP database, and six hub genes (CNR1, CXCR4, GRM3, RTN1, SLC1A6 and ZEB1) were identified as potential direct targets of miR-374c-5p in our model; however, luciferase reporter assays indicated that miR-374c-5p only repressed GRM3 by directly binding to its 3'-untranslated region (UTR). Of note, we verified that suppression of N6-methyladenosine (m6A) modification led to miR-374c-5p downregulation by decreasing its RNA transcript stability. Together, these findings demonstrated that m6A modification of pri-miRNA-374c blocks miRNA-374c-5p maturation and then activates GRM3 expression, which drives BC cell metastasis after Cd exposure.",
+              "doi": "10.1016/j.ecoenv.2021.113085",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "38d3620cac1fc6a216979cde0e0191eb8b5fd05e7d8670e1daa0818df1dbbf66"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC45A3 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC45A3 and SLC1A6 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC45A3', 'SLC1A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC45A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC45A3",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC45A3": {
+          "status": "unavailable",
+          "gene": "SLC45A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A6": {
+          "status": "unavailable",
+          "gene": "SLC1A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC45A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC45A3",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC1A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC1A6",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC1A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC1A6 strength=0.10, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC1A6",
+        "candidates": [
+          "SLC45A3",
+          "SLC1A6"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC45A3": 0.05,
+          "SLC1A6": 0.1
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC1A6': 2}，最终智能体辩论后裁决：winner=SLC1A6 answer=None conf=0.65；法官理由: Two independent LLM channels favor SLC1A6; glutamate/amino-acid transport is plausibly linked to CML proliferation, while SLC45A3 is prostate/sugar-transport related. No direct CRISPR evidence, so confidence is moderate.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC1A6']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC45A3 has prostate-cancer proliferation evidence (SLC45A3-ELK4 silencing inhibits proliferation; LCN2/AR axis increases SLC45A3 and tumor growth) and proliferative remodeling evidence in pulmonary hypertension, which is more transferable to CML’s BCR-ABL1-driven proliferative leukemic phenotype than SLC1A6, whose evidence is mainly neuronal glutamate signaling in epilepsy. | No direct CML evidence is available for either gene, so the decision relies on cross-cancer biological analogy. SLC45A3 has intervention-linked functional evidence showing that reducing SLC45A3-associated transcript/protein activity can suppress cancer cell proliferation, whereas SLC1A6 evidence is largely disease-associated expression in glutamatergic pathways without a cancer-growth intervention link. Therefore, if CRISPR inhibition of one candidate is more likely to produce a low-growth phenotype in CML, SLC45A3 is the better-supported choice, though confidence remains moderate because prostate/PAH biology is not hematopoietic CML-specific.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC1A6",
+        "candidates": [
+          "SLC45A3",
+          "SLC1A6"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC45A3": 0.05,
+          "SLC1A6": 0.1
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC45A3': 1, 'W:SLC1A6': 2}，最终智能体辩论后裁决：winner=SLC1A6 answer=None conf=0.65；法官理由: Two independent LLM channels favor SLC1A6 for BCR-ABL nutrient/redox/glutamate dependence; SLC45A3 support is cross-cancer association-level and weaker. No direct CRISPR readout, but agreement makes SLC1A6 more plausible.。原证据通道判定: winner=SLC45A3 answer=None conf=0.45（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC1A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC45A3",
+          "SLC1A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:15:13Z"
+  }
+}

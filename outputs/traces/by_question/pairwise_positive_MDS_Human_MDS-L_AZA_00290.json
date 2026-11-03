@@ -1,0 +1,329 @@
+{
+  "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00290",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC17A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "winner": "SLC25A16"
+  },
+  "effective_genes": [
+    "SLC17A1",
+    "SLC25A16"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_MDS_Human_MDS-L_AZA_00290",
+      "status": "ok",
+      "summary": "检索到 4 类证据、5 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC17A1",
+        "SLC25A16"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A1",
+              "protein_function": "Important for the resorption of phosphate by the kidney. May be involved in actively transporting phosphate into cells via Na(+) cotransport in the renal brush border membrane. Plays a role in urate transport in the kidney.",
+              "aliases": "NPT1, Sodium-Dependent Phosphate Transport Protein 1, Sodium/Phosphate Cotransporter 1",
+              "transport_type": "electrogenic, Cl- dependent; C/Na+; channel"
+            },
+            {
+              "gene": "SLC25A16",
+              "protein_function": "May be involved in the transport of coenzyme A in the mitochondrial matrix. Very little is known about the physiological function of this carrier.",
+              "aliases": "GDC",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC25A16",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A16"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC17A1 cancer=MDS(Myelodysplastic Neoplasms) bucket=pairwise Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nWhich gene between SLC17A1 and SLC25A16 is more likely to promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC17A1', 'SLC25A16']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC17A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC17A1",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC17A1": {
+          "status": "unavailable",
+          "gene": "SLC17A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A16": {
+          "status": "unavailable",
+          "gene": "SLC25A16",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC17A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC17A1",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A16": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A16",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC17A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC17A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A16",
+        "candidates": [
+          "SLC17A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.55,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A1": 0.05,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A16': 2}，最终智能体辩论后裁决：winner=SLC25A16 answer=None conf=0.55；法官理由: No direct CRISPR evidence; E abstained. But two independent LLM channels favor SLC25A16: mitochondrial carrier relevance to azacitidine/nucleoside-analog stress outweighs kidney phosphate transporter SLC17A1. Agreement is weak but real sign。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC17A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A16在COAD中作为线粒体载体相关异构体在肿瘤组织较正常组织升高，提示其可能与肿瘤代谢重编程相关；MDS是髓系克隆性疾病，AZA反应/耐药常与线粒体功能、氧化应激、凋亡阈值和代谢适应相关，因此该线粒体载体方向比肾特异性磷酸盐/尿酸转运体SLC17A1更可能迁移到MDS耐药。 | 两个基因在MDS上均缺乏直接图谱邻近和TIMER/KM/DE计算支持，不能据此判阴性。SLC17A1主要功能为肾脏Na+/磷酸盐共转运和尿酸转运，与髓系肿瘤、AZA摄取/代谢或药物耐受的直接生物学联系较弱。SLC25A16属于SLC25线粒体载体家族，可能参与辅酶A相关线粒体代谢，而MDS及AZA反应涉及线粒体代谢、ROS、凋亡和代谢适应；文献虽非CRISPR必需性证据，但显示SLC25A16在肿瘤中表达/剪接异常，方向上更支持其参与肿瘤进展或药物耐受。综合跨癌种类推，SLC25A16更可能是促进MDS肿瘤耐药的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC25A16",
+        "candidates": [
+          "SLC17A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.38,
+        "abstained": false,
+        "gene_scores": {
+          "SLC17A1": 0.05,
+          "SLC25A16": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC25A16在COAD中作为线粒体载体相关异构体在肿瘤组织较正常组织升高，提示其可能与肿瘤代谢重编程相关；MDS是髓系克隆性疾病，AZA反应/耐药常与线粒体功能、氧化应激、凋亡阈值和代谢适应相关，因此该线粒体载体方向比肾特异性磷酸盐/尿酸转运体SLC17A1更可能迁移到MDS耐药。 | 两个基因在MDS上均缺乏直接图谱邻近和TIMER/KM/DE计算支持，不能据此判阴性。SLC17A1主要功能为肾脏Na+/磷酸盐共转运和尿酸转运，与髓系肿瘤、AZA摄取/代谢或药物耐受的直接生物学联系较弱。SLC25A16属于SLC25线粒体载体家族，可能参与辅酶A相关线粒体代谢，而MDS及AZA反应涉及线粒体代谢、ROS、凋亡和代谢适应；文献虽非CRISPR必需性证据，但显示SLC25A16在肿瘤中表达/剪接异常，方向上更支持其参与肿瘤进展或药物耐受。综合跨癌种类推，SLC25A16更可能是促进MDS肿瘤耐药的候选基因。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC17A1', 'SLC25A16']",
+        "status": "ok",
+        "summary": "SLC17A1属于溶质载体家族，参与有机阴离子/核苷酸类似物相关转运，可能直接影响药物（如AZA相关代谢物）的细胞摄取或外排，从而改变细胞内药物暴露并促进耐药；SLC25A16主要与线粒体S-腺苷甲硫氨酸转运和甲基代谢相关，与肿瘤药物耐药的直接机制关联较弱。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC17A1",
+        "candidates": [
+          "SLC17A1",
+          "SLC25A16"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC17A1属于溶质载体家族，参与有机阴离子/核苷酸类似物相关转运，可能直接影响药物（如AZA相关代谢物）的细胞摄取或外排，从而改变细胞内药物暴露并促进耐药；SLC25A16主要与线粒体S-腺苷甲硫氨酸转运和甲基代谢相关，与肿瘤药物耐药的直接机制关联较弱。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T16:48:05Z"
+  }
+}

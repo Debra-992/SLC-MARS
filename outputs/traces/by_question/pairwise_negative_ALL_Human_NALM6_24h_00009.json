@@ -1,0 +1,826 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_24h_00009",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC2A1 and SLC29A1 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "winner": "SLC2A1"
+  },
+  "effective_genes": [
+    "SLC2A1",
+    "SLC29A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_24h_00009",
+      "status": "ok",
+      "summary": "检索到 5 类证据、43 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC2A1",
+        "SLC29A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "protein_function": "Uniporter involved in the facilitative transport of nucleosides and nucleobases, and contributes to maintaining their cellular homeostasis.",
+              "aliases": "ENT1, Solute Carrier Family 29 (Equilibrative Nucleoside Transporter), Member 1, Equilibrative Nucleoside Transporter 1, Nucleoside Transporter, Es-Type, Es Nucleoside Transporter",
+              "transport_type": "F"
+            },
+            {
+              "gene": "SLC2A1",
+              "protein_function": "Facilitative glucose transporter, responsible for constitutive or basal glucose uptake.",
+              "aliases": "GLUT1, GLUT, HTLVR, CSE",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC29 Facilitative nucleoside  transporter family",
+              "target_properties": {
+                "name": "SLC29 Facilitative nucleoside  transporter family"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC29A1|5-FU|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC29A1(ENT1) is an equilibrative nucleoside transporter that mediates cellular uptake of 5-fluorouracil (Km ~2.3mM). Reduced ENT1 expression decreases intracellular 5-FU accumulation, contributing to drug resistance in multiple cancer types. Higher ENT1 expression promotes 5-FU cytotoxicity.",
+                "paper": "Young JD 2013 Mol Aspects Med(ENT1) PMID:23506887",
+                "name": "SLC29A1|5-FU|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1016/j.mam.2012.05.007\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "5-FU"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ENT1",
+              "target_properties": {
+                "name": "ENT1"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC2 Facilitative  GLUT transporter family",
+              "target_properties": {
+                "name": "SLC2 Facilitative  GLUT transporter family"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC2A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Nonsmall cell lung cancer (NSCLC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Nonsmall cell lung cancer (NSCLC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Nonsmall cell lung cancer (NSCLC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Nonsmall cell lung cancer (NSCLC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cervical cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cholangiocarcinoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Endometrial Cancer (EC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Esophageal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Impact of single nucleotide polymorphisms of cytarabine metabolic genes on drug toxicity in childhood acute lymphoblastic leukemia.",
+              "abstract": "Cytarabine (cytosine arabinoside, ara-C) is a chemotherapeutical agent used in the treatment of pediatric acute lymphoblastic leukemia (ALL). Adverse drug reactions, such as interpatient variability in sensitivity to ara-C, are considerable and may cause difficulties during chemotherapy. Single nucleotide polymorphisms (SNPs) can play a significant role in modifying nucleoside-drug pharmacokinetics and pharmacodynamics and thus the development of adverse effects. Our aim was to determine whether polymorphisms in genes encoding transporters and enzymes responsible for the metabolism of ara-C are associated with toxicity and clinical outcome in a patient population with childhood ALL. We studied 8 SNPs in the CDA, DCK, DCTD, SLC28A3, and SLC29A1 genes in 144 patients with childhood acute lymphoblastic leukemia treated according to ALLIC BFM 1990, 1995 and 2002 protocols. DCK rs12648166 and DCK rs4694362 SNPs were associated with hematologic toxicity (OR = 2.63, CI 95% = 1.37-5.04, P = 0.0036 and OR = 2.53, CI 95% = 1.34-4.80, P = 0.0044, respectively). Our results indicate that DCK polymorphisms might be important genetic risk factors for hematologic toxicity during ALL treatment with ara-C. Individualized chemotherapy based on genetic profiling may help to optimize ara-C dosing, leading to improvements in clinical outcome and reduced toxicity.",
+              "doi": "10.1002/pbc.25379",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7132c17c995f709105c38427582ca1faff7349c3621c78aa3eff710f2550b506"
+              }
+            },
+            {
+              "title": "Metabolic reprogramming promotes apoptosis resistance in acute lymphoblastic leukemia through CASP3 lactylation.",
+              "abstract": "Acute lymphoblastic leukemia (ALL) is characterized by metabolic adaptations that support rapid cell proliferation and resistance to apoptosis. Our study identifies elevated sphingomyelin (SM) as a key metabolic alteration in ALL, contributing to apoptosis resistance via CASP3 (caspase 3) lactylation. Using comprehensive lipidomic analyses of plasma samples from pediatric ALL patients, we observed significantly increased SM concentrations in patients with manifest ALL compared to patients after remission. Mechanistic investigations revealed that elevated SM enhances SLC2A1-dependent glucose uptake and glycolysis, leading to increased lactate production and subsequent CASP3 lactylation on lysine residue 14, which inhibits CASP3 activation and apoptosis. Reduction of intracellular SM levels through  knockout or  overexpression reduced glycolytic flux and lactate levels, restored CASP3 activity and induced apoptosis in ALL cells. In vivo, SM depletion significantly suppressed ALL progression and prolonged survival in mouse models, highlighting the potential of targeting SM metabolism as a therapeutic strategy. In conclusion, our findings uncover a metabolic pathway linking lipid and glucose metabolism to apoptosis resistance in ALL. The online version contains supplementary material available at 10.1186/s12943-025-02392-w.",
+              "doi": "10.1186/s12943-025-02392-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "55d851e748a8bfd3b882c03fd66410a87ae56dbba621a62b9615a106049e0576"
+              }
+            },
+            {
+              "title": "FLT3 is implicated in cytarabine transport by human equilibrative nucleoside transporter 1 in pediatric acute leukemia.",
+              "abstract": "FLT3 abnormalities are negative prognostic markers in acute leukemia. Infant leukemias are a subgroup with frequent MLL (KMT2A) rearrangements, FLT3 overexpression and high sensitivity to cytarabine, but dismal prognosis. Cytarabine is transported into cells by Human Equilibrative Nucleoside Transporter-1 (hENT1, SLC29A1), but the mechanisms that regulate hENT1 in acute leukemia have been scarcely studied.We explored the expression and functional link between FLT3 and main cytarabine transporters in 50 pediatric patients diagnosed with acute lymphoblastic leukemia and MLL rearrangement (ALL-MLL+) and other subtypes of leukemia, and in leukemia cell lines.A significant positive correlation was found between FLT3 and hENT1 expression in patients. Cytarabine uptake into cells was mediated mainly by hENT1, hENT2 and hCNT1. hENT1-mediated uptake of cytarabine was transiently abolished by the FLT3 inhibitor PKC412, and this effect was associated with decreased hENT1 mRNA and protein levels. Noticeably, the cytotoxicity of cytarabine was lower when cells were first exposed to FLT3 inhibitors (PKC412 or AC220), probably due to decreased hENT1 activity, but we observed a higher cytotoxic effect if FLT3 inhibitors were administered after cytarabine.FLT3 regulates hENT1 activity and thereby affects cytarabine cytotoxicity. The sequence of administration of cytarabine and FLT3 inhibitors is important to maintain their efficacy.",
+              "doi": "10.18632/oncotarget.10448",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "479eb846f3591cbda95d987347f766b45c5a284d0e8570d8db735a5b71db958b"
+              }
+            },
+            {
+              "title": "Long noncoding RNA SLC2A1-AS1 regulates aerobic glycolysis and progression in hepatocellular carcinoma via inhibiting the STAT3/FOXM1/GLUT1 pathway.",
+              "abstract": "Hepatocellular carcinoma (HCC) is one of the most lethal malignant diseases worldwide. Despite advances in the diagnosis and treatment of HCC, its overall prognosis remains poor. Recent studies have shown that long noncoding RNAs (lncRNAs) play crucial roles in various pathophysiological processes, including liver cancer. In the current study, we report that lncRNA SLC2A1-AS1 is frequently downregulated in HCC samples, as shown by quantitative real-time polymerase chain reaction analysis. SLC2A1-AS1 deletion is significantly associated with recurrence-free survival in HCC. By performing glucose uptake, lactate production and ATP detection assays, we found that SLC2A1-AS1-mediated glucose transporter 1 (GLUT1) downregulation significantly suppressed glycolysis of HCC. In vitro Cell Counting Kit-8, colony formation, transwell assays as well as in vivo tumorigenesis and metastasis assays showed that SLC2A1-AS1 overexpression significantly suppressed proliferation and metastasis in HCC through the transcriptional inhibition of GLUT1. Results from fluorescence in situ hybridization, ChIP and luciferase reporter assays demonstrated that SLC2A1-AS1 exerts its regulatory role on GLUT1 by competitively binding to transketolase and signal transducer and activator of transcription 3 (STAT3) and inhibits the transactivation of Forkhead box M1 (FOXM1) via STAT3, thus resulting in inactivation of the FOXM1/GLUT1 axis in HCC cells. Our findings will be helpful for understanding the function and mechanism of lncRNA in HCC. These data also highlight the crucial role of SLC2A1-AS1 in HCC aerobic glycolysis and progression and pave the way for further research regarding the potential of SLC2A1-AS1 as a valuable predictive biomarker for HCC recurrence.",
+              "doi": "10.1002/1878-0261.12666",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "794580b214081609de8196826bc30ea638a5b2dab2ce210cd4ca2387d66728fb"
+              }
+            },
+            {
+              "title": "Histone methyltransferase SETD1A interacts with HIF1α to enhance glycolysis and promote cancer progression in gastric cancer.",
+              "abstract": "Growing tumors alter their metabolic profiles to support the increased cell proliferation. SETD1A, a histone lysine methyltransferase which specifically methylates H3K4, plays important roles in both normal cell and cancer cell functions. However, the function of SETD1A in gastric cancer (GC) progression and its role in GC metabolic reprogramming are still largely unknown. In the current study, we discovered that the expression of SETD1A was higher in GC tumor specimens compared to surrounding nontumor tissues. Upregulation of SETD1A increased GC cell proliferation, whereas downregulation of SETD1A inhibited GC cell proliferation. Furthermore, knockdown of SETD1A reduced glucose uptake and production of lactate and suppressed glycolysis by decreasing the expression of glycolytic genes, including GLUT1, HK2, PFK2, PKM2, LDHA, and MCT4. Mechanistically, SETD1A interacted with HIF1α to strengthen its transactivation, indicating that SETD1A promotes glycolysis through coactivation of HIF1α. SETD1A and HIF1α were recruited to the promoter of HK2 and PFK2, where SETD1A could methylate H3K4. However, knockdown of SETD1A decreased the methylation of H3K4 on HK2 and PFK2 promoter and reduced HIF1α recruitment necessary to promote transcription of glycolytic genes. Inhibition of HIF1α decelerated SETD1A-enhanced GC cell growth. In additional, there was a linear correlation between SETD1A and several key glycolytic genes in human GC specimens obtained from TCGA dataset. Thus, our results demonstrated that SETD1A interacted with HIF1α to promote glycolysis and accelerate GC progression, implicating that SETD1A may be a potential molecular target for GC treatment.",
+              "doi": "10.1002/1878-0261.12689",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06cda9173900c61f984074cbc379d5659338dbf302330c8ab056149e1d86a59e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "disease": "bladder cancer",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "pathway": null,
+              "source": "kg_neighbors"
+            },
+            {
+              "gene": "SLC29A1",
+              "disease": "pancreatic cancer(PC)",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "pathway": null,
+              "source": "kg_neighbors"
+            },
+            {
+              "gene": "SLC29A1",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "pathway": null,
+              "source": "kg_neighbors"
+            },
+            {
+              "gene": "SLC29A1",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "pathway": null,
+              "source": "kg_neighbors"
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC2A1 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC2A1 and SLC29A1 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC2A1', 'SLC29A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC2A1",
+            "ppr_score": 0.0005986356923825143,
+            "degree_corrected_score": 0.00021573748674904206,
+            "graph_degree": 66,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC29A1",
+            "ppr_score": 9.614361405469086e-05,
+            "degree_corrected_score": 0.00010639136942480839,
+            "graph_degree": 7,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC2A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC2A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC2A1": {
+          "status": "unavailable",
+          "gene": "SLC2A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A1": {
+          "status": "unavailable",
+          "gene": "SLC29A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC2A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC2A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC29A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A1', 'SLC29A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC2A1(P(winner)=0.61) vs SLC29A1(P=0.49), 差=0.12；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC2A1",
+        "candidates": [
+          "SLC2A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A1": 9.65,
+          "SLC29A1": 3.0932
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC2A1(P(winner)=0.61) vs SLC29A1(P=0.49), 差=0.12；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A1', 'SLC29A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC2A1/GLUT1 is repeatedly linked to tumor-promoting glucose uptake and glycolysis in NSCLC and HCC, and a direct ALL study shows elevated sphingomyelin enhances SLC2A1-dependent glucose uptake/glycolysis, lactate production, CASP3 lactylation, and apoptosis resistance; reducing this glycolytic axis suppresses ALL progression. By analogy, CRISPR loss of SLC2A1 in NALM6 B-ALL cells is more likely to impair tumor growth/survival than loss of SLC29A1, whose ALL evidence is mainly nucleoside/cytarabine transport and drug-response modulation rather than baseline growth dependence. | In a CRISPR 0h vs 36Days MAGECK screen without explicit chemotherapy exposure, the key question is which gene’s loss most plausibly inhibits intrinsic ALL tumor growth. SLC2A1 has direct ALL mechanistic evidence: GLUT1-dependent glucose uptake supports glycolysis, lactate accumulation, CASP3 lactylation, and apoptosis resistance, so SLC2A1 perturbation is expected to reduce proliferation/survival and inhibit tumor growth. SLC29A1/ENT1 is important for nucleoside transport and cytarabine/5-FU uptake, but this is more relevant to drug activation/toxicity than to untreated baseline growth; loss of ENT1 could even reduce drug-induced cytotoxicity in some settings. PPR slightly favors SLC2A1, TIMER/KM/DE are unavailable, and cross-cancer evidence plus direct ALL metabolic literature therefore make SLC2A1 the stronger candidate for growth inhibition upon CRISPR knockout.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC2A1",
+        "candidates": [
+          "SLC2A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A1": 9.65,
+          "SLC29A1": 3.0932
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC2A1/GLUT1 is repeatedly linked to tumor-promoting glucose uptake and glycolysis in NSCLC and HCC, and a direct ALL study shows elevated sphingomyelin enhances SLC2A1-dependent glucose uptake/glycolysis, lactate production, CASP3 lactylation, and apoptosis resistance; reducing this glycolytic axis suppresses ALL progression. By analogy, CRISPR loss of SLC2A1 in NALM6 B-ALL cells is more likely to impair tumor growth/survival than loss of SLC29A1, whose ALL evidence is mainly nucleoside/cytarabine transport and drug-response modulation rather than baseline growth dependence. | In a CRISPR 0h vs 36Days MAGECK screen without explicit chemotherapy exposure, the key question is which gene’s loss most plausibly inhibits intrinsic ALL tumor growth. SLC2A1 has direct ALL mechanistic evidence: GLUT1-dependent glucose uptake supports glycolysis, lactate accumulation, CASP3 lactylation, and apoptosis resistance, so SLC2A1 perturbation is expected to reduce proliferation/survival and inhibit tumor growth. SLC29A1/ENT1 is important for nucleoside transport and cytarabine/5-FU uptake, but this is more relevant to drug activation/toxicity than to untreated baseline growth; loss of ENT1 could even reduce drug-induced cytotoxicity in some settings. PPR slightly favors SLC2A1, TIMER/KM/DE are unavailable, and cross-cancer evidence plus direct ALL metabolic literature therefore make SLC2A1 the stronger candidate for growth inhibition upon CRISPR knockout. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Nonsmall cell lung cancer (NSCLC)",
+          "Bone cancer",
+          "Brain Tumor",
+          "Cervical cancer",
+          "Cholangiocarcinoma",
+          "Endometrial Cancer (EC)",
+          "Esophageal Cancer",
+          "Esophageal squamous cell carcinoma (ESCC)",
+          "bladder cancer",
+          "pancreatic cancer(PC)",
+          "hepatocellular carcinoma (HCC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC2A1', 'SLC29A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC2A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T03:54:21Z"
+  }
+}

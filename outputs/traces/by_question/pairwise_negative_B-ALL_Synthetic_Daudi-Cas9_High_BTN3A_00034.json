@@ -1,0 +1,596 @@
+{
+  "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00034",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC41A3 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC25A1"
+  },
+  "effective_genes": [
+    "SLC25A1",
+    "SLC41A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00034",
+      "status": "ok",
+      "summary": "检索到 4 类证据、25 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A1",
+        "SLC41A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "protein_function": "Mitochondrial electroneutral antiporter that exports citrate from the mitochondria into the cytosol in exchange for malate.",
+              "aliases": "CTP, CIC, SLC20A3",
+              "transport_type": "E / citrate-H+, malate"
+            },
+            {
+              "gene": "SLC41A3",
+              "protein_function": "Na(+)/Mg(2+) ion exchanger that acts as a predominant Mg(2+) efflux system at the mitochondrial inner membrane.",
+              "aliases": "None",
+              "transport_type": "Ch  (predicted based on homology with the other 2 members/MgtE transporter)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC41A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC41 MgtE-like magnesium   transporter family",
+              "target_properties": {
+                "name": "SLC41 MgtE-like magnesium   transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "A comprehensive analysis of SLC25A1 expression and its oncogenic role in pan-cancer.",
+              "abstract": "The solute carrier family 25 member 1 (SLC25A1) is currently the only known human transporter for citrate in the mitochondrial membrane. However, its role in cancer development remains to be elucidated. We aim to analyze the expression profile, prognostic value, potential immunological significance, and effect on tumor growth of SLC25A1 at a pan-cancer level. Herein, the role of SLC25A1 in tumorigenesis and progression was investigated based on the Cancer Genome Atlas (TCGA), Gene Expression Omnibus (GEO), Genotype-Tissue Expression (GTEx), Clinical Proteomic Tumor Analysis Consortium (CPTAC), GeneMANIA, STRING and Cancer Dependency Map Project (DepMap) database via online websites or the R software. The protein expression levels were validated in tissue microarrays, and the effects on tumor cell lines were accessed through MTS and colony formation assays. The expression of SLC25A1 increased in most cancers, and the upregulation of SLC25A1 in colon adenocarcinoma and lung adenocarcinoma was further confirmed by immunohistochemistry. Meanwhile, SLC25A1 was linked to clinical outcomes across multiple tumor types, particularly in lung adenocarcinoma, where its high expression predicted poor prognosis. Moreover, SLC25A1 was positively associated with MSI, TMB, and CD276 and tightly correlated with tumor-infiltrating immune cells. Furthermore, the knockout of SLC25A1 demonstrated inhibitory effects in most cancer cell lines in the DepMap project. Cellular experiments showed that SLC25A1 knockdown significantly reduced the proliferation of lung adenocarcinoma cells. Our findings suggest the potential of SLC25A1 as a prognostic biomarker for cancers and a therapeutic target for precise antitumor strategy and cancer immunotherapy.",
+              "doi": "10.1007/s12672-023-00830-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "25a58e6f8cd4b81556e598931c1ac18969ab1a0d9ce670758ab2fb561ca85d2a"
+              }
+            },
+            {
+              "title": "SLC41A3 Exhibits as a Carcinoma Biomarker and Promoter in Liver Hepatocellular Carcinoma.",
+              "abstract": "Liver Hepatocellular Carcinoma (LIHC) is the fifth widely occurred carcinoma, which is thought to be the second primary contributor of carcinoma-associated death. There are almost 788,000 death tolls worldwide. Solute carrier family 41 member 3 (SLC41A3) is a member of solute carrier family 41, and it is the key point of numerous researches. Our research attempted to explore the links between SLC41A3 and LIHC through public databases. Higher expression of SLC41A3 displayed an intimate association with higher pathological stages and poorer prognosis. GO and KEGG analysis revealed the possible regulatory pathways of SLC41A3. Additionally, we carried out cell functional experiments to determine the expression of SLC41A3 in the cell lines of LIHC, as well as the effects of its silence on cell proliferation, migration, and invasion. Our data showed that SLC41A3 was greatly increased in the cell lines of LIHC. Moreover, silencing SLC41A3 impeded LIHC cell proliferation, migration, and invasion . Collectively, our study demonstrated that highly expressed SLC41A3 was a probable indication of LIHC occurrence, and SLC41A3 could be regarded as a prospective target in the treatment of LIHC.",
+              "doi": "10.1155/2021/8556888",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ab17502a5bd7ddbd3542655b6f0854da8ce5089c0e41490af6e578a48f95f56d"
+              }
+            },
+            {
+              "title": "Inhibition of citrate transport reduces HIF-1α/GABA-T-mediated succinate accumulation in macrophages: The role of astragaloside IV in ischemic stroke.",
+              "abstract": "The occurrence of ischemic stroke is closely associated with the inflammatory infiltration of peripheral monocytes/macrophages, and the inflammatory activation of macrophages is often affected by metabolic reprogramming. The Slc25a1 regulates mitochondrial citrate transport and has been shown to affect cell proliferation and migration in cancer. Astragaloside IV exhibits significant anti-inflammatory activity and improves ischemic stroke, but its regulatory effect on macrophage metabolic reprogramming has not been elucidated. This study aims to explore the effect of astragaloside IV on ischemic stroke injury from the perspective of Slc25a1-mediated cellular metabolic reprogramming. A total of 170 mice were used to establish the middle cerebral artery occlusion (MCAO) model. The therapeutic effect of astragaloside IV was evaluated by neurobehavioral scores and infarct volume, with its impact further verified through the depletion of peripheral macrophages. The modulation of Slc25a1 by astragaloside IV and its influence on macrophages were investigated in mouse bone marrow-derived macrophages (BMDMs) and peripheral blood mononuclear cell-derived macrophages (PBMC-derived macrophages). Astragaloside IV significantly mitigated neurological impairment and reduced cerebral infarction volume in MCAO mice by inhibition of peripheral monocytes/macrophage inflammatory infiltration. In activated BMDMs and PBMC-derived macrophages, astragaloside IV interacted with Slc25a1, attenuated citrate transport, maintained mitochondrial function, therefore enhancing the shift from the M1- to M2-like macrophages. Mechanistically, astragaloside IV inhibited the transcriptional regulation of HIF-1α on GABA-T via citate-mediated histone H3 and H4 deacetylation and promoted the resumption of the broken TCA cycle and mitochondrial OXPHOS in macrophages. Our study unveiled a therapeutic strategy for ischemic stroke by intervening in the inflammatory infiltration of peripheral monocytes/macrophages. Astragaloside IV, by binding to the mitochondrial citrate transporter Slc25a1, maintained the homeostasis of the TCA cycle and mitochondrial function, ultimately blocking the inflammation of peripheral macrophages to ameliorate ischemic stroke damage. This discovery provides data support for expanding the clinical application of astragaloside IV and offers research insights into the external treatment of encephalopathy.",
+              "doi": "10.1016/j.phymed.2025.156449",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "935c7270feb8330bcdd9081b1520130f8e75d6d0344e4170640836f08fd19ee9"
+              }
+            },
+            {
+              "title": "Cell Metabolomics Reveals Berberine-Inhibited Pancreatic Cancer Cell Viability and Metastasis by Regulating Citrate Metabolism.",
+              "abstract": "Pancreatic cancer (PC) is becoming one of the deadliest cancers, with mortality among the highest worldwide because of its pathogenic latency and the lack of efficient drugs in the clinic. Considering that cancer cells undergo proliferation and differentiation at substantial metabolic costs, as indicated by dysregulated glycolysis and an abnormal TCA cycle induced by mitochondrial damage, we investigated the therapeutic capacity of berberine (BBR) in pancreatic cancer using a cell metabolomics method. A phenotypic assay revealed the significant inhibitory role of BBR in PC cell viability and metastasis. In addition, a precision-targeted metabolome assay showed that BBR profoundly dysregulated the energy metabolism of PC cells, and phenotypic observations based on imaging indicated that PC cell mitochondria were markedly damaged after BBR treatment. Notably, citrate metabolism and transportation in cell mitochondria were significantly influenced by BBR, which led to the blocked biosynthesis of the defined fatty acids (FAs) through the regulation of ACLY, ACO1, and SLC25A1. Therefore, the regulatory effects of FAs on PC cell proliferation and metastasis may be regulated by BBR through targeting citrate metabolism. Collectively, our in vitro data preliminarily reveals the therapeutic potential of BBR against pancreatic cancer by targeting citrate metabolism, citrate might be a new target for drug development and the treatment against PC, but further experimental verification will be required subsequently. Moreover, our study demonstrated that the cell metabolomics method pertains to the capacity to rapidly explore biochemical functions of natural products.",
+              "doi": "10.1021/acs.jproteome.0c00394",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "df38a0b874b72a004711461d1b2e43b10f29cd93334e843ec9a62eded78453e2"
+              }
+            },
+            {
+              "title": "The mitochondrial citrate carrier, SLC25A1, drives stemness and therapy resistance in non-small cell lung cancer.",
+              "abstract": "Therapy resistance represents a clinical challenge for advanced non-small cell lung cancer (NSCLC), which still remains an incurable disease. There is growing evidence that cancer-initiating or cancer stem cells (CSCs) provide a reservoir of slow-growing dormant populations of cells with tumor-initiating and unlimited self-renewal ability that are left behind by conventional therapies reigniting post-therapy relapse and metastatic dissemination. The metabolic pathways required for the expansion of CSCs are incompletely defined, but their understanding will likely open new therapeutic opportunities. We show here that lung CSCs rely upon oxidative phosphorylation for energy production and survival through the activity of the mitochondrial citrate transporter, SLC25A1. We demonstrate that SLC25A1 plays a key role in maintaining the mitochondrial pool of citrate and redox balance in CSCs, whereas its inhibition leads to reactive oxygen species build-up thereby inhibiting the self-renewal capability of CSCs. Moreover, in different patient-derived tumors, resistance to cisplatin or to epidermal growth factor receptor (EGFR) inhibitor treatment is acquired through SLC25A1-mediated implementation of mitochondrial activity and induction of a stemness phenotype. Hence, a newly identified specific SLC25A1 inhibitor is synthetic lethal with cisplatin or with EGFR inhibitor co-treatment and restores antitumor responses to these agents in vitro and in animal models. These data have potential clinical implications in that they unravel a metabolic vulnerability of drug-resistant lung CSCs, identify a novel SLC25A1 inhibitor and, lastly, provide the first line of evidence that drugs, which block SLC25A1 activity, when employed in combination with selected conventional antitumor agents, lead to a therapeutic benefit.",
+              "doi": "10.1038/s41418-018-0101-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "619c3009c24dd4c7739d53d471a80e4748f8b555eb205ec01bff2a7463ce70d7"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC41A3 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A1', 'SLC41A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC25A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A1": {
+          "status": "ok",
+          "gene": "SLC25A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC41A3": {
+          "status": "unavailable",
+          "gene": "SLC41A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC41A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC41A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC41A3']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC41A3(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC41A3"
+        ],
+        "confidence": 0.551,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC41A3": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC41A3(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC41A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A1在glioma、白血病相关邻近证据及pan-cancer中表现为促增殖/促存活依赖基因；B-ALL同样是高增殖、代谢重编程的血液肿瘤，线粒体柠檬酸输出支持脂质合成、乙酰辅酶A/组蛋白乙酰化和TCA循环稳态，因此SLC25A1被抑制时更可能降低肿瘤存活。SLC41A3的邻近证据主要来自肝细胞癌Mg2+转运/侵袭表型，向淋巴造血肿瘤的可迁移性较弱。 | 目标癌种B-lymphoblastic leukaemia缺少直接CRISPR必需性证据，但候选基因中SLC25A1具有更强的跨癌种依赖性和肿瘤促存活证据：文献显示其在多数癌种上调、knockout/knockdown抑制增殖，且在glioma中促进proliferation/stemness并抑制apoptosis；邻近癌种包括glioma、leukemia和liver cancer，其中白血病邻近性对B-ALL更相关。SLC41A3证据集中在LIHC的proliferation/migration/invasion，且TIMER/KM对目标癌种不可用，跨癌种类推到B-ALL较弱。因此二选一判定SLC25A1更可能在CRISPR条件下抑制B-ALL肿瘤存活。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC41A3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC41A3": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC25A1在glioma、白血病相关邻近证据及pan-cancer中表现为促增殖/促存活依赖基因；B-ALL同样是高增殖、代谢重编程的血液肿瘤，线粒体柠檬酸输出支持脂质合成、乙酰辅酶A/组蛋白乙酰化和TCA循环稳态，因此SLC25A1被抑制时更可能降低肿瘤存活。SLC41A3的邻近证据主要来自肝细胞癌Mg2+转运/侵袭表型，向淋巴造血肿瘤的可迁移性较弱。 | 目标癌种B-lymphoblastic leukaemia缺少直接CRISPR必需性证据，但候选基因中SLC25A1具有更强的跨癌种依赖性和肿瘤促存活证据：文献显示其在多数癌种上调、knockout/knockdown抑制增殖，且在glioma中促进proliferation/stemness并抑制apoptosis；邻近癌种包括glioma、leukemia和liver cancer，其中白血病邻近性对B-ALL更相关。SLC41A3证据集中在LIHC的proliferation/migration/invasion，且TIMER/KM对目标癌种不可用，跨癌种类推到B-ALL较弱。因此二选一判定SLC25A1更可能在CRISPR条件下抑制B-ALL肿瘤存活。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "glioma",
+          "leukemia",
+          "liver cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC41A3']",
+        "status": "ok",
+        "summary": "SLC25A1 encodes a mitochondrial citrate transporter that supports lipogenesis and metabolic reprogramming in proliferating leukemia/lymphoma cells; its disruption is more plausibly associated with reduced tumor survival than SLC41A3, which has a less direct role in core cancer cell proliferation and survival.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC41A3"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A1 encodes a mitochondrial citrate transporter that supports lipogenesis and metabolic reprogramming in proliferating leukemia/lymphoma cells; its disruption is more plausibly associated with reduced tumor survival than SLC41A3, which has a less direct role in core cancer cell proliferation and survival.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:18:59Z"
+  }
+}

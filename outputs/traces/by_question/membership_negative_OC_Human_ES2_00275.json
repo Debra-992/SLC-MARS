@@ -1,0 +1,513 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00275",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC15A1 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC15A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00275",
+      "status": "ok",
+      "summary": "检索到 4 类证据、18 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC15A1"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC15A1",
+              "protein_function": "Electrogenic proton-coupled amino-acid transporter that transports oligopeptides of 2 to 4 amino acids with a preference for dipeptides. Primarily responsible for the absorption of dietary di- and tripeptides from the small intestinal lumen.",
+              "aliases": "PEPT1, HPECT1, HPEPT1",
+              "transport_type": "C / H+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC15A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC15 Proton oligopeptide  cotransporter family",
+              "target_properties": {
+                "name": "SLC15 Proton oligopeptide  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC15A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "PEPT1",
+              "target_properties": {
+                "name": "PEPT1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC15A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cervical cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC15A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Oral squamous cell carcinoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC15A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC15A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC15A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Combined inhibition of histone deacetylase and cytidine deaminase improves epigenetic potency of decitabine in colorectal adenocarcinomas.",
+              "abstract": "Targeting the epigenome of cancerous diseases represents an innovative approach, and the DNA methylation inhibitor decitabine is recommended for the treatment of hematological malignancies. Although epigenetic alterations are also common to solid tumors, the therapeutic efficacy of decitabine in colorectal adenocarcinomas (COAD) is unfavorable. Current research focuses on an identification of combination therapies either with chemotherapeutics or checkpoint inhibitors in modulating the tumor microenvironment. Here we report a series of molecular investigations to evaluate potency of decitabine, the histone deacetylase inhibitor PBA and the cytidine deaminase (CDA) inhibitor tetrahydrouridine (THU) in patient derived functional and p53 null colon cancer cell lines (CCCL). We focused on the inhibition of cell proliferation, the recovery of tumor suppressors and programmed cell death, and established clinical relevance by evaluating drug responsive genes among 270 COAD patients. Furthermore, we evaluated treatment responses based on CpG island density. Decitabine caused marked repression of the DNMT1 protein. Conversely, PBA treatment of CCCL recovered acetylation of histone 3 lysine residues, and this enabled an open chromatin state. Unlike single decitabine treatment, the combined decitabine/PBA treatment caused > 95% inhibition of cell proliferation, prevented cell cycle progression especially in the S and G2-phase and induced programmed cell death. Decitabine and PBA differed in their ability to facilitate re-expression of genes localized on different chromosomes, and the combined decitabine/PBA treatment was most effective in the re-expression of 40 tumor suppressors and 13 genes typically silenced in cancer-associated genomic regions of COAD patients. Furthermore, this treatment repressed expression of 11 survival (anti-apoptotic) genes and augmented expression of X-chromosome inactivated genes, especially the lncRNA Xist to facilitate p53-mediated apoptosis. Pharmacological inhibition of CDA by THU or its gene knockdown prevented decitabine inactivation. Strikingly, PBA treatment recovered the expression of the decitabine drug-uptake transporter SLC15A1, thus enabling high tumor drug-loads. Finally, for 26 drug responsive genes we demonstrated improved survival in COAD patients. The combined decitabine/PBA/THU drug treatment improved drug potency considerably, and given their existing regulatory approval, our findings merit prospective clinical trials for the triple combination in COAD patients.",
+              "doi": "10.1186/s13148-023-01500-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC15A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9b7a2eb2b4d9037d502fde7d46d724171bb24490039c71e760f68838dfa8156a"
+              }
+            },
+            {
+              "title": "Functional and Physiological Implications of Oligopeptide Transporters: Potential Targets for Pharmacological Interventions.",
+              "abstract": "Peptide transporters are important plasma membrane proteins that facilitate the cellular uptake of di- and tripeptides in addition to various peptidomimetic drugs. The proton-coupled oligopeptide transporter (POT) family consists of mainly four transporter proteins, which include two H -coupled oligopeptide transporters known as PEPT1 (SLC15A1) and PEPT2 (SLC15A2), along with two peptide/histidine transporters referred to as PHT1 (SLC15A4) and PHT2 (SLC15A3). These transporters play an important role in the drug delivery process in mammalian tissues. They are highly expressed in tissues such as the small intestine, kidney, liver, lung, and eye. PHT1 shows expression in immune cells, especially in B cells and plasmacytoid dendritic cells. The pathophysiological relevance of peptide transporters is emerging to be crucial in various disease conditions, e.g., PEPT1 plays a role in the physiopathology of the gastrointestinal system, particularly in IBD. Upregulated expression of peptide transporters has also been positively related to inflammatory responses. An increasing number of peptide-based drug therapies have been reported to have the potential for development of novel classes of drugs. For example, Carnosine (beta-alanyl-L-histidine) has been demonstrated to act as an antioxidant, antiglycating agent, and neuroprotector. It is transported by PEPT1 and PEPT2, facilitating its protective effects against oxidative stress in neurons and intestinal epithelial cells. Moreover, it has applications in the treatment of multidrug-resistant cancers and has been shown to improve glucose metabolism. This review gives an insight into the functional, physiological and pharmacological importance of proton-coupled oligopeptide transporter.",
+              "doi": "10.1007/s00232-025-00348-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC15A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "df7c9c4ca3b6fa367d8594d5a59e72aa4cb116617c3b3fc77e9f96daa8f4e8c8"
+              }
+            },
+            {
+              "title": "Establishment of a novel microscale thermophoresis ligand-binding assay for characterization of SLC solute carriers using oligopeptide transporter PepT1 (SLC15 family) as a model system.",
+              "abstract": "Membrane proteins represent roughly one third of the human proteome and many of them serve as targets of therapeutic drugs. An exception is the SLC solute carrier superfamily with only a handful of approved drugs targeting SLCs. Indeed, for many of the SLCs, the natural transport substrates are still unknown. A major limitation for SLCs has been the difficulty to thoroughly characterize these multimembrane spanning proteins. The intrinsic properties of membrane proteins with alternative hydrophobic and hydrophilic domains lead to instability, making the purification tasks even more challenging compared to soluble proteins. This issue also holds true for conventional ligand-binding assays (LBAs) which usually require high-quality, pure and concentrated protein samples. Herein, we report a novel binding assay strategy to overcome these issues, taking advantage of a unique combination of yeast expression and microscale thermophoresis (MST). Following yeast overexpression of SLC15A1/PepT1 ortholog from moss Physcomitrella patens, PepT, which exhibits remarkable similarity to human PepT1, the approach was validated using dipeptide glycylsarcosine (Gly-Sar) and antiviral prodrug valacyclovir as test substrates. The originality of our approach is based on the comparative analysis of solubilized total membrane preparations with or without expression of the SLC target of interest, using a yeast strain (S. cerevisiae), in which the corresponding endogenous SLC homolog is depleted. MST is a recently developed technique that takes advantage of the properties of biomolecules in solution to migrate along a temperature gradient. Importantly, this migration is affected by substrate binding. It is being monitored by fluorescence using labelled SLC molecules in the presence of different ligand concentrations. We herein report a novel MST/yeast-based method to characterize binding of ligands to SLCs without the need for a prior SLC-purification step. For validation purposes, we used a close eukaryotic homolog of the human H-coupled oligopeptide transporter PepT1 (SLC15A1) that mediates uptake of di-tripeptides and peptide-like drugs as a test model. This approach allowed the successful confirmation of the binding of Gly-Sar at the mM range and revealed for the first time the K of the antiviral prodrug valacyclovir to the PepT1 homolog at around 50 μM. This novel LBA approach is independent of protein purification. It is suitable for drug discovery as it is upscalable to high throughput compound screening. It works well for SLC transporters which are underrepresented targets due to their difficulties to study them. Moreover, this approach could make a significant contribution toward \"deorphanization\" of SLCs, revealing their transport substrates.",
+              "doi": "10.1016/j.vascn.2018.03.004",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC15A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "feb86a55817cedf1761ec7aefa94aea9714023b1e620922df7de236a4fa669b0"
+              }
+            },
+            {
+              "title": "Evidence from transcriptome analysis unravelled the roles of eyestalk in salinity adaptation in Pacific white shrimp (Litopenaeus vannamei).",
+              "abstract": "Eyestalk is considered the main neuroendocrine organ in crustaceans. Eyestalk regulates reproduction, molting, and energy metabolism by secreting several neurohormones. However, the role of eyestalk in salinity adaptation in crustaceans remains unclear. To reveal the role of eyestalk in salinity adaptation in Litopenaeus vannamei, we performed RNA-seq to compare the transcriptomic response of the eyestalk under low salinity (salinity 3) with that of the control group (salinity 25) for 8 weeks. A total of 479 mRNAs, including 150 upregulated and 329 downregulated mRNAs, were differentially expressed between the two salinity groups. The majority of the differentially expressed genes (DEGs) were enriched in biological pathways related to osmoregulation, metabolism and energy production, and oxidative stress. The most important DEGs associated with osmoregulation were CA4, ATP1A, ATP2B, ABCB1, ABCC4, PhoA, PhoB, NOS1, ACE, ANPEP, and the V-type H-ATPase E-subunit. The metabolism-related DEGs were divided into three main categories: carbohydrate and energy metabolism (i.e., G6PC, UGT), protein and amino acid metabolism (i.e., SLC15A1, AhcY, GFAT), and lipid and fatty acid metabolism (i.e., GPAT3_4, CYP2J). The key DEGs related to the oxidative stress response were UGT, NDUFB1, QCR7, QCR8, P5CDh, COX6B, and CES1. These results provide evidence for the existence of an eyestalk-salinity adaptation-stress endocrine axis in L. vannamei. These findings provide a better understanding of the molecular mechanism underlying salinity adaptation in L. vannamei.",
+              "doi": "10.1016/j.ygcen.2022.114120",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC15A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2dc03d5dd4ce4712032fe635c4e6a3c1961a57e6108200268fda39e6f20f7054"
+              }
+            },
+            {
+              "title": "Dietary niacin affects intestinal morphology and functions via modulating cell proliferation in weaned piglets.",
+              "abstract": "Niacin deficiency leads to inflammation of mucous membranes and diarrhoea. There are few reports on the effects of niacin on the intestinal health of weaned piglets. The present study was conducted to analyse the effects of niacin in weaned piglets along with its underlying mechanism. A total of 48 25-day-old weaned piglets (24 females and 24 males) were randomly allotted into four groups, each treatment were supplemented with 22.5, 30, 45, and 75 mg kg niacin for a period of 14 days, with 12 piglets per diet and 1 piglet per pen. Six piglets (3 males and 3 females) were randomly selected from each treatment group and euthanised for intestinal tissue sampling on days 7 and 14 after the weaning day (day 0), respectively. Dietary niacin did not affect the growth performance of weaned piglets but quadratically affected (P < 0.05) the diarrhoea rate from days 7 to 14. The duodenal villus height and width and crypt depth in the 30 mg kg niacin group were greater than those in the 45 mg kg niacin group on day 7, and the jejunal crypt depth, ileal crypt depth, villus height and villus width decreased (linear, P < 0.05) with the increase in dietary niacin. However, the dietary supplementation with niacin increased (linear, P < 0.001) the jejunal villus height, crypt depth and villus width on day 14. Dietary niacin increased (linear, P < 0.05) the alkaline phosphatase activity in the jejunal mucosa of weaned piglets on day 7 but decreased (linear, P < 0.05) its activity on day 14. The number of Ki67 positive cells per crypt was decreased (linear, P < 0.05) with the dietary niacin on day 7 but increased (linear, P < 0.05) with dietary niacin contents on day 14. Moreover, dietary niacin altered (P < 0.05) SLC5A1, SLC15A1, SLC6A19, TJP-1, occludin and claudin-1 mRNA expression in the small intestine. These results indicate that dietary niacin has different effects on intestinal morphology and functions in the first and second weeks postweaning and that the dietary supplementation with niacin may, by modulating intestinal cell proliferation, affect the intestinal health.",
+              "doi": "10.1039/d0fo03097j",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC15A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7b4f04e847f6942a92c2dad49675e2e4acb7abcdccde2d687a3ae0927eeb272b"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC15A1 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC15A1 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 3 项（ppr=ok, timer=ok, km=ok, de=error）；候选基因=['SLC15A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC15A1",
+            "ppr_score": 5.536184447762585e-05,
+            "degree_corrected_score": 7.341686089331481e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC15A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC15A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC15A1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "stats_text": "P value: 0.0035",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC15A1_ovarian_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC15A1": {
+          "status": "ok",
+          "gene": "SLC15A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC15A1.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC15A1": {
+          "status": "ok",
+          "gene": "SLC15A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.0035",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC15A1_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC15A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC15A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.42 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC15A1"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC15A1": 4.4228
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.7；法官理由: No direct ES2/MAGeCK depletion evidence; observations are association-level. E's essentiality score conflates gene loss with tumor-growth inhibition. Two independent LLM channels agree SLC15A1 is not established as inhibiting ovarian tumor 。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC15A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC15A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.42 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC15A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC15A1": 4.4228
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No direct ES2 MAGeCK ovarian depletion evidence; observations are association-level. SLC15A1 is a redundant peptide transporter, unlikely a tumor-growth bottleneck. Two independent LLM false votes outweigh opaque essentiality score. Verdict。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC15A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC15A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T07:54:21Z"
+  }
+}

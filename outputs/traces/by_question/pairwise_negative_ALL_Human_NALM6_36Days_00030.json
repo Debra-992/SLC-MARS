@@ -1,0 +1,435 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00030",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC23A1 and SLC44A2 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "winner": "SLC23A1"
+  },
+  "effective_genes": [
+    "SLC23A1",
+    "SLC44A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_36Days_00030",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC23A1",
+        "SLC44A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC23A1",
+              "protein_function": "Mediates electrogenic uptake of vitamin C, with a stoichiometry of 2 Na(+) for each ascorbate",
+              "aliases": "SLC23A2, SVCT1, Na(+)/L-Ascorbic Acid Transporter 1",
+              "transport_type": "C / Na+"
+            },
+            {
+              "gene": "SLC44A2",
+              "protein_function": "Choline/H+ antiporter, low-affinity ethanolamine/H+ antiporter. Involved in membrane synthesis and myelin production.",
+              "aliases": "CTL2, Choline Transporter-Like Protein 2",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC23A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC23 Na+-dependent ascorbic  acid transporter family",
+              "target_properties": {
+                "name": "SLC23 Na+-dependent ascorbic  acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC44A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC44 Choline-like  transporter family",
+              "target_properties": {
+                "name": "SLC44 Choline-like  transporter family"
+              }
+            },
+            {
+              "gene": "SLC44A2",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "CTL2",
+              "target_properties": {
+                "name": "CTL2"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "High-dose vitamin C potently induces apoptosis in acute lymphoblastic leukemia by activating ER stress response.",
+              "abstract": "IntroductionHigh-dose Vitamin C has shown significant anti-tumor effects in various cancers, including hematological malignancies. However, its therapeutic efficacy against acute lymphoblastic leukemia (ALL) remains underexplored.MethodsALL cell lines and normal bone marrow mononuclear cells were treated with Vitamin C to assess cell viability, apoptosis, proliferation, and cell cycle progression. Colony formation assays evaluated long-term growth. Additionally, transgenic mouse models were employed to evaluate the  antitumor activity of high-dose Vitamin C in ALL. Western blotting, ROS detection 2',7'-Dichlorofluorescin diacetate (DCFH-DA), and RNA sequencing with GSEA were conducted to explore Vitamin C's mechanism of action.ResultsOur results demonstrated that high-dose Vitamin C exhibited potent cytotoxicity toward ALL cells at relatively low concentrations (200 μM) while sparing normal human bone marrow mononuclear cells even at concentrations as high as 1 mM. Vitamin C effectively inhibited ALL cell line proliferation, induced apoptosis, and disrupted cell cycle progression. We further identified that the increased expression of Solute Carrier Family 23 Member 1 (SLC23A1) in ALL cells enhanced their sensitivity to Vitamin C. In SLC23A1 knockout cells, treatment with 200 μM Vitamin C significantly restored cell viability and reduced apoptosis compared to controls. Mechanistically, high-dose Vitamin C induced apoptosis in ALL cells by activating the ER stress response through the PERK/CHOP pathway.ConclusionTaken together, our findings suggest that high-dose Vitamin C demonstrated significant anti-leukemic effects in ALL, showing cytotoxicity at 200 μM. Furthermore, SLC23A1 may serve as a potential biomarker for predicting the therapeutic response to Vitamin C treatment in ALL patients.",
+              "doi": "10.1177/09603271251345656",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC23A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7d999f54716542852a8ad44ef97a705e3e6fb16829bbc41f827569c8f7642ee5"
+              }
+            },
+            {
+              "title": "Slc44a2 deletion alters tetraspanin and N-cadherin expression: Reduced adhesion and enhanced proliferation in cultured mesenchymal lung cells.",
+              "abstract": "Slc44a2 is reported to interact with tetraspanins CD9 and CD81. To investigate how Slc44a2 affects adhesion protein expression, cells from wild-type (WT) Slc44a2+/+, heterozygous (HET) Slc44a2+/-, and knockout (KO) Slc44a2-/- mice were cultured from lung tissue. The cultured cells expressed vimentin, N-cadherin, p120 catenin, beta-catenin, actin, CD9, and CD81, but not E-cadherin. Vimentin expression with lack of E-cadherin indicated that the cultured cells were of mesenchymal origin. Slc44a2 KO cells and HET cells demonstrated lower adherence and faster proliferation than the WT cells. All three groups displayed dramatically altered intracellular distribution of N-cadherin, CD9, and CD81. The CD9 membrane foci observed in WT cell membranes were less frequent and diminished in size in HET cells and KO cells. N-cadherin was dispersed throughout both the cytoplasm and membrane in WT cells, with similar yet weaker distribution in HET cells; however, in KO cells, N-cadherin was densely aggregated in the perinuclear cytoplasm. CD81 had a distribution pattern in WT, HET, and KO cells similar to that of N-cadherin with dense cytoplasmic clusters in the cells. KO cells also exhibited reduced filamentous actin as compared to WT cells. These results suggest that Slc44a2 is necessary for proper cellular localization of adhesion proteins and growth regulation that may be related to altered adhesion signals.",
+              "doi": "10.1016/j.tice.2021.101599",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0aaff44f65186e442ded5abfd20a0c6d1277a92398aadf491eca49d1f2aed5fc"
+              }
+            },
+            {
+              "title": "SLC44A2 negatively regulates mitochondrial fatty acid oxidation to suppress colorectal progression by blocking the MUL1-CPT2 interaction.",
+              "abstract": "The dependence of cancer cells on mitochondrial metabolism has been revealed in various cancer types. However, the mechanisms underlying this metabolic remodeling remain largely unclear. Solute carrier family 44 member 4 (SLC44A2) is a mitochondrial membrane-localized transmembrane protein belonging to the choline transporter-like protein family. Recently, it was reported that deletion of SLC44A2 impairs adhesion and increases proliferation in cultured lung mesenchymal cells. This finding implies that SLC44A2 may play a role in the malignant phenotypes of human cancers. However, the effects of SLC44A2 on malignant phenotypes and mitochondrial metabolism in human cancers remain unexplored. In the present investigation, we observed a significant reduction in SLC44A2 expression in colorectal cancer (CRC), and low SLC44A2 expression was closely associated with poorer survival of CRC patients. Functional assays demonstrated that SLC44A2 suppressed CRC growth and metastasis both in vitro and in vivo. Mechanistically, SLC44A2 inhibits mitochondrial fatty acid oxidation, thereby reducing energy supply and increase ROS stress. This effect is achieved by promoting mitochondrial E3 ubiquitin ligase 1 (MUL1)-regulated degradation of carnitine palmitoyltransferase 2 (CPT2) via enhancing the interaction between MUL1 and CPT2, without increasing MUL1 expression, which ultimately contributes to the proliferation and metastasis of CRC. Together, SLC44A2 functions as a critical tumor suppressor in CRC and potential therapeutic target in the treatment of this malignancy.",
+              "doi": "10.1038/s41419-025-07781-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6f977f4371e7d10c5e02aac555e623017bb74fb9b8b7aef7dbc236016f2b53a9"
+              }
+            },
+            {
+              "title": "Von Willebrand factor exacerbates heart failure through formation of neutrophil extracellular traps.",
+              "abstract": "Heart failure (HF) is a leading cause of mortality worldwide and characterized by significant co-morbidities and dismal prognosis. Neutrophil extracellular traps (NETs) aggravate inflammation in various cardiovascular diseases; however, their function and mechanism of action in HF pathogenesis remain underexplored. This study aimed to investigate the involvement of a novel VWF-SLC44A2-NET axis in HF progression. NET levels were examined in patients with HF and mouse models of transverse aortic constriction (TAC) HF. PAD4 knockout mice and NET inhibitors (GSK-484, DNase I, NEi) were used to evaluate the role of NETs in HF. RNA sequencing was used to investigate the downstream mechanisms. Recombinant human ADAMTS13 (rhADAMTS13), ADAMTS13, and SLC44A2 knockouts were used to identify novel upstream factors of NETs. Elevated NET levels were observed in patients with HF and TAC mouse models of HF. PAD4 knockout and NET inhibitors improved the cardiac function. Mechanistically, NETs induced mitochondrial dysfunction in cardiomyocytes, inhibiting mitochondrial biogenesis via the NE-TLR4-mediated suppression of PGC-1α. Furthermore, VWF/ADAMTS13 regulated NET formation via SLC44A2. Additionally, sacubitril/valsartan amplifies the cardioprotective effects of the VWF-SLC44A2-NET axis blockade. This study established the role of a novel VWF-SLC44A2-NET axis in regulating mitochondrial homeostasis and function, leading to cardiac apoptosis and contributing to HF pathogenesis. Targeting this axis may offer a potential therapeutic approach for HF treatment.",
+              "doi": "10.1093/eurheartj/ehae517",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f14975a1136335ab4a76dab7cad77eb85e9d10a0932493ab07b95ce065abdda1"
+              }
+            },
+            {
+              "title": "{'i': 'In vivo', '#text': 'anti-tumor activity of high-dose parenteral ascorbic acid is mediated primarily via cofactor activity, not via oxidative stress.'}",
+              "abstract": "The anti-tumor effect of high-dose ascorbic acid (AA) has been demonstrated in multiple  and  cancer models with the postulation of two primary categories of mechanisms: antioxidant/cofactor activity and H  O  -mediated oxidative damage. Both mechanisms have been conclusively demonstrated  . However, while parenteral high-dose AA-induced cofactor activity (TET-mediated DNA demethylation and prolyl/asparaginyl hydroxylase-mediated HIF activity inhibition via reduction of enzymatic Fe  to Fe  ) has been demonstrated intratumorally  in multiple models, the cumulative data on parenteral high-dose AA-induced intratumoral oxidative damage  has been inconclusive. Furthermore, the relative contribution of the seemingly opposing mechanisms towards  anti-cancer activity has not been studied concurrently. We therefore sought to definitively delineate the roles of both antioxidant/cofactor activity and prooxidant functions of high-dose AA in the  anti-tumor response. Using two syngeneic mouse tumor models, the AA-sensitive A20 model and the AA-resistant Renca model, we assessed markers of DNA and lipid oxidative damage as well as the specific roles of TET2 and AA transporter SLC23A2 in the anti-tumor response to parenteral high-dose AA. In the sensitive A20 model, loss of either  or  fully reversed anti-tumor activity. Similarly, overexpression of  in the resistant Renca model (which expresses high baseline levels of AA transporters SLC23A1 and SLC23A2, but does not express TET2), resulted in increased CD8  T cell infiltration and dramatic reduction in tumor growth overall. In both A20 and Renca models, high-dose parenteral AA  total intratumoral antioxidant capacity, and this was attenuated by  knockdown in A20. High-dose AA treatment also resulted in a  - and  -dependent increase in intratumoral 5-hydroxymethylcytosine. Intracellular oxidative damage markers, 8-OHdG and 4-HNE, were not induced in tumors by high-dose AA in either model. In contrast, these markers were robustly induced  by high-dose AA in A20 and Renca cells. Using dynamic real-time extracellular H  O  measurements with high-dose AA, difference in molecular oxygen concentration between standard  and hypoxic  conditions was identified as an important factor underlying the marked discrepancy between the abundant  and absent  intratumoral oxidative stress with high-dose AA. Furthermore, using additional syngeneic models resistant (MB49) and sensitive (MC38) to AA-induced potentiation of anti-PD1 checkpoint inhibition, we demonstrate that very low catalase expression does not confer sensitivity to high-dose AA  (further arguing against the H  O  mechanism  ), that TET2 expression alone is not sufficient to drive an AA-induced anti-tumor response (either as a single agent or in combination with immunotherapy), and that high-dose AA can significantly enhance the efficacy of anti-PD1 immunotherapy even in the absence of single-agent activity. Our data strongly indicate that the  anti-tumor effect of high-dose parenteral AA-including potentiation of immunotherapy-is mediated primarily by its specific antioxidant/cofactor activity (with TET2 expression likely being necessary but certainly not sufficient), and not via oxidative stress. Collectively, the study represents a paradigm shift in our understanding of the cumulative mechanisms of  anti-cancer activity of high-dose AA, with critical implications not just for the clinical translation of AA as an anti-cancer agent (including in enhancing immunotherapy efficacy) but also the field of free radical biology.",
+              "doi": "10.1101/2025.05.21.655101",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC23A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "01a29b0802b6246f03ed0f822f43b3d1ed1b4d6c5f15be8f9b5c0eb7a530bb39"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC23A1 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC23A1 and SLC44A2 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC23A1', 'SLC44A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC23A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC44A2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC23A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC23A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC23A1": {
+          "status": "unavailable",
+          "gene": "SLC23A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC44A2": {
+          "status": "unavailable",
+          "gene": "SLC44A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC23A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC23A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC44A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC44A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC44A2']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC23A1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC44A2",
+        "candidates": [
+          "SLC23A1",
+          "SLC44A2"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC23A1": 0.35,
+          "SLC44A2": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC44A2': 2}，最终智能体辩论后裁决：winner=SLC44A2 answer=None conf=0.65；法官理由: Two independent LLM channels favor SLC44A2; choline transport supports membrane/phospholipid synthesis needed for NALM6 proliferation. SLC23A1 vitamin-C uptake is less directly essential and may mediate drug toxicity rather than baseline gr。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC44A2']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC23A1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC44A2",
+        "candidates": [
+          "SLC23A1",
+          "SLC44A2"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC23A1": 0.35,
+          "SLC44A2": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC44A2': 2}，最终智能体辩论后裁决：winner=SLC44A2 answer=None conf=0.64；法官理由: Two independent LLM votes favor SLC44A2; its choline transport supports membrane synthesis and proliferation, making knockout more likely to impair NALM6 ALL growth than SLC23A1 vitamin C uptake.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC23A1', 'SLC44A2']",
+        "status": "ok",
+        "summary": "SLC44A2 encodes a choline transporter-like protein involved in phospholipid supply and membrane biogenesis, processes that support rapid cancer cell proliferation; its loss is therefore more likely to impair NALM6 ALL tumor growth than loss of SLC23A1, which mainly mediates sodium-dependent vitamin C uptake and is less directly tied to core proliferative machinery.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC44A2",
+        "candidates": [
+          "SLC23A1",
+          "SLC44A2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC44A2 encodes a choline transporter-like protein involved in phospholipid supply and membrane biogenesis, processes that support rapid cancer cell proliferation; its loss is therefore more likely to impair NALM6 ALL tumor growth than loss of SLC23A1, which mainly mediates sodium-dependent vitamin C uptake and is less directly tied to core proliferative machinery.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:31:45Z"
+  }
+}

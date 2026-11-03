@@ -1,0 +1,360 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC37A2 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC37A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC37A2"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC37A2",
+              "protein_function": "Inorganic phosphate and glucose-6-phosphate antiporter. May transport cytoplasmic glucose-6-phosphate into the lumen of the endoplasmic reticulum and translocate inorganic phosphate into the opposite direction. Independent of a lumenal glucose-6-phosphatase. May not play a role in homeostatic regulation of blood glucose levels.",
+              "aliases": "SPX2, Solute Carrier Family 37 (Glycerol-3-Phosphate Transporter), Member 2, Solute Carrier Family 37 (Glucose-6-Phosphate Transporter), Member 2, Glucose-6-Phosphate Exchanger SLC37A2, Sugar-Phosphate Exchange Protein 2, FLJ00171, Sugar Phosphate Exchanger 2, Pp11662",
+              "transport_type": "E / inorganic phosphate"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC37A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC37 Sugar-phosphate/phosphate  exchanger family",
+              "target_properties": {
+                "name": "SLC37 Sugar-phosphate/phosphate  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Integrative proteomics and metabolomics analyses reveals the regulation of autophagy and ferroptosis by RAB10 through Slc37a2/mTOR pathway in breast cancer.",
+              "abstract": "Breast cancer (BC) is the most prevalent and highly heterogeneous malignancy affecting females worldwide, and its development is closely linked to metabolic reprogramming. In this study, label-free quantification (LFQ) was used to analyze the protein expression in exosomes secreted by BC drug-resistant cells, identifying RAS-associated binding protein (RAB) 10 as the most significantly upregulated protein. RAB10, a member of the small GTPase family with complex biological functions, is highly expressed in BC and is associated with poor prognosis. In this study, we mainly utilized mouse breast cancer 4T-1 cells (wild-type control cells) and tumor-induced 4T-1 cells (isolated from mouse in situ tumor tissues to simulate the phenotype of the in vivo tumor microenvironment), and on this basis, conducted in vitro functional verification and in vivo tumorigenesis experiments. A comprehensive multi-omics analysis, including metabolomics and proteomics, following RAB10 knockdown, demonstrated the crucial role of RAB10 in regulating central carbon metabolism, which is essential for autophagy and ferroptosis in BC cells. Our study further confirmed that RAB10 mediates metabolic reprogramming in BC cells by regulating the Slc37a2/mTOR pathway, leading to enhanced autophagy and inhibition of ferroptosis. This comprehensive multi-omics analysis elucidated the key molecular and regulatory mechanisms underlying RAB10-induced metabolic reprogramming in tumors, providing potential new therapeutic targets and biomarkers for prognostic assessment in BC treatment.",
+              "doi": "10.1007/s00018-025-05788-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC37A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0d19c76d9f3af014c1922f2e3a1cdceb336fed3a8de2188c2707c7eff8820c22"
+              }
+            },
+            {
+              "title": "HIF-1α silencing downregulates SLC37A2, SLC37A3, and G6PC3 gene expression and impacts glioblastoma stemness features in 3D neurospheres.",
+              "abstract": "Glioblastoma (GBM), a highly aggressive brain tumor, exhibits a notable capacity for metabolic reprogramming, which may support tumor cell adaptation to the rapid growth and survival demands within the hypoxic solid tumor microenvironment (TME). Hypoxia has been implicated in promoting features associated with cancer stem cell (CSC) phenotypes and chemoresistance. Recent preclinical studies have employed three-dimensional (3D) neurosphere models to investigate these phenotypes, although the metabolic changes associated with such models remain incompletely characterized. GBM cells were cultured as two-dimensional (2D) monolayers or as neurospheres using the 3D hanging drop culture model. Total RNA was extracted using TRIzol, and gene expression was assessed via cDNA arrays and RT-qPCR. Gene silencing was performed using specific siRNAs. Transcriptomic analysis of clinical sample expression profiles was conducted using data from the Genotype-Tissue Expression (GTEx) database. We observed that neurospheres from human GBM-derived cell lines (U87, U118, U138, and U251) were associated with increased expression of hypoxia-inducible factor (HIF)-1α compared to 2D monolayers. This was accompanied by elevated transcript levels of genes involved in adaptive and angiogenic responses, including GLUT1, VEGF, SLC37A2, SLC37A3, and G6PC3. Silencing HIF-1α correlated with reduced neurosphere size and a decrease in markers commonly associated with CSC phenotypes. Similarly, knockdown of SLC37A2, SLC37A3, and G6PC3 was linked to smaller spheroids and reduced expression of GLUT1 and VEGF, without affecting HIF-1α levels. Differential regulation of CSC markers was observed, with PROM1, ABCB5, CD44, and FGFR2 appearing to be influenced by G6PC3/HIF-1α, while ABCG2, DLL1, GATA3, PTCH1, and FLOT2 were more closely associated with SLC37A2/HIF-1α. Our findings suggest that GBM-derived 3D neurosphere cultures exhibit HIF-1α-regulated molecular features consistent with CSC and a potential mimicry of chemoresistance-associated traits rather than a direct demonstration of chemoresistance. These correlative observations support a potential link between metabolic reprogramming and the emergence of such phenotypes in response to hypoxic stress. Further investigation is needed to establish causal relationships and to better understand the underlying mechanisms.",
+              "doi": "10.1016/j.bbrc.2025.153050",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC37A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b200b8595754a75bc451dddc84a734199286922267cb731396f756b202a64059"
+              }
+            },
+            {
+              "title": "Establishment of a risk model by integrating hypoxia genes in predicting prognosis of esophageal squamous cell carcinoma.",
+              "abstract": "Esophageal squamous cell carcinoma (ESCC) has a dismal prognosis, and hypoxia plays a key role in metastasis and proliferation of ESCC. Thus, we aimed to develop a hypoxia-based gene signature to assist in the treatment decisions and prognosis. We performed consensus clustering analysis on samples from GSE53625 dataset from the Gene Expression Omnibus (GEO) database and used weighted gene co-expression network analysis to filter out candidate modules, which were then intersected with differentially expressed genes from clustered subgroups to obtain hypoxia-related genes (HRGs). After that, the aforementioned genes were used to construct risk score models and validated in The Cancer Genome Atlas (TCGA) database and Cox regression analysis were used to construct a nomogram. Immunohistochemical was used to detect protein expression levels of relevant genes. Moreover, the relationship between risk scores and tumor microenvironment was explored. A hypoxia risk model containing six genes (PNPLA1, CARD18, IL-18, SLC37A2, ADAMTS18, and FAM83C) was constructed by screening key HRGs. Poorer prognosis in the high-risk group than in the low-risk group. And Cox regression analysis showed that risk score was an independent prognostic factor. The nomogram based on risk scores could well predict 1-, 3-, and 5-year survival. P53, Wnt, and hypoxia signaling pathways may be some regulatory mechanisms of hypoxia associated with the tumor microenvironment. In addition, we confirmed the high expression of BGN and low expression of IL-18 in ESCC tissues. Our study determined the prognostic value of a 6-hypoxia gene signature and a prognostic model, providing potential prognostic predictors and therapeutic targets for ESCC.",
+              "doi": "10.1002/cam4.5002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC37A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f96950ccc7b1d5b841bf7f88ac1b90abd969d8599feb9dd11d1a700efac0460b"
+              }
+            },
+            {
+              "title": "Clearance by Microglia Depends on Packaging of Phagosomes into a Unique Cellular Compartment.",
+              "abstract": "Phagocytic immune cells such as microglia can engulf and process pathogens and dying cells with high efficiency while still maintaining their dynamic behavior and morphology. Effective intracellular processing of ingested cells is likely to be crucial for microglial function, but the underlying cellular mechanisms are poorly understood. Using both living fish embryos and mammalian macrophages, we show that processing depends on the shrinkage and packaging of phagosomes into a unique cellular compartment, the gastrosome, with distinct molecular and ultra-structural characteristics. Loss of the transporter Slc37a2 blocks phagosomal shrinkage, resulting in the expansion of the gastrosome and the dramatic bloating of the cell. This, in turn, affects the ability of microglia to phagocytose and migrate toward brain injuries. Thus, this work identifies a conserved crucial step in the phagocytic pathway of immune cells and provides a potential entry point for manipulating their behavior in development and disease.",
+              "doi": "10.1016/j.devcel.2019.02.014",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC37A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5f811c647803e7003d721c34dd766f9e96d1821165c1641a4e8a31dc6544dbec"
+              }
+            },
+            {
+              "title": "Solute Carrier Family 37 Member 2 (SLC37A2) Negatively Regulates Murine Macrophage Inflammation by Controlling Glycolysis.",
+              "abstract": "Increased flux of glucose through glycolysis is a hallmark of inflammatory macrophages and is essential for optimal effector functions. Solute carrier (SLC) 37A2 is an endoplasmic reticulum-anchored phosphate-linked glucose-6-phosphate transporter that is highly expressed in macrophages and neutrophils. We demonstrate that SLC37A2 plays a pivotal role in murine macrophage inflammatory activation and cellular metabolic rewiring. Toll-like receptor (TLR) 4 stimulation by lipopolysaccharide (LPS) rapidly increases macrophage SLC37A2 protein expression. SLC37A2 deletion reprograms macrophages to a hyper-glycolytic process and accelerates LPS-induced inflammatory cytokine production, which partially depends on nicotinamide adenine dinucleotide (NAD) biosynthesis. Blockade of glycolysis normalizes the differential expression of pro-inflammatory cytokines between control and SLC37A2 deficient macrophages. Conversely, overexpression of SLC37A2 lowers macrophage glycolysis and significantly reduces LPS-induced pro-inflammatory cytokine expression. In conclusion, our study suggests that SLC37A2 dampens murine macrophage inflammation by down-regulating glycolytic reprogramming as a part of macrophage negative feedback system to curtail acute innate activation.",
+              "doi": "10.1016/j.isci.2020.101125",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC37A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9d09a0bca2861cc700da409e8b9ba5a46839ecf60dfcce62b5381803de3bd6e5"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC37A2 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC37A2 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC37A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC37A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC37A2",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC37A2": {
+          "status": "unavailable",
+          "gene": "SLC37A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC37A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC37A2",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC37A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC37A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC37A2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC37A2": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No Daudi/MAGECK BTN3A depletion evidence links SLC37A2 to B-ALL tumor survival; database notes are metabolic/association-level, and independent LLM consensus rejects promotion.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC37A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC37A2 is a HIF/mTOR-associated glucose-6-phosphate/phosphate exchanger; in breast cancer it supports RAB10-driven metabolic reprogramming, autophagy and ferroptosis resistance, in glioblastoma knockdown reduces neurosphere/stemness phenotypes, and in ESCC it is part of a hypoxia poor-prognosis signature. B-lymphoblastic leukaemia/Daudi cells face hypoxic bone-marrow-like stress and high proliferative/ER-metabolic demand, so the same sugar-phosphate transport and stress-adaptive functions are plausibly pro-survival. | There is no direct B-ALL TIMER/KM/CRISPR evidence for SLC37A2, but the cross-cancer functional literature consistently associates it with tumour survival, metabolic adaptation and stress resistance rather than tumour suppression. In a Daudi-Cas9 CRISPR survival screen, even under BTN3A low/high immune-context conditions, the most likely cell-intrinsic direction is that SLC37A2 activity promotes B-lymphoblastic leukaemia tumour survival; loss would impair glucose-6-phosphate/phosphate homeostasis, mTOR/autophagy-related adaptation and resistance to metabolic stress. Confidence is moderate because B-ALL lineage specificity, Daudi/BTN3A context, and absence of direct expression/essentiality data leave uncertainty.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC37A2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC37A2": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC37A2 is a HIF/mTOR-associated glucose-6-phosphate/phosphate exchanger; in breast cancer it supports RAB10-driven metabolic reprogramming, autophagy and ferroptosis resistance, in glioblastoma knockdown reduces neurosphere/stemness phenotypes, and in ESCC it is part of a hypoxia poor-prognosis signature. B-lymphoblastic leukaemia/Daudi cells face hypoxic bone-marrow-like stress and high proliferative/ER-metabolic demand, so the same sugar-phosphate transport and stress-adaptive functions are plausibly pro-survival. | There is no direct B-ALL TIMER/KM/CRISPR evidence for SLC37A2, but the cross-cancer functional literature consistently associates it with tumour survival, metabolic adaptation and stress resistance rather than tumour suppression. In a Daudi-Cas9 CRISPR survival screen, even under BTN3A low/high immune-context conditions, the most likely cell-intrinsic direction is that SLC37A2 activity promotes B-lymphoblastic leukaemia tumour survival; loss would impair glucose-6-phosphate/phosphate homeostasis, mTOR/autophagy-related adaptation and resistance to metabolic stress. Confidence is moderate because B-ALL lineage specificity, Daudi/BTN3A context, and absence of direct expression/essentiality data leave uncertainty. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC37A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC37A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T04:58:34Z"
+  }
+}

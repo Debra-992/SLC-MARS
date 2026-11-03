@@ -1,0 +1,369 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00225",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC2A8 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC2A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00225",
+      "status": "ok",
+      "summary": "检索到 4 类证据、8 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC2A8"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC2A8",
+              "protein_function": "Insulin-regulated facilitative hexose transporter that mediates the transport of glucose and fructose.",
+              "aliases": "GLUT8",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC2A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC2 Facilitative  GLUT transporter family",
+              "target_properties": {
+                "name": "SLC2 Facilitative  GLUT transporter family"
+              }
+            },
+            {
+              "gene": "SLC2A8",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "GLUT8",
+              "target_properties": {
+                "name": "GLUT8"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "GLUT8, the enigmatic intracellular hexose transporter.",
+              "abstract": "GLUT8 is a class III sugar transporter predominantly expressed in testis and brain. In contrast to the class I and class II transporters, hydrophobicity plots predict a short extracellular loop between transmembrane domain (TM)1 and TM2 and a long extracellular loop between TM9 and TM10 that contains the only N-glycosylation site. In vitro translated GLUT8 migrates as a 35-kDa protein that is glycosylated in the presence of microsomal membranes. In heterologous expression systems, glucose transport activity (Km of 2 mM) was inhibited by fructose and galactose. The transporter carries an NH2-terminal endosomal/lysosomal targeting motif ([DE]XXXL[LI]). Accordingly, constitutive GLUT8 has been found to be associated with endosomes and lysosomes but also with membranes of the endoplasmic reticulum. A similar distribution was detected after overexpression of wild-type or tagged GLUT8 in different cell systems. In these cells, none of the conventional signals tested induced a translocation of GLUT8 to the plasma membrane. Therefore, GLUT8 appears to catalyze transport of sugars or sugar derivatives through intracellular membranes. Slc2a8 knockout mice were viable, developed normally, and showed mild alterations in brain (increased proliferation of neuronal cells in dentate gyrus of the hippocampus, hyperactivity), heart (impaired transmission of electrical wave through the atrium), and sperm cells (reduced number of motile sperm cells associated with reduced mitochondrial membrane potential and ATP levels in sperm). The links between molecular function, cellular localization and phenotype of the knockout mouse is unclear and remains to be determined.",
+              "doi": "10.1152/ajpendo.91019.2008",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cafa855940c25d5dc9704502666fd8c970622b1a216e7fb963ff24a04b2bf596"
+              }
+            },
+            {
+              "title": "The effect of monosaccharide sugars and pyruvate on the differentiation and metabolism of sheep granulosa cells in vitro.",
+              "abstract": "The objective of this study was to investigate the effect of three monosaccharides or pyruvate on the ability of gonadotrophins to induce cellular proliferation and differentiation of cultured sheep granulosa cells. Lactate production and levels of mRNA expression for the glucose transporters SLC2A1, SLC2A4, SLC2A5 and SLC2A8 were also determined. No energy source in the culture media reduced cell number (50%) and oestradiol (E(2)) production. Dose and type of monosaccharide had a highly significant (P<0.001) effect on FSH-induced differentiation of the granulosa cells, and there was a highly significant interaction (P<0.001). Glucose supported higher levels of E(2) production than fructose, which was in turn higher than galactose (P<0.001). In contrast, pyruvate at low doses supported similar levels of E(2) production as glucose, but higher doses were markedly inhibitory to E(2) production (P<0.001). Cells responded positively to insulin (P<0.001) in the presence of all three monosaccharides. Glucose and the high doses of fructose resulted in the accumulation of lactate (P<0.001), but pyruvate, galactose and the low dose of fructose resulted in low lactate production. SLC2A5 expression was not detected and SLC2A8 expression was not affected, but SLC2A1 and SLC2A4 expression was depressed (P<0.05) by culture in the presence of fructose and glucose. These data show that glucose, metabolised under anoxic conditions to lactate, is the preferred energy substrate to support the gonadotrophin-induced differentiation of ovine granulosa cells in vitro, and that fructose and pyruvate, but not galactose, are alternative energy substrates despite marked differences in the way these substrates are metabolised.",
+              "doi": "10.1530/REP-10-0146",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3e158a4b3e66e0407e887c2f105ba8076b3b07f67327b1441e718a1d1396b65e"
+              }
+            },
+            {
+              "title": "Metabolic pathways utilized by the porcine conceptus, uterus, and placenta.",
+              "abstract": "Conceptus elongation and early placentation involve growth and remodeling that requires proliferation and migration of cells. This demands conceptuses expend energy before establishment of a placenta connection and when they are dependent upon components of histotroph secreted or transported into the uterine lumen from the uterus. Glucose and fructose, as well as many amino acids (including arginine, aspartate, glutamine, glutamate, glycine, methionine, and serine), increase in the uterine lumen during the peri-implantation period. Glucose and fructose enter cells via their transporters, SLC2A, SLC2A3, and SLC2A8, and amino acids enter the cells via specific transporters that are expressed by the conceptus trophectoderm. However, porcine conceptuses develop rapidly through extensive cellular proliferation and migration as they elongate and attach to the uterine wall resulting in increased metabolic demands. Therefore, coordination of multiple metabolic biosynthetic pathways is an essential aspect of conceptus development. Oxidative metabolism primarily occurs through the tricarboxylic acid (TCA) cycle and the electron transport chain, but proliferating and migrating cells, like the trophectoderm of pigs, enhance aerobic glycolysis. The glycolytic intermediates from glucose can then be shunted into the pentose phosphate pathway and one-carbon metabolism for the de novo synthesis of nucleotides. A result of aerobic glycolysis is limited availability of pyruvate for maintaining the TCA cycle, and trophectoderm cells likely replenish TCA cycle metabolites primarily through glutaminolysis to convert glutamine into TCA cycle intermediates. The synthesis of ATP, nucleotides, amino acids, and fatty acids through these biosynthetic pathways is essential to support elongation, migration, hormone synthesis, implantation, and early placental development of conceptuses.",
+              "doi": "10.1002/mrd.23570",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f65c93106c1eaa890e0e208aefcefba014bd3ac02beeb9329a0c3959914637d6"
+              }
+            },
+            {
+              "title": "Transcript abundance and apoptosis in day-7 porcine blastocyst cultured with exogenous insulin-like growth factor-I.",
+              "abstract": "Exogenous growth factors may increase the efficiency of embryo development in vitro. The aim of the present study was to examine the effects of insulin-like growth factor (IGF)-I on porcine embryo development. Porcine embryos obtained by in vitro fertilization were cultured for seven days in the presence of IGF-I (50, 100 or 150ng/ml). Subsequently, relative transcript abundance (RA) of IGF-related genes (IGFR1, IGFBP2, and IGFBP3), glucose transporter genes (SLC2A4 and SLC2A8), and apoptosis-related genes (BAX and BCL-XL) was analyzed. No differences were observed in the cleavage rate on day 2 post insemination (pi) and blastocysts rate on day 7pi between IGF-treated and control embryos. IGF-I treatment did not affect RA of IGFR1, IGFBP3, and SLC2A4 genes, but decreased RA of IGFBP2 and SLC2A8 genes. The percentage of TUNEL-positive nuclei in blastocysts did not differ between the experimental groups. However, RA of BAX and BCL-XL genes decreased in response to all IGF-I concentrations, whereas the BCL-XL/BAX RA ratio was enhanced when embryos were cultured in medium containing 150ng/ml of IGF-I. These results indicate that IGF-I did not stimulate in vitro development of porcine embryos through the IGF signaling system, nor did IGF-I stimulate RA of glucose transporter genes. However, IGF-I at the highest dose was able to increase the BCL-XL/BAX transcript expression ratio. This may indicate that the primary role of IGF-I during the first days of embryo development in the pig is associated with anti-apoptotic actions rather than with growth stimulation.",
+              "doi": "10.1016/j.repbio.2013.01.173",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "92073f6e2f932cbe6643d8b7ddfb63903e771c0a28a2fb8525d63834094e0a84"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC2A8 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC2A8 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC2A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC2A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC2A8",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC2A8": {
+          "status": "unavailable",
+          "gene": "SLC2A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC2A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC2A8",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC2A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.10 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC2A8"
+        ],
+        "confidence": 0.446,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A8": 0.1
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC2A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.10 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC2A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.10 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC2A8"
+        ],
+        "confidence": 0.446,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A8": 0.1
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC2A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.10 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A8']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC2A8"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T15:55:43Z"
+  }
+}

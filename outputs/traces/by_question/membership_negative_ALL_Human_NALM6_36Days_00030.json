@@ -1,0 +1,429 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00030",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC6A3 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC6A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00030",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC6A3"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC6A3",
+              "protein_function": "Mediates sodium- and chloride-dependent transport of dopamine and norepinephrine.",
+              "aliases": "DAT1, DAT, DA Transporter",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC6A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC6A3",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A3",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Scoulerine: A natural isoquinoline alkaloid targeting SLC6A3 to treat RCC.",
+              "abstract": "Scoulerine, an isoquinoline alkaloid derived from the corydalis plant, exhibits diverse therapeutic properties against tumors, Alzheimer's disease, and inflammation. This research delves into the pharmacological impact and underlying mechanism of scoulerine on renal cell carcinoma (RCC). Our findings suggest that Scoulerine displays promise as a potential therapeutic agent for RCC, demonstrating notable inhibitory effects in both in vivo and in vitro models. In addition, scoulerine inhibited the viability of 769-P and 786-O cell lines in a time-dependent and dose-dependent manner, and promoted the level of apoptosis associated with B-cell lymphoma-2 associated X protein (Bax). Moreover, the administration of scoulerine resulted in a significant suppression of the mitogen activated protein kinase (MAPK) signaling pathway. Subsequently, utilizing bioinformatics and spatial transcriptomic databases, we identified solute carrier family 6 Member 3 (SLC6A3) as the most promising target of scoulerine. Through experimental validation, we confirmed the functional and therapeutic relevance of SLC6A3 in scoulerine-mediated treatment of RCC. The results of our study indicate a significant affinity between scoulerine and SLC6A3, with competitive inhibition of this interaction leading to a reduction in the inhibitory impact of scoulerine on RCC cell viability. In conclusion, our findings suggest that scoulerine may induce apoptosis in RCC by targeting SLC6A3 and inhibiting the activation of the MAPK signaling pathway, thereby positioning it as a promising natural compound for potential future RCC treatment.",
+              "doi": "10.1016/j.biopha.2024.117524",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5f9bb38b7599529b1f9988c2775539cea45f680583a24bfea19445f045de01c3"
+              }
+            },
+            {
+              "title": "Microplastics and copper induce apoptosis, alter neurocircuits, and cause behavioral changes in zebrafish (Danio rerio) brain.",
+              "abstract": "The knowledge regarding the neurological and behavioral toxic effects associated with microplastics (MPs) and heavy metals exposure is still scarce. The present study aimed to evaluate the potential chronic (30 days) toxic effects of MPs (2 mg/L) and copper (Cu, 25 µg/L), alone or combined, in the zebrafish (Danio rerio) brain antioxidant system, cell proliferation/death, cholinergic-, serotonergic- and dopaminergic pathways and, consequently, in locomotor, anxiety, and social behaviors. Our findings showed that MPs and Cu exposure modulated the antioxidant system of zebrafish brain, with superoxide dismutase (SOD) and glutathione reductase (GR) having higher activity in the Cu25 +MPs group, but glutathione peroxidase (GPx) being inhibited in MPs, Cu25 and Cu25 +MPs. Moreover, an increase in acetylcholinesterase (AChE) activity was observed in all exposed groups. When considering neurogenesis genes, a downregulation of proliferating cell nuclear antigen (pcna) was noticed in zebrafish exposed to the mixture treatment, while for dopaminergic system-related genes (th and slc6a3) an upregulation was observed in MPs, Cu25 and Cu25 +MPs groups. An increase in apoptosis-related genes expression (casp8, casp9 and casp3) was observed in the MPs exposed group. Changes in zebrafish behavior, particularly in mean speed, total distance moved, inactivity in the aquaria, and social/shoaling behavior was also observed in the MPs and Cu exposed groups. Overall, our results highlight the multiplicity of toxic effects of MPs, alone or combined with Cu, in zebrafish brain, namely apoptosis and alterations in adult neurogenesis, neurocircuits and, consequently, behavior.",
+              "doi": "10.1016/j.ecoenv.2022.113926",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3c0aa660f5ef637c955fa4a2e3d5e54785e007bcc33ca88b6e48c8d36f96c3b0"
+              }
+            },
+            {
+              "title": "Nrf2/STAT3-mediated activation of SLC6A3 underlies the neuroprotective effect of quercetin in ischemic stroke.",
+              "abstract": "Ischemic stroke (IS) is a leading cause of mortality and long-term disability, yet effective neuroprotective strategies remain limited. Oxidative stress and dopaminergic dysfunction are key contributors to neuronal injury following cerebral ischemia. Quercetin, a natural flavonoid with antioxidant properties, has shown promise in preclinical models; however, its precise mechanisms of action remain incompletely understood. We employed a combination of network pharmacology, in vivo middle cerebral artery occlusion (MCAO) models, and in vitro oxygen-glucose deprivation/reperfusion (OGD/R) assays. Bioinformatics analyses identified potential therapeutic targets of quercetin, which were validated through Western blotting, immunofluorescence, qRT-PCR, CRISPR-Cas9, and co-immunoprecipitation. Functional outcomes were evaluated via behavioral tests, TUNEL staining, and oxidative stress marker assays. Quercetin significantly reduced cerebral edema, improved neurological function, and inhibited neuronal apoptosis following MCAO. Mechanistically, quercetin activated the Nrf2/STAT3 signaling pathway, promoting nuclear translocation of Nrf2 and transcriptional upregulation of the dopamine transporter gene SLC6A3. This regulatory axis was critical for mitigating oxidative DNA damage and preserving neuronal integrity. Network pharmacology and molecular docking identified Nrf2, STAT3, and SLC6A3 as core targets of quercetin. Inhibition of Nrf2 or STAT3 abrogated the protective effects of quercetin in both in vitro and in vivo models. Our findings identify the Nrf2/STAT3/SLC6A3 axis as a key mediator of quercetin's neuroprotective effects in ischemic stroke. To our knowledge, this is the first study to identify the Nrf2/STAT3/SLC6A3 axis as a key regulatory pathway underlying the neuroprotective action of quercetin.",
+              "doi": "10.1016/j.phymed.2025.157061",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7d19a6c1b10442f92af695a743441ad303c9079f6445a43f20a95cb7eb3674fd"
+              }
+            },
+            {
+              "title": "Dopamine in human follicular fluid is associated with cellular uptake and metabolism-dependent generation of reactive oxygen species in granulosa cells: implications for physiology and pathology.",
+              "abstract": "Is the neurotransmitter dopamine (DA) in the human ovary involved in the generation of reactive oxygen species (ROS)? Human ovarian follicular fluid contains DA, which causes the generation of ROS in cultured human granulosa cells (GCs), and alterations of DA levels in follicular fluid and DA uptake/metabolism in GCs in patients with polycystic ovary syndrome (PCOS) are linked to increased levels of ROS. DA is an important neurotransmitter in the brain, and the metabolism of DA results in the generation of ROS. DA was detected in human ovarian homogenates, but whether it is present in follicular fluid and plays a role in the follicle is not known. We used human follicular fluid from patients undergoing in vitro fertilization (IVF), GCs from patients with or without PCOS and also employed mathematical modeling to investigate the presence of DA and its effects on ROS. DA in follicular fluid and GCs was determined by enzyme-linked immunosorbent assay. GC viability, apoptosis and generation of ROS were monitored in GCs upon addition of DA. Inhibitors of DA uptake and metabolism, an antioxidant and DA receptor agonists, were used to study cellular uptake and the mechanism of DA-induced ROS generation. Human GCs were examined for the presence and abundance of transcripts of the DA transporter (DAT; SLC6A3), the DA-metabolizing enzymes monoamine oxidases A/B (MAO-A/B) and catechol-O-methyltransferase and the vesicular monoamine transporter. A computational model was developed to describe and predict DA-induced ROS generation in human GCs. We found DA in follicular fluid of ovulatory follicles of the human ovary and in GCs. DAT and MAO-A/B, which are expressed by GCs, are prerequisites for a DA receptor-independent generation of ROS in GCs. Blockers of DAT and MAO-A/B, as well as an antioxidant, prevented the generation of ROS (P < 0.05). Agonists of DA receptors (D1 and D2) did not induce ROS. DA, in the concentration range found in follicular fluid, did not induce apoptosis of cultured GCs. Computational modeling suggested, however, that ROS levels in GCs depend on the concentrations of DA and on the cellular uptake and metabolism. In PCOS-derived follicular fluid, the levels of DA were higher (P < 0.05) in GCs, the transcript levels of DAT and MAO-A/B in GCs were 2-fold higher (P < 0.05) and the DA-induced ROS levels were found to be more than 4-fold increased (P < 0.05) compared with non-PCOS cells. Furthermore, DA at a high concentration induced apoptosis in PCOS-derived GCs. While the results in IVF-derived follicular fluid and in GCs reveal for the first time the presence of DA in the human follicular compartment, functions of DA could only be studied in IVF-derived GCs, which can be viewed as a cellular model for the periovulatory follicular phase. The full functional importance of DA-induced ROS in small follicles and other compartments of the ovary, especially in PCOS samples, remains to be shown. The results identify DA as a factor in the human ovary, which, via ROS generation, could play a role in ovarian physiology and pathology. The results obtained in samples from women with PCOS suggest the involvement of DA, acting via ROS, in this condition. This work was supported by a grant from DFG MA1080/17-3 and in part MA1080/19-1. There are no competing interests.",
+              "doi": "10.1093/humrep/det422",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "eeff424520b65797dcd4f69ddfac29c5decae61d65206a93007ba785cd0823cd"
+              }
+            },
+            {
+              "title": "Methylation of hypoxia-inducible factor (HIF)-1α by G9a/GLP inhibits HIF-1 transcriptional activity and cell migration.",
+              "abstract": "Hypoxia-inducible factor 1 (HIF-1) is a master transcriptional regulator in response to hypoxia and its transcriptional activity is crucial for cancer cell mobility. Here we present evidence for a novel epigenetic mechanism that regulates HIF-1 transcriptional activity and HIF-1-dependent migration of glioblastoma cells. The lysine methyltransferases G9a and GLP directly bound to the α subunit of HIF-1 (HIF-1α) and catalyzed mono- and di-methylation of HIF-1α at lysine (K) 674 in vitro and in vivo. K674 methylation suppressed HIF-1 transcriptional activity and expression of its downstream target genes PTGS1, NDNF, SLC6A3, and Linc01132 in human glioblastoma U251MG cells. Inhibition of HIF-1 by K674 methylation is due to reduced HIF-1α transactivation domain function but not increased HIF-1α protein degradation or impaired binding of HIF-1 to hypoxia response elements. K674 methylation significantly decreased HIF-1-dependent migration of U251MG cells under hypoxia. Importantly, we found that G9a was downregulated by hypoxia in glioblastoma, which was inversely correlated with PTGS1 expression and survival of patients with glioblastoma. Therefore, our findings uncover a hypoxia-induced negative feedback mechanism that maintains high activity of HIF-1 and cell mobility in human glioblastoma.",
+              "doi": "10.1093/nar/gky449",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "32deafe5a2468bd72808e57cc1f6fc456497f77146bdafc8ee2ca2c88a24f59b"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC6A3 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC6A3 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC6A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC6A3",
+            "ppr_score": 2.632279639757211e-05,
+            "degree_corrected_score": 5.449441596255975e-05,
+            "graph_degree": 2,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC6A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC6A3",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC6A3": {
+          "status": "unavailable",
+          "gene": "SLC6A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC6A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A3",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC6A3 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.817 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC6A3"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A3": 2.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No direct NALM6 MAGeCK depletion evidence; SLC6A3 is a dopaminergic transporter with only liver/RCC associations. Two independent LLM votes correctly flag that opaque essentiality scoring conflates general essentiality with ALL growth inhib。原证据通道判定: winner=None answer=True conf=0.817（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] The only cancer-adjacent evidence is liver cancer, where SLC6A3 is associated with proliferation promotion and apoptosis suppression, implying a tumor-supportive rather than tumor-inhibitory role. Translating to B-cell precursor ALL/NALM6 is weak because the tissue origin, lineage, and transporter biology are very different; however, the available cancer-effect direction argues against SLC6A3 being a growth inhibitor in ALL. | SLC6A3 is a dopamine/norepinephrine transporter with no direct ALL graph, TIMER, KM, or DE evidence. Its liver-cancer pathway annotations lean toward promoting proliferation and suppressing apoptosis, which is inconsistent with a tumor-growth-inhibiting gene. RCC literature suggests SLC6A3 can mediate drug-induced apoptosis, but that does not establish that SLC6A3 itself inhibits tumor growth; rather, it may be a context-dependent transporter. Given the absence of ALL-specific support and the cross-cancer analogy, the most likely answer is false, with low confidence due to high uncertainty.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC6A3"
+        ],
+        "confidence": 0.28,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A3": 2.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] The only cancer-adjacent evidence is liver cancer, where SLC6A3 is associated with proliferation promotion and apoptosis suppression, implying a tumor-supportive rather than tumor-inhibitory role. Translating to B-cell precursor ALL/NALM6 is weak because the tissue origin, lineage, and transporter biology are very different; however, the available cancer-effect direction argues against SLC6A3 being a growth inhibitor in ALL. | SLC6A3 is a dopamine/norepinephrine transporter with no direct ALL graph, TIMER, KM, or DE evidence. Its liver-cancer pathway annotations lean toward promoting proliferation and suppressing apoptosis, which is inconsistent with a tumor-growth-inhibiting gene. RCC literature suggests SLC6A3 can mediate drug-induced apoptosis, but that does not establish that SLC6A3 itself inhibits tumor growth; rather, it may be a context-dependent transporter. Given the absence of ALL-specific support and the cross-cancer analogy, the most likely answer is false, with low confidence due to high uncertainty. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "liver cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC6A3']",
+        "status": "unavailable",
+        "summary": "SLC6A3（多巴胺转运体/DAT1）主要在多巴胺能神经元中表达，负责突触间隙多巴胺再摄取。NALM6 是 B 细胞急性淋巴细胞白血病（B-ALL）细胞系，SLC6A3 在该类淋巴造血细胞中表达极低或不表达，不是已知的 ALL 驱动基因或必需基因。因此，在 NALM6 细胞中通过 CRISPR 敲除 SLC6A3 并使用 MAGeCK 分析，预期不会显著抑制 ALL 肿瘤生长。该基因与 ALL 肿瘤增殖无已知功能关联，故答案为 false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC6A3"
+        ],
+        "confidence": 0.75,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC6A3（多巴胺转运体/DAT1）主要在多巴胺能神经元中表达，负责突触间隙多巴胺再摄取。NALM6 是 B 细胞急性淋巴细胞白血病（B-ALL）细胞系，SLC6A3 在该类淋巴造血细胞中表达极低或不表达，不是已知的 ALL 驱动基因或必需基因。因此，在 NALM6 细胞中通过 CRISPR 敲除 SLC6A3 并使用 MAGeCK 分析，预期不会显著抑制 ALL 肿瘤生长。该基因与 ALL 肿瘤增殖无已知功能关联，故答案为 false。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T20:55:09Z"
+  }
+}

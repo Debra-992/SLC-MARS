@@ -1,0 +1,517 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00014",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A8 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC39A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00014",
+      "status": "ok",
+      "summary": "检索到 4 类证据、19 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC39A8"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC39A8",
+              "protein_function": "Electroneutral divalent metal cation:bicarbonate symporter of the plasma membrane mediating the cellular uptake of zinc and manganese, two divalent metal cations important for development, tissue homeostasis and immunity. Transports an electroneutral complex composed of a divalent metal cation and two bicarbonate anions or alternatively a bicarbonate and a selenite anion.",
+              "aliases": "BIGM103, ZIP-8, ZIP8, Metal Cation Symporter ZIP8, BCG-Induced Integral Membrane Protein In Monocyte Clone 103, Solute Carrier Family 39 (Metal Ion Transporter), Member 8, LIV-1 Subfamily Of ZIP Zinc Transporter 6, Zrt-And Irt-Like Protein 82, ZRT/IRT-Like Protein 8, Zinc Transporter ZIP8, LZT-Hs6, BCG-Induced Integral Membrane Protein In Monocyte Clone 103, Solute Carrier Family 39 (Zinc Transporter), Member 8, BCG Induced Integral Membrane Protein BIGM103, Zinc Transporter 8, PP3105, CDG2N",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC39A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC39A8",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A8",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A8",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colon adenocarcinoma (COAD)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A8",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colon adenocarcinoma (COAD)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A8",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colon adenocarcinoma (COAD)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A8",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Plasma non-transferrin-bound iron uptake by the small intestine leads to intestinal injury and intestinal flora dysbiosis in an iron overload mouse model and Caco-2 cells.",
+              "abstract": "Iron overload often occurs during blood transfusion and iron supplementation, resulting in the presence of non-transferrin-bound iron (NTBI) in host plasma and damage to multiple organs, but effects on the intestine have rarely been reported. In this study, an iron overload mouse model with plasma NTBI was established by intraperitoneal injection of iron dextran. We found that plasma NTBI damaged intestinal morphology, caused intestinal oxidative stress injury and reactive oxygen species (ROS) accumulation, and induced intestinal epithelial cell apoptosis. In addition, plasma NTBI increased the relative abundance of Ileibacterium and Desulfovibrio in the cecum, while the relative abundance of Faecalibaculum and Romboutsia was reduced. Ileibacterium may be a potential microbial biomarker of plasma NTBI. Based on the function prediction analysis, plasma NTBI led to the weakening of intestinal microbiota function, significantly reducing the function of the extracellular structure. Further investigation into the mechanism of injury showed that iron absorption in the small intestine significantly increased in the iron group. Caco-2 cell monolayers were used as a model of the intestinal epithelium to study the mechanism of iron transport. By adding ferric ammonium citrate (FAC, plasma NTBI in physiological form) to the basolateral side, the apparent permeability coefficient (Papp) values from the basolateral to the apical side were greater than 3×10 cm s. Intracellular ferritin level and apical iron concentration significantly increased, and SLC39A8 (ZIP8) and SLC39A14 (ZIP14) were highly expressed in the FAC group. Short hairpin RNA (shRNA) was used to knock down ZIP8 and ZIP14 in Caco-2 cells. Transfection with ZIP14-specific shRNA decreased intracellular ferritin level and inhibited iron uptake. These results revealed that plasma NTBI may cause intestinal injury and intestinal flora dysbiosis due to the uptake of plasma NTBI from the basolateral side into the small intestine, which is probably mediated by ZIP14.",
+              "doi": "10.1007/s11427-022-2347-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0ebe084a0615b92e8534a61019112e31612c5bc8fe71c3e97c31e1e3d8e1f904"
+              }
+            },
+            {
+              "title": "Combined microarray analysis uncovers self-renewal related signaling in mouse embryonic stem cells.",
+              "abstract": "Due to the limited understanding of self-renewal and pluripotency related signaling in stem cells, extracting information from genome-wide expression data is not only important but also challenging. With the combined use of two methods, we analyzed a set of microarray data at 11 time points from three mouse embryonic stem cell lines cultivated with and without leukemia inhibitory factor (LIF) for 14 days. Albeit the expression of individual genes in signaling pathways was not noticeably different between cells cultivated with and without LIF, at gene-set level the expression of ERK/MAPK (but not JAK/STAT) and cell cycle related genes was found significantly enriched in cells cultivated with LIF. This indicates that the Ras/Raf/ERK pathway, in addition to JAK/STAT, may also be a key player to carry on external LIF signal into mouse embryonic stem cells to promote self-renewal. When data at the first 7 time points were compared with data at the last 4 time points, the expression of several cell cycle related gene sets was apparently enriched in all three cell lines, indicating the active cell proliferation in the first 2 days. Compared with the slight decay of Oct4/Nanog/Sox2 during the 14 days, the expression of cell differentiation genes such as Gata4/6 underwent a drastic increase, which indicates that the upregulated expression of cell differentiation genes may better reflect the loss of self renewal than the down regulated expression of the stemness indicators Oct4, Sox2 and Nanog. Apart from differential expression and gene set enrichment analyses, a clustering algorithm was also used to classify genes into co-expression clusters. The possible regulation of two clusters, whose expression was most changed during cell culture from very low to very high, was explored. The drastic changes of these genes, including Slc39a8 which was a potential indicator of cell differentiation, in contrast the slight changes of self-renewal genes, imply that differentiation may be the default fate of stem cells and self-renewal may rely on a maintenance mechanism. When that mechanism weakens, cell differentiation begins.",
+              "doi": "10.1007/s11693-008-9015-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d5eb915a639996057dd9b38b926a0e7d131d6eb0accd6cdea67c3ea706705dfc"
+              }
+            },
+            {
+              "title": "Protective effects of ZIP8 on Toxoplasma gondii-induced acute hepatocyte injury in mice.",
+              "abstract": "Toxoplasma gondii (T. gondii), as an intracellular protozoan parasite, has the potential to disturb the homeostasis of trace metal elements in host cells. Zinc (Zn) is one of those essential metals that is required for combating infection. Zinc cellular homeostasis is controlled by zinc membrane transporters, including efflux and influx transporters. One of the Zrt-Irt-like protein (ZIP) transporters, ZIP8, facilitates zinc influx into the cytosol. It was recently reported to play significant roles in facilitating Zn uptakes during infection. Here, we investigated the function of ZIP8 in host defense against T. gondii infection in cultured alpha mouse liver 12 (AML12) hepatocytes and mice, with loss of ZIP8 function. Herein, C57BL/6 J female wild-type (WT) and ZIP8-KD mice (Slc39a8 knockdown mice), that were infected with tachyzoites of ToxoDB#9(TgCtwh3), were used as a model of acute toxoplasmosis. AML12 hepatocytes were transfected with lentivirus (LV), with silenced ZIP8 expression. Finally, we observed the function of hepatocytes pretreated with ZnCl before TgCtwh3 infection in vivo and in vitro. In vivo, the levels of zinc ions and ZIP8 protein were upregulated after TgCtwh3 infection. ZIP8 knockdown exacerbated liver damage, further decreased antioxidant enzyme activity, promoted inflammatory mediator expression, and upregulated the rate of apoptosis. ZnCl pretreatment before TgCtwh3 infection improved liver injury, increased antioxidant enzyme activity, restrained the expression of inflammatory mediators, and decreased the rate of apoptosis. The results in vitro were almost the same as those in vivo. This study defines the function of ZIP8-dependent zinc in hepatocyte damage during intracellular pathogen infection. Reagents that regulate ZIP8 activity might be developed as therapeutics to protect the liver function of toxoplasmosis.",
+              "doi": "10.1016/j.actatropica.2022.106629",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11cd3862d8a4e505aa489d7f1d65319c4a3d024954e6e0678288caf13c051f52"
+              }
+            },
+            {
+              "title": "A novel PCDscore based on programmed cell death-related genes can effectively predict prognosis and therapy responses of colon adenocarcinoma.",
+              "abstract": "Emerging evidence suggests a correlation between oncogenesis and programmed cell death (PCD). However, comprehensive studies that incorporate all identified PCD-related genes to guide colon adenocarcinoma (COAD) prognosis and precision treatment strategies are lacking. In this study, a series of bioinformatics analyses were comprehensively conducted using data from the TCGA-COAD, GSE17538, and GSE39582 cohorts. A total of 21 PCD-associated prognostic genes were identified through univariate Cox analysis. LASSO and multivariate Cox methods were employed to establish a prognostic gene signature (ALOX12, HSPA1A, IL13, MID2, RFFL, and SLC39A8) and the corresponding scoring system, termed PCDscore, which exhibited robust predictive ability. The ssGSEA and ESTIMATE algorithms were utilized to evaluate the tumor microenvironment of COAD. The high PCDscore group demonstrated a poorer prognosis, characterized by lower CD4 T cell infiltration and a higher stromal score. In contrast, the low PCDscore group exhibited sensitivity to common chemotherapy drugs such as Cisplatin and 5-Fluorouracil. Single-cell sequencing analysis further revealed that the high-PCDscore group displayed a lower proportion of CD4 T cells. Colorectal cancer samples from the years 2013-2017 were employed to validate the PCDscore, while those from 2018 to 2019 served as a temporal external validation set for the PCDscore. In vitro experimental results indicated that the overexpression of SLC39A8 inhibited the proliferation and invasion of colorectal cancer cells. The study developed a novel PCDscore system based on the analysis of genes related to all identified PCD types, providing valuable insights into clinical prognosis and drug sensitivity for patients with COAD.",
+              "doi": "10.1016/j.compbiomed.2024.107933",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "325405c046e6b698acf9745f540bba7d3a2362f3f722b6496e18827404497aca"
+              }
+            },
+            {
+              "title": "Genetic architecture of the structural connectome.",
+              "abstract": "Myelinated axons form long-range connections that enable rapid communication between distant brain regions, but how genetics governs the strength and organization of these connections remains unclear. We perform genome-wide association studies of 206 structural connectivity measures derived from diffusion magnetic resonance imaging tractography of 26,333 UK Biobank participants, each representing the density of myelinated connections within or between a pair of cortical networks, subcortical structures or cortical hemispheres. We identify 30 independent genome-wide significant variants after Bonferroni correction for the number of measures studied (126 variants at nominal genome-wide significance) implicating genes involved in myelination (SEMA3A), neurite elongation and guidance (NUAK1, STRN, DPYSL2, EPHA3, SEMA3A, HGF, SHTN1), neural cell proliferation and differentiation (GMNC, CELF4, HGF), neuronal migration (CCDC88C), cytoskeletal organization (CTTNBP2, MAPT, DAAM1, MYO16, PLEC), and brain metal transport (SLC39A8). These variants have four broad patterns of spatial association with structural connectivity: some have disproportionately strong associations with corticothalamic connectivity, interhemispheric connectivity, or both, while others are more spatially diffuse. Structural connectivity measures are highly polygenic, with a median of 9.1 percent of common variants estimated to have non-zero effects on each measure, and exhibited signatures of negative selection. Structural connectivity measures have significant genetic correlations with a variety of neuropsychiatric and cognitive traits, indicating that connectivity-altering variants tend to influence brain health and cognitive function. Heritability is enriched in regions with increased chromatin accessibility in adult oligodendrocytes (as well as microglia, inhibitory neurons and astrocytes) and multiple fetal cell types, suggesting that genetic control of structural connectivity is partially mediated by effects on myelination and early brain development. Our results indicate pervasive, pleiotropic, and spatially structured genetic control of white-matter structural connectivity via diverse neurodevelopmental pathways, and support the relevance of this genetic control to healthy brain function.",
+              "doi": "10.1038/s41467-024-46023-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c4fdcee0d3f75ff7eafeca9a9a88f5038227adc0caaa0a3fb8463a4b9cb15a70"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC39A8 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A8 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC39A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC39A8",
+            "ppr_score": 7.180297672973213e-05,
+            "degree_corrected_score": 8.58226261342623e-05,
+            "graph_degree": 6,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC39A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC39A8",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC39A8": {
+          "status": "unavailable",
+          "gene": "SLC39A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC39A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC39A8",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.65 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC39A8"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A8": 4.65
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC39A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.65 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.65 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC39A8"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A8": 4.65
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC39A8 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.65 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A8']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC39A8"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T15:32:43Z"
+  }
+}

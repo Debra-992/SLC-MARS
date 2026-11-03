@@ -1,0 +1,415 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC25A17 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A17"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A17"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A17",
+              "protein_function": "Peroxisomal transporter for cofactors like coenzyme A (CoA), FAD, and AMP.",
+              "aliases": "PMP34, Peroxisomal Membrane Protein PMP34",
+              "transport_type": "E / CoA; PAP, CoA, dPCoA; CoA,AMP; FAD, FMN; NAD+, AMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A17",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A17",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A17",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A17",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A17",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Role of solute carrier transporters SLC25A17 and SLC27A6 in acquired resistance to enzalutamide in castration-resistant prostate cancer.",
+              "abstract": "Enzalutamide (XTANDI®), an antiandrogen, is used for the treatment of advanced-stage prostate cancer. Approximately, 60% of patients receiving enzalutamide show initial remission followed by disease relapse with the emergence of highly aggressive castration-resistant prostate cancer. Solute carrier (SLC) proteins play a critical role in the development of drug resistance by altering cellular metabolism. Transcriptome analysis revealed the predominance of SLC25A17 and SLC27A6 in enzalutamide-resistant prostate cancer cells; however, their role in antiandrogen resistance has not been elucidated. sgRNA-mediated knockdown of SLC25A17 and SLC27A6 suppressed cell proliferation and migration in enzalutamide-resistant cells. An induction of G1/S cell cycle arrest and abundance of hypo-diploid cells along with the reduction in the protein expression CyclinD1 and CDK6, the checkpoint factors, was observed including increased cell death as evident by BAX upregulation in knockdown cells. Inhibition of SLC25A17 and SLC27A6 resulted in downregulation of fatty acid synthase and acetyl-CoA carboxylase with parallel decrease in the levels of lactic acid in enzalutamide resistant cells. However, downregulation of triglyceride and citric acid was only observed in SLC25A17 silenced cells. The protein-protein interaction of SLC25A17 and SLC27A6 revealed alteration in some common drug-resistant and metabolism-related genes. Analysis of The Cancer Genome Atlas database exhibiting high SLC25A17 and SLC27A6 gene expression in prostate cancer patients were associated with poor survival than those with low expression of these proteins. In conclusion, SLC25A17 and SLC27A6 and its interactive network play an essential role in the development of enzalutamide resistance through metabolic reprogramming and may be identified as therapeutic target(s) to circumvent drug resistance.",
+              "doi": "10.1002/mc.23383",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A17"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "97820d41ce527c3dd778cb7d7fdc6a2b3da4ce0ac755b38eac7a865d915afb5f"
+              }
+            },
+            {
+              "title": "USF2 regulates the JAK2/STAT3 pathway through PEX3-mediated SLC25A17 upregulation to affect lipid metabolism and promote the progression of lung adenocarcinoma.",
+              "abstract": "Upstream Stimulator Factor 2 (USF2) has been identified as an oncogenic factor in various types of cancer; however, its precise biological function and underlying molecular mechanisms in the pathogenesis of lung cancer remain to be fully elucidated. In this study, we found that USF2 was markedly upregulated in lung adenocarcinoma (LUAD) tissues and cells. Knockdown of USF2 inhibits A549 cell proliferation and invasion and induces cell apoptosis. Overexpression of USF2 promotes abnormal lipid metabolism in A549 cells, as evidenced by elevated levels of triglycerides, cholesterol, and free fatty acids, upregulated fatty acid synthase levels, and downregulated acyl-CoA oxidase 1 levels. Mechanistically, USF2 directly binds to the promoter of Peroxisome biogenesis factor 3 (PEX3) to drive its transcriptional activation. Upregulated PEX3 promotes abnormal lipid metabolism in LUAD cells by interacting with solute carrier family 25 member 17 (SLC25A17) to upregulate its protein levels. Knockdown of PEX3 reverses the effects of USF2 overexpression on A549 cells. Additionally, SLC25A17 overexpression exacerbates lipid accumulation in A549 cells by activating the janus kinase 2/signal transducer and activator of transcription 3 (JAK2/STAT3) pathway, while AG490, a JAK2 inhibitor, eliminates this effect. Finally, a xenograft tumor model was established by subcutaneously injecting A549 cells transfected with sh-USF2 lentiviral vectors into nude mice. Results showed that USF2 knockdown inhibits abnormal lipid metabolism and tumor growth in xenografted mice. In conclusion, our study demonstrates that USF2 overexpression enhances SLC25A17-mediated JAK2/STAT3 signaling by promoting PEX3 transcriptional activation, thereby exacerbating abnormal lipid metabolism in A549 cells and accelerating LUAD progression.",
+              "doi": "10.1016/j.taap.2025.117534",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A17"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c4bf54f82d465437e57c885372278f02a9b6a91720e25d1f0e9277dc886c6960"
+              }
+            },
+            {
+              "title": "SLC25A17 inhibits autophagy to promote triple-negative breast cancer tumorigenesis by ROS-mediated JAK2/STAT3 signaling pathway.",
+              "abstract": "SLC25A17, a peroxisomal solute carrier, has been implicated in various physiological and pathological processes. However, its precise roles and underlying mechanisms in triple-negative breast cancer (TNBC) remain incompletely understood. The expression and survival data of breast cancer were derived from TCGA and GEO databases. A variety of in vitro assays were conducted, including proliferation, apoptosis, cell cycle, migration, and invasion. Reactive oxygen species (ROS) were measured by immunofluorescence microscopy and flow cytometry. The levels of autophagy were assessed by mRFP-GFP-LC3 confocal microscopy scanning, western blotting, and electron microscopy. SLC25A17 was highly expressed in breast cancer tissues, which was found to be associated with unfavorable prognosis. Functional assays demonstrated that SLC25A17 knockdown suppressed proliferation, epithelial-mesenchymal transition (EMT), migration, and invasion. Moreover, it prompted apoptosis and autophagy. On the other hand, SLC25A17 knockdown promoted autophagy through triggering ROS accumulation, which was counteracted by N-acetyl-l-cysteine (NAC). Furthermore, the pro-apoptotic effect of SLC25A17 knockdown was reversed when treated with autophagy inhibitor 3-MA in TNBC cells, suggesting that SLC25A17 knockdown-induced autophagic cell death. Mechanistically, SLC25A17 performed its function through regulation JAK2/STAT3 signaling in TNBC. In a nude mice xenograft study, SLC25A17 knockdown markedly decreased breast tumor growth and metastasis. SLC25A17 up-regulation may be a critical factor driving TNBC progression by modulating ROS production and autophagy. Consequently, targeting SLC25A17 could be an effective therapeutic strategy against TNBC.",
+              "doi": "10.1186/s12935-024-03270-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A17"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a0bf36a2b3604b78599b9c396734525364b7142ace5cbfed98e0dc18c5b960e8"
+              }
+            },
+            {
+              "title": "Differential gene expression patterns of the developing and adult mouse cornea compared to the lens and tendon.",
+              "abstract": "The cornea continues to mature after birth to develop a fully functional, refractive and protective barrier tissue. Here we investigated the complex biological events underlying this process by profiling global genome-wide gene expression patterns of the immature postnatal day 10 and 7-week old adult mouse cornea. The lens and tendon were included in the study to increase the specificity of genes identified as upregulated in the corneal samples. Notable similarities in gene expression between the cornea and the tendon were in the mesenchymal extracellular matrix collagen (types I, III, V, VI) and proteoglycan (lumican, decorin and biglycan) genes. Expression similarities in the cornea and lens were limited to certain epithelial genes and the crystallins. Approximately 76 genes were over expressed in the cornea samples that showed basal expression levels in the lens and tendon. Thirty-two of these were novel with no known functions in the cornea. These include genes with a potential role in protection against oxidative stress (Dhcr24, Cdo1, Akr1b7, Prdx6), inflammation (Ltb4dh, Wdr1), ion transport (Pdzk1ip1, Slc12a2, Slc25a17) and transcription (Zfp36l3, Pdzk1ip1). Direct comparison of the cornea of two ages showed selective upregulation of 50 and 12 genes in the P10 and adult cornea, respectively. Of the upregulated P10 genes several encode extracellular matrix collagens and proteoglycans that are stable components of the adult cornea and their high transcriptional activity at P10 indicate a period of actie corneal growth and matrix deposition in the young cornea. Much less is known about the genes selectively over expressed in the adult cornea; some relate to immune response and innervations (Npy), and possibly to electron transport (Cyp24a1, Cyp2f2) and others of yet unknown functions in the cornea (Rgs10, Psmb8, Xlr4). This study detected expression of genes with known functions in the cornea, providing additional validation of the microarray experiments. Importantly, it identified several novel genes whose functions have not been investigated in the cornea.",
+              "doi": "10.1016/j.exer.2008.06.001",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A17"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "31e8176c52b24d2818fa63ed81b092c1604d378cb4083dab818aa5502e63f47f"
+              }
+            },
+            {
+              "title": "An implication of the mitochondrial carrier SLC25A3 as an oxidative stress modulator in NAFLD.",
+              "abstract": "Nonalcoholic fatty liver disease (NAFLD) is a type of steatosis not associated with excessive alcohol intake and includes nonalcoholic steatohepatitis (NASH), which can progress to advanced fibrosis and hepatocellular carcinoma. Mitochondrial dysfunction causes oxidative stress, triggering hepatocyte death and inflammation; therefore, the present study aimed to explore relationship between mitochondrial carriers and oxidative stress. Firstly, we established a high fat diet (HFD)-fed ICR mouse NAFLD model characterized by obesity with insulin resistance and found transcriptional upregulation of Slc25a17 and downregulation of Slc25a3 (isoform B) and Slc25a13 in their fatty liver. A mitochondrial phosphate and Cu carrier, SLC25A3, was further studied in wild-type (wt) and SLC25A3-defective HepG2 cells (C1 and C3). SLC25A3 deficiency had insignificant effect on mitochondrial membrane potential (MtMP) and oxygen consumption rate (OCR) in untreated cells but suppressed them when cells were exposed to oleic acid. C1 and C3 cells were prone to produce reactive oxygen species (ROS), and increased ROS was associated with reduced mRNA expression of glutathione peroxidase (GPX) 1 and glutathione disulfide reductase (GSX) in these cell lines. Interestingly, cytoplasmic and mitochondrial Cu accumulation significantly reduced in C1 cells, demonstrating a predominant contribution of SLC25A3 to Cu transport into mitochondrial matrix. Cytotoxicity of free fatty acids was unchanged between wt and SLC25A3-deficient cells. These results indicate that reduced expression of SLC25A3 in fatty liver contributes to electron leak from mitochondria by limiting Cu availability, rendering hepatocytes more susceptible to oxidative stress. This study provides evidence that SLC25A3 is a novel risk factor for developing NASH.",
+              "doi": "10.1016/j.yexcr.2023.113740",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A17"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e214c64ba3620555bbb5ea9e8473ac52b06f8ae9cd6bdcd61e7727f01cd100d4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A17 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC25A17 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC25A17']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A17",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A17",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A17": {
+          "status": "unavailable",
+          "gene": "SLC25A17",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A17": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A17",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A17']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A17 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.15 -> P(必需)=0.764 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A17"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A17": 1.15
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 2, 'A:False': 1}，最终智能体辩论后裁决：winner=None answer=True conf=0.65；法官理由: Evidence channel reports MAGeCK depletion magnitude 1.15 (P essential 0.76), and cancer annotations show SLC25A17 promotes proliferation/anti-apoptosis. L2’s redundancy argument is plausible but weaker than direct loss-of-function signal; t。原证据通道判定: winner=None answer=True conf=0.764（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A17']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A17 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.15 -> P(必需)=0.764 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A17"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A17": 1.15
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.7；法官理由: E predicts essentiality (0.764); L1/L2 independently agree. Observations lack direct lymphoma MAGeCK depletion, but consensus and plausible transporter dependency support loss-of-function inhibiting growth.。原证据通道判定: winner=None answer=True conf=0.764（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A17']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A17"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T04:03:07Z"
+  }
+}

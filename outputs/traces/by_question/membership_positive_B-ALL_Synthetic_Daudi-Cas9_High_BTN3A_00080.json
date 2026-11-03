@@ -1,0 +1,531 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00080",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC29A1 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC29A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00080",
+      "status": "ok",
+      "summary": "检索到 4 类证据、21 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC29A1"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "protein_function": "Uniporter involved in the facilitative transport of nucleosides and nucleobases, and contributes to maintaining their cellular homeostasis.",
+              "aliases": "ENT1, Solute Carrier Family 29 (Equilibrative Nucleoside Transporter), Member 1, Equilibrative Nucleoside Transporter 1, Nucleoside Transporter, Es-Type, Es Nucleoside Transporter",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC29 Facilitative nucleoside  transporter family",
+              "target_properties": {
+                "name": "SLC29 Facilitative nucleoside  transporter family"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC29A1|5-FU|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC29A1(ENT1) is an equilibrative nucleoside transporter that mediates cellular uptake of 5-fluorouracil (Km ~2.3mM). Reduced ENT1 expression decreases intracellular 5-FU accumulation, contributing to drug resistance in multiple cancer types. Higher ENT1 expression promotes 5-FU cytotoxicity.",
+                "paper": "Young JD 2013 Mol Aspects Med(ENT1) PMID:23506887",
+                "name": "SLC29A1|5-FU|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1016/j.mam.2012.05.007\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "5-FU"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ENT1",
+              "target_properties": {
+                "name": "ENT1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "miR-33-3p Regulates PC12 Cell Proliferation and Differentiation In Vitro by Targeting Slc29a1.",
+              "abstract": "MicroRNA-33-3p (miR-33-3p) has been widely investigated for its roles in lipid metabolism and mitochondrial function; however, there are few studies on miR-33-3p in the context of neurological diseases. In this study, we investigated the functional role of miR-33-3p in rat pheochromocytoma PC12 cells. A miR-33-3p mimic was transduced into PC12 cells, and its effects on proliferation, apoptosis, and differentiation were studied using the MTS assay, EdU labeling, flow cytometry, qRT-PCR, western blot, ELISA, and immunofluorescence. We found that miR-33-3p significantly suppressed PC12 cell proliferation, but had no effect on apoptosis. Furthermore, miR-33-3p promoted the differentiation of PC12 cells into Tuj1-positive and choline acetyltransferase-positive neuron-like cells. Mechanistically, miR-33-3p repressed the expression of Slc29a1 in PC12 cells. Importantly, knocking down Slc29a1 in PC12 cells inhibited proliferation and induced differentiation into neuron-like cells. In conclusion, this study showed that miR-33-3p regulated Slc29a1, which in turn controlled the proliferation and differentiation of PC12 cells. Thus, we hypothesize that the miR-33-3p/Slc29a1 axis could be a promising therapeutic target for recovering neurons and the cholinergic nervous system.",
+              "doi": "10.1007/s11064-021-03377-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6ed39efd97542b12ec02b0899a5e4b252cb83950c2681f26b8f6f7a1ae9c60e8"
+              }
+            },
+            {
+              "title": "The role of alternative splicing in cancer: From oncogenesis to drug resistance.",
+              "abstract": "Alternative splicing is a tightly regulated process whereby non-coding sequences of pre-mRNA are removed and protein-coding segments are assembled in diverse combinations, ultimately giving rise to proteins with distinct or even opposing functions. In the past decade, whole genome/transcriptome sequencing studies revealed the high complexity of splicing regulation, which occurs co-transcriptionally and is influenced by chromatin status and mRNA modifications. Consequently, splicing profiles of both healthy and malignant cells display high diversity and alternative splicing was shown to be widely deregulated in multiple cancer types. In particular, mutations in pre-mRNA regulatory sequences, splicing regulators and chromatin modifiers, as well as differential expression of splicing factors are important contributors to cancer pathogenesis. It has become clear that these aberrations contribute to many facets of cancer, including oncogenic transformation, cancer progression, response to anticancer drug treatment as well as resistance to therapy. In this respect, alternative splicing was shown to perturb the expression a broad spectrum of relevant genes involved in drug uptake/metabolism (i.e. SLC29A1, dCK, FPGS, and TP), activation of nuclear receptor pathways (i.e. GR, AR), regulation of apoptosis (i.e. MCL1, BCL-X, and FAS) and modulation of response to immunotherapy (CD19). Furthermore, aberrant splicing constitutes an important source of novel cancer biomarkers and the spliceosome machinery represents an attractive target for a novel and rapidly expanding class of therapeutic agents. Small molecule inhibitors targeting SF3B1 or splice factor kinases were highly cytotoxic against a wide range of cancer models, including drug-resistant cells. Importantly, these effects are enhanced in specific cancer subsets, such as splicing factor-mutated and c-MYC-driven tumors. Furthermore, pre-clinical studies report synergistic effects of spliceosome modulators in combination with conventional antitumor agents. These strategies based on the use of low dose splicing modulators could shift the therapeutic window towards decreased toxicity in healthy tissues. Here we provide an extensive overview of the latest findings in the field of regulation of splicing in cancer, including molecular mechanisms by which cancer cells harness alternative splicing to drive oncogenesis and evade anticancer drug treatment as well as splicing-based vulnerabilities that can provide novel treatment opportunities. Furthermore, we discuss current challenges arising from genome-wide detection and prediction methods of aberrant splicing, as well as unravelling functional relevance of the plethora of cancer-related splicing alterations.",
+              "doi": "10.1016/j.drup.2020.100728",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4200253ffc07f83bfe06fe4e7a2e43c0c0e9d7c842b13103360fca9f1a43180a"
+              }
+            },
+            {
+              "title": "A quiescence-like/TGF-β1-specific CRISPRi screen reveals drug uptake transporters as secondary targets of kinase inhibitors in AML.",
+              "abstract": "Relapse in acute myeloid leukemia (AML) is driven by resistant subclones that survive chemotherapy. It is assumed that these resilient leukemic cells can modify their proliferative behavior by entering a quiescent-like state, similar to healthy hematopoietic stem cells (HSCs). These dormant cells can evade the effects of cytostatic drugs that primarily target actively dividing cells. Although quiescence has been extensively studied in healthy hematopoiesis and various solid cancers, its role in AML has remained unexplored. In this study, we applied an HSC-derived quiescence-associated gene signature to an AML patient cohort and found it to be strongly correlated with poor prognosis and active TGF-β signaling. In vitro treatment with TGF-β1 induces a quiescence-like phenotype, resulting in a G0 shift and reduced sensitivity to cytarabine. To find potential therapeutic targets that prevent AML-associated quiescence and improve response to cytarabine, we conducted a comprehensive CRISPR interference (CRISPRi) screen combined with TGF-β1 stimulation. This approach identified TGFBR1 inhibitors, like vactosertib, as effective agents for preventing the G0 shift in AML cell models. However, pretreatment with vactosertib unexpectedly induced complete resistance to cytarabine. To elucidate the underlying mechanism, we performed a multi-faceted approach combining a second CRISPRi screen, liquid chromatography-tandem mass spectrometry (LC-MS/MS), and in silico analysis. Our findings revealed that TGFBR1 inhibitors unintentionally target the nucleoside transporter SLC29A1 (ENT1), leading to reduced intracellular cytarabine levels. Importantly, we found that this drug interaction is not unique to TGFBR1 inhibitors, but extends to other clinically significant kinase inhibitors, such as the FLT3 inhibitor midostaurin. These findings may have important implications for optimizing combination therapies in AML treatment.",
+              "doi": "10.1016/j.drup.2025.101242",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5011a82abe9ef1d1cecbc1e2cd383266ce1a7c357cb8f4ca5a767b2d82dae88c"
+              }
+            },
+            {
+              "title": "Apoptotic brown adipocytes enhance energy expenditure via extracellular inosine.",
+              "abstract": "Brown adipose tissue (BAT) dissipates energy and promotes cardiometabolic health. Loss of BAT during obesity and ageing is a principal hurdle for BAT-centred obesity therapies, but not much is known about BAT apoptosis. Here, untargeted metabolomics demonstrated that apoptotic brown adipocytes release a specific pattern of metabolites with purine metabolites being highly enriched. This apoptotic secretome enhances expression of the thermogenic programme in healthy adipocytes. This effect is mediated by the purine inosine that stimulates energy expenditure in brown adipocytes by the cyclic adenosine monophosphate-protein kinase A signalling pathway. Treatment of mice with inosine increased BAT-dependent energy expenditure and induced 'browning' of white adipose tissue. Mechanistically, the equilibrative nucleoside transporter 1 (ENT1, SLC29A1) regulates inosine levels in BAT: ENT1-deficiency increases extracellular inosine levels and consequently enhances thermogenic adipocyte differentiation. In mice, pharmacological inhibition of ENT1 as well as global and adipose-specific ablation enhanced BAT activity and counteracted diet-induced obesity, respectively. In human brown adipocytes, knockdown or blockade of ENT1 increased extracellular inosine, which enhanced thermogenic capacity. Conversely, high ENT1 levels correlated with lower expression of the thermogenic marker UCP1 in human adipose tissues. Finally, the Ile216Thr loss of function mutation in human ENT1 was associated with significantly lower body mass index and 59% lower odds of obesity for individuals carrying the Thr variant. Our data identify inosine as a metabolite released during apoptosis with a 'replace me' signalling function that regulates thermogenic fat and counteracts obesity.",
+              "doi": "10.1038/s41586-022-05041-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3dcfc09cc240b6c6195e96579c2afdeefd0ad825bd20c37e6b083bb1c07645a4"
+              }
+            },
+            {
+              "title": "Development of multidrug resistance due to multiple factors including P-glycoprotein overexpression under K-selection after MYC and HRAS oncogene activation.",
+              "abstract": "Multistep tumorigenesis is a form of microevolution consisting of mutation and selection. To clarify the role of selection modalities in tumor development, we examined two alternative evolutionary conditions, r-selection in sparse culture, which allows cells to proliferate rapidly, and K-selection in confluent culture, in which overcrowding constrains cell proliferation. Using MYC- and EJ-RAS-transformed rat embryo fibroblasts, we found that K-selected cells acquired and stably maintained multidrug resistance (MDR) to DOX, VCR, MTX and Ara-C. Then, we examined the involvement of a number of factors potentially causal of the development of MDR, that is, ploidy, Tp53 mutation, doubling time and the expression levels of genes related to drug resistance. Although ploidy status and Tp53 mutations did not correlate with MDR, we found that Abcb1/Mdr1, encoding P-glycoprotein (Pgp), was significantly upregulated after K-selection. Cyclosporin A, a competitive inhibitor of Pgp, increased the intracellular accumulation of DOX and reduced the resistance to it. Indeed, the population of Pgp-transfected cells significantly expanded under K-, but not under r-selection. In addition to Pgp upregulation, altered expression of other genes such as Cda/cytidine deaminase and Slc29a1/equilibrative nucleoside transporter 1 and prolonged doubling times were associated with MDR. This system reproduces events associated with MDR in vivo and would be useful for analysis of MDR development.",
+              "doi": "PMID:16353156",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1df225752f9f568bdd20f6a1f6dfcabe0f93b02d3fdfa73762d72aa96868df98"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC29A1 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC29A1 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC29A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC29A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC29A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC29A1": {
+          "status": "unavailable",
+          "gene": "SLC29A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC29A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC29A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC29A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC29A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC29A1"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC29A1": 3.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC29A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC29A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC29A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC29A1"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC29A1": 3.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC29A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC29A1']",
+        "status": "ok",
+        "summary": "SLC29A1 encodes ENT1, an equilibrative nucleoside transporter that supports nucleoside uptake and metabolic flux in proliferating lymphoid cells. In B-lymphoblastic leukaemia/Daudi-like models, enhanced nucleoside transport can favor cell growth and survival under stress or immune-mediated selection conditions, so SLC29A1 is more consistent with promoting tumour survival than suppressing it.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC29A1"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC29A1 encodes ENT1, an equilibrative nucleoside transporter that supports nucleoside uptake and metabolic flux in proliferating lymphoid cells. In B-lymphoblastic leukaemia/Daudi-like models, enhanced nucleoside transport can favor cell growth and survival under stress or immune-mediated selection conditions, so SLC29A1 is more consistent with promoting tumour survival than suppressing it.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:33:44Z"
+  }
+}

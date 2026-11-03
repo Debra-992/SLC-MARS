@@ -1,0 +1,412 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_5Days_00143",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC1A6 and SLC25A25 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "winner": "SLC1A6"
+  },
+  "effective_genes": [
+    "SLC1A6",
+    "SLC25A25"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_5Days_00143",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC1A6",
+        "SLC25A25"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "protein_function": "Sodium-dependent, high-affinity amino acid transporter that mediates the uptake of L-glutamate and also L-aspartate and D-aspartate.",
+              "aliases": "EAAT4",
+              "transport_type": "C / Na+, H+, K+"
+            },
+            {
+              "gene": "SLC25A25",
+              "protein_function": "Involved in the transport of Mg-ATP in exchange for phosphate, and likely responsible for the net uptake or efflux of adenine nucleotides into or from the mitochondria.",
+              "aliases": "MCSC, SCAMC2, SCaMC-2, Short Calcium-Binding Mitochondrial Carrier 2, Small Calcium-Binding Mitochondrial Carrier 2, Mitochondrial ATP-Mg/Pi Carrier Protein 3",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC1A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC1 High-affinity glutamate and  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC1 High-affinity glutamate and  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC1A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "EAAT4",
+              "target_properties": {
+                "name": "EAAT4"
+              }
+            },
+            {
+              "gene": "SLC25A25",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Transcriptomic profiling of nonneoplastic cortical tissues reveals epileptogenic mechanisms in dysembryoplastic neuroepithelial tumors.",
+              "abstract": "Low-grade dysembryoplastic neuroepithelial tumors (DNTs) are a frequent cause of drug-refractory epilepsy. Molecular mechanisms underlying seizure generation in these tumors are poorly understood. This study was conducted to identify altered genes in nonneoplastic epileptogenic cortical tissues (ECTs) resected from DNT patients during electrocorticography (ECoG)-guided surgery. RNA sequencing (RNAseq) was used to determine the differentially expressed genes (DEGs) in these high-spiking ECTs compared to non-epileptic controls. A total of 477 DEGs (180 upregulated; 297 downregulated) were observed in the ECTs compared to non-epileptic controls. Gene ontology analysis revealed enrichment of genes belonging to the following Kyoto Encyclopedia of Genes and Genomes (KEGG) pathways: (i) glutamatergic synapse; (ii) nitrogen metabolism; (iii) transcriptional misregulation in cancer; and (iv) protein digestion and absorption. The glutamatergic synapse pathway was enriched by DEGs such as GRM4, SLC1A6, GRIN2C, GRM2, GRM5, GRIN3A, and GRIN2B. Enhanced glutamatergic activity was observed in the pyramidal neurons of ECTs, which could be attributed to altered synaptic transmission in these tissues compared to non-epileptic controls. Besides glutamatergic synapse, altered expression of other genes such as GABRB1 (synapse formation), SLIT2 (axonal growth), and PROKR2 (neuron migration) could be linked to epileptogenesis in ECTs. Also, upregulation of GABRA6 gene in ECTs could underlie benzodiazepine resistance in these patients. Neural cell-type-specific gene set enrichment analysis (GSEA) revealed transcriptome of ECTs to be predominantly contributed by microglia and neurons. This study provides first comprehensive gene expression profiling of nonneoplastic ECTs of DNT patients and identifies genes/pathways potentially linked to epileptogenesis.",
+              "doi": "10.1007/s10142-022-00869-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "64da00f976903944256a7369ad8edfbc629f15d29079dc25950777659806ab53"
+              }
+            },
+            {
+              "title": "Long non-coding RNA SLC25A25-AS1 exhibits oncogenic roles in non-small cell lung cancer by regulating the microRNA-195-5p/ITGA2 axis.",
+              "abstract": "Long non-coding RNA SLC25A25 antisense RNA 1 (SLC25A25-AS1) exerts antitumour activity in colorectal cancer. The present study investigated whether SLC25A25-AS1 is implicated in the aggressiveness of non-small cell lung cancer (NSCLC) and the possible underlying mechanism. SLC25A25-AS1 expression in NSCLC was determined by reverse transcription-quantitative PCR. The proliferation, apoptosis, migration and invasion of NSCLC cells were tested  through cell counting kit-8 assay, flow cytometry analysis, Transwell migration and invasion assays, followed by  validation using animal experiments. Additionally, the competitive endogenous RNA theory for SLC25A25-AS1, microRNA-195-5p (miR-195-5p) and integrin α2 (ITGA2) was identified using subcellular fractionation, bioinformatics analysis, reverse transcription-quantitative PCR, western blotting, a luciferase assay and RNA immunoprecipitation. As compared with normal lung tissues, increased expression of SLC25A25-AS1 was demonstrated in NSCLC tissues using The Cancer Genome Atlas database.. In addition, SLC25A25-AS1 was overexpressed in both NSCLC tissues and cell lines. High SLC25A25-AS1 expression was markedly associated with shorter overall survival time of patients with NSCLC. SLC25A25-AS1 silencing impeded NSCLC cell proliferation and triggered apoptosis, while restricting cell migration and invasion. Tumour growth  was also impaired by SLC25A25-AS1 silencing. Mechanistically, SLC25A25-AS1 was demonstrated to be an miR-195-5p sponge in NSCLC cells. miR-195-5p mimics decreased ITGA2 expression in NSCLC cells by directly targeting ITGA2, and SLC25A25-AS1 interference decreased ITGA2 expression by sequestering miR-195-5p. Furthermore, the antitumour effects of SLC25A25-AS1 silencing on malignant behaviours were counteracted when ITGA2 was restored or when miR-195-5p was silenced. In summary, by controlling the miR-195-5p/ITGA2 axis, SLC25A25-AS1 served tumour-promoting roles in NSCLC cells. Therefore, the SLC25A25-AS1/miR-195-5p/ITGA2 signalling pathway might be an attractive target for future therapeutic options in NSCLC.",
+              "doi": "10.3892/ol.2021.12790",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A25"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ec6ea04b9d8673b32524c41a69fc52f7c96df5042eaf3416c4c592b1cc298e89"
+              }
+            },
+            {
+              "title": "Decreased expression of LncRNA SLC25A25-AS1 promotes proliferation, chemoresistance, and EMT in colorectal cancer cells.",
+              "abstract": "Increasing evidence suggests that long non-coding RNAs (lncRNAs) are aberrantly expressed in colorectal cancer (CRC); however, only few CRC-related lncRNAs have been characterized. In this study, we aimed to dig out potential dysregulated lncRNAs that are highly involved in CRC development. Using a lncRNA-mining approach, we performed lncRNA expression profiling in a large CRC cohort from Gene Expression Ominus (GEO), GSE39582 test series (N = 585). We identified 31 downregulated lncRNAs and 16 upregulated lncRNAs from the GSE39582 test series patients (566 tumor patients and 19 normal controls). The reliability of lncRNA expression profiles was further confirmed by RT-qPCR in carcinoma tissues and paired adjacent normal tissues from 30 CRC patients, also in the serum from 109 CRC patients, and 99 normal individuals. We demonstrated that the expression of SLC25A25-AS1, which has not been reported previously, was significantly decreased in both the tumor tissues (27 out of 30) and serum of CRC patients. SLC25A25-AS1 overexpression significantly inhibited proliferation and colony formation in colorectal cancer cell lines, and downregulation of SLC25A25-AS1 obviously enhanced chemoresistance and promoted EMT process in vitro associated with Erk and p38 signaling pathway activation. Therefore, SLC25A25-AS1 was determined to play a tumor suppressive role in CRC. Our results might provide a lncRNA-based target for CRC treatment.",
+              "doi": "PMID:27553025",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A25"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b26d3610355608478e51a10d5e5c01fdaa5b10d3836cc5f64b78c025470a30ec"
+              }
+            },
+            {
+              "title": "Adenine nucleotide carrier protein dysfunction in human disease.",
+              "abstract": "Adenine nucleotide translocase (ANT) is the prototypical member of the mitochondrial carrier protein family, primarily involved in ADP/ATP exchange across the inner mitochondrial membrane. Several carrier proteins evolutionarily related to ANT, including SLC25A24 and SLC25A25, are believed to promote the exchange of cytosolic ATP-Mg with phosphate in the mitochondrial matrix. They allow a net accumulation of adenine nucleotides inside mitochondria, which is essential for mitochondrial biogenesis and cell growth. In the last two decades, mutations in the heart/muscle isoform 1 of ANT (ANT1) and the ATP-Mg transporters have been found to cause a wide spectrum of human diseases by a recessive or dominant mechanism. Although loss-of-function recessive mutations cause a defect in oxidative phosphorylation and an increase in oxidative stress which drives the pathology, it is unclear how the dominant missense mutations in these proteins cause human diseases. In this review, we focus on how yeast was productively used as a model system for the understanding of these dominant diseases. We also describe the relationship between the structure and function of ANT and how this may relate to various pathologies. Particularly, mutations in Aac2, the yeast homolog of ANT, were recently found to clog the mitochondrial protein import pathway. This leads to mitochondrial precursor overaccumulation stress (mPOS), characterized by the toxic accumulation of unimported mitochondrial proteins in the cytosol. We anticipate that in coming years, yeast will continue to serve as a useful model system for the mechanistic understanding of mitochondrial protein import clogging and related pathologies in humans.",
+              "doi": "10.1002/iub.2767",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A25"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "639b9fbff5e888407ea6b768ec9d1215b70bb10f87b9a2a299b0b676ea7e6c94"
+              }
+            },
+            {
+              "title": "N6-methyladenosine-mediated downregulation of miR-374c-5p promotes cadmium-induced cell proliferation and metastasis by targeting GRM3 in breast cancer cells.",
+              "abstract": "Cadmium (Cd) is a toxic heavy metal that can facilitate the development and progression of breast cancer (BC). Emerging evidence has indicated that the progression of Cd-exposed BC is related to the dysregulation of microRNAs (miRNAs). The purpose of our study was to investigate the expression pattern and underlying mechanisms of miR-374c-5p in Cd-mediated BC progression. In this study, T-47D cells and MCF-7 cells were treated with different concentrations of Cd (0.1, 1 and 10 μM) for 72 h. MiR-374c-5p expression was downregulated, and transfection of miR-374c-5p mimics significantly decreased BC cell proliferation, migration and invasion induced by 10 μM Cd. Importantly, we used the Cytoscape software plugin cytoHubba to analyse the intersected genes between our RNA-Seq results and the mirDIP database, and six hub genes (CNR1, CXCR4, GRM3, RTN1, SLC1A6 and ZEB1) were identified as potential direct targets of miR-374c-5p in our model; however, luciferase reporter assays indicated that miR-374c-5p only repressed GRM3 by directly binding to its 3'-untranslated region (UTR). Of note, we verified that suppression of N6-methyladenosine (m6A) modification led to miR-374c-5p downregulation by decreasing its RNA transcript stability. Together, these findings demonstrated that m6A modification of pri-miRNA-374c blocks miRNA-374c-5p maturation and then activates GRM3 expression, which drives BC cell metastasis after Cd exposure.",
+              "doi": "10.1016/j.ecoenv.2021.113085",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC1A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "38d3620cac1fc6a216979cde0e0191eb8b5fd05e7d8670e1daa0818df1dbbf66"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC1A6 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC1A6 and SLC25A25 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC1A6', 'SLC25A25']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC1A6",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC1A6",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC1A6": {
+          "status": "unavailable",
+          "gene": "SLC1A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A25": {
+          "status": "unavailable",
+          "gene": "SLC25A25",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC1A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC1A6",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A25": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A25",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC1A6', 'SLC25A25']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC1A6 strength=0.10, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A25",
+        "candidates": [
+          "SLC1A6",
+          "SLC25A25"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC1A6": 0.1,
+          "SLC25A25": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A25': 2}，最终智能体辩论后裁决：winner=SLC25A25 answer=None conf=0.68；法官理由: Two independent LLM channels favor SLC25A25; SLC1A6/EAAT4 is neuronal and likely low-expressed in CML/eHAP, whereas SLC25A25 supports mitochondrial ATP/Pi exchange, a plausible cancer metabolic dependency. Evidence is indirect, so moderate 。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC1A6', 'SLC25A25']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A25所在/相关的线粒体ATP-Mg/Pi载体功能在多种实体瘤中通过促进增殖、存活或耐药被间接支持；相比之下，SLC1A6主要是神经元谷氨酸转运体，其与肿瘤生长的证据更弱。将这种‘线粒体核苷酸转运/代谢支持增殖’的跨癌种机制迁移到CML：CML由BCR-ABL驱动，细胞增殖和代谢需求高，线粒体载体类基因更可能成为生长必需或促生长节点。 | 在缺乏CML直接图谱/组学证据时，不能把缺证据视为阴性。候选中SLC25A25编码线粒体腺嘌呤核苷酸/磷酸盐交换相关载体，文献显示其反义lncRNA在NSCLC中敲低可抑制增殖、迁移、侵袭和肿瘤生长，在CRC中也调控增殖/耐药/EMT，提示SLC25A25 locus具有跨癌种增殖相关生物学。SLC1A6为EAAT4型钠依赖高亲和力谷氨酸/天冬氨酸转运体，主要关联神经元谷氨酸能信号，肿瘤生长必需性证据不足。CML虽是血液系统恶性肿瘤，但BCR-ABL驱动的高增殖状态可能更依赖线粒体代谢/核苷酸转运等基础细胞生长机制，因此若CRISPR敲除后抑制CML肿瘤生长，SLC25A25比SLC1A6更可能。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A25",
+        "candidates": [
+          "SLC1A6",
+          "SLC25A25"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC1A6": 0.1,
+          "SLC25A25": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC25A25所在/相关的线粒体ATP-Mg/Pi载体功能在多种实体瘤中通过促进增殖、存活或耐药被间接支持；相比之下，SLC1A6主要是神经元谷氨酸转运体，其与肿瘤生长的证据更弱。将这种‘线粒体核苷酸转运/代谢支持增殖’的跨癌种机制迁移到CML：CML由BCR-ABL驱动，细胞增殖和代谢需求高，线粒体载体类基因更可能成为生长必需或促生长节点。 | 在缺乏CML直接图谱/组学证据时，不能把缺证据视为阴性。候选中SLC25A25编码线粒体腺嘌呤核苷酸/磷酸盐交换相关载体，文献显示其反义lncRNA在NSCLC中敲低可抑制增殖、迁移、侵袭和肿瘤生长，在CRC中也调控增殖/耐药/EMT，提示SLC25A25 locus具有跨癌种增殖相关生物学。SLC1A6为EAAT4型钠依赖高亲和力谷氨酸/天冬氨酸转运体，主要关联神经元谷氨酸能信号，肿瘤生长必需性证据不足。CML虽是血液系统恶性肿瘤，但BCR-ABL驱动的高增殖状态可能更依赖线粒体代谢/核苷酸转运等基础细胞生长机制，因此若CRISPR敲除后抑制CML肿瘤生长，SLC25A25比SLC1A6更可能。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC1A6', 'SLC25A25']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC1A6",
+          "SLC25A25"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:47:42Z"
+  }
+}

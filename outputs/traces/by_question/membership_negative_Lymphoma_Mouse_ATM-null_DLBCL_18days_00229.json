@@ -1,0 +1,288 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00229",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC33A1 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC33A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00229",
+      "status": "ok",
+      "summary": "检索到 4 类证据、3 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC33A1"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC33A1",
+              "protein_function": "Acetyl-CoA transporter that mediates active acetyl-CoA import through the endoplasmic reticulum membrane into the ER lumen.",
+              "aliases": "ACATN, SPG42",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC33A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC33 Acetyl-CoA  transporter family",
+              "target_properties": {
+                "name": "SLC33 Acetyl-CoA  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Annonaceous Acetogenins Synergistically Inhibit Hepatocellular Carcinoma with Sorafenib.",
+              "abstract": "Sorafenib was first approved as the standard treatment for advanced hepatocellular carcinoma (HCC). Despite providing an advantage in terms of patient survival, sorafenib has shown poor clinical efficacy and severe side effects after long-term treatment. Thus, combination treatment is a potential way to increase the effectiveness and reduce the dose-limiting toxicity of sorafenib. Extracts of the seeds of  have shown synergistic antitumor activity with sorafenib, and seven annonaceous acetogenins, including three new acetogenins, muricin P (), muricin Q (), and muricin R (), were isolated from the extracts by bioguided fractionation and showed synergy with sorafenib. The structures of these compounds were determined using spectroscopic and chemical methods. Annonacin () and muricin P (), which reduced intracellular ATP levels and promoted apoptosis, exhibited synergistic cytotoxicity with sorafenib . , annonacin () displayed synergistic antitumor activity by promoting tumor cell apoptosis. Moreover, the potential mechanism of annonacin () was predicted by transcriptomic analysis, which suggested that SLC33A1 is a potential target in HCC. Annonacin () might be a novel candidate for combination therapy with sorafenib against advanced HCC.",
+              "doi": "10.1021/acs.jnatprod.3c00667",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC33A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "404e4ebdcbba973710a6501ebd9ca67311bfba5a513cafeba6fd7f93acb42269"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC33A1 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC33A1 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC33A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC33A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC33A1",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC33A1": {
+          "status": "unavailable",
+          "gene": "SLC33A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC33A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC33A1",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC33A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC33A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC33A1"
+        ],
+        "confidence": 0.55,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 1, 'A:True': 2}，最终智能体辩论后裁决：winner=None answer=True conf=0.55；法官理由: No direct CRISPR readout, but two independent LLM channels agree SLC33A1 loss likely depletes ATM-null DLBCL over 18 days; E’s 0.423 nonessential probability is weak and conflates essentiality with inhibition direction.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC33A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] HCC中SLC33A1作为ER乙酰辅酶A输入/代谢相关靶点，抑制后可降低细胞ATP并促进凋亡；DLBCL/淋巴瘤同样具有高增殖、ER蛋白稳态与脂质代谢依赖，ATM-null背景可能增强对代谢和ER应激的敏感性，因此跨癌种类比支持SLC33A1缺失或抑制限制肿瘤生长。 | 目标Lymphoma缺乏直接图谱邻近、TIMER/KM/DE证据，但不应把缺证据视为阴性。SLC33A1是SLC33乙酰辅酶A转运体，参与ER内乙酰辅酶A供给、蛋白乙酰化、脂质代谢与ER应激；文献显示HCC中annonacin等可通过降低ATP和诱导凋亡发挥抗肿瘤作用，并提示SLC33A1可能是相关靶点，意味着抑制SLC33A1可能削弱肿瘤细胞存活。淋巴瘤细胞尤其是DLBCL常依赖强分泌/代谢重编程，SLC33A1功能丧失更可能降低增殖或促进死亡，因此membership判断为true；但跨上皮癌到淋巴造血系统迁移不确定性较高，置信度低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC33A1"
+        ],
+        "confidence": 0.34,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] HCC中SLC33A1作为ER乙酰辅酶A输入/代谢相关靶点，抑制后可降低细胞ATP并促进凋亡；DLBCL/淋巴瘤同样具有高增殖、ER蛋白稳态与脂质代谢依赖，ATM-null背景可能增强对代谢和ER应激的敏感性，因此跨癌种类比支持SLC33A1缺失或抑制限制肿瘤生长。 | 目标Lymphoma缺乏直接图谱邻近、TIMER/KM/DE证据，但不应把缺证据视为阴性。SLC33A1是SLC33乙酰辅酶A转运体，参与ER内乙酰辅酶A供给、蛋白乙酰化、脂质代谢与ER应激；文献显示HCC中annonacin等可通过降低ATP和诱导凋亡发挥抗肿瘤作用，并提示SLC33A1可能是相关靶点，意味着抑制SLC33A1可能削弱肿瘤细胞存活。淋巴瘤细胞尤其是DLBCL常依赖强分泌/代谢重编程，SLC33A1功能丧失更可能降低增殖或促进死亡，因此membership判断为true；但跨上皮癌到淋巴造血系统迁移不确定性较高，置信度低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC33A1']",
+        "status": "ok",
+        "summary": "In CRISPR knockout screens of ATM-null DLBCL cells in mouse tumor-growth assays, loss of SLC33A1 is expected to reduce tumor growth because SLC33A1 supports acetate import and acetyl-CoA/lipid metabolism needed by proliferating lymphoma cells; therefore its perturbation inhibits lymphoma tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC33A1"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "In CRISPR knockout screens of ATM-null DLBCL cells in mouse tumor-growth assays, loss of SLC33A1 is expected to reduce tumor growth because SLC33A1 supports acetate import and acetyl-CoA/lipid metabolism needed by proliferating lymphoma cells; therefore its perturbation inhibits lymphoma tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T09:36:54Z"
+  }
+}

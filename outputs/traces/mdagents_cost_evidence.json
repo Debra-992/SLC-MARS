@@ -1,0 +1,101 @@
+{
+ "note": "mdagents 缩减前(full-cost)实测证据，用于论证降 agents 5->3 的预算依据",
+ "config": {
+  "rounds": 2,
+  "turns": 2,
+  "teams": 2,
+  "members": 2,
+  "agents": 5,
+  "max_workers": 1
+ },
+ "measured_at": "2026-10-27T16:58:24",
+ "n_sampled": 11,
+ "n_with_token": 11,
+ "avg_total_tok_per_q": 27352.6,
+ "avg_llm_calls_per_q": 14.18,
+ "cum_total_tok": 300879,
+ "per_q": [
+  {
+   "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00002",
+   "diff": "basic",
+   "tok": 3643,
+   "calls": 4,
+   "elapsed_s": 53.3
+  },
+  {
+   "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00003",
+   "diff": "intermediate",
+   "tok": 38394,
+   "calls": 20,
+   "elapsed_s": 493.5
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+   "diff": "advanced",
+   "tok": 16762,
+   "calls": 16,
+   "elapsed_s": 235.6
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00005",
+   "diff": "intermediate",
+   "tok": 55136,
+   "calls": 28,
+   "elapsed_s": 531.9
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00006",
+   "diff": "intermediate",
+   "tok": 58559,
+   "calls": 20,
+   "elapsed_s": 792.5
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00007",
+   "diff": "basic",
+   "tok": 3232,
+   "calls": 4,
+   "elapsed_s": 41.7
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00008",
+   "diff": "basic",
+   "tok": 4668,
+   "calls": 4,
+   "elapsed_s": 56.8
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00009",
+   "diff": "intermediate",
+   "tok": 26022,
+   "calls": 14,
+   "elapsed_s": 369.6
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00010",
+   "diff": "intermediate",
+   "tok": 25832,
+   "calls": 14,
+   "elapsed_s": 353.9
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00011",
+   "diff": "intermediate",
+   "tok": 50286,
+   "calls": 28,
+   "elapsed_s": 482.0
+  },
+  {
+   "qid": "membership_negative_ALL_Human_NALM6_24h_00012",
+   "diff": "basic",
+   "tok": 18345,
+   "calls": 4,
+   "elapsed_s": 277.9
+  }
+ ],
+ "comparison": {
+  "pure_llm_avg_tok": 1929,
+  "lit_rag_avg_tok": 2027,
+  "mdagents_vs_pure_llm_multiple": 14.2
+ }
+}

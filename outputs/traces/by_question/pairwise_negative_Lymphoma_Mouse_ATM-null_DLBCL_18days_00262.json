@@ -1,0 +1,403 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00262",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC33A1 and SLC25A32 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A32"
+  },
+  "effective_genes": [
+    "SLC33A1",
+    "SLC25A32"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00262",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC33A1",
+        "SLC25A32"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "protein_function": "Facilitates flavin adenine dinucleotide (FAD) translocation across the mitochondrial inner membrane into the mitochondrial matrix where it acts as a redox cofactor.",
+              "aliases": "MFTC, Mitochondrial FAD Transporter",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC33A1",
+              "protein_function": "Acetyl-CoA transporter that mediates active acetyl-CoA import through the endoplasmic reticulum membrane into the ER lumen.",
+              "aliases": "ACATN, SPG42",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC33A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC33 Acetyl-CoA  transporter family",
+              "target_properties": {
+                "name": "SLC33 Acetyl-CoA  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The interaction of HT-2 toxin and Akt1 on gene expression regulation in Kashin-Beck disease pathogenesis.",
+              "abstract": "This study investigates the effects of T-2 toxin metabolite HT-2 alone or combined with Akt1 on chondrocyte gene expression to elucidate their roles in Kashin-Beck disease (KBD) pathogenesis. Lentiviral transfection was employed to silence Akt1 in C28/I2 human chondrocytes. High-throughput RNA sequencing and bioinformatics analysis methods were used to identify and compare differentially expressed genes (DEGs) and pathways in HT-2, siAkt1, HT-2-siAkt1 and Control (non-treatment) group. Co-expressed genes and co-expressed modules were investigated using WGCNA. Protein-protein interaction (PPI) networks were constructed using the STRING database, and hub genes were identified by the MCC algorithm. A total of 2086 DEGs were identified in the HT-2 vs Control comparison, with significant upregulation observed for CCND2, MMP9 and TIMP4. The adhesion and PI3K-Akt signaling pathways were upregulated, while ECM-receptor interactions was downregulated. In the siAkt1 vs Control comparison, 695 DEGs were detected. VAMP7 and CXCR4 were significantly upregulated, while PFKL and ALDOA were significantly downregulated. Fructose and mannose metabolism, amino acid biosynthesis, and glucose/energy metabolic pathways were significantly downregulated. There were 411 DEGs when HT-2-siAkt1 vs HT-2, and CCND2, MMP9, WTAPP1 and TIMP4 were significantly downregulated. Adhesion, NF-κB signaling pathway and PI3K-Akt signaling pathway were significantly downregulated. Under, WGCNA, in the module most associated with HT-2, FRMD3B, ALDH1A3, ANTXR2, SERINC2 and SRGN were identified as hub genes; in the module most associated with siAkt1, TNFRSF11B, CECR2, TMOD1, ZNF704 and RHOBTB1 were identified as hub genes; in the module most associated with HT-2-siAkt1, the hub genes were GNAL, SLC25A32, ACADSB, CABLES1 and GINS4. Akt1 primarily affects the expression of genes in chondrocytes under HT-2 exposure that involved in autophagy, cell proliferation and glycolysis and other cell functions, potentially contributing to the pathogenesis of KBD.",
+              "doi": "10.1016/j.toxicon.2025.108432",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75447c29f9e02e261bc0ddbb1036edfd15138c7c33a4d308efcee037f6939d0a"
+              }
+            },
+            {
+              "title": "Annonaceous Acetogenins Synergistically Inhibit Hepatocellular Carcinoma with Sorafenib.",
+              "abstract": "Sorafenib was first approved as the standard treatment for advanced hepatocellular carcinoma (HCC). Despite providing an advantage in terms of patient survival, sorafenib has shown poor clinical efficacy and severe side effects after long-term treatment. Thus, combination treatment is a potential way to increase the effectiveness and reduce the dose-limiting toxicity of sorafenib. Extracts of the seeds of  have shown synergistic antitumor activity with sorafenib, and seven annonaceous acetogenins, including three new acetogenins, muricin P (), muricin Q (), and muricin R (), were isolated from the extracts by bioguided fractionation and showed synergy with sorafenib. The structures of these compounds were determined using spectroscopic and chemical methods. Annonacin () and muricin P (), which reduced intracellular ATP levels and promoted apoptosis, exhibited synergistic cytotoxicity with sorafenib . , annonacin () displayed synergistic antitumor activity by promoting tumor cell apoptosis. Moreover, the potential mechanism of annonacin () was predicted by transcriptomic analysis, which suggested that SLC33A1 is a potential target in HCC. Annonacin () might be a novel candidate for combination therapy with sorafenib against advanced HCC.",
+              "doi": "10.1021/acs.jnatprod.3c00667",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC33A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "404e4ebdcbba973710a6501ebd9ca67311bfba5a513cafeba6fd7f93acb42269"
+              }
+            },
+            {
+              "title": "Mitochondria-Associated Gene SLC25A32 as a Novel Prognostic and Immunotherapy Biomarker: From Pan-Cancer Multiomics Analysis to Breast Cancer Validation.",
+              "abstract": "Mutations in SLC25A32 in humans cause late-onset exercise intolerance, which is associated with various neurological and metabolic diseases. However, its specific mechanism of action in tumour development is poorly understood owing to the lack of multiomics integrated analysis of SLC25A32 in pan-cancer. We used various analytical tools to comprehensively investigate the transcription, protein level, and promoter methylation of SLC25A32. Furthermore, the GSCA and cBioPortal databases were used to evaluate the inheritance impact and epigenetic alterations of SLC25A32 in pan-cancer. SLC25A32 expression and the prognostic significance of copy number alterations in multiple cancers were compared using the UCSCXenaShiny and GEPIA2.0 platforms, and its specific function in breast cancer was experimentally verified. SLC25A32 is abnormally expressed at the transcriptional and protein levels in most cancer types, with aberrant DNA promoter methylation and significant gene amplification in most tumours. SLC25A32 is significantly associated with the survival prognosis of some cancers, immune infiltrating cells, tumour stemness, and immune-related markers. SLC25A32 knockdown decreased breast tumour cell proliferation, invasion, and metastasis. This study aimed to reveal SLC25A32 as a novel prognostic biomarker for pan-cancer prediction and immunotherapy efficacy and specifically describes its underlying mechanism of action in breast cancer. SLC25A32 is widely differentially expressed in pan-cancer with prognostic significance and is correlated with immune infiltration. Additionally, it can affect breast cancer occurrence and development.",
+              "doi": "10.1155/2024/1373659",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "909acfbafefc45ea92274378d43db4096e1abf14306579d4c63b0392a7ffaa17"
+              }
+            },
+            {
+              "title": "Mitochondrial and Cytosolic One-Carbon Metabolism Is a Targetable Metabolic Vulnerability in Cisplatin-Resistant Ovarian Cancer.",
+              "abstract": "One-carbon (C1) metabolism is compartmentalized between the cytosol and mitochondria with the mitochondrial C1 pathway as the major source of glycine and C1 units for cellular biosynthesis. Expression of mitochondrial C1 genes including SLC25A32, serine hydroxymethyl transferase (SHMT) 2, 5,10-methylene tetrahydrofolate dehydrogenase 2, and 5,10-methylene tetrahydrofolate dehydrogenase 1-like was significantly elevated in primary epithelial ovarian cancer (EOC) specimens compared with normal ovaries. 5-Substituted pyrrolo[3,2-d]pyrimidine antifolates (AGF347, AGF359, AGF362) inhibited proliferation of cisplatin-sensitive (A2780, CaOV3, IGROV1) and cisplatin-resistant (A2780-E80, SKOV3) EOC cells. In SKOV3 and A2780-E80 cells, colony formation was inhibited. AGF347 induced apoptosis in SKOV3 cells. In IGROV1 cells, AGF347 was transported by folate receptor (FR) α. AGF347 was also transported into IGROV1 and SKOV3 cells by the proton-coupled folate transporter (SLC46A1) and the reduced folate carrier (SLC19A1). AGF347 accumulated to high levels in the cytosol and mitochondria of SKOV3 cells. By targeted metabolomics with [2,3,3-2H]L-serine, AGF347, AGF359, and AGF362 inhibited SHMT2 in the mitochondria. In the cytosol, SHMT1 and de novo purine biosynthesis (i.e., glycinamide ribonucleotide formyltransferase, 5-aminoimidazole-4-carboxamide ribonucleotide formyltransferase) were targeted; AGF359 also inhibited thymidylate synthase. Antifolate treatments of SKOV3 cells depleted cellular glycine, mitochondrial NADH and glutathione, and showed synergistic in vitro inhibition toward SKOV3 and A2780-E80 cells when combined with cisplatin. In vivo studies with subcutaneous SKOV3 EOC xenografts in SCID mice confirmed significant antitumor efficacy of AGF347. Collectively, our studies demonstrate a unique metabolic vulnerability in EOC involving mitochondrial and cytosolic C1 metabolism, which offers a promising new platform for therapy.",
+              "doi": "10.1158/1535-7163.MCT-23-0550",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e46b62430bf160b603756ff4c44860708a744a74045df5b77f945d63fb70eb15"
+              }
+            },
+            {
+              "title": "SLC25A32 promotes malignant progression of glioblastoma by activating PI3K-AKT signaling pathway.",
+              "abstract": "Solute carrier family 25 member 32 (SLC25A32) is an important member of SLC25A family and plays a role in folate transport metabolism. However, the mechanism and function of SLC25A32 in the progression of human glioblastoma (GBM) remain unclear. In this study, folate related gene analysis was performed to explore gene expression profiles in low-grade glioma (LGG) and GBM. Western blotting, real-time quantitative PCR (qRT-PCR), and immunohistochemistry (IHC) were used to confirm the expression levels of SLC25A32 in GBM tissues and cell lines. CCK-8 assays, colony formation assays, and Edu assays were performed to assess the role of SLC25A32 on proliferation in GBM in vitro. A 3D sphere invasion assay and an ex vivo co-culture invasion model were performed to assess the effects of SLC25A32 on invasion in GBM. Elevated expression of SLC25A32 was observed in GBM, and high SLC25A32 expression was associated with a high glioma grade and poorer prognosis. Immunohistochemistry performed with anti-SLC25A32 on samples from an independent cohort of patients confirmed these results. Knockdown of SLC25A32 inhibited the proliferation and invasion of GBM cells, but overexpression of SLC25A32 significantly promoted cell growth and invasion. These effects were mainly due to the activation of the PI3K-AKT-mTOR signaling pathway. Our study demonstrated that SLC25A32 plays a significant role in promoting the malignant phenotype of GBM. Therefore, SLC25A32 can be used as an independent prognostic factor in patients with GBM, providing a new target for the comprehensive treatment of GBM.",
+              "doi": "10.1186/s12885-023-11097-6",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3b2e1ae473ec96d7b050dfe6afef27bcb18af280387f0a934f15ced02dac9953"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC33A1 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC33A1 and SLC25A32 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC33A1', 'SLC25A32']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC33A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC33A1",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC33A1": {
+          "status": "unavailable",
+          "gene": "SLC33A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A32": {
+          "status": "unavailable",
+          "gene": "SLC25A32",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC33A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC33A1",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A32": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A32",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC25A32']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A32 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC33A1",
+        "candidates": [
+          "SLC33A1",
+          "SLC25A32"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05,
+          "SLC25A32": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC33A1': 2}，最终智能体辩论后裁决：winner=SLC33A1 answer=None conf=0.64；法官理由: Evidence is association-level and insufficient, but two independent LLM channels favor SLC33A1. Its nonredundant ER/Golgi acetyl-CoA transport is more plausibly a lymphoma proliferation bottleneck than SLC25A32 mitochondrial FAD transport.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC25A32']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A32 在乳腺癌中敲低可降低增殖/侵袭，在卵巢癌中作为线粒体一碳代谢脆弱点被支持，并与多种癌症表达/预后/免疫浸润相关；DLBCL/淋巴瘤同样依赖快速核苷酸合成、线粒体代谢和氧化还原稳态，因此从乳腺癌/卵巢癌的一碳代谢依赖可迁移到淋巴瘤增殖依赖。 | 目标癌种 Lymphoma（ATM-null DLBCL）缺乏直接图谱/组学证据，但候选基因中 SLC25A32 的生物学功能更贴近肿瘤生长必需性：其作为线粒体 FAD/一碳代谢相关转运体，支持 mitochondrial folate metabolism、glycine/serine 代谢、NADPH/redox 和核苷酸前体供给；已有乳腺癌敲低实验和卵巢癌代谢脆弱性证据提示抑制 SLC25A32 更可能限制肿瘤增殖。SLC33A1 主要与 ER 内 acetyl-CoA 转运相关，在 HCC 中仅是药物协同的潜在靶点，证据更间接且与淋巴瘤快速增殖/代谢依赖的联系较弱。因此二选一更可能抑制 Lymphoma 肿瘤生长的是 SLC25A32。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC33A1",
+        "candidates": [
+          "SLC33A1",
+          "SLC25A32"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05,
+          "SLC25A32": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A32': 1, 'W:SLC33A1': 2}，最终智能体辩论后裁决：winner=SLC33A1 answer=None conf=0.66；法官理由: SLC33A1 has a plausible nonredundant ER acetyl-CoA essentiality in cancer cell lines and two independent LLM votes. SLC25A32 support is cross-cancer metabolic association without lymphoma-specific CRISPR evidence.。原证据通道判定: winner=SLC25A32 answer=None conf=0.62（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC25A32']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC33A1",
+          "SLC25A32"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T06:33:09Z"
+  }
+}

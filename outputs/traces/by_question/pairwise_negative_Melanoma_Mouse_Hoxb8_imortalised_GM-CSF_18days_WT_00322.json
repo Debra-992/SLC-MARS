@@ -1,0 +1,427 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00322",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC35B3 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A26"
+  },
+  "effective_genes": [
+    "SLC25A26",
+    "SLC35B3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00322",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A26",
+        "SLC35B3"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            },
+            {
+              "gene": "SLC35B3",
+              "protein_function": "Probably functions as a 3'-phosphoadenylyl sulfate:adenosine 3',5'-bisphosphate antiporter at the Golgi membranes. Mediates the transport from the cytosol into the lumen of the Golgi of 3'-phosphoadenylyl sulfate/adenosine 3'phospho 5'-phosphosulfate (PAPS).",
+              "aliases": "SLC35B3",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC35B3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Analysis of chemotherapy response programs in ovarian cancers by the next-generation sequencing technologies.",
+              "abstract": "To understand the chemotherapy response program in ovarian cancer cells at deep transcript sequencing levels. Two next-generation sequencing technologies--MPSS (massively parallel signature sequencing) and SBS (sequencing by synthesis)--were used to sequence the transcripts of IGROV1 and IGROV1-CP cells, and to sequence the transcripts of a highly chemotherapy responsive and a highly chemotherapy resistant ovarian cancer tissue. We identified 3422 signatures (2957 genes) that are significantly different between IGROV1 and IGROV1-CP cells (P<0.001). Gene Ontology (GO) term GO:0001837 (epithelial-to-mesenchymal transition) and GO:0034330 (cell junction assembly and maintenance) are enriched in genes that are over expressed in IGROV1-CP cells while apoptosis-related GO terms are enriched in genes over expressed in IGROV1 cells. We identified 1187 tags (corresponding to 1040 genes) that are differentially expressed between the chemotherapy responsive and the persistently chemotherapy resistant ovarian cancer tissues. GO term GO:0050673 (epithelial cell proliferation) and GO:0050678 (regulation of epithelial cell proliferation) are enriched in the genes over expressed in the chemotherapy resistant tissue while the GO:0007229 (integrin-mediated signaling pathway) is enriched in the genes over expressed in the chemotherapy sensitive tissue. An integrative analysis identified 111 common differentially expressed genes including two bone morphogenetic proteins (BMP4 and BMP7), six solute carrier proteins (SLC10A3, SLC16A3, SLC25A1, SLC35B3, SLC7A5 and SLC7A7), transcription factor POU5F1 (POU class 5 homeobox 1), and KLK10 (kallikrein-related peptidase 10). A network analysis revealed a subnetwork with three genes BMP7, NR2F2 and AP2B1 that were consistently over expressed in the chemoresistant tissue or cells compared to the chemosensitive tissue or cells. Our database offers the first comprehensive view of the digital transcriptomes of ovarian cancer cell lines and tissues with different chemotherapy response phenotypes.",
+              "doi": "10.1016/j.ygyno.2010.01.041",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2ef7284384bc2278020489421070ed6a6511cf44c890927de98f308a65040668"
+              }
+            },
+            {
+              "title": "Identification and characterization of novel compound variants in SLC25A26 associated with combined oxidative phosphorylation deficiency 28.",
+              "abstract": "Combined oxidative phosphorylation deficiency 28 (COXPD28) is associated with mitochondrial dysfunction caused by mutations in SLC25A26, the gene which encodes the mitochondrial S-adenosylmethionine carrier (SAMC) that responsible for the transport of S-adenosylmethionine (SAM) into the mitochondria. To identify and characterize pathogenic variants of SLC25A26 in a Chinese pedigree, provide a basis for clinical diagnosis and genetic counseling. We conducted a systematic analysis of the clinical characteristics of a female with COXPD28. Whole-exome and mitochondrial genome sequencing was applied for the genetic analysis, together with bioinformatic analysis of predicted consequences of the identified variant. A homotrimer model was built to visualize the affected region and predict possible outcomes of this mutation. Then a literature review was performed by online searching all cases reported with COXPD28. The novel compound heterozygous SLC25A26 variants (c.34G > C, p.A12P; c.197C > A; p.A66E) were identified in a Chinese patient with COXPD28. These two variants are located in the transmembrane region 1 and transmembrane region 2, respectively. As a member of the mitochondrial carrier family, the transmembrane region of SAMC is highly conserved. The variants were predicted to be pathogenic by in silico analysis and lead to a change in the protein structure of SAMC. And the change of the SAMC structure may lead to insufficient methylation and cause disease by affecting the SAM transport. The variants in this region probably resulted in a variable loss of mitochondrial SAMC transport function and cause the COXPD28. This study that further refine genotype-phenotype associations can provide disease prognosis with a basis and families with reproductive planning options.",
+              "doi": "10.1016/j.gene.2021.145891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "253c99a7b6948508df5208fa39cdfb9e1989f9691e1780308fe9c90dff97b9e6"
+              }
+            },
+            {
+              "title": "Genetic heterogeneity and homogeneity among orofacial cleft subtypes: genome-wide association studies in the cleft collective.",
+              "abstract": "Several genome wide association studies (GWASs) of orofacial cleft have been conducted. However only a few such studies to date have combined all cleft cases, focused on subtypes other than non-syndromic cleft lip with/without cleft palate, or investigated subtype heterogeneity. We conducted a GWAS of orofacial clefts within 2268 cases from the Cleft Collective and 7913 population-based controls; we performed analyses of all orofacial clefts, plus 7 subgroups. We replicated our findings in a meta-analysis of independent samples and investigated patterns of correlation across subgroups. We identified 27 regions at genome-wide significance, 8 of which were novel. We also conducted the first GWAS of Pierre Robin Sequence, despite the small sample size (n cases = 237), we found one genome wide significant SNP (P < 5 × 10-8), and another 21 suggestive associations (P < 10-5). Novel loci include those mapping to LHX8 and TSBP1 (combined clefts), ARHGEF18 and ARHGEF19 (cleft lip with/without palate), FBN2 (cleft lip only), SLC35B3 (cleft palate only), CASC20 (Pierre Robin Sequence) and CHRM2 (non-syndromic cleft palate only). Several novel hits were in regions previously associated with facial morphology in GWAS or were in regions involved in key developmental processes, including neural crest cell migration and craniofacial development. We identified genetic loci with similar effects across all subgroups and some loci which were subtype specific, we also identified 3 loci with opposing effects on cleft lip and Pierre Robin sequence. Our findings highlight the merit of including all orofacial cleft subtypes in GWAS studies and investigating heterogeneity of effects across subtypes.",
+              "doi": "10.1093/hmg/ddaf131",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2d9c410502d61f0355f15283667889291e65dc7c7974ec32fb056cfde9393cec"
+              }
+            },
+            {
+              "title": "SLC25A26 overexpression impairs cell function via mtDNA hypermethylation and rewiring of methyl metabolism.",
+              "abstract": "Cancer cells down-regulate different genes to give them a selective advantage in invasiveness and/or metastasis. The SLC25A26 gene encodes the mitochondrial carrier that catalyzes the import of S-adenosylmethionine (SAM) into the mitochondrial matrix, required for mitochondrial methylation processes, and is down-regulated in cervical cancer cells. In this study we show that SLC25A26 is down-regulated due to gene promoter hypermethylation, as a mechanism to promote cell survival and proliferation. Furthermore, overexpression of SLC25A26 in CaSki cells increases mitochondrial SAM availability and promotes hypermethylation of mitochondrial DNA, leading to decreased expression of key respiratory complex subunits, reduction of mitochondrial ATP and release of cytochrome c. In addition, increased SAM transport into mitochondria leads to impairment of the methionine cycle with accumulation of homocysteine at the expense of glutathione, which is strongly reduced. All these events concur to arrest the cell cycle in the S phase, induce apoptosis and enhance chemosensitivity of SAM carrier-overexpressing CaSki cells to cisplatin.",
+              "doi": "10.1111/febs.14028",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a35cbdfba4cc47f6c38bf04172b57648ed17274cd6425a061da8d7455fb77a3f"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A26 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC35B3 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC25A26', 'SLC35B3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC35B3",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A26",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC25A26",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.8837",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A26_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35B3": {
+          "status": "unavailable",
+          "gene": "SLC35B3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A26": {
+          "status": "ok",
+          "gene": "SLC25A26",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.8837",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A26_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC35B3": {
+          "status": "unavailable",
+          "gene": "SLC35B3",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC35B3']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC35B3"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.3527,
+          "SLC35B3": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.68；法官理由: SLC25A26 supports mitochondrial SAM/SAH exchange and one-carbon/methylation, likely core essential; SLC35B3 is less characterized PAPS transporter. Evidence channel abstained, but two independent LLM votes and functional profile favor SLC25。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC35B3']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A26 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC35B3"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.3527,
+          "SLC35B3": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.61；法官理由: Two independent LLM votes favor SLC25A26; mitochondrial SAM/SAH antiporter supports methylation/tRNA modification, likely more essential in melanoma than Golgi PAPS transporter SLC35B3; database evidence indirect.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC35B3']",
+        "status": "ok",
+        "summary": "SLC25A26 encodes a mitochondrial S-adenosylmethionine transporter essential for mitochondrial methylation and function; its loss is more likely to impair melanoma cell metabolism and tumor growth than SLC35B3, which is mainly involved in nucleotide-sugar transport and glycosylation.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC25A26",
+          "SLC35B3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A26 encodes a mitochondrial S-adenosylmethionine transporter essential for mitochondrial methylation and function; its loss is more likely to impair melanoma cell metabolism and tumor growth than SLC35B3, which is mainly involved in nucleotide-sugar transport and glycosylation.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:30:35Z"
+  }
+}

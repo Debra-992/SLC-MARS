@@ -1,0 +1,569 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00031",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC31A1 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC31A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00031",
+      "status": "ok",
+      "summary": "检索到 4 类证据、23 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC31A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC31A1",
+              "protein_function": "Uniporter that mediates the transport of copper(1+) from the extracellular space to the cytoplasm, across the plasma membrane.",
+              "aliases": "COPT1, HCTR1, CTR1, Solute Carrier Family 31 (Copper Transporter), Member 1",
+              "transport_type": "energy in-dependent, potassium-dependent"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC31A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC31 Copper  transporter family",
+              "target_properties": {
+                "name": "SLC31 Copper  transporter family"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC31A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC31A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Neuroblastoma (NBM)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "glycolysis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Neuroblastoma (NBM)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC31A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "TRIM21-Mediated K11-Linked Ubiquitination of ID1 Suppresses Tumorigenesis and Promotes Cuproptosis in Esophageal Squamous Cell Carcinoma.",
+              "abstract": "Inhibitor of DNA binding 1 (ID1) is a key transcriptional regulator involved in the development of various cancers, including esophageal squamous cell carcinoma (ESCC). However, the mechanisms regulating ID1 ubiquitination in ESCC are not well understood. This study identifies TRIM21 as a novel E3 ubiquitin ligase that targets ID1 for K11-linked ubiquitination at lysine 91. Unlike typical ubiquitination that marks proteins for degradation, TRIM21-mediated K11 ubiquitination does not affect ID1 stability. Instead, it disrupts the ID1-TCF12 interaction, releasing TCF12 to activate SLC31A1, a copper transporter. Elevated SLC31A1 expression increases intracellular copper, inducing cuproptosis and inhibiting ESCC cell proliferation and tumor growth. Functional assays show that overexpressing TRIM21 suppresses ESCC progression, while TRIM21 knockdown promotes growth. Clinically, low TRIM21 expression correlates with advanced disease stage and poorer patient survival rate, underscoring its prognostic value. Additionally, Sorafenib treatment upregulates TRIM21, enhancing ID1 ubiquitination, increasing SLC31A1 expression, and inducing cuproptosis. These findings uncover the TRIM21-ID1-TCF12-SLC31A1 axis as a critical pathway in ESCC progression, suggesting that targeting this axis with Sorafenib can offer a promising therapeutic strategy for inhibiting tumor growth and improving patient outcomes.",
+              "doi": "10.1002/advs.202502501",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ed7db5a6bd459e5931c0c4206418ad0f38c7d19491572f00db73092b59183e6f"
+              }
+            },
+            {
+              "title": "Exploring the impact of cuproptosis-related genes on immune infiltration in rheumatoid arthritis.",
+              "abstract": "Immune infiltration plays a significant role in the pathogenesis of rheumatoid arthritis (RA). Cuproptosis, a newly characterized form of programmed cell death, remains insufficiently investigated regarding its genetic regulation of immune infiltration in RA. Data from the GEO database were analyzed to determine the relationship between cuproptosis-related genes and immune infiltration. Comprehensive analyses, including Gene Ontology, and KEGG pathway enrichment were performed to construct a risk model and provide a theoretical framework for understanding the mechanisms underlying the involvement of cuproptosis in RA-related immune infiltration. And we explored the expression of related genes-PDHB in animal and cell experiments. The findings revealed substantial variations in immune infiltration between RA and control groups. Eleven cuproptosis-related genes associated with RA were identified, namely DLST, LIAS, DLAT, DLD, PDHB, Lipt1, DBT, ATP7B, SLC31A1, FDX1, and PDHA1. Among these, DLST and PDHB emerged as potential risk factors influencing RA pathogenesis. These genes modulated immune cell alterations, including changes in iDCs, NK-cells, mast cells, and pDCs, alongside impacts on immune functions specific to RA. In animal experiments, we found that the expression of PDHB is decreased; overexpression of PDHB by PDHB gene transfection inhibited the migration, invasion, and proliferation of FLS cells.",
+              "doi": "10.1007/s00210-024-03731-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "36b79b6918fa9b28c09cc73a6e793f6fa2bf90fe77fa587d663b231d2c291acb"
+              }
+            },
+            {
+              "title": "Single-cell RNA sequencing reveals SLC31A1-mediated M2 polarization of macrophages promotes malignant progression in triple-negative breast cancer.",
+              "abstract": "Among the various types of breast cancer that endanger women's lives, triple-negative breast cancer (TNBC) stands out due to its extreme heterogeneity, aggressive nature, and high likelihood of recurrence. The absence of unique targets and targeted drugs is a major factor contributing to the failure of cancer treatments and the eventual death of patients. Single-cell RNA sequencing (scRNA-seq) was applied to investigate the immune microenvironment of TNBC, facilitating the detection of key cell subpopulations and regulatory genes. The mRNA expression of SLC31A1 in macrophages was measured by qPCR. Flow cytometry was utilized to ascertain the M2 macrophage proportion and cancer cell apoptosis. Transwell and scratch assays were conducted to gauge cancer cell migration and invasion. Copper ion and HO detection kits were employed to evaluate the copper ion content and oxidative stress levels in macrophages. SLC31A1 overexpression in TNBC myeloid cells, particularly macrophage subpopulations, was identified through scRNA-seq analysis. Cluster and pseudotime analyses showed that macrophages with high SLC31A1 expression are often in advanced stages of cell growth, accompanied by notable changes in oxidative stress. Functional studies revealed that knocking down SLC31A1 in macrophages significantly reduced M2-type polarization. The conditioned medium from these macrophages markedly inhibited TNBC cell migration and invasion, while promoting apoptosis. Furthermore, SLC31A1 knockdown resulted in decreased copper ion content and HO levels in macrophages. SLC31A1 enhances the malignant phenotype of TNBC cells by inducing M2 polarization in macrophages.",
+              "doi": "10.1007/s00432-025-06191-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cda520c6ce3bb04ab6cea633292b7d3eae2391af3d67dd44246e46b9998428e3"
+              }
+            },
+            {
+              "title": "Cuproptosis-related gene SLC31A1 expression correlates with the prognosis and tumor immune microenvironment in glioma.",
+              "abstract": "Cuproptosis is a newly discovered form of cell death. It is regulated by a string of genes. The genes are identified to influence the tumor progression, but in glioma, the cuproptosis-related genes are little studied. The Cancer Genome Atlas (TCGA) and the Genotype-Tissue Expression (GTEx) were used to screen for SLC31A1 gene expression in glioma and healthy tissue samples. The results were validated using the Gene Expression Omnibus (GEO) and quantitative real-time polymerase chain reaction (qPCR). The Human Protein Atlas (HPA) and the National Cancer Institute's Clinical Proteomic Tumor Analysis Consortium (CPTAC) were used to validate our results at the protein level. Multivariable analysis and Kaplan-Meier survival curves were used to examine the relationship among SLC31A1 gene expression, clinical parameters, and survival rates. The online Search Tool for the Retrieval of Interacting Genes/Proteins (STRING) was used to find the genes and proteins that correlate to SLC31A1. The immune infiltration analysis was performed using the Tumor Immune Estimation Resource (TIMER) databases. Small interfering RNA was used to knock down the SLC31A1 expression, and the cell proliferation, apoptosis, and migration were analyzed using cell counting kit-8, flow cytometry, and transwell. The glioma patients have higher SLC31A1 expression levels, which increase as the World Health Organization (WHO) grade escalates. The survival analysis illustrates that the SLC31A1 gene expression negatively correlates with overall survival (OS), progression-free survival (PFS), and disease-specific survival (DSS). The immune infiltration analysis shows the SLC31A1 gene positively correlates with T helper 2 (Th2) cells, macrophages, and M2-type macrophages and negatively correlates with plasmacytoid dendritic cells (pDCs), natural killer (NK) CD56bright cells, and CD8 T cells. The in vitro KD experiment shows the SLC31A1 knockdown depressed the glioma cell proliferation and migration and promoted the apoptosis rate. The SLC31A1 gene expression can shorten the survival time of glioma patients. In vitro study shows that SLC31A1 can promote cell proliferation, and migration, and depress the cell apoptosis of glioma cells. It also can promote the formation of a tumor-suppressive microenvironment.",
+              "doi": "10.1007/s10142-023-01210-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "86f4cfa8a4cb06b4573aec53f7806fe22b376e2574d2ec9388074eb899f46258"
+              }
+            },
+            {
+              "title": "MiR-522-3p inhibits proliferation and activation by regulating the expression of SLC31A1 in T cells.",
+              "abstract": "We investigated the role of miR-522-3p in thymoma-associated myasthenia gravis (TAMG), and the mechanism of action in T cells. The miR-522-3p expression in normal serum, non-thymoma MG patient serum and TAMG patient serum and tissues was detected by quantitative real-time PCR (qRT-PCR), respectively. We assessed miR-522-3p expression in Jurkat cells and human CD4 T cells after activation by anti-CD3 and anti-CD28 using qRT-PCR. The viability, proliferation, cycle distribution and the levels of CD25, CD69, interleukin-2 (IL-2) and IL-10 in transfected Jurkat cells were detected by Cell counting kit-8, 5-ethynyl-2'-deoxyuridine (EdU), flow cytometry, qRT-PCR, respectively. Targeting relationships of miR-522-3p and SLC31A1 were predicted and validated by bioinformatics analysis and dual-luciferase reporter. The viability, proliferation, cycle distribution and the levels of SLC31A1, CD25, CD69, IL-2 and IL-10 in transfected Jurkat cells were detected by above methods and western blot. The miR-522-3p expression was declined in TAMG and activated T cells. MiR-522-3p inhibitor promoted cell viability, EdU positive cells, cycle progression, and the level of CD25, CD69, IL-2 and IL-10 in Jurkat cells, while the effect of miR-522-3p mimic was the opposite. SLC31A1 was targeted by miR-522-3p, and miR-522-3p inhibited SLC31A1 expression. Overexpressed SLC31A1 reversed the inhibitory effects of miR-522-3p mimic on cell viability, EdU positive cell, cycle progression, and the levels of IL-2 and IL-10 in transfected Jurkat cells. MiR-522-3p expression was down-regulated in TAMG, and miR-522-3p inhibited proliferation and activation by regulating SLC31A1 expression in T cells.",
+              "doi": "10.1007/s10616-021-00472-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC31A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f7795013264ac2439523863ccfcbb6000ca871c576a6da3b2d55d4b4e6b20f15"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC31A1 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC31A1 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC31A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC31A1",
+            "ppr_score": 0.00011121414596787071,
+            "degree_corrected_score": 0.00011511979653979658,
+            "graph_degree": 8,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC31A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC31A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC31A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC31A1": {
+          "status": "ok",
+          "gene": "SLC31A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC31A1.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC31A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC31A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC31A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=5.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC31A1"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC31A1": 5.9
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.78；法官理由: Three channels vote True. Evidence-channel essentiality score (0.82) and two independent LLMs support copper-transporter dependency in NALM6; graph lacks direct ALL/NALM6 CRISPR readout but consensus is convincing enough.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC31A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=5.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC31A1"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC31A1": 5.9
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.78；法官理由: CRISPR loss-of-function evidence suggests SLC31A1 is essential in NALM6, so inhibition would impair copper-dependent fitness and suppress ALL tumor growth. Database paths are indirect, but all channels agree.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC31A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC31A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T08:39:33Z"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "system": "mdagents_topk",
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC7A11",
+        "SLC38A1"
+      ],
+      "diff": "advanced",
+      "ndcg5": 0.16958010263680806,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 56392,
+        "completion": 24231,
+        "total": 80623,
+        "calls": 32
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pred": [],
+      "diff": "intermediate",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 41763,
+        "completion": 4887,
+        "total": 46650,
+        "calls": 33
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pred": [
+        "SLC35F2",
+        "SLC25A11",
+        "SLC25A51",
+        "SLC25A1",
+        "SLC30A1"
+      ],
+      "diff": "advanced",
+      "ndcg5": 1.0,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 52847,
+        "completion": 25716,
+        "total": 78563,
+        "calls": 32
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pred": [
+        "SLC7A11",
+        "SLC16A3",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC9A1"
+      ],
+      "diff": "advanced",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 55452,
+        "completion": 23856,
+        "total": 79308,
+        "calls": 32
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pred": [
+        "SLC7A11",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC9A1",
+        "SLCO1B1"
+      ],
+      "diff": "advanced",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 65064,
+        "completion": 29367,
+        "total": 94431,
+        "calls": 38
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pred": [],
+      "diff": "intermediate",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 53758,
+        "completion": 5075,
+        "total": 58833,
+        "calls": 36
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pred": [],
+      "diff": "intermediate",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 75782,
+        "completion": 5875,
+        "total": 81657,
+        "calls": 42
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pred": [],
+      "diff": "intermediate",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 177300,
+        "completion": 7836,
+        "total": 185136,
+        "calls": 62
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pred": [],
+      "diff": "intermediate",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 80868,
+        "completion": 5325,
+        "total": 86193,
+        "calls": 44
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pred": [
+        "SLC19A1",
+        "SLC25A32",
+        "SLC16A1",
+        "SLC35A2",
+        "SLC35A1"
+      ],
+      "diff": "advanced",
+      "ndcg5": 1.0,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 54375,
+        "completion": 24625,
+        "total": 79000,
+        "calls": 39
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pred": [
+        "SLC1A5",
+        "SLC7A11",
+        "SLC25A4",
+        "SLC38A1",
+        "SLC7A5"
+      ],
+      "diff": "advanced",
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 56581,
+        "completion": 22854,
+        "total": 79435,
+        "calls": 32
+      },
+      "error": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-10-28T02:39:09Z",
+  "definition": "pure-LLM 双探针(原题面复用 + 空白填空 paraphrase)非双对",
+  "counters": {
+    "stable": 1,
+    "novel": 1,
+    "unstable": 1,
+    "probe_error": 0
+  },
+  "b_qids": [
+    "membership_negative_ALL_Human_CUTLL1_Low-2V_00003",
+    "membership_negative_ALL_Human_NALM6_24h_00004"
+  ]
+}

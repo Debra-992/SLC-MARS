@@ -1,0 +1,593 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00257",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC39A4 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC39A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00257",
+      "status": "ok",
+      "summary": "检索到 4 类证据、25 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC39A4"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC39A4",
+              "protein_function": "Selective transporter that mediates the uptake of Zn(2+).",
+              "aliases": "ZIP4, Zinc Transporter ZIP4",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC39A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC39A4",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A4",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "UKLF/PCBP2 axis governs the colorectal cancer development by transcriptionally activating SLC39A4.",
+              "abstract": "Colorectal cancer (CRC) is one of the most prevalent malignant tumors with limited treatment options. Therefore, there is an urgent need to investigate new therapeutic targets against CRC. Ubiquitous Kruppel-like factor (UKLF) is involved in various cancer processes, but its effect and detailed molecular mechanism in CRC are not yet fully understood. Here, this study aimed to investigate the function and mechanism of UKLF in the development of CRC. The results showed that UKLF was highly expressed in CRC tissues from clinical patients and its high expression was related to poor prognosis. UKLF promoted cell proliferation, migration and invasion, and inhibited cell apoptosis. The promotion effect of UKLF on tumor growth was further confirmed in vivo. As far as the mechanism was concerned, poly (C) binding protein 2 (PCBP2) was verified to bind to the 3'-UTR of UKLF mRNA and enhance its mRNA stability. Moreover, UKLF modulated the expression of solute carrier family 39 member 4 (SLC39A4) at the transcriptional level. Taken together, these findings elucidated the regulatory mechanism of UKLF and uncovered the importance of the PCBP2/UKLF/SLC39A4 pathway. The targeting of UKLF may be a novel direction for molecular-targeted CRC therapy.",
+              "doi": "10.1016/j.bbamcr.2024.119755",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bc37b6f6371079a79f41e983e346a94858cafadbceb569a03defb07383a42d5a"
+              }
+            },
+            {
+              "title": "SLC39A4 expression is associated with enhanced cell migration, cisplatin resistance, and poor survival in non-small cell lung cancer.",
+              "abstract": "The zinc transporter SLC39A4 influences epithelial cell morphology and migration in various cancers; however, its role in regulating cell invasion and chemotherapeutic resistance in human lung cancer is not yet clear. Here, integrated analysis of gene expression in non-small cell lung cancer revealed that SLC39A4 expression is significantly correlated with increased tumour size and regional lymph node spread, as well as shorter overall survival (OS) and disease-free survival (DFS). SLC39A4 silencing by lentivirus-mediated shRNA blocked human lung cancer cell epithelial-mesenchymal transition and metastasis in vitro and in vivo, respectively. Moreover, SLC39A4 knockdown enhanced cancer cell sensitivity to cisplatin-induced death by inhibiting stemness in lung cancer cells. Collectively, these data suggest that SLC39A4 may be a novel therapeutic target and predictive marker of tumour metastasis in non-small cell lung cancer.",
+              "doi": "10.1038/s41598-017-07830-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bcd69e6a83d7ddc8454461b5e7f686a41eac2a98a9a64999a9faf4ff728e68a3"
+              }
+            },
+            {
+              "title": "ZIP4 Increases Expression of Transcription Factor ZEB1 to Promote Integrin α3β1 Signaling and Inhibit Expression of the Gemcitabine Transporter ENT1 in Pancreatic Cancer Cells.",
+              "abstract": "Pancreatic tumors undergo rapid growth and progression, become resistant to chemotherapy, and recur after surgery. We studied the functions of the solute carrier family 39 member 4 (SLC39A4, also called ZIP4), which regulates concentrations of intracellular zinc and is increased in pancreatic cancer cells, in cell lines and mice. We obtained 93 pancreatic cancer specimens (tumor and adjacent nontumor tissues) from patients who underwent surgery and gemcitabine chemotherapy and analyzed them by immunohistochemistry. ZIP4 and/or ITGA3 or ITGB1 were overexpressed or knocked down with short hairpin RNAs in AsPC-1 and MIA PaCa-2 pancreatic cancer cells lines, and in pancreatic cells from KPC and KPC-ZEB1-knockout mice, and pancreatic spheroids were established; cells and spheroids were analyzed by immunoblots, reverse transcription polymerase chain reaction, and liquid chromatography tandem mass spectrometry. We studied transcriptional regulation of ZEB1, ITGA3, ITGB1, JNK, and ENT1 by ZIP4 using chromatin precipitation and luciferase reporter assays. Nude mice were given injections of genetically manipulated AsPC-1 and MIA PaCa-2 cells, and growth of xenograft tumors and metastases was measured. In pancreatic cancer specimens from patients, increased levels of ZIP4 were associated with shorter survival times. MIA PaCa-2 cells that overexpressed ZIP4 had increased resistance to gemcitabine, 5-fluorouracil, and cisplatin, whereas AsPC-1 cells with ZIP4 knockdown had increased sensitivity to these drugs. In mice, xenograft tumors grown from AsPC-1 cells with ZIP4 knockdown were smaller and more sensitive to gemcitabine. ZIP4 overexpression significantly reduced accumulation of gemcitabine in pancreatic cancer cells, increased growth of xenograft tumors in mice, and increased expression of the integrin subunits ITGA3 and ITGB1; expression levels of ITGA3 and ITGB1 were reduced in cells with ZIP4 knockdown. Pancreatic cancer cells with ITGA3 or ITGB1 knockdown had reduced proliferation and formed smaller tumors in mice, despite overexpression of ZIP4; spheroids established from these cells had increased sensitivity to gemcitabine. We found ZIP4 to activate STAT3 to induce expression of ZEB1, which induced expression of ITGA3 and ITGB1 in KPC cells. Increased ITGA3 and ITGB1 expression and subsequent integrin α3β1 signaling, via c-Jun-N-terminal kinase (JNK), inhibited expression of the gemcitabine transporter ENT1, which reduced gemcitabine uptake by pancreatic cancer cells. ZEB1-knockdown cells had increased sensitivity to gemcitabine. In studies of pancreatic cancer cell lines and mice, we found that ZIP4 increases expression of the transcription factor ZEB1, which activates expression of ITGA3 and ITGB1. The subsequent increase in integrin α3β1 signaling, via JNK, inhibits expression of the gemcitabine transporter ENT1, so that cells take up smaller amounts of the drug. Activation of this pathway might help mediate resistance of pancreatic tumors to chemotherapeutic agents.",
+              "doi": "10.1053/j.gastro.2019.10.038",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c3627b7c1942f4f7ec6773cf94d5c7a92199b2d2ca22ec378ae2d70efaa647fa"
+              }
+            },
+            {
+              "title": "A cuproptosis-related gene expression signature predicting clinical prognosis and immune responses in intrahepatic cholangiocarcinoma detected by single-cell RNA sequence analysis.",
+              "abstract": "Cholangiocarcinoma represents a malignant neoplasm originating from the hepatobiliary tree, with a subset of tumors developing inside the liver. Intrahepatic cholangiocarcinomas (ICC) commonly exhibit an asymptomatic presentation, rendering both diagnosis and treatment challenging. Cuproptosis, an emerging regulated cell death pathway induced by copper ions, has garnered attention recently. As cancer cells show altered copper metabolism and comparatively higher copper needs, cuproptosis may play a role in the development of ICC. However, studies investigating this possibility are currently lacking. Single-cell and bulk RNA sequence data were analyzed, and correlations were established between the expression of cuproptosis-related molecules and ICC patient survival. Genes with predicting survival were used to create a CUPT score using Cox and LASSO regression and tumor mutation burden (TMB) analysis. The CIBERSORT software was employed to characterize immune cell infiltration within the tumors. Furthermore, immune infiltration prediction, biological function enrichment, and drug sensitivity analyses were conducted to explore the potential implications of the cuproptosis-related signature. The effects of silencing solute carrier family 39 member 4 gene (SLC39A4) expression using siRNA were investigated using assays measuring cell proliferation, colony formation, and cell migration. Key genes of cuproptosis were detected by western blotting. The developed CUPT score divided patients into high and low CUPT score groups. Those with a low score had significantly better prognosis and longer survival. In contrast, high CUPT scores were associated with worse clinical outcomes and significantly higher TMB. Comparisons of the two groups also indicated differences in the immune infiltrate present in the tumors. Finally, we were able to identify 95 drugs potentially affecting the cuproptosis pathway. Some of these might be effective in the treatment of ICC. The in vitro experiments revealed that suppressing the expression of SLC39A4 in ICC cell lines resulted in reduced cell proliferation, colony formation, and cell migration. It also led to an increase in cell death and the upregulation of key genes associated with cuproptosis, namely ferredoxin 1 (FDX1) and dihydrolipoyl transacetylase (DLAT). These findings strongly suggest that this cuproptosis-associated molecule may play a pivotal role in the development and metastasis of ICC. Changes in the expression of a cuproptosis-related gene signature can predict the clinical prognosis of ICC with considerable accuracy. This supports the notion that cuproptosis influences the diversity and complexity of the immune microenvironment, mutational landscape, and biological behavior of ICC. Understanding this pathway better may hold promise for the development of innovative strategies in the management of this disease.",
+              "doi": "10.1186/s12935-024-03251-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f445bfbba12869b7502d0117437f38deddbbe0e92538e882573170deafced00f"
+              }
+            },
+            {
+              "title": "Zip4 (Slc39a4) expression is activated in hepatocellular carcinomas and functions to repress apoptosis, enhance cell cycle and increase migration.",
+              "abstract": "The zinc transporter ZIP4 (Slc39a4) is important for proper mammalian development and is an essential gene in mice. Recent studies suggest that this gene may also play a role in pancreatic cancer. Herein, we present evidence that this essential zinc transporter is expressed in hepatocellular carcinomas. Zip4 mRNA and protein were dramatically elevated in hepatocytes in the majority of human hepatocellular carcinomas relative to noncancerous surrounding tissues, as well as in hepatocytes in hepatocellular carcinomas occurring in farnesoid X receptor-knockout mice. Interestingly, meta-analysis of microarray data in the Geo and Oncomine databases suggests that Zip4 mRNA may also be elevated in many types of cancer. Potential mechanisms of action of ZIP4 were examined in cultured cell lines. RNAi knockdown of Zip4 in mouse Hepa cells significantly increased apoptosis and modestly slowed progression from G(0)/G(1) to S phase when cells were released from hydroxyurea block into zinc-deficient medium. Cell migration assays revealed that RNAi knockdown of Zip4 in Hepa cells depressed in vitro migration whereas forced over-expression in Hepa cells and MCF-7 cells enhanced in vitro migration. ZIP4 may play a role in the acquisition of zinc by hepatocellular carcinomas, and potentially many different cancerous cell-types, leading to repressed apoptosis, enhanced growth rate and enhanced invasive behavior.",
+              "doi": "10.1371/journal.pone.0013158",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "97df19f19abd4bfa8713cb97749211ee1c088cfc2349f07f9d6d4ef04fcd3d9f"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC39A4 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC39A4 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unavailable, de=error）；候选基因=['SLC39A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC39A4",
+            "ppr_score": 0.00010809953806474468,
+            "degree_corrected_score": 6.632799615181179e-05,
+            "graph_degree": 9,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC39A4",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A4.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC39A4",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC39A4": {
+          "status": "ok",
+          "gene": "SLC39A4",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A4.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC39A4": {
+          "status": "unavailable",
+          "gene": "SLC39A4",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A4 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=6.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC39A4"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A4": 6.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: No observations link SLC39A4 to melanoma drug resistance; E's essentiality score reflects CRISPR viability, not inhibition. Two independent channels correctly flag construct mismatch. Claim unsupported/false.。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A4 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=6.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC39A4"
+        ],
+        "confidence": 0.8,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A4": 6.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.8；法官理由: Evidence shows only CRISPR essentiality/zinc-transporter associations, no melanoma drug-resistance mechanism. E's score conflates loss-of-function viability with inhibition; two independent LLM critiques correctly reject that. Thus claim fa。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A4']",
+        "status": "ok",
+        "summary": "SLC39A4 encodes the zinc transporter ZIP4 and is mainly linked to zinc homeostasis, skin integrity, and some cancer-related zinc dysregulation. There is no well-established evidence that SLC39A4 specifically inhibits melanoma tumor drug resistance; if anything, zinc transporter perturbations are more often associated with altered drug sensitivity rather than a defined resistance-suppressing role in melanoma.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC39A4"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC39A4 encodes the zinc transporter ZIP4 and is mainly linked to zinc homeostasis, skin integrity, and some cancer-related zinc dysregulation. There is no well-established evidence that SLC39A4 specifically inhibits melanoma tumor drug resistance; if anything, zinc transporter perturbations are more often associated with altered drug sensitivity rather than a defined resistance-suppressing role in melanoma.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T02:28:27Z"
+  }
+}

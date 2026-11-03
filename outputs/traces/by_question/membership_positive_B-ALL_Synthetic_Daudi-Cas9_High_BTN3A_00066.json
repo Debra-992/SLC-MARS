@@ -1,0 +1,308 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00066",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC44A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC44A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00066",
+      "status": "ok",
+      "summary": "检索到 4 类证据、4 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC44A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC44A3",
+              "protein_function": "Predicted to enable transmembrane transporter activity.",
+              "aliases": "CTL3, Choline Transporter-Like Protein 3",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC44A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC44 Choline-like  transporter family",
+              "target_properties": {
+                "name": "SLC44 Choline-like  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Genome-wide analysis identifies novel susceptibility loci for myocardial infarction.",
+              "abstract": "While most patients with myocardial infarction (MI) have underlying coronary atherosclerosis, not all patients with coronary artery disease (CAD) develop MI. We sought to address the hypothesis that some of the genetic factors which establish atherosclerosis may be distinct from those that predispose to vulnerable plaques and thrombus formation. We carried out a genome-wide association study for MI in the UK Biobank (n∼472 000), followed by a meta-analysis with summary statistics from the CARDIoGRAMplusC4D Consortium (n∼167 000). Multiple independent replication analyses and functional approaches were used to prioritize loci and evaluate positional candidate genes. Eight novel regions were identified for MI at the genome wide significance level, of which effect sizes at six loci were more robust for MI than for CAD without the presence of MI. Confirmatory evidence for association of a locus on chromosome 1p21.3 harbouring choline-like transporter 3 (SLC44A3) with MI in the context of CAD, but not with coronary atherosclerosis itself, was obtained in Biobank Japan (n∼165 000) and 16 independent angiography-based cohorts (n∼27 000). Follow-up analyses did not reveal association of the SLC44A3 locus with CAD risk factors, biomarkers of coagulation, other thrombotic diseases, or plasma levels of a broad array of metabolites, including choline, trimethylamine N-oxide, and betaine. However, aortic expression of SLC44A3 was increased in carriers of the MI risk allele at chromosome 1p21.3, increased in ischaemic (vs. non-diseased) coronary arteries, up-regulated in human aortic endothelial cells treated with interleukin-1β (vs. vehicle), and associated with smooth muscle cell migration in vitro. A large-scale analysis comprising ∼831 000 subjects revealed novel genetic determinants of MI and implicated SLC44A3 in the pathophysiology of vulnerable plaques.",
+              "doi": "10.1093/eurheartj/ehaa1040",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e71edfde03df112b9506ca4f5ff00b2d3d82bfd8b35b91ab0a3928c0256101c3"
+              }
+            },
+            {
+              "title": "CHML regulates migration and invasion in hepatocellular carcinoma via transcriptional and metabolic reprogramming.",
+              "abstract": "Hepatocellular carcinoma (HCC), a prevalent malignant neoplasm, presents significant therapeutic challenges. However, the key factors and mechanisms driving HCC metastasis remain incompletely understood. This study aimed to elucidate the mechanism through which CHML regulates the migration and invasion of HCC cells. Following CHML knockout or overexpression, we assessed the proliferative capacity of HCC cells using the Cell Counting Kit-8 (CCK-8) assay, 5-ethynyl-2'-deoxyuridine (EdU) incorporation, colony formation assay, and subcutaneous xenograft tumor models in nude mice. Cell migration and invasion were evaluated using wound healing and Transwell assays. We utilized transcriptome sequencing and untargeted metabolomics to assess the gene's effects on transcriptomic and metabolic changes and its mechanisms in regulating migration. CHML knockout significantly inhibited the migration and invasion of HCC cells in vitro, whereas CHML overexpression promoted these phenotypes (<0.05). Transcriptomic sequencing revealed CHML-mediated regulation of migration-associated pathways, whereas untargeted metabolomics identified choline metabolism as a key significantly altered pathway. Notably, the integration of transcriptomics and untargeted metabolomics identified choline metabolism as a pivotal pathway in CHML-regulated migration and invasion. The subsequent mechanistic analysis demonstrated that CHML upregulated the Solute carrier family 44 member 3 (SLC44A3) to enhance choline uptake, thereby increasing phosphatidic acid (PA) production. This metabolic shift activated MAPK and PI3K-AKT signaling cascades, ultimately driving HCC cell migration and invasion. CHML promoted the migration and invasion of HCC cells through multiple pathways. Our findings provide novel insights into metabolic dependencies in HCC metastasis and position CHML as a promising therapeutic target.",
+              "doi": "10.3389/fonc.2025.1575809",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b8a62d244b5149a8af501ae807d2a7094ac809234c9758c7d493e27deecb4e10"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC44A3 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC44A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC44A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC44A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC44A3",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC44A3": {
+          "status": "unavailable",
+          "gene": "SLC44A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC44A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC44A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC44A3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC44A3"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC44A3": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.58；法官理由: No direct Daudi MAGeCK evidence; literature is MI association, irrelevant. SLC44-family redundancy makes loss unlikely to deplete cells. All channels vote false, though speculative. Weak but consistent negative signal.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC44A3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC44A3"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC44A3": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.66；法官理由: No CRISPR depletion evidence supports SLC44A3 promoting B-ALL survival; observations only indicate transporter/MI associations. Evidence channel and two independent LLM votes agree it is non-essential under MAGeCK.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC44A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:54:44Z"
+  }
+}

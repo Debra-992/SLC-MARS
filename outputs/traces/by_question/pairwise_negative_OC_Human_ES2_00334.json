@@ -1,0 +1,435 @@
+{
+  "qid": "pairwise_negative_OC_Human_ES2_00334",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC22A12 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "winner": "SLC35B1"
+  },
+  "effective_genes": [
+    "SLC35B1",
+    "SLC22A12"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_OC_Human_ES2_00334",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B1",
+        "SLC22A12"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A12",
+              "protein_function": "Electroneutral antiporter that translocates urate across the apical membrane of proximal tubular cells in exchange for monovalent organic or inorganic anions.",
+              "aliases": "URAT1, RST, Renal-Specific Transporter",
+              "transport_type": "E / organic anions"
+            },
+            {
+              "gene": "SLC35B1",
+              "protein_function": "ATP:ADP antiporter that catalyzes the exchange of ATP and ADP across the endoplasmic reticulum (ER) membrane. Regulates ER energy metabolism and protein biogenesis.",
+              "aliases": "SLC35B1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A12",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A12",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "URAT1",
+              "target_properties": {
+                "name": "URAT1"
+              }
+            },
+            {
+              "gene": "SLC35B1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Metabolic crosstalk and therapeutic interplay between diabetes and hyperuricemia.",
+              "abstract": "Hyperuricemia and diabetes mellitus (DM) are prevalent metabolic disorders with high comorbidity, imposing a substantial global public health burden. Their coexistence is not merely additive but synergistic, exacerbating metabolic dysregulation through mechanisms such as insulin resistance and β-cell apoptosis, ultimately establishing a vicious cycle. Both disorders induce acute and chronic damage to vital organs, particularly the cardiovascular, renal systems. Hyperuricemia aggravates diabetic complications, notably diabetic cardiomyopathy, nephropathy and retinopathy via oxidative stress, inflammation, and metabolic dysregulation.Current urate-lowering therapies (ULTs), such as xanthine oxidase inhibitors and urate transporter 1 (URAT1, also known as SLC22A12) antagonists, demonstrate potential benefits in ameliorating diabetic complications but face challenges including safety concerns and dose adjustments. Similarly, several glucose-lowering drugs also exhibit the benefits of improving hyperuricemia. This review summarizes the metabolic crosstalk and therapeutic interplay between hyperuricemia and DM, examines the pathogenic role of uric acid in diabetic complications, and discusses the benefits and challenges of existing ULTs and glucose-lowering drugs in disrupting this cycle of metabolic dysregulation and concurrent organ damage. We hope our findings deepen the comprehension of the intricate metabolic crosstalk between glucose and urate homeostasis, providing novel therapeutic insights for patients with comorbid DM and hyperuricemia.",
+              "doi": "10.1016/j.diabres.2025.112204",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A12"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6771cad2f78f10869ee79aa449658695bd0fda3a7b8900918f63ccf112f8a7fa"
+              }
+            },
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Analysis of SLC genes alternative splicing identifies the SLC7A6 RI isoform as a therapeutic target for colorectal cancer.",
+              "abstract": "Alternative splicing (AS), a crucial mechanism in post-transcriptional regulation, has been implicated in diverse cancer processes. Several splicing variants of solute carrier (SLC) transporters reportedly play pivotal roles in tumorigenesis and tumor development. However, an in-depth analysis of AS landscapes of SLCs in colon adenocarcinoma (COAD) is lacking. Herein, we analyzed data from The Cancer Genome Atlas and identified 1215 AS events across 243 SLC genes, including 109 differentially expressed AS (DEAS) events involving 62 SLC genes in COAD. Differentially spliced SLCs were enriched in biological processes, including transmembrane transporter activity, transporter activity, ferroptosis, and choline metabolism. In patients with COAD, tumor tissues exhibited higher expression of longer mitochondrial carrier SLC25A16 isoforms than adjacent normal tissues, consistent with bioinformatics analysis. Protein-coding sequences and transmembrane helices of survival-related DEAS were predicted, revealing that shifts in splicing sites altered the number and structure of their transmembrane proteins. We developed a prognostic risk model based on the screened 6-SLC-AS (SLC7A6_RI_37208 (SLC7A6-RI), SLC11A2_AP_21724, SLC2A8_ES_87631, SLC35B1_AA_42317, SLC39A11_AD_43204, and SLC7A8_AP_26712). Knockdown of the intronic region of SLC7A6-RI isoform enhanced colon cancer cell proliferation. In vivo, knockdown of the intronic region of SLC7A6-RI isoform enhanced tumor growth in colon cancer. Mechanistically, si-SLC7A6-RI isoform exerted oncogenic effects by activating the PI3K-Akt-mTOR signaling pathway and promoting cell proliferation, evidenced by increased expression of key regulators Phosphorylated Mammalian Target of Rapamycin (p-mTOR) and a cell proliferation marker Proliferating Cell Nuclear Antigen (PCNA) using western blotting. Our study elucidated SLC-AS in COAD, highlighting its potential as a prognostic and therapeutic target and emphasizing the suppressive influence of SLC7A6-RI in colon cancer progression.",
+              "doi": "10.1111/cas.16351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3ab303da4942091e927081c16e3566458c8cfd12b97c46020687e511160f0e23"
+              }
+            },
+            {
+              "title": "Effects of glucose on lactose synthesis in mammary epithelial cells from dairy cow.",
+              "abstract": "Lactose, as the primary osmotic component in milk, is the major determinant of milk volume. Glucose is the primary precursor of lactose. However, the effect of glucose on lactose synthesis in dairy cow mammary glands and the mechanism governing this process are poorly understood. Here we showed that glucose has the ability to induce lactose synthesis in dairy cow mammary epithelial cells, as well as increase cell viability and proliferation. A concentration of 12 mM glucose was the optimum concentration to induce cell growth and lactose synthesis in cultured dairy cow mammary epithelial cells. In vitro, 12 mM glucose enhanced lactose content, along with the expression of genes involved in glucose transportation and the lactose biosynthesis pathway, including GLUT1, SLC35A2, SLC35B1, HK2, β4GalT-I, and AKT1. In addition, we found that AKT1 knockdown inhibited cell growth and lactose synthesis as well as expression of GLUT1, SLC35A2, SLC35B1, HK2, and β4GalT-I. Glucose induces cell growth and lactose synthesis in dairy cow mammary epithelial cells. Protein kinase B alpha acts as a regulator of metabolism in dairy cow mammary gland to mediate the effects of glucose on lactose synthesis.",
+              "doi": "10.1186/s12917-016-0704-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7481668337f5074651447ea1cfb0116331aac5b1e8041070989ba69ad4b4b891"
+              }
+            },
+            {
+              "title": "Low Expression Levels of SLC22A12 Indicates a Poor Prognosis and Progresses Clear Cell Renal Cell Carcinoma.",
+              "abstract": "Clear cell renal cell carcinoma (ccRCC) accounts for approximately 4/5 of all kidney cancers. Accumulation of minor changes in the cellular homeostasis may be one cause of ccRCC. Therefore, we downloaded the RNA sequencing and survival data of the kidney renal cell carcinoma (KIRC) cohort from the Cancer Genome Atlas (TCGA) database. After the univariate and multivariate Cox regression analyses, 19 kidney-specific differentially expressed genes (DEGs) were found. Solute Carrier Family 22 Member 12 (SLC22A12) resulted in an independent prognostic predictor for both overall survival (OS) and disease-free survival (DFS). SLC22A12 expression was lower in tumoral tissue compared to normal tissue. Moreover, patients in the SLC22A12 low expression group had a higher pathological stage and worse survival than the high expression group. Additionally, qRT-PCR assay, immunoblotting test (IBT), and immunohistochemical (IHC) analyses of cancer tissues/cells and the corresponding normal controls verified that SLC22A12 is downregulated in ccRCC. Receiver operator characteristic (ROC) curves showed that the low expression level of SLC22A12 could be a good diagnostic marker for ccRCC (AUC=0.7258; p <0.0001). Gene set enrichment analysis (GSEA) showed that SLC22A12 expression levels are related to metabolism, cell cycle, and tumor-related signaling pathways. GO and KEGG analyses revealed that SLC22A12 transports multiple organic compounds, ions, and hormones and participates in the extracellular structure organization. Furthermore, SLC22A12 over-expression  inhibited the proliferation, migration, and invasion of renal cancer cells by regulating PI3K/Akt pathways. Such effects were reversed when knocking out SLC22A12. In summary, as a transporter for many vital metabolites, SLC22A12 may affect tumor cell survival through its impacts on the mentioned metabolites. In conclusion, this study uncovered that SLC22A12 is a promising prognostic and diagnostic biomarker for ccRCC.",
+              "doi": "10.3389/fonc.2021.659208",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A12"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e612d6bb7c70e91668a1826c2894b53e92c48cbf0a669e15140c6c2789e70fc1"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B1 cancer=Ovarian cancer bucket=pairwise Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B1 and SLC22A12 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC35B1', 'SLC22A12']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC22A12",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC35B1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "stats_text": "P value: 0.9757",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B1": {
+          "status": "unavailable",
+          "gene": "SLC35B1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A12": {
+          "status": "unavailable",
+          "gene": "SLC22A12",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B1": {
+          "status": "ok",
+          "gene": "SLC35B1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.9757",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC35B1_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC22A12": {
+          "status": "ok",
+          "gene": "SLC22A12",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.4809",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC22A12_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC22A12']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B1 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC22A12"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC22A12": 0.2659
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B1': 2}，最终智能体辩论后裁决：winner=SLC35B1 answer=None conf=0.78；法官理由: SLC35B1 supports ER energy/protein biogenesis and glycosylation, making depletion more growth-inhibitory in ovarian cancer cells. SLC22A12 is kidney urate transport, likely nonessential in ES2. Independent LLM votes agree despite annotation。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC22A12']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35B1 作为 ER ATP:ADP 交换体，连接能量代谢、ER 蛋白合成/折叠和增殖应激，在 CRC/COAD 的 SLC 预后模型及乳腺上皮增殖/代谢文献中反复出现；卵巢上皮癌同样依赖增殖代谢、ER 应激和能量供给，因此从上皮肿瘤代谢依赖向 ES2 卵巢癌细胞迁移时，SLC35B1 更可能表现为肿瘤生长支持基因。SLC22A12/URAT1 主要是肾近端小管尿酸转运体，组织特异性和肿瘤邻近证据均弱，跨癌种迁移到卵巢癌 CRISPR 必需性的合理性较低。 | 目标癌种缺少直接图谱邻近/组学证据，因此不能把缺证据当作阴性，而应基于生物学角色推断。SLC35B1 的功能与 ER 能量代谢和蛋白生物发生相关，这类通路在快速增殖的卵巢癌细胞中更可能成为内在依赖；其虽在 CRC/COAD 文献中多为预后或表达模型成分，并非直接 CRISPR 必需性证据，但与乳腺上皮细胞增殖/代谢调控形成跨组织上皮肿瘤类比。SLC22A12 为肾特异性尿酸转运体，主要关联高尿酸血症/糖尿病代谢，而非肿瘤生长；KM 中两者 p 值均不显著，TIMER/PPR 不可用，因此计算证据整体偏弱。综合跨癌种类比，SLC35B1 比 SLC22A12 更可能在 ES2 卵巢癌 CRISPR 筛选中敲除后抑制肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC22A12"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B1": 0.3505,
+          "SLC22A12": 0.2659
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC35B1 作为 ER ATP:ADP 交换体，连接能量代谢、ER 蛋白合成/折叠和增殖应激，在 CRC/COAD 的 SLC 预后模型及乳腺上皮增殖/代谢文献中反复出现；卵巢上皮癌同样依赖增殖代谢、ER 应激和能量供给，因此从上皮肿瘤代谢依赖向 ES2 卵巢癌细胞迁移时，SLC35B1 更可能表现为肿瘤生长支持基因。SLC22A12/URAT1 主要是肾近端小管尿酸转运体，组织特异性和肿瘤邻近证据均弱，跨癌种迁移到卵巢癌 CRISPR 必需性的合理性较低。 | 目标癌种缺少直接图谱邻近/组学证据，因此不能把缺证据当作阴性，而应基于生物学角色推断。SLC35B1 的功能与 ER 能量代谢和蛋白生物发生相关，这类通路在快速增殖的卵巢癌细胞中更可能成为内在依赖；其虽在 CRC/COAD 文献中多为预后或表达模型成分，并非直接 CRISPR 必需性证据，但与乳腺上皮细胞增殖/代谢调控形成跨组织上皮肿瘤类比。SLC22A12 为肾特异性尿酸转运体，主要关联高尿酸血症/糖尿病代谢，而非肿瘤生长；KM 中两者 p 值均不显著，TIMER/PPR 不可用，因此计算证据整体偏弱。综合跨癌种类比，SLC35B1 比 SLC22A12 更可能在 ES2 卵巢癌 CRISPR 筛选中敲除后抑制肿瘤生长。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B1', 'SLC22A12']",
+        "status": "ok",
+        "summary": "SLC35B1 encodes a Golgi nucleotide-sugar transporter implicated in glycosaminoglycan/proteoglycan biosynthesis, which can support cancer cell proliferation and extracellular signaling; its CRISPR knockout is therefore more plausibly associated with reduced ovarian cancer tumor growth in ES2 cells. SLC22A12 (URAT1) is mainly a renal urate/organic-anion transporter with less expected relevance to ovarian cancer growth dependency.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35B1",
+        "candidates": [
+          "SLC35B1",
+          "SLC22A12"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35B1 encodes a Golgi nucleotide-sugar transporter implicated in glycosaminoglycan/proteoglycan biosynthesis, which can support cancer cell proliferation and extracellular signaling; its CRISPR knockout is therefore more plausibly associated with reduced ovarian cancer tumor growth in ES2 cells. SLC22A12 (URAT1) is mainly a renal urate/organic-anion transporter with less expected relevance to ovarian cancer growth dependency.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:51:55Z"
+  }
+}

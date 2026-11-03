@@ -1,0 +1,433 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00031",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC38A9 and SLC44A2 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "winner": "SLC44A2"
+  },
+  "effective_genes": [
+    "SLC38A9",
+    "SLC44A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_36Days_00031",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC38A9",
+        "SLC44A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "protein_function": "Lysosomal amino acid transporter involved in the activation of mTORC1 in response to amino acid levels. Acts as an amino acid sensor.",
+              "aliases": "SNAT9, Sodium-Coupled Neutral Amino Acid Transporter 9",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC44A2",
+              "protein_function": "Choline/H+ antiporter, low-affinity ethanolamine/H+ antiporter. Involved in membrane synthesis and myelin production.",
+              "aliases": "CTL2, Choline Transporter-Like Protein 2",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC44A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC44 Choline-like  transporter family",
+              "target_properties": {
+                "name": "SLC44 Choline-like  transporter family"
+              }
+            },
+            {
+              "gene": "SLC44A2",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "CTL2",
+              "target_properties": {
+                "name": "CTL2"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "mTORC1 Selective Nano-Inhibitor by Disrupting the Lysosomal Arginine-SLC38A9- mTORC1-CDKs Axis for Precision Bladder Cancer Therapy.",
+              "abstract": "The absence of precise targeting and defined mechanisms, akin to small molecules, remains a major barrier to the clinical translation of nanomedicines. Mammalian target of rapamycin complex 1 (mTORC1), a key regulator of cell proliferation and metabolism, is linked to abnormal activation in various diseases like cancers. While small-molecule inhibitors of mTORC1 are limited, they remain a focus. Here, a strategy is presented for mTORC1-specific nano-inhibitors targeting the lysosomal arginine (Arg)-SLC38A9-mTORC1 pathway. Using [2Fe-2S]CO as a universal paradigm, nanomedicines are developed (e.g., ZnPc-SFeCO) that degrade Arg in the lysosome, inhibiting SLC38A9 activation and blocking mTORC1 recruitment. ZnPc-SFeCO inhibits mTORC1 at ultra-low concentrations (1.07 ng mL), with three orders of magnitude greater specificity than the clinical small molecule rapamycin. SLC38A9 knockout abolishes nanomedicine efficacy. Differential responses to the inhibitors are also observed in normal and bladder cancer cells, linked to SLC38A9 expression levels, suggesting potential for precise treatment of non-muscle invasive bladder cancer (NMIBC). In vivo, ZnPc-SFeCO combined with photodynamic therapy outperformed MMC in preventing tumor recurrence and extending survival. This work establishes a promising approach for developing mTORC1-specific nano-inhibitors with well-defined targets and mechanisms, offering new insights into the development of precision nanomedicines for cancer therapy.",
+              "doi": "10.1002/adma.202504798",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d2ad9693492cd86c0f42f73e9d93016f4530c6588bf81001817f8304068f2f92"
+              }
+            },
+            {
+              "title": "Slc44a2 deletion alters tetraspanin and N-cadherin expression: Reduced adhesion and enhanced proliferation in cultured mesenchymal lung cells.",
+              "abstract": "Slc44a2 is reported to interact with tetraspanins CD9 and CD81. To investigate how Slc44a2 affects adhesion protein expression, cells from wild-type (WT) Slc44a2+/+, heterozygous (HET) Slc44a2+/-, and knockout (KO) Slc44a2-/- mice were cultured from lung tissue. The cultured cells expressed vimentin, N-cadherin, p120 catenin, beta-catenin, actin, CD9, and CD81, but not E-cadherin. Vimentin expression with lack of E-cadherin indicated that the cultured cells were of mesenchymal origin. Slc44a2 KO cells and HET cells demonstrated lower adherence and faster proliferation than the WT cells. All three groups displayed dramatically altered intracellular distribution of N-cadherin, CD9, and CD81. The CD9 membrane foci observed in WT cell membranes were less frequent and diminished in size in HET cells and KO cells. N-cadherin was dispersed throughout both the cytoplasm and membrane in WT cells, with similar yet weaker distribution in HET cells; however, in KO cells, N-cadherin was densely aggregated in the perinuclear cytoplasm. CD81 had a distribution pattern in WT, HET, and KO cells similar to that of N-cadherin with dense cytoplasmic clusters in the cells. KO cells also exhibited reduced filamentous actin as compared to WT cells. These results suggest that Slc44a2 is necessary for proper cellular localization of adhesion proteins and growth regulation that may be related to altered adhesion signals.",
+              "doi": "10.1016/j.tice.2021.101599",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0aaff44f65186e442ded5abfd20a0c6d1277a92398aadf491eca49d1f2aed5fc"
+              }
+            },
+            {
+              "title": "The SLC38A9-mTOR axis is involved in autophagy in the juvenile yellow catfish (Pelteobagrus fulvidraco) under ammonia stress.",
+              "abstract": "The primary objective of this study was to examine the effect of acute ammonia stress on hepatic physiological alterations in yellow catfish by performing a comprehensive analysis of the metabolome and transcriptome. The present study showed that ammonia stress led to liver metabolic disruption, functional incapacitation, and oxidative damage. Transcriptomic and metabolomic analyses revealed transcriptional and metabolic differences in the liver of yellow catfish under control and high ammonia stress conditions. After 96 h of acute exposure to ammonia, the mRNA levels of 596 liver genes were upregulated, whereas those of 603 genes were downregulated. Enrichment analysis of the differentially expressed genes identified multiple signalling pathways associated with autophagy, including the endocytosis, autophagy-animal, and mammalian target of rapamycin signalling pathways. A total of 186 upregulated and 117 downregulated metabolites, primarily associated with amino acid biosynthesis pathways, were identified. Multi-omics integration revealed the solute carrier family 38 member 9 (SLC38A9)-mammalian target of rapamycin axis as a signalling nexus for amino acid-mediated modulation of autophagy flux, and q-PCR was used to assess the expression of autophagy-related genes (LC3a and sqstm1), revealing an initial inhibition followed by the restoration of autophagic flux during ammonia stress. Subsequent utilisation of arginine as a specific SLC38A9 activator during ammonia stress demonstrated that augmented SLC38A9 expression hindered autophagy, exacerbated ammonia toxicity, and caused a physiological decline (total cholesterol, total triglyceride, acid phosphatase, alkaline phosphatase, aspartate aminotransferase, and alanine aminotransferase levels were significantly increased), oxidative stress, and apoptosis. Autophagy activation may be an adaptive mechanism to resist ammonia stress.",
+              "doi": "10.1016/j.envpol.2023.123211",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c438b9a58bde3c5dc76ca0c3fac175c4ee12158b25c7c8854e716debbeebec58"
+              }
+            },
+            {
+              "title": "Cholesterol confers ferroptosis resistance onto myeloid-biased hematopoietic stem cells and prevents irradiation-induced myelosuppression.",
+              "abstract": "There is growing appreciation that hematopoietic alterations underpin the ubiquitous detrimental effects of metabolic disorders. The susceptibility of bone marrow (BM) hematopoiesis to perturbations of cholesterol metabolism is well documented, while the underlying cellular and molecular mechanisms remain poorly understood. Here we reveal a distinct and heterogeneous cholesterol metabolic signature within BM hematopoietic stem cells (HSCs). We further show that cholesterol directly regulates maintenance and lineage differentiation of long-term HSCs (LT-HSCs), with high levels of intracellular cholesterol favoring maintenance and myeloid bias of LT-HSCs. During irradiation-induced myelosuppression, cholesterol also safeguards LT-HSC maintenance and myeloid regeneration. Mechanistically, we unravel that cholesterol directly and distinctively enhances ferroptosis resistance and boosts myeloid but dampens lymphoid lineage differentiation of LT-HSCs. Molecularly, we identify that SLC38A9-mTOR axis mediates cholesterol sensing and signal transduction to instruct lineage differentiation of LT-HSCs as well as to dictate ferroptosis sensitivity of LT-HSCs through orchestrating SLC7A11/GPX4 expression and ferritinophagy. Consequently, myeloid-biased HSCs are endowed with a survival advantage under both hypercholesterolemia and irradiation conditions. Importantly, a mTOR inhibitor rapamycin and a ferroptosis inducer imidazole ketone erastin prevent excess cholesterol-induced HSC expansion and myeloid bias. These findings unveil an unrecognized fundamental role of cholesterol metabolism in HSC survival and fate decisions with valuable clinical implications.",
+              "doi": "10.1016/j.redox.2023.102661",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "da8e52adaae31ff098568a68c180dfabf4a661128d9eb2e4f819dc7529aba20a"
+              }
+            },
+            {
+              "title": "SLC44A2 negatively regulates mitochondrial fatty acid oxidation to suppress colorectal progression by blocking the MUL1-CPT2 interaction.",
+              "abstract": "The dependence of cancer cells on mitochondrial metabolism has been revealed in various cancer types. However, the mechanisms underlying this metabolic remodeling remain largely unclear. Solute carrier family 44 member 4 (SLC44A2) is a mitochondrial membrane-localized transmembrane protein belonging to the choline transporter-like protein family. Recently, it was reported that deletion of SLC44A2 impairs adhesion and increases proliferation in cultured lung mesenchymal cells. This finding implies that SLC44A2 may play a role in the malignant phenotypes of human cancers. However, the effects of SLC44A2 on malignant phenotypes and mitochondrial metabolism in human cancers remain unexplored. In the present investigation, we observed a significant reduction in SLC44A2 expression in colorectal cancer (CRC), and low SLC44A2 expression was closely associated with poorer survival of CRC patients. Functional assays demonstrated that SLC44A2 suppressed CRC growth and metastasis both in vitro and in vivo. Mechanistically, SLC44A2 inhibits mitochondrial fatty acid oxidation, thereby reducing energy supply and increase ROS stress. This effect is achieved by promoting mitochondrial E3 ubiquitin ligase 1 (MUL1)-regulated degradation of carnitine palmitoyltransferase 2 (CPT2) via enhancing the interaction between MUL1 and CPT2, without increasing MUL1 expression, which ultimately contributes to the proliferation and metastasis of CRC. Together, SLC44A2 functions as a critical tumor suppressor in CRC and potential therapeutic target in the treatment of this malignancy.",
+              "doi": "10.1038/s41419-025-07781-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6f977f4371e7d10c5e02aac555e623017bb74fb9b8b7aef7dbc236016f2b53a9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC38A9 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC38A9 and SLC44A2 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC38A9', 'SLC44A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC38A9",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC44A2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC38A9",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC38A9",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC38A9": {
+          "status": "unavailable",
+          "gene": "SLC38A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC44A2": {
+          "status": "unavailable",
+          "gene": "SLC44A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC38A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A9",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC44A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC44A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A9', 'SLC44A2']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC38A9 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC38A9",
+          "SLC44A2"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A9": 0.35,
+          "SLC44A2": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC38A9': 2}，最终智能体辩论后裁决：winner=SLC38A9 answer=None conf=0.63；法官理由: Two independent LLM votes favor SLC38A9; its mTORC1 nutrient-sensing role is more likely essential in proliferating NALM6 than SLC44A2's redundant choline transport. Evidence-channel abstention reflects missing CRISPR readouts, not contrary。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A9', 'SLC44A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC38A9的跨癌种/造血证据更直接：其在膀胱癌中通过溶酶体Arginine-SLC38A9-mTORC1轴调控增殖，在造血干细胞中通过SLC38A9-mTOR轴影响HSC维持、谱系偏向和铁死亡敏感性；ALL/NALM6为B系前体白血病，mTORC1激活与氨基酸感知通常支持肿瘤细胞增殖和存活，因此SLC38A9敲除更可能抑制ALL肿瘤生长。SLC44A2虽有膜合成/胆碱转运功能，但现有邻近证据显示其缺失反而降低黏附并增强增殖，方向上不如SLC38A9支持肿瘤抑制。 | 目标癌种ALL缺乏直接PPR/TIMER/KM/DE证据，因此依据跨癌种生物学推理。SLC38A9是溶酶体氨基酸感受器并激活mTORC1，mTORC1在血液肿瘤和白血病增殖中常为促生存通路；文献中SLC38A9缺失或抑制可阻断mTORC1相关促增殖/存活信号，尤其在膀胱癌和造血干细胞场景中均显示其参与增殖与谱系维持。相比之下，SLC44A2缺失在肺间充质细胞中导致黏附下降且增殖增强，提示其敲除不一定抑制肿瘤生长，甚至可能促进增殖。综合方向一致性和造血/增殖通路可迁移性，SLC38A9更可能是抑制ALL肿瘤生长的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC38A9",
+          "SLC44A2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A9": 0.35,
+          "SLC44A2": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC38A9的跨癌种/造血证据更直接：其在膀胱癌中通过溶酶体Arginine-SLC38A9-mTORC1轴调控增殖，在造血干细胞中通过SLC38A9-mTOR轴影响HSC维持、谱系偏向和铁死亡敏感性；ALL/NALM6为B系前体白血病，mTORC1激活与氨基酸感知通常支持肿瘤细胞增殖和存活，因此SLC38A9敲除更可能抑制ALL肿瘤生长。SLC44A2虽有膜合成/胆碱转运功能，但现有邻近证据显示其缺失反而降低黏附并增强增殖，方向上不如SLC38A9支持肿瘤抑制。 | 目标癌种ALL缺乏直接PPR/TIMER/KM/DE证据，因此依据跨癌种生物学推理。SLC38A9是溶酶体氨基酸感受器并激活mTORC1，mTORC1在血液肿瘤和白血病增殖中常为促生存通路；文献中SLC38A9缺失或抑制可阻断mTORC1相关促增殖/存活信号，尤其在膀胱癌和造血干细胞场景中均显示其参与增殖与谱系维持。相比之下，SLC44A2缺失在肺间充质细胞中导致黏附下降且增殖增强，提示其敲除不一定抑制肿瘤生长，甚至可能促进增殖。综合方向一致性和造血/增殖通路可迁移性，SLC38A9更可能是抑制ALL肿瘤生长的候选基因。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC38A9', 'SLC44A2']",
+        "status": "ok",
+        "summary": "In NALM6 B-ALL cells, CRISPR knockout dropout over 0h to 24 days is more likely for essential proliferation/nutrient-sensing genes. SLC38A9 supports lysosomal amino acid transport and mTORC1 signaling, making its loss more likely to suppress tumor growth than SLC44A2, which is less central to ALL cell viability under these conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC38A9",
+          "SLC44A2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "In NALM6 B-ALL cells, CRISPR knockout dropout over 0h to 24 days is more likely for essential proliferation/nutrient-sensing genes. SLC38A9 supports lysosomal amino acid transport and mTORC1 signaling, making its loss more likely to suppress tumor growth than SLC44A2, which is less central to ALL cell viability under these conditions.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T09:52:44Z"
+  }
+}

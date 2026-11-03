@@ -1,0 +1,427 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00317",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B2 and SLC25A26 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A26"
+  },
+  "effective_genes": [
+    "SLC35B2",
+    "SLC25A26"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00317",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B2",
+        "SLC25A26"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            },
+            {
+              "gene": "SLC35B2",
+              "protein_function": "Probably functions as a 3'-phosphoadenylyl sulfate:adenosine 3',5'-bisphosphate antiporter at the Golgi membranes. Mediates the transport from the cytosol into the lumen of the Golgi of 3'-phosphoadenylyl sulfate/adenosine 3'phospho 5'-phosphosulfate (PAPS).",
+              "aliases": "SLC35B2",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC35B2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Inhibition of the SLC35B2-TPST2 Axis of Tyrosine Sulfation Attenuates the Growth and Metastasis of Pancreatic Ductal Adenocarcinom.",
+              "abstract": "Pancreatic ductal adenocarcinoma (PDAC) is the fourth leading cause of cancer deaths in the United States. Tyrosine sulfation, catalyzed by the tyrosylprotein sulfotransferase 2 (TPST2), is a post-translational modification essential for protein-protein interactions and cellular functions. Solute carrier family 35 member B (SLC35B2) is a key transporter that transports the universal sulfate donor 3'-phosphoadenosine 5'-phosphosulfate into the Golgi apparatus where the protein sulfation occurs. The goal of this study was to determine whether and how the SLC35B2-TPST2 axis of tyrosine sulfation plays a role in PDAC. Gene expression was analyzed in PDAC patients and mice. Human PDAC MIA PaCa-2 and PANC-1 cells were used for in vitro studies. TPST2-deficient MIA PaCa-2 cells were generated to assess xenograft tumor growth in vivo. Mouse PDAC cells derived from the Kras;Tp53;Pdx1-Cre (KPC) mice were used to generate Tpst2 knockout KPC cells to evaluate tumor growth and metastasis in vivo. High expressions of SLC35B2 and TPST2 were correlated with poor PDAC patient survival. Knocking down SLC35B2 or TPST2, or pharmacologicically inhibiting sulfation, resulted in the inhibition of PDAC cell proliferation and migration in vitro. TPST2-deficient MIA PaCa-2 cells showed inhibited xenograft tumor growth. Orthotopic inoculation of Tpst2 knockout KPC cells in mice showed inhibition of primary tumor growth, local invasion, and metastasis. Mechanistically, the integrin β4 was found to be a novel substrate of TPST2. Inhibition of sulfation destabilizes integrin β4 protein, which may have accounted for the suppression of metastasis. Targeting the SLC35B2-TPST2 axis of tyrosine sulfation may represent a novel approach for therapeutic intervention of PDAC.",
+              "doi": "10.1016/j.jcmgh.2023.05.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4d0cffd39c4790ce74dcb993eb3ed7670616e009b301f4dd0e0462b99a74e330"
+              }
+            },
+            {
+              "title": "A genome-wide CRISPR screen identifies a restricted set of HIV host dependency factors.",
+              "abstract": "Host proteins are essential for HIV entry and replication and can be important nonviral therapeutic targets. Large-scale RNA interference (RNAi)-based screens have identified nearly a thousand candidate host factors, but there is little agreement among studies and few factors have been validated. Here we demonstrate that a genome-wide CRISPR-based screen identifies host factors in a physiologically relevant cell system. We identify five factors, including the HIV co-receptors CD4 and CCR5, that are required for HIV infection yet are dispensable for cellular proliferation and viability. Tyrosylprotein sulfotransferase 2 (TPST2) and solute carrier family 35 member B2 (SLC35B2) function in a common pathway to sulfate CCR5 on extracellular tyrosine residues, facilitating CCR5 recognition by the HIV envelope. Activated leukocyte cell adhesion molecule (ALCAM) mediates cell aggregation, which is required for cell-to-cell HIV transmission. We validated these pathways in primary human CD4 T cells through Cas9-mediated knockout and antibody blockade. Our findings indicate that HIV infection and replication rely on a limited set of host-dispensable genes and suggest that these pathways can be studied for therapeutic intervention.",
+              "doi": "10.1038/ng.3741",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f1f61c42435ff36287054bebe6b8f1b7d20dbe43d3e28a76054bf5fd30a5b184"
+              }
+            },
+            {
+              "title": "Enhanced SLC35B2/SAV1 sulfation axis promotes tumor growth by inhibiting Hippo signaling in HCC.",
+              "abstract": "Protein tyrosine sulfation (PTS) is a common posttranslational modification that regulates a variety of physiological and pathological processes. However, the role of PTS in cancer remains poorly understood. The goal of this study was to determine whether and how PTS plays a role in HCC progression. By mass spectrometry and bioinformatics analysis, we identified SAV1 as a novel substrate of PTS in HCC. Oxidative stress upregulates the transcription of SLC35B2, a Golgi-resident transporter of sulfate donor 3'-phosphoadenosine 5'-phosphosulfate, leading to increased sulfation of SAV1. Sulfation of SAV1 disrupts the formation of the SAV1-MST1 complex, resulting in a decrease of MST1 phosphorylation and subsequent inactivation of Hippo signaling. These molecular events ultimately foster the growth of HCC cells both in vivo and in vitro. Moreover, SLC35B2 is a novel transcription target gene of the Hippo pathway, constituting a positive feedback loop that facilitates HCC progression under oxidative stress. Our findings reveal a regulatory mechanism of the SLC35B2/SAV1 sulfation axis in response to oxidative stress, highlighting its potential as a promising therapeutic target for HCC.",
+              "doi": "10.1097/HEP.0000000000000783",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a86b5b355c7f8b9facf7e49afcf9636555f47e14ffa253332c585d1ad5f511b1"
+              }
+            },
+            {
+              "title": "Identification and characterization of novel compound variants in SLC25A26 associated with combined oxidative phosphorylation deficiency 28.",
+              "abstract": "Combined oxidative phosphorylation deficiency 28 (COXPD28) is associated with mitochondrial dysfunction caused by mutations in SLC25A26, the gene which encodes the mitochondrial S-adenosylmethionine carrier (SAMC) that responsible for the transport of S-adenosylmethionine (SAM) into the mitochondria. To identify and characterize pathogenic variants of SLC25A26 in a Chinese pedigree, provide a basis for clinical diagnosis and genetic counseling. We conducted a systematic analysis of the clinical characteristics of a female with COXPD28. Whole-exome and mitochondrial genome sequencing was applied for the genetic analysis, together with bioinformatic analysis of predicted consequences of the identified variant. A homotrimer model was built to visualize the affected region and predict possible outcomes of this mutation. Then a literature review was performed by online searching all cases reported with COXPD28. The novel compound heterozygous SLC25A26 variants (c.34G > C, p.A12P; c.197C > A; p.A66E) were identified in a Chinese patient with COXPD28. These two variants are located in the transmembrane region 1 and transmembrane region 2, respectively. As a member of the mitochondrial carrier family, the transmembrane region of SAMC is highly conserved. The variants were predicted to be pathogenic by in silico analysis and lead to a change in the protein structure of SAMC. And the change of the SAMC structure may lead to insufficient methylation and cause disease by affecting the SAM transport. The variants in this region probably resulted in a variable loss of mitochondrial SAMC transport function and cause the COXPD28. This study that further refine genotype-phenotype associations can provide disease prognosis with a basis and families with reproductive planning options.",
+              "doi": "10.1016/j.gene.2021.145891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "253c99a7b6948508df5208fa39cdfb9e1989f9691e1780308fe9c90dff97b9e6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B2 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35B2 and SLC25A26 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC35B2', 'SLC25A26']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC35B2",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B2": {
+          "status": "unavailable",
+          "gene": "SLC35B2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B2": {
+          "status": "unavailable",
+          "gene": "SLC35B2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A26": {
+          "status": "ok",
+          "gene": "SLC25A26",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.8837",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A26_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B2', 'SLC25A26']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC35B2 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC35B2",
+          "SLC25A26"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B2": 0.35,
+          "SLC25A26": 0.2027
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.62；法官理由: No direct CRISPR evidence, but SLC25A26’s mitochondrial SAM/SAH transport supports methylation and OXPHOS dependencies plausible in melanoma. Two independent LLM channels agree; SLC35B2 appears more redundant glycosylation transport.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B2', 'SLC25A26']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35B2 在 PDAC 和 HCC 中有直接功能证据：其作为 Golgi PAPS 转运体支持酪氨酸硫酸化，SLC35B2/TPST2 轴抑制或敲低可减弱增殖、侵袭和体内肿瘤生长。Melanoma 与这些癌种虽组织来源不同，但均为高度侵袭/转移型肿瘤，且依赖细胞黏附、受体酪氨酸硫酸化、整合素/趋化因子等膜表面修饰通路；因此 SLC35B2 的硫酸化供体供给功能在 melanoma 中较可能迁移为肿瘤生长/转移依赖。SLC25A26 主要见于宫颈癌 3p 缺失相关下调的关联证据，缺乏跨癌种的功能抑制肿瘤生长证据，且 melanoma 中 KM 不显著。 | 候选中 SLC35B2 具有更强的跨癌种可迁移功能证据：在 PDAC 中敲低 SLC35B2 抑制增殖和迁移，在 HCC 中 SLC35B2/SAV1 硫酸化轴促进肿瘤生长，提示其作为肿瘤支持基因，被抑制后更可能降低肿瘤生长。Melanoma 的侵袭和转移依赖膜蛋白修饰/黏附信号，因此 SLC35B2 抑制肿瘤生长的类比方向更合理。SLC25A26 的宫颈癌证据主要是拷贝数缺失与表达下调的关联，不等同于 CRISPR 必需性，且计算证据弱，故不作为更可能抑制 melanoma 肿瘤生长的候选。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A26",
+        "candidates": [
+          "SLC35B2",
+          "SLC25A26"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B2": 0.35,
+          "SLC25A26": 0.2027
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35B2': 1, 'W:SLC25A26': 2}，最终智能体辩论后裁决：winner=SLC25A26 answer=None conf=0.64；法官理由: Two independent LLM channels agree SLC25A26 is a nonredundant mitochondrial SAM transporter, making its loss more likely to cause day-18 dropout and inhibit melanoma growth. SLC35B2 evidence is cross-cancer and association-level, weaker tha。原证据通道判定: winner=SLC35B2 answer=None conf=0.61（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35B2', 'SLC25A26']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35B2",
+          "SLC25A26"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T18:15:36Z"
+  }
+}

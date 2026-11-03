@@ -1,0 +1,625 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC34A2 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC34A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+      "status": "ok",
+      "summary": "检索到 4 类证据、29 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC34A2"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC34A2",
+              "protein_function": "Involved in actively transporting phosphate into cells via Na(+) cotransport.",
+              "aliases": "NPT2B, NAPI-IIb, NPTIIb",
+              "transport_type": "C / Na, HPO42-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC34A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC34 Type II Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC34 Type II Na+-phosphate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC34A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC34A2",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Multicancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC34A2",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC34A2 promotes neuroblastoma cell stemness via enhancement of miR-25/Gsk3β-mediated activation of Wnt/β-catenin signaling.",
+              "abstract": "Cancer stem cells contribute to cancer progression, but the mechanisms underlying neuroblastoma stem cell development are unclear. Here, we examined the roles of the transcription factor SLC34A2 in regulating the stemness of neuroblastoma cells. We found that SLC34A2 expression was negatively correlated with the overall survival and relapse-free survival probability of neuroblastoma patients. Additionally, SLC34A2 expression was observed to be remarkably increased in spheroids derived from neuroblastoma cells. Knockdown of SLC34A2 attenuated the expression of stemness markers and spheroid formation capacity of neuroblastoma cell-derived spheroids, and overexpression of SLC34A2 exerted the opposite effects in neuroblastoma cells. Mechanistically, SLC34A2 was found to directly bind to the promoter of , which targets glycogen synthesis kinase 3β (Gsk3β), an antagonist of Wnt signaling. Transfection of miR-25 inhibitor or a Gsk3β overexpression plasmid attenuated the effects of SLC34A2 overexpression on the stemness of neuroblastoma cells. Our results demonstrate that miR-25/Gsk3β-mediated activation of Wnt signaling is responsible for SLC34A2-induced enhancement of neuroblastoma cell stemness.",
+              "doi": "10.1002/2211-5463.12594",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2d65e14e1268c1ebde20c444ba5f8d206e9e2dcca6f8db326e3a69f459765966"
+              }
+            },
+            {
+              "title": "Identification of ROS1 rearrangement in gastric adenocarcinoma.",
+              "abstract": "Recently, chromosomal rearrangements involving receptor tyrosine kinases (RTKs) have been described in common epithelial malignancies, including nonsmall cell lung cancer (NSCLC), colorectal cancer, and breast cancer. One of these RTKs, c-ros oncogene 1, receptor tyrosine kinase (ROS1), has been identified as a driver mutation in NSCLC, because its inhibition by crizotinib, an anaplastic lymphoma receptor tyrosine kinase (ALK)/met proto-oncogene hepatocyte growth factor receptor (MET)/ROS1 inhibitor, led to significant tumor shrinkage in ROS1-rearranged NSCLC. Currently, only human epidermal growth factor 2 (HER2)-targeted therapy in combination with chemotherapy has been successful in significantly prolonging the survival of patients with advanced gastric cancer (GC). There is a need for the discovery of additional novel targets in GC. Anti-ROS1 immunohistochemistry (IHC) was used to screen 495 GC samples and was followed by simultaneous ROS1 break-apart fluorescence in situ hybridization (FISH) and reverse transcriptase-polymerase chain reaction (RT-PCR) analyses in IHC-positive samples. Fusion partners in ROS1-rearranged GC were determined by RT-PCR. In all 495 samples, HER2 amplification was identified with FISH, and MET expression was identified by IHC. Twenty-three tumor samples were ROS1 IHC-positive. Three of 23 patients were ROS1 FISH positive, HER2 FISH negative, and negative for MET overexpression; and 2 of those 3 patients harbored a solute carrier family 34 (sodium phosphate), member 2 (SLC34A2)-ROS1 fusion transcripts. No fusion partner was identified in the third patient. Both patients who had SLC34A2-ROS1 transcripts had poorly differentiated histology with recurrence and death within 2 years of curative surgery. ROS1 IHC-positive status was not identified as an independent prognostic factor for overall survival. In this study, an SLC34A2-ROS1 rearrangement was identified in GC, and the results provide a rationale for investigating the clinical efficacy of ROS1 inhibitors in this unique molecular subset of GC. Society.",
+              "doi": "10.1002/cncr.27967",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "73bff6c2dba406abf4b2483d3fdea9ac34159bc9230b34ab567b2a0a41d48dc4"
+              }
+            },
+            {
+              "title": "Knockdown of SLC34A2 inhibits cell proliferation, metastasis, and elevates chemosensitivity in glioma.",
+              "abstract": "Solute carrier 34 A2 (SLC34A2) is a member of SLC34 family that is a group of phosphate transporters. SLC34A2 has been reported to play critical roles in tumorigenesis and progression. However, the researches about the biological roles of SLC34A2 in glioma have not yet been reported. In this study, we analyzed the expression patterns of SLC34A2 in clinical glioma tumor tissues and cell lines. The results demonstrated that SLC34A2 was generally overexpressed in both glioma tissues and cell lines. To further investigate the roles of SLC34A2 in glioma, lentivirus containing specific SLC34A2 short hairpin RNA (sh-SLC34A2) was used to infect glioma cell lines U251 and U87 for the knockdown of SLC34A2. The following studies proved that SLC34A2 knockdown exhibited suppressive effects on cell proliferation and migration/invasion. SLC34A2 knockdown also inhibited epithelial-mesenchymal transition (EMT) phenotype, as evidenced by the increased E-cadherin expression, and the decreased N-cadherin and fibronectin expressions. Besides, knockdown of SLC34A2 enhanced the temozolomide (TMZ) sensitivity of U251 and U87 cells. In vivo tumorigenicity assay demonstrated that SLC34A2 knockdown inhibited tumor growth. Moreover, SLC34A2 knockdown suppressed the activation of epidermal growth factor receptor (EGFR)/PI3K/AKT signaling pathway in U87 cells. GW2974 (EGFR inhibitor) increased SLC34A2 knockdown-inhibited cell proliferation, migration/invasion, as well as enhanced SLC34A2 knockdown-increased the TMZ sensitivity of glioma cells. These findings suggested that SLC34A2 might be a new potential therapeutic target for the therapy of glioma patients.",
+              "doi": "10.1002/jcb.28305",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9219a40ae110bda7da9f483db8bfcfff6bf7db525adb90420f855c7b792cc4d3"
+              }
+            },
+            {
+              "title": "Discovery of a first-in-class protein degrader for the c-ros oncogene 1 (ROS1).",
+              "abstract": "The c-ros oncogene 1 (ROS1), an oncogenic driver, is known to induce non-small cell lung cancer (NSCLC) when overactivated, particularly through the formation of fusion proteins. Traditional targeted therapies focus on inhibiting ROS1 activity with ROS 1 inhibitors to manage cancer progression. However, a new strategy involving the design of protein degraders offers a more potent approach by completely degrading ROS1 fusion oncoproteins, thereby effectively blocking their kinase activity and enhancing anti-tumour potential. Utilizing PROteolysis-TArgeting Chimera (PROTAC) technology and informed by molecular docking and rational design, we report the first ROS1-specific PROTAC, SIAIS039. This degrader effectively targets multiple ROS1 fusion oncoproteins (CD74-ROS1, SDC4-ROS1 and SLC34A2-ROS1) in engineered Ba/F3 cells and HCC78 cells, demonstrating anti-tumour effects against ROS1 fusion-driven cancer cells. It suppresses cell proliferation, induces cell cycle arrest, and apoptosis, and inhibits clonogenicity. The anti-tumour efficacy of SIAIS039 surpasses two approved drugs, crizotinib and entrectinib, and matches that of the top inhibitors, including lorlatinib and taletrectinib. Mechanistic studies confirm that the degradation induced by 039 requires the participation of ROS1 ligands and E3 ubiquitin ligases, and involves the proteasome and ubiquitination. In addition, 039 exhibited excellent oral bioavailability in a mouse xenograft model, highlighting its potential for clinical application. In conclusion, our study presents a promising and novel therapeutic strategy for ROS1 fusion-positive NSCLC by targeting ROS1 fusion oncoproteins for degradation, laying the foundation for the development of further PROTAC and offering hope for patients with ROS1 fusion-positive NSCLC.",
+              "doi": "10.1016/j.bioorg.2024.107590",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7c84d528df4a5291be7106a728dd3e605c07fb16bc4ed1ac3ba036011eec7334"
+              }
+            },
+            {
+              "title": "Solute carrier family 34 member 2 overexpression contributes to tumor growth and poor patient survival in colorectal cancer.",
+              "abstract": "Solute carrier family 34 member 2 (SLC34A2) is a well-known sodium-dependent phosphate transporter that has recently been linked to cancer development. However, its specific oncogenic role remains controversial in numerous human malignancies, and is currently unknown in colorectal cancer (CRC). Therefore, in this study we firstly used Oncomine database to determine its expression in cancer tissues and found it is overexpressed in thyroid, ovarian and renal cancer, while it is opposite in lung, breast and pancreas cancer. Using qRT-PCR and western blot, we then demonstrated its overexpression in CRC tissues as compared with adjacent normal tissues (n = 20). In a retrospective cohort enrolling 190 CRC patients, we proved its expression was significantly correlated with N stage. Furthermore, high SLC34A2 expression is associated with higher postoperative metastasis rate and serves as an independent adverse factor affecting patient prognosis. In subgroup analysis, SLC34A2 expression could stratify the patient prognosis in stage II and III CRC, but failed in stage IV CRC. In cellular assays in vitro, knockdown of SLC34A2 dramatically inhibited the proliferation and colony formation, induced the apoptosis and arrests the cell cycle progression of HCT-116 CRC cells. In cellular assays in vivo, knockdown of SLC34A2 significantly inhibited the growth of xenografts, decreasing Ki-67 and proliferating cell nuclear antigen (PCNA) expression and increasing apoptosis rate. Taken together, our study indicates SLC34A2 plays a crucial promoting role in CRC development and therefore has great potential to be further developed as a reliable biomarker for CRC diagnosis and treatment.",
+              "doi": "10.1016/j.biopha.2018.01.124",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f37a67a980b79eb0d99c969c02e193ffa14bd3ef5d933b312d4ae5c519275d4e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC34A2 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC34A2 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC34A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC34A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC34A2",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC34A2": {
+          "status": "unavailable",
+          "gene": "SLC34A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC34A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC34A2",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC34A2 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=6.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC34A2"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A2": 6.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.74；法官理由: No B-ALL-specific CRISPR evidence; KG links are gastric/oxidative stress and contradictory. SLC34A2 is an epithelial phosphate transporter, unlikely expressed/essential in Daudi. E's generic essentiality conflates knockout lethality with pr。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC34A2 在胃癌、胶质瘤、神经母细胞瘤等实体瘤中通过磷酸盐转运/氧化磷酸化/增殖/干性相关通路呈现促癌效应，但这些证据主要来自上皮性或实体肿瘤谱系；B-lymphoblastic leukaemia 属于 B 细胞淋巴造血谱系，Daudi-Cas9 细胞对 SLC34A2 的依赖可能远低于实体瘤，且 BTN3A low/high 的 CRISPR 背景与 SLC34A2 的磷酸盐转运功能缺乏明确通路耦合。 | 目标癌种缺少直接 TIMER/KM/邻近图谱证据，不能仅凭跨癌种促增殖证据外推为 B-ALL 存活促进基因。SLC34A2 在邻近癌种中的 PROMOTION 多依赖实体瘤增殖、EMT、干性、氧化磷酸化等程序，而 B-ALL 的存活更受 B 细胞受体/转录因子、代谢重编程、免疫逃逸和造血谱系特异性通路驱动。Daudi-Cas9 中若无 SLC34A2 高表达或功能依赖，CRISPR 敲除不太可能显著降低肿瘤存活；因此最可能答案为 false，即 SLC34A2 不促进 B-lymphoblastic leukaemia 的肿瘤存活。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC34A2"
+        ],
+        "confidence": 0.38,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A2": 6.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC34A2 在胃癌、胶质瘤、神经母细胞瘤等实体瘤中通过磷酸盐转运/氧化磷酸化/增殖/干性相关通路呈现促癌效应，但这些证据主要来自上皮性或实体肿瘤谱系；B-lymphoblastic leukaemia 属于 B 细胞淋巴造血谱系，Daudi-Cas9 细胞对 SLC34A2 的依赖可能远低于实体瘤，且 BTN3A low/high 的 CRISPR 背景与 SLC34A2 的磷酸盐转运功能缺乏明确通路耦合。 | 目标癌种缺少直接 TIMER/KM/邻近图谱证据，不能仅凭跨癌种促增殖证据外推为 B-ALL 存活促进基因。SLC34A2 在邻近癌种中的 PROMOTION 多依赖实体瘤增殖、EMT、干性、氧化磷酸化等程序，而 B-ALL 的存活更受 B 细胞受体/转录因子、代谢重编程、免疫逃逸和造血谱系特异性通路驱动。Daudi-Cas9 中若无 SLC34A2 高表达或功能依赖，CRISPR 敲除不太可能显著降低肿瘤存活；因此最可能答案为 false，即 SLC34A2 不促进 B-lymphoblastic leukaemia 的肿瘤存活。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Gastric cancer (GC)",
+          "Multicancer",
+          "hepatocellular carcinoma (HCC)",
+          "lung cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC34A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:40:33Z"
+  }
+}

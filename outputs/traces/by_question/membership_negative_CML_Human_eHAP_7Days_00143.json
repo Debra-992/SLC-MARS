@@ -1,0 +1,322 @@
+{
+  "qid": "membership_negative_CML_Human_eHAP_7Days_00143",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nIs SLC5A11 inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC5A11"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_CML_Human_eHAP_7Days_00143",
+      "status": "ok",
+      "summary": "检索到 4 类证据、5 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC5A11"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC5A11",
+              "protein_function": "Involved in the sodium-dependent cotransport of myo-inositol with a Na(+):MI stoichiometry of 2:1.",
+              "aliases": "SMIT2",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC5A11",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC5 Sodium glucose  cotransporter family",
+              "target_properties": {
+                "name": "SLC5 Sodium glucose  cotransporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The role of the mitochondrial ribosomal protein family in detecting hepatocellular carcinoma and predicting prognosis, immune features, and drug sensitivity.",
+              "abstract": "Hepatocellular carcinoma (HCC) is one of the most common types of malignant tumors, with a slow onset, rapid progression, and frequent recurrence. Previous research has implicated mitochondrial ribosomal genes in the development, metastasis, and prognosis of various cancers. However, further research is necessary to establish a link between mitochondrial ribosomal protein (MRP) family expression and HCC diagnosis, prognosis, ferroptosis-related gene (FRG) expression, m6A modification-related gene expression, tumor immunity, and drug sensitivity. Bioinformatics resources were used to analyze data from patients with HCC retrieved from the TCGA, ICGC, and GTEx databases (GEPIA, UALCAN, Xiantao tool, cBioPortal, STRING, Cytoscape, TISIDB, and GSCALite). Among the 82 MRP family members, 14 MRP genes (MRPS21, MRPS23, MRPL9, DAP3, MRPL13, MRPL17, MRPL24, MRPL55, MRPL16, MRPL14, MRPS17, MRPL47, MRPL21, and MRPL15) were significantly upregulated differentially expressed genes (DEGs) in HCC tumor samples in comparison to normal samples. Receiver-operating characteristic curve analysis indicated that all 14 DEGs show good diagnostic performance. Furthermore, TCGA analysis revealed that the mRNA expression of 39 MRPs was associated with overall survival (OS) in HCC. HCC was divided into two molecular subtypes (C1 and C2) with distinct prognoses using clustering analysis. The clusters showed different FRG expression and m6A methylation profiles and immune features, and prognostic models showed that the model integrating 5 MRP genes (MRPS15, MRPL3, MRPL9, MRPL36, and MRPL37) and 2 FRGs (SLC1A5 and SLC5A11) attained a greater clinical net benefit than three other prognostic models. Finally, analysis of the CTRP and GDSC databases revealed several potential drugs that could target prognostic MRP genes. We identified 14 MRP genes as HCC diagnostic markers. We investigated FRG and m6A modification-related gene expression profiles and immune features in patients with HCC, and developed and validated a model incorporating MRP and FRG expression that accurately and reliably predicts HCC prognosis and may predict disease progression and treatment response.",
+              "doi": "10.1007/s12094-023-03269-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b95636ceba906d7a2bf5cbd256bd5853b209840b616b371c55c6861cf757ad8d"
+              }
+            },
+            {
+              "title": "Characterization of the SGLT2 Interaction Network and Its Regulation by SGLT2 Inhibitors: A Bioinformatic Analysis.",
+              "abstract": "Sodium-glucose cotransporter 2 (SGLT2), also known as solute carrier family 5 member 2 (SLC5A2), is a promising target for a new class of drugs primarily established as kidney-targeting, effective glucose-lowering agents used in diabetes mellitus (DM) patients. Increasing evidence indicates that besides renal effects, SGLT2 inhibitors (SGLT2i) have also a systemic impact via indirectly targeting the heart and other tissues. Our hypothesis states that the pleiotropic effects of SGLT2i are associated with their binding force, location of targets in the SGLT2 networks, targets involvement in signaling pathways, and their tissue-specific expression.  Thus, to investigate differences in SGLT2i impact on human organisms, we re-created the SGLT2 interaction network incorporating its inhibitors and metformin and analyzed its tissue-specific expression using publicly available datasets. We analyzed it in the context of the so-called key terms ( autophagy, oxidative stress, aging, senescence, inflammation, AMPK pathways, and mTOR pathways) which seem to be crucial to elucidating the SGLT2 role in a variety of clinical manifestations.  Analysis of SGLT2 and its network components' expression confidence identified selected organs in the following order: kidney, liver, adipose tissue, blood, heart, muscle, intestine, brain, and artery according to the TISSUES database. Drug repurposing analysis of known SGLT2i pointed out the influence of SGLT1 regulators on the heart and intestine tissue. Additionally, dapagliflozin seems to also have a stronger impact on brain tissue through the regulation of SGLT3 and SLC5A11. The shortest path analysis identified interaction SIRT1-SGLT2 among the top five interactions across six from seven analyzed networks associated with the key terms. Other top first-level SGLT2 interactors associated with key terms were not only ADIPOQ, INS, GLUT4, ACE, and GLUT1 but also less recognized ILK and ADCY7. Among other interactors which appeared in multiple shortest-path analyses were GPT, COG2, and MGAM. Enrichment analysis of SGLT2 network components showed the highest overrepresentation of hypertensive disease, DM-related diseases for both levels of SGLT2 interactors. Additionally, for the extended SGLT2 network, we observed enrichment in obesity (including SGLT1), cancer-related terms, neuroactive ligand-receptor interaction, and neutrophil-mediated immunity.  This study provides comprehensive and ranked information about the SGLT2 interaction network in the context of tissue expression and can help to predict the clinical effects of the SGLT2i.",
+              "doi": "10.3389/fphar.2022.901340",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "960dd09286b119e648448bdaf9f809c42341f4bae4506fca781b76e5818dc850"
+              }
+            },
+            {
+              "title": "The sodium-dependent glucose cotransporter SLC5A11 as an autoimmune modifier gene in SLE.",
+              "abstract": "Genetic studies in several human autoimmune diseases suggest that the pericentromeric region of chromosome 16 might harbor an autoimmune modifier gene. We hypothesized that the sodium-dependent glucose cotransporter gene SLC5A11 is such a gene, and so might interact with immune-related genes. Herein, this hypothesis was tested in a genetic evaluation of the multiple gene effect in systemic lupus erythematosus (SLE). We used the case-control candidate gene association approach. Eight immune-related genes involved in inflammation and autoantibody generation and clear-up [interleukin 1 receptor antagonist (IL1RN), interleukin 1-beta (IL1-beta), tumor necrosis factor-alpha (TNF-alpha), lymphotoxin-alpha (LTA), tumor necrosis factor ligand superfamily, member 6 (TNFSF6), programmed cell death 1 (PDCD1), C2, and complement component 4 (C4)] were selected for study. Frequency of each candidate's genotype and allele between case and control were compared. Results were stratified by reanalyzing genotype data with relevant symptoms. Finally, improved computational data mining was used to analyze the phenotypes in a large data set. In the frequency analysis, only IL1-beta was significantly associated with SLE. Stratification analysis showed a significant association with SLE symptoms between SLC5A11 and the other immune-related genes, with the exceptions of TNFSF6 and C4. SLC5A11 was significantly associated with low C4 (as was TNF-alpha), anti-Smith antibody (anti-Sm) (as was C2), serositis, and alopecia. Finally, SLC5A11 interacted with PDCD1, TNF-alpha, LTA, and C4. After our study, we concluded that SLC5A11 is involved with some immune effects and interacts with immune-related gene(s), consistent with its function as an autoimmune modifier gene. Furthermore, SLC5A11 might induce apoptosis through the TNF-alpha, PDCD1 pathway. The present genotype-phenotype mapping approach should be applicable to genetic study of other complex diseases.",
+              "doi": "PMID:18069935",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f3acd5404fb746bf187371b180acf5c00058a60f3e204b8acecfec717cf95c1a"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC5A11 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nIs SLC5A11 inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC5A11']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC5A11",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC5A11",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC5A11": {
+          "status": "unavailable",
+          "gene": "SLC5A11",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC5A11": {
+          "status": "unsupported_cancer",
+          "gene": "SLC5A11",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A11"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A11": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC5A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC5A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC5A11"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A11": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC5A11 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC5A11']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC5A11"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T18:07:16Z"
+  }
+}

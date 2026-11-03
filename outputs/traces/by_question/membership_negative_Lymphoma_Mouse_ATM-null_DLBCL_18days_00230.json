@@ -1,0 +1,324 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00230",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC24A2 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC24A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00230",
+      "status": "ok",
+      "summary": "检索到 4 类证据、5 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC24A2"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC24A2",
+              "protein_function": "Calcium, potassium:sodium antiporter that transports 1 Ca(2+) and 1 K(+) in exchange for 4 Na(+)",
+              "aliases": "NCKX2",
+              "transport_type": "E / 4 Na+, Ca2+, K+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC24A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC24 Na+/(Ca2+-K+)  exchanger family",
+              "target_properties": {
+                "name": "SLC24 Na+/(Ca2+-K+)  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Pyrolae herba alleviates cognitive impairment via hippocampal TREM2 signaling modulating neuroinflammation and neurogenesis in lipopolysaccharide-treated mice.",
+              "abstract": "Pyrolae herba (PH), a kind of Chinese herb, has been identified to have an anti-inflammatory effect, while the potential for treating cognitive impairment (CI), as well as the underlying mechanisms, is unclear. Currently, the interaction between neuroinflammation and neural function play a critical role in pathophysiology of CI. To elucidate therapeutic effect of PH for CI as well as its underlying mechanisms with LPS-treated mice model. In this study, male C57BL6/J mice received lipopolysaccharide (LPS) injection for 10 days to establish CI model and were administrated with PH for 14 days. We used piracetam as a positive control. Memory and spatial function was tested by Morris water maze (MWM). The level of inflammation-related cytokines (TNF-α, IL-1β, IL-10, IL-6) were determined by enzyme-linked immunosorbent assay (ELISA) in serum and western blot in hippocampus. Immunofluorescence (IF) was used to measure the levels of ionized calcium binding linker molecule 1 (IBA-1), glial fibrillary acidic protein (GFAP), BrdU, Ki67 and doublecortin (DCX) in hippocampus. The mRNA sequencing was used to screen the potential target of PH with therapeutic CI. Reverse transcription-polymerase chain reaction (RT-PCR) was used to determine the gene alteration of triggering receptor expressed on myeloid cells 2 (TREM2) in hippocampus. We used western blot to determine protein expressions of TREM2 and its related signaling, as well as synaptic proteins in hippocampus. The results revealed that LPS contributed to CI, and PH or piracetam treatment significantly ameliorated CI in MWM test. LPS contributed to increasing expressions of TNF-α and IL-1β in serum and hippocampus, which both reversed by PH or piracetam. PH or piracetam could inhibit the activation of glial cells including microglia and astrocyte in the hippocampus in LPS-induced CI model. The mRNA sequencing and RT-PCR results showed that LPS significantly increased the gene expression of TREM2, which was reversed by PH. The alteration of TREM2 expression was the most significant among the 10 genes (TREM2, Slc24a2, Ptch2, Gck, Il1rapl1, Cadps2, Btbd11, Secisbp2l, Tenm3 and Prepl) in hippocampus. Protein results showed that LPS upregulated the expressions of TREM2 and its related proteins including DAP12, spleen tyrosine kinase (SYK) phosphorylation and ADAM 10, which were all reversed by PH or piracetam in hippocampus. Furthermore, LPS was capable of reducing the expression of BrdU and DCX co-labeled positive cells in hippocampal dentate gyrus (DG), which was reversed only by PH. Moreover, PH or piracetam treatment significantly increased the expression of Ki67 and DCX co-labeled positive cells in hippocampal DG. The expression of synapsin1 was obviously decreased by LPS and was significantly reversed by PH or piracetam. PH could alleviate CI by suppressing the secretion of pro-inflammatory cytokines and mitigating astrocyte activity by restraining microglia's activation in hippocampus, further facilitating neurogenesis and proliferation, thereby enhancing pre-synaptic protein. This study highlighted on the clinical application of PH, which might promote the use of phytomedicine in CI patients.",
+              "doi": "10.1016/j.jep.2023.117214",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "22e6c4017da530d9371979a7fdb38e1c8b2e2b7b12ea9bfadf864cd1db2c5b2c"
+              }
+            },
+            {
+              "title": "Identification and validation of calcium extrusion-related genes prognostic signature in colon adenocarcinoma.",
+              "abstract": "Disruptions in calcium homeostasis are associated with a wide range of diseases, and play a pivotal role in the development of cancer. However, the construction of prognostic models using calcium extrusion-related genes in colon adenocarcinoma (COAD) has not been well studied. We aimed to identify whether calcium extrusion-related genes serve as a potential prognostic biomarker in the COAD progression. We constructed a prognostic model based on the expression of calcium extrusion-related genes (SLC8A1, SLC8A2, SLC8A3, SLC8B1, SLC24A2, SLC24A3 and SLC24A4) in COAD. Subsequently, we evaluated the associations between the risk score calculated by calcium extrusion-related genes and mutation signature, immune cell infiltration, and immune checkpoint molecules. Then we calculated the immune score, stromal score, tumor purity and estimate score using the Estimation of STromal and Immune cells in MAlignant Tumor tissues using Expression data (ESTIMATE) algorithm. The response to immunotherapy was assessed using tumor immune dysfunction and exclusion (TIDE). Finally, colorectal cancer cells migration, growth and colony formation assays were performed in RKO cells with the overexpression or knockdown SLC8A3, SLC24A2, SLC24A3, or SLC24A4. We found that patients with high risk score of calcium extrusion-related genes tend to have a poorer prognosis than those in the low-risk group. Additionally, patients in high-risk group had higher rates of KRAS mutations and lower MUC16 mutations, implying a strong correlation between KRAS and MUC16 mutations and calcium homeostasis in COAD. Moreover, the high-risk group showed a higher infiltration of regulatory T cells (Tregs) in the tumor microenvironment. Finally, our study identified two previously unreported model genes (SLC8A3 and SLC24A4) that contribute to the growth and migration of colorectal cancer RKO cells. Altogether, we developed a prognostic risk model for predicting the prognosis of COAD patients based on the expression profiles of calcium extrusion-related genes, Furthermore, we validated two previously unreported tumor suppressor genes (SLC8A3 and SLC24A4) involved in colorectal cancer progression.",
+              "doi": "10.7717/peerj.17582",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ef8292e43041fc906527a574ba6eeed32cc67b82d21b46b626996c9d7941eeb0"
+              }
+            },
+            {
+              "title": "The plasma peptides of Alzheimer's disease.",
+              "abstract": "A practical strategy to discover proteins specific to Alzheimer's dementia (AD) may be to compare the plasma peptides and proteins from patients with dementia to normal controls and patients with neurological conditions like multiple sclerosis or other diseases. The aim was a proof of principle for a method to discover proteins and/or peptides of plasma that show greater observation frequency and/or precursor intensity in AD. The endogenous tryptic peptides of Alzheimer's were compared to normals, multiple sclerosis, ovarian cancer, breast cancer, female normal, sepsis, ICU Control, heart attack, along with their institution-matched controls, and normal samples collected directly onto ice. Endogenous tryptic peptides were extracted from blinded, individual AD and control EDTA plasma samples in a step gradient of acetonitrile for random and independent sampling by LC-ESI-MS/MS with a set of robust and sensitive linear quadrupole ion traps. The MS/MS spectra were fit to fully tryptic peptides within proteins identified using the X!TANDEM algorithm. Observation frequency of the identified proteins was counted using SEQUEST algorithm. The proteins with apparently increased observation frequency in AD versus AD Control were revealed graphically and subsequently tested by Chi Square analysis. The proteins specific to AD plasma by Chi Square with FDR correction were analyzed by the STRING algorithm. The average protein or peptide log precursor intensity was compared across disease and control treatments by ANOVA in the R statistical system. Peptides and/or phosphopeptides of common plasma proteins such as complement C2, C7, and C1QBP among others showed increased observation frequency by Chi Square and/or precursor intensity in AD. Cellular gene symbols with large Chi Square values (χ2 ≥ 25, p ≤ 0.001) from tryptic peptides included KIF12, DISC1, OR8B12, ZC3H12A, TNF, TBC1D8B, GALNT3, EME2, CD1B, BAG1, CPSF2, MMP15, DNAJC2, PHACTR4, OR8B3, GCK, EXOSC7, HMGA1 and NT5C3A among others. Similarly, increased frequency of tryptic phosphopeptides were observed from MOK, SMIM19, NXNL1, SLC24A2, Nbla10317, AHRR, C10orf90, MAEA, SRSF8, TBATA, TNIK, UBE2G1, PDE4C, PCGF2, KIR3DP1, TJP2, CPNE8, and NGF amongst others. STRING analysis showed an increase in cytoplasmic proteins and proteins associated with alternate splicing, exocytosis of luminal proteins, and proteins involved in the regulation of the cell cycle, mitochondrial functions or metabolism and apoptosis. Increases in mean precursor intensity of peptides from common plasma proteins such as DISC1, EXOSC5, UBE2G1, SMIM19, NXNL1, PANO, EIF4G1, KIR3DP1, MED25, MGRN1, OR8B3, MGC24039, POLR1A, SYTL4, RNF111, IREB2, ANKMY2, SGKL, SLC25A5, CHMP3 among others were associated with AD. Tryptic peptides from the highly conserved C-terminus of DISC1 within the sequence MPGGGPQGAPAAAGGGGVSHRAGSRDCLPPAACFR and ARQCGLDSR showed a higher frequency and highest intensity in AD compared to all other disease and controls. Proteins apparently expressed in the brain that were directly related to Alzheimer's including Nerve Growth Factor (NFG), Sphingomyelin Phosphodiesterase, Disrupted in Schizophrenia 1 (DISC1), the cell death regulator retinitis pigmentosa (NXNl1) that governs the loss of nerve cells in the retina and the cell death regulator ZC3H12A showed much higher observation frequency in AD plasma vs the matched control. There was a striking agreement between the proteins known to be mutated or dis-regulated in the brains of AD patients with the proteins observed in the plasma of AD patients from endogenous peptides including NBN, BAG1, NOX1, PDCD5, SGK3, UBE2G1, SMPD3 neuronal proteins associated with synapse function such as KSYTL4, VTI1B and brain specific proteins such as TBATA.",
+              "doi": "10.1186/s12014-021-09320-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "fa865aff0fed040729455352715499d3ea7a1f4775906c0c0d1bbdb90c24441f"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC24A2 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC24A2 inhibit Lymphoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=download_required）；候选基因=['SLC24A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC24A2",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC24A2.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC24A2",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC24A2": {
+          "status": "ok",
+          "gene": "SLC24A2",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC24A2.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC24A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC24A2",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A2"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC24A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A2"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC24A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC24A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:41:55Z"
+  }
+}

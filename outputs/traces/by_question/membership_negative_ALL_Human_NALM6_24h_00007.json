@@ -1,0 +1,376 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_24h_00007",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC30A8 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC30A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_24h_00007",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC30A8"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC30A8",
+              "protein_function": "Proton-coupled zinc ion antiporter mediating the entry of zinc into the lumen of pancreatic beta cell secretory granules.",
+              "aliases": "ZnT-8, ZNT8, Solute Carrier Family 30 (Zinc Transporter), Member 8, Proton-Coupled Zinc Antiporter SLC30A8",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC30A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC30 Zinc efflux  family",
+              "target_properties": {
+                "name": "SLC30 Zinc efflux  family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Stearoyl CoA desaturase is a gatekeeper that protects human beta cells against lipotoxicity and maintains their identity.",
+              "abstract": "During the onset of type 2 diabetes, excessive dietary intake of saturated NEFA and fructose lead to impaired insulin production and secretion by insulin-producing pancreatic beta cells. The majority of data on the deleterious effects of lipids on functional beta cell mass were obtained either in vivo in rodent models or in vitro using rodent islets and beta cell lines. Translating data from rodent to human beta cells remains challenging. Here, we used the human beta cell line EndoC-βH1 and analysed its sensitivity to a lipotoxic and glucolipotoxic (high palmitate with or without high glucose) insult, as a way to model human beta cells in a type 2 diabetes environment. EndoC-βH1 cells were exposed to palmitate after knockdown of genes related to saturated NEFA metabolism. We analysed whether and how palmitate induces apoptosis, stress and inflammation and modulates beta cell identity. EndoC-βH1 cells were insensitive to the deleterious effects of saturated NEFA (palmitate and stearate) unless stearoyl CoA desaturase (SCD) was silenced. SCD was abundantly expressed in EndoC-βH1 cells, as well as in human islets and human induced pluripotent stem cell-derived beta cells. SCD silencing induced markers of inflammation and endoplasmic reticulum stress and also IAPP mRNA. Treatment with the SCD products oleate or palmitoleate reversed inflammation and endoplasmic reticulum stress. Upon SCD knockdown, palmitate induced expression of dedifferentiation markers such as SOX9, MYC and HES1. Interestingly, SCD knockdown by itself disrupted beta cell identity with a decrease in mature beta cell markers INS, MAFA and SLC30A8 and decreased insulin content and glucose-stimulated insulin secretion. The present study delineates an important role for SCD in the protection against lipotoxicity and in the maintenance of human beta cell identity. Microarray data and all experimental details that support the findings of this study have been deposited in in the GEO database with the GSE130208 accession code.",
+              "doi": "10.1007/s00125-019-05046-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f906567556072132273e539a9b78a69c643f7d48c73c956686cb6672f3456c78"
+              }
+            },
+            {
+              "title": "ZnT8 Exerts Anti-apoptosis of Kidney Tubular Epithelial Cell in Diabetic Kidney Disease Through TNFAIP3-NF-κB Signal Pathways.",
+              "abstract": "Apoptosis of kidney tubular epithelial cells contributes to diabetic kidney disease (DKD) pathophysiology, but the mechanisms are not fully understood. Zinc transporter protein member 8 (ZnT8, SLC30A8) is a susceptive gene in diabetes. Here, we aim to investigate whether ZnT8 has effects on pathophysiology of DKD. The animal groups include control, ZnT8KO mice, STZ-induced, and ZnT8-KO-STZ. STZ-induced DKD was performed in male C57BL/6 J mice and in ZnT8-KO mice. High glucose (HG)-induced apoptosis in a normal rat kidney tubular epithelial cell line (NRK-52E cells) was performed in vitro. Transfection of hZnT8-EGFP or TNFAIP3 siRNA was done in NRK-52E cells. Flow cytometry with Annexin V-FITC/PI double staining and TUNEL analysis was performed for the detection of apoptosis. Gene expression at mRNA and protein levels was examined with real-time RT-PCR and Western blot. Urine albumin to creatinine ratio, proinflammatory cytokines, and apoptosis were enhanced in kidneys of STZ and ZnT8-KO-STZ mice compared to control or ZnT8-KO mice. ZnT8 overexpression after hZnT8-EGFP transfection decreased HG-stimulated inflammatory activity and apoptosis in NRK-52E cells. Furthermore, treatment with ZnSO blunted HG-induced apoptosis and NF-κB activation. ZnSO increased the abundance of zinc-finger protein TNF-α-induced protein 3 (TNFAIP3). Also, ZnT8 over-expression after hZnT8-EGFP transfection significantly ameliorates HG-induced NF-κB-dependent transcriptional activity and apoptotic protein expressions in NRK-52E cells, but the inhibitory effect of ZnT8 was significantly abolished with TNFAIP3 siRNA. Our study provides evidence that ZnT8 has protective effects against apoptosis of renal tubular epithelial cells through induction of TNFAIP3 and subsequent suppression of the NF-κB pathway.",
+              "doi": "10.1007/s12011-022-03361-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f55effd14264ba59e84fde87f1199a85eea01b01e5131c391880682b02f73205"
+              }
+            },
+            {
+              "title": "Select DYRK1A Inhibitors Enhance Both Proliferation and Differentiation in Human Pancreatic Beta Cells.",
+              "abstract": "The small molecule DYRK1A inhibitor, harmine, induces human beta cell proliferation, expands beta cell mass, enhances expression of beta cell phenotypic genes, and improves human beta cell function i  and  . It is unknown whether the \"pro-differentiation effect\" is a DYRK1A inhibitor class-wide effect. Here we compare multiple commonly studied DYRK1A inhibitors. Harmine, 2-2c and 5-IT increase expression of PDX1, MAFA, NKX6.1, SLC2A2, PCSK1, MAFB, SIX2, SLC2A2, SLC30A8, ENTPD3 in normal and T2D human islets. Unexpectedly, GNF4877, CC-401, INDY, CC-401 and Leucettine fail to induce expression of these essential beta cell molecules. Remarkably, the pro-differentiation effect is independent of DYRK1A inhibition: although silencing DYRK1A induces human beta cell proliferation, it has no effect on differentiation; conversely, harmine treatment enhances beta cell differentiation in DYRK1A-silenced islets. A careful screen of multiple DYRK1A inhibitor kinase candidate targets was unable to identify pro-differentiation pathways. Overall, harmine, 2-2c and 5-IT are unique among DYRK1A inhibitors in their ability to enhance both beta cell proliferation and differentiation. While beta cell  is mediated by DYRK1A inhibition,  effects of harmine,  and 5-IT are distinct, and unexplained in mechanistic terms. These considerations have important implications for DYRK1A inhibitor pharmaceutical development.",
+              "doi": "10.1101/2024.05.17.594179",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9ca291d5d143eeb215d8f38716dff16c96245fd50a6464755d628ac687cbb844"
+              }
+            },
+            {
+              "title": "Targeting MicroRNA-143 Leads to Inhibition of Glioblastoma Tumor Progression.",
+              "abstract": "Glioblastoma (GBM) is the most common and aggressive of all brain tumors, with a median survival of only 14 months after initial diagnosis. Novel therapeutic approaches are an unmet need for GBM treatment. MicroRNAs (miRNAs) are a class of small non-coding RNAs that regulate gene expression at the post-transcriptional level. Several dysregulated miRNAs have been identified in all cancer types including GBM. In this study, we aimed to uncover the role of miR-143 in GBM cell lines, patient samples, and mouse models. Quantitative real-time RT-PCR of RNA extracted from formalin-fixed paraffin-embedded (FFPE) samples showed that the relative expression of miR-143 was higher in GBM patients compared to control individuals. Transient transfection of GBM cells with a miR-143 oligonucleotide inhibitor (miR-143-inh) resulted in reduced cell proliferation, increased apoptosis, and cell cycle arrest. SLC30A8, a glucose metabolism-related protein, was identified as a direct target of miR-143 in GBM cells. Moreover, multiple injections of GBM tumor-bearing mice with a miR-143-inh-liposomal formulation significantly reduced tumor growth compared to control mice. The reduced in vitro cell growth and in vivo tumor growth following miRNA-143 inhibition suggests that miR-143 is a potential therapeutic target for GBM therapy.",
+              "doi": "10.3390/cancers10100382",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6e1ef47cc869d64ce71c221336907d7623166f671b86a75cb26ca85ac44ebe4a"
+              }
+            },
+            {
+              "title": "Obesity alters testicular gene expression in mice, monkeys and humans.",
+              "abstract": "Obesity, a global health issue, is associated with numerous diseases and has been shown to affect male reproductive health by inducing endocrine hormonal changes, chronic inflammation, oxidative stress and epigenetic alterations in reproductive cells. This study investigates the impact of obesity on testicular gene expression across mice, monkeys and humans, identifying 730 conserved testis-specific genes. High-fat diet-induced obesity upregulates GNG5, INHA, MSH5, SLC30A8 and SLC7A4 in testes, suggesting their potential as regulatory targets in testicular damage associated with obesity. Single-cell analysis reveals species-conserved expression patterns of SLC7A4 in Sertoli cells and SLC30A8 in SPG cells. It also confirmed that SLC30A8 and SLC7A4 were significantly upregulated in the testes of spontaneously obese mice. The findings highlight the potential of these genes as regulatory targets in obesity-related testicular dysfunction, providing insights into male reproductive health impairments caused by obesity.",
+              "doi": "10.1017/S0967199425000061",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2b09dd9efe55c7ba524a4cb24842972e7f4d3cfcdf84e840a0fc3508782e24b8"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC30A8 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC30A8 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC30A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC30A8",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC30A8",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC30A8",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC30A8": {
+          "status": "unavailable",
+          "gene": "SLC30A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC30A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC30A8",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A8"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A8": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No ALL/NALM6-specific evidence; SLC30A8 is beta-cell zinc transporter with redundancy. E's 0.56 essentiality is generic and conflates essentiality with inhibition. Two independent LLM channels agree loss won't suppress tumor growth.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A8']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A8 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A8"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A8": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: E's true is weak generic essentiality, not NALM6 MAGeCK depletion; observations show beta-cell zinc transporter with no ALL tumor-growth link. Two independent LLM votes agree false. No convincing evidence SLC30A8 inhibits ALL growth.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A8']",
+        "status": "ok",
+        "summary": "SLC30A8 主要编码锌转运体 ZnT8，功能与胰岛β细胞锌储存及胰岛素分泌相关，而非 ALL 增殖或存活的关键调控因子。在 Human/NALM6 的 CRISPR 0h vs 36Days MAGeCK 条件下，没有充分依据认为 SLC30A8 抑制 ALL 肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A8"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC30A8 主要编码锌转运体 ZnT8，功能与胰岛β细胞锌储存及胰岛素分泌相关，而非 ALL 增殖或存活的关键调控因子。在 Human/NALM6 的 CRISPR 0h vs 36Days MAGeCK 条件下，没有充分依据认为 SLC30A8 抑制 ALL 肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:59:51Z"
+  }
+}

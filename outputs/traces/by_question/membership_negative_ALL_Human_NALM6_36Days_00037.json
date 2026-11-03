@@ -1,0 +1,356 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00037",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC34A1 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC34A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00037",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC34A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC34A1",
+              "protein_function": "Involved in actively transporting phosphate into cells via Na(+) cotransport in the renal brush border membrane.",
+              "aliases": "NPT2, SLC17A2, NPTIIa",
+              "transport_type": "C / Na, HPO42-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC34A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC34 Type II Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC34 Type II Na+-phosphate  cotransporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Foscarnet, an inhibitor of the sodium-phosphate cotransporter NaPi-IIa, inhibits phosphorylation of glycogen synthase kinase-3β by lithium in the rat kidney cortex.",
+              "abstract": "Lithium, which is used in the treatment of and prophylaxis for bipolar disease, inhibits glycogen synthase kinase-3β (GSK3β) by producing its phosphorylated form (p-GSK3β). GSK3β plays a role in apoptosis and some kinds of acute kidney injuries, and the formation of p-GSK3β is considered to contribute to protection against acute kidney injury. We previously reported that the sodium-phosphate cotransporter NaPi-IIa (SLC34A1) mediated the reabsorption of lithium in the rat kidney. In the present study, the phosphorylation status of GSK3β in the kidney cortex of rats administered lithium chloride and foscarnet, a typical inhibitor of NaPi-IIa, was examined using Western blotting. Under a 2-h infusion of lithium chloride, the plasma concentration of lithium was 1.06 mEq/l, and its renal clearance was calculated as 1.18 ml/min/kg, which was 29.6% of creatinine clearance. The abundance of p-GSK3β in the kidney cortex was augmented by the administration of lithium. The simultaneous infusion of foscarnet increased the renal clearance of lithium and its ratio to creatinine clearance as well as the urinary excretion of phosphate. Foscarnet also inhibited the lithium-induced phosphorylation of GSK3β. These results suggest that the reabsorption of lithium by NaPi-IIa triggers the phosphorylation of GSK3β in the rat kidney cortex.",
+              "doi": "10.1016/j.dmpk.2016.02.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7988b444ce0e2c099a998a3db2059776c92452f6650dd2327b3a10ccd967fba0"
+              }
+            },
+            {
+              "title": "Pharmacological inhibition of ataxia-telangiectasia mutated exacerbates acute kidney injury by activating p53 signaling in mice.",
+              "abstract": "The DNA damage response after kidney injury induces cell cycle arrest in renal tubular epithelial cells, resulting in the secretion of pro-fibrotic cytokines, thereby promoting interstitial fibrosis in a paracrine manner. Phosphorylation of ataxia-telangiectasia mutated (ATM) is the initial step in the DNA damage response and subsequent cell cycle arrest; however, the effects of ATM inhibition on the injured kidney have not been explored. Pharmacological ATM inhibition by KU55933 in cisplatin-treated mice did not ameliorate, but instead exacerbated cisplatin-induced DNA damage and tubular injury, thereby increasing mortality. Analysis of isolated tubular epithelia by FACS from bigenic SLC34a1-CreERt2; R26tdTomato proximal tubular-specific reporter mice revealed that KU55933 upregulated p53 and subsequent pro-apoptotic signaling in tubular epithelia of cisplatin-treated mice, leading to marked mitochondrial injury and apoptosis. In addition, KU55933 attenuated several DNA repair processes after cisplatin treatment, including single-strand DNA repair and Fanconi anemia pathways, suggesting that DNA repair after dual treatment of cisplatin and KU55933 was not sufficient to prevent the cisplatin-induced tubular injury. Our study suggested that ATM inhibition does not increase DNA repair after cisplatin-induced DNA damage and exacerbates tubular injury through the upregulation of p53-dependent pro-apoptotic signaling. Acute kidney injury must be carefully monitored when ATM inhibitors become available in clinical practice in the future.",
+              "doi": "10.1038/s41598-020-61456-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "35923c1129c12b8ae89b320658db25b33f9d009c6e50aa74e80a17c8b3e77a58"
+              }
+            },
+            {
+              "title": "Genetic Risk Factors for Idiopathic Urolithiasis: A Systematic Review of the Literature and Causal Network Analysis.",
+              "abstract": "Urolithiasis has a high prevalence and recurrence rate. Prevention is key to patient management, but risk stratification is challenging. In particular, genetic predisposition for urinary stones is not fully understood. To review current evidence of potential causative genes for idiopathic urolithiasis and map their relationships to one another. This evidence is essential for future establishment of molecular targeted therapy. A systematic literature review from 2007 to 2017 was performed in accordance with the Preferred Reporting Items for Systematic Review and Meta-analyses guidelines. The search was restricted to human studies conducted as either case-control or genome-wide association studies, and published in English. We also performed a causal network analysis of candidate genes gained from the systematic review using Ingenuity Pathway Analysis (IPA). During the systematic screening of literature, 30 papers were selected for the review. A total of 20 genes with 42 polymorphisms/variants were found to be associated with urolithiasis risk. Their functional roles were mainly categorized as stone matrix, calcium and phosphate regulation, urinary concentration and constitution, and inflammation/oxidative stress. IPA network analysis revealed that these genes connected via signaling pathways and a proinflammatory/oxidative environment. This systematic review provides an updated gene list and novel causal networks for idiopathic urolithiasis risk. Although some genes such as SPP1, CASR, VDR, CLDN14, and SLC34A1 were identified by several studies and recognized by prior reviews, further investigation elucidating their roles in stone formation will be essential for future studies. In this review, we summarized recent literature regarding genes responsible for kidney stone risk. Based on a detailed review of 30 articles and computational network analysis, we concluded that disorder of mineral regulation with local inflammation in the kidney may cause kidney stone disease.",
+              "doi": "10.1016/j.euf.2017.04.010",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "de9d53f00b589e9654bc9de2a9c63b19ded3624774b5c69369cf1315860bf5b3"
+              }
+            },
+            {
+              "title": "Differentiated kidney epithelial cells repair injured proximal tubule.",
+              "abstract": "Whether kidney proximal tubule harbors a scattered population of epithelial stem cells is a major unsolved question. Lineage-tracing studies, histologic characterization, and ex vivo functional analysis results conflict. To address this controversy, we analyzed the lineage and clonal behavior of fully differentiated proximal tubule epithelial cells after injury. A CreER(T2) cassette was knocked into the sodium-dependent inorganic phosphate transporter SLC34a1 locus, which is expressed only in differentiated proximal tubule. Tamoxifen-dependent recombination was absolutely specific to proximal tubule. Clonal analysis after injury and repair showed that the bulk of labeled cells proliferate after injury with increased clone size after severe compared with mild injury. Injury to labeled proximal tubule epithelia induced expression of CD24, CD133, vimentin, and kidney-injury molecule-1, markers of putative epithelial stem cells in the human kidney. Similar results were observed in cultured proximal tubules, in which labeled clones proliferated and expressed dedifferentiation and injury markers. When mice with completely labeled kidneys were subject to injury and repair there was no dilution of fate marker despite substantial proliferation, indicating that unlabeled progenitors do not contribute to kidney repair. During nephrogenesis and early kidney growth, single proximal tubule clones expanded, suggesting that differentiated cells also contribute to tubule elongation. These findings provide no evidence for an intratubular stem-cell population, but rather indicate that terminally differentiated epithelia reexpress apparent stem-cell markers during injury-induced dedifferentiation and repair.",
+              "doi": "10.1073/pnas.1310653110",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7c17dfd0bb073c9795962d88932ae63cee256606c1993062c2304adabd64af18"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC34A1 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC34A1 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC34A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC34A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC34A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC34A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC34A1": {
+          "status": "unavailable",
+          "gene": "SLC34A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC34A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC34A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC34A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC34A1"
+        ],
+        "confidence": 0.85,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.85；法官理由: No direct NALM6 CRISPR depletion evidence; SLC34A1 is kidney/intestine phosphate transporter, unlikely ALL dependency. E’s 0.56 is non-directional weak proxy; two independent LLM false votes dominate.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC34A1 is a kidney/proximal-tubule Na+-phosphate cotransporter with evidence in renal lithium/phosphate handling and kidney injury, not in hematopoietic or lymphoid malignancies; ALL/NALM6 is a B-cell precursor lymphoid model, so the tissue/cell-lineage mismatch makes a direct growth dependency unlikely. | The available literature and pathway context place SLC34A1 mainly in renal epithelial phosphate transport, lithium reabsorption, and proximal tubule lineage tracing. There is no ALL-specific PPR/TIMER/KM/DE evidence and no known role in B-ALL survival or proliferation. While SLC-family transporters can affect metabolism, SLC34A1 is not expected to be a core nutrient transporter in NALM6 B-ALL cells; if expression/function is low, CRISPR knockout would likely not reduce tumor growth. Therefore, under the requested ALL/NALM6/MAGeCK setting, SLC34A1 inhibition is more plausibly non-inhibitory rather than tumor-growth inhibitory.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC34A1"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC34A1 is a kidney/proximal-tubule Na+-phosphate cotransporter with evidence in renal lithium/phosphate handling and kidney injury, not in hematopoietic or lymphoid malignancies; ALL/NALM6 is a B-cell precursor lymphoid model, so the tissue/cell-lineage mismatch makes a direct growth dependency unlikely. | The available literature and pathway context place SLC34A1 mainly in renal epithelial phosphate transport, lithium reabsorption, and proximal tubule lineage tracing. There is no ALL-specific PPR/TIMER/KM/DE evidence and no known role in B-ALL survival or proliferation. While SLC-family transporters can affect metabolism, SLC34A1 is not expected to be a core nutrient transporter in NALM6 B-ALL cells; if expression/function is low, CRISPR knockout would likely not reduce tumor growth. Therefore, under the requested ALL/NALM6/MAGeCK setting, SLC34A1 inhibition is more plausibly non-inhibitory rather than tumor-growth inhibitory. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC34A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC34A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:24:38Z"
+  }
+}

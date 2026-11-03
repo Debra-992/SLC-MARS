@@ -1,0 +1,32 @@
+{
+  "ablation": "ablate_knowledge",
+  "trace_version": "21",
+  "n": 0,
+  "seed": 5,
+  "buckets": [
+    "pairwise",
+    "membership"
+  ],
+  "n_valid": 0,
+  "summary": {
+    "n": 0,
+    "correct": 0,
+    "wrong": 0,
+    "abstain": 0,
+    "coverage": 0,
+    "acc_answered": 0,
+    "acc_overall": 0,
+    "net_vs_chance": 0
+  },
+  "baseline_v20": {
+    "n": 5,
+    "correct": 5,
+    "wrong": 0,
+    "abstain": 0,
+    "coverage": 1.0,
+    "acc_answered": 1.0,
+    "acc_overall": 1.0,
+    "net_vs_chance": 0.5
+  },
+  "results": []
+}

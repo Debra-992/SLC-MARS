@@ -1,0 +1,472 @@
+{
+  "note": "管线每题 LLM token（supply+heuristic decide+auto decide；不含 MetaGPT baseline）。tracestore 未插桩，故用独立探针 trace_one 复算实测。calls==0 视为端点废行已剔除。",
+  "measured_at": "2026-10-30T03:40:44Z",
+  "probe_n": 50,
+  "ok_n": 50,
+  "valid_n": 50,
+  "seed": 5,
+  "mean_total": 10127,
+  "mean_prompt": 2048,
+  "mean_completion": 8078,
+  "mean_calls": 3.6,
+  "mean_total_by_bucket": {
+    "pairwise": 6956,
+    "membership": 13297
+  },
+  "n_by_bucket": {
+    "pairwise": 25,
+    "membership": 25
+  },
+  "per_q": [
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00104",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 667,
+      "completion": 2472,
+      "total": 3139,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00226",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 353,
+      "completion": 1532,
+      "total": 1885,
+      "calls": 1
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00265",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 2942,
+      "completion": 5780,
+      "total": 8722,
+      "calls": 5
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 665,
+      "completion": 5298,
+      "total": 5963,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00323",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 380,
+      "completion": 840,
+      "total": 1220,
+      "calls": 1
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00146",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 677,
+      "completion": 1301,
+      "total": 1978,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00287",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 4700,
+      "completion": 17538,
+      "total": 22238,
+      "calls": 6
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00331",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 673,
+      "completion": 1611,
+      "total": 2284,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00264",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 5787,
+      "completion": 10679,
+      "total": 16466,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 663,
+      "completion": 5622,
+      "total": 6285,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00277",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 729,
+      "completion": 3726,
+      "total": 4455,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00042",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 388,
+      "completion": 2059,
+      "total": 2447,
+      "calls": 1
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00016",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 633,
+      "completion": 5298,
+      "total": 5931,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00009",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 669,
+      "completion": 1009,
+      "total": 1678,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00313",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 317,
+      "completion": 4491,
+      "total": 4808,
+      "calls": 1
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 2985,
+      "completion": 19994,
+      "total": 22979,
+      "calls": 5
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00118",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 663,
+      "completion": 1591,
+      "total": 2254,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00028",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 5752,
+      "completion": 26158,
+      "total": 31910,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00124",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 3090,
+      "completion": 20264,
+      "total": 23354,
+      "calls": 5
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00104",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 625,
+      "completion": 2126,
+      "total": 2751,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00076",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 4868,
+      "completion": 17621,
+      "total": 22489,
+      "calls": 7
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 3300,
+      "completion": 6071,
+      "total": 9371,
+      "calls": 5
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00011",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 673,
+      "completion": 866,
+      "total": 1539,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_positive_ALL_Human_CUTLL1_7days_00000",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 687,
+      "completion": 1439,
+      "total": 2126,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00222",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 5488,
+      "completion": 24953,
+      "total": 30441,
+      "calls": 8
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00067",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 366,
+      "completion": 1292,
+      "total": 1658,
+      "calls": 1
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00064",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 373,
+      "completion": 1858,
+      "total": 2231,
+      "calls": 1
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00065",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 5558,
+      "completion": 27454,
+      "total": 33012,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00079",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 675,
+      "completion": 1018,
+      "total": 1693,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00008",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 5468,
+      "completion": 26173,
+      "total": 31641,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00260",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 709,
+      "completion": 6971,
+      "total": 7680,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00142",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 637,
+      "completion": 3657,
+      "total": 4294,
+      "calls": 2
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_5Days_00131",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 633,
+      "completion": 1529,
+      "total": 2162,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00261",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 1891,
+      "completion": 15190,
+      "total": 17081,
+      "calls": 4
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 627,
+      "completion": 3319,
+      "total": 3946,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_positive_CRC_Human_HT29_Remdesivir_00252",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 5059,
+      "completion": 12810,
+      "total": 17869,
+      "calls": 7
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00293",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 681,
+      "completion": 1472,
+      "total": 2153,
+      "calls": 2
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 3022,
+      "completion": 4938,
+      "total": 7960,
+      "calls": 5
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00105",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 5116,
+      "completion": 11764,
+      "total": 16880,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00291",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 681,
+      "completion": 2834,
+      "total": 3515,
+      "calls": 2
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00324",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 5076,
+      "completion": 21195,
+      "total": 26271,
+      "calls": 8
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00038",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 4018,
+      "completion": 21838,
+      "total": 25856,
+      "calls": 6
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00095",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 2908,
+      "completion": 11891,
+      "total": 14799,
+      "calls": 5
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00102",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 667,
+      "completion": 2583,
+      "total": 3250,
+      "calls": 2
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00279",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 3301,
+      "completion": 4604,
+      "total": 7905,
+      "calls": 5
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00088",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 349,
+      "completion": 550,
+      "total": 899,
+      "calls": 1
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00091",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 635,
+      "completion": 3037,
+      "total": 3672,
+      "calls": 2
+    },
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00002",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 4631,
+      "completion": 14236,
+      "total": 18867,
+      "calls": 8
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00048",
+      "bucket": "pairwise",
+      "ok": true,
+      "prompt": 325,
+      "completion": 3920,
+      "total": 4245,
+      "calls": 1
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+      "bucket": "membership",
+      "ok": true,
+      "prompt": 633,
+      "completion": 7444,
+      "total": 8077,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,403 @@
+{
+  "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35A1 and SLC22A18 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC35A1"
+  },
+  "effective_genes": [
+    "SLC35A1",
+    "SLC22A18"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35A1",
+        "SLC22A18"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A18",
+              "protein_function": "May act as a transporter of organic cations based on a proton efflux antiport mechanism.",
+              "aliases": "BWR1A, TSSC5, ITM, SLC22A1L, BWSCR1A, ORCTL2, IMPT1",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC35A1",
+              "protein_function": "Transports CMP-sialic acid from the cytosol into the Golgi apparatus, functioning as an antiporter that exchanges CMP-sialic acid for CMP.",
+              "aliases": "CMP-Sia-Tr, CMPST",
+              "transport_type": "E / CMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A18",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Knockdown of Orphan Transporter SLC22A18 Impairs Lipid Metabolism and Increases Invasiveness of HepG2 Cells.",
+              "abstract": "The aim of this work is to investigate the roles of solute carrier family 22 member 18 (SLC22A18) in lipid metabolism and in establishing the tumor phenotype of HepG2 cells. SLC22A18-knockdown HepG2 cells were established by stable transfection with shRNA. Protein expression levels were measured by quantitative proteomics and Western blot analysis. Cell growth was examined by cell counting kit. Accumulation of triglyceride-rich lipid droplets was measured by Oil-Red O staining. Cell migration and invasion were examined by Transwell assays. SLC22A18-knockdown HepG2 cells accumulated triglyceride-rich lipid droplets and showed decreased expression levels of lysosomal/autophagic proteins, suggesting that lipid degradation is suppressed. Growth of HepG2 cells was decreased by SLC22A18 knockdown, but was restored by free fatty acid supplementation. In addition, SLC22A18 knockdown decreased the expression of insulin-like growth factor-binding protein 1 (IGFBP-1) and increased the invasion ability of HepG2 cells. Exogenous IGFBP-1 blocked the increase of invasion activity induced by SLC22A18 knockdown. Our results suggest that suppression of SLC22A18 decreased the supply of intracellular free fatty acids from triglyceride-rich lipid droplets by impairing the lysosomal/autophagy degradation pathway and reduced the invasive activity of HepG2 cells by decreasing IGFBP-1 expression.",
+              "doi": "10.1007/s11095-018-2565-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A18"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "40ac9ed960950176f2db394231eb978fe3d25dd09bc013dd7a9464825121a0d0"
+              }
+            },
+            {
+              "title": "Genome wide CRISPR screening reveals a role for sialylation in the tumorigenesis and chemoresistance of acute myeloid leukemia cells.",
+              "abstract": "Aberrant activation of cytokine and growth factor signal transduction pathways confers enhanced survival and proliferation properties to acute myeloid leukemia (AML) cells. However, the mechanisms underlying the deregulation of signaling pathways in leukemia cells are unclear. To identify genes capable of independently supporting cytokine-independent growth, we employed a genome-wide CRISPR/Cas9-mediated loss-of-function screen in GM-CSF-dependent human AML TF-1 cells. More than 182 genes (p < 0.01) were found to suppress the cytokine-independent growth of TF-1 cells. Among the top hits, genes encoding key factors involved in sialylation biosynthesis were identified; these included CMAS, SLC35A1, NANS, and GNE. Knockout of either CMAS or SLC35A1 enabled cytokine-independent proliferation and survival of AML cells. Furthermore, NSG (NOD/SCID/IL2Rγ) mice injected with CMAS or SLC35A1-knockout TF-1 cells exhibited a shorter survival than mice injected with wild-type cells. Mechanistically, abrogation of sialylation biosynthesis in TF-1 cells induced a strong activation of ERK signaling, which sensitized cells to MEK inhibitors but conferred resistance to JAK inhibitors. Further, the surface level of α2,3-linked sialic acids was negatively correlated with the sensitivity of AML cell lines to MEK/ERK inhibitors. We also found that sialylation modulated the expression and stability of the CSF2 receptor. Together, these results demonstrate a novel role of sialylation in regulating oncogenic transformation and drug resistance development in leukemia. We propose that altered sialylation could serve as a biomarker for targeted anti-leukemic therapy.",
+              "doi": "10.1016/j.canlet.2021.04.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "30721cbd751194153687e1cd259f0e7c692eeb300d2bae380cb498a5094bd055"
+              }
+            },
+            {
+              "title": "Identification of miRNA signature associated with BMP2 and chemosensitivity of TMZ in glioblastoma stem-like cells.",
+              "abstract": "Glioblastoma multiform (GBM) is the most lethal intracranial tumor in adults. Glioblastoma stem-like cells (GSCs) are responsible for tumorigenesis and chemotherapy resistance. BMPs are known to increase temozolomide (TMZ) response in GSCs, however, the intracellular molecular mechanism remains largely unknown. In this study, we built a GSC cell model called U87S, and performed RNA sequencing to identify differentially expressed (DE) miRNA profiles in U87S cells treated with BMP2, TMZ or combined BMP2 and TMZ respectively. Bioinformatics analysis revealed that most DE miRNAs were involved in the cancer pathways, suggesting their crucial roles in gliomagenesis. Eight miRNAs from RNA-seq were validated. Four out of these miRNAs (, , , and ) were found significantly up-regulated in GBM tumor tissues. One of them, , was significantly correlated with the survival of GBM patients, and differentially expressed in U87S cells. Expression of  was up-regulated by BMP. Overexpression of  in U87S cells inhibited cell viability and enhanced the cytotoxicity of TMZ. And activation of BMP boosted the effect of  on cell viability and TMZ-mediated cytotoxicity. Besides, expressions of five predicted targets of  were evaluated. Four of them were differentially expressed in GBM tumors. And one of them, SLC22A18, was associated with the survival of GBM patients. In the end, a -mediated ceRNA network was constructed for the convenience of future study. Together, our data provided DE miRNA expression profiles associated with BMP2 and TMZ in GSCs, which might lead to finding out miRNA-based target therapies that specially target GSCs.",
+              "doi": "10.1016/j.gendis.2019.09.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A18"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "02bd848165a7747bf6a2dbf9fcc540b8862acdc27202d3fb255055d0bb8dd163"
+              }
+            },
+            {
+              "title": "microRNA-137 functions as a tumor suppressor in human non-small cell lung cancer by targeting SLC22A18.",
+              "abstract": "Our previous study demonstrated that the overexpression of solute carrier family 22 member 18 (SLC22A18) in human non-small cell lung cancer (NSCLC) tissues might be associated with tumor progression and patients' prognosis. The aim of this study was to investigate the molecular mechanisms underlying its roles in NSCLC. As a result, bioinformatics analysis and luciferase reporter assay showed that microRNA (miRNA)-137 directly targeted SLC22A18 in NSCLC cells. Then, functional studies indicated that the ectopic expression of miR-137 significantly inhibited NSCLC cell proliferation, invasion and migration by targeting SLC22A18. More importantly, the decreased expression of miR-137 in clinical NSCLC tissues was correlated with advanced TNM stage, positive metastasis and poor prognosis of patients with this malignancy. In conclusion, these findings offer the convincing evidence that the roles of SLC22A18 in NSCLC progression may be partially caused by the regulatory effects of miR-137, which may function as a tumor suppressor. Our clinical data further indicated that miR-137 may be an independent favorable prognostic factor in NSCLC patients.",
+              "doi": "10.1016/j.ijbiomac.2014.12.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A18"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a629d63010f8969833951881ad6b2fcd57921c3525156cfbbdf21de44ea59137"
+              }
+            },
+            {
+              "title": "Involvement of an Orphan Transporter, SLC22A18, in Cell Growth and Drug Resistance of Human Breast Cancer MCF7 Cells.",
+              "abstract": "The SLC22A18 gene, which encodes an orphan transporter, is located at the 11p15.5 imprinted region, an important tumor suppressor gene region. However, the role of SLC22A18 in tumor suppression remains unclear. Here, we investigated the involvement of SLC22A18 in cell growth, invasion, and drug resistance of MCF7 human breast cancer cell line. Western blot analysis indicated that SLC22A18 is predominantly expressed at intracellular organelle membranes. Quantitative proteomics showed that knockdown of SLC22A18 significantly altered the expression of 578 (31.0%) of 1867 proteins identified, including proteins related to malignancy and poor prognosis of breast cancer. SLC22A18 knockdown (1) increased MCF7 cell growth concomitantly with a >7-fold increase of annexin A8 (involved in cell growth and migration; a predictor of poor prognosis), (2) induced spherical morphology of MCF7 cells concomitantly with a nearly 3-fold increase of CD44 (involved in regulation of malignant phenotypes), and (3) increased chemosensitivity to vinca alkaloids concomitantly with a >80% reduction of doublecortin-like kinase 1 (involved in regulation of microtubule polymerization). Our results suggest that SLC22A18 may act as a tumor suppressor by regulating the expression levels of cell growth-related proteins, and vinca alkaloids might show therapeutic efficacy against low-SLC22A18-expressing breast cancer.",
+              "doi": "10.1016/j.xphs.2018.08.011",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A18"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "57df686068acdc90e36990313b8eeb65d4de4ef604b0534db2fe003569a40d32"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35A1 and SLC22A18 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC35A1', 'SLC22A18']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35A1": {
+          "status": "unavailable",
+          "gene": "SLC35A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A18": {
+          "status": "unavailable",
+          "gene": "SLC22A18",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A18": {
+          "status": "unsupported_cancer",
+          "gene": "SLC22A18",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A1', 'SLC22A18']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC22A18 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A1",
+        "candidates": [
+          "SLC35A1",
+          "SLC22A18"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A1": 0.05,
+          "SLC22A18": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC35A1': 2}，最终智能体辩论后裁决：winner=SLC35A1 answer=None conf=0.72；法官理由: SLC35A1 transports CMP-sialic acid, supporting sialylation and likely essential for Daudi-Cas9 survival; MAGeCK screens often recover such glycosylation bottlenecks. SLC22A18 is a tumor-suppressor-like transporter; its knockdown may alter m。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A1', 'SLC22A18']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35A1 的邻近证据主要来自 AML：CRISPR 敲除反而使 AML 细胞获得细胞因子非依赖性增殖/存活，提示其正常功能在该髓系白血病语境下更像限制异常存活，而非促进肿瘤存活；SLC22A18 的邻近证据则来自 HepG2、NSCLC 和 GBM，其中敲低降低细胞生长、过表达或靶向抑制与肿瘤进展/预后相关，更符合“基因存在/表达支持肿瘤生存与增殖”的方向。将这种代谢/生长支持型作用迁移到 B-lymphoblastic leukaemia 的 Daudi-Cas9 语境中，SLC22A18 更可能被判定为促进 Tumor Survival 的候选。 | 目标癌种缺乏直接 TIMER/KM/DE 证据，因此依赖跨癌种生物学推理。SLC35A1 虽与白血病相关，但其 AML CRISPR 证据显示敲除促进存活，方向上不利于把它选为“promote tumor survival”的基因。SLC22A18 在多种实体瘤中呈现敲低抑制生长、表达/功能支持侵袭或预后的趋势，且其有机阳离子/代谢相关功能更可能在 B-ALL 细胞系中通过维持增殖代谢支持肿瘤存活。综合方向一致性和类比可迁移性，SLC22A18 更可能胜出。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A1",
+        "candidates": [
+          "SLC35A1",
+          "SLC22A18"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A1": 0.05,
+          "SLC22A18": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC22A18': 1, 'W:SLC35A1': 2}，最终智能体辩论后裁决：winner=SLC35A1 answer=None conf=0.66；法官理由: SLC35A1 is a core CMP-sialic acid transporter, plausibly broadly essential for lymphoid glycosylation and survival; two independent LLM votes agree. SLC22A18 evidence is indirect, cross-cancer, and often tumor-suppressor-like, making it les。原证据通道判定: winner=SLC22A18 answer=None conf=0.62（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A1', 'SLC22A18']",
+        "status": "ok",
+        "summary": "SLC35A1 encodes a Golgi CMP-sialic acid transporter that supports protein sialylation, immune evasion, and survival signaling in lymphoid malignancies, making it more plausible as a tumor survival-promoting dependency. In contrast, SLC22A18/TUSC2 is more often associated with tumor-suppressive or growth-restrictive roles, so SLC35A1 is the better candidate to promote B-lymphoblastic leukaemia tumor survival in the BTN3A low/high CRISPR screen context.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A1",
+        "candidates": [
+          "SLC35A1",
+          "SLC22A18"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35A1 encodes a Golgi CMP-sialic acid transporter that supports protein sialylation, immune evasion, and survival signaling in lymphoid malignancies, making it more plausible as a tumor survival-promoting dependency. In contrast, SLC22A18/TUSC2 is more often associated with tumor-suppressive or growth-restrictive roles, so SLC35A1 is the better candidate to promote B-lymphoblastic leukaemia tumor survival in the BTN3A low/high CRISPR screen context.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:56:48Z"
+  }
+}

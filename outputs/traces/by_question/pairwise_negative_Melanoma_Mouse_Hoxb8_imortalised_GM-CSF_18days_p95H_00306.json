@@ -1,0 +1,498 @@
+{
+  "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00306",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A19 and SLC22A7 is more likely to inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "winner": "SLC25A19"
+  },
+  "effective_genes": [
+    "SLC25A19",
+    "SLC22A7"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00306",
+      "status": "ok",
+      "summary": "检索到 4 类证据、14 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A19",
+        "SLC22A7"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "protein_function": "[Isoform 2]: Functions as a Na(+)-independent bidirectional multispecific transporter.",
+              "aliases": "OAT2, Organic Anion Transporter 2",
+              "transport_type": "F or E"
+            },
+            {
+              "gene": "SLC25A19",
+              "protein_function": "Mediates the transport of thiamine pyrophosphates into mitochondria.",
+              "aliases": "Mitochondrial Thiamine Pyrophosphate Carrier",
+              "transport_type": "E / thiamine pyrophosphate, thiamine monophosphate, thiamine; pyrophosphate, (deoxy)nucleotide"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC22A7|paclitaxel|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC22A7(OAT2) transports paclitaxel with high affinity (Km 0.14µM). As a hepatic uptake transporter, it facilitates drug entry; reduced expression may contribute to decreased intracellular paclitaxel accumulation.",
+                "paper": "Kobayashi Y 2005 J Pharm Pharmacol PMID:15901346",
+                "name": "SLC22A7|paclitaxel|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1211/0022357055966\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "paclitaxel"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A19",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A7",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "iTRAQ-based quantitative proteomic analysis reveals the toxic mechanism of diclofenac sodium on the kidney of broiler chicken.",
+              "abstract": "Diclofenac sodium (DS) is one of the nonsteroidal anti-inflammatory drugs (NSAIDs), which exhibits potent toxicity to birds. To search the molecular mechanism of DS induced nephrotoxicity in broiler chicken, 20 apparently healthy 30-day old broiler chickens were separated randomly into two groups (n = 10): Group A was kept as control while DS was administered at the dose rate of 10 mg/kg body weight in group B through oral gavage. Kidney samples were collected, and the proteins were identified and quantified by iTRAQ. 434 differentially expressed proteins (DEPs) were screened, including 277 up-regulated DEPs and 157 down-regulated DEPs. The functional annotation and classification results indicated that DEPs were significantly enriched in apoptosis and metabolism-related pathways via GO and KEGG analysis. Compared with the control group, the most significant enrichment pathways are \"ribosome\", \"metabolic pathways\" and \"protein processing in endoplasmic reticulum\". Based on the proteomic results and relevant literature, some DEPs that potentially related to the toxicity of DS were screened. The mRNA transcript levels of these DEPs were characterized by qRT-PCR, and the results showed that Slc22a7, Gatm, Glud1, Agxt2 and Gldc were significantly down-regulated, while Gsl, Gpt2 and Asns were significantly up-regulated. We speculate that the toxic mechanism of DS to chicken might be that it induces kidney cell apoptosis, interferes with purine metabolism and inhibits the expression of OAT2. The current study provides a reference for elucidating the nephrotoxic mechanism of diclofenac sodium to broiler chicken from the molecular perspective.",
+              "doi": "10.1016/j.cbpc.2021.109129",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ff286d2c114271353cdf111c168fcc37973bb65205b10628e7db60993783ee70"
+              }
+            },
+            {
+              "title": "SLC25A19 drives colorectal cancer progression by regulating p53.",
+              "abstract": "Investigating the molecular mechanism of colorectal cancer (CRC), a common lethal malignancies worldwide, is of great clinical significance. Solute carrier family 25 member 19 (SLC25A19) is a member of the solute carrier family that contribute to cellular functions, including tumor biology. Recently, many studies have attention on uncovering the relationship of SLC25A19 with malignant cancers, but its precise involvement in the regulation of CRC has not been thoroughly understood. This study sought to uncover the role and mechanism of SLC25A19 in CRC development. The GEPIA database and immunohistochemical staining were utilized to detect the expression of SLC25A19 in CRC tissues. The functional influences of SLC25A19 on CRC cell phenotypes were evaluated through a series of assays including celigo cell count, colony formation, CCK-8, flow cytometry, wound healing, and transwell assays following knocking down SLC25A19. Subsequently, the xenograft tumor model was constructed to evaluate the effect of SLC25A19 on tumor growth in vivo. The underlying mechanisms of SLC25A19 silencing were investigated using the human phospho-kinase array. This study demonstrated the upregulation of SLC25A19 in CRC and its significant correlation with unfavorable prognosis in CRC patients. Suppression of SLC25A19 resulted in significant inhibition of cell proliferation, colony formation, and cell migration, alongside a boost in cell apoptosis. In vivo experiments revealed that silenced SLC25A19 displayed reduced growth rates and formed smaller xenografts. Mechanistically, the p53 pathway was found to be upregulated by SLC25A19 knockdown and mediated the function of SLC25A19. Consequently, SLC25A19 was identified as a novel molecule with key regulatory ability in CRC development.",
+              "doi": "10.1002/cam4.70253",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "94b35d1516275d1528feb572bb21170c8c74909f2ec8be51d71330b1308f8da4"
+              }
+            },
+            {
+              "title": "Factors determining sensitivity or resistance of tumor cell lines towards artesunate.",
+              "abstract": "Clinical oncology is still challenged by the development of drug resistance of tumors that result in poor prognosis for patients. There is an urgent necessity to understand the molecular mechanisms of resistance and to develop novel therapy strategies. Artesunate (ART) is an anti-malarial drug, which also exerts profound cytotoxic activity towards cancer cells. We first applied a gene-hunting approach using cluster and COMPARE analyses of microarray-based transcriptome-wide mRNA expression profiles. Among the genes identified by this approach were genes from diverse functional groups such as structural constituents of ribosomes (RPL6, RPL7, RPS12, RPS15A), kinases (CABC1, CCT2, RPL41), transcriptional and translational regulators (SFRS2, TUFM, ZBTB4), signal transducers (FLNA), control of cell growth and proliferation (RPS6), angiogenesis promoting factors (ITGB1), and others (SLC25A19, NCKAP1, BST1, DBH, FZD7, NACA, MTHFD2). Furthermore, we applied a candidate gene approach and tested the role of resistance mechanisms towards established anti-cancer drugs for ART resistance. By using transfected or knockout cell models we found that the tumor suppressor p16(INK4A) and the anti-oxidant protein, catalase, conferred resistance towards ART, while the oncogene HPV-E6 conferred sensitivity towards ART. The tumor suppressor p53 and its downstream protein, p21, as well as the anti-oxidant manganese-dependent superoxide dismutase did not affect cellular response to ART. In conclusion, our pharmacogenomic approach revealed that response of tumor cells towards ART is multi-factorial and is determined by gene expression associated with either ART sensitivity or resistance. At least some of the functional groups of genes (e.g. angiogenesis promoting factors, cell growth and proliferation-associated genes signal transducers and kinases) are also implicated in clinical responsiveness of tumors towards chemotherapy. It merits further investigation, whether ART is responsive in clinically refractory tumors and whether the genes identified in the present study also determine clinical responsiveness towards ART.",
+              "doi": "10.1016/j.cbi.2010.02.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "111d9314c772cf0d5ec1de9d0b7f845db93ee5e5804051c8c65c19780db2882f"
+              }
+            },
+            {
+              "title": "SLC25A19 is required for NADH homeostasis and mitochondrial respiration.",
+              "abstract": "Mitochondrial transporters facilitate the translocation of metabolites between the cytoplasm and mitochondria and are critical for mitochondrial functional integrity. Although many mitochondrial transporters are associated with metabolic diseases, how they regulate mitochondrial function and their metabolic contributions at the cellular level are largely unknown. Here, we show that mitochondrial thiamine pyrophosphate (TPP) transporter SLC25A19 is required for mitochondrial respiration. SLC25A19 deficiency leads to reduced cell viability, increased integrated stress response (ISR), enhanced glycolysis and elevated cell sensitivity to 2-deoxyglucose (2-DG) treatment. Through a series of biochemical assays, we found that the depletion of mitochondrial NADH is the primary cause of the impaired mitochondrial respiration in SLC25A19 deficient cells. We also showed involvement of SLC25A19 in regulating the enzymatic activities of complexes I and III, the tricarboxylic acid (TCA) cycle, malate-aspartate shuttle and amino acid metabolism. Consistently, addition of idebenone, an analog of coenzyme Q10, restores mitochondrial respiration and cell viability in SLC25A19 deficient cells. Together, our findings provide new insight into the functions of SLC25A19 in mitochondrial and cellular physiology, and suggest that restoring mitochondrial respiration could be a novel strategy for treating SLC25A19-associated disorders.",
+              "doi": "10.1016/j.freeradbiomed.2024.06.019",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "85dadb3293c5c5b4c97a492c3cb465d50b90da33bd29efe213beaa2cc5485676"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of mitochondrial solute carrier family 25 (SLC25) identifies member 19 (SLC25A19) as a regulatory factor in hepatocellular carcinoma.",
+              "abstract": "The mitochondrial solute carrier family 25 (SLC25) is known to play a pivotal role in oncogenesis, yet its specific involvement in hepatocellular carcinoma (HCC) remains poorly elucidated. In this study, we performed a clustering analysis of HCC patients in the Cancer Genome Atlas database based on the expression levels of SLC25 members, and conducted clinical feature analysis for each patient within the clusters. Subsequently, we developed a prognostic model using a Lasso regression approach with SLC25A19, SLC25A49, and SLC25A51 as features, and generated a risk score for each HCC patient. We then identified SLC25A19 as a potential prognostic marker for HCC through single-cell analysis, and validated this finding using in vitro and in vivo experiments. Our results revealed significant differences in the expression of most SLC25 family members in HCC patients, enabling the stratification of patients into three clusters, with those in cluster 1 exhibiting the most favorable prognosis and showing a correlation with enhanced immune infiltration. The risk scores derived from the features SLC25A19, SLC25A49, and SLC25A51 effectively predicted the prognosis of HCC patients, with area under the curve (AUC) values exceeding 0.7 in the test group. Single-cell analysis further demonstrated h eightened expression of SLC25A19 in the immune microenvironment of HCC, and in vitro experiments indicated that SLC25A19 may regulate the proliferation, migration, invasion, cycle, and apoptosis of liver cancer cells through the Wnt pathway. In the HepG2 animal model, overexpression of SLC25A19 significantly promotes tumor growth, while knockdown inhibits tumor growth. Analysis of patient tumor tissues shows that SLC25A19 is highly expressed in liver cancer tissues and is associated with CD8 T cell infiltration. In conclusion, our comprehensive analysis of the role of SLC25 in HCC unveiled SLC25A19 as a potential regulatory factor in HCC.",
+              "doi": "10.1016/j.gene.2025.149299",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A19"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bb75480306db9ee3c3e199a42a5ce0a1e1c97185b3d2e86b5fe3f9ed12b33df6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A19 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A19 and SLC22A7 is more likely to inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC25A19', 'SLC22A7']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A19",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC22A7",
+            "ppr_score": 2.0611080031807597e-05,
+            "degree_corrected_score": 2.1904554046548473e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A19",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC25A19",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.016",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A19_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A19": {
+          "status": "unavailable",
+          "gene": "SLC25A19",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A7": {
+          "status": "unavailable",
+          "gene": "SLC22A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A19": {
+          "status": "ok",
+          "gene": "SLC25A19",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.016",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC25A19_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC22A7": {
+          "status": "unavailable",
+          "gene": "SLC22A7",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A19', 'SLC22A7']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC22A7(P(winner)=0.48) vs SLC25A19(P=0.45), 差=0.03；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A19",
+        "candidates": [
+          "SLC25A19",
+          "SLC22A7"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A19": 0.4398,
+          "SLC22A7": 2.35
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC22A7': 1, 'W:SLC25A19': 2}，最终智能体辩论后裁决：winner=SLC25A19 answer=None conf=0.66；法官理由: Two independent LLM signals and mitochondrial TPP essentiality favor SLC25A19 depletion suppressing resistant melanoma; SLC22A7 is a drug-uptake transporter whose loss likely worsens resistance, and graph proxy is weak.。原证据通道判定: winner=SLC22A7 answer=None conf=0.481（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A19', 'SLC22A7']",
+        "status": "ok",
+        "summary": "[跨癌种类推] 临近癌种中，SLC25A19在CRC中敲低可抑制增殖/迁移并激活p53、促进凋亡，且其缺失破坏线粒体NADH稳态与呼吸、增强应激和代谢脆弱性；这种线粒体代谢/应激依赖在Melanoma耐药中可迁移，因为Melanoma耐药常伴随代谢重编程、氧化应激耐受和凋亡逃逸。相比之下，SLC22A7/OAT2主要是药物摄取转运体，缺失更可能降低细胞内药物积累并促进耐药，而非抑制耐药。 | 虽然目标癌种Melanoma缺乏直接邻近/组学证据，但跨癌种生物学推理支持SLC25A19更可能作为抑制肿瘤药物耐受性的候选：其敲低在CRC中显示肿瘤抑制效应，并通过线粒体功能受损、p53/ISR激活和代谢脆弱性削弱细胞生存，这些机制可能降低耐药细胞适应性。SLC22A7的已知功能更偏向药物摄取，PDAC化疗耐药路径中甚至表现为促进耐药，且其缺失可能减少药物进入细胞，不利于抑制耐药。计算证据上，SLC25A19有显著KM关联，SLC22A7的PPR虽非零但TIMER/KM不可用，且疾病方向更支持其耐药促进而非抑制。因此二选一倾向于SLC25A19。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A19",
+        "candidates": [
+          "SLC25A19",
+          "SLC22A7"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A19": 0.4398,
+          "SLC22A7": 2.35
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] 临近癌种中，SLC25A19在CRC中敲低可抑制增殖/迁移并激活p53、促进凋亡，且其缺失破坏线粒体NADH稳态与呼吸、增强应激和代谢脆弱性；这种线粒体代谢/应激依赖在Melanoma耐药中可迁移，因为Melanoma耐药常伴随代谢重编程、氧化应激耐受和凋亡逃逸。相比之下，SLC22A7/OAT2主要是药物摄取转运体，缺失更可能降低细胞内药物积累并促进耐药，而非抑制耐药。 | 虽然目标癌种Melanoma缺乏直接邻近/组学证据，但跨癌种生物学推理支持SLC25A19更可能作为抑制肿瘤药物耐受性的候选：其敲低在CRC中显示肿瘤抑制效应，并通过线粒体功能受损、p53/ISR激活和代谢脆弱性削弱细胞生存，这些机制可能降低耐药细胞适应性。SLC22A7的已知功能更偏向药物摄取，PDAC化疗耐药路径中甚至表现为促进耐药，且其缺失可能减少药物进入细胞，不利于抑制耐药。计算证据上，SLC25A19有显著KM关联，SLC22A7的PPR虽非零但TIMER/KM不可用，且疾病方向更支持其耐药促进而非抑制。因此二选一倾向于SLC25A19。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "colorectal cancer(CRC)",
+          "pancreatic ductal adenocarcinoma (PDAC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A19', 'SLC22A7']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A19",
+          "SLC22A7"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T06:51:55Z"
+  }
+}

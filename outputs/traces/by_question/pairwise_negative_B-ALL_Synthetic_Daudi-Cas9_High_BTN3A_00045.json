@@ -1,0 +1,489 @@
+{
+  "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00045",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC41A3 and SLC22A8 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC41A3"
+  },
+  "effective_genes": [
+    "SLC41A3",
+    "SLC22A8"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00045",
+      "status": "ok",
+      "summary": "检索到 4 类证据、16 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC41A3",
+        "SLC22A8"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A8",
+              "protein_function": "Functions as an organic anion/dicarboxylate exchanger that couples organic anion uptake indirectly to the sodium gradient.",
+              "aliases": "OAT3, Solute Carrier Family 22 (Organic Anion Transporter), Member 8",
+              "transport_type": "E / dicarboxylate"
+            },
+            {
+              "gene": "SLC41A3",
+              "protein_function": "Na(+)/Mg(2+) ion exchanger that acts as a predominant Mg(2+) efflux system at the mitochondrial inner membrane.",
+              "aliases": "None",
+              "transport_type": "Ch  (predicted based on homology with the other 2 members/MgtE transporter)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A8",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC22A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC22A8",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC22A8",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "OAT3",
+              "target_properties": {
+                "name": "OAT3"
+              }
+            },
+            {
+              "gene": "SLC41A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC41 MgtE-like magnesium   transporter family",
+              "target_properties": {
+                "name": "SLC41 MgtE-like magnesium   transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC22A8",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "treatments with cytostatics such as methotrexate and cisplatin",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A8",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "treatments with cytostatics such as methotrexate and cisplatin",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A8",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "ureteral obstruction",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Rosuvastatin promotes osteoblast differentiation and regulates SLCO1A1 transporter gene expression in MC3T3-E1 cells.",
+              "abstract": "Rosuvastatin (RSV) is a synthetic statin with favourable pharmacologic properties including minimal metabolism, hepatic selectivity and enhanced inhibition of HMG-CoA reductase. An induction of osteoblast differentiation has been reported in vitro with lipophilic statins but not with RSV, which, like pravastatin, is relatively hydrophilic compared with other statins. To mediate its action, an active transport mechanism via solute carrier (SLC) transporters from the SLC16, SLC21/SLCO and SLC22 gene family - specifically Slc16a1, Slco1a1, Slco2b1 and Slc22a8 - may be present to allow effective entry in osteoblastic cells. In this study, we demonstrate that RSV induced osteoblast differentiation, as measured by increased BMP-2 gene expression and secretion, and ALP activity in MC3T3-E1 osteoblast cells, without significantly affecting cell proliferation within the concentration range of 0.001-10 μM. Low concentrations of RSV (0.001-0.01 μM) were protective against cell death whereas higher concentrations (10-100 μM) showed cytotoxicity. Moreover, MC3T3-E1 osteoblasts expressed high levels of Slco1a1 and Slc16a1 mRNA and low levels of Slco2b1 and Slc22a8 mRNA, when compared with kidney and liver tissues from mice. Slco1a1 gene expression increased 12-fold during osteoblast differentiation and was further regulated after RSV treatment. In conclusion, as for other statins, RSV promotes osteoblast differentiation, and also, demonstrated for the first time, regulates the expression of Slco1a1, which may constitute the transport system for RSV across the cell membrane in mature osteoblasts.",
+              "doi": "10.1159/000322332",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A8"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "29b39f7af60a725ade3a781440cc499cb78a55647a92745007040ba03b54e39f"
+              }
+            },
+            {
+              "title": "SLC41A3 Exhibits as a Carcinoma Biomarker and Promoter in Liver Hepatocellular Carcinoma.",
+              "abstract": "Liver Hepatocellular Carcinoma (LIHC) is the fifth widely occurred carcinoma, which is thought to be the second primary contributor of carcinoma-associated death. There are almost 788,000 death tolls worldwide. Solute carrier family 41 member 3 (SLC41A3) is a member of solute carrier family 41, and it is the key point of numerous researches. Our research attempted to explore the links between SLC41A3 and LIHC through public databases. Higher expression of SLC41A3 displayed an intimate association with higher pathological stages and poorer prognosis. GO and KEGG analysis revealed the possible regulatory pathways of SLC41A3. Additionally, we carried out cell functional experiments to determine the expression of SLC41A3 in the cell lines of LIHC, as well as the effects of its silence on cell proliferation, migration, and invasion. Our data showed that SLC41A3 was greatly increased in the cell lines of LIHC. Moreover, silencing SLC41A3 impeded LIHC cell proliferation, migration, and invasion . Collectively, our study demonstrated that highly expressed SLC41A3 was a probable indication of LIHC occurrence, and SLC41A3 could be regarded as a prospective target in the treatment of LIHC.",
+              "doi": "10.1155/2021/8556888",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ab17502a5bd7ddbd3542655b6f0854da8ce5089c0e41490af6e578a48f95f56d"
+              }
+            },
+            {
+              "title": "A Risk Model Based on Sorafenib-Response Target Genes Predicts the Prognosis of Patients with HCC.",
+              "abstract": "Sorafenib is used to treat digestive system tumors in patients who do not respond to or cannot tolerate surgery. However, the roles and inhibitory mechanisms of sorafenib against hepatocellular carcinoma (HCC) are unclear. Differentially expressed genes in tissues from responders and nonresponders to sorafenib were investigated using the HCC GSE109211 data set. Biological functions and mechanisms were studied using the Gene Ontology and Kyoto Encyclopedia of Genes and Genomes databases. The expression levels of differential expressed target genes were identified in HCC tissues, using The Cancer Genome Atlas database, and their prognostic and diagnostic values were explored using survival and receiver operating characteristic curve analysis. A nomogram and risk model of sorafenib-response target genes enabled the evaluation of the prognosis of patients with HCC. The relationship between risk scores and levels of infiltrating immune cells was visualized via correlation analysis. We identified 1620 sorafenib-response target genes involved in the PPAR signaling pathway, antigen processing and presentation, and ferroptosis. SLC41A3, SEC61A1, LRP4, PPM1G, and HSP90AA1 were independent risk factors for a poor prognosis for patients with HCC and had diagnostic value. A risk model based on SLC41A3, SEC61A1, LRP4, PPM1G, and HSP90AA1 expression showed that patients with HCC in the high-risk group had a worse prognosis. Consensus-clustering analysis (performed with K set to 2) distinguished two clusters (the cluster 1 and cluster 2 groups). Patients in cluster 1 survived significantly longer than those in cluster 2. The risk score correlated with the levels of T cells, cytotoxic lymphocytes, CD8 T cells, macrophages, memory B cells, follicular helper T cells, and other immune cells. The high risk based on the sorafenib-response targets SLC41A3, SEC61A1, LRP4, PPM1G, and HSP90AA1 represented the poor prognosis for patients with HCC and significantly correlated with the levels of immune infiltrating cells in HCC.",
+              "doi": "10.1155/2022/7257738",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d10bb2638eccb59e9b8cbc6a40f191d023689541086d7344795eb77b5fd1e9db"
+              }
+            },
+            {
+              "title": "Magnesium Supplementation Attenuates Pulmonary Hypertension via Regulation of Magnesium Transporters.",
+              "abstract": "Pulmonary hypertension (PH) is characterized by profound vascular remodeling and altered Ca homeostasis in pulmonary arterial smooth muscle cells (PASMCs). Magnesium ion (Mg), a natural Ca antagonist and a cofactor for numerous enzymes, is crucial for regulating diverse cellular functions, but its roles in PH remains unclear. Here, we examined the roles of Mg and its transporters in PH development. Chronic hypoxia and monocrotaline induced significant PH in adult male rats. It was associated with a reduction of [Mg] in PASMCs, a significant increase in gene expressions of , , , , , , , , ,  and ; upregulation of SLC41A1, SLC41A2, CNNM2, and TRPM7 proteins; and downregulation of SLC41A3 mRNA and protein. Mg supplement attenuated pulmonary arterial pressure, right heart hypertrophy, and medial wall thickening of pulmonary arteries, and reversed the changes in the expression of Mg transporters. Incubation of PASMCs with a high concentration of Mg markedly inhibited PASMC proliferation and migration, and increased apoptosis, whereas a low level of Mg produced the opposite effects. siRNA targeting  attenuated PASMC proliferation and migration, but promoted apoptosis; and  overexpression also caused similar effects. Moreover, siRNA targeting  or high [Mg] incubation inhibited hypoxia-induced upregulation and nuclear translocation of NFATc3 in PASMCs. The results, for the first time, provide the supportive evidence that Mg transporters participate in the development of PH by modulating PASMC proliferation, migration, and apoptosis; and Mg supplementation attenuates PH through regulation of Mg transporters involving the NFATc3 signaling pathway.",
+              "doi": "10.1161/HYPERTENSIONAHA.120.14909",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c8d1f2a1fcc803e15630dd5c875db420c88b6b4878dc06039f512d0da845a993"
+              }
+            },
+            {
+              "title": "SLC41A1 overexpression correlates with immune cell infiltration in HCC and promotes its malignant progression.",
+              "abstract": "Solute carrier 41 (SLC41) has been identified as a family of magnesium (Mg) transporters that participate in various diseases, including tumor development and progression. Recent studies revealed SLC41A3 acted as an oncogene and predicted poor survival for hepatocellular carcinoma (HCC) patients. However, the potential function of SLC41A1 in HCC remains unclear. In our study, we focused on the levels and putative mechanisms of SLC41A1 in HCC. Using bioinformatics techniques, we found SLC41A1 was upregulated in HCC, which was verified by immunostaining of HCC patients. SLC41A1 was correlated with clinicopathological characteristics, and could be utilized as independently diagnostic and prognostic markers for HCC. By exploring MethSurv website, DNA methylation was identified in SLC41A1, and several methylated CpG sites might affect overall survival of HCC patients. Using Gene Ontology (GO) , Kyoto Encyclopedia of Genes and Genomes (KEGG), gene set enrichment analysis (GSEA), protein-protein interaction (PPI) network, we found SLC41A1 overexpression was related to several tumor-promoting pathways and molecules, such as degradation of extracellular matrix, cell adhesion and O-linked glycosylation, and expression of CXCL1, CXCL5 and MUC1. The results of single-sample GSEA (ssGSEA) showed SLC41A1 might regulate infiltration of multiple immune cells, resulting in the imbalance between immune suppression and immune surveillance. Cellular experiments showed that knockdown of SLC41A1 inhibited proliferation, migration and invasion of HCC, whereas SLC41A1 overexpression exerted the tumor-promoting effects. Collectively, our results shed light on new insights into expression, putative roles and mechanisms of SLC41A1 in HCC, providing novel diagnostic biomarkers and therapeutic targets for HCC.",
+              "doi": "10.7150/ijms.100155",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1cfcc772b4405eb4d37b0a8bb2dd0f21187b6f24164e9311bfd0203684be04e7"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC41A3 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC41A3 and SLC22A8 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC41A3', 'SLC22A8']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC41A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC41A3",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC41A3": {
+          "status": "unavailable",
+          "gene": "SLC41A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A8": {
+          "status": "unavailable",
+          "gene": "SLC22A8",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC41A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC41A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC22A8": {
+          "status": "unsupported_cancer",
+          "gene": "SLC22A8",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC41A3', 'SLC22A8']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC22A8(P(winner)=0.49) vs SLC41A3(P=0.45), 差=0.04；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC41A3",
+        "candidates": [
+          "SLC41A3",
+          "SLC22A8"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC41A3": 0.05,
+          "SLC22A8": 1.75
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC22A8': 1, 'W:SLC41A3': 2}，最终智能体辩论后裁决：winner=SLC41A3 answer=None conf=0.66；法官理由: Two independent LLM channels favor SLC41A3 as broadly essential Mg2+/mitochondrial transporter in proliferating B-ALL; SLC22A8 is kidney OAT likely nonessential. E’s logistic signal is weak association proxy, not CRISPR readout.。原证据通道判定: winner=SLC22A8 answer=None conf=0.493（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC41A3', 'SLC22A8']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC41A3 has direct carcinoma evidence in hepatocellular carcinoma where high expression associates with poor prognosis and silencing reduces proliferation/migration/invasion; it also modulates Mg2+ homeostasis, apoptosis/proliferation, and immune infiltration in non-tumor pulmonary hypertension models. Although B-lymphoblastic leukemia is a lymphoid rather than epithelial cancer, Daudi-Cas9 cells are highly proliferative lymphoid tumor cells, and Mg2+/ion-transport-dependent survival pathways are more plausibly transferable to tumor-cell intrinsic growth/apoptosis than SLC22A8's kidney/liver organic-anion transport and cytostatic-response associations. | No direct B-lymphoblastic leukemia, TIMER, or KM evidence exists for either gene. SLC22A8 is mainly an organic anion/dicarboxylate transporter linked to oxidative stress, ureteral obstruction, and cytostatic responses; these are non-tumor or drug-handling contexts and do not strongly imply tumor-cell survival inhibition in B-ALL. SLC41A3, by contrast, has carcinoma functional evidence: knockdown impedes tumor proliferation and high expression predicts poor outcome, and it participates in Mg2+-regulated proliferation/apoptosis/NFATc3 pathways. In a CRISPR tumor-survival screen, loss or inhibition of SLC41A3 is therefore more likely to reduce B-lymphoblastic leukemia tumor survival than loss of SLC22A8, though cross-lineage uncertainty keeps confidence modest.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC41A3",
+        "candidates": [
+          "SLC41A3",
+          "SLC22A8"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC41A3": 0.05,
+          "SLC22A8": 1.75
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC41A3 has direct carcinoma evidence in hepatocellular carcinoma where high expression associates with poor prognosis and silencing reduces proliferation/migration/invasion; it also modulates Mg2+ homeostasis, apoptosis/proliferation, and immune infiltration in non-tumor pulmonary hypertension models. Although B-lymphoblastic leukemia is a lymphoid rather than epithelial cancer, Daudi-Cas9 cells are highly proliferative lymphoid tumor cells, and Mg2+/ion-transport-dependent survival pathways are more plausibly transferable to tumor-cell intrinsic growth/apoptosis than SLC22A8's kidney/liver organic-anion transport and cytostatic-response associations. | No direct B-lymphoblastic leukemia, TIMER, or KM evidence exists for either gene. SLC22A8 is mainly an organic anion/dicarboxylate transporter linked to oxidative stress, ureteral obstruction, and cytostatic responses; these are non-tumor or drug-handling contexts and do not strongly imply tumor-cell survival inhibition in B-ALL. SLC41A3, by contrast, has carcinoma functional evidence: knockdown impedes tumor proliferation and high expression predicts poor outcome, and it participates in Mg2+-regulated proliferation/apoptosis/NFATc3 pathways. In a CRISPR tumor-survival screen, loss or inhibition of SLC41A3 is therefore more likely to reduce B-lymphoblastic leukemia tumor survival than loss of SLC22A8, though cross-lineage uncertainty keeps confidence modest. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "treatments with cytostatics such as methotrexate and cisplatin",
+          "ureteral obstruction"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC41A3', 'SLC22A8']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC41A3",
+          "SLC22A8"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:44:52Z"
+  }
+}

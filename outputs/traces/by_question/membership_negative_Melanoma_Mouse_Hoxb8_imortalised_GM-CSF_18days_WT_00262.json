@@ -1,0 +1,440 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00262",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC10A3 inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC10A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00262",
+      "status": "ok",
+      "summary": "检索到 4 类证据、13 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC10A3"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC10A3",
+              "protein_function": "Ubiquitous expression and conservation of the sequence in distant animal species suggest that the gene codes for a protein with housekeeping functions.",
+              "aliases": "P3, Solute Carrier Family 10, Member 3",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC10A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC10 Sodium bile  salt cotransport family",
+              "target_properties": {
+                "name": "SLC10 Sodium bile  salt cotransport family"
+              }
+            },
+            {
+              "gene": "SLC10A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC10A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC10A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC10A3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "P3",
+              "target_properties": {
+                "name": "P3"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC10A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC10A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Germ Cell Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC10A3",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Testicular Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC10A3 regulates ferroptosis of glioblastoma through the STAT3/GPX4 pathway.",
+              "abstract": "Ferroptosis is closely related to disease progression and treatment response in human brain gliomas; however, the regulatory mechanisms involved remain to be elucidated. Identifying new ferroptosis regulatory factors holds promise for addressing the aberrant regulation of ferroptosis in glioblastoma (GBM) and overcoming its treatment resistance. In this research, bioinformatics revealed that SLC10A3 is upregulated in GBM and correlates with poor patient prognosis. Functional analysis showed that SLC10A3 regulates GBM growth and progression through ferroptosis and that silencing SLC10A3 enhances sensitivity to the ferroptosis inducer Erastin. Mechanistically, SLC10A3 modulates STAT3 transcription and phosphorylation, impacting GBM ferroptosis via the STAT3-GPX4 pathway, and the STAT3 phosphorylation inhibitor Stattic effectively reverses this process. In vivo experiments also demonstrated that silencing SLC10A3 effectively induces ferroptosis in GBM and inhibits GBM progression. Our findings may help elucidate the mechanisms behind GBM resistance and offer new potential therapeutic targets.",
+              "doi": "10.1038/s41598-025-05866-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "329fe59590a26c7307d3fa38db562494b75268104d7e6867f9caf500122c449e"
+              }
+            },
+            {
+              "title": "SLC10A3 Is a Prognostic Biomarker and Involved in Immune Infiltration and Programmed Cell Death in Lower Grade Glioma.",
+              "abstract": "The association between SLC10A3 (solute carrier family 10 member 3) and lower grade glioma (LGG) remains unclear. We used public databases and bioinformatics analysis to analyze SLC10A3. These included The Cancer Genome Atlas, Genotype-Tissue Expansion, Chinese Glioma Genome Atlas, Human Protein Atlas, GeneCards, cBioPortal, Search Tool for the Retrieval of Interacting Genes/Proteins, Gene Expression Profiling Interactive Analysis, Tumor Immune Estimation Resource, Tumor-Immune System Interaction Database, receiver operating characteristic curve analysis, Kaplan-Meier analysis, Cox analysis, nomograms, calibration plots, gene ontology/Kyoto Encyclopedia of Genes and Genomes enrichment analysis, gene set enrichment analysis, single-sample gene set enrichment analysis, and Spearman's correlation analysis. SLC10A3 was upregulated in adrenocortical carcinoma, glioblastoma, and LGG and was associated with good overall survival (OS) in adrenocortical carcinoma and poor OS in LGG and glioblastoma. SLC10A3 was increased with increased World Health Organization grade, upregulated in isocitrate dehydrogenase-wild type, 1p/19q (chromosome arms 1p and 19q) non-co-deleted, and higher in astrocytoma. Patients with LGG were grouped by the occurrence of the clinical outcome endpoints (i.e., OS, disease-specific survival [DSS], and progression-free interval events). Genetic alterations in SLC10A3 were associated with poor progression-free survival in LGG. Most of clinical characteristics were associated with the SLC10A3 expression level. SLC10A3 with diagnostic and prognostic value (OS, DSS, and progression-free interval) was an independent prognostic factor in LGG. Moreover, Nomograms (WHO grade, 1p/19q codeletion, age and SLC10A3) had moderately accurate predictive for OS and DSS. Functional analysis showed that SLC10A3 might participate in the transport of multiple substances, neurogenic signaling, immune response, and programmed cell death in LGG. SLC10A3 correlated with immune infiltration in LGG and moderately correlated with the gene signature of pyroptosis, lysosome-dependent cell death, necroptosis, apoptosis, ferroptosis, alkaliptosis, and autophagy-dependent cell death. SLC10A3 is a potential diagnostic and prognostic biomarker for LGG and might be associated with substance transport, neurogenic signaling, immune infiltration, and programmed cell death in LGG.",
+              "doi": "10.1016/j.wneu.2023.07.134",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "21ba62e12cd456589f85ed12f05a55d1f62735bb0a328cd252afd8709175ad9b"
+              }
+            },
+            {
+              "title": "Analysis of chemotherapy response programs in ovarian cancers by the next-generation sequencing technologies.",
+              "abstract": "To understand the chemotherapy response program in ovarian cancer cells at deep transcript sequencing levels. Two next-generation sequencing technologies--MPSS (massively parallel signature sequencing) and SBS (sequencing by synthesis)--were used to sequence the transcripts of IGROV1 and IGROV1-CP cells, and to sequence the transcripts of a highly chemotherapy responsive and a highly chemotherapy resistant ovarian cancer tissue. We identified 3422 signatures (2957 genes) that are significantly different between IGROV1 and IGROV1-CP cells (P<0.001). Gene Ontology (GO) term GO:0001837 (epithelial-to-mesenchymal transition) and GO:0034330 (cell junction assembly and maintenance) are enriched in genes that are over expressed in IGROV1-CP cells while apoptosis-related GO terms are enriched in genes over expressed in IGROV1 cells. We identified 1187 tags (corresponding to 1040 genes) that are differentially expressed between the chemotherapy responsive and the persistently chemotherapy resistant ovarian cancer tissues. GO term GO:0050673 (epithelial cell proliferation) and GO:0050678 (regulation of epithelial cell proliferation) are enriched in the genes over expressed in the chemotherapy resistant tissue while the GO:0007229 (integrin-mediated signaling pathway) is enriched in the genes over expressed in the chemotherapy sensitive tissue. An integrative analysis identified 111 common differentially expressed genes including two bone morphogenetic proteins (BMP4 and BMP7), six solute carrier proteins (SLC10A3, SLC16A3, SLC25A1, SLC35B3, SLC7A5 and SLC7A7), transcription factor POU5F1 (POU class 5 homeobox 1), and KLK10 (kallikrein-related peptidase 10). A network analysis revealed a subnetwork with three genes BMP7, NR2F2 and AP2B1 that were consistently over expressed in the chemoresistant tissue or cells compared to the chemosensitive tissue or cells. Our database offers the first comprehensive view of the digital transcriptomes of ovarian cancer cell lines and tissues with different chemotherapy response phenotypes.",
+              "doi": "10.1016/j.ygyno.2010.01.041",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2ef7284384bc2278020489421070ed6a6511cf44c890927de98f308a65040668"
+              }
+            },
+            {
+              "title": "RNA-sequencing dissects the transcriptome of polyploid cancer cells that are resistant to combined treatments of cisplatin with paclitaxel and docetaxel.",
+              "abstract": "Overcoming chemoresistance will prevent cancer relapse and contribute to clinical chemotherapy. In order to explore the underlying mechanism of chemoresistance, we firstly incubated cancer cells with a combination of cisplatin + paclitaxel (C + P) or cisplatin + paclitaxel + docetaxel (C + P + D) to mimic the treatment of cancer therapy in the laboratory. We found that polyploidy is a recurring strategy that cells adopt in response to cisplatin-based treatments. RNA-sequencing was performed to identify differentially expressed genes (DEGs) that may contribute to drug resistance. 4830 and 5518 DEGs were discovered in C + P and C + P + D resistant cells, respectively, and 4384 (73.40%) genes were shared. Possible drug resistance genes like Atg14, Abcb1b, Tbx2, Slc2a9, Slc10a3 and Slc22a18 were up-regulated while Foxm1, Bcl2, Brca1, Chek1, Hiatl1 and Abcb9 were down regulated. Genes involved in the pathways of p53 signaling, lysosomes and apoptosis were up-regulated, and in contrast, genes in the cell cycle, DNA replication, and mismatch repair pathways were down-regulated. Moreover, representative proteins relative to DEGs were examined to validate the results of RNA-seq and RT-PCR. Taken together, these results will contribute to revealing the mechanism of chemoresistance and discovering potential prognostic factors for cancer medication.",
+              "doi": "10.1039/c7mb00334j",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "181659e838cf61ec04ce27debf499893377891870b12da3d79c247782df7ea39"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC10A3 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC10A3 inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC10A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC10A3",
+            "ppr_score": 2.3282533854809302e-05,
+            "degree_corrected_score": 2.4743658283613892e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC10A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC10A3",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC10A3": {
+          "status": "unavailable",
+          "gene": "SLC10A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC10A3": {
+          "status": "unavailable",
+          "gene": "SLC10A3",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC10A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A3"
+        ],
+        "confidence": 0.446,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A3": 3.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC10A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC10A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A3"
+        ],
+        "confidence": 0.446,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A3": 3.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC10A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.446 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC10A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:43:42Z"
+  }
+}

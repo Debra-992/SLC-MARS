@@ -1,0 +1,535 @@
+{
+  "ablation": "ablate_compute",
+  "trace_version": "22",
+  "n": 5,
+  "seed": 5,
+  "buckets": [
+    "pairwise",
+    "membership"
+  ],
+  "n_valid": 5,
+  "summary": {
+    "n": 5,
+    "correct": 2,
+    "wrong": 2,
+    "abstain": 1,
+    "coverage": 0.8,
+    "acc_answered": 0.5,
+    "acc_overall": 0.4,
+    "net_vs_chance": -0.09999999999999998
+  },
+  "baseline_v20": {
+    "n": 5,
+    "correct": 5,
+    "wrong": 0,
+    "abstain": 0,
+    "coverage": 1.0,
+    "acc_answered": 1.0,
+    "acc_overall": 1.0,
+    "net_vs_chance": 0.5
+  },
+  "results": [
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00104",
+      "bucket": "pairwise",
+      "task_type": "pairwise_negative",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr vs Crispr JQ1 as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC1A6 is more likely to inhibit Breast Cancer's Tumor Drug Resistence?",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr vs Crispr JQ1"
+      },
+      "ground_truth": {
+        "winner": "SLC25A1"
+      },
+      "effective_genes": [
+        "SLC25A1",
+        "SLC1A6"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A1', 'SLC1A6']",
+            "status": "ok",
+            "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC25A1",
+            "candidates": [
+              "SLC25A1",
+              "SLC1A6"
+            ],
+            "confidence": 0.551,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A1": 4.45,
+              "SLC1A6": 0.1
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC1A6(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A1', 'SLC1A6']",
+            "status": "ok",
+            "summary": "[跨癌种类推] SLC25A1在glioma中与化疗耐药/增殖/干性呈PROMOTION，并在pan-cancer DepMap中显示knockout对多数癌细胞有抑制效应；在乳腺癌MCF7相关代谢-表观遗传背景中，SLC25A1作为线粒体柠檬酸输出体支持胞质acetyl-CoA和ERα信号，提示其更可能参与乳腺癌治疗耐受。SLC1A6仅有乳腺癌miRNA/GRM3间接关联，缺乏耐药或CRISPR必需性证据。 | SLC25A1具有更强的跨癌种功能迁移证据：glioma化疗耐药、pan-cancer oncogenic表达、DepMap knockout抑制、以及乳腺癌serine starvation下对ER信号和acetyl-CoA代谢的支持。MCF7为ER阳性乳腺癌细胞，BET/JQ1相关转录-表观遗传压力下，抑制SLC25A1可能削弱代谢依赖和耐药相关转录程序。SLC1A6虽出现在乳腺癌miR-374c-5p hub基因列表中，但未被验证为直接功能靶点，且无明确药耐或CRISPR依赖性证据。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC25A1",
+            "candidates": [
+              "SLC25A1",
+              "SLC1A6"
+            ],
+            "confidence": 0.66,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A1": 4.45,
+              "SLC1A6": 0.1
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[跨癌种类推] SLC25A1在glioma中与化疗耐药/增殖/干性呈PROMOTION，并在pan-cancer DepMap中显示knockout对多数癌细胞有抑制效应；在乳腺癌MCF7相关代谢-表观遗传背景中，SLC25A1作为线粒体柠檬酸输出体支持胞质acetyl-CoA和ERα信号，提示其更可能参与乳腺癌治疗耐受。SLC1A6仅有乳腺癌miRNA/GRM3间接关联，缺乏耐药或CRISPR必需性证据。 | SLC25A1具有更强的跨癌种功能迁移证据：glioma化疗耐药、pan-cancer oncogenic表达、DepMap knockout抑制、以及乳腺癌serine starvation下对ER信号和acetyl-CoA代谢的支持。MCF7为ER阳性乳腺癌细胞，BET/JQ1相关转录-表观遗传压力下，抑制SLC25A1可能削弱代谢依赖和耐药相关转录程序。SLC1A6虽出现在乳腺癌miR-374c-5p hub基因列表中，但未被验证为直接功能靶点，且无明确药耐或CRISPR依赖性证据。",
+            "analogy_cancers": [
+              "glioma",
+              "leukemia",
+              "liver cancer"
+            ],
+            "decision_mode": "llm",
+            "used_llm": true,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:19:54Z"
+      }
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00226",
+      "bucket": "membership",
+      "task_type": "membership_negative",
+      "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC25A32 inhibit Lymphoma's Tumor Growth?",
+      "constraints": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "ground_truth": {
+        "answer": true
+      },
+      "effective_genes": [
+        "SLC25A32"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=membership candidates=['SLC25A32']",
+            "status": "ok",
+            "summary": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+            "source": null,
+            "error": null,
+            "bucket": "membership",
+            "task_type": "membership_negative",
+            "answer": false,
+            "winner": null,
+            "candidates": [
+              "SLC25A32"
+            ],
+            "confidence": 0.423,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A32": 0.05
+            },
+            "basis": [
+              "kg_neighbor"
+            ],
+            "rationale": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "wrong"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=membership candidates=['SLC25A32']",
+            "status": "ok",
+            "summary": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+            "source": null,
+            "error": null,
+            "bucket": "membership",
+            "task_type": "membership_negative",
+            "answer": false,
+            "winner": null,
+            "candidates": [
+              "SLC25A32"
+            ],
+            "confidence": 0.423,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A32": 0.05
+            },
+            "basis": [
+              "kg_neighbor"
+            ],
+            "rationale": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "wrong"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:20:34Z"
+      }
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00265",
+      "bucket": "pairwise",
+      "task_type": "pairwise_negative",
+      "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC33A1 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "constraints": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "ground_truth": {
+        "winner": "SLC33A1"
+      },
+      "effective_genes": [
+        "SLC33A1",
+        "SLC6A6"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC33A1', 'SLC6A6']",
+            "status": "unavailable",
+            "summary": "方向/量级/旁系缓冲证据均不足(best=SLC33A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": null,
+            "candidates": [
+              "SLC33A1",
+              "SLC6A6"
+            ],
+            "confidence": 0.0,
+            "abstained": true,
+            "gene_scores": {
+              "SLC33A1": 0.05,
+              "SLC6A6": 0.05
+            },
+            "basis": [
+              "kg_neighbor"
+            ],
+            "rationale": "方向/量级/旁系缓冲证据均不足(best=SLC33A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "abstain"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC33A1', 'SLC6A6']",
+            "status": "unavailable",
+            "summary": "方向/量级/旁系缓冲证据均不足(best=SLC33A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": null,
+            "candidates": [
+              "SLC33A1",
+              "SLC6A6"
+            ],
+            "confidence": 0.0,
+            "abstained": true,
+            "gene_scores": {
+              "SLC33A1": 0.05,
+              "SLC6A6": 0.05
+            },
+            "basis": [
+              "kg_neighbor"
+            ],
+            "rationale": "[LLM 不可用且直接证据不足 -> 诚实弃答] 方向/量级/旁系缓冲证据均不足(best=SLC33A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "abstain"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:21:14Z"
+      }
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053",
+      "bucket": "membership",
+      "task_type": "membership_positive",
+      "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC4A7 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "constraints": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "ground_truth": {
+        "answer": true
+      },
+      "effective_genes": [
+        "SLC4A7"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=membership candidates=['SLC4A7']",
+            "status": "ok",
+            "summary": "[R2 必需性重排·v20] SLC4A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+            "source": null,
+            "error": null,
+            "bucket": "membership",
+            "task_type": "membership_positive",
+            "answer": true,
+            "winner": null,
+            "candidates": [
+              "SLC4A7"
+            ],
+            "confidence": 0.821,
+            "abstained": false,
+            "gene_scores": {
+              "SLC4A7": 3.9
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[R2 必需性重排·v20] SLC4A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=membership candidates=['SLC4A7']",
+            "status": "ok",
+            "summary": "[R2 必需性重排·v20] SLC4A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+            "source": null,
+            "error": null,
+            "bucket": "membership",
+            "task_type": "membership_positive",
+            "answer": true,
+            "winner": null,
+            "candidates": [
+              "SLC4A7"
+            ],
+            "confidence": 0.821,
+            "abstained": false,
+            "gene_scores": {
+              "SLC4A7": 3.9
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[R2 必需性重排·v20] SLC4A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.90 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "correct"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:21:54Z"
+      }
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00323",
+      "bucket": "pairwise",
+      "task_type": "pairwise_negative",
+      "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC38A5 is more likely to inhibit Melanoma's Tumor Growth?",
+      "constraints": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "ground_truth": {
+        "winner": "SLC25A26"
+      },
+      "effective_genes": [
+        "SLC25A26",
+        "SLC38A5"
+      ],
+      "systems": {
+        "pipeline_heuristic": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A26', 'SLC38A5']",
+            "status": "ok",
+            "summary": "[pairwise 图特征logistic·v10] SLC38A5(P(winner)=0.63) vs SLC25A26(P=0.45), 差=0.18；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC38A5",
+            "candidates": [
+              "SLC25A26",
+              "SLC38A5"
+            ],
+            "confidence": 0.634,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A26": 0.05,
+              "SLC38A5": 8.25
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[pairwise 图特征logistic·v10] SLC38A5(P(winner)=0.63) vs SLC25A26(P=0.45), 差=0.18；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "wrong"
+        },
+        "pipeline_auto": {
+          "answer": {
+            "knowledge_type": "answer",
+            "question": "bucket=pairwise candidates=['SLC25A26', 'SLC38A5']",
+            "status": "ok",
+            "summary": "[pairwise 图特征logistic·v10] SLC38A5(P(winner)=0.63) vs SLC25A26(P=0.45), 差=0.18；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "source": null,
+            "error": null,
+            "bucket": "pairwise",
+            "task_type": "pairwise_negative",
+            "answer": null,
+            "winner": "SLC38A5",
+            "candidates": [
+              "SLC25A26",
+              "SLC38A5"
+            ],
+            "confidence": 0.634,
+            "abstained": false,
+            "gene_scores": {
+              "SLC25A26": 0.05,
+              "SLC38A5": 8.25
+            },
+            "basis": [
+              "kg_direction",
+              "kg_direction_against",
+              "kg_disease_path",
+              "kg_neighbor"
+            ],
+            "rationale": "[pairwise 图特征logistic·v10] SLC38A5(P(winner)=0.63) vs SLC25A26(P=0.45), 差=0.18；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+            "analogy_cancers": [],
+            "decision_mode": "heuristic",
+            "used_llm": false,
+            "evidence_integrity": "unknown!=negative",
+            "conformal_threshold": null
+          },
+          "outcome": "wrong"
+        }
+      },
+      "provenance": {
+        "dataset": "clean",
+        "trace_version": "22",
+        "ablation": "ablate_compute",
+        "source": "v20_cache_reuse",
+        "ts": "2026-10-30T02:22:35Z"
+      }
+    }
+  ]
+}

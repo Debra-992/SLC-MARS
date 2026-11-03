@@ -1,0 +1,354 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_24h_00012",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC35B2 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC35B2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_24h_00012",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35B2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35B2",
+              "protein_function": "Probably functions as a 3'-phosphoadenylyl sulfate:adenosine 3',5'-bisphosphate antiporter at the Golgi membranes. Mediates the transport from the cytosol into the lumen of the Golgi of 3'-phosphoadenylyl sulfate/adenosine 3'phospho 5'-phosphosulfate (PAPS).",
+              "aliases": "SLC35B2",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35B2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Inhibition of the SLC35B2-TPST2 Axis of Tyrosine Sulfation Attenuates the Growth and Metastasis of Pancreatic Ductal Adenocarcinom.",
+              "abstract": "Pancreatic ductal adenocarcinoma (PDAC) is the fourth leading cause of cancer deaths in the United States. Tyrosine sulfation, catalyzed by the tyrosylprotein sulfotransferase 2 (TPST2), is a post-translational modification essential for protein-protein interactions and cellular functions. Solute carrier family 35 member B (SLC35B2) is a key transporter that transports the universal sulfate donor 3'-phosphoadenosine 5'-phosphosulfate into the Golgi apparatus where the protein sulfation occurs. The goal of this study was to determine whether and how the SLC35B2-TPST2 axis of tyrosine sulfation plays a role in PDAC. Gene expression was analyzed in PDAC patients and mice. Human PDAC MIA PaCa-2 and PANC-1 cells were used for in vitro studies. TPST2-deficient MIA PaCa-2 cells were generated to assess xenograft tumor growth in vivo. Mouse PDAC cells derived from the Kras;Tp53;Pdx1-Cre (KPC) mice were used to generate Tpst2 knockout KPC cells to evaluate tumor growth and metastasis in vivo. High expressions of SLC35B2 and TPST2 were correlated with poor PDAC patient survival. Knocking down SLC35B2 or TPST2, or pharmacologicically inhibiting sulfation, resulted in the inhibition of PDAC cell proliferation and migration in vitro. TPST2-deficient MIA PaCa-2 cells showed inhibited xenograft tumor growth. Orthotopic inoculation of Tpst2 knockout KPC cells in mice showed inhibition of primary tumor growth, local invasion, and metastasis. Mechanistically, the integrin β4 was found to be a novel substrate of TPST2. Inhibition of sulfation destabilizes integrin β4 protein, which may have accounted for the suppression of metastasis. Targeting the SLC35B2-TPST2 axis of tyrosine sulfation may represent a novel approach for therapeutic intervention of PDAC.",
+              "doi": "10.1016/j.jcmgh.2023.05.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4d0cffd39c4790ce74dcb993eb3ed7670616e009b301f4dd0e0462b99a74e330"
+              }
+            },
+            {
+              "title": "A genome-wide CRISPR screen identifies a restricted set of HIV host dependency factors.",
+              "abstract": "Host proteins are essential for HIV entry and replication and can be important nonviral therapeutic targets. Large-scale RNA interference (RNAi)-based screens have identified nearly a thousand candidate host factors, but there is little agreement among studies and few factors have been validated. Here we demonstrate that a genome-wide CRISPR-based screen identifies host factors in a physiologically relevant cell system. We identify five factors, including the HIV co-receptors CD4 and CCR5, that are required for HIV infection yet are dispensable for cellular proliferation and viability. Tyrosylprotein sulfotransferase 2 (TPST2) and solute carrier family 35 member B2 (SLC35B2) function in a common pathway to sulfate CCR5 on extracellular tyrosine residues, facilitating CCR5 recognition by the HIV envelope. Activated leukocyte cell adhesion molecule (ALCAM) mediates cell aggregation, which is required for cell-to-cell HIV transmission. We validated these pathways in primary human CD4 T cells through Cas9-mediated knockout and antibody blockade. Our findings indicate that HIV infection and replication rely on a limited set of host-dispensable genes and suggest that these pathways can be studied for therapeutic intervention.",
+              "doi": "10.1038/ng.3741",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f1f61c42435ff36287054bebe6b8f1b7d20dbe43d3e28a76054bf5fd30a5b184"
+              }
+            },
+            {
+              "title": "Enhanced SLC35B2/SAV1 sulfation axis promotes tumor growth by inhibiting Hippo signaling in HCC.",
+              "abstract": "Protein tyrosine sulfation (PTS) is a common posttranslational modification that regulates a variety of physiological and pathological processes. However, the role of PTS in cancer remains poorly understood. The goal of this study was to determine whether and how PTS plays a role in HCC progression. By mass spectrometry and bioinformatics analysis, we identified SAV1 as a novel substrate of PTS in HCC. Oxidative stress upregulates the transcription of SLC35B2, a Golgi-resident transporter of sulfate donor 3'-phosphoadenosine 5'-phosphosulfate, leading to increased sulfation of SAV1. Sulfation of SAV1 disrupts the formation of the SAV1-MST1 complex, resulting in a decrease of MST1 phosphorylation and subsequent inactivation of Hippo signaling. These molecular events ultimately foster the growth of HCC cells both in vivo and in vitro. Moreover, SLC35B2 is a novel transcription target gene of the Hippo pathway, constituting a positive feedback loop that facilitates HCC progression under oxidative stress. Our findings reveal a regulatory mechanism of the SLC35B2/SAV1 sulfation axis in response to oxidative stress, highlighting its potential as a promising therapeutic target for HCC.",
+              "doi": "10.1097/HEP.0000000000000783",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a86b5b355c7f8b9facf7e49afcf9636555f47e14ffa253332c585d1ad5f511b1"
+              }
+            },
+            {
+              "title": "Characterization of a spontaneous osteopetrosis model using RANKL-dysfunctional mice.",
+              "abstract": "Tumor necrosis factor superfamily member 11 (TNFSF11), or receptor activator of nuclear factor-κB ligand (RANKL), is a crucial osteoclast-stimulating factor binding to RANK on osteoclast membranes. Mouse models are powerful tools for understanding the genetic mechanisms of related diseases. Here, we examined the utility of Tnfsf11 mutation in mice for understanding the mechanisms of bone remodeling and dysmorphology. The Tnfsf11gum mouse, discovered in 2011 at Jackson Laboratory, was used to study the genetic landscape associated with TNFSF11 inactivation in bone marrow tissues. Tnfsf11 and Tnfsf11 mice were subjected to Micro-CT observation, ELISA analysis, histological evaluation, and massively-parallel mRNA sequencing (RNA-Seq) analysis. Tnfsf11 mice exhibited severe osteopetrotic changes in the bone marrow cavity, along with significantly lower serum RANKL levels and a reduced number of tartrate-resistant acid phosphatase (TRAP)-positive osteoclasts in the bone marrow compared to those in Tnfsf11 mice. However, tooth eruption between Tnfsf11 and Tnfsf11 mice did not differ. Furthermore, genes involved in osteoblast proliferation and differentiation, including Gli1, Slc35b2, Lrrc17, and Junb were differentially expressed. Heterozygous mutation of TNFSF11 was also associated with a slightly increased expression of genes involved in osteoclast proliferation and differentiation, including Tcirg1, Junb, Anxa2, and Atp6ap1. Overall, we demonstrate that single gene mutations in Tnfsf11 cause bone resorption instability without significantly altering the genes related to osteoblast and osteoclast activity in the bone marrow cavity, thus establishing an optimal resource as an experimental animal model for bone resorption in bone biology research.",
+              "doi": "10.1016/j.tice.2024.102412",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35B2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b7687619bbf5c839e9cc2514ef3d9b576771fc82e62bc7b380e830deac8330f0"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35B2 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC35B2 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC35B2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35B2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35B2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35B2",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35B2": {
+          "status": "unavailable",
+          "gene": "SLC35B2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35B2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35B2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35B2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35B2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC35B2"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC35B2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35B2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35B2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC35B2"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35B2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC35B2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35B2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35B2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:17:32Z"
+  }
+}

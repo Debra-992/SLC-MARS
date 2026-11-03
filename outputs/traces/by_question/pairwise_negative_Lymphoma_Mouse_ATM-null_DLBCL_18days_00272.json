@@ -1,0 +1,403 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00272",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A32 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC25A32"
+  },
+  "effective_genes": [
+    "SLC25A32",
+    "SLC6A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00272",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A32",
+        "SLC6A6"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "protein_function": "Facilitates flavin adenine dinucleotide (FAD) translocation across the mitochondrial inner membrane into the mitochondrial matrix where it acts as a redox cofactor.",
+              "aliases": "MFTC, Mitochondrial FAD Transporter",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC6A6",
+              "protein_function": "Mediates sodium- and chloride-dependent transport of taurine and beta-alanine.",
+              "aliases": "TAUT",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC6A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The interaction of HT-2 toxin and Akt1 on gene expression regulation in Kashin-Beck disease pathogenesis.",
+              "abstract": "This study investigates the effects of T-2 toxin metabolite HT-2 alone or combined with Akt1 on chondrocyte gene expression to elucidate their roles in Kashin-Beck disease (KBD) pathogenesis. Lentiviral transfection was employed to silence Akt1 in C28/I2 human chondrocytes. High-throughput RNA sequencing and bioinformatics analysis methods were used to identify and compare differentially expressed genes (DEGs) and pathways in HT-2, siAkt1, HT-2-siAkt1 and Control (non-treatment) group. Co-expressed genes and co-expressed modules were investigated using WGCNA. Protein-protein interaction (PPI) networks were constructed using the STRING database, and hub genes were identified by the MCC algorithm. A total of 2086 DEGs were identified in the HT-2 vs Control comparison, with significant upregulation observed for CCND2, MMP9 and TIMP4. The adhesion and PI3K-Akt signaling pathways were upregulated, while ECM-receptor interactions was downregulated. In the siAkt1 vs Control comparison, 695 DEGs were detected. VAMP7 and CXCR4 were significantly upregulated, while PFKL and ALDOA were significantly downregulated. Fructose and mannose metabolism, amino acid biosynthesis, and glucose/energy metabolic pathways were significantly downregulated. There were 411 DEGs when HT-2-siAkt1 vs HT-2, and CCND2, MMP9, WTAPP1 and TIMP4 were significantly downregulated. Adhesion, NF-κB signaling pathway and PI3K-Akt signaling pathway were significantly downregulated. Under, WGCNA, in the module most associated with HT-2, FRMD3B, ALDH1A3, ANTXR2, SERINC2 and SRGN were identified as hub genes; in the module most associated with siAkt1, TNFRSF11B, CECR2, TMOD1, ZNF704 and RHOBTB1 were identified as hub genes; in the module most associated with HT-2-siAkt1, the hub genes were GNAL, SLC25A32, ACADSB, CABLES1 and GINS4. Akt1 primarily affects the expression of genes in chondrocytes under HT-2 exposure that involved in autophagy, cell proliferation and glycolysis and other cell functions, potentially contributing to the pathogenesis of KBD.",
+              "doi": "10.1016/j.toxicon.2025.108432",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75447c29f9e02e261bc0ddbb1036edfd15138c7c33a4d308efcee037f6939d0a"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'Taurine enhances the antitumor efficacy of PD-1 antibody by boosting CD8 T cell function.'}",
+              "abstract": "The functional state of CD8 T cells determines the therapeutic efficacy of PD-1 blockade antibodies in tumors. Amino acids are key nutrients for maintaining T cell antitumor immunity. In this study, we used samples from lung cancer patients treated with PD-1 blockade antibodies to assay the amino acids in their serum by mass spectrometry. We found that lung cancer patients with high serum taurine levels generally responded to PD-1 blockade antibody therapy, in parallel with the secretion of high levels of cytotoxic cytokines (IFN-γ and TNF-α). CD8 T cells cultured with exogenous taurine exhibited decreased apoptosis, enhanced proliferation, and increased secretion of cytotoxic cytokines. High SLC6A6 expression in CD8 T cells was positively associated with an effector T cell signature. SLC6A6 knockdown limited the function and proliferation of CD8 T cells. RNA sequencing revealed that SLC6A6 knockdown altered the calcium signaling pathway, oxidative phosphorylation, and T cell receptor signaling in CD8 T cells. Furthermore, taurine enhanced T cell proliferation and function in vitro by stimulation of PLCγ1-mediated calcium and MAPK signaling. Taurine plus immune checkpoint blockade antibody significantly attenuated tumor growth and markedly improved the function and proliferation of CD8 T cells in a mouse tumor model. Thus, our findings indicate that taurine is an important driver for improving CD8 T cell immune responses and could serve as a potential therapeutic agent for cancer patients.",
+              "doi": "10.1007/s00262-022-03308-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa0543d880aa3842529e24d47677bc24ea20198ed8009c4b1b99e0e86b2a4a98"
+              }
+            },
+            {
+              "title": "Unveiling the role of taurine and SLC6A6 in tumor immune evasion: Implications for gastric cancer therapy.",
+              "abstract": "Metabolic changes are key drivers of tumor progression. Understanding how metabolic reprogramming promotes tumor development and identifying key metabolic activities are essential for improving tumor diagnosis and treatment. Among the numerous transporters in the body, solute carriers (SLCs) are particularly significant, often overexpressed in cancer cells to meet the tumor's demand for nutrients and energy. While the role of SLCs in nutrient absorption within the gastrointestinal tract is well-established, their specific role in gastric cancer (GC) remains unclear. Recently, Xiaodi Zhao's team investigated the critical role of taurine and its transporter, SLC6A6, in anti-tumor immunity and clinical outcomes. Notably, this research marks the first instance of taurine exhibiting a dual role. It promotes tumor growth in immunodeficient mice while inhibiting it in immunocompetent mice. The study found that taurine exerts its anti-cancer effects by modulating CD8 T cells rather than directly inhibiting tumor cells, revealing the SP1-SLC6A6 axis as a key mechanism behind chemotherapy-induced immune evasion. Our work further explored the potential, advantages, and challenges of using taurine and SLC6A6 as biomarkers and therapeutic targets in gastric cancer. We aim to underscore their importance in both basic research and clinical applications, providing valuable insights and guidance for future investigations.",
+              "doi": "10.1016/j.biocel.2024.106661",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "992657d82d2b1b50c67e4a751e1650c5c5a838a4f377302e8ea8bcb53bc6e2fe"
+              }
+            },
+            {
+              "title": "Taurine, an osteocyte metabolite, protects against oxidative stress-induced cell death and decreases inhibitors of the Wnt/β-catenin signaling pathway.",
+              "abstract": "Taurine has been shown to have positive effects on bone mass, which are thought to be due in part to its cytoprotective effects on osteoblasts and here we show that taurine also protects osteocytes against cell death due to reactive oxygen species. Using the IDG-SW3 cell line, the expression of the taurine uptake transporter Taut/Slc6a6 is increased during osteoblast to osteocyte differentiation. Taurine had no effect on genes associated with osteoblast to osteocyte differentiation such as Dmp1, Phex or osteocalcin, even at high doses, but a slight yet significant inhibition of alkaline phosphatase was observed at the highest dose (50 mM). No effect was seen on the osteoclast regulatory genes Rankl and Opg, however the wnt antagonist Sost/sclerostin was potently and dose-dependently downregulated in response to taurine supplementation. Taurine also significantly inhibited Dkk1 mRNA expression, but only at 50 mM. Interestingly, osteocytes were found to also be able to synthesize taurine intracellularly, potentially as a self-protective mechanism, but do not secrete the metabolite. A highly significant increase in the expression of cysteine dioxygenase (Cdo), a key enzyme necessary for the production of taurine, was observed with osteoblast to osteocyte differentiation along with a decrease in methionine, the precursor of taurine. For the first time, we describe the synthesis of taurine by osteocytes, potentially to preserve viability and to regulate bone formation through inhibition of sclerostin.",
+              "doi": "10.1016/j.bone.2020.115374",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "76006161ff33bfd1e0ca717067ce48bc11b39b10106141dad3db2262f1d67641"
+              }
+            },
+            {
+              "title": "Deficiency of Pdk1 drives heart failure by impairing taurine homeostasis through Slc6a6.",
+              "abstract": "3-Phosphoinositide-dependent protein kinase-1 (Pdk1) as a serine/threonine protein kinase plays a critical role in multiple signaling pathways. Analysis of the gene expression omnibus database showed that Pdk1 was significantly downregulated in patients with heart diseases. Gene set enrichment analysis of the proteomics dataset identified apoptotic- and metabolism-related signaling pathways directly targeted by Pdk1. Previously, our research indicated that Pdk1 deletion-induced metabolic changes might be involved in the pathogenesis of heart failure; however, the underlying mechanism remains elusive. Here, we demonstrated that deficiency of Pdk1 resulted in apoptosis, oxidative damage, and disturbed metabolism, both in vivo and in vitro. Furthermore, profiling of metabonomics by  H-NMR demonstrated that taurine was the major differential metabolite in the heart of Pdk1-knockout mice. Taurine treatment significantly reduced the reactive oxygen species production and apoptosis, improved cardiac function, and prolonged the survival time in Pdk1 deficient mice. Proteomic screening identified solute carrier family 6 member 6 (Slc6a6) as the downstream that altered taurine levels in Pdk1-expression cells. Consistently, cellular apoptosis and oxidative damage were rescued by Slc6a6 in abnormal Pdk1 expression cells. These findings collectively suggest that Pdk1 deficiency induces heart failure via disturbances in taurine homeostasis, triggered by Slc6a6.",
+              "doi": "10.1096/fj.202300272R",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "17f46b34cc9ba9c67dc9ab07c5e0859830f76fa0c3a597b74bf163329b1b58f4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A32 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A32 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC25A32', 'SLC6A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A32",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A32",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A32": {
+          "status": "unavailable",
+          "gene": "SLC25A32",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unavailable",
+          "gene": "SLC6A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A32": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A32",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A6",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A32 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A6"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.05,
+          "SLC6A6": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A32': 2}，最终智能体辩论后裁决：winner=SLC25A32 answer=None conf=0.65；法官理由: E abstained; two independent LLM channels favor SLC25A32 due mitochondrial FAD/one-carbon/nucleotide dependency in proliferating DLBCL, while SLC6A6 taurine transport appears more redundant. No direct CRISPR evidence, so confidence moderate。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A6']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A32 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A6"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.05,
+          "SLC6A6": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A32': 2}，最终智能体辩论后裁决：winner=SLC25A32 answer=None conf=0.64；法官理由: Two independent LLM votes favor SLC25A32; its mitochondrial folate/FAD one-carbon role supports purine synthesis, a likely DLBCL fitness bottleneck, whereas SLC6A6 taurine transport appears less essential. Evidence is indirect, so moderate 。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A32', 'SLC6A6']",
+        "status": "ok",
+        "summary": "SLC25A32 is a mitochondrial folate transporter supporting one-carbon metabolism, nucleotide synthesis, redox balance, and mitochondrial function—pathways frequently essential in aggressive lymphoma and DLBCL cell lines. In a CRISPR/MAGeCK 0-day vs 18-day dropout comparison, loss of SLC25A32 is more likely to reduce cell fitness and inhibit tumor growth than loss of SLC6A6, a taurine transporter with comparatively less direct dependence in this context.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A32",
+        "candidates": [
+          "SLC25A32",
+          "SLC6A6"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A32 is a mitochondrial folate transporter supporting one-carbon metabolism, nucleotide synthesis, redox balance, and mitochondrial function—pathways frequently essential in aggressive lymphoma and DLBCL cell lines. In a CRISPR/MAGeCK 0-day vs 18-day dropout comparison, loss of SLC25A32 is more likely to reduce cell fitness and inhibit tumor growth than loss of SLC6A6, a taurine transporter with comparatively less direct dependence in this context.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:45:02Z"
+  }
+}

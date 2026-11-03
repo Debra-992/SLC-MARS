@@ -1,0 +1,450 @@
+{
+  "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00048",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35A2 and SLC35A1 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC35A1"
+  },
+  "effective_genes": [
+    "SLC35A2",
+    "SLC35A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00048",
+      "status": "ok",
+      "summary": "检索到 4 类证据、13 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35A2",
+        "SLC35A1"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35A1",
+              "protein_function": "Transports CMP-sialic acid from the cytosol into the Golgi apparatus, functioning as an antiporter that exchanges CMP-sialic acid for CMP.",
+              "aliases": "CMP-Sia-Tr, CMPST",
+              "transport_type": "E / CMP"
+            },
+            {
+              "gene": "SLC35A2",
+              "protein_function": "Transports uridine diphosphate galactose (UDP-galactose) from the cytosol into the Golgi apparatus.",
+              "aliases": "UDP-Gal-Tr, UGTL",
+              "transport_type": "E / UMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC35A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC35A2",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast invasive carcinoma (BRCA)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC35A2",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast invasive carcinoma (BRCA)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Genome wide CRISPR screening reveals a role for sialylation in the tumorigenesis and chemoresistance of acute myeloid leukemia cells.",
+              "abstract": "Aberrant activation of cytokine and growth factor signal transduction pathways confers enhanced survival and proliferation properties to acute myeloid leukemia (AML) cells. However, the mechanisms underlying the deregulation of signaling pathways in leukemia cells are unclear. To identify genes capable of independently supporting cytokine-independent growth, we employed a genome-wide CRISPR/Cas9-mediated loss-of-function screen in GM-CSF-dependent human AML TF-1 cells. More than 182 genes (p < 0.01) were found to suppress the cytokine-independent growth of TF-1 cells. Among the top hits, genes encoding key factors involved in sialylation biosynthesis were identified; these included CMAS, SLC35A1, NANS, and GNE. Knockout of either CMAS or SLC35A1 enabled cytokine-independent proliferation and survival of AML cells. Furthermore, NSG (NOD/SCID/IL2Rγ) mice injected with CMAS or SLC35A1-knockout TF-1 cells exhibited a shorter survival than mice injected with wild-type cells. Mechanistically, abrogation of sialylation biosynthesis in TF-1 cells induced a strong activation of ERK signaling, which sensitized cells to MEK inhibitors but conferred resistance to JAK inhibitors. Further, the surface level of α2,3-linked sialic acids was negatively correlated with the sensitivity of AML cell lines to MEK/ERK inhibitors. We also found that sialylation modulated the expression and stability of the CSF2 receptor. Together, these results demonstrate a novel role of sialylation in regulating oncogenic transformation and drug resistance development in leukemia. We propose that altered sialylation could serve as a biomarker for targeted anti-leukemic therapy.",
+              "doi": "10.1016/j.canlet.2021.04.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "30721cbd751194153687e1cd259f0e7c692eeb300d2bae380cb498a5094bd055"
+              }
+            },
+            {
+              "title": "Slc35a2 mosaic knockout impacts cortical development, dendritic arborisation, and neuronal firing.",
+              "abstract": "Mild malformation of cortical development with oligodendroglial hyperplasia in epilepsy (MOGHE) is an important cause of drug-resistant epilepsy. A significant subset of individuals diagnosed with MOGHE display somatic mosaicism for loss-of-function variants in SLC35A2, which encodes the UDP-galactose transporter. We developed a mouse model to investigate how disruption of this transporter leads to a malformation of cortical development. We used in utero electroporation and CRISPR/Cas9 to knockout Slc35a2 in a subset of layer 2/3 cortical neuronal progenitors in the developing brains of male and female fetal mice to model mosaic expression. Mosaic Slc35a2 knockout was verified through next-generation sequencing and immunohistochemistry of GFP-labelled transfected cells. Histology of brain tissue in mosaic Slc35a2 knockout mice revealed the presence of upper layer-derived cortical neurons in the white matter. Reconstruction of single filled neurons identified altered dendritic arborisation with Slc35a2 knockout neurons having increased complexity. Whole-cell electrophysiological recordings revealed that Slc35a2 knockout neurons display reduced action potential firing, increased afterhyperpolarisation duration and reduced burst-firing when compared with control neurons. Mosaic Slc35a2 knockout mice also exhibited significantly increased epileptiform spiking and increased locomotor activity. We successfully generated a mouse model of mosaic Slc35a2 deficiency, which recapitulates features of the human phenotype, including impaired neuronal migration. We show that knockout in layer 2/3 cortical neuron progenitors is sufficient to disrupt neuronal excitability, increase epileptiform activity and cause hyperactivity in mosaic mice. Our mouse model provides an opportunity to further investigate the disease mechanisms that contribute to MOGHE and facilitate the development of precision therapies.",
+              "doi": "10.1016/j.nbd.2024.106657",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c5978903f8aea26b97e63fcb1cc8cb9930e4d7c05d90f0afd9ca8066a81fddf8"
+              }
+            },
+            {
+              "title": "Loss of Slc35a2 alters development of the mouse cerebral cortex.",
+              "abstract": "Brain somatic variants in SLC35A2, an intracellular UDP-galactose transporter, are commonly identified mutations associated with drug-resistant neocortical epilepsy and developmental brain malformations, including focal cortical dysplasia type I and mild malformation of cortical development with oligodendroglial hyperplasia in epilepsy (MOGHE). However, the causal effects of altered SLC35A2 function on cortical development remain untested. We hypothesized that focal Slc35a2 knockout (KO) or knockdown (KD) in the developing mouse cortex would disrupt cortical development and change network excitability. Through two independent studies, we used in utero electroporation (IUE) to introduce CRISPR/Cas9/targeted guide RNAs or short-hairpin RNAs into the embryonic mouse brain at day 14.5-15.5 to achieve Slc35a2 KO or KD, respectively, from neural precursor cells. Slc35a2 KO or KD caused disrupted radial migration of electroporated neurons evidenced by heterotopic cells located in lower cortical layers and in the sub-cortical white matter. Slc35a2 KO in neurons did not induce changes in oligodendrocyte number, importantly suggesting that the oligodendroglial hyperplasia observed in MOGHE originates from distinct cell autonomous effects of Slc35a2 mutations. Adult KO mice were implanted with EEG electrodes for 72-hour continuous recording. Spontaneous seizures were not observed in focal Slc35a2 KO mice, but there was reduced seizure threshold following pentylenetetrazol injection. Here we demonstrate that focal Slc35a2 KO or KD in vivo disrupts corticogenesis through altered neuronal migration and that KO leads to reduced seizure threshold. Together these results demonstrate a direct causal role for SLC35A2 in cortical development.",
+              "doi": "10.1016/j.neulet.2024.137881",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f52a20fda317ff8f7740a1346ee04cc20dba04c8fdadafea35bf915cc0675bf0"
+              }
+            },
+            {
+              "title": "SLC35A2 is a novel prognostic biomarker and promotes cell proliferation and metastasis via Wnt/β-catenin/EMT signaling pathway in breast cancer.",
+              "abstract": "Although it is a leading cause of cancer-related mortality among women globally, breast cancer (BC) has drawn increased attention owing to its poor prognosis and the challenges associated with limited treatment options. SLC35A2 was shown to be dysregulated in a number of tumor types according to multiple investigations. However, its function in BC was rarely reported. This study aims to investigate the expression of SLC35A2 in BC and its impact on the functionality and prognosis of BC cells. We collected 11 pairs of BC tissues and normal specimens, obtaining clinical information from 1,118 BC patients through RNA sequencing analysis. Different BC cell lines were used in experiments, and the roles of SLC35A2 in cell proliferation, invasion, and migration was assessed through gene silencing and functional assays. Additionally, a prognostic model, including SLC35A2 expression levels, age, T-stage, M-stage, N-stage, and clinical stage, was constructed, and its predictive performance in overall survival was validated using time-dependent receiver operating characteristic curves. High SLC35A2 expression was correlated positively with patient age and T-stage. Kaplan-Meier survival curves and Cox regression analysis confirmed the independent and significant prognostic value of SLC35A2 in overall survival. Functional experiments demonstrated that SLC35A2 silencing inhibited the proliferation, migration, and invasion of BC cells, affecting their metastatic potential through modulation of the Wnt/β-catenin/EMT signaling pathway. In conclusion, our study reveals the crucial role of SLC35A2 in BC, providing a novel biomarker for clinical management and valuable insights into the underlying mechanisms of BC pathogenesis.",
+              "doi": "10.1038/s41598-024-84584-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ea10465e320f17121800aa5dc73a643e97be53353f0cc77f753965184968fe9c"
+              }
+            },
+            {
+              "title": "Mosaic expression of SLC35A2 pathogenetic variants impairs neuronal migration and dendritogenesis in the developing cortex.",
+              "abstract": "Brain somatic variants in the SLC35A2 gene, encoding for a Golgi galactose transporter, represent the major cause of mild malformation of cortical development with oligodendroglial hyperplasia in epilepsy (MOGHE). Clinical features associated with MOGHE include early-onset epileptic encephalopathy, drug-resistant focal epilepsy with developmental delay, and intellectual disability. Half of somatic SLC35A2 variants identified in MOGHE patients are predicted to encode full-length SLC35A2 protein or stable protein products. We investigated the pathophysiological basis of MOGHE by analyzing the functional consequences of SLC35A2 pathogenetic variants in vitro and in vivo models. We assessed how different SLC35A2 variants impact protein stability and expression in transfected cellular models. We used in utero electroporation in the rat brain to model mosaic expression of SLC35A2 pathogenetic variants in the cerebral cortex and assessed their effect on neurons migration and morphology. We found that SLC35A2 variants identified in MOGHE patients variably impact on SLC35A2 protein expression. In utero expression of a SLC35A2 missense (p.G282A) or frameshift (p.F280Tfs*10) variants resulted in neuronal heterotopia in the white matter and impaired dendritogenesis at postnatal stages, suggesting a cell autonomous role for SLC35A2 in neuronal development. These phenotypes were recapitulated by in utero silencing of rat Slc35a2 gene. We successfully developed an in vivo mosaic model for the characterization of SLC35A2 variants identified in MOGHE patients and demonstrated that the expression of single SLC35A2 variants triggers the pathophysiological cascade associated with SLC35A2 dysfunction in neurons.",
+              "doi": "10.1093/hmg/ddaf156",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "32b6537beb3c51af7495f8fab9e8286c62453c3fc5913819f6a1bd8075747a66"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35A2 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35A2 and SLC35A1 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC35A2', 'SLC35A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35A2",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35A2": {
+          "status": "unavailable",
+          "gene": "SLC35A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35A1": {
+          "status": "unavailable",
+          "gene": "SLC35A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35A2",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A2', 'SLC35A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC35A2(P(winner)=0.48) vs SLC35A1(P=0.45), 差=0.02；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A2",
+        "candidates": [
+          "SLC35A2",
+          "SLC35A1"
+        ],
+        "confidence": 0.477,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A2": 1.15,
+          "SLC35A1": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC35A2(P(winner)=0.48) vs SLC35A1(P=0.45), 差=0.02；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A2', 'SLC35A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC35A2(P(winner)=0.48) vs SLC35A1(P=0.45), 差=0.02；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A2",
+        "candidates": [
+          "SLC35A2",
+          "SLC35A1"
+        ],
+        "confidence": 0.477,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A2": 1.15,
+          "SLC35A1": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC35A2(P(winner)=0.48) vs SLC35A1(P=0.45), 差=0.02；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35A2', 'SLC35A1']",
+        "status": "ok",
+        "summary": "SLC35A2 encodes a UDP-GlcNAc transporter required for N-glycosylation and glycan-dependent surface protein maturation. In B-lymphoblastic leukaemia/Daudi-Cas9 CRISPR screens under BTN3A low/high conditions, glycosylation regulators that affect BTN3A expression or immune recognition are plausible tumor-survival promoters. SLC35A2 is therefore more likely than SLC35A1 to support tumour survival by maintaining glycosylation-dependent BTN3A-related immune-evasion states.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC35A2",
+        "candidates": [
+          "SLC35A2",
+          "SLC35A1"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35A2 encodes a UDP-GlcNAc transporter required for N-glycosylation and glycan-dependent surface protein maturation. In B-lymphoblastic leukaemia/Daudi-Cas9 CRISPR screens under BTN3A low/high conditions, glycosylation regulators that affect BTN3A expression or immune recognition are plausible tumor-survival promoters. SLC35A2 is therefore more likely than SLC35A1 to support tumour survival by maintaining glycosylation-dependent BTN3A-related immune-evasion states.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:10:57Z"
+  }
+}

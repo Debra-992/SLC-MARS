@@ -1,0 +1,552 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A11 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A11"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+      "status": "ok",
+      "summary": "检索到 4 类证据、23 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A11"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A11",
+              "protein_function": "Catalyzes the transport of 2-oxoglutarate across the inner mitochondrial membrane in an electroneutral exchange for malate. Can also exchange 2-oxoglutarate for other dicarboxylic acids. Contributes to several metabolic processes, including the malate-aspartate shuttle, the oxoglutarate/isocitrate shuttle, in gluconeogenesis from lactate, and in nitrogen metabolism.",
+              "aliases": "OGC",
+              "transport_type": "E / oxoglutarate, malate"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A11",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A11",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A11",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A11",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The impact of bisphenol A on gill health: A focus on mitochondrial dysfunction induced disorders of energy metabolism and apoptosis in Meretrix petechialis.",
+              "abstract": "Bisphenol A (BPA), a well-known chemical compound used in various daily goods, has been associated with adverse effects on animal metabolic processes. However, the specific impacts of BPA exposure on clam gills remain largely unexplored. To investigate the effects of BPA on energy metabolism and apoptosis in Meretrix petechialis gills, clams were exposed to varying concentrations of BPA (1, 10, and 100 μg/L) for 21 days. Results showed that BPA exposure induced gill histopathological injuries and inhibited filtration rates. Transmission electron microscopy (TEM) analysis revealed mitochondrial injury and dysfunction as potential mechanisms of gill damage. Transcriptome analysis identified differentially expressed genes (DEGs) primarily enriched in energy metabolism and apoptosis pathways. BPA-induced changes in ATP content, ATPase, and lactate dehydrogenase (LDH) activities suggested dysregulation of energy metabolism. TUNEL staining demonstrated enhanced apoptotic signals with increasing BPA concentrations. Activation of the caspase-3/9 pathway indicated a concentration-dependent, mitochondria-dependent apoptotic process. Additionally, the expression of genes associated with mitochondria (NNT, TOMM40, and SLC25A11), energy metabolism (PCK1 and pdhC), inducing mitochondria-dependent apoptosis (NFKB1, RAC1, and TRAF2), and oxidative stress (GSTT1) was affected by BPA exposure. Integrated biomarker response version 2 (IBRv2) values further confirmed a concentration-dependent gill toxicity of BPA via the mitochondrial pathway. These findings provide a deeper understanding of the toxicological mechanisms underlying BPA-induced toxicity in bivalves and contribute to assessing the risks posed by BPA in benthic ecosystems.",
+              "doi": "10.1016/j.aquatox.2025.107259",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "354670413d171c47cf700aa60af6e955103b6f89beb7f51447374983d35f489d"
+              }
+            },
+            {
+              "title": "Modulation of mitochondrial glutathione status and cellular energetics in primary cultures of proximal tubular cells from remnant kidney of uninephrectomized rats.",
+              "abstract": "Compensatory renal hypertrophy following reduction in renal mass leads to a hypermetabolic state and increases in basal mitochondrial oxidative stress and susceptibility to several nephrotoxicants. Previous studies provide conflicting data on whether renal mitochondria after reduction in renal mass undergo proliferation or hypertrophy or both. In the present study, our goal was to determine whether mitochondria of hypertrophied kidney undergo hypertrophy or proliferation after uninephrectomy using the uninephrectomized (NPX) rat model. Renal proximal tubular (PT) cells from NPX rats exhibited increased mitochondrial density, membrane potential and protein but no significant difference in mitochondrial DNA, as compared to PT cells from control rats. Our previous studies showed that overexpression of two mitochondrial anion transporters, the dicarboxylate (DIC, Slc25a10) and oxoglutarate (OGC, Slc25a11) carriers, in NRK-52E cells resulted in increased mitochondrial uptake of glutathione (GSH) and protection from chemically induced apoptosis. In the present study, we overexpressed DIC- and OGC-cDNA plasmids to assess their function in renal PT cells after compensatory renal hypertrophy. PT cells from NPX rats that were first preincubated with GSH were protected from cytotoxicity due to the mitochondrial inhibitor antimycin A by overexpression of either of the two mitochondrial GSH transporters. Our present results provide further evidence that compensatory renal hypertrophy is associated primarily with mitochondrial hypertrophy and hyperpolarization and that manipulation of mitochondrial GSH transporters in PT cells of hypertrophied kidney can alter susceptibility to chemically induced injury under appropriate conditions and may be a suitable therapeutic approach.",
+              "doi": "10.1016/j.bcp.2013.02.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "a66eaa17e17445afc870a76d07ec69e183145eedfc039dc10edfbd5cf869213d"
+              }
+            },
+            {
+              "title": "Targeting SLC25A10 alleviates improved antioxidant capacity and associated radioresistance of cancer cells induced by chronic-cycling hypoxia.",
+              "abstract": "High tumor heterogeneity and increased therapy resistance acquired in a hypoxic tumor microenvironment remain major obstacles to successful radiotherapy. Others and we have shown that adaptation of cancer cells to cycling severe hypoxia and intermittent reoxygenation stress (chronic-cycling hypoxia) increases cellular antioxidant capacity thereby supporting resistance to chemotherapy and radiotherapy. Here we explored the involvement of antioxidant-associated mitochondrial transport-systems for maintenance of redox-homeostasis in adaptation to chronic-cycling hypoxia and associated radioresistance. Genetic or pharmacological inhibition of the mitochondrial dicarboxylate carrier (SLC25A10) or the oxoglutarate-carrier (SLC25A11) increased the cytotoxic effects of ionizing radiation (IR). But only targeting of SLC25A10 was effective in overcoming chronic-cycling hypoxia-induced enhanced death resistance in vitro and in vivo by disturbing increased antioxidant capacity. Furthermore, in silico analysis revealed that overexpression of SLC25A10 but not SLC25A11 is associated with reduced overall survival in lung- and breast-cancer patients. Our study reveals a role of SLC25A10 in supporting both, redox- and energy-homeostasis, ensuring radioresistance of cancer cells with tolerance to chronic-cycling hypoxia thereby proposing a novel strategy to overcome a mechanism of hypoxia-induced therapy resistance with potential clinical relevance regarding decreased patient survival.",
+              "doi": "10.1016/j.canlet.2018.09.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "20d58d4a4cdcefcc054fde91452d5d50f2c583dcc33555e7b8625b2921cc9eed"
+              }
+            },
+            {
+              "title": "Loss of SLC25A11 causes suppression of NSCLC and melanoma tumor formation.",
+              "abstract": "Fast growing cancer cells require greater amounts of ATP than normal cells. Although glycolysis was suggested as a source of anabolic metabolism based on lactate production, the main source of ATP to support cancer cell metabolism remains unidentified. We have proposed that the oxoglutarate carrier SLC25A11 is important for ATP production in cancer by NADH transportation from the cytosol to mitochondria as a malate. We have examined not only changes of ATP and NADH but also changes of metabolites after SLC25A11 knock down in cancer cells. The mitochondrial electron transport chain was functionally active in cancer cells. The cytosolic to mitochondrial NADH ratio was higher in non-small cell lung cancer (NSCLC) and melanoma cells than in normal cells. This was consistent with higher levels of the oxoglutarate carrier SLC25A11. Blocking malate transport by knockdown of SLC25A11 significantly impaired ATP production and inhibited the growth of cancer cells, which was not observed in normal cells. In in vivo experiments, heterozygote of SLC25A11 knock out mice suppressed KRAS lung tumor formation by cross breeding. Cancer cells critically depended on the oxoglutarate carrier SLC25A11 for transporting NADH from cytosol to mitochondria as a malate form for the purpose of ATP production. Therefore blocking SLC25A11 may have an advantage in stopping cancer growth by reducing ATP production. FUND: The Basic Science Research Program through the National Research Foundation of Korea funded by the Ministry of Science and ICT to SYK (NRF-2017R1A2B2003428).",
+              "doi": "10.1016/j.ebiom.2019.01.036",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0445c3017ce9163e4859d82e40865fb11fc1417e69f19d682aa7ce73a43adabf"
+              }
+            },
+            {
+              "title": "The 2-oxoglutarate carrier promotes liver cancer by sustaining mitochondrial GSH despite cholesterol loading.",
+              "abstract": "Cancer cells exhibit mitochondrial cholesterol (mt-cholesterol) accumulation, which contributes to cell death resistance by antagonizing mitochondrial outer membrane (MOM) permeabilization. Hepatocellular mt-cholesterol loading, however, promotes steatohepatitis, an advanced stage of chronic liver disease that precedes hepatocellular carcinoma (HCC), by depleting mitochondrial GSH (mGSH) due to a cholesterol-mediated impairment in mGSH transport. Whether and how HCC cells overcome the restriction of mGSH transport imposed by mt-cholesterol loading to support mGSH uptake remains unknown. Although the transport of mGSH is not fully understood, SLC25A10 (dicarboxylate carrier, DIC) and SLC25A11 (2-oxoglutarate carrier, OGC) have been involved in mGSH transport, and therefore we examined their expression and role in HCC. Unexpectedly, HCC cells and liver explants from patients with HCC exhibit divergent expression of these mitochondrial carriers, with selective OGC upregulation, which contributes to mGSH maintenance. OGC but not DIC downregulation by siRNA depleted mGSH levels and sensitized HCC cells to hypoxia-induced ROS generation and cell death as well as impaired cell growth in three-dimensional multicellular HCC spheroids, effects that were reversible upon mGSH replenishment by GSH ethyl ester, a membrane permeable GSH precursor. We also show that OGC regulates mitochondrial respiration and glycolysis. Moreover, OGC silencing promoted hypoxia-induced cardiolipin peroxidation, which reversed the inhibition of cholesterol on the permeabilization of MOM-like liposomes induced by Bax or Bak. Genetic OGC knockdown reduced the ability of tumor-initiating stem-like cells to induce liver cancer. These findings underscore the selective overexpression of OGC as an adaptive mechanism of HCC to provide adequate mGSH levels in the face of mt-cholesterol loading and suggest that OGC may be a novel therapeutic target for HCC treatment.",
+              "doi": "10.1016/j.redox.2017.08.022",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A11"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "04fbd329b803bc3163fff071a9c4b3a6b27d2e69391c78aff295401b04a7a4f9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A11 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC25A11 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A11']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A11",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A11",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A11": {
+          "status": "unavailable",
+          "gene": "SLC25A11",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A11": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A11",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A11']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A11 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A11"
+        ],
+        "confidence": 0.821,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A11": 4.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A11 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=4.45 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A11']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A11在HCC中被标注为促进疾病表型，并参与增殖、氧化磷酸化、迁移和化疗耐药；在NSCLC/黑色素瘤中，SLC25A11缺失或敲低会损害ATP产生、抑制肿瘤形成并增强细胞毒性治疗敏感性。尽管目标癌种B-lymphoblastic leukaemia缺乏直接TIMER/KM证据，但Daudi-Cas9等B淋巴母细胞白血病细胞具有高度增殖、线粒体氧化磷酸化和氧化还原稳态依赖，这与SLC25A11介导的苹果酸-天冬氨酸穿梭、NADH转运和抗凋亡保护功能可迁移。 | 候选基因SLC25A11是线粒体2-氧戊二酸/苹果酸载体，核心功能是维持胞质-线粒体还原当量传递、ATP生成和抗氧化/抗凋亡能力。已有证据显示其在HCC中promote disease，在NSCLC/黑色素瘤中loss会抑制肿瘤形成，抑制后可增强放射损伤敏感性，过表达可保护细胞免受化学诱导凋亡。这些跨癌种证据支持SLC25A11作为代谢必需性/生存促进因子，而非单纯组织特异性癌基因。目标B-ALL中虽然缺少直接组学邻近证据，但白血病细胞同样依赖线粒体代谢和氧化还原稳态，因此最可能方向是SLC25A11 promote tumor survival。因TIMER不可用、KM不支持该癌种、且CRISPR筛选条件主要围绕BTN3A而非SLC25A11，置信度设为中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A11"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A11": 4.45
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC25A11在HCC中被标注为促进疾病表型，并参与增殖、氧化磷酸化、迁移和化疗耐药；在NSCLC/黑色素瘤中，SLC25A11缺失或敲低会损害ATP产生、抑制肿瘤形成并增强细胞毒性治疗敏感性。尽管目标癌种B-lymphoblastic leukaemia缺乏直接TIMER/KM证据，但Daudi-Cas9等B淋巴母细胞白血病细胞具有高度增殖、线粒体氧化磷酸化和氧化还原稳态依赖，这与SLC25A11介导的苹果酸-天冬氨酸穿梭、NADH转运和抗凋亡保护功能可迁移。 | 候选基因SLC25A11是线粒体2-氧戊二酸/苹果酸载体，核心功能是维持胞质-线粒体还原当量传递、ATP生成和抗氧化/抗凋亡能力。已有证据显示其在HCC中promote disease，在NSCLC/黑色素瘤中loss会抑制肿瘤形成，抑制后可增强放射损伤敏感性，过表达可保护细胞免受化学诱导凋亡。这些跨癌种证据支持SLC25A11作为代谢必需性/生存促进因子，而非单纯组织特异性癌基因。目标B-ALL中虽然缺少直接组学邻近证据，但白血病细胞同样依赖线粒体代谢和氧化还原稳态，因此最可能方向是SLC25A11 promote tumor survival。因TIMER不可用、KM不支持该癌种、且CRISPR筛选条件主要围绕BTN3A而非SLC25A11，置信度设为中等偏低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "hepatocellular carcinoma (HCC)",
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A11']",
+        "status": "ok",
+        "summary": "SLC25A11 编码线粒体 NAD+/NADH 载体，参与线粒体代谢、氧化还原平衡和 NAD(H) 穿梭。在 B-lymphoblastic leukaemia 等快速增殖肿瘤中，维持线粒体 NAD+ 供应和代谢弹性通常有助于肿瘤细胞存活；因此 SLC25A11 更可能促进 Tumor Survival。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A11"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A11 编码线粒体 NAD+/NADH 载体，参与线粒体代谢、氧化还原平衡和 NAD(H) 穿梭。在 B-lymphoblastic leukaemia 等快速增殖肿瘤中，维持线粒体 NAD+ 供应和代谢弹性通常有助于肿瘤细胞存活；因此 SLC25A11 更可能促进 Tumor Survival。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:31:35Z"
+  }
+}

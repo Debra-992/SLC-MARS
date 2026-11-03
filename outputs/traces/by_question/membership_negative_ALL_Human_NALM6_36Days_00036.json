@@ -1,0 +1,447 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00036",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC22A7 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC22A7"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00036",
+      "status": "ok",
+      "summary": "检索到 4 类证据、12 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC22A7"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "protein_function": "[Isoform 2]: Functions as a Na(+)-independent bidirectional multispecific transporter.",
+              "aliases": "OAT2, Organic Anion Transporter 2",
+              "transport_type": "F or E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC22A7|paclitaxel|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC22A7(OAT2) transports paclitaxel with high affinity (Km 0.14µM). As a hepatic uptake transporter, it facilitates drug entry; reduced expression may contribute to decreased intracellular paclitaxel accumulation.",
+                "paper": "Kobayashi Y 2005 J Pharm Pharmacol PMID:15901346",
+                "name": "SLC22A7|paclitaxel|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1211/0022357055966\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "paclitaxel"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC22A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC22A7",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC22A7",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic ductal adenocarcinoma (PDAC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "iTRAQ-based quantitative proteomic analysis reveals the toxic mechanism of diclofenac sodium on the kidney of broiler chicken.",
+              "abstract": "Diclofenac sodium (DS) is one of the nonsteroidal anti-inflammatory drugs (NSAIDs), which exhibits potent toxicity to birds. To search the molecular mechanism of DS induced nephrotoxicity in broiler chicken, 20 apparently healthy 30-day old broiler chickens were separated randomly into two groups (n = 10): Group A was kept as control while DS was administered at the dose rate of 10 mg/kg body weight in group B through oral gavage. Kidney samples were collected, and the proteins were identified and quantified by iTRAQ. 434 differentially expressed proteins (DEPs) were screened, including 277 up-regulated DEPs and 157 down-regulated DEPs. The functional annotation and classification results indicated that DEPs were significantly enriched in apoptosis and metabolism-related pathways via GO and KEGG analysis. Compared with the control group, the most significant enrichment pathways are \"ribosome\", \"metabolic pathways\" and \"protein processing in endoplasmic reticulum\". Based on the proteomic results and relevant literature, some DEPs that potentially related to the toxicity of DS were screened. The mRNA transcript levels of these DEPs were characterized by qRT-PCR, and the results showed that Slc22a7, Gatm, Glud1, Agxt2 and Gldc were significantly down-regulated, while Gsl, Gpt2 and Asns were significantly up-regulated. We speculate that the toxic mechanism of DS to chicken might be that it induces kidney cell apoptosis, interferes with purine metabolism and inhibits the expression of OAT2. The current study provides a reference for elucidating the nephrotoxic mechanism of diclofenac sodium to broiler chicken from the molecular perspective.",
+              "doi": "10.1016/j.cbpc.2021.109129",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ff286d2c114271353cdf111c168fcc37973bb65205b10628e7db60993783ee70"
+              }
+            },
+            {
+              "title": "Interaction of human organic anion transporter 2 (OAT2) and sodium taurocholate cotransporting polypeptide (NTCP) with antineoplastic drugs.",
+              "abstract": "The ability of an antineoplastic drug to exert its cytostatic effect depends largely on the balance between its uptake into and extrusion from the cancer cells. ATP driven efflux transporter proteins drive the export of antineoplastic drugs and play a pivotal role in the development of chemoresistance. As regards uptake transporters, comparably less is known on their impact in drug action. In the current study, we characterized the interactions of two uptake transporter proteins, expressed mainly in the liver; the organic anion transporter 2 (OAT2, encoded by the SLC22A7 gene) and the sodium taurocholate cotransporting polypeptide (NTCP, encoded by the SLC10A1 gene), stably transfected in human embryonic kidney cells, with some antineoplastic agents that are routinely being used in cancer chemotherapy. Whereas NTCP did not show any strong interactions with the cytostatics tested, we observed a very strong inhibition of OAT2 mediated [(3)H] cGMP uptake in the presence of bendamustine, irinotecan and paclitaxel. The Ki values of OAT2 for bendamustine, irinotecan and paclitaxel were determined to be 43.3±4.33μM, 26.4±2.34μM and 10.4±0.45μM, respectively. Incubation of bendamustine with OAT2 expressing cells increased the caspase-3 activity, and this increase was inhibited by simultaneous incubation with bendamustine and probenecid, a well-known inhibitor of OATs, suggesting that bendamustine is a substrate of OAT2. A higher accumulation of irinotecan was observed in OAT2 expressing cells compared to control pcDNA cells by HPLC analysis of cell lysates. The accumulation was diminished in the presence of cGMP, the substrate we used to functionally characterize OAT2, suggesting specificity of this uptake and the fact that OAT2 mediates uptake of irinotecan.",
+              "doi": "10.1016/j.phrs.2014.11.002",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c8e658544d53c24944fd3c8c28a9382ab7bb822e964f90a37aa9d9c601902f2a"
+              }
+            },
+            {
+              "title": "Subchronic exposure to individual and combined ochratoxin A and citrinin affects the expression of rat renal organic anion transporters.",
+              "abstract": "Ochratoxin A (OTA) and citrinin (CIT) are mycotoxins known to co-contaminate human/animal food/feed. Their prominent nephrotoxic effects pose a threat to human and animal health. Studies have shown synergistic or additive effects of these two mycotoxins, but a clear consensus on this phenomenon does not exist. In vitro/vivo studies on OTA and CIT effects showed they elevate oxidative stress parameters. Some in vitro studies tested resveratrol (RSV) as a potential antioxidant to counteract these OTA and CIT effects. However, data on the combined effects of OTA + CIT mycotoxins and RSV on their in vivo toxicity is lacking. We used immunofluorescence microscopy and Western blotting to study the subchronic effects of individual/combined OTA (0.125 and 0.250 mg kg b.w.) and CIT (20 mg kg b.w.) on the localization/expression of rat renal organic anion transporters (rOats) (rOat1/Slc22a6, rOat2/Slc22a7, rOat3/Slc22a8, rOat5/Slc22a19) that mediate the secretion/reabsorption of organic anions in kidney proximal tubules. We investigated if RSV (20 mg kg b.w.) can counteract the effects of both mycotoxins on the localization/expression of studied transporters. Results revealed Oat- and dose-dependent changes in protein expression of rOats. When combined with both mycotoxins, RSV decreased the protein expression of all of the studied rOats. Its effect was additive on Oat1/2/5. Thus, RSV failed to ameliorate OTA- and/or CIT-related nephrotoxic effects on the expression of studied rOats in rat kidneys.",
+              "doi": "10.1007/s12550-020-00399-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ab243d651bd4d482683c680b8d716f17e084b0bb0b8a82e3ff3292a2a940a283"
+              }
+            },
+            {
+              "title": "Identification of new SNPs associated with severe toxicity to capecitabine.",
+              "abstract": "Predicting individual risk of chemotherapy-induced severe adverse reaction is a critical issue when selecting the best treatment for cancer patients. SNPs have been identified in genes involved in the pharmacodynamics of fluoropyrimidines, and guidelines even recommend genotyping some DPYD variants in order to estimate the risk of toxicity. However, the predictive value of this approach remains insufficient, thus limiting its clinical implementation. The aim of the present study was to identify new genetic variants by selecting a group of tag SNPs in genes associated with the pharmacodynamics of fluoropyrimidines (CDA, DPYD, ENOSF1, CES1, TYMS, SLC22A7, TYMP, and UMPS). For this purpose, 23 selected SNPs were genotyped on an OpenArray™ platform in a cohort of 301 colorectal cancer patients receiving capecitabine-based chemotherapy. Univariate and multivariate statistical analysis by logistic regression revealed 10 SNPs associated with severe adverse reactions to capecitabine (P<0.05): rs1048977, rs12726436, and rs2072671 in CDA; rs12119882 in DPYD; rs2853741 in TYMS; rs699517 in TYMS/ENOSF1; rs2270860 and rs4149178 in SLC22A7; and rs2279199 and rs4678145 in UMPS. Except for rs2072671, no association had previously been reported between these SNPs and the risk of capecitabine-induced toxicity. The use of tag SNPs to find new polymorphisms related to adverse reactions to capecitabine was successful. These new variants could increase the predictive power of currently available tests and thus prevent severe adverse reactions to capecitabine.",
+              "doi": "10.1016/j.phrs.2017.03.021",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "138ef0a20be4cd3d0f15d4dfba07f36d880db5e213f7480c1aa420b2b14dc668"
+              }
+            },
+            {
+              "title": "Rare-variant association analysis reveals known and new age-related hearing loss genes.",
+              "abstract": "Age-related (AR) hearing loss (HL) is a prevalent sensory deficit in the elderly population. Several studies showed that common variants increase ARHL susceptibility. Here, we demonstrate that rare-variants play a crucial role in ARHL etiology. We analyzed exome and imputed data from white-European UK Biobank volunteers, performing both single-variant and rare-variant aggregate association analyses using self-reported ARHL phenotypes. We identified and replicated associations between ARHL and rare-variants in KLHDC7B, PDCD6, MYO6, SYNJ2, and TECTA. PUS7L and EYA4 also revealed rare-variant associations with ARHL. EYA4, MYO6, and TECTA are all known to underline Mendelian nonsyndromic HL. PDCD6, a new HL gene, plays an important role in apoptosis and has widespread inner ear expression, particularly in the inner hair cells. An unreplicated common variant association was previously observed for KHLDC7B, here we demonstrate that rare-variants in this gene also play a role in ARHL etiology. Additionally, the first replicated association between SYNJ2 and ARHL was detected. Analysis of common variants revealed several previously reported, i.e., ARHGEF28, and new, i.e., PIK3R3, ARHL associations, as well as ones we replicate here for the first time, i.e., BAIAP2L2, CRIP3, KLHDC7B, MAST2, and SLC22A7. It was also observed that the odds ratios for rare-variant ARHL associations, were higher than those for common variants. In conclusion, we demonstrate the vital role rare-variants, including those in Mendelian nonsyndromic HL genes, play in the etiology of ARHL.",
+              "doi": "10.1038/s41431-023-01302-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6fe8be8d65b08ebb7ab95a0ab9a10dd49c3d3e299b82ae292bdc42a0a5787f33"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC22A7 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC22A7 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC22A7']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC22A7",
+            "ppr_score": 4.0673372612716386e-05,
+            "degree_corrected_score": 6.875187293212802e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC22A7",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC22A7",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC22A7": {
+          "status": "unavailable",
+          "gene": "SLC22A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC22A7": {
+          "status": "unsupported_cancer",
+          "gene": "SLC22A7",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC22A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.50 -> P(必需)=0.817 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC22A7"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A7": 2.5
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No NALM6/MAGeCK depletion evidence; SLC22A7 is a redundant organic anion transporter, not a core ALL dependency. Channel E’s essentiality score is indirect/association-level and contradicted by two independent biological priors.。原证据通道判定: winner=None answer=True conf=0.817（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A7']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC22A7/OAT2在CRC/PDAC等实体瘤中的关联主要落在药物摄取、化疗耐药或ferroptosis相关旁路，而非内在肿瘤生长抑制；ALL为淋巴造血系统肿瘤，NALM6细胞系与肝/肾来源转运体的组织谱系差异大，因此跨癌种迁移支持其作为ALL生长抑制因子的证据很弱。 | 目标癌种ALL缺乏直接图谱邻近、TIMER表达或KM预后证据；PPR邻近仅6.88e-05，提示疾病网络关联弱。SLC22A7已知功能为有机阴离子/药物转运体，文献更多支持其影响paclitaxel、bendamustine、irinotecan等药物细胞内积累及毒性/耐药，而不是敲除后抑制肿瘤生长。在CRISPR 0h vs 24Days、MAGeCK的基线生长语境下，缺乏证据表明SLC22A7抑制ALL肿瘤生长；相反，其更可能是非必需或药物处理相关基因。因此判定为false，置信度中等偏低以反映跨癌种类推不确定性。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC22A7"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A7": 2.5
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC22A7/OAT2在CRC/PDAC等实体瘤中的关联主要落在药物摄取、化疗耐药或ferroptosis相关旁路，而非内在肿瘤生长抑制；ALL为淋巴造血系统肿瘤，NALM6细胞系与肝/肾来源转运体的组织谱系差异大，因此跨癌种迁移支持其作为ALL生长抑制因子的证据很弱。 | 目标癌种ALL缺乏直接图谱邻近、TIMER表达或KM预后证据；PPR邻近仅6.88e-05，提示疾病网络关联弱。SLC22A7已知功能为有机阴离子/药物转运体，文献更多支持其影响paclitaxel、bendamustine、irinotecan等药物细胞内积累及毒性/耐药，而不是敲除后抑制肿瘤生长。在CRISPR 0h vs 24Days、MAGeCK的基线生长语境下，缺乏证据表明SLC22A7抑制ALL肿瘤生长；相反，其更可能是非必需或药物处理相关基因。因此判定为false，置信度中等偏低以反映跨癌种类推不确定性。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "colorectal cancer(CRC)",
+          "pancreatic ductal adenocarcinoma (PDAC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC22A7']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC22A7"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T03:29:12Z"
+  }
+}

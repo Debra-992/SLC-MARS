@@ -1,0 +1,750 @@
+{
+  "packs": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit ALL's Tumor Growth.",
+      "constraints": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC5A3",
+        "SLC16A1",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC2A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC3A2",
+          0.01266700405265473
+        ],
+        [
+          "SLC7A11",
+          0.006327327939087717
+        ],
+        [
+          "SLC1A5",
+          0.0002886215473650146
+        ],
+        [
+          "SLC7A5",
+          0.00027978957778917676
+        ],
+        [
+          "SLC2A1",
+          0.00021573748674904206
+        ],
+        [
+          "SLC16A1",
+          0.00018144554240705956
+        ],
+        [
+          "SLC38A1",
+          0.00016482515173462238
+        ],
+        [
+          "SLC16A3",
+          0.00011031897050968108
+        ],
+        [
+          "SLC25A1",
+          0.00010216923703911309
+        ]
+      ],
+      "ppr_candidate_count": 9,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC3A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC2A3",
+        "SLC7A8",
+        "SLC1A4",
+        "SLC38A1",
+        "SLC2A4",
+        "SLC7A9",
+        "SLC16A3",
+        "SLC25A1",
+        "SLC7A1",
+        "SLC5A3",
+        "SLC35B1",
+        "SLC25A19"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit ALL's Tumor Growth.",
+      "constraints": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC5A3",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC33A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC3A2",
+          0.01266700405265473
+        ],
+        [
+          "SLC7A11",
+          0.006327327939087717
+        ],
+        [
+          "SLC1A5",
+          0.0002886215473650146
+        ],
+        [
+          "SLC7A5",
+          0.00027978957778917676
+        ],
+        [
+          "SLC2A1",
+          0.00021573748674904206
+        ],
+        [
+          "SLC16A1",
+          0.00018144554240705956
+        ],
+        [
+          "SLC38A1",
+          0.00016482515173462238
+        ],
+        [
+          "SLC16A3",
+          0.00011031897050968108
+        ],
+        [
+          "SLC25A1",
+          0.00010216923703911309
+        ]
+      ],
+      "ppr_candidate_count": 9,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC3A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC2A3",
+        "SLC7A8",
+        "SLC1A4",
+        "SLC38A1",
+        "SLC2A4",
+        "SLC7A9",
+        "SLC16A3",
+        "SLC25A1",
+        "SLC7A1",
+        "SLC5A3",
+        "SLC25A19",
+        "SLC33A1"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit B-lymphoblastic leukaemia's Tumor Survival.",
+      "constraints": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "task_type": null,
+      "gt_ranking": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "ppr_candidates": [],
+      "ppr_candidate_count": 0,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC29A1",
+        "SLC46A3",
+        "SLC22A1",
+        "SLC22A2",
+        "SLC22A3",
+        "SLC22A4",
+        "SLC22A5",
+        "SLC22A6",
+        "SLC22A7",
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr 0Days vs Crispr 20Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Breast Cancer's Tumor Growth.",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0Days vs Crispr 20Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC11A2",
+        "SLC16A1",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.01181630909804982
+        ],
+        [
+          "SLC9A1",
+          0.0029434868223055456
+        ],
+        [
+          "SLC16A1",
+          0.002354296656472996
+        ],
+        [
+          "SLC7A5",
+          0.001774139759872317
+        ],
+        [
+          "SLC7A11",
+          0.0013016369784233537
+        ],
+        [
+          "SLC2A1",
+          0.0007847942085264047
+        ],
+        [
+          "SLC3A2",
+          0.00044060382965232066
+        ],
+        [
+          "SLC31A1",
+          0.00011362109565755185
+        ]
+      ],
+      "ppr_candidate_count": 8,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC3A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC25A1",
+        "SLC7A8",
+        "SLC38A2",
+        "SLC2A3",
+        "SLC4A1",
+        "SLC9A1",
+        "SLC12A2",
+        "SLC22A1",
+        "SLC25A10",
+        "SLC11A2",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr vs Crispr TAM as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Breast Cancer's Tumor Drug Resistence.",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Drug Resistence",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr vs Crispr TAM"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.01181630909804982
+        ],
+        [
+          "SLC9A1",
+          0.0029434868223055456
+        ],
+        [
+          "SLC16A1",
+          0.002354296656472996
+        ],
+        [
+          "SLC7A5",
+          0.001774139759872317
+        ],
+        [
+          "SLC7A11",
+          0.0013016369784233537
+        ],
+        [
+          "SLC2A1",
+          0.0007847942085264047
+        ],
+        [
+          "SLC3A2",
+          0.00044060382965232066
+        ]
+      ],
+      "ppr_candidate_count": 7,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC3A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC25A1",
+        "SLC7A8",
+        "SLC38A2",
+        "SLC2A3",
+        "SLC4A1",
+        "SLC9A1",
+        "SLC12A2",
+        "SLC22A1",
+        "SLC25A10",
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "question": "Under the experimental conditions of Colorectal cancer, using Human as the model organism, HCT116 from Cell line as the sample, with Crispr WT 5weeks vs SLC16A1.KO Crispr 5weeks as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Colorectal cancer's Tumor Survival.",
+      "constraints": {
+        "cancer": "Colorectal cancer",
+        "cell_line": "HCT116",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr WT 5weeks vs SLC16A1.KO Crispr 5weeks"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC7A5",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.0014388101164856224
+        ],
+        [
+          "SLC7A5",
+          0.0012058654613510992
+        ],
+        [
+          "SLC16A1",
+          0.0011891586942613475
+        ],
+        [
+          "SLC7A11",
+          0.0011606750112158363
+        ],
+        [
+          "SLC38A1",
+          0.0010574025782265105
+        ],
+        [
+          "SLC38A2",
+          0.0006539461090819238
+        ]
+      ],
+      "ppr_candidate_count": 6,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC38A2",
+        "SLC7A1",
+        "SLC2A3",
+        "SLC16A1",
+        "SLC29A1",
+        "SLC46A1",
+        "SLC7A8",
+        "SLC3A2",
+        "SLC2A4",
+        "SLC25A1",
+        "SLC35A2"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Lymphoma's Tumor Growth.",
+      "constraints": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "task_type": null,
+      "gt_ranking": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ppr_candidates": [],
+      "ppr_candidate_count": 0,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC29A1",
+        "SLC46A1",
+        "SLC22A1",
+        "SLC22A2",
+        "SLC22A3",
+        "SLC22A4",
+        "SLC22A5",
+        "SLC22A6",
+        "SLC22A7",
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC38A2"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Melanoma's Tumor Drug Resistence.",
+      "constraints": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1",
+        "SLC7A11"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC7A11",
+          0.0017101200589746163
+        ],
+        [
+          "SLC2A1",
+          0.00020313249324161017
+        ],
+        [
+          "SLC7A5",
+          0.00016620538943330692
+        ],
+        [
+          "SLC38A2",
+          0.00015333229501476598
+        ],
+        [
+          "SLC1A5",
+          0.00011742846033806788
+        ],
+        [
+          "SLC25A1",
+          9.957823821377752e-05
+        ],
+        [
+          "SLC16A1",
+          9.936647443234077e-05
+        ],
+        [
+          "SLC16A3",
+          9.581225860486941e-05
+        ],
+        [
+          "SLC38A1",
+          9.456092032501021e-05
+        ]
+      ],
+      "ppr_candidate_count": 9,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC7A1",
+        "SLC2A3",
+        "SLC4A1",
+        "SLC9A1",
+        "SLC16A3",
+        "SLC25A1",
+        "SLC7A8",
+        "SLC38A2",
+        "SLC2A10",
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Ovarian cancer's Tumor Growth.",
+      "constraints": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC35B1",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC7A5",
+          0.006686001441328757
+        ],
+        [
+          "SLC2A1",
+          0.003906303940807746
+        ],
+        [
+          "SLC7A11",
+          0.002564087749930374
+        ],
+        [
+          "SLC1A5",
+          0.00023633608877980493
+        ],
+        [
+          "SLC16A3",
+          0.00023156683963240958
+        ],
+        [
+          "SLC16A1",
+          0.00020373549372257468
+        ],
+        [
+          "SLC3A2",
+          0.0002024784571392936
+        ]
+      ],
+      "ppr_candidate_count": 7,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC38A4",
+        "SLC7A1",
+        "SLC2A3",
+        "SLC16A1",
+        "SLC3A2",
+        "SLC7A8",
+        "SLC16A2",
+        "SLC2A4",
+        "SLC38A2",
+        "SLC7A9",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC30A9"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to promote B-lymphoblastic leukaemia's Tumor Survival.",
+      "constraints": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "task_type": null,
+      "gt_ranking": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "ppr_candidates": [],
+      "ppr_candidate_count": 0,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC29A1",
+        "SLC46A3",
+        "SLC22A1",
+        "SLC22A2",
+        "SLC22A3",
+        "SLC22A4",
+        "SLC22A5",
+        "SLC22A6",
+        "SLC22A7",
+        "SLC35A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "pool_source": "llm_nominated"
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "question": "Under the experimental conditions of Colorectal cancer, using Human as the model organism, HCT116 from Cell line as the sample, with Crispr WT 5weeks vs SLC6A8.KO Crispr 5weeks as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to promote Colorectal cancer's Tumor Survival.",
+      "constraints": {
+        "cancer": "Colorectal cancer",
+        "cell_line": "HCT116",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr WT 5weeks vs SLC6A8.KO Crispr 5weeks"
+      },
+      "task_type": "topk_positive",
+      "gt_ranking": [
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.0014388101164856224
+        ],
+        [
+          "SLC7A5",
+          0.0012058654613510992
+        ],
+        [
+          "SLC16A1",
+          0.0011891586942613475
+        ],
+        [
+          "SLC7A11",
+          0.0011606750112158363
+        ],
+        [
+          "SLC38A1",
+          0.0010574025782265105
+        ],
+        [
+          "SLC38A2",
+          0.0006539461090819238
+        ]
+      ],
+      "ppr_candidate_count": 6,
+      "eval_pool": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC38A1",
+        "SLC38A2",
+        "SLC7A1",
+        "SLC2A3",
+        "SLC16A1",
+        "SLC29A1",
+        "SLC46A1",
+        "SLC7A8",
+        "SLC3A2",
+        "SLC2A4",
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "pool_source": "llm_nominated"
+    }
+  ],
+  "pool_source": "llm_nominated",
+  "k_nominate": 15
+}

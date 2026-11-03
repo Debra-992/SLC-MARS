@@ -1,0 +1,420 @@
+{
+  "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00074",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC12A3 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC12A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00074",
+      "status": "ok",
+      "summary": "检索到 4 类证据、12 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC12A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC12A3",
+              "protein_function": "Acts as a key mediator of sodium and chloride reabsorption in kidney distal convoluted tubules.",
+              "aliases": "NCC, TSC, Thiazide-Sensitive Sodium-Chloride Cotransporter",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC12A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC12 Electroneutral cation-coupled  Cl cotransporter family",
+              "target_properties": {
+                "name": "SLC12 Electroneutral cation-coupled  Cl cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC12A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC12A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC12A3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NCC",
+              "target_properties": {
+                "name": "NCC"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC12A3",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Wilms Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC12A3",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Wilms Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Single-Nucleus RNA Sequencing Reveals Loss of Distal Convoluted Tubule 1 Renal Tubules in HIV Viral Protein R Transgenic Mice.",
+              "abstract": "Although hyponatremia and salt wasting are common in patients with HIV/AIDS, the understanding of their contributing factors is limited. HIV viral protein R (Vpr) contributes to HIV-associated nephropathy. To investigate the effects of Vpr on the distal tubules and on the expression level of the Slc12a3 gene, encoding the sodium-chloride cotransporter (which is responsible for sodium reabsorption in distal nephron segments), single-nucleus RNA sequencing was performed on kidney cortices from three wild-type (WT) and three Vpr transgenic (Vpr Tg) mice. The percentage of distal convoluted tubule (DCT) cells was significantly lower in Vpr Tg mice compared with WT mice (P < 0.05); in Vpr Tg mice, Slc12a3 expression was not significantly different in DCT cells. The Pvalb DCT1 subcluster had fewer cells in Vpr Tg mice compared with those in WT mice (P < 0.01). Immunohistochemistry revealed fewer Slc12a3Pvalb DCT1 segments in Vpr Tg mice. Differential gene expression analysis between Vpr Tg and WT samples in the DCT cluster showed down-regulation of the Ier3 gene, which is an inhibitor of apoptosis. The in vitro knockdown of Ier3 by siRNA transfection induced apoptosis in mouse DCT cells. These observations suggest that the salt-wasting effect of Vpr in Vpr Tg mice is likely mediated by Ier3 down-regulation in DCT1 cells and loss of Slc12a3Pvalb DCT1 segments.",
+              "doi": "10.1016/j.ajpath.2024.06.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "288810ed89195fc96d8951e4651c06e0f24bb4670045d2754d3ee0f8f8b7c724"
+              }
+            },
+            {
+              "title": "Diverse Receptor Tyrosine Kinase Phosphorylation in Urine-Derived Tubular Epithelial Cells from Autosomal Dominant Polycystic Kidney Disease Patients.",
+              "abstract": "The clinical features of autosomal dominant polycystic kidney disease (ADPKD) differ among patients even if they have the same gene mutation in PKD1 or PKD2. This suggests that there is diversity in the expression of other modifier genes or in the underlying molecular mechanisms of ADPKD, but these are not well understood. We primarily cultured solute carrier family 12 member 3 (SLC12A3)-positive urine-derived distal tubular epithelial cells from 6 ADPKD patients and 4 healthy volunteers and established immortalized cell lines. The diversity in receptor tyrosine kinase (RTK) phosphorylation by phospho-RTK array in immortalized tubular epithelial cells was analyzed. We noted diversity in the activation of several molecules, including Met, a receptor of hepatocyte growth factor (HGF). Administration of golvatinib, a selective Met inhibitor, or transfection of small interfering RNA for Met suppressed cell proliferation and downstream signaling only in the cell lines in which hyperphosphorylation of Met was observed. In three-dimensional culture of Madin-Darby canine kidney (MDCK) cells as a cyst formation model of ADPKD, HGF activated Met, resulting in an increased total cyst number and total cyst volume. Administration of golvatinib inhibited these phenotypes in MDCK cells. Analysis of urine-derived tubular epithelial cells demonstrated diverse RTK phosphorylation in ADPKD, and Met phosphorylation was noted in some patients. Considering the difference in the effects of golvatinib on immortalized tubular epithelial cells among patients, this analysis may aid in selecting suitable drugs for individual ADPKD patients.",
+              "doi": "10.1159/000509419",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5c9ebe2ade102f6fc9c021591ac7446313c19732d12c126cbd6f0d2ba682df97"
+              }
+            },
+            {
+              "title": "Exploring Hub Gene-Mediated Signaling and miRNA Interactions in Wilms Tumor Development and Drug Sensitivity.",
+              "abstract": "Wilms tumor (WT) is a common pediatric kidney cancer with unclear molecular mechanisms driving its progression. Despite advancements in treatment, prognosis remains suboptimal for high-risk cases, highlighting the urgent need for novel biomarkers for early diagnosis and targeted therapies. In this study, we investigated the molecular underpinnings of WT by identifying key hub genes and evaluating their diagnostic and prognostic potential. Differentially expressed genes (DEGs) were identified from Gene Expression Omnibus (GEO) datasets, and common genes were analyzed using protein-protein interaction (PPI) networks to find hub genes. Functional assays, including cell proliferation, colony formation, and wound healing, were performed to validate the hub genes. Prognostic value, miRNA interactions, and pan-cancer expression analysis were also conducted, along with drug sensitivity evaluation. Analysis of gene expression data from publicly available GEO datasets revealed that SLC12A3, ADH6, GSTM3, and CLCNKB hub genes were significantly dysregulated in WT. Receiver operating characteristic (ROC) curve demonstrated that these hub genes showed strong diagnostic potential, with high sensitivity and specificity in distinguishing WT from normal tissues. Additionally, the expression levels of these genes were closely associated with the overall survival of WT patients, indicating their prognostic significance. Furthermore, analysis of potential miRNA interactions revealed that specific miRNAs could regulate these hub genes, contributing to the pathogenesis of WT. Functional studies of SLC12A3 and ADH6 overexpression showed reduced cell proliferation, colony formation, and migratory capacity, suggesting their involvement in inhibiting tumor progression. This study emphasizes the critical roles of SLC12A3, ADH6, GSTM3, and CLCNKB in WT and their potential as both diagnostic biomarkers and therapeutic targets in WT management.",
+              "doi": "10.2174/0113892010396845250730075758",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9e7d2370fdd250cacf741331f1073201fdd16af5a9997dae84cb63b1802578b7"
+              }
+            },
+            {
+              "title": "Decoding hub gene networks and miRNA interplay in Wilms tumor pathogenesis and therapeutic sensitivity.",
+              "abstract": "This study aims to explore the expression and functional significance of hub genes in Wilms tumors and their potential as diagnostic biomarkers and therapeutic targets. Gene expression data from Wilms tumors and normal control samples were obtained from the Gene Expression Omnibus (GEO) database. Differentially expressed genes (DEGs) were identified using the limma package in R, followed by Venn diagram analysis to identify common DEGs. STRING and Cytoscape were employed to construct a protein-protein interaction (PPI) network and identify hub genes. Cell culture of five Wilms tumor cell lines and normal controls was performed to validate gene expression. Functional assays including proliferation, colony formation, and wound healing assays were conducted to assess the impact of SLC12A3 and GSTM3 overexpression. Immune infiltration analysis was carried out using ssGSEA. We identified SLC12A3, CLCNKB, REN, and GSTM3 as hub genes with significant down-regulation across Wilms tumor cell lines and normal controls. Immune infiltration analysis revealed that the expression of these genes was associated with altered levels of immune cell populations, such as activated dendritic cells, CD8+ T cells, macrophages, and NK cells. GSTM3 overexpression enhanced the inflammatory response and reduced DNA damage, indicated by lower γ-H2AX expression. Functional assays showed that induction of SLC12A3 and GSTM3 overexpression significantly inhibited cell proliferation, colony formation, and migration. SLC12A3, CLCNKB, REN, and GSTM3 hub genes play key roles in regulating cellular functions and the immune microenvironment in Wilms tumors. Therefore, these genes could serve as potential biomarker and therapeutic targets in Wilms tumor patients.",
+              "doi": "10.62347/SLUH3891",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b8e999a0ab8127877379a70ed39e09b85b26edcaf0fb9a38630d5177a7f0d60f"
+              }
+            },
+            {
+              "title": "SRGN, a new identified shear-stress-responsive gene in endothelial cells.",
+              "abstract": "Endothelial cells (ECs) play an important role in the pathogenesis of cardiovascular disease, especially atherosclerosis (AS). The abnormal wall shear stress (WSS) which directly contacts with ECs is the key stimulating factor leading to AS. However, the underlying mechanism of ECs responding to WSS is still incompletely understood. This study aims to explore the novel mechano-sensitive genes and its potential mechanism in response to WSS in ECs by employing bioinformatics methods based on previously available high-throughput data from zebrafish embryos, both before and after blood flow formation. Six common differentially expressed genes (DEGs) (SRGN, SLC12A3, SLC25A4, PVALB1, ITGAE.2, zgc:198419) were selected out from two high-throughput datasets (GSE126617 and GSE20707) in the GEO database. Among them, SRGN was chosen for further verification through the in vitro shear stress loading experiments with human umbilical vein endothelial cells (HUVECs) and the in vivo partial ligation of carotid artery in mice. Our data indicated that low shear stress (LSS) could enhance the expression of SRGN via the PKA/CREB-dependent signaling pathway. The proportion of Ki67 cells and the concentration of nitric oxide (NO) were high in SRGN high expression cells, suggesting that SRGN may be involved in the proliferation of HUVECs. Furthermore, in the partial ligation of the carotid artery mice model, we observed that the expression of SRGN was significantly increased in atherosclerotic plaques induced by abnormal shear stress. Taken together, this study demonstrated that SRGN is a key gene in the response of ECs to WSS and could be involved in AS.",
+              "doi": "10.1007/s11010-020-03830-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8fc68aa34cd5a64114218966ab3985d58c75376513164e94701816342e47f3c2"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC12A3 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC12A3 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC12A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC12A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC12A3",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC12A3": {
+          "status": "unavailable",
+          "gene": "SLC12A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC12A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC12A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC12A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC12A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.20 -> P(必需)=0.371 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC12A3"
+        ],
+        "confidence": 0.371,
+        "abstained": false,
+        "gene_scores": {
+          "SLC12A3": 1.2
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC12A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.20 -> P(必需)=0.371 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC12A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC12A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.20 -> P(必需)=0.371 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC12A3"
+        ],
+        "confidence": 0.371,
+        "abstained": false,
+        "gene_scores": {
+          "SLC12A3": 1.2
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC12A3 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.20 -> P(必需)=0.371 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC12A3']",
+        "status": "ok",
+        "summary": "SLC12A3 主要编码肾脏远曲小管的 Na-Cl 协同转运体，不是 B-淋巴母细胞白血病中已知的肿瘤存活抑制基因；在 Daudi-Cas9 细胞、CRISPR BTN3A low/high 与 MAGECK 条件下，也缺乏证据表明 SLC12A3 抑制 B-淋巴母细胞白血病的 Tumor Survival。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC12A3"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC12A3 主要编码肾脏远曲小管的 Na-Cl 协同转运体，不是 B-淋巴母细胞白血病中已知的肿瘤存活抑制基因；在 Daudi-Cas9 细胞、CRISPR BTN3A low/high 与 MAGECK 条件下，也缺乏证据表明 SLC12A3 抑制 B-淋巴母细胞白血病的 Tumor Survival。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T02:57:44Z"
+  }
+}

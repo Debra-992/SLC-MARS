@@ -1,0 +1,347 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00263",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC33A1 and SLC35F4 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC33A1"
+  },
+  "effective_genes": [
+    "SLC33A1",
+    "SLC35F4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00263",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC33A1",
+        "SLC35F4"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC33A1",
+              "protein_function": "Acetyl-CoA transporter that mediates active acetyl-CoA import through the endoplasmic reticulum membrane into the ER lumen.",
+              "aliases": "ACATN, SPG42",
+              "transport_type": "F"
+            },
+            {
+              "gene": "SLC35F4",
+              "protein_function": "Putative solute transporter.",
+              "aliases": "C14orf36, Transmembrane Protein 22, TMEM22, Chromosome 14 Open Reading Frame 36, Solute Carrier Family 35, Member F4",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC33A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC33 Acetyl-CoA  transporter family",
+              "target_properties": {
+                "name": "SLC33 Acetyl-CoA  transporter family"
+              }
+            },
+            {
+              "gene": "SLC35F4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Annonaceous Acetogenins Synergistically Inhibit Hepatocellular Carcinoma with Sorafenib.",
+              "abstract": "Sorafenib was first approved as the standard treatment for advanced hepatocellular carcinoma (HCC). Despite providing an advantage in terms of patient survival, sorafenib has shown poor clinical efficacy and severe side effects after long-term treatment. Thus, combination treatment is a potential way to increase the effectiveness and reduce the dose-limiting toxicity of sorafenib. Extracts of the seeds of  have shown synergistic antitumor activity with sorafenib, and seven annonaceous acetogenins, including three new acetogenins, muricin P (), muricin Q (), and muricin R (), were isolated from the extracts by bioguided fractionation and showed synergy with sorafenib. The structures of these compounds were determined using spectroscopic and chemical methods. Annonacin () and muricin P (), which reduced intracellular ATP levels and promoted apoptosis, exhibited synergistic cytotoxicity with sorafenib . , annonacin () displayed synergistic antitumor activity by promoting tumor cell apoptosis. Moreover, the potential mechanism of annonacin () was predicted by transcriptomic analysis, which suggested that SLC33A1 is a potential target in HCC. Annonacin () might be a novel candidate for combination therapy with sorafenib against advanced HCC.",
+              "doi": "10.1021/acs.jnatprod.3c00667",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC33A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "404e4ebdcbba973710a6501ebd9ca67311bfba5a513cafeba6fd7f93acb42269"
+              }
+            },
+            {
+              "title": "The transcription factor, Nuclear factor, erythroid 2 (Nfe2), is a regulator of the oxidative stress response during Danio rerio development.",
+              "abstract": "Development is a complex and well-defined process characterized by rapid cell proliferation and apoptosis. At this stage in life, a developmentally young organism is more sensitive to toxicants as compared to an adult. In response to pro-oxidant exposure, members of the Cap'n'Collar (CNC) basic leucine zipper (b-ZIP) transcription factor family (including Nfe2 and Nfe2-related factors, Nrfs) activate the expression of genes whose protein products contribute to reduced toxicity. Here, we studied the role of the CNC protein, Nfe2, in the developmental response to pro-oxidant exposure in the zebrafish (Danio rerio). Following acute waterborne exposures to diquat or tert-buytlhydroperoxide (tBOOH) at one of three developmental stages, wildtype (WT) and nfe2 knockout (KO) embryos and larvae were morphologically scored and their transcriptomes sequenced. Early in development, KO animals suffered from hypochromia that was made more severe through exposure to pro-oxidants; this phenotype in the KO may be linked to decreased expression of alas2, a gene involved in heme synthesis. WT and KO eleutheroembryos and larvae were phenotypically equally affected by exposure to pro-oxidants, where tBOOH caused more pronounced phenotypes as compared to diquat. Comparing diquat and tBOOH exposed embryos relative to the WT untreated control, a greater number of genes were up-regulated in the tBOOH condition as compared to diquat (tBOOH: 304 vs diquat: 148), including those commonly found to be differentially regulated in the vertebrate oxidative stress response (OSR) (e.g. hsp70.2, txn1, and gsr). When comparing WT and KO across all treatments and times, there were 1170 genes that were differentially expressed, of which 33 are known targets of the Nrf proteins Nrf1 and Nrf2. More specifically, in animals exposed to pro-oxidants a total of 968 genes were differentially expressed between WT and KO across developmental time, representing pathways involved in coagulation, embryonic organ development, body fluid level regulation, erythrocyte differentiation, and oxidation-reduction, amongst others. The greatest number of genes that changed in expression between WT and KO occurred in animals exposed to diquat at 2h post fertilization (hpf). Across time and treatment, there were six genes (dhx40, cfap70, dnajb9b, slc35f4, spi-c, and gpr19) that were significantly up-regulated in KO compared to WT and four genes (fhad1, cyp4v7, nlrp12, and slc16a6a) that were significantly down-regulated. None of these genes have been previously identified as targets of Nfe2 or the Nrf family. These results demonstrate that the zebrafish Nfe2 may be a regulator of both primitive erythropoiesis and the OSR during development.",
+              "doi": "10.1016/j.aquatox.2016.09.019",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5f32eac4d814f5d6dc76c2f55e3a18be1c9c01328eb0a0f352f80e43201cd177"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC33A1 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC33A1 and SLC35F4 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC33A1', 'SLC35F4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC33A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC33A1",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC33A1": {
+          "status": "unavailable",
+          "gene": "SLC33A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35F4": {
+          "status": "unavailable",
+          "gene": "SLC35F4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC33A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC33A1",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35F4": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35F4",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC35F4']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC33A1 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC33A1",
+        "candidates": [
+          "SLC33A1",
+          "SLC35F4"
+        ],
+        "confidence": 0.76,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05,
+          "SLC35F4": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC33A1': 2}，最终智能体辩论后裁决：winner=SLC33A1 answer=None conf=0.76；法官理由: Two independent LLM channels favor SLC33A1 as a core essential acetyl-CoA transporter; SLC35F4 is a putative sugar transport with weaker centrality. No direct CRISPR readout, so confidence is moderate.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC35F4']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC33A1 has a clearer cancer-related mechanistic link: it is an ER acetyl-CoA transporter and was implicated as a potential target in hepatocellular carcinoma, where acetogenin-like modulation reduced intracellular ATP and promoted apoptosis. DLBCL/lymphoma cells are highly proliferative and metabolically stressed, so impaired ER acetyl-CoA supply and acetylation-dependent homeostasis could plausibly reduce tumor growth. SLC35F4 is only weakly supported by a zebrafish developmental oxidative-stress transcriptomic association and lacks a direct cancer dependency rationale. | For ATM-null DLBCL, a gene whose loss disrupts metabolic/ER stress capacity is more likely to inhibit growth than a poorly characterized putative solute transporter with only non-cancer developmental evidence. The HCC/acetogenin link to SLC33A1, together with its known function in ER acetyl-CoA transport and protein acetylation, makes it the more plausible CRISPR-knockout target for suppressing lymphoma tumor growth, despite absence of direct lymphoma omics or PPR/KM/TIMER evidence.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC33A1",
+        "candidates": [
+          "SLC33A1",
+          "SLC35F4"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC33A1": 0.05,
+          "SLC35F4": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC33A1 has a clearer cancer-related mechanistic link: it is an ER acetyl-CoA transporter and was implicated as a potential target in hepatocellular carcinoma, where acetogenin-like modulation reduced intracellular ATP and promoted apoptosis. DLBCL/lymphoma cells are highly proliferative and metabolically stressed, so impaired ER acetyl-CoA supply and acetylation-dependent homeostasis could plausibly reduce tumor growth. SLC35F4 is only weakly supported by a zebrafish developmental oxidative-stress transcriptomic association and lacks a direct cancer dependency rationale. | For ATM-null DLBCL, a gene whose loss disrupts metabolic/ER stress capacity is more likely to inhibit growth than a poorly characterized putative solute transporter with only non-cancer developmental evidence. The HCC/acetogenin link to SLC33A1, together with its known function in ER acetyl-CoA transport and protein acetylation, makes it the more plausible CRISPR-knockout target for suppressing lymphoma tumor growth, despite absence of direct lymphoma omics or PPR/KM/TIMER evidence. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC33A1', 'SLC35F4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC33A1",
+          "SLC35F4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T06:23:27Z"
+  }
+}

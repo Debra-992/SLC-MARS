@@ -1,0 +1,431 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_7Days_00157",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35C1 and SLC12A6 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+  },
+  "ground_truth": {
+    "winner": "SLC12A6"
+  },
+  "effective_genes": [
+    "SLC35C1",
+    "SLC12A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_7Days_00157",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35C1",
+        "SLC12A6"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC12A6",
+              "protein_function": "Mediates electroneutral potassium-chloride cotransport when activated by cell swelling",
+              "aliases": "KCC3, ACCPN",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC35C1",
+              "protein_function": "May play an important role in the cellular response to tissue hypoxia. May be either a GDP-fucose transporter that competes with SLC35C1 for GDP-fucose, or a factor that otherwise enhances the fucosylation of Notch and is required for optimal Notch signaling in mammalian cells.",
+              "aliases": "SLC35C2",
+              "transport_type": "E / GMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC12A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC12 Electroneutral cation-coupled  Cl cotransporter family",
+              "target_properties": {
+                "name": "SLC12 Electroneutral cation-coupled  Cl cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC12A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC35C1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC12A6",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Functional analysis of a potassium-chloride co-transporter 3 (SLC12A6) promoter polymorphism leading to an additional DNA methylation site.",
+              "abstract": "The human potassium-chloride co-transporter 3 (KCC3, SLC12A6) is involved in cell proliferation and in electro-neutral movement of ions across the cell membrane. The gene (SLC12A6) is located on chromosome 15q14, a region that has previously shown linkage with bipolar disorder, schizophrenia, rolandic epilepsy, idiopathic generalized epilepsy, autism and attention deficit/hyperactivity disorder. Furthermore, recessively inherited mutations of SLC12A6 cause Andermann syndrome, characterized by agenesis of the corpus callosum, which is associated with peripheral neuropathy and psychoses. Recently, we have demonstrated the association of two G/A promoter polymorphisms of SLC12A6 with bipolar disorder in a case-control study, and familial segregation of the rare variants as well as a trend toward association with schizophrenia. To investigate functional consequences of these polymorphisms, lymphocyte DNA was extracted, bisulfite modified, and subsequently sequenced. To investigate SLC12A6 promoter activity, various promoter constructs were generated and analyzed by luciferase reporter gene assays. We provide evidence that the G- allele showed a significant reduction of reporter gene expression. In human lymphocytes, the allele harboring the rare upstream G nucleotide was found to be methylated at the adjacent C position, possibly accountable for tissue-specific reduction in gene expression in vivo. Here we demonstrate functionality of an SNP associated with psychiatric disease and our results may represent a functional link between genetic variation and an epigenetic modification.",
+              "doi": "10.1038/npp.2008.77",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96be9d5b4bcbbe39632cb5043be6c7146490745218e6a066f1d4eb62cea5c30a"
+              }
+            },
+            {
+              "title": "Systematic pan-cancer analysis identifies SLC35C1 as an immunological and prognostic biomarker.",
+              "abstract": "GDP-amylose transporter protein 1 (SLC35C1) plays an important role in many types of cancer. Therefore, it is clinically important to further investigate the expression profile of SLC35C1 in human tumors to provide new molecular clues for the pathogenesis of glioma. In this study, we performed a comprehensive pan-cancer analysis of SLC35C1 using a series of bioinformatics approaches and validated its differential tissue expression and biological function. The results showed that SLC35C1 was aberrantly expressed in different types of tumors and significantly correlated with overall survival (OS) and progression-free interval (PFI). More importantly, the expression level of SLC35C1 was closely correlated with Tumor Microenvironment (TME), immune infiltration and immune-related genes. In addition, we found that SLC35C1 expression was also closely related to Tumor Mutation Burden (TMB), Microsatellite Instability (MSI) and antitumor drug sensitivity in various cancer types. Functional bioinformatics analysis indicated that SLC35C1 may be involved in multiple signaling pathways and biological processes in glioma. Based on SLC35C1 expression, a risk factor model was found to predict OS of glioma. In addition, in vitro experiments showed that SLC35C1 knockdown significantly inhibited the proliferation, migration and invasive ability of glioma cells, while SLC35C1 overexpression promoted proliferation, migration, invasion and colony formation of glioma cells. Finally, quantitative real-time PCR confirmed that SLC35C1 was highly expressed in gliomas.",
+              "doi": "10.1038/s41598-023-32375-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ec2390b32b74efe51dcedf24277b4e703cb41c329d1f5dc005d315040cc3d434"
+              }
+            },
+            {
+              "title": "Aberrant fucosylation sustains the NOTCH and EGFR/NF-κB pathways and has a prognostic value in human intrahepatic cholangiocarcinoma.",
+              "abstract": "Intrahepatic cholangiocarcinoma (iCCA) is a lethal malignancy, with increasing incidence worldwide and limited therapeutic options. Aberrant protein glycosylation is a hallmark of cancer. Here, we thoroughly investigated the possible involvement of fucosylation in cholangiocarcinogenesis. We discovered that the levels of global fucosylation and members of the fucosylation pathway are ubiquitously upregulated in human iCCA tissues compared to nontumorous surrounding livers and normal biliary cells. In addition, total fucosylation levels correlate with poor patients' prognosis. Furthermore, fucosylation inhibition following 6-alkynylfucose (6AF) administration triggered a dose-dependent decrease in the proliferation and migration of iCCA cell lines. Notably, adding fucose to the cell medium annulled these effects. At the molecular level, 6AF administration or small interfering RNA-mediated silencing of GDP-L-fucose synthetase (FX) and the GDP-fucose transmembrane transporter (SLC35C1), both pivotal players of cellular fucosylation, decreased NOTCH activity, NOTCH1/Jagged1 interaction, NOTCH receptors, and related target genes in iCCA cell lines. In the same cells, EGFR, nuclear factor kappa-light-chain-enhancer of activated B cells p65, and Bcl-xL protein levels diminished, whereas IκBα (a critical cellular NF-κB inhibitor) increased after FX/SLC35C1 knockdown or 6AF administration. In the chick chorioallantoic membrane assay, 6AF treatment profoundly suppresses the growth of iCCA cells. Elevated global fucosylation characterizes human iCCA, contributing to cell growth and migration through the upregulation of the NOTCH and EGFR/NF-κB pathways. Thus, aberrant fucosylation is a novel pathogenetic player and a potential therapeutic target for human iCCA.",
+              "doi": "10.1097/HEP.0000000000000322",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e3aff20807f757386fd3dac67f782cbd4f5a0681b23f0c1cf895b9ae90fb5c27"
+              }
+            },
+            {
+              "title": "Down-regulation of SLC35C1 induces colon cancer through over-activating Wnt pathway.",
+              "abstract": "The canonical Wnt signalling pathway is a critical pathway involved in the proliferation of cells. It has been well-established that it plays the central role during colorectal carcinogenesis and development. Yet the exact molecular mechanism of how the canonical Wnt pathway is fine-tuned remains elusive. We found that SLC35C1, a GDP-fucose transporter, negatively regulates the Wnt signalling pathway. We show here that SLC35C1 is reduced in all colon cancer by both immunohistochemistry images and TCGA data, whereas β-catenin is increased. Down-regulation of SLC35C1 is also detected by real-time PCR in stage 3 and stage 4 colorectal cancer tissues. Moreover, analysing the TCGA database with cBioPortal reveals the negative correlation of SLC35C1 mRNA level to the expression of β-catenin. Reduced SLC35C1 significantly promotes cell proliferation and colony formation of HEK293 cells. Meanwhile, in HEK293 cells silencing SLC35C1 activates canonical Wnt pathway, whereas overexpressing SLC35C1 inhibits it. Consistently, the reduction of SLC35C1 in HEK293 cells also elevated the mRNA level of Wnt target genes C-myc, Axin2 and Cyclin D1, as well as the secretion of Wnt3a. In conclusion, we identified SLC35C1 as a negative regulator of the Wnt signalling pathway in colon cancer. Decreased SLC35C1 may cause over-activation of Wnt signalling in colorectal cancer.",
+              "doi": "10.1111/jcmm.14969",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0e74f8ca466d19c434cbe8c6c4f7964a63951af7b3b37b2d40dae00967c8afeb"
+              }
+            },
+            {
+              "title": "A Metabolic Gene Survey Pinpoints Fucosylation as a Key Pathway Underlying the Suppressive Function of Regulatory T Cells in Cancer.",
+              "abstract": "Forkhead box P3 (Foxp3)-expressing regulatory T cells (Treg) are the guardians of controlled immune reactions and prevent the development of autoimmune diseases. However, in the tumor context, their increased number suppresses antitumor immune responses, indicating the importance of understanding the mechanisms behind their function and stability. Metabolic reprogramming can affect Foxp3 regulation and, therefore, Treg suppressive function and fitness. Here, we performed a metabolic CRISPR/Cas9 screen and pinpointed novel candidate positive and negative metabolic regulators of Foxp3. Among the positive regulators, we revealed that targeting the GDP-fucose transporter Slc35c1, and more broadly fucosylation (Fuco), in Tregs compromises their proliferation and suppressive function both in vitro and in vivo, leading to alteration of the tumor microenvironment and impaired tumor progression and protumoral immune responses. Pharmacologic inhibition of Fuco dampened tumor immunosuppression mostly by targeting Tregs, thus resulting in reduced tumor growth. In order to substantiate these findings in humans, tumoral Tregs from patients with colorectal cancer were clustered on the basis of the expression of Fuco-related genes. FucoLOW Tregs were found to exhibit a more immunogenic profile compared with FucoHIGH Tregs. Furthermore, an enrichment of a FucoLOW signature, mainly derived from Tregs, correlated with better prognosis and response to immune checkpoint blockade in melanoma patients. In conclusion, Slc35c1-dependent Fuco is able to regulate the suppressive function of Tregs, and measuring its expression in Tregs might pave the way towards a useful biomarker model for patients with cancer. See related Spotlight by Silveria and DuPage, p. 1570.",
+              "doi": "10.1158/2326-6066.CIR-22-0606",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35C1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ade29dea314a3e060a4fc9ce9e01ba9aa18a780444f2544fe15caa6efb0ee2e2"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35C1 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC35C1 and SLC12A6 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC35C1', 'SLC12A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35C1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35C1",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35C1": {
+          "status": "unavailable",
+          "gene": "SLC35C1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC12A6": {
+          "status": "unavailable",
+          "gene": "SLC12A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35C1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35C1",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC12A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC12A6",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35C1', 'SLC12A6']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC12A6(P(winner)=0.47) vs SLC35C1(P=0.45), 差=0.01；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35C1",
+        "candidates": [
+          "SLC35C1",
+          "SLC12A6"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35C1": 0.05,
+          "SLC12A6": 0.6
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC12A6': 1, 'W:SLC35C1': 2}，最终智能体辩论后裁决：winner=SLC35C1 answer=None conf=0.61；法官理由: Two independent LLM channels favor SLC35C1 via GDP-fucose/Notch signaling, plausible CML growth inhibition. E’s SLC12A6 edge is a near-tie association proxy, not CRISPR, and lacks CML-specific support. Database evidence is weak, so consensu。原证据通道判定: winner=SLC12A6 answer=None conf=0.465（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35C1', 'SLC12A6']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC35C1 在 glioma/iCCA 中有直接 knockdown 抑制增殖、迁移、侵袭并削弱 NOTCH/EGFR/NF-κB 促生长通路的证据；虽然 CML 是血液肿瘤，与上皮来源癌种不完全同源，但糖基化依赖的信号通路和细胞存活/增殖机制具有跨癌种可迁移性。SLC12A6 仅有乳腺癌迁移促进和神经/精神疾病背景，缺少类似肿瘤生长必需性证据。 | pairwise 中 SLC35C1 更可能作为 CML 肿瘤生长的正向依赖基因：其 GDP-fucose 转运功能支持蛋白糖基化，进而维持多条促增殖/存活通路；敲低在多种癌症模型中已显示抑制生长表型。SLC12A6 的 KCC3 离子转运功能与细胞增殖有关，但现有证据更偏关联/迁移，且缺乏跨癌种 CRISPR/功能抑制证据。结肠癌中 SLC35C1 下调反而促 Wnt 增殖，提示方向具有癌种特异性，因此置信度偏低，但综合直接功能证据仍选 SLC35C1。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC35C1",
+        "candidates": [
+          "SLC35C1",
+          "SLC12A6"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35C1": 0.05,
+          "SLC12A6": 0.6
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC35C1 在 glioma/iCCA 中有直接 knockdown 抑制增殖、迁移、侵袭并削弱 NOTCH/EGFR/NF-κB 促生长通路的证据；虽然 CML 是血液肿瘤，与上皮来源癌种不完全同源，但糖基化依赖的信号通路和细胞存活/增殖机制具有跨癌种可迁移性。SLC12A6 仅有乳腺癌迁移促进和神经/精神疾病背景，缺少类似肿瘤生长必需性证据。 | pairwise 中 SLC35C1 更可能作为 CML 肿瘤生长的正向依赖基因：其 GDP-fucose 转运功能支持蛋白糖基化，进而维持多条促增殖/存活通路；敲低在多种癌症模型中已显示抑制生长表型。SLC12A6 的 KCC3 离子转运功能与细胞增殖有关，但现有证据更偏关联/迁移，且缺乏跨癌种 CRISPR/功能抑制证据。结肠癌中 SLC35C1 下调反而促 Wnt 增殖，提示方向具有癌种特异性，因此置信度偏低，但综合直接功能证据仍选 SLC35C1。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "breast cancer(BC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC35C1', 'SLC12A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35C1",
+          "SLC12A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T00:35:50Z"
+  }
+}

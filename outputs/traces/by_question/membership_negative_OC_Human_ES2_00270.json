@@ -1,0 +1,359 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00270",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC9A5 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC9A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00270",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC9A5"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC9A5",
+              "protein_function": "Plasma membrane Na(+)/H(+) antiporter. Mediates the electroneutral exchange of intracellular H(+) ions for extracellular Na(+) in 1:1 stoichiometry, thus regulating intracellular pH homeostasis, in particular in neural tissues. Acts as a negative regulator of dendritic spine growth. Plays a role in postsynaptic remodeling and signaling. Can also contribute to organellar pH regulation, with consequences for receptor tyrosine kinase trafficking.",
+              "aliases": "NHE5, NHE-5",
+              "transport_type": "E / Na+, H+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC9A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            },
+            {
+              "gene": "SLC9A5",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC9A5",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NHE5",
+              "target_properties": {
+                "name": "NHE5"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC9A5",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC9A5 promotes tumor growth and cell motility via ACOX1-mediated peroxisomal fatty acid oxidation.",
+              "abstract": "Growing evidence suggests a strong association between decreased lipid catabolism and the development of cancer. Solute carrier family 9 member A5 (SLC9A5) plays a regulatory role in colorectal function. However, the specific involvement of SLC9A5 in colorectal cancer (CRC) remains unclear, as well as its potential connection to lipid catabolism. We found that SLC9A5 exhibited significantly higher expression in CRC tumor tissues compared to adjacent paratumor tissues, as confirmed through analysis of the TCGA database and validation on a CRC tissue chip using IHC. Furthermore, in vitro experiments showed that knockdown of SLC9A5 resulted in suppressed cell proliferation, migration, and invasion. Then we performed bioinformatics analysis and found that SLC9A5 was significantly enriched in peroxisomal fatty acid oxidation (FAO) pathway and negatively correlated with its first rate-limiting enzyme acyl-CoA oxidases (ACOX). Interestingly, the expression of ACOX1, as well as FAO process indicated by changes in very long chain fatty acid levels, were enhanced upon SLC9A5 knockdown in CRC cells. Moreover, the attenuated tumor growth, migration, invasion, and increased FAO observed after SLC9A5 knockdown could be reversed by simultaneous knockdown of both SLC9A5 and ACOX1. In summary, these findings reveal the oncogenic role of SLC9A5 in CRC, particularly in relation to ACOX1-mediated peroxidation, and might serve as a promising therapeutic target for inhibiting the progression of colorectal cancer.",
+              "doi": "10.1016/j.yexcr.2023.113700",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "64f4d9f89c0fad251a6809bfcaa157de0e99585fd7b601c5430ac96926194b6e"
+              }
+            },
+            {
+              "title": "{'sup': ['+', '+'], '#text': 'Na/H-Exchanger Family as Novel Prognostic Biomarkers in Colorectal Cancer.'}",
+              "abstract": "The acidic characteristics of the tumor microenvironment (TME) are attributed to cancer cells' needs of metabolism which produce a large amount of H. In order not to affect its own life activities, it needs to release H into the intercellular space through an efficient Na/H exchanger. On account of the intestine whose physiological function is highly dependent on intestinal pH value, NHE family members may play a critical role in the occurrence and development of colorectal cancer (CRC). TCGA, GEPIA2, ONCOMINE, UALCAN, STRING, TIMER, Cytoscape, TargetScan, ENCORI, LncBase v.2, DNMIVD, HPA, and CellMiner databases were used in our study. The mRNA expressions of SLC9A1, SLC9A2, SLC9A3, and SLC9A9 were evidently lower in COAD than in normal samples; however, the mRNA expressions of SLC9A5, SLC9A8, and SLC9B2 were higher. Besides, mRNA expressions of NHE family were extremely associated with clinicopathological features, tumor immune microenvironment and stemness score, DNA methylation, and patient prognosis in COAD. Moreover, we conjectured that NHE family may play a role through MAPK or ErbB signaling pathway according to the results of GO/KEGG enrichment analysis. At last, we found that NHE family members were key factors of various kinds of cancers. Our study indicated that NHE family represented new diagnostic and therapeutic targets for CRC, which could have important significance for the clinical treatment of CRC.",
+              "doi": "10.1155/2021/3241351",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8e40a21ae51712935d6fe72d45c8c66be52e2b12b23680f3e6b9ac5b611dfac4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC9A5 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC9A5 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC9A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC9A5",
+            "ppr_score": 8.334439315388755e-06,
+            "degree_corrected_score": 2.4714205369956597e-05,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC9A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC9A5",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC9A5": {
+          "status": "unavailable",
+          "gene": "SLC9A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC9A5": {
+          "status": "unavailable",
+          "gene": "SLC9A5",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC9A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.95 -> P(必需)=0.429 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A5"
+        ],
+        "confidence": 0.429,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A5": 1.95
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC9A5 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.95 -> P(必需)=0.429 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A5']",
+        "status": "ok",
+        "summary": "[跨癌种类推] CRC epithelial/acidosis/stemness/pH transport dependence is partially transferable to ovarian carcinoma, where Na+/H+ exchangers often support proliferation and survival rather than suppress tumor growth. | Direct ovarian CRISPR evidence is absent (PPR negligible, TIMER/KM unavailable), but SLC9A5/NHE5 is oncogenic in CRC: elevated expression, knockdown suppresses proliferation/migration/invasion, and NHE family links to acidic TME, stemness, MAPK/ErbB. Therefore the best cross-cancer inference is that SLC9A5 likely promotes rather than inhibits ovarian tumor growth; confidence is limited by tissue specificity and lack of ovarian expression/screen data.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC9A5"
+        ],
+        "confidence": 0.42,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9A5": 1.95
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] CRC epithelial/acidosis/stemness/pH transport dependence is partially transferable to ovarian carcinoma, where Na+/H+ exchangers often support proliferation and survival rather than suppress tumor growth. | Direct ovarian CRISPR evidence is absent (PPR negligible, TIMER/KM unavailable), but SLC9A5/NHE5 is oncogenic in CRC: elevated expression, knockdown suppresses proliferation/migration/invasion, and NHE family links to acidic TME, stemness, MAPK/ErbB. Therefore the best cross-cancer inference is that SLC9A5 likely promotes rather than inhibits ovarian tumor growth; confidence is limited by tissue specificity and lack of ovarian expression/screen data. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "colorectal cancer(CRC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC9A5']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC9A5"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:00:30Z"
+  }
+}

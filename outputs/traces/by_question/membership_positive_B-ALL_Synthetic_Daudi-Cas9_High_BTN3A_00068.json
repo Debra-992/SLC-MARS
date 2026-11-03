@@ -1,0 +1,362 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00068",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC24A4 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC24A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00068",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC24A4"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC24A4",
+              "protein_function": "Calcium, potassium:sodium antiporter that transports 1 Ca(2+) and 1 K(+) in exchange for 4 Na(+)",
+              "aliases": "NCKX4",
+              "transport_type": "E / 4 Na+, Ca2+, K+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC24A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC24 Na+/(Ca2+-K+)  exchanger family",
+              "target_properties": {
+                "name": "SLC24 Na+/(Ca2+-K+)  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Genome-wide association study and functional validation implicates JADE1 in tauopathy.",
+              "abstract": "Primary age-related tauopathy (PART) is a neurodegenerative pathology with features distinct from but also overlapping with Alzheimer disease (AD). While both exhibit Alzheimer-type temporal lobe neurofibrillary degeneration alongside amnestic cognitive impairment, PART develops independently of amyloid-β (Aβ) plaques. The pathogenesis of PART is not known, but evidence suggests an association with genes that promote tau pathology and others that protect from Aβ toxicity. Here, we performed a genetic association study in an autopsy cohort of individuals with PART (n = 647) using Braak neurofibrillary tangle stage as a quantitative trait. We found some significant associations with candidate loci associated with AD (SLC24A4, MS4A6A, HS3ST1) and progressive supranuclear palsy (MAPT and EIF2AK3). Genome-wide association analysis revealed a novel significant association with a single nucleotide polymorphism on chromosome 4 (rs56405341) in a locus containing three genes, including JADE1 which was significantly upregulated in tangle-bearing neurons by single-soma RNA-seq. Immunohistochemical studies using antisera targeting JADE1 protein revealed localization within tau aggregates in autopsy brains with four microtubule-binding domain repeats (4R) isoforms and mixed 3R/4R, but not with 3R exclusively. Co-immunoprecipitation in post-mortem human PART brain tissue revealed a specific binding of JADE1 protein to four repeat tau lacking N-terminal inserts (0N4R). Finally, knockdown of the Drosophila JADE1 homolog rhinoceros (rno) enhanced tau-induced toxicity and apoptosis in vivo in a humanized 0N4R mutant tau knock-in model, as quantified by rough eye phenotype and terminal deoxynucleotidyl transferase dUTP nick end-labeling (TUNEL) in the fly brain. Together, these findings indicate that PART has a genetic architecture that partially overlaps with AD and other tauopathies and suggests a novel role for JADE1 as a modifier of neurofibrillary degeneration.",
+              "doi": "10.1007/s00401-021-02379-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06d5fcb0bd1b422affe97e225634dce93304594201f1bdc1bc885bf70587dbce"
+              }
+            },
+            {
+              "title": "Identification and validation of calcium extrusion-related genes prognostic signature in colon adenocarcinoma.",
+              "abstract": "Disruptions in calcium homeostasis are associated with a wide range of diseases, and play a pivotal role in the development of cancer. However, the construction of prognostic models using calcium extrusion-related genes in colon adenocarcinoma (COAD) has not been well studied. We aimed to identify whether calcium extrusion-related genes serve as a potential prognostic biomarker in the COAD progression. We constructed a prognostic model based on the expression of calcium extrusion-related genes (SLC8A1, SLC8A2, SLC8A3, SLC8B1, SLC24A2, SLC24A3 and SLC24A4) in COAD. Subsequently, we evaluated the associations between the risk score calculated by calcium extrusion-related genes and mutation signature, immune cell infiltration, and immune checkpoint molecules. Then we calculated the immune score, stromal score, tumor purity and estimate score using the Estimation of STromal and Immune cells in MAlignant Tumor tissues using Expression data (ESTIMATE) algorithm. The response to immunotherapy was assessed using tumor immune dysfunction and exclusion (TIDE). Finally, colorectal cancer cells migration, growth and colony formation assays were performed in RKO cells with the overexpression or knockdown SLC8A3, SLC24A2, SLC24A3, or SLC24A4. We found that patients with high risk score of calcium extrusion-related genes tend to have a poorer prognosis than those in the low-risk group. Additionally, patients in high-risk group had higher rates of KRAS mutations and lower MUC16 mutations, implying a strong correlation between KRAS and MUC16 mutations and calcium homeostasis in COAD. Moreover, the high-risk group showed a higher infiltration of regulatory T cells (Tregs) in the tumor microenvironment. Finally, our study identified two previously unreported model genes (SLC8A3 and SLC24A4) that contribute to the growth and migration of colorectal cancer RKO cells. Altogether, we developed a prognostic risk model for predicting the prognosis of COAD patients based on the expression profiles of calcium extrusion-related genes, Furthermore, we validated two previously unreported tumor suppressor genes (SLC8A3 and SLC24A4) involved in colorectal cancer progression.",
+              "doi": "10.7717/peerj.17582",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ef8292e43041fc906527a574ba6eeed32cc67b82d21b46b626996c9d7941eeb0"
+              }
+            },
+            {
+              "title": "On the effect heterogeneity of established disease susceptibility loci for Alzheimer's disease across different genetic ancestries.",
+              "abstract": "Genome-wide association studies have identified numerous disease susceptibility loci (DSLs) for Alzheimer's disease (AD). However, only a limited number of studies have investigated the dependence of the genetic effect size of established DSLs on genetic ancestry. We utilized the whole genome sequencing data from the Alzheimer's Disease Sequencing Project (ADSP) including 35,569 participants. A total of 25,459 subjects in four distinct populations (African ancestry, non-Hispanic White, admixed Hispanic, and Asian) were analyzed. We found that nine DSLs showed significant heterogeneity across populations. Single nucleotide polymorphism (SNP) rs2075650 in translocase of outer mitochondrial membrane 40 (TOMM40) showed the largest heterogeneity (Cochran's Q = 0.00, I = 90.08), followed by other SNPs in apolipoprotein C1 (APOC1) and apolipoprotein E (APOE). Two additional loci, signal-induced proliferation-associated 1 like 2 (SIPA1L2) and solute carrier 24 member 4 (SLC24A4), showed significant heterogeneity across populations. We observed substantial heterogeneity for the APOE-harboring 19q13.32 region with TOMM40/APOE/APOC1 genes. The largest risk effect was seen among African Americans, while Asians showed a surprisingly small risk effect.",
+              "doi": "10.1002/alz.13796",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b2dba515df25102e0e1bc9de7fac69795e2eb5aa344cfa181899f37e1201086a"
+              }
+            },
+            {
+              "title": "Transcriptome-based screening and validation of key genes for wool color in cashmere goats.",
+              "abstract": "Colored wool from cashmere goats is increasingly popular among consumers, but the transcriptomic differences between coat colors are poorly understood. This study aimed to screen for coat color regulation-associated genes in cashmere goats to ascertain their underlying molecular mechanisms. Transcriptomic sequencing of skin tissues from black (BC), brown (YC), and white cashmere (WC) goats was performed. Immunohistochemistry and western blotting were used to validate SLC24A4 and DCT expression, two essential genes identified for coat color determination. We identified 6,518 differentially expressed genes (DEGs) in the BC vs. WC group (3,919 upregulated, 2,599 downregulated). Next, 5,593 DEGs were identified in the YC vs. WC group (3,629 upregulated, 1,964 downregulated). Finally, 4,538 DEGs were expressed in both groups, with 1,980 and 1,055 DEGs exclusively expressed in either group. Functions and pathways associated with hair color were enriched, including melanosomes, melanocyte migration, melanin biosynthesis processes and functions, and melanogenesis pathways. TYRP1, SLC24A4, PMEL, OCA2, and DCT were significantly upregulated in BC goat skin, while ASIP was significantly upregulated in YC skin. Additionally, KIT, POMC, SLC24A5, Wnt3a, and EDN3 were DEGs for different coat colors. Immunohistochemistry revealed SLC24A4 and DCT expression in dermal papillae, inner and outer root sheaths, and the hair follicle matrix. Western blotting showed that SLC24A4 protein levels were highest in BC goat skin. DCT protein levels were also highest in BC goat skin, albeit not significantly. These results further our understanding of coat color regulation in cashmere goats, establishing a foundation for their molecular breeding.",
+              "doi": "10.1007/s13258-024-01562-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e8b73a4d6ab0081ce08a44cc4b9e9a1f4edadcc99efd4653b753652df9e18721"
+              }
+            },
+            {
+              "title": "[What's new in dermatological research?].",
+              "abstract": "Medical literature is rich with new and relevant information, resulting from basic or applied research. Some strong arguments are presented in this document. Firstly, the discovery and role of a virus, the polyomavirus, in the development of Merkel tumours. It is a small virus with double bit DNA strand, coding for a oncoprotein. If the polyomavirus plays a causal role in the tumorigenesis, it acts by various mechanisms. The micro-RNAs represent an abundant class of small RNA not coding for proteins, but which control the gene expression coding for proteins on a post-transcriptional level. The first obvious sign of the role of the micro-RNAs in the inflammatory dermatoses appeared recently, in particular when these micro-RNAs associated with psoriasis and atopic dermatitis were identified through a broad genomic analysis of the expression of these micro-RNAs. A new giant virus strain sheltering another unknown tiny virus to date has just been discovered. This virus infinitely small called Sputnik enables to deteriorate a much larger virus baptized Mama, at the point of preventing it to manufacture normal viral particles and also preventing it from reproducing. This discovery raises a crucial question: Is Sputnik a new system of transfer of genes of a species of one virus to another? A group of blood cells expressing E-cadherin, the dot cells, found in the fetal blood of the dermis, contributes to tissue repair through the mechanisms of cellular differentiation and their action allows healing without scar. CD4+ T helper lymphocytes producing interleukin 17 (IL17) play a pathogenic part in atopic dermatitis. The genes of the beta defensins could be involved in the genetic susceptibility of the psoriatic disease. The autoimmune origin of the alopecia areata is supported by a great number of observations, the role of neuropeptides in the initiation of the autoimmunity during alopecia areata has just been demonstrated. The dendritic cells are cells presenting antigens which play a crucial role in the adaptive immunological response. It was shown that activation of the proliferation of the lymphocytes T after the migration of dendritic cells on the level of the lymphatic ganglion depended not on Langerhans cell, but of the dendritic cell. A new way appears to control the autoimmunity in the psoriasis and involves the plasmacytoid dendritic cells which are sensitized with the DNA itself when it is coupled with an antibacterial peptide. Mast cells express cathelicidin, which acts like an antibiotic with broad spectrum and influences the defence system of the epitheliums. We have perhaps found a new therapeutic target for rosacea by disclosing high rates of cathelicidin and a series of associated proteases in skin lesions. The sebocytes express antibacterial functional peptides deriving from cathelicidin which can have a bactericidal effect against P. Acnes. A vast genomic study in the androgenetic alopecia highlighted the existence of new loci localized on the 20p11 chromosome, associated with the risk of androgenetic alopecia. New alleles to determine the color of hair and the cutaneous pigmentation were identified. Two loci (IRF 4 and SLC24A4) are highly associated with the color of hair, like three other areas. The blue color of the eyes could be due to a change of an element located in gene HERC2 preventing of the expression of OCA2. Thus, many fields of dermatology were the object of research which opens new prospects for diagnosis and treatment.",
+              "doi": "10.1016/S0151-9638(08)75485-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC24A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "67d5b9aa2d7a23d1307c6c02c0e8e5a40b2567f186c8ffc97a65c437f37e8aa4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC24A4 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC24A4 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC24A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC24A4",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC24A4",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC24A4": {
+          "status": "unavailable",
+          "gene": "SLC24A4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC24A4": {
+          "status": "unsupported_cancer",
+          "gene": "SLC24A4",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A4 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A4"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A4": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No Daudi MAGeCK evidence shows SLC24A4 loss promotes B-ALL survival; it is an ion transporter with unrelated literature. Channels agree false, though database evidence is only association-level.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC24A4 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC24A4"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC24A4": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.7；法官理由: No Daudi/MAGeCK depletion evidence supports SLC24A4 promoting survival; literature is unrelated neurodegeneration. Independent channels agree it is likely redundant/nonessential, so the positive membership claim is rejected.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC24A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC24A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T06:18:57Z"
+  }
+}

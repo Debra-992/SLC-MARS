@@ -1,0 +1,1816 @@
+{
+  "generated_at": "2026-10-25T22:32:01Z",
+  "dataset_a_n": 100,
+  "counters": {
+    "stable": 32,
+    "novel": 23,
+    "unstable": 36,
+    "probe_error": 9
+  },
+  "template_version": "2",
+  "reused_rows": 39,
+  "probe_model": "qwen3.8-flash",
+  "note": "GT 仅在此标注工具内读取对照；B := novel ∪ unstable",
+  "labels": [
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00104",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00226",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00265",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC33A1"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC33A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00323",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00146",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00287",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC19A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00331",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00264",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC33A1"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC6A14",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A7"
+      },
+      "probe1": {
+        "answer": "SLC10A6",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00277",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00042",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35F2"
+      },
+      "probe1": {
+        "answer": "SLC35F2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00016",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00286",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00009",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC29A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00313",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00118",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A7"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC37A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00028",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00124",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC43A2"
+      },
+      "probe1": {
+        "answer": "SLC43A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC43A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00104",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00076",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00011",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_ALL_Human_CUTLL1_7days_00000",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00222",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00067",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00064",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A38"
+      },
+      "probe1": {
+        "answer": "SLC25A38",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A38",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00065",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00079",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00283",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00008",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00260",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC28A3"
+      },
+      "probe1": {
+        "answer": "SLC28A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC22A15",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00142",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_5Days_00131",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00261",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00127",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC25A39",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00293",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A7"
+      },
+      "probe1": {
+        "answer": "SLC39A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00105",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00291",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A7",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00324",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC4A3"
+      },
+      "probe1": {
+        "answer": "SLC35B3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00038",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00095",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00102",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_TNBC_Human_MCF7_35days_00347",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A17"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00279",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00088",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00091",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00002",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00137",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00312",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00057",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC35A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00108",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00109",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00242",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00254",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00129",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00062",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00139",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00106",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A6"
+      },
+      "probe1": {
+        "answer": "SLCO4A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A6",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00134",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00288",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLCO5A1"
+      },
+      "probe1": {
+        "answer": "SLCO5A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLCO5A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00128",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00070",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00246",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00013",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_COAD_Mouse_CT26-HA_T-cell_00146",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00334",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00098",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00231",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00035",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00271",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00248",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00094",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00086",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00003",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00091",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00328",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00155",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00275",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00299",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC9A1"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00252",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_ALL_Human_CUTLL1_7days_00001",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00250",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00017",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00149",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00255",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00120",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00315",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00012",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00153",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00115",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00031",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00227",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00305",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    }
+  ]
+}

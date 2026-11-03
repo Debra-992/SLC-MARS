@@ -1,0 +1,358 @@
+{
+  "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00063",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC30A1 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC30A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00063",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC30A1"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC30A1",
+              "protein_function": "Zinc ion:proton antiporter that could function at the plasma membrane mediating zinc efflux from cells against its electrochemical gradient protecting them from intracellular zinc accumulation and toxicity.",
+              "aliases": "ZNT1, ZRC1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC30A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC30 Zinc efflux  family",
+              "target_properties": {
+                "name": "SLC30 Zinc efflux  family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The Intestinal Transporter SLC30A1 Plays a Critical Role in Regulating Systemic Zinc Homeostasis.",
+              "abstract": "The essential trace element, zinc, regulates virtually all aspects of cellular physiology, particularly cell proliferation and survival. Diverse families of metal transporters, metallothioneins, and metal-responsive transcriptional regulators are linked to zinc homeostasis. However, the mechanism underlying the regulation of systemic zinc homeostasis remains largely unknown. Here, it is reported that the intestinal transporter SLC30A1 plays an essential role in maintaining systemic zinc homeostasis. Using several lines of tissue-specific knockout mice, it is found that intestinal Slc30a1 plays a critical role in survival. Furthermore, lineage tracing reveals that Slc30a1 is localized to the basolateral membrane of intestinal epithelial cells (IECs). It is also found that Slc30a1 safeguards both intestinal barrier integrity and systemic zinc homeostasis. Finally, an integrative analysis of the cryo-EM structure and site-specific mutagenesis of human SLC30A1 are performed and a zinc transport mechanism of SLC30A1 unique within the SLC30A family, with His43 serving as a critical residue for zinc selectivity, is identified.",
+              "doi": "10.1002/advs.202406421",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "12f95dc72905f3c094dc588217c282db53ef0cf1ec2fdb791069ea94d949f210"
+              }
+            },
+            {
+              "title": "Zinc transporter 5 and zinc transporter 7 induced by high glucose protects peritoneal mesothelial cells from undergoing apoptosis.",
+              "abstract": "Zinc is an essential micronutrient and cytoprotectant involved in many types of apoptosis. The zinc transporter family SLC30A (ZnTs) is an important factor in the regulation of zinc homeostasis; however, its function in apoptosis in peritoneal mesothelial cells (PMCs) remains unknown. This study explores the regulation of zinc transporters and how they play a role in cell survival, particularly in rat peritoneal mesothelial cells (RPMCs), surrounding glucose concentrations, and the molecular mechanism involved. The messenger RNA (mRNA) transcripts were quantitatively measured by real-time polymerase chain reaction for all known nine zinc transport exporters (SLC30A1-8,10), as well as in primary RPMCs and the cells cultured under nonstimulated and HG-stimulated conditions. While many zinc transporters were constitutively expressed, ZnT5 mRNA and ZnT7 mRNA were strongly induced by HG. Overexpression of ZnT5 and ZnT7 respectively resulted in a decrease in the expression of caspace 3, caspace 8, BAX, and AIF and coincided with cell survival in the presence of HG. Inhibition of ZnT5 and ZnT7 expression using considerable siRNA-mediated knockdown of RPMCs was examined and, afterwards, the impact on cell apoptosis was investigated. Increased levels of apoptosis were observed after knockdown of ZnT5 and ZnT7. Furthermore, overexpression of ZnT5 and ZnT7 is accompanied by activation of PI3K/Akt pathway and inhibiting HG-induced apoptosis. This study suggests that the zinc transporting system in RPMCs is influenced by exposure to HG, particularly ZnT5 and ZnT7. This may account for the inhibition of HG-induced RPMC apoptosis and peritoneum injury, likely through targeting PI3K/Akt pathway-mediated cell survival.",
+              "doi": "10.1016/j.cellsig.2012.12.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "db61ce9a7235d868d31b9db2907752cb3e00671ef7f07f9992a4f1f454fb11fe"
+              }
+            },
+            {
+              "title": "Changes in Zn homeostasis during long term culture of primary endothelial cells and effects of Zn on endothelial cell senescence.",
+              "abstract": "Endothelial cell senescence and Zn nutritional status influence cardiovascular disease. The influence of Zn appears dichotomous, hence it is imperative to understand the relationship with cellular senescence to improve knowledge about the molecular and cellular basis of the disease. Here we aimed to determine: 1) the impact of chronic exposure to a moderately high dose of Zn on senescence of endothelial cells; 2) the changes in Zn homeostasis during the lifespan of primary cultured endothelial cells; and 3) the susceptibility of proliferating and senescent endothelial cells to cell death after short term exposure to increasing doses of Zn and of the Zn chelator TPEN. Chronic exposure to Zn accelerated senescence and untreated cells at later passages, where doubling time had increased, displayed relocation of labile Zn and altered expression of genes involved in the response to Zn toxicity, including SLC30A1, SLC39A6, SLC30A5, SLC30A10 and metallothioneins, indicating that senescent cells have altered zinc homeostasis. Most Zn-dependent genes that were expressed differently between early and late passages were correlated with changes in the expression of anti-apoptotic genes. Short-term treatment with a high dose of Zn leads to cell death, but only in the population of cells at both earlier and later passages that had already entered senescence. In contrast, Zn depletion led to death of cells at earlier but not later passages, which suggests that there are sub-populations of senescent cells that are resistant to Zn depletion. This resistant senescent cell population may accumulate under conditions of Zn deficiency and contribute to vascular pathology.",
+              "doi": "10.1016/j.exger.2017.09.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "976aafbc681f4938cbf50f90b17b4f0ffdc4fbd6e25361496e6e590fec73ac2e"
+              }
+            },
+            {
+              "title": "Zinc inhibits the reproductive toxicity of Zearalenone in immortalized murine ovarian granular KK-1 cells.",
+              "abstract": "Zearalenone (ZEA) mainly injures the reproductive system of mammals. In the present study, we aimed to explore the mechanism by which zinc inhibits ZEA-induced reproductive damage in KK-1 cells for the first time. The results shown that both zinc sulfate and zinc gluconate addition increased the intracellular zinc concentration and influenced the expression of zinc transporters (Slc30a1 and Slc39a1) in a time-dependent manner. Co-incubation of zinc with ZEA significantly reduced the ZEA-induced reactive oxygen species and malondialdehyde elevation by promoting the transcription of Mtf1 and Mt2. Meanwhile, two different zincs inhibited the ZEA-induced loss of mitochondrial membrane potential and elevation of late-stage apoptosis via activating the mitochondrial apoptotic pathway by recovering the mRNA and protein expression of pro-apoptotic genes (Bax, Casp3, Casp9). Zinc also recovered cells from S-phase cell cycle arrest. In addition, both of them promoted the ZEA-induced estrogen production but regulated the expression of steroidogenic enzymes (Star, Cyp11a1, Hsd3b1, Cyp17a1) in different way. All these results indicated that zinc could inhibit the reproductive toxicity of ZEA.",
+              "doi": "10.1038/srep14277",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7e0a9510ecbaa21c4c19811422592233cdd072c0877a44ee5388207834c03c6f"
+              }
+            },
+            {
+              "title": "Pathways and gene networks mediating the regulatory effects of cannabidiol, a nonpsychoactive cannabinoid, in autoimmune T cells.",
+              "abstract": "Our previous studies showed that the non-psychoactive cannabinoid, cannabidiol (CBD), ameliorates the clinical symptoms in mouse myelin oligodendrocyte glycoprotein (MOG)35-55-induced experimental autoimmune encephalomyelitis model of multiple sclerosis (MS) as well as decreases the memory MOG35-55-specific T cell (TMOG) proliferation and cytokine secretion including IL-17, a key autoimmune factor. The mechanisms of these activities are currently poorly understood. Herein, using microarray-based gene expression profiling, we describe gene networks and intracellular pathways involved in CBD-induced suppression of these activated memory TMOG cells. Encephalitogenic TMOG cells were stimulated with MOG35-55 in the presence of spleen-derived antigen presenting cells (APC) with or without CBD. mRNA of purified TMOG was then subjected to Illumina microarray analysis followed by ingenuity pathway analysis (IPA), weighted gene co-expression network analysis (WGCNA) and gene ontology (GO) elucidation of gene interactions. Results were validated using qPCR and ELISA assays. Gene profiling showed that the CBD treatment suppresses the transcription of a large number of proinflammatory genes in activated TMOG. These include cytokines (Xcl1, Il3, Il12a, Il1b), cytokine receptors (Cxcr1, Ifngr1), transcription factors (Ier3, Atf3, Nr4a3, Crem), and TNF superfamily signaling molecules (Tnfsf11, Tnfsf14, Tnfrsf9, Tnfrsf18). \"IL-17 differentiation\" and \"IL-6 and IL-10-signaling\" were identified among the top processes affected by CBD. CBD increases a number of IFN-dependent transcripts (Rgs16, Mx2, Rsad2, Irf4, Ifit2, Ephx1, Ets2) known to execute anti-proliferative activities in T cells. Interestingly, certain MOG35-55 up-regulated transcripts were maintained at high levels in the presence of CBD, including transcription factors (Egr2, Egr1, Tbx21), cytokines (Csf2, Tnf, Ifng), and chemokines (Ccl3, Ccl4, Cxcl10) suggesting that CBD may promote exhaustion of memory TMOG cells. In addition, CBD enhanced the transcription of T cell co-inhibitory molecules (Btla, Lag3, Trat1, and CD69) known to interfere with T/APC interactions. Furthermore, CBD enhanced the transcription of oxidative stress modulators with potent anti-inflammatory activity that are controlled by Nfe2l2/Nrf2 (Mt1, Mt2a, Slc30a1, Hmox1). Microarray-based gene expression profiling demonstrated that CBD exerts its immunoregulatory effects in activated memory TMOG cells via (a) suppressing proinflammatory Th17-related transcription, (b) by promoting T cell exhaustion/tolerance, (c) enhancing IFN-dependent anti-proliferative program, (d) hampering antigen presentation, and (d) inducing antioxidant milieu resolving inflammation. These findings put forward mechanism by which CBD exerts its anti-inflammatory effects as well as explain the beneficial role of CBD in pathological memory T cells and in autoimmune diseases.",
+              "doi": "10.1186/s12974-016-0603-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC30A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2e9005ef208187c71182e8a1b4872675f5fc839a75128098987e9992c74bae62"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC30A1 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC30A1 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC30A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC30A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC30A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC30A1": {
+          "status": "unavailable",
+          "gene": "SLC30A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC30A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC30A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A1"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A1": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC30A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC30A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC30A1"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC30A1": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC30A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC30A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC30A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T15:54:18Z"
+  }
+}

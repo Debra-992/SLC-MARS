@@ -1,0 +1,372 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00045",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A32 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC25A32"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00045",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A32"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "protein_function": "Facilitates flavin adenine dinucleotide (FAD) translocation across the mitochondrial inner membrane into the mitochondrial matrix where it acts as a redox cofactor.",
+              "aliases": "MFTC, Mitochondrial FAD Transporter",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A32",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The interaction of HT-2 toxin and Akt1 on gene expression regulation in Kashin-Beck disease pathogenesis.",
+              "abstract": "This study investigates the effects of T-2 toxin metabolite HT-2 alone or combined with Akt1 on chondrocyte gene expression to elucidate their roles in Kashin-Beck disease (KBD) pathogenesis. Lentiviral transfection was employed to silence Akt1 in C28/I2 human chondrocytes. High-throughput RNA sequencing and bioinformatics analysis methods were used to identify and compare differentially expressed genes (DEGs) and pathways in HT-2, siAkt1, HT-2-siAkt1 and Control (non-treatment) group. Co-expressed genes and co-expressed modules were investigated using WGCNA. Protein-protein interaction (PPI) networks were constructed using the STRING database, and hub genes were identified by the MCC algorithm. A total of 2086 DEGs were identified in the HT-2 vs Control comparison, with significant upregulation observed for CCND2, MMP9 and TIMP4. The adhesion and PI3K-Akt signaling pathways were upregulated, while ECM-receptor interactions was downregulated. In the siAkt1 vs Control comparison, 695 DEGs were detected. VAMP7 and CXCR4 were significantly upregulated, while PFKL and ALDOA were significantly downregulated. Fructose and mannose metabolism, amino acid biosynthesis, and glucose/energy metabolic pathways were significantly downregulated. There were 411 DEGs when HT-2-siAkt1 vs HT-2, and CCND2, MMP9, WTAPP1 and TIMP4 were significantly downregulated. Adhesion, NF-κB signaling pathway and PI3K-Akt signaling pathway were significantly downregulated. Under, WGCNA, in the module most associated with HT-2, FRMD3B, ALDH1A3, ANTXR2, SERINC2 and SRGN were identified as hub genes; in the module most associated with siAkt1, TNFRSF11B, CECR2, TMOD1, ZNF704 and RHOBTB1 were identified as hub genes; in the module most associated with HT-2-siAkt1, the hub genes were GNAL, SLC25A32, ACADSB, CABLES1 and GINS4. Akt1 primarily affects the expression of genes in chondrocytes under HT-2 exposure that involved in autophagy, cell proliferation and glycolysis and other cell functions, potentially contributing to the pathogenesis of KBD.",
+              "doi": "10.1016/j.toxicon.2025.108432",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75447c29f9e02e261bc0ddbb1036edfd15138c7c33a4d308efcee037f6939d0a"
+              }
+            },
+            {
+              "title": "Mitochondria-Associated Gene SLC25A32 as a Novel Prognostic and Immunotherapy Biomarker: From Pan-Cancer Multiomics Analysis to Breast Cancer Validation.",
+              "abstract": "Mutations in SLC25A32 in humans cause late-onset exercise intolerance, which is associated with various neurological and metabolic diseases. However, its specific mechanism of action in tumour development is poorly understood owing to the lack of multiomics integrated analysis of SLC25A32 in pan-cancer. We used various analytical tools to comprehensively investigate the transcription, protein level, and promoter methylation of SLC25A32. Furthermore, the GSCA and cBioPortal databases were used to evaluate the inheritance impact and epigenetic alterations of SLC25A32 in pan-cancer. SLC25A32 expression and the prognostic significance of copy number alterations in multiple cancers were compared using the UCSCXenaShiny and GEPIA2.0 platforms, and its specific function in breast cancer was experimentally verified. SLC25A32 is abnormally expressed at the transcriptional and protein levels in most cancer types, with aberrant DNA promoter methylation and significant gene amplification in most tumours. SLC25A32 is significantly associated with the survival prognosis of some cancers, immune infiltrating cells, tumour stemness, and immune-related markers. SLC25A32 knockdown decreased breast tumour cell proliferation, invasion, and metastasis. This study aimed to reveal SLC25A32 as a novel prognostic biomarker for pan-cancer prediction and immunotherapy efficacy and specifically describes its underlying mechanism of action in breast cancer. SLC25A32 is widely differentially expressed in pan-cancer with prognostic significance and is correlated with immune infiltration. Additionally, it can affect breast cancer occurrence and development.",
+              "doi": "10.1155/2024/1373659",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "909acfbafefc45ea92274378d43db4096e1abf14306579d4c63b0392a7ffaa17"
+              }
+            },
+            {
+              "title": "Mitochondrial and Cytosolic One-Carbon Metabolism Is a Targetable Metabolic Vulnerability in Cisplatin-Resistant Ovarian Cancer.",
+              "abstract": "One-carbon (C1) metabolism is compartmentalized between the cytosol and mitochondria with the mitochondrial C1 pathway as the major source of glycine and C1 units for cellular biosynthesis. Expression of mitochondrial C1 genes including SLC25A32, serine hydroxymethyl transferase (SHMT) 2, 5,10-methylene tetrahydrofolate dehydrogenase 2, and 5,10-methylene tetrahydrofolate dehydrogenase 1-like was significantly elevated in primary epithelial ovarian cancer (EOC) specimens compared with normal ovaries. 5-Substituted pyrrolo[3,2-d]pyrimidine antifolates (AGF347, AGF359, AGF362) inhibited proliferation of cisplatin-sensitive (A2780, CaOV3, IGROV1) and cisplatin-resistant (A2780-E80, SKOV3) EOC cells. In SKOV3 and A2780-E80 cells, colony formation was inhibited. AGF347 induced apoptosis in SKOV3 cells. In IGROV1 cells, AGF347 was transported by folate receptor (FR) α. AGF347 was also transported into IGROV1 and SKOV3 cells by the proton-coupled folate transporter (SLC46A1) and the reduced folate carrier (SLC19A1). AGF347 accumulated to high levels in the cytosol and mitochondria of SKOV3 cells. By targeted metabolomics with [2,3,3-2H]L-serine, AGF347, AGF359, and AGF362 inhibited SHMT2 in the mitochondria. In the cytosol, SHMT1 and de novo purine biosynthesis (i.e., glycinamide ribonucleotide formyltransferase, 5-aminoimidazole-4-carboxamide ribonucleotide formyltransferase) were targeted; AGF359 also inhibited thymidylate synthase. Antifolate treatments of SKOV3 cells depleted cellular glycine, mitochondrial NADH and glutathione, and showed synergistic in vitro inhibition toward SKOV3 and A2780-E80 cells when combined with cisplatin. In vivo studies with subcutaneous SKOV3 EOC xenografts in SCID mice confirmed significant antitumor efficacy of AGF347. Collectively, our studies demonstrate a unique metabolic vulnerability in EOC involving mitochondrial and cytosolic C1 metabolism, which offers a promising new platform for therapy.",
+              "doi": "10.1158/1535-7163.MCT-23-0550",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e46b62430bf160b603756ff4c44860708a744a74045df5b77f945d63fb70eb15"
+              }
+            },
+            {
+              "title": "SLC25A32 promotes malignant progression of glioblastoma by activating PI3K-AKT signaling pathway.",
+              "abstract": "Solute carrier family 25 member 32 (SLC25A32) is an important member of SLC25A family and plays a role in folate transport metabolism. However, the mechanism and function of SLC25A32 in the progression of human glioblastoma (GBM) remain unclear. In this study, folate related gene analysis was performed to explore gene expression profiles in low-grade glioma (LGG) and GBM. Western blotting, real-time quantitative PCR (qRT-PCR), and immunohistochemistry (IHC) were used to confirm the expression levels of SLC25A32 in GBM tissues and cell lines. CCK-8 assays, colony formation assays, and Edu assays were performed to assess the role of SLC25A32 on proliferation in GBM in vitro. A 3D sphere invasion assay and an ex vivo co-culture invasion model were performed to assess the effects of SLC25A32 on invasion in GBM. Elevated expression of SLC25A32 was observed in GBM, and high SLC25A32 expression was associated with a high glioma grade and poorer prognosis. Immunohistochemistry performed with anti-SLC25A32 on samples from an independent cohort of patients confirmed these results. Knockdown of SLC25A32 inhibited the proliferation and invasion of GBM cells, but overexpression of SLC25A32 significantly promoted cell growth and invasion. These effects were mainly due to the activation of the PI3K-AKT-mTOR signaling pathway. Our study demonstrated that SLC25A32 plays a significant role in promoting the malignant phenotype of GBM. Therefore, SLC25A32 can be used as an independent prognostic factor in patients with GBM, providing a new target for the comprehensive treatment of GBM.",
+              "doi": "10.1186/s12885-023-11097-6",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3b2e1ae473ec96d7b050dfe6afef27bcb18af280387f0a934f15ced02dac9953"
+              }
+            },
+            {
+              "title": "SLC25A32 sustains cancer cell proliferation by regulating flavin adenine nucleotide (FAD) metabolism.",
+              "abstract": "SLC25A32 is a member of the solute carrier 25 family of mitochondrial transporters. SLC25A32 transports tetrahydrofolate (THF) as well as FAD into mitochondria and regulates mitochondrial one-carbon metabolism and redox balance. While it is known that cancer cells require one-carbon and FAD-dependent mitochondrial metabolism to sustain cell proliferation, the role of SLC25A32 in cancer cell growth remains unexplored. Our results indicate that the  gene is highly amplified in different tumors and that amplification correlates with increased mRNA expression and reduced patients´ survival. siRNA-mediated knock-down and CRISPR-mediated knock-out of SLC25A32 in cancer cells of different origins, resulted in the identification of cell lines sensitive and resistant to SLC25A32 inhibition. Mechanistically, tracing of deuterated serine revealed that SLC25A32 knock-down does not affect the mitochondrial/cytosolic folate flux as measured by Liquid Chromatography coupled Mass Spectrometry (LC-MS). Instead, SLC25A32 inhibition results in a respiratory chain dysfunction at the FAD-dependent complex II enzyme, induction of Reactive Oxygen Species (ROS) and depletion of reduced glutathione (GSH), which impairs cancer cell proliferation. Moreover, buthionine sulfoximine (BSO) treatment further sensitizes cells to ROS-mediated inhibition of cell proliferation upon SLC25A32 knock-down. Treatment of cells with the FAD precursor riboflavin and with GSH rescues cancer cell proliferation upon SLC25A32 down-regulation. Our results indicate that the reduction of mitochondrial FAD concentrations by targeting SLC25A32 has potential clinical applications as a single agent or in combination with approved cancer drugs that lead to increased oxidative stress and reduced tumor growth.",
+              "doi": "10.18632/oncotarget.27486",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A32"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "779e4bb94167f92df4eb94d47696f1f0df88e5edfa417b09783bb866804f58ff"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A32 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A32 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A32']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A32",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A32",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A32",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A32": {
+          "status": "unavailable",
+          "gene": "SLC25A32",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A32": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A32",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A32']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A32"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A32 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A32']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A32在乳腺癌、胶质瘤和卵巢癌等实体瘤中表现为促进增殖/侵袭的代谢支持基因，敲低后细胞生长受损；其核心功能是线粒体FAD转运并支持氧化还原/一碳代谢，而NALM6这类快速增殖的B-ALL细胞同样高度依赖核苷酸合成、线粒体代谢和叶酸/一碳通路，因此跨癌种类推更可能为SLC25A32缺失或抑制导致ALL细胞生长受限。 | 目标癌种ALL缺乏直接图谱邻近、TIMER/KM/PPR计算证据，不能据此判阴性。文献显示SLC25A32在pan-cancer中异常表达，并在乳腺癌和GBM中敲低抑制增殖/侵袭；在卵巢癌中作为线粒体一碳代谢脆弱性相关基因被提及，支持其代谢必需性。ALL细胞系NALM6处于长期培养/CRISPR筛选条件下，若SLC25A32被敲除，理论上会削弱线粒体FAD供应及一碳/氧化还原代谢，从而抑制肿瘤生长。考虑到血液肿瘤与实体瘤组织环境差异及无直接ALL证据，置信度较低，但综合生物学推理最可能答案为true。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A32"
+        ],
+        "confidence": 0.48,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A32": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC25A32在乳腺癌、胶质瘤和卵巢癌等实体瘤中表现为促进增殖/侵袭的代谢支持基因，敲低后细胞生长受损；其核心功能是线粒体FAD转运并支持氧化还原/一碳代谢，而NALM6这类快速增殖的B-ALL细胞同样高度依赖核苷酸合成、线粒体代谢和叶酸/一碳通路，因此跨癌种类推更可能为SLC25A32缺失或抑制导致ALL细胞生长受限。 | 目标癌种ALL缺乏直接图谱邻近、TIMER/KM/PPR计算证据，不能据此判阴性。文献显示SLC25A32在pan-cancer中异常表达，并在乳腺癌和GBM中敲低抑制增殖/侵袭；在卵巢癌中作为线粒体一碳代谢脆弱性相关基因被提及，支持其代谢必需性。ALL细胞系NALM6处于长期培养/CRISPR筛选条件下，若SLC25A32被敲除，理论上会削弱线粒体FAD供应及一碳/氧化还原代谢，从而抑制肿瘤生长。考虑到血液肿瘤与实体瘤组织环境差异及无直接ALL证据，置信度较低，但综合生物学推理最可能答案为true。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A32']",
+        "status": "ok",
+        "summary": "SLC25A32编码线粒体叶酸转运体，参与线粒体一碳代谢和核苷酸/甲基化相关代谢支持。在NALM6等急性淋巴细胞白血病细胞中，快速增殖细胞通常依赖叶酸代谢维持生长；CRISPR敲除SLC25A32更可能削弱其代谢适应和增殖能力，从而表现为抑制ALL肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A32"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A32编码线粒体叶酸转运体，参与线粒体一碳代谢和核苷酸/甲基化相关代谢支持。在NALM6等急性淋巴细胞白血病细胞中，快速增殖细胞通常依赖叶酸代谢维持生长；CRISPR敲除SLC25A32更可能削弱其代谢适应和增殖能力，从而表现为抑制ALL肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:45:27Z"
+  }
+}

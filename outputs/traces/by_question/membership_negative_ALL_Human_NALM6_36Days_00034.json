@@ -1,0 +1,376 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00034",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A5 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC39A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00034",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC39A5"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC39A5",
+              "protein_function": "Uniporter that transports zinc(2+) into polarized cells of enterocytes, pancreatic acinar and endoderm cells across the basolateral membrane and participates, notably, in zinc excretion from the intestine by the uptake of zinc from the blood into the intestine.",
+              "aliases": "ZIP5, Solute Carrier Family 39 (Metal Ion Transporter), Member 5, Solute Carrier Family 39 (Zinc Transporter), Member 5, Zrt-And Irt-Like Protein 52, ZRT/IRT-Like Protein 5, Zinc Transporter ZIP5, Zinc Transporter 5, LZT-Hs7, MYP24, ZIP-5",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC39A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Exposure to Di-(2-Ethylhexyl) phthalate drives ovarian dysfunction by inducing granulosa cell pyroptosis via the SLC39A5/NF-κB/NLRP3 axis.",
+              "abstract": "Endocrine-disrupting chemicals (EDCs) have been reported to affect populations by disrupting the human endocrine system. Di-(2-ethylhexyl) phthalate (DEHP) is an EDC that is present in various consumer products. Exposure to DEHP could contribute to reproductive system dysfunction, with subsequent adverse female reproductive outcomes. Granulosa cells (GCs) play essential roles in ovarian function and fertility. To further reveal the underlying mechanism by which DEHP impairs female fertility and affects the normal function of GCs, in vivo and in vitro experiments were performed. Transcript sequencing was used to identify genes that were differentially expressed in GCs after DEHP treatment. SLC39A5 was shown to be overexpressed in the DEHP group compared to the normal control group. DEHP treatment and overexpression of SLC39A5 activated NF-κB-related factors, followed by an increase in the transcript expression level of NLRP3. NLRP3 inflammasomes play crucial roles in pyroptosis by acting as sensors. Pyroptosis is a type of inflammation-related cell death associated with various diseases, including ovarian cancer and polycystic ovary syndrome. Activation of NF-κB contributed to the upregulation of pyroptosis in GCs, while pyroptosis factors were downregulated after the inhibition of NF-κB with JSH-23. The same phenomenon was also observed in a mouse model in which DEHP-treated mice had higher expression levels of NF-κB and pyroptosis markers in GCs. Moreover, this phenomenon could be partially reversed by the NF-κB inhibitor JSH-23. DEHP treatment also disrupted the normal expression of ovarian function-related genes and inhibited the proliferation of GCs. Reproductive system impairment was observed in mice exposed to DEHP. DEHP-treated mice had a lower body weight, smaller reproductive organs, fewer healthy follicles, and diminished ovarian reserve. Thus, DEHP contributes to ovarian dysfunction by inducing pyroptosis via the SLC39A5/NF-κB/NLRP3 axis in GCs.",
+              "doi": "10.1016/j.ecoenv.2023.114625",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "263596038e318c59160e685b16e7fb5623208652f332df886b335e8d78e50c6c"
+              }
+            },
+            {
+              "title": "SLC39A5 promotes the malignant progression of gastric cancer by activating BATF phosphorylation.",
+              "abstract": "Despite advances in diagnostic and therapeutic methods for gastric cancer (GC), early detection continues to be a significant challenge, resulting in late-stage diagnoses and poor survival outcomes. Studies have shown that solute carrier family 39 member 5 (SLC39A5) is upregulated in GC and may serve as a potential prognostic biomarker. However, the exact role of SLC39A5 and its underlying mechanisms remains unclear. To evaluate cell proliferation, migration, and invasion, a variety of assays, including Cell Counting Kit-8, 5-ethynyl-2'-deoxyuridine incorporation, scratch, and Transwell assays, were conducted. The molecular interactions among genes were investigated through coimmunoprecipitation, chromatin immunoprecipitation, and dual luciferase reporter assays. An in vivo GC mouse model was established to substantiate our in vitro findings. Knockdown of SLC39A5 inhibited GC cell proliferation, migration, and invasion. Furthermore, SLC39A5 increased Moloney murine leukemia virus 1 (proto-oncogene serine/threonine-protein kinase 1 [PIM1]) kinase activity by enhancing zinc influx, which in turn triggered basic leucine zipper ATF-like transcription factor (BATF) phosphorylation and stabilized BATF protein. BATF overexpression reversed the inhibitory effect of SLC39A5 depletion on the behavior of GC cells and tumor growth. Moreover, we found that BATF, combined with the Jun proto-oncogene, AP-1 transcription factor subunit (JUN), led to the suppression of Huntingtin interacting protein 1-related (HIP1R) expression and the activation of the PI3K/protein kinase B (AKT) pathway. In conclusion, SLC39A5 promotes the progression of GC via the BATF-HIP1R axis, which suggests that SLC39A5 acts as a therapeutic or diagnostic target for GC.",
+              "doi": "10.1016/j.jbc.2025.110754",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "682d9aa7edb12ab1115b899dfab48fe0655970ba719cf949365c648bdf72622f"
+              }
+            },
+            {
+              "title": "SLC39A5 promotes lung adenocarcinoma cell proliferation by activating PI3K/AKT signaling.",
+              "abstract": "Lung cancer is the most common cancer and the primary cause of cancer-related deaths worldwide. Solute carrier family 39 member 5 (SLC39A5) regulates cellular zinc homeostasis and plays a vital role in several human cancers. However, the clinical significance and biological function of SLC39A5 in lung adenocarcinoma (LUAD) remain unclear. Hence, we sought to elucidate the role of SLC39A5 in LUAD pathophysiology in this study. The expression and clinical significance of SLC39A5 were evaluated using The Cancer Genome Atlas, the Gene Expression Omnibus, and tissue microarray data. We used the Cell Counting Kit-8, flow cytometry, western blotting, and quantitative reverse transcriptase-polymerase chain reaction analyses to determine the function of SLC39A5 in vitro. We also used a mouse xenograft model to evaluate the function of SLC39A5 in vivo. Our results indicate that SLC39A5 was upregulated in LUAD tissues compared with that in adjacent non-tumor lung tissues. SLC39A5 overexpression correlated with poor survival in patients with LUAD. SLC39A5 promoted LUAD cell proliferation by accelerating the G1-to-S phase transition and inhibiting apoptosis. SLC39A5 knockdown inhibited the tumorigenesis of LUAD cells in a nude mouse model of xenograft tumors. SLC39A5 promoted LUAD cell proliferation by activating the phosphatidylinositol 3-kinase (PI3K)/protein kinase B (AKT) signaling. SLC39A5 played an oncogenic role in LUAD by activating the PI3K/AKT signaling. Hence, SLC39A5 may serve as a novel prognostic biomarker and potential therapeutic target for LUAD.",
+              "doi": "10.1016/j.prp.2021.153541",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5c64856c077df3ce603acc25fe5fe879fa7f8f7178bb9838ce6000695328493e"
+              }
+            },
+            {
+              "title": "Slc39a5-mediated zinc homeostasis plays an essential role in venous angiogenesis in zebrafish.",
+              "abstract": "Angiogenesis is a precise process mediated by a variety of signals and the environmental niche. Although the essential trace element zinc and its homeostasis are essential for maintaining proper cellular functions, whether zinc plays a role in angiogenesis is currently unknown. Using zebrafish embryos as a model system, we found that zinc treatment significantly increased the expression of the  gene, which encodes the zinc transporter Slc39a5. Moreover, knocking down  expression using either a morpholino or CRISPR/Cas9-mediated gene editing led to cardiac ischaemia and an accumulation of red blood cells in the caudal vein plexus (CVP), as well as delayed venous sprouting and fewer vascular loops in the CVP region during early development. Further analysis revealed significantly reduced proliferation and delayed cell migration in the caudal vein of  morphants. At the mechanistic level, we found increased levels of systemic zinc in -deficient embryos, and chelating zinc restored CVP development. In addition, we found that zinc overload in wild-type embryos leads to impaired CVP formation. Taken together, these results indicate that Slc39a5 plays a critical role in endothelial sprouting and migration in venous angiogenesis by regulating zinc homeostasis.",
+              "doi": "10.1098/rsob.200281",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ef8ca2c613a5582747b746a67a0c7cde9f452f8d73b598a6a5e8bc45cf019cb0"
+              }
+            },
+            {
+              "title": "Knockdown of Zinc Transporter ZIP5 by RNA Interference Inhibits Esophageal Cancer Growth In Vivo.",
+              "abstract": "We recently found that SLC39A5 (ZIP5), a zinc transporter, is overexpressed in esophageal cancer. Downregulation of ZIP5 inhibited the proliferation, migration, and invasion of the esophageal cancer cell line KYSE170 in vitro. In this study, we found that downregulation of SLC39A5 (ZIP5) by interference resulted in a significant reduction in esophageal cancer tumor volume and weight in vivo. COX2 (cyclooxygenase 2) expression was decreased and E-cadherin expression was increased in the KYSE170K xenografts, which was caused by the downregulation of ZIP5. However, we did not find that the downregulation of ZIP5 caused a change in the relative expressions of cyclin D1, VEGF (vascular endothelial growth factor), MMP9 (matrix metalloprotein 9), and Bcl-2 (B-cell lymphoma/leukmia-2) mRNA or an alteration in the average level of zinc in the peripheral blood and xenografts in vivo. Collectively, these findings indicate that knocking down ZIP5 by small interfering RNA (siRNA) might be a novel treatment strategy for esophageal cancer with ZIP5 overexpression.",
+              "doi": "10.3727/096504016X14648701447896",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b9c05ac01129e7fa63b66872c8d33f8914ccf3cba211c3c39ac503d6f1ba4000"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC39A5 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A5 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC39A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC39A5",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC39A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC39A5",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC39A5": {
+          "status": "unavailable",
+          "gene": "SLC39A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC39A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC39A5",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC39A5"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A5": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.7；法官理由: No direct NALM6 MAGeCK evidence; SLC39A5 is tissue-restricted zinc transporter with redundant ZIP family, literature unrelated to ALL tumor growth. Two independent LLM votes agree false, outweighing weak E essentiality heuristic.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC39A5"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A5": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No CRISPR depletion or direction evidence in NALM6; SLC39A5 is tissue-restricted, redundant zinc transporter. E's weak essentiality call does not establish tumor-growth inhibition; two independent LLM votes favor false.。原证据通道判定: winner=None answer=True conf=0.56（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A5']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC39A5"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:29:39Z"
+  }
+}

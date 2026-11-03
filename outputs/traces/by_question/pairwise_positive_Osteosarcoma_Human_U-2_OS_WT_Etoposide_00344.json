@@ -1,0 +1,764 @@
+{
+  "qid": "pairwise_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00344",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC38A1 is more likely to promote Osteosarcoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Osteosarcoma",
+    "cell_line": "U-2 OS",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+  },
+  "ground_truth": {
+    "winner": "SLC25A26"
+  },
+  "effective_genes": [
+    "SLC25A26",
+    "SLC38A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00344",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A26",
+        "SLC38A1"
+      ],
+      "requested_context": {
+        "cancer": "Osteosarcoma",
+        "cell_line": "U-2 OS",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "protein_function": "Mitochondrial S-adenosyl-L-methionine/S-adenosyl-L-homocysteine antiporter. Mediates the exchange of cytosolic S-adenosyl-L-methionine for mitochondrial S-adenosylhomocysteine (SAH).",
+              "aliases": "SAMC, Solute Carrier Family 25 (S-Adenosylmethionine Carrier), Member 26",
+              "transport_type": "E / S-adenosyl-methionine, S-adenosyl-homocysteine"
+            },
+            {
+              "gene": "SLC38A1",
+              "protein_function": "Symporter that cotransports short-chain neutral amino acids and sodium ions from the extracellular to the intracellular side of the cell membrane. The transport is elctrogenic, pH dependent and driven by the Na(+) electrochemical gradient. Participates in the astroglia-derived glutamine transport into GABAergic interneurons for neurotransmitter GABA de novo synthesis. May also contributes to amino acid transport in placental trophoblasts. Also regulates synaptic plasticity.",
+              "aliases": "SNAT1, ATA1, NAT2, SAT1, Sodium-Coupled Neutral Amino Acid Transporter 1, Sodium-Coupled Neutral Amino Acid Symporter 1, N-System Amino Acid Transporter 2, System A Amino Acid Transporter 1, System N Amino Acid Transporter 1, Amino Acid Transporter A1, Solute Carrier Family 38, Member 1, Amino Acid Transporter System A1",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A26",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute myeloid leukemia (AML)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute myeloid leukemia (AML)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute myeloid leukemia (AML)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute myeloid leukemia (AML)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "acute myeloid leukemia (AML)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "prostate cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification of eight candidate target genes of the recurrent 3p12-p14 loss in cervical cancer by integrative genomic profiling.",
+              "abstract": "The pathogenetic role, including its target genes, of the recurrent 3p12-p14 loss in cervical cancer has remained unclear. To determine the onset of the event during carcinogenesis, we used microarray techniques and found that the loss was the most frequent 3p event, occurring in 61% of 92 invasive carcinomas, in only 2% of 43 high-grade intraepithelial lesions (CIN2/3), and in 33% of 6 CIN3 lesions adjacent to invasive carcinomas, suggesting a role in acquisition of invasiveness or early during the invasive phase. We performed an integrative DNA copy number and expression analysis of 77 invasive carcinomas, where all genes within the recurrent region were included. We selected eight genes, THOC7, PSMD6, SLC25A26, TMF1, RYBP, SHQ1, EBLN2, and GBE1, which were highly down-regulated in cases with loss, as confirmed at the protein level for RYBP and TMF1 by immunohistochemistry. The eight genes were subjected to network analysis based on the expression profiles, revealing interaction partners of proteins encoded by the genes that were coordinately regulated in tumours with loss. Several partners were shared among the eight genes, indicating crosstalk in their signalling. Gene ontology analysis showed enrichment of biological processes such as apoptosis, proliferation, and stress response in the network and suggested a relationship between down-regulation of the eight genes and activation of tumourigenic pathways. Survival analysis showed prognostic impact of the eight-gene signature that was confirmed in a validation cohort of 74 patients and was independent of clinical parameters. These results support the role of the eight candidate genes as targets of the 3p12-p14 loss in cervical cancer and suggest that the strong selection advantage of the loss during carcinogenesis might be caused by a synergetic effect of several tumourigenic processes controlled by these targets.",
+              "doi": "10.1002/path.4168",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A26"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96ed46ed838b01cc50f750524affadfcfece1eb8fdd9f3a4a20287626af93504"
+              }
+            },
+            {
+              "title": "Deletion of Amino Acid Transporter ASCT2 (SLC1A5) Reveals an Essential Role for Transporters SNAT1 (SLC38A1) and SNAT2 (SLC38A2) to Sustain Glutaminolysis in Cancer Cells.",
+              "abstract": "Many cancer cells depend on glutamine as they use the glutaminolysis pathway to generate building blocks and energy for anabolic purposes. As a result, glutamine transporters are essential for cancer growth and are potential targets for cancer chemotherapy with ASCT2 (SLC1A5) being investigated most intensively. Here we show that HeLa epithelial cervical cancer cells and 143B osteosarcoma cells express a set of glutamine transporters including SNAT1 (SLC38A1), SNAT2 (SLC38A2), SNAT4 (SLC38A4), LAT1 (SLC7A5), and ASCT2 (SLC1A5). Net glutamine uptake did not depend on ASCT2 but required expression of SNAT1 and SNAT2. Deletion of ASCT2 did not reduce cell growth but caused an amino acid starvation response and up-regulation of SNAT1 to replace ASCT2 functionally. Silencing of GCN2 in the ASCT2(-/-) background reduced cell growth, showing that a combined targeted approach would inhibit growth of glutamine-dependent cancer cells.",
+              "doi": "10.1074/jbc.M115.700534",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2e74143c2eef7fd18fd09d0ee0b98c73b1ee4e2a63cd6d744baa447e5ac2cee2"
+              }
+            },
+            {
+              "title": "{'i': ['ASCT2', 'SLC1A5'], '#text': 'Ablation of the  () gene encoding a neutral amino acid transporter reveals transporter plasticity and redundancy in cancer cells.'}",
+              "abstract": "The neutral amino acid transporter solute carrier family 1 member 5 (SLC1A5 or ASCT2) is overexpressed in many cancers. To identify its roles in tumors, we employed 143B osteosarcoma cells and HCC1806 triple-negative breast cancer cells with or without ASCT2 deletion. ASCT2ko 143B cells grew well in standard culture media, but ASCT2 was required for optimal growth at <0.5 mm glutamine, with tumor spheroid growth and monolayer migration of 143B ASCT2ko cells being strongly impaired at lower glutamine concentrations. However, the ASCT2 deletion did not affect matrix-dependent invasion. ASCT2ko 143B xenografts in nude mice exhibited a slower onset of growth and a higher number of small tumors than ASCT2wt 143B xenografts, but did not differ in average tumor size 25 days after xenotransplantation. ASCT2 deficiency was compensated by increased levels of sodium neutral amino acid transporter 1 (SNAT1 or SLC38A1) and SNAT2 (SLC38A2) in ASCT2ko 143B cells, mediated by a GCN2 EIF2α kinase (GCN2)-dependent pathway, but this compensation was not observed in ASCT2ko HCC1806 cells. Combined SNAT1 silencing and GCN2 inhibition significantly inhibited growth of ASCT2ko HCC1806 cells, but not of ASCT2ko 143B cells. Similarly, pharmacological inhibition of l-type amino acid transporter 1 (LAT1) and GCN2 significantly inhibited growth of ASCT2ko HCC1806 cells, but not of ASCT2ko 143B cells. We conclude that cancer cells with reduced transporter plasticity are more vulnerable to disruption of amino acid homeostasis than cells with a full capacity to up-regulate redundant transporters by an integrated stress response.",
+              "doi": "10.1074/jbc.RA118.006378",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1d5279178e071edf2abedadeba400384fecb8648aa3c44767b7cac32c93d78c8"
+              }
+            },
+            {
+              "title": "Increased SNAT1 is a marker of human osteosarcoma and potential therapeutic target.",
+              "abstract": "SLC38A1/SNAT1 has been found to play an essential role in human development, but its role in osteosarcoma (OS) has yet to be evaluated. The purpose of this study was to assess the expression of SLC38A1/SNAT1 in patients with OS, and further investigate the mechanisms by which it affects tumor growth and metastasis. Tissue microarray blocks and immunohistochemical studies were carried out to assess the expression of SNAT1 in 165 OS specimens. Its correlation with clinicopathological characteristics was then analyzed. The function of SNAT1 in OS cells was investigated by silencing SNAT1 using SNAT1-shRNA  and . SNAT1 was highly expressed in 85% OS and significantly closely associated with pulmonary metastasis. Patients with high SNAT1 expression survived for shorter periods than those with low SNAT1 expression. Suppression of endogenous SNAT1 led to inhibition of cell proliferation, cell colony formation, and cell migration , and retarded tumor growth in xenograft models. Silencing SNAT1 reduced expression of MMP9, vimentin, fibronectin, p-Akt, p-mTOR, and VEGF. Our results indicated that increased expression of SNAT1 is a common event in OS. SNAT1 played an essential role in the development and progression of osteosarcoma, which may serve as a prognostic and therapeutic marker of OS.",
+              "doi": "10.18632/oncotarget.20693",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4cd9d23d188b2ab51bc63618b2413db8303e409bf4d438076a2c8e4c4eee0880"
+              }
+            },
+            {
+              "title": "Establishment and verification of potential biomarkers for cholangiocarcinoma.",
+              "abstract": "Cholangiocarcinoma (CCA) is a malignancy arising from multiple locations along the biliary tree, which is still lacking effective diagnostic biomarkers. The present study aimed to provide a comprehensive differential gene expression profile for the disease. The differentially expressed genes (DEGs) for CCA were explored in-depth using a Gene Expression Omnibus (GEO) dataset, an internal cohort of clinical participants as well as  experiments with the HUCCT1 cell line. Based on the GEO dataset, potential biomarker genes were proposed and the enriched biological processes as well as signaling pathways were further investigated. A protein-protein interaction network of target genes was established. In the clinical specimens, the functions of the primary candidate, FBJ murine osteosarcoma viral oncogene homolog B (FOSB), were evaluated by reverse transcription-quantitative (RT-q)PCR and western blot analysis. A Cell Counting Kit-8 (CCK-8) assay was used for a functional study on FOSB. The results indicated that, compared with non-tumor bile duct tissues, primary CCA samples had 676 differentially expressed genes, including 277 downregulated and 399 upregulated ones. Among these, HBD, FOSB, HBB, ITIH2, FCGBP, MT1JP, PIJR, SLC38A1, COL10A1 and MMP19 were determined to be the most significant DEGs. At the same time, upregulated genes were enriched in 'vasculature development' and 'IL-17 signaling pathways'. Downregulated genes were enriched in 'extracellular matrix progress' and 'glucuronate signaling pathway'. The patients with CCA displayed decreased levels of hemoglobin. Compared with paracancerous tissues, CCA cancerous tissues exhibited increased RNA and protein expression levels of FOSB according to RT-qPCR and western blot analysis, respectively. Furthermore, FOSB expression influenced the proliferation/viability of the CCA cell line HUCCT1. In conclusion, the present study suggested that the FOSB gene may serve as a primary biomarker candidate for CCA, providing a valuable reference for its clinical implementation.",
+              "doi": "10.3892/etm.2022.11483",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8182e4a1b3e260c269f5f10ef7d0683e05c5e111e9c67ee4379a13038e68e201"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A26 cancer=Osteosarcoma bucket=pairwise Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A26 and SLC38A1 is more likely to promote Osteosarcoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A26', 'SLC38A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Osteosarcoma(OS)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A26",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC38A1",
+            "ppr_score": 0.00017129676869322873,
+            "degree_corrected_score": 0.00011752323188659092,
+            "graph_degree": 15,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A26",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A26",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A26": {
+          "status": "unavailable",
+          "gene": "SLC25A26",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A1": {
+          "status": "unavailable",
+          "gene": "SLC38A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A26": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A26",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A1",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC38A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC38A1(P(winner)=0.61) vs SLC25A26(P=0.45), 差=0.16；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC38A1",
+        "candidates": [
+          "SLC25A26",
+          "SLC38A1"
+        ],
+        "confidence": 0.613,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35,
+          "SLC38A1": 9.4
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC38A1(P(winner)=0.61) vs SLC25A26(P=0.45), 差=0.16；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC38A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC38A1/SNAT1 在 AML 等临近癌种中表现为促癌方向，并关联 oxidative stress、stemness、proliferation 和 OXPHOS；这些代谢/应激/存活通路与骨肉瘤在 etoposide 应激下维持增殖、氨基酸稳态和抗氧化生存的需求具有可迁移性。更重要的是，SNAT1 在骨肉瘤细胞和临床样本中已有直接促增殖、促转移和抑制后降低肿瘤生长的证据，且 OS 细胞可通过 SNAT1/SNAT2 补偿氨基酸转运，提示其在药物应激下可能支持耐药性存活。 | SLC38A1 是 Na+ 偶联中性氨基酸/谷氨酰胺相关转运体，参与氨基酸摄取、GCN2/ISR 应激响应、mTOR/Akt/VEGF 等存活信号；文献显示其在骨肉瘤中高表达、抑制后降低增殖/迁移/体内生长，并在 143B OS 细胞中作为谷氨酰胺/氨基酸转运冗余通路被上调。相比之下，SLC25A26 主要涉及线粒体 SAM/SAH 交换和甲基化稳态，虽有宫颈癌 3p 丢失候选证据，但缺乏骨肉瘤直接功能、药物应激或耐药相关证据，且 PPR/TIMER/KM 计算证据更弱。因此，在 Osteosarcoma + Etoposide 的 MAGeCK 语境下，SLC38A1 更可能被判定为促进肿瘤药物耐药的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC38A1",
+        "candidates": [
+          "SLC25A26",
+          "SLC38A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A26": 0.35,
+          "SLC38A1": 9.4
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC38A1/SNAT1 在 AML 等临近癌种中表现为促癌方向，并关联 oxidative stress、stemness、proliferation 和 OXPHOS；这些代谢/应激/存活通路与骨肉瘤在 etoposide 应激下维持增殖、氨基酸稳态和抗氧化生存的需求具有可迁移性。更重要的是，SNAT1 在骨肉瘤细胞和临床样本中已有直接促增殖、促转移和抑制后降低肿瘤生长的证据，且 OS 细胞可通过 SNAT1/SNAT2 补偿氨基酸转运，提示其在药物应激下可能支持耐药性存活。 | SLC38A1 是 Na+ 偶联中性氨基酸/谷氨酰胺相关转运体，参与氨基酸摄取、GCN2/ISR 应激响应、mTOR/Akt/VEGF 等存活信号；文献显示其在骨肉瘤中高表达、抑制后降低增殖/迁移/体内生长，并在 143B OS 细胞中作为谷氨酰胺/氨基酸转运冗余通路被上调。相比之下，SLC25A26 主要涉及线粒体 SAM/SAH 交换和甲基化稳态，虽有宫颈癌 3p 丢失候选证据，但缺乏骨肉瘤直接功能、药物应激或耐药相关证据，且 PPR/TIMER/KM 计算证据更弱。因此，在 Osteosarcoma + Etoposide 的 MAGeCK 语境下，SLC38A1 更可能被判定为促进肿瘤药物耐药的候选基因。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "acute myeloid leukemia (AML)",
+          "colorectal cancer(CRC)",
+          "hepatocellular carcinoma (HCC)",
+          "prostate cancer"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A26', 'SLC38A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A26",
+          "SLC38A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:34:17Z"
+  }
+}

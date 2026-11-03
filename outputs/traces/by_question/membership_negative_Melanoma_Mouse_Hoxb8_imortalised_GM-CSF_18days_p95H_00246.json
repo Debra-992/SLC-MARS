@@ -1,0 +1,747 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00246",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC2A1 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC2A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00246",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC2A1"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC2A1",
+              "protein_function": "Facilitative glucose transporter, responsible for constitutive or basal glucose uptake.",
+              "aliases": "GLUT1, GLUT, HTLVR, CSE",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC2A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC2 Facilitative  GLUT transporter family",
+              "target_properties": {
+                "name": "SLC2 Facilitative  GLUT transporter family"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Bone cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cervical cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cholangiocarcinoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Endometrial Cancer (EC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Esophageal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Esophageal squamous cell carcinoma (ESCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Glioblastoma multiforme",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "RASD2 promotes the development and metastasis of uveal melanoma via enhancing glycolysis.",
+              "abstract": "Uveal melanoma (UVM) is a primary intraocular tumor in adults with high mortality. Nearly half of primary UVM tumors metastasize to the liver and lung. RASD2 encodes a Ras-related GTP-binding protein and involves in psychiatric disorders. RASD2 has been shown to be expressed in multiple tissues including skin. However, the function of RASD2 in UVM is not fully studied. Here, we investigated the expression, functional role and expression regulation of RASD2 in UVM. RASD2 expression was significantly elevated in metastasis UVM, while high level of RASD2 indicated poor prognosis of patients with metastasis UVM. Silencing RASD2 dampened cell growth, migration and invasion of UVM cells. Additionally, xenograft tumor model suggested that RASD2 knockdown suppressed in vivo UVM xenograft tumor growth and lung metastasis. Bioinformatics analysis predicted that RASD2 regulated epithelial-mesenchymal transition and glycolysis in UVM, which was further confirmed both in vivo and in vitro. Moreover, RASD2 knockdown suppressed UVM cell metabolism, with decreased expression of glycolysis-related HK2, LDHA, GLUT1 and PKM2. In addition, we demonstrated that PKM2 knockdown antagonized the effect of RASD2 on cell growth, migration and invasion. In summary, our findings suggest that RASD2 may enhance the development and metastasis of UVM via enhancing glycolysis. Targeting RASD2 could be a novel therapeutic strategy for UVM treatment.",
+              "doi": "10.1016/j.bbrc.2022.04.060",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f4d9c8730a3000351c0a5690359d344919ce7024037930326fee72cde6e01226"
+              }
+            },
+            {
+              "title": "The combination of pro-oxidative acting vanicosides and GLUT1 inhibitor (WZB117) exerts a synergistic cytotoxic effect against melanoma cells.",
+              "abstract": "Vanicosides A and B isolated from Reynoutria sachalinensis rhizomes are disaccharide phenylpropanoid esters with proven antioxidant activity. Our earlier study showed the cytotoxic activity of vanicosides against melanoma cells, but the mechanism of cell death has not been elucidated. Based on the chemical structure of vanicosides, we proposed that they may induce cell death by generating reactive oxygen species (ROS) into melanoma cells. Moreover, the glucose molecule in their structure can affect the glucose transporters (GLUTs), upregulated in cancer cells. The A375 (melanotic) and C32 (amelanotic) melanoma cell lines were applied. Cell viability assay and ROS-Glo™ assay were performed before and after blocking of Glucose Transporter Type 1 (GLUT1) by WZB117. Fibroblasts and the SKOV-3 line were included in the study to test selectivity in the action of vanicosides and help to elucidate the mechanism of action. Upon incubation with vanicosides, high production of ROS occured, especially inside C32 cells, which was significantly reduced after GLUT-1 blocking. The A375 cells produced less ROS. Melanoma cells were simillary sensitive to the cytotoxic effects of vanicosides, which was clearly enhanced when vanicosides were used together with the WZB117 (GLUT1 inhibitor). The SKOV-3 line and the fibroblasts showed much less sensitivity to the cytotoxicity of vanicosides, also used together with WZB117. Moreover, no significant ROS formation was observed in these lines. The study proved that vanicosides generate ROS inside melanoma cells. These findings suggest that the combination of pro-oxidative acting vanicosides and GLUT1 inhibitors exerts a synergistic cytotoxic effect on melanoma cells.",
+              "doi": "10.1016/j.fitote.2023.105702",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "80c1ea8e2d0ccf90698e10c2bfa199b45dcaf824ef45e93be89a21a15557b843"
+              }
+            },
+            {
+              "title": "Wogonin inhibits the growth of HT144 melanoma via regulating hedgehog signaling-mediated inflammation and glycolysis.",
+              "abstract": "Hedgehog (Hh) signaling has been proved to be closely associated with the occurrence of melanoma. Wogonin is one of the active components of flavonoids that extracts from Scutellariae radix. Previous studies showed that wogonin could inhibit the invasion and migration of B16F10 cells, and suppress the synthesis of melanin in A375 melanoma cells. However, the regulatory effects of Hh signaling in wogonin against melanoma and its potential mechanisms remain largely unknown. The present study aimed to investigate the effect of wogonin on the growth of HT144 melanoma, and to elucidate the role of Hh signaling in wogonin-induced antitumor effects by focusing on inflammation and glycolysis regulation. Wogonin inhibited the proliferation, colony formation and tumor growth of HT144 melanoma cells. Wogonin showed strong anti-inflammatory effect in HT144 melanoma, as shown by the decreased levels of pro-inflammatory factors, the increased level of anti-inflammatory factor and the decreased expression of inflammatory cytokines. Wogonin decreased the glucose consumption and the production of lactic acid and ATP, and decreased the activities of hexokinase (HK), phosphofructokinase(PFK) and pyruvate kinase (PK), and further inhibited the expression of monocarboxylate transporter 1 (MCT-1), MCT-4 and glucosecotransporter-1 (GLUT1), showing potent anti-glycolysis effect against HT144 melanoma. Wogonin inhibited the patched and Smo expression while increased Hhip expression in HT144 cells, suggesting that wogonin blocked the Hh signaling in HT144 cells. The Hh signaling inhibitor cyclopamine, like wogonin, inhibited the colony formation of HT144 cells, however, the inhibitory effect of wogonin on colony formation of HT144 cells was abrogated by the Hh signaling agonist SAG. In addition, SAG abrogated the inhibitory effect of wogonin on the secretion of inflammatory factors and the expression of inflammatory cytokines. Furthermore, SAG abrogated the inhibitory effect of wogonin on several key molecules controlling glycolysis. Overall, these findings suggested that the anti-tumor effect of wogonin can be attributed to the inhibition of Hh signaling-mediated regulation of inflammation and glycolysis in HT144 melanoma.",
+              "doi": "10.1016/j.intimp.2021.108222",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d8d686acdf6c26813a137b5c6a6d614d4a67646b33cb58357b489e8d6734df27"
+              }
+            },
+            {
+              "title": "Jolkinolide B induces apoptosis and inhibits tumor growth in mouse melanoma B16F10 cells by altering glycolysis.",
+              "abstract": "Most cancer cells preferentially rely on glycolysis to produce the energy (adenosine triphosphate, ATP) for growth and proliferation. Emerging evidence demonstrates that the apoptosis in cancer cells could be closely associated with the inhibition of glycolysis. In this study, we have found that jolkinolide B (JB), a bioactive diterpenoid extracted from the root of Euphorbia fischeriana Steud, induced tumor cells apoptosis and decreased the production of ATP and lactic acid in mouse melanoma B16F10 cells. Furthermore, we found that JB downregulated the mRNA expression of glucose transporter genes (Glut1, Glut3 and Glut4) and glycolysis-related kinase genes (Hk2 and Ldha) in B16F10 cells. Moreover, treatment with JB upregulated the mRNA expression of pro-apoptosis genes (Bax), downregulated the mRNA expression of anti-apoptosis genes (Bcl-2, Caspase-3 and Caspase-9), decreased the potential of mitochondrial membrane and increased reactive oxygen species (ROS) levels in B16F10 cells. Finally, intragastric administration of JB suppressed tumor growth and induced tumor apoptosis in mouse xenograft model of murine melanoma B16F10 cells. Taken together, these results suggest that JB could induce apoptosis through the mitochondrial pathway and inhibit tumor growth. The inhibition of glycolysis could play a crucial role in the induction of apoptosis in JB-treated B16F10 cells.",
+              "doi": "10.1038/srep36114",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d22684d8ea6ce47635de9e45e220bbdbcae32ec560c39b0c7d131bca7a3d99cd"
+              }
+            },
+            {
+              "title": "Pharmacologic LDH inhibition redirects intratumoral glucose uptake and improves antitumor immunity in solid tumor models.",
+              "abstract": "Tumor reliance on glycolysis is a hallmark of cancer. Immunotherapy is more effective in controlling glycolysis-low tumors lacking lactate dehydrogenase (LDH) due to reduced tumor lactate efflux and enhanced glucose availability within the tumor microenvironment (TME). LDH inhibitors (LDHi) reduce glucose uptake and tumor growth in preclinical models, but their impact on tumor-infiltrating T cells is not fully elucidated. Tumor cells have higher basal LDH expression and glycolysis levels compared with infiltrating T cells, creating a therapeutic opportunity for tumor-specific targeting of glycolysis. We demonstrate that LDHi treatment (a) decreases tumor cell glucose uptake, expression of the glucose transporter GLUT1, and tumor cell proliferation while (b) increasing glucose uptake, GLUT1 expression, and proliferation of tumor-infiltrating T cells. Accordingly, increasing glucose availability in the microenvironment via LDH inhibition leads to improved tumor-killing T cell function and impaired Treg immunosuppressive activity in vitro. Moreover, combining LDH inhibition with immune checkpoint blockade therapy effectively controls murine melanoma and colon cancer progression by promoting effector T cell infiltration and activation while destabilizing Tregs. Our results establish LDH inhibition as an effective strategy for rebalancing glucose availability for T cells within the TME, which can enhance T cell function and antitumor immunity.",
+              "doi": "10.1172/JCI177606",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3f3f3309dab00d02ff248795d5a117286ba6339d520658c632ba790cca7e435c"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC2A1 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC2A1 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC2A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC2A1",
+            "ppr_score": 0.0008965139945875644,
+            "degree_corrected_score": 0.00020313249324161017,
+            "graph_degree": 66,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC2A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC2A1",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC2A1": {
+          "status": "unavailable",
+          "gene": "SLC2A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC2A1": {
+          "status": "unavailable",
+          "gene": "SLC2A1",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC2A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=10.10 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC2A1"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A1": 10.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 3}，最终智能体辩论后裁决：winner=None answer=True conf=0.74；法官理由: All channels vote True. KG links SLC2A1/GLUT1 to glycolysis and chemotherapy resistance promotion, so CRISPR loss would inhibit resistant survival in melanoma. Disease specificity is imperfect, but consensus and mechanistic support justify 。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC2A1在Bone cancer/Brain Tumor等邻近癌种中通过glycolysis、migration和chemotherapy resistance呈现疾病PROMOTION；Melanoma与这些癌种共享高度糖酵解依赖、Warburg代谢和葡萄糖转运体上调的生物学特征，因此可迁移推断SLC2A1在Melanoma中更可能促进而非抑制肿瘤耐药。 | SLC2A1编码GLUT1，是促葡萄糖摄取和糖酵解的转运体。给定文献显示在Melanoma相关模型中，GLUT1/糖酵解通路被上调并支持肿瘤生长、存活、代谢压力和药物敏感性；GLUT1抑制剂WZB117与pro-oxidative药物协同增强细胞毒性，说明SLC2A1本身是耐药/存活促进因素，而非耐药抑制因素。计算证据虽不可用，但跨癌种图谱与直接Melanoma文献一致指向SLC2A1 promote tumor drug resistance。因此对问题‘SLC2A1 inhibit Melanoma's Tumor Drug Resistence?’应判为false。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC2A1"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A1": 10.1
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC2A1在Bone cancer/Brain Tumor等邻近癌种中通过glycolysis、migration和chemotherapy resistance呈现疾病PROMOTION；Melanoma与这些癌种共享高度糖酵解依赖、Warburg代谢和葡萄糖转运体上调的生物学特征，因此可迁移推断SLC2A1在Melanoma中更可能促进而非抑制肿瘤耐药。 | SLC2A1编码GLUT1，是促葡萄糖摄取和糖酵解的转运体。给定文献显示在Melanoma相关模型中，GLUT1/糖酵解通路被上调并支持肿瘤生长、存活、代谢压力和药物敏感性；GLUT1抑制剂WZB117与pro-oxidative药物协同增强细胞毒性，说明SLC2A1本身是耐药/存活促进因素，而非耐药抑制因素。计算证据虽不可用，但跨癌种图谱与直接Melanoma文献一致指向SLC2A1 promote tumor drug resistance。因此对问题‘SLC2A1 inhibit Melanoma's Tumor Drug Resistence?’应判为false。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Bone cancer",
+          "Brain Tumor",
+          "Cervical cancer",
+          "Cholangiocarcinoma",
+          "Endometrial Cancer (EC)",
+          "Esophageal Cancer",
+          "Esophageal squamous cell carcinoma (ESCC)",
+          "Gastric cancer (GC)",
+          "Glioblastoma multiforme"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC2A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:37:18Z"
+  }
+}

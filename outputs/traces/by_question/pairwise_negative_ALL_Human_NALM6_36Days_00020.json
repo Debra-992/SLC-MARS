@@ -1,0 +1,546 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00020",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC5A3 and SLC38A9 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "winner": "SLC5A3"
+  },
+  "effective_genes": [
+    "SLC5A3",
+    "SLC38A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_36Days_00020",
+      "status": "ok",
+      "summary": "检索到 4 类证据、19 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC5A3",
+        "SLC38A9"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "protein_function": "Lysosomal amino acid transporter involved in the activation of mTORC1 in response to amino acid levels. Acts as an amino acid sensor.",
+              "aliases": "SNAT9, Sodium-Coupled Neutral Amino Acid Transporter 9",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC5A3",
+              "protein_function": "Electrogenic Na(+)-coupled sugar symporter that actively transports myo-inositol and its stereoisomer scyllo-inositol.",
+              "aliases": "SMIT1, SMIT",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC5 Sodium glucose  cotransporter family",
+              "target_properties": {
+                "name": "SLC5 Sodium glucose  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC5A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC5A3",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Melanoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "autophagy",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "skin cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC5A3",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "skin cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "mTORC1 Selective Nano-Inhibitor by Disrupting the Lysosomal Arginine-SLC38A9- mTORC1-CDKs Axis for Precision Bladder Cancer Therapy.",
+              "abstract": "The absence of precise targeting and defined mechanisms, akin to small molecules, remains a major barrier to the clinical translation of nanomedicines. Mammalian target of rapamycin complex 1 (mTORC1), a key regulator of cell proliferation and metabolism, is linked to abnormal activation in various diseases like cancers. While small-molecule inhibitors of mTORC1 are limited, they remain a focus. Here, a strategy is presented for mTORC1-specific nano-inhibitors targeting the lysosomal arginine (Arg)-SLC38A9-mTORC1 pathway. Using [2Fe-2S]CO as a universal paradigm, nanomedicines are developed (e.g., ZnPc-SFeCO) that degrade Arg in the lysosome, inhibiting SLC38A9 activation and blocking mTORC1 recruitment. ZnPc-SFeCO inhibits mTORC1 at ultra-low concentrations (1.07 ng mL), with three orders of magnitude greater specificity than the clinical small molecule rapamycin. SLC38A9 knockout abolishes nanomedicine efficacy. Differential responses to the inhibitors are also observed in normal and bladder cancer cells, linked to SLC38A9 expression levels, suggesting potential for precise treatment of non-muscle invasive bladder cancer (NMIBC). In vivo, ZnPc-SFeCO combined with photodynamic therapy outperformed MMC in preventing tumor recurrence and extending survival. This work establishes a promising approach for developing mTORC1-specific nano-inhibitors with well-defined targets and mechanisms, offering new insights into the development of precision nanomedicines for cancer therapy.",
+              "doi": "10.1002/adma.202504798",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d2ad9693492cd86c0f42f73e9d93016f4530c6588bf81001817f8304068f2f92"
+              }
+            },
+            {
+              "title": "Long non-coding RNA NORAD functions as a microRNA-204-5p sponge to repress the progression of Parkinson's disease in vitro by increasing the solute carrier family 5 member 3 expression.",
+              "abstract": "Parkinson's disease (PD) is one of the most common neurodegenerative disorders. Long non-coding RNAs have important regulatory values in various human diseases. Non-coding RNA Activated by DNA Damage (NORAD) was reported to regulate PD progression in vitro, but its functional mechanism is fully unknown. We used 1-methyl-4-phenylpyridinium (MPP ) to establish the cell-based PD model. NORAD, microRNA-204-5p (miR-204-5p), and solute carrier family 5 member 3 (SLC5A3) levels were quantified using the quantitative real-time polymerase chain reaction. Cell viability and apoptosis were determined by Cell Counting Kit-8 and flow cytometry, respectively. The protein levels were analyzed via western blot. Cytotoxicity was assessed by the released lactate dehydrogenase level in cell supernatant. Oxidative stress and inflammation were measured by the standard indicators. Dual-luciferase reporter and RNA immunoprecipitation assays were performed for intergenic combination. First, we found that NORAD was obviously reduced in MPP -treated neuroblastoma cells and lightened the MPP -induced cytotoxicity, oxidative stress, and inflammatory response. Then, NORAD was shown to be a miR-204-5p sponge and avoided the injury induced by MPP in neuroblastoma cells via targeting miR-204-5p. SLC5A3 was a miR-204-5p target and could be regulated by NORAD/miR-204-5p axis. SLC5A3 knockdown assuaged the anti-miR-204-5p-induced protection for neuroblastoma cells from MPP . Altogether, NORAD played a neuroprotective role against the progression of MPP -induced PD model in neuroblastoma cells relying on the miR-204-5p/SLC5A3 axis. This study afforded the clear elaboration on the PD pathomechanism concerning NORAD.",
+              "doi": "10.1002/iub.2344",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4702c583745d020418e38bcc4994b70de5205d425a4d0df8df2d5d77f8d8a7cc"
+              }
+            },
+            {
+              "title": "Deficiency in the α1 subunit of Na+/K+-ATPase enhances the anti-proliferative effect of high osmolality in nucleus pulposus intervertebral disc cells.",
+              "abstract": "Intervertebral disc cells are constantly exposed to a hyperosmotic environment. Among cellular responses towards this stress is the inhibition of proliferation through the activation of p38 MAPK and p53. In an effort to further elucidate the biochemical pathways triggered by hyperosmotic stress, we assessed the high osmolality-induced transcriptional changes of bovine nucleus pulposus cells using whole-genome arrays. A 5- and a 24-h hyperosmotic treatment led to the differential expression of >100 and >200 genes, respectively, including nine genes encoding transporters (SLC4A11, SLC5A3, ATP1A1, SLC38A2, KCNK17, KCTD20, KCTD11, SLC7A5, and CLCA2). Differences in the transcriptional profile of these selected genes, as indicated by the microarrays experiments, were validated by qRT-PCR in 2D and 3D cell cultures, under hyperosmolar salt and sorbitol conditions, revealing the presence of a common triggering signal for osmotic adaptation. The key signaling molecules p38 MAPK and p53 were demonstrated to differently participate in the regulation of the aforementioned transporters. Finally, siRNA-mediated knocking-down of each one of the three transporters with the highest and sustained over-expression (i.e., SLC4A11, SLC5A3, and ATP1A1) had a distinct outcome on the transcriptional profile of the other transporters, on p38 MAPK and p53 phosphorylation and consequently on cell cycle progression. The inhibition of ATP1A1 had the most prominent effect on the transcription of the rest of the transporters and was found to enhance the anti-proliferative effect of hyperosmotic conditions through an increased G2/M cell cycle block, ascribing to this pump a central role in the osmoregulatory response of nucleus pulposus cells.",
+              "doi": "10.1002/jcp.25040",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "305a6b8c646cdbe79b4b19d68652d42a8a114845e8e1e718e01976f51b0fba05"
+              }
+            },
+            {
+              "title": "Development and validation of a prognostic model for predicting survival and immunotherapy benefits in melanoma based on metabolism-relevant genes.",
+              "abstract": "Skin cutaneous melanoma (SKCM) is a fatal form of skin cancer. Metabolism-related genes (MRGs) comprise a group of genes that possess the ability to modulate and regulate metabolic pathways. In this study, the expression levels of MRGs were used to classify SKCM patients into three molecular subtypes. Then the differentially expressed genes (DEGs) among the three MRGs molecular clusters were applied into the LASSO and COX regression analysis to identify five signature genes. Furthermore, we developed a prognostic model to predict the prognosis of SKCM patients and evaluate the response of SKCM patients to immunotherapy based on the expression of signature genes. Pathological features were extracted using the ResNet50 deep learning framework and Cellprofiler software, and feature selection was performed using elastic regression and univariate Cox analysis to obtain 13 pathological features related to the MRGs prognostic model. Single-cell RNA sequencing (scRNA-seq) analysis identified the expression of MRGs in multiple cell types and found that SLC5A3 + malignant cells may mediate potential communication with tumor-associated fibroblasts through the PI3K-AKT pathway and cholesterol metabolism pathway. It is worth noting that, through in vitro experiments, including western blot (WB), quantitative PCR (qPCR), and immunohistochemistry (IHC) techniques, we found differences in the expression levels of signature genes between normal melanocytes and SKCM cells. In addition, suppressing the expression of the signature gene, SLC5A3, in a SKCM cell line through the utilization of small interfering RNAs (siRNAs) could inhibit the proliferation and migration of cells, as evidenced by the implementation of colony formation assay, CCK8, and cell transfection techniques.",
+              "doi": "10.1007/s12672-025-03186-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC5A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2a7fa41bcc29bacd963c4257ad1731421e2733da48831da714c4441972c2587f"
+              }
+            },
+            {
+              "title": "The SLC38A9-mTOR axis is involved in autophagy in the juvenile yellow catfish (Pelteobagrus fulvidraco) under ammonia stress.",
+              "abstract": "The primary objective of this study was to examine the effect of acute ammonia stress on hepatic physiological alterations in yellow catfish by performing a comprehensive analysis of the metabolome and transcriptome. The present study showed that ammonia stress led to liver metabolic disruption, functional incapacitation, and oxidative damage. Transcriptomic and metabolomic analyses revealed transcriptional and metabolic differences in the liver of yellow catfish under control and high ammonia stress conditions. After 96 h of acute exposure to ammonia, the mRNA levels of 596 liver genes were upregulated, whereas those of 603 genes were downregulated. Enrichment analysis of the differentially expressed genes identified multiple signalling pathways associated with autophagy, including the endocytosis, autophagy-animal, and mammalian target of rapamycin signalling pathways. A total of 186 upregulated and 117 downregulated metabolites, primarily associated with amino acid biosynthesis pathways, were identified. Multi-omics integration revealed the solute carrier family 38 member 9 (SLC38A9)-mammalian target of rapamycin axis as a signalling nexus for amino acid-mediated modulation of autophagy flux, and q-PCR was used to assess the expression of autophagy-related genes (LC3a and sqstm1), revealing an initial inhibition followed by the restoration of autophagic flux during ammonia stress. Subsequent utilisation of arginine as a specific SLC38A9 activator during ammonia stress demonstrated that augmented SLC38A9 expression hindered autophagy, exacerbated ammonia toxicity, and caused a physiological decline (total cholesterol, total triglyceride, acid phosphatase, alkaline phosphatase, aspartate aminotransferase, and alanine aminotransferase levels were significantly increased), oxidative stress, and apoptosis. Autophagy activation may be an adaptive mechanism to resist ammonia stress.",
+              "doi": "10.1016/j.envpol.2023.123211",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c438b9a58bde3c5dc76ca0c3fac175c4ee12158b25c7c8854e716debbeebec58"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC5A3 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC5A3 and SLC38A9 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC5A3', 'SLC38A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC5A3",
+            "ppr_score": 6.16833614377397e-05,
+            "degree_corrected_score": 8.076403458785877e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          },
+          {
+            "gene": "SLC38A9",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC5A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC5A3",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC5A3": {
+          "status": "unavailable",
+          "gene": "SLC5A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A9": {
+          "status": "unavailable",
+          "gene": "SLC38A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC5A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC5A3",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC38A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC38A9",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC5A3', 'SLC38A9']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC5A3(P(winner)=0.52) vs SLC38A9(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC5A3",
+          "SLC38A9"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A3": 4.1,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC5A3': 1, 'W:SLC38A9': 2}，最终智能体辩论后裁决：winner=SLC38A9 answer=None conf=0.62；法官理由: Two independent LLM votes favor SLC38A9: lysosomal amino-acid/mTORC1 sensing plausibly supports B-ALL growth. SLC5A3 has only weak association-level proliferation signal and low-confidence graph proxy. No direct CRISPR readout, but consensu。原证据通道判定: winner=SLC5A3 answer=None conf=0.516（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC5A3', 'SLC38A9']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC5A3(P(winner)=0.52) vs SLC38A9(P=0.45), 差=0.06；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC5A3",
+          "SLC38A9"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC5A3": 4.1,
+          "SLC38A9": 0.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC5A3': 1, 'W:SLC38A9': 2}，最终智能体辩论后裁决：winner=SLC38A9 answer=None conf=0.63；法官理由: SLC38A9 mediates lysosomal arginine sensing and mTORC1 activation, a plausible NALM6/ALL growth dependency; SLC5A3 evidence is weak association-level (0.52 vs 0.45). Two independent LLM votes support SLC38A9.。原证据通道判定: winner=SLC5A3 answer=None conf=0.516（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC5A3', 'SLC38A9']",
+        "status": "ok",
+        "summary": "在 Human NALM6 B-ALL 细胞系的 CRISPR/MAGECK 条件下，SLC38A9 参与溶酶体氨基酸转运、精氨酸感知和 mTORC1 调控，敲除后更可能抑制细胞增殖与 ALL 肿瘤生长；SLC5A3 主要介导肌醇转运，在 ALL 生长依赖性中的证据相对较弱。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC38A9",
+        "candidates": [
+          "SLC5A3",
+          "SLC38A9"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "在 Human NALM6 B-ALL 细胞系的 CRISPR/MAGECK 条件下，SLC38A9 参与溶酶体氨基酸转运、精氨酸感知和 mTORC1 调控，敲除后更可能抑制细胞增殖与 ALL 肿瘤生长；SLC5A3 主要介导肌醇转运，在 ALL 生长依赖性中的证据相对较弱。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:28:12Z"
+  }
+}

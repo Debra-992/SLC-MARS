@@ -1,0 +1,344 @@
+{
+  "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00079",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC44A5 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC44A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00079",
+      "status": "ok",
+      "summary": "检索到 4 类证据、6 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC44A5"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC44A5",
+              "protein_function": "Choline/H+ antiporter.",
+              "aliases": "CTL5, Choline Transporter-Like Protein 5",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC44A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC44 Choline-like  transporter family",
+              "target_properties": {
+                "name": "SLC44 Choline-like  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The molecular effects of a polymorphism in the 5'UTR of solute carrier family 44, member 5 that is associated with birth weight in Holsteins.",
+              "abstract": "Dystocia is a major problem for the dairy cattle industry, and the observed high rates of this condition stem from genetic selection to increase subsequent milk production of the calving female. Because smaller birth size does not adversely affect subsequent milk production, selecting for cows with a smaller birth size would reduce dystocia rates and be beneficial for both the cattle and the farmers. To identify genes that regulate birth weight, we conducted a genome-wide association study using 1151 microsatellite markers and identified a single nucleotide polymorphism (SNP) associated with birth weight: A-326G in the 5' untranslated region (UTR) of solute carrier family 44, member 5 (SLC44A5). Cows with higher birth weights carried the A polymorphism in the SLC44A5 5' UTR, and the presence of the A polymorphism correlated with a high rate of dystocia. Luciferase assays and quantitative polymerase chain reaction (QPCR) assays revealed that SLC44A5 transcripts with the A polymorphism are expressed at lower levels than those carrying the G polymorphism. SLC44A5 encodes a choline transporter-like protein, and choline is a component of the major phospholipids of cell membranes. Uptake studies in HeLa cells demonstrated that SLC44A5 knockdown reduces choline efflux, whereas SLC44A5 overexpression resulted in the opposite effect. Furthermore, cell viability assays indicated that SLC44A5 knockdown increased cell proliferation, whereas SLC44A5 overexpression repressed proliferation. Taken together, our results suggest that calves with reduced SLC44A5 expression are larger due to enhanced cell proliferation. This study provides novel insights into the molecular mechanisms that control birth weight in Holsteins and suggests that SLC44A5 may serve as a potential target for preventing dystocia.",
+              "doi": "10.1371/journal.pone.0041267",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "49dd224b9ab395ada4da0b197fdca35a842b6989b10ca862ea8c11d94b41ff44"
+              }
+            },
+            {
+              "title": "Knockdown by shRNA identifies SLC44A5 as a potential therapeutic target in hepatocellular carcinoma.",
+              "abstract": "Hepatocellular carcinoma (HCC) has been ranked the second leading cause of cancer‑associated mortality in China and the third leading cause of cancer‑associated mortality worldwide. A number of previous studies investigating SLC44A5 have revealed important biological insight and disease‑specific functions. Therefore, the present study investigated the expression of SLC44A5 in HCC tissues and cell lines, and assessed the effect of SLC44A5 on the viability, cell cycle, apoptosis and invasion of HCC cell lines. The mRNA expression of SLC44A5 in 35 HCC tissues was significantly higher compared with that in 35 normal tissues. The protein expression of SLC44A5 was notably high in MHCC‑97H and SMMC‑7721 cells compared with that in four other HCC cell lines. Knockdown of SLC44A5 using short hairpin RNA inhibited cell viability and arrested the cells in G1 of the cell cycle by reducing the expression of cell cycle markers, proliferating cell nuclear antigen and cyclin‑dependent kinase 2 in MHCC‑97H and SMMC‑7721 cells. Furthermore, SLC44A5 knockdown cells also exhibited cell apoptosis by reducing the expression levels of apoptosis markers, caspase‑3 and caspase‑9 in MHCC‑97H and SMMC‑7721 cells, and suppressed invasion. The present results suggested that SLC44A5 is involved in HCC carcinogenesis and progression in HCC, indicating that SLC44A5 may be a molecular target in cancer therapy.",
+              "doi": "10.3892/mmr.2016.5136",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5fe2d17c06c7df7eb2a09cfda901c463994a6b5acb07efaf5ab5dd3359a1fe15"
+              }
+            },
+            {
+              "title": "Deciphering Autoantigen Signatures in Chikungunya Virus Infection Using Machine Learning: A Data-Driven Approach to Understand Host Immunity.",
+              "abstract": "Chikungunya virus (CHIKV), a mosquito-borne alphavirus, causes acute febrile illness and often progresses to chronic arthritis-like symptoms for which the underlying molecular mechanisms remain elusive. This study identifies key biomarkers of CHIKV-host interactions, shedding light on potential mechanisms underlying virus-induced joint pathology. RNA sequencing data from peripheral blood samples of paediatric patients with natural Chikungunya infection (15-17 days post-symptom onset; GSE99992: Severe cases = 42, Non-Severe cases = 44) was analysed using binary classification models with StratifiedKFold validation, ensuring a robust and reliable approach to feature selection. A panel of 20 gene features selected by recursive feature elimination with cross-validation (RFECV) showed overlap with known autoantigens and were differentially expressed in CHIKV infection. Network analysis revealed interactions among host biomarkers-THG1L, SLC44A5, KCNN3-and viral components such as nsp4 (CHIKV RNA polymerase) and BCL2-like 11 (an apoptosis facilitator), highlighting a multifactorial virus-host interplay. Fibronectin 1 (FN1) emerged as a central hub gene, known for its role in osteoblast mineralization, skeletal development and its association with renal pathologies. These findings provide novel insights into CHIKV-induced immune dysregulation and offer a foundation for future experimental validation and therapeutic exploration.",
+              "doi": "10.1007/s00284-025-04489-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f867cbcb969af082f9830d1a074a74fcc652f2e6bddfaee8d6b1b3fc4b712291"
+              }
+            },
+            {
+              "title": "Involvement of dual-strand of the miR-144 duplex and their targets in the pathogenesis of lung squamous cell carcinoma.",
+              "abstract": "The prognosis of patients with advanced-stage lung squamous cell carcinoma (LUSQ) is poor, and effective treatment protocols are limited. Our continuous analyses of antitumor microRNAs (miRNAs) and their oncogenic targets have revealed novel oncogenic pathways in LUSQ. Analyses of our original miRNA expression signatures indicated that both strands of miR-144 (miR-144-5p, the passenger strand; miR-144-3p, the guide strand) showed decreased expression in cancer tissues. Additionally, low expression of miR-144-5p significantly predicted a poor prognosis in patients with LUSQ by The Cancer Genome Atlas database analyses (overall survival, P = 0.026; disease-free survival, P = 0.023). Functional assays revealed that ectopic expression of miR-144-5p and miR-144-3p significantly blocked the malignant abilities of LUSQ cells, eg, cancer cell proliferation, migration, and invasion. In LUSQ cells, 13 and 15 genes were identified as possible oncogenic targets that might be regulated by miR-144-5p and miR-144-3p, respectively. Among these targets, we identified 3 genes (SLC44A5, MARCKS, and NCS1) that might be regulated by both strands of miR-144. Interestingly, high expression of NCS1 predicted a significantly poorer prognosis in patients with LUSQ (overall survival, P = 0.013; disease-free survival, P = 0.048). By multivariate analysis, NCS1 expression was found to be an independent prognostic factor for patients with LUSQ patients. Overexpression of NCS1 was detected in LUSQ clinical specimens, and its aberrant expression enhanced malignant transformation of LUSQ cells. Our approach, involving identification of antitumor miRNAs and their targets, will contribute to improving our understanding of the molecular pathogenesis of LUSQ.",
+              "doi": "10.1111/cas.13853",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC44A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cdec049cd69ecbfe8cbf702840edd2ac1a88458ba1e7d7d7a06aca424317e944"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC44A5 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC44A5 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC44A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC44A5",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC44A5",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC44A5": {
+          "status": "unavailable",
+          "gene": "SLC44A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC44A5": {
+          "status": "unsupported_cancer",
+          "gene": "SLC44A5",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC44A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC44A5"
+        ],
+        "confidence": 0.7,
+        "abstained": false,
+        "gene_scores": {
+          "SLC44A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.7；法官理由: No CRISPR readout supports SLC44A5 loss reducing Daudi tumor survival; evidence only choline-transporter annotation and unrelated literature. Two independent LLM channels agree redundancy/nonessentiality, outweighing weak association-level 。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A5']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC44A5 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC44A5"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC44A5": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No direct MAGeCK depletion evidence for SLC44A5 in Daudi-Cas9; only family/transporter and unrelated cattle association. Two independent LLMs and evidence channel agree loss is unlikely to inhibit survival due to choline uptake redundancy. 。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC44A5']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC44A5"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T14:40:32Z"
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00039",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A51 and SLC39A6 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC25A51"
+  },
+  "effective_genes": [
+    "SLC25A51",
+    "SLC39A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00039",
+      "status": "ok",
+      "summary": "检索到 4 类证据、37 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A51",
+        "SLC39A6"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A51",
+              "protein_function": "Mediates the import of NAD(+) into mitochondria.",
+              "aliases": "MCART1",
+              "transport_type": "O"
+            },
+            {
+              "gene": "SLC39A6",
+              "protein_function": "Zinc-influx transporter which plays a role in zinc homeostasis and in the induction of epithelial-to-mesenchymal transition (EMT). When associated with SLC39A10, the heterodimer formed by SLC39A10 and SLC39A6 mediates cellular zinc uptake to trigger cells to undergo epithelial-to-mesenchymal transition (EMT).",
+              "aliases": "ZIP6, LIV-1, Solute Carrier Family 39 (Metal Ion Transporter), Member 6, Solute Carrier Family 39 (Zinc Transporter), Member 6, Estrogen-Regulated Protein LIV-12, Zrt-And Irt-Like Protein 6, ZRT/IRT-Like Protein 6, Zinc Transporter ZIP6, Zinc Transporter 6, ZIP-6, LIV1, LIV-1 Protein, Estrogen Regulated",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A51",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A51",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC39A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC39A6",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Thyroid Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Thyroid Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A51",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "lung cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC39A6",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "{'sup': '+', '#text': 'SLC25A51 decouples the mitochondrial NAD/NADH ratio to control proliferation of AML cells.'}",
+              "abstract": "SLC25A51 selectively imports oxidized NAD into the mitochondrial matrix and is required for sustaining cell respiration. We observed elevated expression of SLC25A51 that correlated with poorer outcomes in patients with acute myeloid leukemia (AML), and we sought to determine the role SLC25A51 may serve in this disease. We found that lowering SLC25A51 levels led to increased apoptosis and prolonged survival in orthotopic xenograft models. Metabolic flux analyses indicated that depletion of SLC25A51 shunted flux away from mitochondrial oxidative pathways, notably without increased glycolytic flux. Depletion of SLC25A51 combined with 5-azacytidine treatment limits expansion of AML cells in vivo. Together, the data indicate that AML cells upregulate SLC25A51 to decouple mitochondrial NAD/NADH for a proliferative advantage by supporting oxidative reactions from a variety of fuels. Thus, SLC25A51 represents a critical regulator that can be exploited by cancer cells and may be a vulnerability for refractory AML.",
+              "doi": "10.1016/j.cmet.2024.01.013",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c6204c6776ee02d08b8b6d7ac511bd590b517a29a5027671f28dc4ab5c1938f2"
+              }
+            },
+            {
+              "title": "Profiling and characterization of microRNAs responding to sodium butyrate treatment in A549 cells.",
+              "abstract": "Butyrate inhibits growth of lung cancer. However, the molecular mechanism is still unclear. Here we profiled miRNAs that responded to sodium butyrate(NaB) stimulation in A549 cells, a non-small cell lung cancer cell line, using microarray. We found 33 up-regulated microRNAs and 22 down-regulated microRNAs (log2 ≥1.5 folds, P-value <0.05). The expression of miR-3935, miR-574-3p, and miR-494-3p was confirmed by realtime qPCR. Then,we explored their potential targets of miR-3935 and miR-494-3p using long noncoding RNA(LncRNA) microarray. Using cell expressing negative microRNA as control, we found 103 up-regulated transcripts (including 69 mRNA and 34 LncRNA), and 36 down-regulated transcripts (including 34 mRNAs and 2 LncRNA), in miR-3935 over-expressing A549 cells; 128 up-regulated transcripts (121 mRNAs, 7 LncRNAs) and 180 down-regulated transcripts (169 mRNAs, 11 LncRNAs) in mir-494-3p, respectively (log2 Fold change ≥ 1 & P < 0.05). The expression of RNF115, NTRK3, SLC39A6, and USB1 was confirmed with qPCR. Immunoblotting was adopted to detect RNF115 expression in miR-3935 overexpressed A549 cells. Then, using a luciferase reporter assay system, we found that miR-3935 overexpression significantly decreased 3UTR of RNF115 mediated luciferase expression .In addition, we also observed that the proliferation and migration of A549 cells was obviously prevented by miR-3935 overexpression. Finally, we showed miR-3935 and miR-494-3p induced interferon stimulated gene 15(ISG15) expression through activating its promoter transcription. Together, we profiled microRNAs that responded to NaB treatment and characterized their biological functions in A549 cells. Those results provided new clue for the future treatment of non small cell lung cancer.",
+              "doi": "10.1002/jcb.26547",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "65e0aaa2a1331a1b7074031e10955e0a431e421a484d1776440580f54eb05a8e"
+              }
+            },
+            {
+              "title": "The LIV-1-GRPEL1 axis adjusts cell fate during anti-mitotic agent-damaged mitosis.",
+              "abstract": "Understanding how cells respond to mitotic poisons is of great biomedical and clinical significance. However, it remains unknown how cell-death or survival is determined during exposure to anti-mitotic drugs. The biological effects of SLC39A6 (LIV-1) and GrpE-like 1 (GRPEL1) on mitotic exit and apoptosis were evaluated both in vitro and in vivo using flow cytometry, western blotting, xenografts and time-lapse imaging. The interactions between proteins and the ubiquitination of GRPEL1 were assessed by GST pull down, immunoprecipitation and mass spectrometry analysis. The expression of LIV-1 in cancers was assessed by immunohistochemistry. Overexpression of LIV-1 led to direct apoptosis. Depleted for LIV-1 evade anti-mitotic agent-induced killing through a rapid exit from arrested mitosis. LIV-1 interacts with GRPEL1 and Stabilizes GRPEL1 Protein by Preventing Ubiquitylation of GRPEL1. LIV-1-GRPEL1 axis depletion works to reduce the mitotic arrest by inducing PP2A-B55α phosphates activity, while inhibit apoptosis by banding AIF and preventing the latter's release into the nucleus. Loss of function in this axis was frequent in multiple types of human epithelial cancer. These data demonstrate that LIV-1-GRPEL1 axis dually regulates mitotic exit as well as apoptosis by interacting with PP2A B55α and AIF. Its discovery constitutes a conceptual advance for the decisive mechanism of cell fate during damaged mitosis. FUND: National Clinical Research Center for Obstetric and Gynecologic Diseases, the National Natural Science Foundation of China.",
+              "doi": "10.1016/j.ebiom.2019.09.054",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4557690b0fa746f7ea3f95486aa4ddc3dca3a8ee38df3a4ac9a122caaf9e2930"
+              }
+            },
+            {
+              "title": "Changes in Zn homeostasis during long term culture of primary endothelial cells and effects of Zn on endothelial cell senescence.",
+              "abstract": "Endothelial cell senescence and Zn nutritional status influence cardiovascular disease. The influence of Zn appears dichotomous, hence it is imperative to understand the relationship with cellular senescence to improve knowledge about the molecular and cellular basis of the disease. Here we aimed to determine: 1) the impact of chronic exposure to a moderately high dose of Zn on senescence of endothelial cells; 2) the changes in Zn homeostasis during the lifespan of primary cultured endothelial cells; and 3) the susceptibility of proliferating and senescent endothelial cells to cell death after short term exposure to increasing doses of Zn and of the Zn chelator TPEN. Chronic exposure to Zn accelerated senescence and untreated cells at later passages, where doubling time had increased, displayed relocation of labile Zn and altered expression of genes involved in the response to Zn toxicity, including SLC30A1, SLC39A6, SLC30A5, SLC30A10 and metallothioneins, indicating that senescent cells have altered zinc homeostasis. Most Zn-dependent genes that were expressed differently between early and late passages were correlated with changes in the expression of anti-apoptotic genes. Short-term treatment with a high dose of Zn leads to cell death, but only in the population of cells at both earlier and later passages that had already entered senescence. In contrast, Zn depletion led to death of cells at earlier but not later passages, which suggests that there are sub-populations of senescent cells that are resistant to Zn depletion. This resistant senescent cell population may accumulate under conditions of Zn deficiency and contribute to vascular pathology.",
+              "doi": "10.1016/j.exger.2017.09.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "976aafbc681f4938cbf50f90b17b4f0ffdc4fbd6e25361496e6e590fec73ac2e"
+              }
+            },
+            {
+              "title": "Overexpression of SLC25A51 promotes hepatocellular carcinoma progression by driving aerobic glycolysis through activation of SIRT5.",
+              "abstract": "Solute carrier family 25 member 20 (SLC25A51) is a newly identified mammalian mitochondrial NAD transporter. However, the clinicopathological and biological significance of SLC25A51 in human cancers, including hepatocellular carcinoma (HCC), remains unclear. The aim of this study was to define the role of SLC25A51 in HCC progression. Here we demonstrate that SLC25A51 is significantly overexpressed in human HCC specimens and cell lines, caused by, at least in partial, the decrease of miR-212-3p. SLC25A51 overexpression is positively correlated with the clinicopathological characteristics of vascular invasion and tumor diameter, as well as poor survival in patients with HCC. Knockdown of SLC25A51 attenuated, while overexpression of SLC25A51 enhanced the growth and metastasis of HCC cells both in vitro and in vivo. Mechanistically, glucose metabolism reprogramming from oxidative phosphorylation to glycolysis by activation of mitochondrial sirtuin 5 (SIRT5) was found to contribute to the promotion of growth and metastasis by SLC25A51 in HCC cells. Together, these findings reveal important roles of SLC25A51 in HCC tumorigenesis and suggest SLC25A51 as a promising prognostic marker and therapeutic target for treating HCC.",
+              "doi": "10.1016/j.freeradbiomed.2022.02.014",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A51"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "876f034e82711e6f2a58143545116f714a4f6195b9ab6fdd663535838c6fc929"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A51 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A51 and SLC39A6 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A51', 'SLC39A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A51",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A51",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A51": {
+          "status": "unavailable",
+          "gene": "SLC25A51",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC39A6": {
+          "status": "unavailable",
+          "gene": "SLC39A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A51": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A51",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC39A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC39A6",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A51', 'SLC39A6']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC39A6(P(winner)=0.56) vs SLC25A51(P=0.51), 差=0.05；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A51",
+        "candidates": [
+          "SLC25A51",
+          "SLC39A6"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A51": 2.8,
+          "SLC39A6": 5.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC39A6': 1, 'W:SLC25A51': 2}，最终智能体辩论后裁决：winner=SLC25A51 answer=None conf=0.68；法官理由: SLC25A51 imports mitochondrial NAD+, a likely survival bottleneck in Daudi cells; knockout plausibly inhibits tumor survival. SLC39A6 is more redundant. E’s SLC39A6 edge is weak association-level proxy, while two independent LLM votes suppo。原证据通道判定: winner=SLC39A6 answer=None conf=0.556（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A51', 'SLC39A6']",
+        "status": "ok",
+        "summary": "[跨癌种类推] AML→B-ALL: both are hematopoietic malignancies with high proliferative demand and dependence on mitochondrial redox/oxidative metabolism. SLC25A51 supplies mitochondrial NAD+ and its depletion causes apoptosis/reduced leukemia expansion in AML; this metabolic vulnerability is more transferable to B-lymphoblastic leukemia than SLC39A6, whose evidence is mainly epithelial-cancer EMT/stemness/migration and anti-mitotic survival, which are less lineage-appropriate for B-ALL. | SLC25A51 has direct functional evidence in a blood cancer: lowering SLC25A51 increased apoptosis and prolonged survival in AML xenografts, indicating that CRISPR perturbation of SLC25A51 would likely inhibit B-lymphoblastic leukaemia tumor survival. SLC39A6 evidence is weaker for B-ALL: it promotes EMT/stemness/migration in thyroid/breast cancers, and LIV-1 depletion can help cells evade anti-mitotic killing rather than reduce survival. TIMER/KM/DE are unavailable or unsupported for the target cancer, so confidence is limited, but cross-cancer hematologic analogy favors SLC25A51.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A51",
+        "candidates": [
+          "SLC25A51",
+          "SLC39A6"
+        ],
+        "confidence": 0.67,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A51": 2.8,
+          "SLC39A6": 5.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] AML→B-ALL: both are hematopoietic malignancies with high proliferative demand and dependence on mitochondrial redox/oxidative metabolism. SLC25A51 supplies mitochondrial NAD+ and its depletion causes apoptosis/reduced leukemia expansion in AML; this metabolic vulnerability is more transferable to B-lymphoblastic leukemia than SLC39A6, whose evidence is mainly epithelial-cancer EMT/stemness/migration and anti-mitotic survival, which are less lineage-appropriate for B-ALL. | SLC25A51 has direct functional evidence in a blood cancer: lowering SLC25A51 increased apoptosis and prolonged survival in AML xenografts, indicating that CRISPR perturbation of SLC25A51 would likely inhibit B-lymphoblastic leukaemia tumor survival. SLC39A6 evidence is weaker for B-ALL: it promotes EMT/stemness/migration in thyroid/breast cancers, and LIV-1 depletion can help cells evade anti-mitotic killing rather than reduce survival. TIMER/KM/DE are unavailable or unsupported for the target cancer, so confidence is limited, but cross-cancer hematologic analogy favors SLC25A51. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Thyroid Cancer",
+          "breast cancer(BC)",
+          "colorectal cancer(CRC)",
+          "hepatocellular carcinoma (HCC)",
+          "lung cancer",
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A51', 'SLC39A6']",
+        "status": "ok",
+        "summary": "SLC25A51 encodes a mitochondrial NAD+ transporter critical for NAD homeostasis and energy metabolism. B-lymphoblastic leukemia cells such as Daudi are highly proliferative and metabolically vulnerable to NAD depletion, making SLC25A51 loss more likely to inhibit tumor survival than SLC39A6, a zinc transporter that is less central to lymphoblastic leukemia survival.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A51",
+        "candidates": [
+          "SLC25A51",
+          "SLC39A6"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A51 encodes a mitochondrial NAD+ transporter critical for NAD homeostasis and energy metabolism. B-lymphoblastic leukemia cells such as Daudi are highly proliferative and metabolically vulnerable to NAD depletion, making SLC25A51 loss more likely to inhibit tumor survival than SLC39A6, a zinc transporter that is less central to lymphoblastic leukemia survival.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T18:19:34Z"
+  }
+}

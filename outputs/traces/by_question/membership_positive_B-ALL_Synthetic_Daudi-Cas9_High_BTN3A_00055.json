@@ -1,0 +1,373 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC7A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC7A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055",
+      "status": "ok",
+      "summary": "检索到 4 类证据、8 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC7A3",
+              "protein_function": "Uniporter that mediates the uptake of cationic L-amino acids such as L-arginine, L-lysine and L-ornithine.",
+              "aliases": "CAT-3, ATRC3",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC7A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family",
+              "target_properties": {
+                "name": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family"
+              }
+            },
+            {
+              "gene": "SLC7A3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "CAT-3",
+              "target_properties": {
+                "name": "CAT-3"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Extracellular arginine is required but the arginine transporter CAT3 (Slc7a3) is dispensable for mouse normal and malignant hematopoiesis.",
+              "abstract": "Amino acid-mediated metabolism is one of the key catabolic and anabolic processes involved in diverse cellular functions. However, the role of the semi-essential amino acid arginine in normal and malignant hematopoietic cell development is poorly understood. Here we report that a continuous supply of exogenous arginine is required for the maintenance/function of normal hematopoietic stem cells (HSCs). Surprisingly, knockout of Slc7a3 (CAT3), a major L-arginine transporter, does not affect HSCs in steady-state or under stress. Although Slc7a3 is highly expressed in naïve and activated CD8 T cells, neither T cell development nor activation/proliferation is impacted by Slc7a3 depletion. Furthermore, the Slc7a3 deletion does not attenuate leukemia development driven by Pten loss or the oncogenic Ptpn11 mutation. Arginine uptake assays reveal that L-arginine uptake is not disrupted in Slc7a3 knockout cells. These data suggest that extracellular arginine is critically important for HSCs, but CAT3 is dispensable for normal hematopoiesis and leukemogenesis.",
+              "doi": "10.1038/s41598-022-24554-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9525f32537ca541a234467f3bed797c319c9c185a5594cdaf1626c26aeb26f5e"
+              }
+            },
+            {
+              "title": "Increased SLC7A3 Expression Inhibits Tumor Cell Proliferation and Predicts a Favorable Prognosis in Breast Cancer.",
+              "abstract": "Arginine plays significant and contrasting roles in breast cancer growth and survival. However, the factors governing arginine balance remain poorly characterized. We aimed to identify the molecule that governs arginine metabolism in breast cancer and to elucidate its significance. We analyzed the correlation between the expression of solute carrier family 7 member 3 (SLC7A3), the major arginine transporter, and breast cancer survival in various databases, including GEPIA, UALCAN, Metascape, String, Oncomine, KM-plotter, CBioPortal and PrognoScan databases. Additionally, we validated our findings through bioinformatic analyses and experimental investigations, including colony formation, wound healing, transwell, and mammosphere formation assays. Our analysis revealed a significant reduction in SLC7A3 expression in all breast cancer subtypes compared to adjacent breast tissues. Kaplan-Meier survival analyses demonstrated that high SLC7A3 expression was positively associated with decreased nodal metastasis (HR=0.70, 95% CI [0.55, 0.89]), ER positivity (HR=0.79, 95% CI [0.65, 0.95]), and HER2 negativity (HR=0.69, 95% CI [0.58, 0.82]), and increased recurrence-free survival. Moreover, low SLC7A3 expression predicted poor prognosis in breast cancer patients for overall survival. Additionally, the knockdown of SLC7A3 in MCF-7 and MDA-MB-231 cells resulted in increased cell proliferation and invasion . Our findings indicate a downregulation of SLC7A3 expression in breast cancer tissues compared to adjacent breast tissues. High SLC7A3 expression could serve as a prognostic indicator for favorable outcomes in breast cancer patients due to its inhibitory effects on breast cancer cell proliferation and invasion.",
+              "doi": "10.2174/0115748928279007231130070056",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "171b5781350627d43b3f182bf2d421016f3b4a30538a0fbc797e8b5ec2bed2f0"
+              }
+            },
+            {
+              "title": "Select nutrients in the uterine lumen of sheep and pigs affect conceptus development.",
+              "abstract": "Interferon tau (IFNT) is the pregnancy recognition signal from ruminant conceptuses. IFNT also acts with P4 to induce expression of genes for transport of nutrients, such as glucose (Gluc) and arginine (Arg) into the uterine lumen to activate mechanistic mammalian target of rapamycin (MTOR) cell signaling that stimulates proliferation, migration, gene transcription and mRNA translation by conceptus trophectoderm (Tr). In ewes, Arg and Gluc increase significantly in the uterine lumen between Days 10 and 15 of pregnancy due to increased expression of transporters for Gluc (SLC2A1 and SLC5A1) and Arg (SLC7A2B) by uterine epithelia. Arg and Gluc stimulate proliferation, migration and mRNA translation by Tr. Arg increases expression of GTP cyclohydrolase 1 (GCH1) and IFNT mRNAs while Arg and Gluc increase ornithine decarboxylase, nitric oxide synthase 2, and GCH1 mRNAs and proteins by Tr cells. GCH1 is required for synthesis of tetrahydrobiopterin, an essential cofactor for all NOS isoforms. Arg is metabolized to nitric oxide and polyamines that increase proliferation and migration of Tr cells. In pigs, Gluc, Arg, leucine (Leu) and glutamine (Gln) increase in the uterine lumen between Days 12 and 15 of pregnancy due to enhanced expression of transporters for Gluc and amino acids. Transporters for Gluc in porcine uterine LE (SLC2A1) and conceptus trophectoderm (SLC2A2) are abundant. Transporters for glutamate and neutral (SLC1A1, SLC1A4) and cationic (SLC7A1, SLC7A2, SLC7A7, SLC7A9) amino acids are expressed in uterine LE and SLC7A3 mRNA is expressed in conceptus Tr. Arg and Leu increase MTOR cell signaling and proliferation of pig Tr, as do Gluc and fructose. Azaserine, an inhibitor of hexosamine biosynthesis, inhibits effects of Gluc and fructose. Thus, select nutrients in the uterine lumen affect gene transcription and mRNA translation to affect conceptus development.",
+              "doi": "PMID:22738901",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5337d2756f7c1584c882bf9173e784da04c0041ceb7cd75423b40466a73e2598"
+              }
+            },
+            {
+              "title": "SIRPA enhances osteosarcoma metastasis by stabilizing SP1 and promoting SLC7A3-mediated arginine uptake.",
+              "abstract": "The function of signal regulatory protein alpha (SIRPA) has been well studied in macrophages and dendritic cells, but relatively less in tumors. Notably, SIRPA is upregulated in osteosarcoma tissues, particularly in metastatic tissues, and is associated with unfavorable clinical outcomes. Knockdown of SIRPA impaired OS cell migration by decreasing specificity protein 1 (SP1) stability and arginine uptake. Importantly, SIRPA phosphorylated SP1 at threonine 278 (Thr278) through extracellular signal-regulated kinase (ERK) activation to protect SP1 from proteasomal degradation. In addition, SP1 increased solute carrier family 7 member 3 (SLC7A3) expression by binding to the SLC7A3 promoter and increased the capability of arginine uptake, thereby facilitating OS cell migration. More interestingly, arginine promoted the stability of SP1 in an ERK-independent manner and thus formed the \"SP1 stabilization circle\". Combined treatment with the anti-SIRPA antibody and arginase, which blocked the circle, impaired tumor metastasis in mice bearing xenografts formed from SIRPA-overexpressing cells. In summary, our study demonstrates that the upregulation of SIRPA promotes OS metastasis via the \"SP1 stabilization circle\" and SLC7A3-mediated arginine uptake, which might serve as a target for OS treatment.",
+              "doi": "10.1016/j.canlet.2023.216412",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9d484c2003ffb06c5fc929c156a81beeb2fce2847dac4bc8386d2efa67c0a8f3"
+              }
+            },
+            {
+              "title": "p53 Promotes Cancer Cell Adaptation to Glutamine Deprivation by Upregulating Slc7a3 to Increase Arginine Uptake.",
+              "abstract": "Cancer cells heavily depend on the amino acid glutamine to meet the demands associated with growth and proliferation. Due to the rapid consumption of glutamine, cancer cells frequently undergo glutamine starvation in vivo. We and others have shown that p53 is a critical regulator in metabolic stress resistance. To better understand the molecular mechanisms by which p53 activation promotes cancer cell adaptation to glutamine deprivation, we identified p53-dependent genes that are induced upon glutamine deprivation by using RNA-seq analysis. We show that Slc7a3, an arginine transporter, is significantly induced by p53. We also show that increased intracellular arginine levels following glutamine deprivation are dependent on p53. The influx of arginine has minimal effects on known metabolic pathways upon glutamine deprivation. Instead, we found arginine serves as an effector for mTORC1 activation to promote cell growth in response to glutamine starvation. Therefore, we identify a p53-inducible gene that contributes to the metabolic stress response.",
+              "doi": "10.1016/j.celrep.2019.02.037",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2ae87fd64ecf153637e01212ce1b3dfe63ab94ea204d22b1aa82ec0a1f96eb72"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A3 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC7A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC7A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC7A3",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A3.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC7A3",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A3": {
+          "status": "ok",
+          "gene": "SLC7A3",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC7A3.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC7A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.25 -> P(必需)=0.516 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A3"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A3": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: Literature says Slc7a3/CAT3 is dispensable for malignant hematopoiesis and leukemia development; E's generic essentiality is weak and directionless. Two independent LLM votes and redundancy support no SLC7A3 depletion/survival promotion.。原证据通道判定: winner=None answer=True conf=0.516（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC7A3/CAT-3 is an arginine transporter, but cross-cancer evidence points away from a pro-survival role in B-lymphoblastic leukaemia: hematopoietic/leukemogenesis studies show Slc7a3 knockout is dispensable for normal hematopoiesis and leukemia development, and breast-cancer perturbation data show SLC7A3 loss increases proliferation/invasion rather than supporting survival. Although osteosarcoma data suggest SLC7A3-mediated arginine uptake can support migration/metastasis, that is a tissue-specific, context-dependent phenotype and does not transfer strongly to B-ALL tumor survival, especially when other cationic amino-acid transporters can compensate. | For B-lymphoblastic leukaemia, the most relevant analogy is malignant hematopoiesis, where SLC7A3 deletion does not impair leukemogenesis and arginine uptake remains intact, implying functional redundancy. Therefore SLC7A3 is unlikely to be a positive CRISPR survival/fitness gene under the described B-ALL conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A3": 0.25
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC7A3/CAT-3 is an arginine transporter, but cross-cancer evidence points away from a pro-survival role in B-lymphoblastic leukaemia: hematopoietic/leukemogenesis studies show Slc7a3 knockout is dispensable for normal hematopoiesis and leukemia development, and breast-cancer perturbation data show SLC7A3 loss increases proliferation/invasion rather than supporting survival. Although osteosarcoma data suggest SLC7A3-mediated arginine uptake can support migration/metastasis, that is a tissue-specific, context-dependent phenotype and does not transfer strongly to B-ALL tumor survival, especially when other cationic amino-acid transporters can compensate. | For B-lymphoblastic leukaemia, the most relevant analogy is malignant hematopoiesis, where SLC7A3 deletion does not impair leukemogenesis and arginine uptake remains intact, implying functional redundancy. Therefore SLC7A3 is unlikely to be a positive CRISPR survival/fitness gene under the described B-ALL conditions. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC7A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:20:32Z"
+  }
+}

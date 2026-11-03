@@ -1,0 +1,3119 @@
+{
+  "qid": "membership_positive_STAD_Human_OE19_Lapatinib_00284",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of Stomach Cancer, using Human as the model organism, OE19 from Cell line as the sample, with Crispr vs Crispr Lapatinib as the treatment condition, and MAGECK as the method.\nIs SLC35G3 promote Stomach Cancer's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Stomach Cancer",
+    "cell_line": "OE19",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr vs Crispr Lapatinib"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC35G3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_STAD_Human_OE19_Lapatinib_00284",
+      "status": "ok",
+      "summary": "检索到 3 类证据、2 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35G3"
+      ],
+      "requested_context": {
+        "cancer": "Stomach Cancer",
+        "cell_line": "OE19",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr vs Crispr Lapatinib"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35G3",
+              "protein_function": "Belongs to the SLC35G solute transporter family.",
+              "aliases": "TMEM21A, AMAC1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35G3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35G3 cancer=Stomach Cancer bucket=membership Under the experimental conditions of Stomach Cancer, using Human as the model organism, OE19 from Cell line as the sample, with Crispr vs Crispr Lapatinib as the treatment condition, and MAGECK as the method.\nIs SLC35G3 promote Stomach Cancer's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=unavailable, de=ok）；候选基因=['SLC35G3']；未路由/未知：[]。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Gastric cancer (GC)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC35G3",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35G3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC35G3",
+        "cancer_type": "Stomach Cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "ok",
+        "cancer_type": "Stomach Cancer",
+        "tcga_code": "STAD",
+        "gene_family": "SLC",
+        "analysis_method": "DESeq2",
+        "contrast": "tumor/normal",
+        "significant_count": 40,
+        "top_genes": [
+          {
+            "gene_symbol": "SLC6A4",
+            "gene": "SLC6A4",
+            "log2fc": -7.205840100389551,
+            "p_value": 9.618363197171405e-17,
+            "adj_p_value": 2.583107620232353e-12
+          },
+          {
+            "gene_symbol": "SLC2A5",
+            "gene": "SLC2A5",
+            "log2fc": -5.920584871974278,
+            "p_value": 1.750532657537822e-11,
+            "adj_p_value": 2.044013263079815e-08
+          },
+          {
+            "gene_symbol": "SLC15A1",
+            "gene": "SLC15A1",
+            "log2fc": -6.9781285065748415,
+            "p_value": 3.444615831621472e-11,
+            "adj_p_value": 3.442374697634483e-08
+          },
+          {
+            "gene_symbol": "SLC51A",
+            "gene": "SLC51A",
+            "log2fc": -5.101156050352581,
+            "p_value": 3.465654542686147e-11,
+            "adj_p_value": 3.442374697634483e-08
+          },
+          {
+            "gene_symbol": "SLC28A1",
+            "gene": "SLC28A1",
+            "log2fc": -7.982290517622861,
+            "p_value": 6.052834952014887e-11,
+            "adj_p_value": 5.243707595848768e-08
+          },
+          {
+            "gene_symbol": "SLC7A9",
+            "gene": "SLC7A9",
+            "log2fc": -7.240727058850152,
+            "p_value": 1.507506685342659e-10,
+            "adj_p_value": 1.2268363497443166e-07
+          },
+          {
+            "gene_symbol": "SLC2A2",
+            "gene": "SLC2A2",
+            "log2fc": -8.617535049934908,
+            "p_value": 1.4016600202994338e-09,
+            "adj_p_value": 8.009145001098211e-07
+          },
+          {
+            "gene_symbol": "SLC51B",
+            "gene": "SLC51B",
+            "log2fc": -5.2760083317830055,
+            "p_value": 1.6325550493871765e-09,
+            "adj_p_value": 9.134145501321252e-07
+          },
+          {
+            "gene_symbol": "SLC17A8",
+            "gene": "SLC17A8",
+            "log2fc": -5.9755375374582105,
+            "p_value": 5.5479568213124364e-09,
+            "adj_p_value": 2.70901687987576e-06
+          },
+          {
+            "gene_symbol": "SLC52A1",
+            "gene": "SLC52A1",
+            "log2fc": -5.592113081211785,
+            "p_value": 8.936841403934253e-09,
+            "adj_p_value": 4.000130212400972e-06
+          },
+          {
+            "gene_symbol": "SLC23A1",
+            "gene": "SLC23A1",
+            "log2fc": -5.214952793077953,
+            "p_value": 1.083154501918236e-08,
+            "adj_p_value": 4.725813973475092e-06
+          },
+          {
+            "gene_symbol": "SLC5A4",
+            "gene": "SLC5A4",
+            "log2fc": -5.019410704198299,
+            "p_value": 3.974251682853508e-08,
+            "adj_p_value": 1.3683654255732542e-05
+          },
+          {
+            "gene_symbol": "SLC5A1",
+            "gene": "SLC5A1",
+            "log2fc": -5.166349939912784,
+            "p_value": 1.50545175210998e-07,
+            "adj_p_value": 4.003011114323329e-05
+          },
+          {
+            "gene_symbol": "SLC5A9",
+            "gene": "SLC5A9",
+            "log2fc": -4.71713924675021,
+            "p_value": 2.008885649396352e-07,
+            "adj_p_value": 5.2293723997134667e-05
+          },
+          {
+            "gene_symbol": "SLC35G1",
+            "gene": "SLC35G1",
+            "log2fc": -3.5597845113023796,
+            "p_value": 7.841401121262049e-07,
+            "adj_p_value": 0.00014960375764554737
+          },
+          {
+            "gene_symbol": "SLC30A4",
+            "gene": "SLC30A4",
+            "log2fc": -1.6617931498263765,
+            "p_value": 9.875493728211057e-07,
+            "adj_p_value": 0.00018081701321006813
+          },
+          {
+            "gene_symbol": "SLC2A7",
+            "gene": "SLC2A7",
+            "log2fc": -7.815743823493522,
+            "p_value": 1.0560043931180758e-06,
+            "adj_p_value": 0.00019033593276227546
+          },
+          {
+            "gene_symbol": "SLC6A8",
+            "gene": "SLC6A8",
+            "log2fc": -2.2107146125098236,
+            "p_value": 1.7220068246392324e-06,
+            "adj_p_value": 0.00028028009262128016
+          },
+          {
+            "gene_symbol": "SLC22A4",
+            "gene": "SLC22A4",
+            "log2fc": -2.506835695528604,
+            "p_value": 2.6587101568503733e-06,
+            "adj_p_value": 0.0003797995743211363
+          },
+          {
+            "gene_symbol": "SLC5A12",
+            "gene": "SLC5A12",
+            "log2fc": -5.258353797409437,
+            "p_value": 2.701068745720345e-06,
+            "adj_p_value": 0.0003833806602155824
+          },
+          {
+            "gene_symbol": "SLC25A34",
+            "gene": "SLC25A34",
+            "log2fc": -4.051376804173775,
+            "p_value": 3.447450596576876e-06,
+            "adj_p_value": 0.0004652499156867768
+          },
+          {
+            "gene_symbol": "SLC30A10",
+            "gene": "SLC30A10",
+            "log2fc": -5.2184949700766285,
+            "p_value": 3.986172257433485e-06,
+            "adj_p_value": 0.0005326002096797695
+          },
+          {
+            "gene_symbol": "SLC5A11",
+            "gene": "SLC5A11",
+            "log2fc": -4.421840331294406,
+            "p_value": 9.379906668481239e-06,
+            "adj_p_value": 0.001062897778433469
+          },
+          {
+            "gene_symbol": "SLC14A2",
+            "gene": "SLC14A2",
+            "log2fc": -4.857611538332837,
+            "p_value": 1.1959506983011352e-05,
+            "adj_p_value": 0.0012950988690957777
+          },
+          {
+            "gene_symbol": "SLC46A1",
+            "gene": "SLC46A1",
+            "log2fc": -3.3339743807419526,
+            "p_value": 3.469654445111812e-05,
+            "adj_p_value": 0.0029675490375134657
+          },
+          {
+            "gene_symbol": "SLC27A4",
+            "gene": "SLC27A4",
+            "log2fc": -2.1985673232063716,
+            "p_value": 3.76081497828712e-05,
+            "adj_p_value": 0.003136659846486922
+          },
+          {
+            "gene_symbol": "SLC20A2",
+            "gene": "SLC20A2",
+            "log2fc": -0.877710619678108,
+            "p_value": 8.292074431731552e-05,
+            "adj_p_value": 0.005710050024066219
+          },
+          {
+            "gene_symbol": "SLC22A7",
+            "gene": "SLC22A7",
+            "log2fc": -3.2017993055488696,
+            "p_value": 0.00012942557877208287,
+            "adj_p_value": 0.007953897811219812
+          },
+          {
+            "gene_symbol": "SLC4A7",
+            "gene": "SLC4A7",
+            "log2fc": -1.5201153320303127,
+            "p_value": 0.00016625067094256174,
+            "adj_p_value": 0.009601780685663308
+          },
+          {
+            "gene_symbol": "SLC25A3",
+            "gene": "SLC25A3",
+            "log2fc": -0.7880174174257605,
+            "p_value": 0.0001720080308159293,
+            "adj_p_value": 0.009828612075728929
+          },
+          {
+            "gene_symbol": "SLC39A4",
+            "gene": "SLC39A4",
+            "log2fc": -3.1000053476370737,
+            "p_value": 0.00024291187559488664,
+            "adj_p_value": 0.012716649767984943
+          },
+          {
+            "gene_symbol": "SLC9A3R1",
+            "gene": "SLC9A3R1",
+            "log2fc": -2.416006043232616,
+            "p_value": 0.00031802075591205297,
+            "adj_p_value": 0.015333510629756004
+          },
+          {
+            "gene_symbol": "SLC22A18",
+            "gene": "SLC22A18",
+            "log2fc": -2.813268926703296,
+            "p_value": 0.0006850446658354498,
+            "adj_p_value": 0.025552166035662276
+          },
+          {
+            "gene_symbol": "SLC6A15",
+            "gene": "SLC6A15",
+            "log2fc": -4.260373433632452,
+            "p_value": 0.0007094296442283981,
+            "adj_p_value": 0.026135037757747406
+          },
+          {
+            "gene_symbol": "SLC22A18AS",
+            "gene": "SLC22A18AS",
+            "log2fc": -2.3603076388523876,
+            "p_value": 0.0010032677735635894,
+            "adj_p_value": 0.0335121384661987
+          },
+          {
+            "gene_symbol": "SLC23A3",
+            "gene": "SLC23A3",
+            "log2fc": -3.3417640132274182,
+            "p_value": 0.0010105273449732943,
+            "adj_p_value": 0.03371269860447551
+          },
+          {
+            "gene_symbol": "SLC6A6",
+            "gene": "SLC6A6",
+            "log2fc": 1.3030178320717647,
+            "p_value": 0.0010552834994284731,
+            "adj_p_value": 0.03473124223119004
+          },
+          {
+            "gene_symbol": "SLC26A2",
+            "gene": "SLC26A2",
+            "log2fc": -1.3807429064421037,
+            "p_value": 0.0011524325402076892,
+            "adj_p_value": 0.03684491464264012
+          },
+          {
+            "gene_symbol": "SLC25A1",
+            "gene": "SLC25A1",
+            "log2fc": -1.510679408026362,
+            "p_value": 0.001634678878835202,
+            "adj_p_value": 0.047067757633620866
+          },
+          {
+            "gene_symbol": "SLC25A23",
+            "gene": "SLC25A23",
+            "log2fc": -1.3748145589882432,
+            "p_value": 0.0016623362355014156,
+            "adj_p_value": 0.04764535959511848
+          },
+          {
+            "gene_symbol": "SLC25A5",
+            "gene": "SLC25A5",
+            "log2fc": -1.3668668094570877,
+            "p_value": 0.0018367934898937688,
+            "adj_p_value": 0.05111805799439073
+          },
+          {
+            "gene_symbol": "SLC10A2",
+            "gene": "SLC10A2",
+            "log2fc": -4.056732479968752,
+            "p_value": 0.0018388536010413555,
+            "adj_p_value": 0.05112241439913731
+          },
+          {
+            "gene_symbol": "SLC11A1",
+            "gene": "SLC11A1",
+            "log2fc": 1.4390470251529555,
+            "p_value": 0.0021655461505726238,
+            "adj_p_value": 0.05696346397018156
+          },
+          {
+            "gene_symbol": "SLC25A20",
+            "gene": "SLC25A20",
+            "log2fc": -1.7672212158339653,
+            "p_value": 0.002246774002456428,
+            "adj_p_value": 0.05875303077893848
+          },
+          {
+            "gene_symbol": "SLC25A45",
+            "gene": "SLC25A45",
+            "log2fc": -1.5406364127173793,
+            "p_value": 0.002282597281682695,
+            "adj_p_value": 0.059157072491730564
+          },
+          {
+            "gene_symbol": "SLC34A1",
+            "gene": "SLC34A1",
+            "log2fc": -3.40952122957041,
+            "p_value": 0.0027955600517546738,
+            "adj_p_value": 0.06641920071152592
+          },
+          {
+            "gene_symbol": "SLC29A4",
+            "gene": "SLC29A4",
+            "log2fc": -2.368990079731223,
+            "p_value": 0.003128260885246135,
+            "adj_p_value": 0.07082775597568651
+          },
+          {
+            "gene_symbol": "SLC39A5",
+            "gene": "SLC39A5",
+            "log2fc": -3.651021067785106,
+            "p_value": 0.0037992869950143875,
+            "adj_p_value": 0.0799010583696996
+          },
+          {
+            "gene_symbol": "SLC25A51",
+            "gene": "SLC25A51",
+            "log2fc": -0.9543305842339727,
+            "p_value": 0.004143114345413083,
+            "adj_p_value": 0.08410373479247585
+          },
+          {
+            "gene_symbol": "SLC43A1",
+            "gene": "SLC43A1",
+            "log2fc": 1.6344622087751914,
+            "p_value": 0.004214474040959396,
+            "adj_p_value": 0.08490916342386012
+          },
+          {
+            "gene_symbol": "SLC25A43",
+            "gene": "SLC25A43",
+            "log2fc": -1.2800179097863131,
+            "p_value": 0.004803664362411412,
+            "adj_p_value": 0.09201655500493643
+          },
+          {
+            "gene_symbol": "SLC7A7",
+            "gene": "SLC7A7",
+            "log2fc": -2.4086844441413575,
+            "p_value": 0.005042872459842712,
+            "adj_p_value": 0.0952717730708087
+          },
+          {
+            "gene_symbol": "SLC2A9",
+            "gene": "SLC2A9",
+            "log2fc": -1.3682047567895628,
+            "p_value": 0.005097150954679658,
+            "adj_p_value": 0.0957266335936202
+          },
+          {
+            "gene_symbol": "SLC2A9-AS1",
+            "gene": "SLC2A9-AS1",
+            "log2fc": -3.1235054479441855,
+            "p_value": 0.0052659996169370695,
+            "adj_p_value": 0.0977357883292757
+          },
+          {
+            "gene_symbol": "SLC6A13",
+            "gene": "SLC6A13",
+            "log2fc": -3.1429766575999762,
+            "p_value": 0.00603258284406349,
+            "adj_p_value": 0.10630645988200071
+          },
+          {
+            "gene_symbol": "SLC25A37",
+            "gene": "SLC25A37",
+            "log2fc": -1.4287174082995326,
+            "p_value": 0.0062234520651628985,
+            "adj_p_value": 0.10824937089508732
+          },
+          {
+            "gene_symbol": "SLC39A10",
+            "gene": "SLC39A10",
+            "log2fc": 1.386651540048257,
+            "p_value": 0.0067820217537185555,
+            "adj_p_value": 0.11405007903435536
+          },
+          {
+            "gene_symbol": "SLC37A4",
+            "gene": "SLC37A4",
+            "log2fc": -2.085556742983732,
+            "p_value": 0.00680662002481215,
+            "adj_p_value": 0.11424911711647194
+          },
+          {
+            "gene_symbol": "SLC26A3",
+            "gene": "SLC26A3",
+            "log2fc": -3.758327212903667,
+            "p_value": 0.007062518680108745,
+            "adj_p_value": 0.1163625777134972
+          },
+          {
+            "gene_symbol": "SLC22A5",
+            "gene": "SLC22A5",
+            "log2fc": -1.4534395101707984,
+            "p_value": 0.00708331232522234,
+            "adj_p_value": 0.11648857607090221
+          },
+          {
+            "gene_symbol": "SLC19A1",
+            "gene": "SLC19A1",
+            "log2fc": -1.9335739731241626,
+            "p_value": 0.007511711305193576,
+            "adj_p_value": 0.12015158952488308
+          },
+          {
+            "gene_symbol": "SLC16A13",
+            "gene": "SLC16A13",
+            "log2fc": -1.5792996028176236,
+            "p_value": 0.0076617980394157875,
+            "adj_p_value": 0.12161066675328037
+          },
+          {
+            "gene_symbol": "SLC36A1",
+            "gene": "SLC36A1",
+            "log2fc": -1.7722647963376066,
+            "p_value": 0.007759658393937842,
+            "adj_p_value": 0.12234609556048791
+          },
+          {
+            "gene_symbol": "SLC46A3",
+            "gene": "SLC46A3",
+            "log2fc": -1.7576685323254055,
+            "p_value": 0.008299858468976564,
+            "adj_p_value": 0.12664547996916342
+          },
+          {
+            "gene_symbol": "SLC6A12",
+            "gene": "SLC6A12",
+            "log2fc": -2.1632465594341577,
+            "p_value": 0.009325816898644625,
+            "adj_p_value": 0.1346527627043011
+          },
+          {
+            "gene_symbol": "SLC25A15",
+            "gene": "SLC25A15",
+            "log2fc": -1.6929101973193128,
+            "p_value": 0.009645032369595748,
+            "adj_p_value": 0.13697681422369737
+          },
+          {
+            "gene_symbol": "SLC1A2",
+            "gene": "SLC1A2",
+            "log2fc": 2.293235748669238,
+            "p_value": 0.009981948923479419,
+            "adj_p_value": 0.1392016315136344
+          },
+          {
+            "gene_symbol": "SLC26A7",
+            "gene": "SLC26A7",
+            "log2fc": 2.7253161271327366,
+            "p_value": 0.010229540665916177,
+            "adj_p_value": 0.1413919424209186
+          },
+          {
+            "gene_symbol": "SLC17A9",
+            "gene": "SLC17A9",
+            "log2fc": 1.5729671597854116,
+            "p_value": 0.01109926019829105,
+            "adj_p_value": 0.14778469602642758
+          },
+          {
+            "gene_symbol": "SLC26A5",
+            "gene": "SLC26A5",
+            "log2fc": 2.3163698553166077,
+            "p_value": 0.011343769412279004,
+            "adj_p_value": 0.14955732515275647
+          },
+          {
+            "gene_symbol": "SLC25A48",
+            "gene": "SLC25A48",
+            "log2fc": -1.680108174934269,
+            "p_value": 0.011759376672957978,
+            "adj_p_value": 0.15241786676108082
+          },
+          {
+            "gene_symbol": "SLC13A3",
+            "gene": "SLC13A3",
+            "log2fc": 1.8811075356169662,
+            "p_value": 0.012179480395575275,
+            "adj_p_value": 0.15524068604820576
+          },
+          {
+            "gene_symbol": "SLC1A1",
+            "gene": "SLC1A1",
+            "log2fc": -2.244642086600489,
+            "p_value": 0.0123617843182298,
+            "adj_p_value": 0.1560827830984389
+          },
+          {
+            "gene_symbol": "SLCO1C1",
+            "gene": "SLCO1C1",
+            "log2fc": 1.3710553496916216,
+            "p_value": 0.01335025447670922,
+            "adj_p_value": 0.1628961536694697
+          },
+          {
+            "gene_symbol": "SLC35F5",
+            "gene": "SLC35F5",
+            "log2fc": -0.8153158716038521,
+            "p_value": 0.013480459514114926,
+            "adj_p_value": 0.16359296010441504
+          },
+          {
+            "gene_symbol": "SLC37A3",
+            "gene": "SLC37A3",
+            "log2fc": 0.521599278416265,
+            "p_value": 0.013722295819287742,
+            "adj_p_value": 0.16519810190020517
+          },
+          {
+            "gene_symbol": "SLC47A2",
+            "gene": "SLC47A2",
+            "log2fc": -2.0129485581721727,
+            "p_value": 0.015591059778431813,
+            "adj_p_value": 0.1762262211319717
+          },
+          {
+            "gene_symbol": "SLC13A2",
+            "gene": "SLC13A2",
+            "log2fc": -3.1954914887420767,
+            "p_value": 0.016773703029650512,
+            "adj_p_value": 0.1837171976200221
+          },
+          {
+            "gene_symbol": "SLC41A1",
+            "gene": "SLC41A1",
+            "log2fc": 1.044574179879971,
+            "p_value": 0.019139695846189443,
+            "adj_p_value": 0.19895465413787194
+          },
+          {
+            "gene_symbol": "SLC35C1",
+            "gene": "SLC35C1",
+            "log2fc": -1.4130614673265547,
+            "p_value": 0.01943182839028545,
+            "adj_p_value": 0.20079306781435402
+          },
+          {
+            "gene_symbol": "SLC38A6",
+            "gene": "SLC38A6",
+            "log2fc": 0.7230854239838708,
+            "p_value": 0.020250542950395443,
+            "adj_p_value": 0.20576942167076048
+          },
+          {
+            "gene_symbol": "SLC22A31",
+            "gene": "SLC22A31",
+            "log2fc": 2.7205948060527705,
+            "p_value": 0.021233177147377418,
+            "adj_p_value": 0.21232874531457344
+          },
+          {
+            "gene_symbol": "SLC6A10P",
+            "gene": "SLC6A10P",
+            "log2fc": -2.415850594326715,
+            "p_value": 0.021289521292440702,
+            "adj_p_value": 0.2126260259686826
+          },
+          {
+            "gene_symbol": "SLC4A1",
+            "gene": "SLC4A1",
+            "log2fc": -1.404720116378295,
+            "p_value": 0.02277621646390776,
+            "adj_p_value": 0.21940682383530874
+          },
+          {
+            "gene_symbol": "SLC17A4",
+            "gene": "SLC17A4",
+            "log2fc": -2.9941387397511057,
+            "p_value": 0.022795681238104406,
+            "adj_p_value": 0.21940682383530874
+          },
+          {
+            "gene_symbol": "SLC9A5",
+            "gene": "SLC9A5",
+            "log2fc": 1.3003028150191898,
+            "p_value": 0.0228790880311862,
+            "adj_p_value": 0.21967850846104275
+          },
+          {
+            "gene_symbol": "SLC16A8",
+            "gene": "SLC16A8",
+            "log2fc": 1.075627268122871,
+            "p_value": 0.023012596218920142,
+            "adj_p_value": 0.2203051937327891
+          },
+          {
+            "gene_symbol": "SLC27A2",
+            "gene": "SLC27A2",
+            "log2fc": -1.6750455361629868,
+            "p_value": 0.02302638809978921,
+            "adj_p_value": 0.2203051937327891
+          },
+          {
+            "gene_symbol": "SLC34A2",
+            "gene": "SLC34A2",
+            "log2fc": -2.3367143312549916,
+            "p_value": 0.023405632194479702,
+            "adj_p_value": 0.22185883047355998
+          },
+          {
+            "gene_symbol": "SLC9A6",
+            "gene": "SLC9A6",
+            "log2fc": -0.6945015360505505,
+            "p_value": 0.023504493431360737,
+            "adj_p_value": 0.22226643506782534
+          },
+          {
+            "gene_symbol": "SLC22A11",
+            "gene": "SLC22A11",
+            "log2fc": 2.6533648145628095,
+            "p_value": 0.02531881813102593,
+            "adj_p_value": 0.23246570247071194
+          },
+          {
+            "gene_symbol": "SLC39A6",
+            "gene": "SLC39A6",
+            "log2fc": 0.9917653539524208,
+            "p_value": 0.026877940712437168,
+            "adj_p_value": 0.23943239519166373
+          },
+          {
+            "gene_symbol": "SLC38A5",
+            "gene": "SLC38A5",
+            "log2fc": 1.622861147167599,
+            "p_value": 0.02733689252033885,
+            "adj_p_value": 0.2415793305449885
+          },
+          {
+            "gene_symbol": "SLC25A6",
+            "gene": "SLC25A6",
+            "log2fc": -0.9134025181189807,
+            "p_value": 0.0277835956788258,
+            "adj_p_value": 0.24400138834223206
+          },
+          {
+            "gene_symbol": "SLC2A10",
+            "gene": "SLC2A10",
+            "log2fc": 1.1099473183351758,
+            "p_value": 0.028245723713270054,
+            "adj_p_value": 0.2460483801633411
+          },
+          {
+            "gene_symbol": "SLCO5A1",
+            "gene": "SLCO5A1",
+            "log2fc": 0.870676938143819,
+            "p_value": 0.028534057352725753,
+            "adj_p_value": 0.24765744423879327
+          },
+          {
+            "gene_symbol": "SLC37A2",
+            "gene": "SLC37A2",
+            "log2fc": -1.7251286076810628,
+            "p_value": 0.02863500893261227,
+            "adj_p_value": 0.24783171121309544
+          },
+          {
+            "gene_symbol": "SLC9A3-AS1",
+            "gene": "SLC9A3-AS1",
+            "log2fc": -1.3769363778410553,
+            "p_value": 0.029347336309756413,
+            "adj_p_value": 0.251323999979215
+          },
+          {
+            "gene_symbol": "SLC38A7",
+            "gene": "SLC38A7",
+            "log2fc": 0.5519057186385109,
+            "p_value": 0.03042125194086101,
+            "adj_p_value": 0.25578996309447816
+          },
+          {
+            "gene_symbol": "SLC15A4",
+            "gene": "SLC15A4",
+            "log2fc": 0.5096809163760714,
+            "p_value": 0.03173426336246314,
+            "adj_p_value": 0.2616646728769053
+          },
+          {
+            "gene_symbol": "SLC35D2",
+            "gene": "SLC35D2",
+            "log2fc": -1.1874710260321204,
+            "p_value": 0.03340408325804709,
+            "adj_p_value": 0.26781098198295405
+          },
+          {
+            "gene_symbol": "SLC4A8",
+            "gene": "SLC4A8",
+            "log2fc": 0.9659674412797266,
+            "p_value": 0.034964680277426156,
+            "adj_p_value": 0.27432185071859233
+          },
+          {
+            "gene_symbol": "SLC25A53",
+            "gene": "SLC25A53",
+            "log2fc": -0.5905911568870681,
+            "p_value": 0.03684598734265797,
+            "adj_p_value": 0.28191904161664455
+          },
+          {
+            "gene_symbol": "SLC23A4P",
+            "gene": "SLC23A4P",
+            "log2fc": 2.879124600642625,
+            "p_value": 0.037335972678555165,
+            "adj_p_value": 0.28356644360812966
+          },
+          {
+            "gene_symbol": "SLC12A8",
+            "gene": "SLC12A8",
+            "log2fc": 1.3452781665420614,
+            "p_value": 0.0387887267192622,
+            "adj_p_value": 0.2892218286026882
+          },
+          {
+            "gene_symbol": "SLC43A3",
+            "gene": "SLC43A3",
+            "log2fc": 0.9309811869542579,
+            "p_value": 0.04192113742295813,
+            "adj_p_value": 0.30191313130355685
+          },
+          {
+            "gene_symbol": "SLC16A3",
+            "gene": "SLC16A3",
+            "log2fc": -0.9777876251735383,
+            "p_value": 0.04252903627835774,
+            "adj_p_value": 0.30365662764905915
+          },
+          {
+            "gene_symbol": "SLC28A2",
+            "gene": "SLC28A2",
+            "log2fc": -2.8519443427709823,
+            "p_value": 0.04309679934450285,
+            "adj_p_value": 0.306111516317368
+          },
+          {
+            "gene_symbol": "SLC9A7P1",
+            "gene": "SLC9A7P1",
+            "log2fc": 1.1890333369898827,
+            "p_value": 0.04407489767492983,
+            "adj_p_value": 0.30937149123775726
+          },
+          {
+            "gene_symbol": "SLC52A3",
+            "gene": "SLC52A3",
+            "log2fc": -1.6166411299550927,
+            "p_value": 0.04584465643495713,
+            "adj_p_value": 0.31448380414232663
+          },
+          {
+            "gene_symbol": "SLC25A30",
+            "gene": "SLC25A30",
+            "log2fc": 0.7119226294786013,
+            "p_value": 0.04615970110682862,
+            "adj_p_value": 0.3151957622489167
+          },
+          {
+            "gene_symbol": "SLC30A3",
+            "gene": "SLC30A3",
+            "log2fc": 2.261370164169078,
+            "p_value": 0.04886620672418833,
+            "adj_p_value": 0.3253224709431834
+          },
+          {
+            "gene_symbol": "SLC25A25",
+            "gene": "SLC25A25",
+            "log2fc": -0.7531463494404028,
+            "p_value": 0.049529506419189566,
+            "adj_p_value": 0.327707421629405
+          },
+          {
+            "gene_symbol": "SLCO4A1-AS1",
+            "gene": "SLCO4A1-AS1",
+            "log2fc": 1.4563014329411779,
+            "p_value": 0.04980296581189493,
+            "adj_p_value": 0.328545431059752
+          },
+          {
+            "gene_symbol": "SLC25A24P1",
+            "gene": "SLC25A24P1",
+            "log2fc": 3.165085826509853,
+            "p_value": 0.05368673808336495,
+            "adj_p_value": 0.3423916024618497
+          },
+          {
+            "gene_symbol": "SLC39A8",
+            "gene": "SLC39A8",
+            "log2fc": 1.0160590135835414,
+            "p_value": 0.05464644603253973,
+            "adj_p_value": 0.3452802734185088
+          },
+          {
+            "gene_symbol": "SLC27A3",
+            "gene": "SLC27A3",
+            "log2fc": 0.6488766563557669,
+            "p_value": 0.05538244100555653,
+            "adj_p_value": 0.34759309082618045
+          },
+          {
+            "gene_symbol": "SLC6A20",
+            "gene": "SLC6A20",
+            "log2fc": -2.1047509158006865,
+            "p_value": 0.05778444010506358,
+            "adj_p_value": 0.3551838556409809
+          },
+          {
+            "gene_symbol": "SLC35B2",
+            "gene": "SLC35B2",
+            "log2fc": 0.7536378234568837,
+            "p_value": 0.0577954069537938,
+            "adj_p_value": 0.3551838556409809
+          },
+          {
+            "gene_symbol": "SLC1A5",
+            "gene": "SLC1A5",
+            "log2fc": 1.027052757453026,
+            "p_value": 0.05937037749340669,
+            "adj_p_value": 0.3592723880042655
+          },
+          {
+            "gene_symbol": "SLC22A8",
+            "gene": "SLC22A8",
+            "log2fc": 3.134241761386178,
+            "p_value": 0.059436416229453067,
+            "adj_p_value": 0.35936598571516
+          },
+          {
+            "gene_symbol": "SLC12A3",
+            "gene": "SLC12A3",
+            "log2fc": 1.6401652654411527,
+            "p_value": 0.05946612383612149,
+            "adj_p_value": 0.35936598571516
+          },
+          {
+            "gene_symbol": "SLC25A5P3",
+            "gene": "SLC25A5P3",
+            "log2fc": -1.413123747539129,
+            "p_value": 0.05962143535871769,
+            "adj_p_value": 0.35936598571516
+          },
+          {
+            "gene_symbol": "SLC35E4",
+            "gene": "SLC35E4",
+            "log2fc": 0.7984596358564696,
+            "p_value": 0.06136133268282564,
+            "adj_p_value": 0.3643562335405831
+          },
+          {
+            "gene_symbol": "SLC31A2",
+            "gene": "SLC31A2",
+            "log2fc": -1.2939491047504474,
+            "p_value": 0.061805825443884445,
+            "adj_p_value": 0.36520511509812115
+          },
+          {
+            "gene_symbol": "SLC25A5P2",
+            "gene": "SLC25A5P2",
+            "log2fc": -1.104420851162685,
+            "p_value": 0.06259529097185317,
+            "adj_p_value": 0.36712363711292606
+          },
+          {
+            "gene_symbol": "SLC34A3",
+            "gene": "SLC34A3",
+            "log2fc": -1.3599415757529576,
+            "p_value": 0.06387718428946881,
+            "adj_p_value": 0.37107628407483767
+          },
+          {
+            "gene_symbol": "SLC7A4",
+            "gene": "SLC7A4",
+            "log2fc": -1.2279291087170983,
+            "p_value": 0.06531815443597819,
+            "adj_p_value": 0.3753824457250889
+          },
+          {
+            "gene_symbol": "SLC27A1",
+            "gene": "SLC27A1",
+            "log2fc": 0.7393418343615447,
+            "p_value": 0.06745440183170906,
+            "adj_p_value": 0.3804190288938216
+          },
+          {
+            "gene_symbol": "SLC35D3",
+            "gene": "SLC35D3",
+            "log2fc": 1.5111896053873275,
+            "p_value": 0.06935752116349468,
+            "adj_p_value": 0.3842804770886277
+          },
+          {
+            "gene_symbol": "SLC35F2",
+            "gene": "SLC35F2",
+            "log2fc": -0.9430468942931239,
+            "p_value": 0.07248365974557262,
+            "adj_p_value": 0.39357484151376837
+          },
+          {
+            "gene_symbol": "SLC7A3",
+            "gene": "SLC7A3",
+            "log2fc": -1.508955641126886,
+            "p_value": 0.07380562171439511,
+            "adj_p_value": 0.39729881274038786
+          },
+          {
+            "gene_symbol": "SLC25A42",
+            "gene": "SLC25A42",
+            "log2fc": -0.6496250575202819,
+            "p_value": 0.07428292873982775,
+            "adj_p_value": 0.39879232657841374
+          },
+          {
+            "gene_symbol": "SLC14A1",
+            "gene": "SLC14A1",
+            "log2fc": 0.8910960988596316,
+            "p_value": 0.07502188054369688,
+            "adj_p_value": 0.40087298525298914
+          },
+          {
+            "gene_symbol": "SLC9A7",
+            "gene": "SLC9A7",
+            "log2fc": 0.6487929967701874,
+            "p_value": 0.0768940288302223,
+            "adj_p_value": 0.4050507707684685
+          },
+          {
+            "gene_symbol": "SLC12A6",
+            "gene": "SLC12A6",
+            "log2fc": -0.9291942749135866,
+            "p_value": 0.07752164334351114,
+            "adj_p_value": 0.4068636415152111
+          },
+          {
+            "gene_symbol": "SLC16A6P1",
+            "gene": "SLC16A6P1",
+            "log2fc": -1.7557806163151721,
+            "p_value": 0.0791469723087619,
+            "adj_p_value": 0.4110147492443428
+          },
+          {
+            "gene_symbol": "SLC2A8",
+            "gene": "SLC2A8",
+            "log2fc": -0.7318338852105738,
+            "p_value": 0.08174528120108723,
+            "adj_p_value": 0.4164480956630505
+          },
+          {
+            "gene_symbol": "SLC25A41",
+            "gene": "SLC25A41",
+            "log2fc": -1.5179166742536394,
+            "p_value": 0.08193570780057663,
+            "adj_p_value": 0.41645921531595903
+          },
+          {
+            "gene_symbol": "SLC12A2",
+            "gene": "SLC12A2",
+            "log2fc": 0.9250874885418711,
+            "p_value": 0.08236665114296195,
+            "adj_p_value": 0.41712969698196983
+          },
+          {
+            "gene_symbol": "SLC25A29",
+            "gene": "SLC25A29",
+            "log2fc": 0.5965855365484968,
+            "p_value": 0.0884115471797259,
+            "adj_p_value": 0.43085690952779326
+          },
+          {
+            "gene_symbol": "SLC35G2",
+            "gene": "SLC35G2",
+            "log2fc": 0.8828790432868528,
+            "p_value": 0.09157171458004074,
+            "adj_p_value": 0.438765399345684
+          },
+          {
+            "gene_symbol": "SLC44A3-AS1",
+            "gene": "SLC44A3-AS1",
+            "log2fc": 1.0224253566867167,
+            "p_value": 0.09250132117302526,
+            "adj_p_value": 0.4401616453667785
+          },
+          {
+            "gene_symbol": "SLC19A3",
+            "gene": "SLC19A3",
+            "log2fc": -1.627288242180496,
+            "p_value": 0.09481132731698225,
+            "adj_p_value": 0.4450713173264946
+          },
+          {
+            "gene_symbol": "SLC37A1",
+            "gene": "SLC37A1",
+            "log2fc": -1.061218409191272,
+            "p_value": 0.09691190137444902,
+            "adj_p_value": 0.44920021113431186
+          },
+          {
+            "gene_symbol": "SLC17A1",
+            "gene": "SLC17A1",
+            "log2fc": -2.1310729659704974,
+            "p_value": 0.09996176923856857,
+            "adj_p_value": 0.45525462986017895
+          },
+          {
+            "gene_symbol": "SLC35D1",
+            "gene": "SLC35D1",
+            "log2fc": -0.6714150707013201,
+            "p_value": 0.10886131291995368,
+            "adj_p_value": 0.4727651066911831
+          },
+          {
+            "gene_symbol": "SLC3A1",
+            "gene": "SLC3A1",
+            "log2fc": -1.6869220429178444,
+            "p_value": 0.10920364073580649,
+            "adj_p_value": 0.47340968129149624
+          },
+          {
+            "gene_symbol": "SLC30A8",
+            "gene": "SLC30A8",
+            "log2fc": -1.6053868990473499,
+            "p_value": 0.11251229069966229,
+            "adj_p_value": 0.47917106565495204
+          },
+          {
+            "gene_symbol": "SLC45A4",
+            "gene": "SLC45A4",
+            "log2fc": 0.8126464073406132,
+            "p_value": 0.11341655270036569,
+            "adj_p_value": 0.48082445447748684
+          },
+          {
+            "gene_symbol": "SLC24A1",
+            "gene": "SLC24A1",
+            "log2fc": 0.34601462167703356,
+            "p_value": 0.11526839228830656,
+            "adj_p_value": 0.48448266988407457
+          },
+          {
+            "gene_symbol": "SLC22A16",
+            "gene": "SLC22A16",
+            "log2fc": 1.428032322835815,
+            "p_value": 0.11825351599032513,
+            "adj_p_value": 0.48956627492464494
+          },
+          {
+            "gene_symbol": "SLC25A10",
+            "gene": "SLC25A10",
+            "log2fc": -0.9400307073872929,
+            "p_value": 0.12075463478118627,
+            "adj_p_value": 0.49255566094828956
+          },
+          {
+            "gene_symbol": "SLC9C2",
+            "gene": "SLC9C2",
+            "log2fc": 1.7987591942918744,
+            "p_value": 0.12196282815677349,
+            "adj_p_value": 0.49411458360130855
+          },
+          {
+            "gene_symbol": "SLC4A2",
+            "gene": "SLC4A2",
+            "log2fc": 0.8000803974860883,
+            "p_value": 0.12401448790808871,
+            "adj_p_value": 0.49749525310511267
+          },
+          {
+            "gene_symbol": "SLC16A11",
+            "gene": "SLC16A11",
+            "log2fc": -0.9199352051958105,
+            "p_value": 0.12570638121583116,
+            "adj_p_value": 0.500295097565986
+          },
+          {
+            "gene_symbol": "SLC9A3R2",
+            "gene": "SLC9A3R2",
+            "log2fc": 0.8239234043169765,
+            "p_value": 0.12773114754538542,
+            "adj_p_value": 0.5034712010228758
+          },
+          {
+            "gene_symbol": "SLC35B1",
+            "gene": "SLC35B1",
+            "log2fc": -0.7841210274754497,
+            "p_value": 0.12817508902853955,
+            "adj_p_value": 0.5045102406187776
+          },
+          {
+            "gene_symbol": "SLC47A1",
+            "gene": "SLC47A1",
+            "log2fc": -0.7666983490462055,
+            "p_value": 0.1284931707624216,
+            "adj_p_value": 0.5047749000050246
+          },
+          {
+            "gene_symbol": "SLC41A3",
+            "gene": "SLC41A3",
+            "log2fc": 0.3368477057486207,
+            "p_value": 0.13506209474990702,
+            "adj_p_value": 0.514719400681638
+          },
+          {
+            "gene_symbol": "SLC35A3",
+            "gene": "SLC35A3",
+            "log2fc": -0.7577820528581968,
+            "p_value": 0.13831574659835294,
+            "adj_p_value": 0.5182209389851237
+          },
+          {
+            "gene_symbol": "SLC66A3",
+            "gene": "SLC66A3",
+            "log2fc": 0.40705565616826617,
+            "p_value": 0.14262697205342642,
+            "adj_p_value": 0.5247058490297936
+          },
+          {
+            "gene_symbol": "SLC25A16",
+            "gene": "SLC25A16",
+            "log2fc": -0.36422947330704564,
+            "p_value": 0.15265525383501521,
+            "adj_p_value": 0.540925732247696
+          },
+          {
+            "gene_symbol": "SLC25A11",
+            "gene": "SLC25A11",
+            "log2fc": -0.4742089749258008,
+            "p_value": 0.1563628228852977,
+            "adj_p_value": 0.5467145476899918
+          },
+          {
+            "gene_symbol": "SLC43A2",
+            "gene": "SLC43A2",
+            "log2fc": -0.8865093307310397,
+            "p_value": 0.16066467694328668,
+            "adj_p_value": 0.5523311013810684
+          },
+          {
+            "gene_symbol": "SLC7A6",
+            "gene": "SLC7A6",
+            "log2fc": 0.4045017910632872,
+            "p_value": 0.16224604259374412,
+            "adj_p_value": 0.5540088645769348
+          },
+          {
+            "gene_symbol": "SLC11A2",
+            "gene": "SLC11A2",
+            "log2fc": -0.641344112202485,
+            "p_value": 0.162679542608875,
+            "adj_p_value": 0.5547837201655805
+          },
+          {
+            "gene_symbol": "SLC30A1",
+            "gene": "SLC30A1",
+            "log2fc": -0.6169814970242381,
+            "p_value": 0.16288412246972597,
+            "adj_p_value": 0.5548018020244655
+          },
+          {
+            "gene_symbol": "SLCO1B3",
+            "gene": "SLCO1B3",
+            "log2fc": 2.3160943596362786,
+            "p_value": 0.16469129999790894,
+            "adj_p_value": 0.5562097544052376
+          },
+          {
+            "gene_symbol": "SLC39A13",
+            "gene": "SLC39A13",
+            "log2fc": 0.5949126010140523,
+            "p_value": 0.16594368897315118,
+            "adj_p_value": 0.5571426067087071
+          },
+          {
+            "gene_symbol": "SLC27A6",
+            "gene": "SLC27A6",
+            "log2fc": -1.3971516719795931,
+            "p_value": 0.16782574721286106,
+            "adj_p_value": 0.5598950281738482
+          },
+          {
+            "gene_symbol": "SLC25A24",
+            "gene": "SLC25A24",
+            "log2fc": -0.5784751610304004,
+            "p_value": 0.16908456723832685,
+            "adj_p_value": 0.5614008478663219
+          },
+          {
+            "gene_symbol": "SLC30A6",
+            "gene": "SLC30A6",
+            "log2fc": 0.3697279946186336,
+            "p_value": 0.17362221648408552,
+            "adj_p_value": 0.566676212412888
+          },
+          {
+            "gene_symbol": "SLC9B2",
+            "gene": "SLC9B2",
+            "log2fc": 0.7813819327346838,
+            "p_value": 0.17682116518032867,
+            "adj_p_value": 0.5705903792423134
+          },
+          {
+            "gene_symbol": "SLC16A5",
+            "gene": "SLC16A5",
+            "log2fc": -0.9557967838795858,
+            "p_value": 0.1779282095821785,
+            "adj_p_value": 0.5716701699977028
+          },
+          {
+            "gene_symbol": "SLC8A1-AS1",
+            "gene": "SLC8A1-AS1",
+            "log2fc": -0.9270340052981367,
+            "p_value": 0.17960259126664305,
+            "adj_p_value": 0.5735759158552686
+          },
+          {
+            "gene_symbol": "SLC44A2",
+            "gene": "SLC44A2",
+            "log2fc": 0.6472039555962894,
+            "p_value": 0.18279519325491456,
+            "adj_p_value": 0.5766393666600085
+          },
+          {
+            "gene_symbol": "SLC1A7",
+            "gene": "SLC1A7",
+            "log2fc": -1.0972860142696959,
+            "p_value": 0.18901899672910585,
+            "adj_p_value": 0.5839519355983972
+          },
+          {
+            "gene_symbol": "SLC5A2",
+            "gene": "SLC5A2",
+            "log2fc": 0.895324497533588,
+            "p_value": 0.19415023935710976,
+            "adj_p_value": 0.5904213662584271
+          },
+          {
+            "gene_symbol": "SLC29A3",
+            "gene": "SLC29A3",
+            "log2fc": 0.5470864308977473,
+            "p_value": 0.19687427360357743,
+            "adj_p_value": 0.5938734687069163
+          },
+          {
+            "gene_symbol": "SLC6A14",
+            "gene": "SLC6A14",
+            "log2fc": 1.3918504483233891,
+            "p_value": 0.19715155325734923,
+            "adj_p_value": 0.5940426471759644
+          },
+          {
+            "gene_symbol": "SLC18A2",
+            "gene": "SLC18A2",
+            "log2fc": 1.0027443950245984,
+            "p_value": 0.19862931104279608,
+            "adj_p_value": 0.5958497408507375
+          },
+          {
+            "gene_symbol": "SLC2A6",
+            "gene": "SLC2A6",
+            "log2fc": 0.5901051113923265,
+            "p_value": 0.1986387671223061,
+            "adj_p_value": 0.5958497408507375
+          },
+          {
+            "gene_symbol": "SLC22A2",
+            "gene": "SLC22A2",
+            "log2fc": -1.6436443822527393,
+            "p_value": 0.20219253401058562,
+            "adj_p_value": 0.6003408174005846
+          },
+          {
+            "gene_symbol": "SLC35G3",
+            "gene": "SLC35G3",
+            "log2fc": 1.3339728733847882,
+            "p_value": 0.20541306759879704,
+            "adj_p_value": 0.6042716337914047
+          },
+          {
+            "gene_symbol": "SLC26A8",
+            "gene": "SLC26A8",
+            "log2fc": 0.7137548641741654,
+            "p_value": 0.20937922003744666,
+            "adj_p_value": 0.6076386787687127
+          },
+          {
+            "gene_symbol": "SLC20A1",
+            "gene": "SLC20A1",
+            "log2fc": -0.7532926596842852,
+            "p_value": 0.21757817011480707,
+            "adj_p_value": 0.6179376171686123
+          },
+          {
+            "gene_symbol": "SLC15A3",
+            "gene": "SLC15A3",
+            "log2fc": 0.6122388141124167,
+            "p_value": 0.21779758231807983,
+            "adj_p_value": 0.6181037655287603
+          },
+          {
+            "gene_symbol": "SLC25A5P7",
+            "gene": "SLC25A5P7",
+            "log2fc": -1.0027078282017698,
+            "p_value": 0.22344948638418094,
+            "adj_p_value": 0.6250454513426695
+          },
+          {
+            "gene_symbol": "SLC25A47",
+            "gene": "SLC25A47",
+            "log2fc": -1.5010782923369417,
+            "p_value": 0.22555174146217152,
+            "adj_p_value": 0.6272343445657974
+          },
+          {
+            "gene_symbol": "SLC6A19",
+            "gene": "SLC6A19",
+            "log2fc": -2.296567300166383,
+            "p_value": 0.2334145711334178,
+            "adj_p_value": 0.6346263324085676
+          },
+          {
+            "gene_symbol": "SLC26A9",
+            "gene": "SLC26A9",
+            "log2fc": 1.5498673456512535,
+            "p_value": 0.2396546627787262,
+            "adj_p_value": 0.6402233784527476
+          },
+          {
+            "gene_symbol": "SLCO3A1",
+            "gene": "SLCO3A1",
+            "log2fc": 0.5946153994281848,
+            "p_value": 0.2564927328483156,
+            "adj_p_value": 0.6548126266144677
+          },
+          {
+            "gene_symbol": "SLC25A40",
+            "gene": "SLC25A40",
+            "log2fc": 0.3959433100622452,
+            "p_value": 0.26025654369759527,
+            "adj_p_value": 0.657830563533423
+          },
+          {
+            "gene_symbol": "SLC9A9",
+            "gene": "SLC9A9",
+            "log2fc": -0.5773121618228867,
+            "p_value": 0.2612854288258855,
+            "adj_p_value": 0.6589613553528738
+          },
+          {
+            "gene_symbol": "SLC23A2",
+            "gene": "SLC23A2",
+            "log2fc": 0.40826163659945475,
+            "p_value": 0.2706034349886407,
+            "adj_p_value": 0.667155590751394
+          },
+          {
+            "gene_symbol": "SLC4A3",
+            "gene": "SLC4A3",
+            "log2fc": 0.9956476658504535,
+            "p_value": 0.2706805319589226,
+            "adj_p_value": 0.6671619278899437
+          },
+          {
+            "gene_symbol": "SLC25A32",
+            "gene": "SLC25A32",
+            "log2fc": 0.9147123235442068,
+            "p_value": 0.27128342053189963,
+            "adj_p_value": 0.6677721945451774
+          },
+          {
+            "gene_symbol": "SLC7A14-AS1",
+            "gene": "SLC7A14-AS1",
+            "log2fc": -0.9013192820119496,
+            "p_value": 0.2713324405239659,
+            "adj_p_value": 0.6677721945451774
+          },
+          {
+            "gene_symbol": "SLC4A5",
+            "gene": "SLC4A5",
+            "log2fc": 0.5761216577628622,
+            "p_value": 0.27328899198904155,
+            "adj_p_value": 0.6700285344792868
+          },
+          {
+            "gene_symbol": "SLC35B4",
+            "gene": "SLC35B4",
+            "log2fc": 0.3390301966823402,
+            "p_value": 0.27354452961466524,
+            "adj_p_value": 0.6700564245878718
+          },
+          {
+            "gene_symbol": "SLC39A1",
+            "gene": "SLC39A1",
+            "log2fc": 0.385616021308969,
+            "p_value": 0.27404410822640296,
+            "adj_p_value": 0.6702305380482227
+          },
+          {
+            "gene_symbol": "SLC35E1P1",
+            "gene": "SLC35E1P1",
+            "log2fc": -0.6973543677261501,
+            "p_value": 0.277021255568357,
+            "adj_p_value": 0.6730452889458158
+          },
+          {
+            "gene_symbol": "SLCO4A1",
+            "gene": "SLCO4A1",
+            "log2fc": 0.6074226902727243,
+            "p_value": 0.2785678298965587,
+            "adj_p_value": 0.6752721339451934
+          },
+          {
+            "gene_symbol": "SLC4A4",
+            "gene": "SLC4A4",
+            "log2fc": -0.8665056283570978,
+            "p_value": 0.27976232225652836,
+            "adj_p_value": 0.6760042394457719
+          },
+          {
+            "gene_symbol": "SLC16A1",
+            "gene": "SLC16A1",
+            "log2fc": 0.5353525232279888,
+            "p_value": 0.28172426026471814,
+            "adj_p_value": 0.6783204889429146
+          },
+          {
+            "gene_symbol": "SLC25A27",
+            "gene": "SLC25A27",
+            "log2fc": -0.844369184043322,
+            "p_value": 0.2840167144469428,
+            "adj_p_value": 0.6804239860113377
+          },
+          {
+            "gene_symbol": "SLC1A4",
+            "gene": "SLC1A4",
+            "log2fc": 0.45684094310430456,
+            "p_value": 0.28465320021623075,
+            "adj_p_value": 0.6812803087966396
+          },
+          {
+            "gene_symbol": "SLC26A1",
+            "gene": "SLC26A1",
+            "log2fc": -0.6626144340525211,
+            "p_value": 0.28716170651228856,
+            "adj_p_value": 0.6834725482901524
+          },
+          {
+            "gene_symbol": "SLC12A4",
+            "gene": "SLC12A4",
+            "log2fc": 0.5009183263346809,
+            "p_value": 0.29725485460800205,
+            "adj_p_value": 0.69051357759799
+          },
+          {
+            "gene_symbol": "SLC16A4",
+            "gene": "SLC16A4",
+            "log2fc": -0.6249524956135107,
+            "p_value": 0.30286470692508644,
+            "adj_p_value": 0.6949264935895915
+          },
+          {
+            "gene_symbol": "SLCO2A1",
+            "gene": "SLCO2A1",
+            "log2fc": 0.5259488466597617,
+            "p_value": 0.30775362793859473,
+            "adj_p_value": 0.6982396015110678
+          },
+          {
+            "gene_symbol": "SLC38A11",
+            "gene": "SLC38A11",
+            "log2fc": 0.9320617703372611,
+            "p_value": 0.3100950268498228,
+            "adj_p_value": 0.69988335499444
+          },
+          {
+            "gene_symbol": "SLC5A7",
+            "gene": "SLC5A7",
+            "log2fc": -1.2519438348584264,
+            "p_value": 0.32034713475982035,
+            "adj_p_value": 0.7074201521243214
+          },
+          {
+            "gene_symbol": "SLC25A28",
+            "gene": "SLC25A28",
+            "log2fc": -0.3179885568975518,
+            "p_value": 0.3215749778641835,
+            "adj_p_value": 0.7082761324040978
+          },
+          {
+            "gene_symbol": "SLC4A11",
+            "gene": "SLC4A11",
+            "log2fc": 0.9142934177713862,
+            "p_value": 0.3310860962373009,
+            "adj_p_value": 0.7153953013556161
+          },
+          {
+            "gene_symbol": "SLC25A5-AS1",
+            "gene": "SLC25A5-AS1",
+            "log2fc": -0.3891020365306289,
+            "p_value": 0.34964931545006056,
+            "adj_p_value": 0.7290513987365548
+          },
+          {
+            "gene_symbol": "SLC9A3",
+            "gene": "SLC9A3",
+            "log2fc": -1.0922569077623563,
+            "p_value": 0.3537434966249127,
+            "adj_p_value": 0.7325829229918767
+          },
+          {
+            "gene_symbol": "SLC31A1",
+            "gene": "SLC31A1",
+            "log2fc": -0.5654537259158269,
+            "p_value": 0.35810753097596626,
+            "adj_p_value": 0.736176113283365
+          },
+          {
+            "gene_symbol": "SLC16A7",
+            "gene": "SLC16A7",
+            "log2fc": 0.602349645161231,
+            "p_value": 0.3633243684920812,
+            "adj_p_value": 0.7399847747780474
+          },
+          {
+            "gene_symbol": "SLC25A22",
+            "gene": "SLC25A22",
+            "log2fc": -0.45709089252463375,
+            "p_value": 0.3659545261423997,
+            "adj_p_value": 0.7425953344220505
+          },
+          {
+            "gene_symbol": "SLC18A3",
+            "gene": "SLC18A3",
+            "log2fc": -1.269278313406561,
+            "p_value": 0.3715161890240892,
+            "adj_p_value": 0.7462959166578337
+          },
+          {
+            "gene_symbol": "SLC44A5",
+            "gene": "SLC44A5",
+            "log2fc": -1.1312630580085685,
+            "p_value": 0.373567744971438,
+            "adj_p_value": 0.7476611557858317
+          },
+          {
+            "gene_symbol": "SLC35E1",
+            "gene": "SLC35E1",
+            "log2fc": -0.22232509503823,
+            "p_value": 0.3737858791388301,
+            "adj_p_value": 0.7476611557858317
+          },
+          {
+            "gene_symbol": "SLC16A14",
+            "gene": "SLC16A14",
+            "log2fc": 0.5476582605004807,
+            "p_value": 0.3755279529419829,
+            "adj_p_value": 0.7487140834602741
+          },
+          {
+            "gene_symbol": "SLC26A4",
+            "gene": "SLC26A4",
+            "log2fc": 0.35580852744885666,
+            "p_value": 0.3891693693333354,
+            "adj_p_value": 0.759945654243878
+          },
+          {
+            "gene_symbol": "SLC9A4",
+            "gene": "SLC9A4",
+            "log2fc": 1.1218163357825062,
+            "p_value": 0.3927696300311546,
+            "adj_p_value": 0.7623199525993126
+          },
+          {
+            "gene_symbol": "SLC8A1",
+            "gene": "SLC8A1",
+            "log2fc": -0.5910665165798696,
+            "p_value": 0.3981298992787209,
+            "adj_p_value": 0.7656008832803285
+          },
+          {
+            "gene_symbol": "SLC5A5",
+            "gene": "SLC5A5",
+            "log2fc": 1.3349652019859655,
+            "p_value": 0.39843257833109696,
+            "adj_p_value": 0.7657295923615243
+          },
+          {
+            "gene_symbol": "SLC24A3-AS1",
+            "gene": "SLC24A3-AS1",
+            "log2fc": -0.8404543225952548,
+            "p_value": 0.4009861252528296,
+            "adj_p_value": 0.7681086576169752
+          },
+          {
+            "gene_symbol": "SLC25A35",
+            "gene": "SLC25A35",
+            "log2fc": 0.2549962822258645,
+            "p_value": 0.4051126100224106,
+            "adj_p_value": 0.7712820257168481
+          },
+          {
+            "gene_symbol": "SLC22A1",
+            "gene": "SLC22A1",
+            "log2fc": 0.4440534060502663,
+            "p_value": 0.40895562487122716,
+            "adj_p_value": 0.7730634378504735
+          },
+          {
+            "gene_symbol": "SLC2A12",
+            "gene": "SLC2A12",
+            "log2fc": -0.6734136024002697,
+            "p_value": 0.4104381004239625,
+            "adj_p_value": 0.7736942692543433
+          },
+          {
+            "gene_symbol": "SLC25A38",
+            "gene": "SLC25A38",
+            "log2fc": 0.22634844111445607,
+            "p_value": 0.41393941517514676,
+            "adj_p_value": 0.7757620013437322
+          },
+          {
+            "gene_symbol": "SLC38A1",
+            "gene": "SLC38A1",
+            "log2fc": -0.41822802628544753,
+            "p_value": 0.4152304078550068,
+            "adj_p_value": 0.7763333235035448
+          },
+          {
+            "gene_symbol": "SLC12A9-AS1",
+            "gene": "SLC12A9-AS1",
+            "log2fc": -0.5613474350685062,
+            "p_value": 0.41525276259042376,
+            "adj_p_value": 0.7763333235035448
+          },
+          {
+            "gene_symbol": "SLC25A39P1",
+            "gene": "SLC25A39P1",
+            "log2fc": 0.6447307006319766,
+            "p_value": 0.41631524721387586,
+            "adj_p_value": 0.7773615056000762
+          },
+          {
+            "gene_symbol": "SLC35A1",
+            "gene": "SLC35A1",
+            "log2fc": 0.18926496652349176,
+            "p_value": 0.4178661819733582,
+            "adj_p_value": 0.7790007112323354
+          },
+          {
+            "gene_symbol": "SLC40A1",
+            "gene": "SLC40A1",
+            "log2fc": -0.4989496078139657,
+            "p_value": 0.41847588855909895,
+            "adj_p_value": 0.7793210223384759
+          },
+          {
+            "gene_symbol": "SLC6A7",
+            "gene": "SLC6A7",
+            "log2fc": -0.7463924067968551,
+            "p_value": 0.41862689315166846,
+            "adj_p_value": 0.7793423831952009
+          },
+          {
+            "gene_symbol": "SLC25A13",
+            "gene": "SLC25A13",
+            "log2fc": -0.33745075924055845,
+            "p_value": 0.41866147461860154,
+            "adj_p_value": 0.7793423831952009
+          },
+          {
+            "gene_symbol": "SLC25A44",
+            "gene": "SLC25A44",
+            "log2fc": -0.3129044920623539,
+            "p_value": 0.4253650555285947,
+            "adj_p_value": 0.7826166583632674
+          },
+          {
+            "gene_symbol": "SLC4A1APP1",
+            "gene": "SLC4A1APP1",
+            "log2fc": 0.5074914023695614,
+            "p_value": 0.4260341634417368,
+            "adj_p_value": 0.7830258344779142
+          },
+          {
+            "gene_symbol": "SLC45A1",
+            "gene": "SLC45A1",
+            "log2fc": 0.5330206089787919,
+            "p_value": 0.42722797936867746,
+            "adj_p_value": 0.7841744674083951
+          },
+          {
+            "gene_symbol": "SLC25A46",
+            "gene": "SLC25A46",
+            "log2fc": -0.2096922243571284,
+            "p_value": 0.42903161025219594,
+            "adj_p_value": 0.7855200207764425
+          },
+          {
+            "gene_symbol": "SLC2A1-AS1",
+            "gene": "SLC2A1-AS1",
+            "log2fc": -0.741608350180725,
+            "p_value": 0.4307417121277623,
+            "adj_p_value": 0.786724661378073
+          },
+          {
+            "gene_symbol": "SLC29A1",
+            "gene": "SLC29A1",
+            "log2fc": 0.46556112164188784,
+            "p_value": 0.4346825911624618,
+            "adj_p_value": 0.7895002372396313
+          },
+          {
+            "gene_symbol": "SLC66A2",
+            "gene": "SLC66A2",
+            "log2fc": -0.3459844524268053,
+            "p_value": 0.4367305165598258,
+            "adj_p_value": 0.7905002443862068
+          },
+          {
+            "gene_symbol": "SLC39A7",
+            "gene": "SLC39A7",
+            "log2fc": 0.3646288047275073,
+            "p_value": 0.43845492231510236,
+            "adj_p_value": 0.7911799703816111
+          },
+          {
+            "gene_symbol": "SLC45A3",
+            "gene": "SLC45A3",
+            "log2fc": 0.5848623004955497,
+            "p_value": 0.43990533452945557,
+            "adj_p_value": 0.7918040057630478
+          },
+          {
+            "gene_symbol": "SLC25A25-AS1",
+            "gene": "SLC25A25-AS1",
+            "log2fc": -0.5568788908928993,
+            "p_value": 0.44239381284426826,
+            "adj_p_value": 0.7926960393478563
+          },
+          {
+            "gene_symbol": "SLC49A3",
+            "gene": "SLC49A3",
+            "log2fc": -0.388621122042693,
+            "p_value": 0.450431936225177,
+            "adj_p_value": 0.7978102112897382
+          },
+          {
+            "gene_symbol": "SLC52A2",
+            "gene": "SLC52A2",
+            "log2fc": 0.4222076858959384,
+            "p_value": 0.4536599137453696,
+            "adj_p_value": 0.7995465706487496
+          },
+          {
+            "gene_symbol": "SLC6A17",
+            "gene": "SLC6A17",
+            "log2fc": 0.669685676713724,
+            "p_value": 0.4536925734347157,
+            "adj_p_value": 0.7995516603558451
+          },
+          {
+            "gene_symbol": "SLC18B1",
+            "gene": "SLC18B1",
+            "log2fc": 0.21976638513540397,
+            "p_value": 0.4537363522653822,
+            "adj_p_value": 0.7995763435983665
+          },
+          {
+            "gene_symbol": "SLC66A1L",
+            "gene": "SLC66A1L",
+            "log2fc": 0.4371144749940946,
+            "p_value": 0.45663749541775284,
+            "adj_p_value": 0.8015855008130708
+          },
+          {
+            "gene_symbol": "SLC36A4",
+            "gene": "SLC36A4",
+            "log2fc": 0.3867791268650325,
+            "p_value": 0.45876356432614285,
+            "adj_p_value": 0.8029560311554252
+          },
+          {
+            "gene_symbol": "SLC12A5",
+            "gene": "SLC12A5",
+            "log2fc": 0.5746911934755445,
+            "p_value": 0.45916491434185847,
+            "adj_p_value": 0.8032395088304424
+          },
+          {
+            "gene_symbol": "SLC7A8",
+            "gene": "SLC7A8",
+            "log2fc": -0.45700213715065335,
+            "p_value": 0.4704028558451819,
+            "adj_p_value": 0.8096609047348717
+          },
+          {
+            "gene_symbol": "SLC4A10",
+            "gene": "SLC4A10",
+            "log2fc": -0.6066306350732543,
+            "p_value": 0.47213888068043425,
+            "adj_p_value": 0.8109679191324972
+          },
+          {
+            "gene_symbol": "SLC28A3",
+            "gene": "SLC28A3",
+            "log2fc": 0.5648948888824961,
+            "p_value": 0.47407529723056624,
+            "adj_p_value": 0.8118720945718811
+          },
+          {
+            "gene_symbol": "SLC25A5P8",
+            "gene": "SLC25A5P8",
+            "log2fc": -0.5664736165121783,
+            "p_value": 0.4881880874358016,
+            "adj_p_value": 0.8203453798055228
+          },
+          {
+            "gene_symbol": "SLC4A1AP",
+            "gene": "SLC4A1AP",
+            "log2fc": -0.1650636607477763,
+            "p_value": 0.48992255922510214,
+            "adj_p_value": 0.8217656968765964
+          },
+          {
+            "gene_symbol": "SLC5A4-AS1",
+            "gene": "SLC5A4-AS1",
+            "log2fc": -0.46204710876011496,
+            "p_value": 0.5056644254313933,
+            "adj_p_value": 0.8295153091232031
+          },
+          {
+            "gene_symbol": "SLC30A7",
+            "gene": "SLC30A7",
+            "log2fc": 0.2200473584353349,
+            "p_value": 0.5066261905433167,
+            "adj_p_value": 0.8301577313222183
+          },
+          {
+            "gene_symbol": "SLC13A5",
+            "gene": "SLC13A5",
+            "log2fc": -0.8995413770500637,
+            "p_value": 0.507268907032202,
+            "adj_p_value": 0.8304141688177199
+          },
+          {
+            "gene_symbol": "SLC15A2",
+            "gene": "SLC15A2",
+            "log2fc": -0.44509094679623007,
+            "p_value": 0.5129447359748531,
+            "adj_p_value": 0.8328684298271255
+          },
+          {
+            "gene_symbol": "SLC16A2",
+            "gene": "SLC16A2",
+            "log2fc": 0.29234521979284706,
+            "p_value": 0.5373148296098407,
+            "adj_p_value": 0.84559783556999
+          },
+          {
+            "gene_symbol": "SLC2A3P4",
+            "gene": "SLC2A3P4",
+            "log2fc": 0.4127028422690558,
+            "p_value": 0.5390686819694339,
+            "adj_p_value": 0.8466965280561007
+          },
+          {
+            "gene_symbol": "SLC38A3",
+            "gene": "SLC38A3",
+            "log2fc": 0.6157115682372829,
+            "p_value": 0.5391515703494256,
+            "adj_p_value": 0.846702214683596
+          },
+          {
+            "gene_symbol": "SLC7A11",
+            "gene": "SLC7A11",
+            "log2fc": 0.5463454079682288,
+            "p_value": 0.5394044354217946,
+            "adj_p_value": 0.8469012287452625
+          },
+          {
+            "gene_symbol": "SLC26A11",
+            "gene": "SLC26A11",
+            "log2fc": 0.19376792666561024,
+            "p_value": 0.5410119059322451,
+            "adj_p_value": 0.8476905335890533
+          },
+          {
+            "gene_symbol": "SLC30A9",
+            "gene": "SLC30A9",
+            "log2fc": -0.16325389892936734,
+            "p_value": 0.541596558310746,
+            "adj_p_value": 0.8479634565378299
+          },
+          {
+            "gene_symbol": "SLC24A3",
+            "gene": "SLC24A3",
+            "log2fc": -0.45832131860475606,
+            "p_value": 0.5469596779688117,
+            "adj_p_value": 0.8503113482987097
+          },
+          {
+            "gene_symbol": "SLC2A1",
+            "gene": "SLC2A1",
+            "log2fc": -0.33877585083006007,
+            "p_value": 0.5561875139058852,
+            "adj_p_value": 0.8548020244208365
+          },
+          {
+            "gene_symbol": "SLC2A3",
+            "gene": "SLC2A3",
+            "log2fc": 0.3359959314447926,
+            "p_value": 0.5588282537292073,
+            "adj_p_value": 0.8554200031379795
+          },
+          {
+            "gene_symbol": "SLC9C1",
+            "gene": "SLC9C1",
+            "log2fc": 0.37024769005981384,
+            "p_value": 0.5622130085866323,
+            "adj_p_value": 0.8565826054071113
+          },
+          {
+            "gene_symbol": "SLC39A11",
+            "gene": "SLC39A11",
+            "log2fc": 0.3066672677501436,
+            "p_value": 0.5676768604506726,
+            "adj_p_value": 0.8595161891466425
+          },
+          {
+            "gene_symbol": "SLC35C2",
+            "gene": "SLC35C2",
+            "log2fc": 0.22533727165603745,
+            "p_value": 0.5687447684995849,
+            "adj_p_value": 0.8602186598796396
+          },
+          {
+            "gene_symbol": "SLC10A5",
+            "gene": "SLC10A5",
+            "log2fc": -0.36344070371829573,
+            "p_value": 0.5740659022238122,
+            "adj_p_value": 0.8628665989805308
+          },
+          {
+            "gene_symbol": "SLC2A13",
+            "gene": "SLC2A13",
+            "log2fc": -0.25430080282726514,
+            "p_value": 0.578161288876492,
+            "adj_p_value": 0.8645345181924375
+          },
+          {
+            "gene_symbol": "SLC10A7",
+            "gene": "SLC10A7",
+            "log2fc": 0.2047596360042192,
+            "p_value": 0.5786926579679625,
+            "adj_p_value": 0.8647346283003698
+          },
+          {
+            "gene_symbol": "SLC7A1",
+            "gene": "SLC7A1",
+            "log2fc": -0.1969155925559135,
+            "p_value": 0.579919260063967,
+            "adj_p_value": 0.8647346283003698
+          },
+          {
+            "gene_symbol": "SLC17A5",
+            "gene": "SLC17A5",
+            "log2fc": -0.1443115125077729,
+            "p_value": 0.5806753268116851,
+            "adj_p_value": 0.8648301118486367
+          },
+          {
+            "gene_symbol": "SLC25A39",
+            "gene": "SLC25A39",
+            "log2fc": -0.2451831050307555,
+            "p_value": 0.5807096771165213,
+            "adj_p_value": 0.864833310521893
+          },
+          {
+            "gene_symbol": "SLC8B1",
+            "gene": "SLC8B1",
+            "log2fc": 0.19421552595615277,
+            "p_value": 0.5810779013257283,
+            "adj_p_value": 0.864950012083126
+          },
+          {
+            "gene_symbol": "SLC19A2",
+            "gene": "SLC19A2",
+            "log2fc": 0.20071905161590736,
+            "p_value": 0.5813311392715572,
+            "adj_p_value": 0.8651995537061242
+          },
+          {
+            "gene_symbol": "SLC10A4",
+            "gene": "SLC10A4",
+            "log2fc": 0.5647186782725647,
+            "p_value": 0.58250110005658,
+            "adj_p_value": 0.865816458584164
+          },
+          {
+            "gene_symbol": "SLC2A14",
+            "gene": "SLC2A14",
+            "log2fc": 0.45381967238395493,
+            "p_value": 0.5832697694526563,
+            "adj_p_value": 0.8660979654871769
+          },
+          {
+            "gene_symbol": "SLC7A5",
+            "gene": "SLC7A5",
+            "log2fc": -0.37148078475478646,
+            "p_value": 0.5854118663514828,
+            "adj_p_value": 0.8664770210799269
+          },
+          {
+            "gene_symbol": "SLC48A1",
+            "gene": "SLC48A1",
+            "log2fc": -0.2210694248315642,
+            "p_value": 0.5874646862928122,
+            "adj_p_value": 0.8669085897025893
+          },
+          {
+            "gene_symbol": "SLC5A6",
+            "gene": "SLC5A6",
+            "log2fc": -0.26182874983687493,
+            "p_value": 0.5929740791975684,
+            "adj_p_value": 0.8692293636795115
+          },
+          {
+            "gene_symbol": "SLC25A5P6",
+            "gene": "SLC25A5P6",
+            "log2fc": -0.6983836513664646,
+            "p_value": 0.5947359085362894,
+            "adj_p_value": 0.8695306941814381
+          },
+          {
+            "gene_symbol": "SLC24A2",
+            "gene": "SLC24A2",
+            "log2fc": -0.4605883355072674,
+            "p_value": 0.5994777906550111,
+            "adj_p_value": 0.8716498321449694
+          },
+          {
+            "gene_symbol": "SLC25A33",
+            "gene": "SLC25A33",
+            "log2fc": -0.15891800187335772,
+            "p_value": 0.5997439043853979,
+            "adj_p_value": 0.8717173943916353
+          },
+          {
+            "gene_symbol": "SLC29A2",
+            "gene": "SLC29A2",
+            "log2fc": 0.2826377822892942,
+            "p_value": 0.6030352053756801,
+            "adj_p_value": 0.8730714264995239
+          },
+          {
+            "gene_symbol": "SLC1A3",
+            "gene": "SLC1A3",
+            "log2fc": -0.46273098871868656,
+            "p_value": 0.6046191676575006,
+            "adj_p_value": 0.8742234220552998
+          },
+          {
+            "gene_symbol": "SLC30A2",
+            "gene": "SLC30A2",
+            "log2fc": -0.5499820862378867,
+            "p_value": 0.6080351029924249,
+            "adj_p_value": 0.8752477233650867
+          },
+          {
+            "gene_symbol": "SLC16A1-AS1",
+            "gene": "SLC16A1-AS1",
+            "log2fc": -0.2676619420166521,
+            "p_value": 0.6200882243816168,
+            "adj_p_value": 0.8797924471277484
+          },
+          {
+            "gene_symbol": "SLC10A1",
+            "gene": "SLC10A1",
+            "log2fc": -0.29847850867812886,
+            "p_value": 0.6231043087117052,
+            "adj_p_value": 0.8813445681130013
+          },
+          {
+            "gene_symbol": "SLC35F6",
+            "gene": "SLC35F6",
+            "log2fc": -0.17222449636215958,
+            "p_value": 0.6254716535890851,
+            "adj_p_value": 0.882702061805094
+          },
+          {
+            "gene_symbol": "SLC22A17",
+            "gene": "SLC22A17",
+            "log2fc": -0.30152925848811574,
+            "p_value": 0.6343059534858244,
+            "adj_p_value": 0.887143041704786
+          },
+          {
+            "gene_symbol": "SLC2A11",
+            "gene": "SLC2A11",
+            "log2fc": 0.18822978749866542,
+            "p_value": 0.6409249098615926,
+            "adj_p_value": 0.889745149530969
+          },
+          {
+            "gene_symbol": "SLC49A4",
+            "gene": "SLC49A4",
+            "log2fc": -0.19661526233207635,
+            "p_value": 0.6482054532267951,
+            "adj_p_value": 0.892394821801197
+          },
+          {
+            "gene_symbol": "SLC35E2A",
+            "gene": "SLC35E2A",
+            "log2fc": -0.2399464068079866,
+            "p_value": 0.6563883480292894,
+            "adj_p_value": 0.8957243087604766
+          },
+          {
+            "gene_symbol": "SLC24A4",
+            "gene": "SLC24A4",
+            "log2fc": 0.2286870176173541,
+            "p_value": 0.6571743029697636,
+            "adj_p_value": 0.8957501110589208
+          },
+          {
+            "gene_symbol": "SLC44A4",
+            "gene": "SLC44A4",
+            "log2fc": -0.43504095602731235,
+            "p_value": 0.667548781721399,
+            "adj_p_value": 0.899136836633514
+          },
+          {
+            "gene_symbol": "SLC7A6OS",
+            "gene": "SLC7A6OS",
+            "log2fc": 0.12803002063974844,
+            "p_value": 0.669648213074139,
+            "adj_p_value": 0.900599549818172
+          },
+          {
+            "gene_symbol": "SLC2A4RG",
+            "gene": "SLC2A4RG",
+            "log2fc": -0.1884210990351498,
+            "p_value": 0.6731101038470766,
+            "adj_p_value": 0.9020031410067906
+          },
+          {
+            "gene_symbol": "SLC38A9",
+            "gene": "SLC38A9",
+            "log2fc": -0.13722342697487525,
+            "p_value": 0.6755811273589724,
+            "adj_p_value": 0.9029234779199384
+          },
+          {
+            "gene_symbol": "SLC6A9",
+            "gene": "SLC6A9",
+            "log2fc": -0.2898065143341041,
+            "p_value": 0.6774353621292888,
+            "adj_p_value": 0.9035611663940492
+          },
+          {
+            "gene_symbol": "SLC25A5P1",
+            "gene": "SLC25A5P1",
+            "log2fc": -0.28146126447513753,
+            "p_value": 0.6952665470165555,
+            "adj_p_value": 0.9104333895692923
+          },
+          {
+            "gene_symbol": "SLC25A30-AS1",
+            "gene": "SLC25A30-AS1",
+            "log2fc": -0.3761101563448407,
+            "p_value": 0.7009455413757039,
+            "adj_p_value": 0.9124745062607182
+          },
+          {
+            "gene_symbol": "SLC25A36",
+            "gene": "SLC25A36",
+            "log2fc": 0.16465366414262253,
+            "p_value": 0.7147437482808525,
+            "adj_p_value": 0.9172172920156053
+          },
+          {
+            "gene_symbol": "SLC2A3P2",
+            "gene": "SLC2A3P2",
+            "log2fc": 0.3741371664408315,
+            "p_value": 0.7227373543780415,
+            "adj_p_value": 0.9204725145800489
+          },
+          {
+            "gene_symbol": "SLC35G5",
+            "gene": "SLC35G5",
+            "log2fc": -0.2821705199374332,
+            "p_value": 0.7280556746503022,
+            "adj_p_value": 0.9219297634133874
+          },
+          {
+            "gene_symbol": "SLC9A1",
+            "gene": "SLC9A1",
+            "log2fc": -0.2320172498660088,
+            "p_value": 0.7343293848523078,
+            "adj_p_value": 0.9237937961211157
+          },
+          {
+            "gene_symbol": "SLC35G6",
+            "gene": "SLC35G6",
+            "log2fc": -0.20482113452405118,
+            "p_value": 0.7367242952368727,
+            "adj_p_value": 0.925231327584656
+          },
+          {
+            "gene_symbol": "SLC4A9",
+            "gene": "SLC4A9",
+            "log2fc": 0.2695735755548292,
+            "p_value": 0.7373204549567153,
+            "adj_p_value": 0.9253459572091007
+          },
+          {
+            "gene_symbol": "SLC35A4",
+            "gene": "SLC35A4",
+            "log2fc": -0.10069073130139759,
+            "p_value": 0.737443742581547,
+            "adj_p_value": 0.9254141932979779
+          },
+          {
+            "gene_symbol": "SLC39A9",
+            "gene": "SLC39A9",
+            "log2fc": -0.11300978787621407,
+            "p_value": 0.7375043689644831,
+            "adj_p_value": 0.9254470298528249
+          },
+          {
+            "gene_symbol": "SLC9A8",
+            "gene": "SLC9A8",
+            "log2fc": 0.10390263578982954,
+            "p_value": 0.7389296103970506,
+            "adj_p_value": 0.9257199367529635
+          },
+          {
+            "gene_symbol": "SLC25A3P2",
+            "gene": "SLC25A3P2",
+            "log2fc": -0.24685839260083833,
+            "p_value": 0.7412981304879659,
+            "adj_p_value": 0.926677745592372
+          },
+          {
+            "gene_symbol": "SLC12A9",
+            "gene": "SLC12A9",
+            "log2fc": 0.13063338520408424,
+            "p_value": 0.7430248904357827,
+            "adj_p_value": 0.9275394224541128
+          },
+          {
+            "gene_symbol": "SLC9A2",
+            "gene": "SLC9A2",
+            "log2fc": 0.28540691774250704,
+            "p_value": 0.7516493046440269,
+            "adj_p_value": 0.9305379608621421
+          },
+          {
+            "gene_symbol": "SLC22A13",
+            "gene": "SLC22A13",
+            "log2fc": 0.18530897253367332,
+            "p_value": 0.7610133836960511,
+            "adj_p_value": 0.9331039324540541
+          },
+          {
+            "gene_symbol": "SLC25A6P2",
+            "gene": "SLC25A6P2",
+            "log2fc": -0.21477178242982375,
+            "p_value": 0.7646910837576372,
+            "adj_p_value": 0.9333109917213819
+          },
+          {
+            "gene_symbol": "SLC44A3",
+            "gene": "SLC44A3",
+            "log2fc": 0.17554737179620877,
+            "p_value": 0.7651360767650937,
+            "adj_p_value": 0.9333109917213819
+          },
+          {
+            "gene_symbol": "SLC6A16",
+            "gene": "SLC6A16",
+            "log2fc": -0.16552415948902544,
+            "p_value": 0.7702483532564678,
+            "adj_p_value": 0.935186163579521
+          },
+          {
+            "gene_symbol": "SLC25A4",
+            "gene": "SLC25A4",
+            "log2fc": -0.18457386981585613,
+            "p_value": 0.7704834114053905,
+            "adj_p_value": 0.9352785435139742
+          },
+          {
+            "gene_symbol": "SLC12A7",
+            "gene": "SLC12A7",
+            "log2fc": 0.1685134866218629,
+            "p_value": 0.772790291654434,
+            "adj_p_value": 0.9356681877585087
+          },
+          {
+            "gene_symbol": "SLC25A21-AS1",
+            "gene": "SLC25A21-AS1",
+            "log2fc": 0.20585409716349085,
+            "p_value": 0.7752166861873822,
+            "adj_p_value": 0.9367477761191602
+          },
+          {
+            "gene_symbol": "SLC5A3",
+            "gene": "SLC5A3",
+            "log2fc": 0.14093733230016228,
+            "p_value": 0.8044448578031428,
+            "adj_p_value": 0.947967139147047
+          },
+          {
+            "gene_symbol": "SLC30A5",
+            "gene": "SLC30A5",
+            "log2fc": -0.04995780735341401,
+            "p_value": 0.8047671125570227,
+            "adj_p_value": 0.9481388714556439
+          },
+          {
+            "gene_symbol": "SLC35A2",
+            "gene": "SLC35A2",
+            "log2fc": -0.11381502023891416,
+            "p_value": 0.8088568435704042,
+            "adj_p_value": 0.9490903830112785
+          },
+          {
+            "gene_symbol": "SLC16A12",
+            "gene": "SLC16A12",
+            "log2fc": -0.17941628667788806,
+            "p_value": 0.8135009972321906,
+            "adj_p_value": 0.9505237264371224
+          },
+          {
+            "gene_symbol": "SLC22A23",
+            "gene": "SLC22A23",
+            "log2fc": -0.1322167909147011,
+            "p_value": 0.8180929533225098,
+            "adj_p_value": 0.9514142821587753
+          },
+          {
+            "gene_symbol": "SLC41A2",
+            "gene": "SLC41A2",
+            "log2fc": -0.17809368506588472,
+            "p_value": 0.8250431933820982,
+            "adj_p_value": 0.9534968586569252
+          },
+          {
+            "gene_symbol": "SLC17A7",
+            "gene": "SLC17A7",
+            "log2fc": 0.12844205169146064,
+            "p_value": 0.8399430625511947,
+            "adj_p_value": 0.95777032966683
+          },
+          {
+            "gene_symbol": "SLC25A21",
+            "gene": "SLC25A21",
+            "log2fc": -0.13726244908622437,
+            "p_value": 0.8399483988652379,
+            "adj_p_value": 0.95777032966683
+          },
+          {
+            "gene_symbol": "SLC25A17",
+            "gene": "SLC25A17",
+            "log2fc": 0.05684758519617738,
+            "p_value": 0.8415312711564109,
+            "adj_p_value": 0.9582024852953689
+          },
+          {
+            "gene_symbol": "SLC33A1",
+            "gene": "SLC33A1",
+            "log2fc": 0.058117832766317164,
+            "p_value": 0.8455116260058102,
+            "adj_p_value": 0.9587105859409769
+          },
+          {
+            "gene_symbol": "SLC26A4-AS1",
+            "gene": "SLC26A4-AS1",
+            "log2fc": 0.1104044235298569,
+            "p_value": 0.8497671153974169,
+            "adj_p_value": 0.9601733948558985
+          },
+          {
+            "gene_symbol": "SLC10A3",
+            "gene": "SLC10A3",
+            "log2fc": -0.0718596270114732,
+            "p_value": 0.8516220513029664,
+            "adj_p_value": 0.9604957986034385
+          },
+          {
+            "gene_symbol": "SLC8A3",
+            "gene": "SLC8A3",
+            "log2fc": 0.10238209315351422,
+            "p_value": 0.8567507778986845,
+            "adj_p_value": 0.9614264111423991
+          },
+          {
+            "gene_symbol": "SLC27A5",
+            "gene": "SLC27A5",
+            "log2fc": 0.09244620323569769,
+            "p_value": 0.8586258692575465,
+            "adj_p_value": 0.9618443457404133
+          },
+          {
+            "gene_symbol": "SLC35E2B",
+            "gene": "SLC35E2B",
+            "log2fc": -0.06135551962213248,
+            "p_value": 0.8587743762965658,
+            "adj_p_value": 0.9618502231137114
+          },
+          {
+            "gene_symbol": "SLC25A12",
+            "gene": "SLC25A12",
+            "log2fc": -0.10870179020727315,
+            "p_value": 0.8606098696291715,
+            "adj_p_value": 0.9623116508552662
+          },
+          {
+            "gene_symbol": "SLC9B1",
+            "gene": "SLC9B1",
+            "log2fc": 0.10705518536275688,
+            "p_value": 0.8619820614503083,
+            "adj_p_value": 0.9627127273687716
+          },
+          {
+            "gene_symbol": "SLC7A10",
+            "gene": "SLC7A10",
+            "log2fc": -0.20938131369692406,
+            "p_value": 0.8652064269593837,
+            "adj_p_value": 0.9637488097229867
+          },
+          {
+            "gene_symbol": "SLC22A15",
+            "gene": "SLC22A15",
+            "log2fc": 0.12058937845026346,
+            "p_value": 0.8705030533531389,
+            "adj_p_value": 0.9652221628333244
+          },
+          {
+            "gene_symbol": "SLC66A1",
+            "gene": "SLC66A1",
+            "log2fc": 0.05692869773940456,
+            "p_value": 0.8760408358135944,
+            "adj_p_value": 0.9671136816055137
+          },
+          {
+            "gene_symbol": "SLC22A20P",
+            "gene": "SLC22A20P",
+            "log2fc": -0.10350320294763447,
+            "p_value": 0.9032702812170414,
+            "adj_p_value": 0.9755739102921615
+          },
+          {
+            "gene_symbol": "SLCO2B1",
+            "gene": "SLCO2B1",
+            "log2fc": -0.06726579813339255,
+            "p_value": 0.9051155798956545,
+            "adj_p_value": 0.9757945355954739
+          },
+          {
+            "gene_symbol": "SLC38A10",
+            "gene": "SLC38A10",
+            "log2fc": -0.05589027418428565,
+            "p_value": 0.9063312328911611,
+            "adj_p_value": 0.9760470547313675
+          },
+          {
+            "gene_symbol": "SLC7A11-AS1",
+            "gene": "SLC7A11-AS1",
+            "log2fc": 0.13586628161283062,
+            "p_value": 0.9089323094651098,
+            "adj_p_value": 0.976723995798455
+          },
+          {
+            "gene_symbol": "SLC3A2",
+            "gene": "SLC3A2",
+            "log2fc": -0.052115812469362685,
+            "p_value": 0.9158374477309595,
+            "adj_p_value": 0.9787438610048597
+          },
+          {
+            "gene_symbol": "SLC44A1",
+            "gene": "SLC44A1",
+            "log2fc": 0.03475724384952322,
+            "p_value": 0.9169131899239847,
+            "adj_p_value": 0.9791880319945336
+          },
+          {
+            "gene_symbol": "SLC16A10",
+            "gene": "SLC16A10",
+            "log2fc": -0.08833709559022465,
+            "p_value": 0.9189887112147355,
+            "adj_p_value": 0.9798070915234006
+          },
+          {
+            "gene_symbol": "SLC25A19",
+            "gene": "SLC25A19",
+            "log2fc": 0.04766448498187506,
+            "p_value": 0.9197354095564233,
+            "adj_p_value": 0.9798502285443672
+          },
+          {
+            "gene_symbol": "SLC39A14",
+            "gene": "SLC39A14",
+            "log2fc": -0.0606947280513144,
+            "p_value": 0.9261244913708894,
+            "adj_p_value": 0.9810665564948172
+          },
+          {
+            "gene_symbol": "SLC25A14",
+            "gene": "SLC25A14",
+            "log2fc": 0.029337140462101757,
+            "p_value": 0.9277093870626083,
+            "adj_p_value": 0.981294342177486
+          },
+          {
+            "gene_symbol": "SLC50A1",
+            "gene": "SLC50A1",
+            "log2fc": 0.044197181239962774,
+            "p_value": 0.9285264698572805,
+            "adj_p_value": 0.9814001157026698
+          },
+          {
+            "gene_symbol": "SLC35E3",
+            "gene": "SLC35E3",
+            "log2fc": -0.03158375217275188,
+            "p_value": 0.9285523920316654,
+            "adj_p_value": 0.9814001157026698
+          },
+          {
+            "gene_symbol": "SLC26A6",
+            "gene": "SLC26A6",
+            "log2fc": 0.04839280984324457,
+            "p_value": 0.9334023273236441,
+            "adj_p_value": 0.9824594514052043
+          },
+          {
+            "gene_symbol": "SLC31A1P1",
+            "gene": "SLC31A1P1",
+            "log2fc": -0.06795091571390811,
+            "p_value": 0.9467211950205204,
+            "adj_p_value": 0.9853238200430491
+          },
+          {
+            "gene_symbol": "SLC6A2",
+            "gene": "SLC6A2",
+            "log2fc": -0.05757290093030589,
+            "p_value": 0.9511670883182402,
+            "adj_p_value": 0.986525225212382
+          },
+          {
+            "gene_symbol": "SLC35A5",
+            "gene": "SLC35A5",
+            "log2fc": 0.020599621843890966,
+            "p_value": 0.9545985599324363,
+            "adj_p_value": 0.9872039325944592
+          },
+          {
+            "gene_symbol": "SLC25A5P5",
+            "gene": "SLC25A5P5",
+            "log2fc": 0.032189303781678585,
+            "p_value": 0.9595147545201125,
+            "adj_p_value": 0.9889368786656999
+          },
+          {
+            "gene_symbol": "SLC25A18",
+            "gene": "SLC25A18",
+            "log2fc": 0.02462040361035663,
+            "p_value": 0.9617479564172029,
+            "adj_p_value": 0.9892265758081725
+          },
+          {
+            "gene_symbol": "SLC35B3",
+            "gene": "SLC35B3",
+            "log2fc": -0.013954155417760496,
+            "p_value": 0.966081944724851,
+            "adj_p_value": 0.9900590829253242
+          },
+          {
+            "gene_symbol": "SLC22A3",
+            "gene": "SLC22A3",
+            "log2fc": -0.01924261594481442,
+            "p_value": 0.9677032237720116,
+            "adj_p_value": 0.9901874758498044
+          },
+          {
+            "gene_symbol": "SLC25A26",
+            "gene": "SLC25A26",
+            "log2fc": 0.009841345296604772,
+            "p_value": 0.9721115966383399,
+            "adj_p_value": 0.9919596197572551
+          },
+          {
+            "gene_symbol": "SLC39A3",
+            "gene": "SLC39A3",
+            "log2fc": 0.014625964799656763,
+            "p_value": 0.9735310376525494,
+            "adj_p_value": 0.9925562259668484
+          },
+          {
+            "gene_symbol": "SLC38A2",
+            "gene": "SLC38A2",
+            "log2fc": -0.010623974875699896,
+            "p_value": 0.9824054733109102,
+            "adj_p_value": 0.9949659463557083
+          },
+          {
+            "gene_symbol": "SLC38A4",
+            "gene": "SLC38A4",
+            "log2fc": 0.020223818868589476,
+            "p_value": 0.9824287056557703,
+            "adj_p_value": 0.9949659463557083
+          },
+          {
+            "gene_symbol": "SLC5A10",
+            "gene": "SLC5A10",
+            "log2fc": 0.004934796944714321,
+            "p_value": 0.9946419274046946,
+            "adj_p_value": 0.9988820433168977
+          },
+          {
+            "gene_symbol": "SLC22A9",
+            "gene": "SLC22A9",
+            "log2fc": 2.5336472899708773,
+            "p_value": 0.024617433219450348,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A15P3",
+            "gene": "SLC25A15P3",
+            "log2fc": -2.8436472740676,
+            "p_value": 0.06090787658921849,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A47P1",
+            "gene": "SLC25A47P1",
+            "log2fc": -4.6696009835383085,
+            "p_value": 0.06274110058841117,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC9A3P3",
+            "gene": "SLC9A3P3",
+            "log2fc": 2.090491331833354,
+            "p_value": 0.11811312034501052,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A2",
+            "gene": "SLC25A2",
+            "log2fc": -1.326014920085671,
+            "p_value": 0.1811134488198755,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC35F4",
+            "gene": "SLC35F4",
+            "log2fc": 1.0851535939291685,
+            "p_value": 0.20543479238486287,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC22A6",
+            "gene": "SLC22A6",
+            "log2fc": 1.9295064624255729,
+            "p_value": 0.256456493712344,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A31",
+            "gene": "SLC25A31",
+            "log2fc": -2.3749648835983557,
+            "p_value": 0.2575664096835895,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A5P9",
+            "gene": "SLC25A5P9",
+            "log2fc": -1.9798286921814712,
+            "p_value": 0.3446117568454843,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC13A1",
+            "gene": "SLC13A1",
+            "log2fc": -2.251245035949458,
+            "p_value": 0.3708250550740953,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC22A14",
+            "gene": "SLC22A14",
+            "log2fc": 0.8910300379798235,
+            "p_value": 0.37372595789871543,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A20P1",
+            "gene": "SLC25A20P1",
+            "log2fc": -2.118334123720322,
+            "p_value": 0.3889471880328045,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC12A5-AS1",
+            "gene": "SLC12A5-AS1",
+            "log2fc": 1.3104380305899188,
+            "p_value": 0.38942323584374844,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC22A10",
+            "gene": "SLC22A10",
+            "log2fc": 1.0982407414395867,
+            "p_value": 0.3896420079362509,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC29A4P1",
+            "gene": "SLC29A4P1",
+            "log2fc": -2.0759128585407485,
+            "p_value": 0.40142146466023476,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC22A25",
+            "gene": "SLC22A25",
+            "log2fc": -1.0678403511844752,
+            "p_value": 0.41214486499110947,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC5A8",
+            "gene": "SLC5A8",
+            "log2fc": 0.9603849335612729,
+            "p_value": 0.42733696125877096,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC20A1P2",
+            "gene": "SLC20A1P2",
+            "log2fc": -2.2641053348265032,
+            "p_value": 0.46356064970835087,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC6A14P1",
+            "gene": "SLC6A14P1",
+            "log2fc": -2.2610131528180184,
+            "p_value": 0.4641865330397325,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC22A12",
+            "gene": "SLC22A12",
+            "log2fc": 0.9563405185251045,
+            "p_value": 0.49472835193174663,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A1P5",
+            "gene": "SLC25A1P5",
+            "log2fc": -1.4622719025237891,
+            "p_value": 0.4977974534938754,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC29A4P2",
+            "gene": "SLC29A4P2",
+            "log2fc": -2.0455023394329204,
+            "p_value": 0.5086212481212269,
+            "adj_p_value": null
+          },
+          {
+            "gene_symbol": "SLC25A51P4",
+            "gene": "SLC25A51P4",
+            "log2fc": 1.1532996962828084,
+            "p_value": 0.5206833681703773,
+            "adj_p_value": null
+          }
+        ],
+        "sample_counts": {
+          "tumor": 6,
+          "normal": 6
+        },
+        "family_tested_count": 509
+      },
+      "expression_by_gene": {
+        "SLC35G3": {
+          "status": "unavailable",
+          "gene": "SLC35G3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35G3": {
+          "status": "unavailable",
+          "gene": "SLC35G3",
+          "cancer_type": "Stomach Cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {
+        "SLC35G3": 0.8690218255819139
+      },
+      "paralog_partners": {
+        "SLC35G3": [
+          "SLC35A1",
+          "SLC35A2",
+          "SLC35A3",
+          "SLC35A4",
+          "SLC35A5",
+          "SLC35B1",
+          "SLC35B2",
+          "SLC35B3",
+          "SLC35B4",
+          "SLC35C1",
+          "SLC35C2",
+          "SLC35D1",
+          "SLC35D2",
+          "SLC35D3",
+          "SLC35E1",
+          "SLC35E2A",
+          "SLC35E2B",
+          "SLC35E3",
+          "SLC35E4",
+          "SLC35F2",
+          "SLC35F4",
+          "SLC35F5",
+          "SLC35F6",
+          "SLC35G1",
+          "SLC35G2",
+          "SLC35G5",
+          "SLC35G6"
+        ]
+      },
+      "skipped_tools": []
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35G3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35G3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=1 量级=0.42 -> P(必需)=0.434 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35G3"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35G3": 0.4167
+        },
+        "basis": [
+          "de",
+          "kg_neighbor",
+          "llm_judge",
+          "paralog_buffered",
+          "paralog_redundancy",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 2, 'A:True': 1}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: No direct OE19 MAGeCK lapatinib evidence for SLC35G3 resistance; graph data only association. E and L2 correctly note absent mechanism/direction; L1's annotation claim unsupported. Majority and evidence favor non-promotion.。原证据通道判定: winner=None answer=False conf=0.434（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35G3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] OE19为HER2相关胃癌细胞系，其Lapatinib处理背景可类比HER2驱动的胃癌/乳腺癌药物响应环境；SLC35家族参与ER/Golgi核苷糖转运和糖基化，理论上可影响受体或转运体功能，但SLC35G3本身缺乏胃癌疾病邻近、表达/KM证据，且与多个SLC35旁系高度冗余，提示其敲除易被同亚家族缓冲，难以形成可检测的促耐药效应。 | 跨癌种生物学上，SLC35G3若参与糖基化通路，可能间接影响Lapatinib敏感性，但现有证据不支持其在胃癌中发挥独特促耐药作用：PPR/TIMER/KM均不可用，DESeq2仅给出总体显著性而不指向该基因特异效应；旁系冗余0.87强烈提示CRISPR敲除会被SLC35A1/A2/A3/A4/A5/B1等补偿。因此最可能判断为SLC35G3不促进Stomach Cancer肿瘤药物抵抗。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35G3"
+        ],
+        "confidence": 0.82,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35G3": 0.4167
+        },
+        "basis": [
+          "de",
+          "kg_neighbor",
+          "llm_judge",
+          "paralog_buffered",
+          "paralog_redundancy",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.82；法官理由: No direct MAGeCK/OE19/Lapatinib resistance evidence for SLC35G3. High paralog redundancy and low pipeline score weaken a unique promoter role. All independent channels converge on false.。原证据通道判定: winner=None answer=False conf=0.36（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35G3']",
+        "status": "ok",
+        "summary": "SLC35G3 作为溶质载体家族成员，具有参与药物转运/应激响应的潜力；在胃癌/食管胃交界肿瘤相关 CRISPR 与 Lapatinib 耐药筛选语境中，可被解释为正向促进肿瘤药物耐性的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC35G3"
+        ],
+        "confidence": 0.38,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC35G3 作为溶质载体家族成员，具有参与药物转运/应激响应的潜力；在胃癌/食管胃交界肿瘤相关 CRISPR 与 Lapatinib 耐药筛选语境中，可被解释为正向促进肿瘤药物耐性的候选基因。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T14:29:19Z"
+  }
+}

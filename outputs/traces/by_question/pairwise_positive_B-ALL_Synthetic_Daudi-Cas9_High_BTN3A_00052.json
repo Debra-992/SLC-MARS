@@ -1,0 +1,750 @@
+{
+  "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC16A1 and SLC35A1 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC35A1"
+  },
+  "effective_genes": [
+    "SLC16A1",
+    "SLC35A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+      "status": "ok",
+      "summary": "检索到 4 类证据、39 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC16A1",
+        "SLC35A1"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "protein_function": "Bidirectional proton-coupled monocarboxylate transporter that catalyzes the rapid transport across the plasma membrane of many monocarboxylates such as lactate, pyruvate, acetate and the ketone bodies acetoacetate and beta-hydroxybutyrate.",
+              "aliases": "MCT1, Monocarboxylate Transporter 1",
+              "transport_type": "C / H+ or E / monocarboxylate"
+            },
+            {
+              "gene": "SLC35A1",
+              "protein_function": "Transports CMP-sialic acid from the cytosol into the Golgi apparatus, functioning as an antiporter that exchanges CMP-sialic acid for CMP.",
+              "aliases": "CMP-Sia-Tr, CMPST",
+              "transport_type": "E / CMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC16 Monocarboxylate  transporter family",
+              "target_properties": {
+                "name": "SLC16 Monocarboxylate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC16A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Brain Tumor",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Cervical Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Head and Neck Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Head and Neck tumors",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Laryngeal Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Venous thromboembolism (VTE)",
+              "disease_sort": "Non-tumor diseases",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "oxidative stress",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC16A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Monocarboxylate transporter 1 promotes proliferation and invasion of renal cancer cells by mediating acetate transport.",
+              "abstract": "One hallmark of renal cell carcinoma (RCC) is metabolic reprogramming, which involves elevation of glycolysis and upregulation of lipid metabolism. However, the mechanism of metabolic reprogramming is incompletely understood. Monocarboxylate transporter 1 (MCT1) promotes transport for lactate and pyruvate, which are crucial for cell metabolism. The aim of present study was to investigate the function of MCT1 on RCC development and its mechanism on metabolic reprogramming. The results showed that MCT1 messenger RNA and protein levels significantly increased in cancer tissues of ccRCC compared to normal tissue. MCT1 was further found to mainly located in the cell membrane of RCC. The knockdown of MCT1 by RNAi significantly inhibited proliferation and migration of 786-O and ACHN cells. MCT1 also induced the expressions of proliferation marker Ki-67 and invasion marker SNAI1. Moreover, we also showed that acetate treatment could upregulate the expression of MCT1, but not other MCT isoforms. On the other hand, MCT1 was involved in acetate transport and intracellular histone acetylation. In summary, this study revealed that MCT1 is abnormally high in ccRCC and promotes cancer development. The regulatory effect of MCT1 on cell proliferation and invasion maybe mediated by acetate transport.",
+              "doi": "10.1002/cbin.11571",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "00a349501c346621af1aa2795ecb79f912dbbdfb68e97497aa9eb88e5e65290b"
+              }
+            },
+            {
+              "title": "Genome wide CRISPR screening reveals a role for sialylation in the tumorigenesis and chemoresistance of acute myeloid leukemia cells.",
+              "abstract": "Aberrant activation of cytokine and growth factor signal transduction pathways confers enhanced survival and proliferation properties to acute myeloid leukemia (AML) cells. However, the mechanisms underlying the deregulation of signaling pathways in leukemia cells are unclear. To identify genes capable of independently supporting cytokine-independent growth, we employed a genome-wide CRISPR/Cas9-mediated loss-of-function screen in GM-CSF-dependent human AML TF-1 cells. More than 182 genes (p < 0.01) were found to suppress the cytokine-independent growth of TF-1 cells. Among the top hits, genes encoding key factors involved in sialylation biosynthesis were identified; these included CMAS, SLC35A1, NANS, and GNE. Knockout of either CMAS or SLC35A1 enabled cytokine-independent proliferation and survival of AML cells. Furthermore, NSG (NOD/SCID/IL2Rγ) mice injected with CMAS or SLC35A1-knockout TF-1 cells exhibited a shorter survival than mice injected with wild-type cells. Mechanistically, abrogation of sialylation biosynthesis in TF-1 cells induced a strong activation of ERK signaling, which sensitized cells to MEK inhibitors but conferred resistance to JAK inhibitors. Further, the surface level of α2,3-linked sialic acids was negatively correlated with the sensitivity of AML cell lines to MEK/ERK inhibitors. We also found that sialylation modulated the expression and stability of the CSF2 receptor. Together, these results demonstrate a novel role of sialylation in regulating oncogenic transformation and drug resistance development in leukemia. We propose that altered sialylation could serve as a biomarker for targeted anti-leukemic therapy.",
+              "doi": "10.1016/j.canlet.2021.04.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "30721cbd751194153687e1cd259f0e7c692eeb300d2bae380cb498a5094bd055"
+              }
+            },
+            {
+              "title": "The monocarboxylate transporter family--role and regulation.",
+              "abstract": "Monocarboxylate transporter (MCT) isoforms 1-4 catalyze the proton-linked transport of monocarboxylates such as L-lactate across the plasma membrane, whereas MCT8 and MCT10 are thyroid hormone and aromatic amino acid transporters, respectively. The importance of MCTs is becoming increasingly evident as their extensive physiological and pathological roles are revealed. MCTs 1-4 play essential metabolic roles in most tissues with their distinct properties, expression profile, and subcellular localization matching the particular metabolic needs of a tissue. Important metabolic roles include energy metabolism in the brain, skeletal muscle, heart, tumor cells, and T-lymphocyte activation, gluconeogenesis in the liver and kidney, spermatogenesis, bowel metabolism of short-chain fatty acids, and drug transport. MCT8 is essential for thyroid hormone transport across the blood-brain barrier. Genetic perturbation of MCT function may be involved in disease states such as pancreatic β-cell malfunction (inappropriate MCT1 expression), chronic fatigue syndromes (impairment of muscle MCT function), and psychomotor retardation (MCT8 mutation). MCT expression can be regulated at both the transcriptional and post-transcriptional levels. Of particular importance is the upregulation of muscle MCT1 expression in response to training and MCT4 expression in response to hypoxia. The latter is mediated by hypoxia inducible factor 1α and often observed in tumor cells that rely almost entirely on glycolysis for their energy provision. The recent discovery of potent and specific MCT1 inhibitors that prevent proliferation of T-lymphocytes confirms that MCTs may be promising pharmacological targets including for cancer chemotherapy.",
+              "doi": "10.1002/iub.572",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "faaef0c259798c109b5eff4a1c66ff7ca5642abf1ea1365db09bbb65bd7bd547"
+              }
+            },
+            {
+              "title": "LncRNA SLC16A1-AS1 contributes to the progression of hepatocellular carcinoma cells by modulating miR-411/MITD1 axis.",
+              "abstract": "Hepatocellular carcinoma (HCC) is a common malignancy with high morbidity. The current study aimed to explore the molecular mechanism of lncRNA SLC16A1-AS1 in the tumorigenesis of HCC. The expression of SLC16A1-AS1 and miR-411 was examined in clinical HCC tissues. HCC cell lines Hep3B and Huh-7 were employed and transfected with si-SLC16A1-AS1. The correlation between SLC16A1-AS1 and miR-411 was verified by luciferase reporter assay. Cell viability was detected by CCK-8 assay. Cell migration and invasion capacity were examined by transwell assay. The protein level of MITD1 was analyzed by western blotting. The expression of SLC16A1-AS1 markedly increased in HCC tissues and cell lines. Subsequent studies identified SLC16A1-AS1 as a downstream target of miR-411. In addition, SLC16A1-AS1 knockdown and miR-411 overexpression significantly stagnated the progression of HCC cells. SLC16A1-AS1 knockdown also downregulated MITD1 levels. Our findings showed that SLC16A1-AS1 was overexpressed in HCC cells and tissues. SLC16A1-AS1 promoted the malignant characteristics of HCC cells and acted as an oncogene. Its regulatory effect may be associated with miR-411/MITD1 axis. Therefore, SLC16A1-AS1 has the potential to be used as a biomarker or therapeutic target for the treatment of HCC.",
+              "doi": "10.1002/jcla.24344",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa76fcbcdc502c60b03c85f63d04c712403a893b16ca2fe939f499a09a4264c8"
+              }
+            },
+            {
+              "title": "Enhancing the anticancer effect of androgen deprivation therapy by monocarboxylate transporter 1 inhibitor in prostate cancer cells.",
+              "abstract": "Tumor initiation and progression necessitate a metabolic shift in cancer cells. Consequently, the progression of prostate cancer (PCa), a leading cause of cancer-related deaths in males globally, involves a shift from lipogenic to glycolytic metabolism. Androgen deprivation therapy (ADT) serves as the standard treatment for advanced-stage PCa. However, despite initial patient responses, castrate resistance emerges ultimately, necessitating novel therapeutic approaches. Therefore, in this study, we aimed to investigate the role of monocarboxylate transporters (MCTs) in PCa post-ADT and evaluate their potential as therapeutic targets. PCa cells (LNCaP and C4-2 cell line), which has high prostate-specific membrane antigen (PSMA) and androgen receptor (AR) expression among PCa cell lines, was used in this study. We assessed the expression of MCT1 in PCa cells subjected to ADT using charcoal-stripped bovine serum (CSS)-containing medium or enzalutamide (ENZ). Furthermore, we evaluated the synergistic anticancer effects of combined treatment with ENZ and SR13800, an MCT1 inhibitor. Short-term ADT led to a significant upregulation in folate hydrolase 1 (FOLH1) and solute carrier family 16 member 1 (SLC16A1) gene levels, with elevated PSMA and MCT1 protein levels. Long-term ADT induced notable changes in cell morphology with further upregulation of FOLH1/PSMA and SLC16A1/MCT1 levels. Treatment with ENZ, a nonsteroidal anti-androgen, also increased PSMA and MCT1 expression. However, combined therapy with ENZ and SR13800 led to reduced PSMA level, decreased cell viability, and suppressed expression of cancer stem cell markers and migration indicators. Additionally, analysis of human PCa tissues revealed a positive correlation between PSMA and MCT1 expression in tumor regions. Our results demonstrate that ADT led to a significant upregulation in MCT1 levels. However, the combination of ENZ and SR13800 demonstrated a promising synergistic anticancer effect, highlighting a potential therapeutic significance for patients with PCa undergoing ADT.",
+              "doi": "10.1002/pros.24700",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1dd9ec89e9bf564060a828b4fd96fa88f064f3aa982ca11b28c9757d18f0f055"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC16A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC16A1 and SLC35A1 is more likely to promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC16A1', 'SLC35A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC16A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC16A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC16A1": {
+          "status": "unavailable",
+          "gene": "SLC16A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35A1": {
+          "status": "unavailable",
+          "gene": "SLC35A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC16A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC16A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC35A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC35A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC35A1"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A1": 8.8,
+          "SLC35A1": 0.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC35A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC35A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC35A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC35A1"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A1": 8.8,
+          "SLC35A1": 0.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC16A1(P(winner)=0.64) vs SLC35A1(P=0.45), 差=0.19；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC16A1', 'SLC35A1']",
+        "status": "ok",
+        "summary": "SLC16A1/MCT1 介导乳酸和丙酮酸跨膜转运，支持高糖酵解型 B-lymphoblastic leukaemia 细胞的能量代谢与增殖，在多种血液肿瘤中常与存活优势相关；SLC35A1 主要参与唾液酸化，虽可影响免疫逃逸和糖基化，但作为直接促进肿瘤存活的候选不如 SLC16A1 明确。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC16A1",
+        "candidates": [
+          "SLC16A1",
+          "SLC35A1"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC16A1/MCT1 介导乳酸和丙酮酸跨膜转运，支持高糖酵解型 B-lymphoblastic leukaemia 细胞的能量代谢与增殖，在多种血液肿瘤中常与存活优势相关；SLC35A1 主要参与唾液酸化，虽可影响免疫逃逸和糖基化，但作为直接促进肿瘤存活的候选不如 SLC16A1 明确。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:50:43Z"
+  }
+}

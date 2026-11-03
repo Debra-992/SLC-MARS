@@ -1,0 +1,457 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_7Days_00159",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC12A6 and SLC25A3 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+  },
+  "ground_truth": {
+    "winner": "SLC12A6"
+  },
+  "effective_genes": [
+    "SLC12A6",
+    "SLC25A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_7Days_00159",
+      "status": "ok",
+      "summary": "检索到 4 类证据、13 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC12A6",
+        "SLC25A3"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC12A6",
+              "protein_function": "Mediates electroneutral potassium-chloride cotransport when activated by cell swelling",
+              "aliases": "KCC3, ACCPN",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC25A3",
+              "protein_function": "Inorganic ion transporter that transports phosphate or copper ions across the mitochondrial inner membrane into the matrix compartment.",
+              "aliases": "PTP, PiC",
+              "transport_type": "C / phosphate, H+; E / phosphate, OH-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC12A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC12 Electroneutral cation-coupled  Cl cotransporter family",
+              "target_properties": {
+                "name": "SLC12 Electroneutral cation-coupled  Cl cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC12A6",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A3",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Kidney Cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC12A6",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "breast cancer(BC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Functional analysis of a potassium-chloride co-transporter 3 (SLC12A6) promoter polymorphism leading to an additional DNA methylation site.",
+              "abstract": "The human potassium-chloride co-transporter 3 (KCC3, SLC12A6) is involved in cell proliferation and in electro-neutral movement of ions across the cell membrane. The gene (SLC12A6) is located on chromosome 15q14, a region that has previously shown linkage with bipolar disorder, schizophrenia, rolandic epilepsy, idiopathic generalized epilepsy, autism and attention deficit/hyperactivity disorder. Furthermore, recessively inherited mutations of SLC12A6 cause Andermann syndrome, characterized by agenesis of the corpus callosum, which is associated with peripheral neuropathy and psychoses. Recently, we have demonstrated the association of two G/A promoter polymorphisms of SLC12A6 with bipolar disorder in a case-control study, and familial segregation of the rare variants as well as a trend toward association with schizophrenia. To investigate functional consequences of these polymorphisms, lymphocyte DNA was extracted, bisulfite modified, and subsequently sequenced. To investigate SLC12A6 promoter activity, various promoter constructs were generated and analyzed by luciferase reporter gene assays. We provide evidence that the G- allele showed a significant reduction of reporter gene expression. In human lymphocytes, the allele harboring the rare upstream G nucleotide was found to be methylated at the adjacent C position, possibly accountable for tissue-specific reduction in gene expression in vivo. Here we demonstrate functionality of an SNP associated with psychiatric disease and our results may represent a functional link between genetic variation and an epigenetic modification.",
+              "doi": "10.1038/npp.2008.77",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC12A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "96be9d5b4bcbbe39632cb5043be6c7146490745218e6a066f1d4eb62cea5c30a"
+              }
+            },
+            {
+              "title": "The mitochondrial phosphate carrier: Role in oxidative metabolism, calcium handling and mitochondrial disease.",
+              "abstract": "The mitochondrial phosphate carrier (PiC) is a mitochondrial solute carrier protein, which is encoded by SLC25A3 in humans. PiC delivers phosphate, a key substrate of oxidative phosphorylation, across the inner mitochondrial membrane. This transport activity is also relevant for allowing effective mitochondrial calcium handling. Furthermore, PiC has also been described to affect cell survival mechanisms via interactions with cyclophilin D and the viral mitochondrial-localized inhibitor of apoptosis (vMIA). The significance of PiC has been supported by the recent discovery of a fatal human condition associated with PiC mutations. Here, we present first the early studies that lead to the discovery and molecular characterization of the PiC, then discuss the very recently developed mouse models for PiC and pathological mutations in the human SLC25A3 gene.",
+              "doi": "10.1016/j.bbrc.2015.06.031",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4a5199f58bd328ea914360a6fff68632cec2d09e25c7454cbd5b525d472f80b6"
+              }
+            },
+            {
+              "title": "A yeast BH3-only protein mediates the mitochondrial pathway of apoptosis.",
+              "abstract": "Mitochondrial outer membrane permeabilization is a watershed event in the process of apoptosis, which is tightly regulated by a series of pro- and anti-apoptotic proteins belonging to the BCL-2 family, each characteristically possessing a BCL-2 homology domain 3 (BH3). Here, we identify a yeast protein (Ybh3p) that interacts with BCL-X(L) and harbours a functional BH3 domain. Upon lethal insult, Ybh3p translocates to mitochondria and triggers BH3 domain-dependent apoptosis. Ybh3p induces cell death and disruption of the mitochondrial transmembrane potential via the mitochondrial phosphate carrier Mir1p. Deletion of Mir1p and depletion of its human orthologue (SLC25A3/PHC) abolish stress-induced mitochondrial targeting of Ybh3p in yeast and that of BAX in human cells, respectively. Yeast cells lacking YBH3 display prolonged chronological and replicative lifespans and resistance to apoptosis induction. Thus, the yeast genome encodes a functional BH3 domain that induces cell death through phylogenetically conserved mechanisms.",
+              "doi": "10.1038/emboj.2011.197",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "afdce449c0c12c3576cd2aba06523457fe6e473593231401af8244d33d57b06f"
+              }
+            },
+            {
+              "title": "Circular RNA_CNST Promotes the Tumorigenesis of Osteosarcoma Cells by Sponging miR-421.",
+              "abstract": "Circular RNAs (circRNAs) act crucial roles in the progression of multiple malignancies including osteosarcoma (OS). But, the underlying mechanisms by which hsa_circ_0017311 (circCNST) contributes to the tumorigenesis of OS remain poorly understood. Our present study aimed to explore the role and mechanisms of circCNST in OS tumorigenesis. The differentially expressed circRNAs were identified by the Gene Expression Omnibus database. The association of circCNST with clinicopathological features and prognosis in patients with OS was analyzed by RNA fluorescence in situ hybridization (FISH) and quantitative real-time polymerase chain reaction (PCR) analysis. 3-(4,5-Dimethylthiazol-2-yl)-2,5-diphenyltetrazolium bromide (MTT), colony formation assays, and a xenograft tumor model were conducted to assess the role of circCNST in OS cells  and . CircCNST-specific binding with miR-421 was confirmed by FISH, luciferase gene report, and RNA immunoprecipitation assays. As a result, we found that the expression levels of circCNST were dramatically increased in OS tissues and cell lines as compared with the adjacent normal tissues, and it was associated with tumor size and poor survival in OS patients. Knockdown of circCNST repressed cell viability, colony formation, and xenograft tumor growth, while restored expression of circCNST reversed these effects. Furthermore, circCNST was colocalized with miR-421 in the cytoplasm and acted as a sponge of miR-421, which attenuated circCNST-induced proliferation-promoting effects in OS cells by targeting SLC25A3. In conclusion, our findings demonstrate that circCNST promotes the tumorigenesis of OS cells by sponging miR-421, and provides a potential biomarker for patients with OS.",
+              "doi": "10.1177/0963689720926147",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d57e220e9af4b7528e94735b6a03a0ff6dff88f38aacf407b3872befa2bec548"
+              }
+            },
+            {
+              "title": "Spermidine promotes human hair growth and is a novel modulator of human epithelial stem cell functions.",
+              "abstract": "Rapidly regenerating tissues need sufficient polyamine synthesis. Since the hair follicle (HF) is a highly proliferative mini-organ, polyamines may also be important for normal hair growth. However, the role of polyamines in human HF biology and their effect on HF epithelial stem cells in situ remains largely unknown. We have studied the effects of the prototypic polyamine, spermidine (0.1-1 µM), on human scalp HFs and human HF epithelial stem cells in serum-free organ culture. Under these conditions, spermidine promoted hair shaft elongation and prolonged hair growth (anagen). Spermidine also upregulated expression of the epithelial stem cell-associated keratins K15 and K19, and dose-dependently modulated K15 promoter activity in situ and the colony forming efficiency, proliferation and K15 expression of isolated human K15-GFP+ cells in vitro. Inhibiting the rate-limiting enzyme of polyamine synthesis, ornithine decarboyxlase (ODC), downregulated intrafollicular K15 expression. In primary human epidermal keratinocytes, spermidine slightly promoted entry into the S/G2-M phases of the cell cycle. By microarray analysis of human HF mRNA extracts, spermidine upregulated several key target genes implicated e.g. in the control of cell adherence and migration (POP3), or endoplasmic reticulum and mitochondrial functions (SYVN1, NACA and SLC25A3). Excess spermidine may restrict further intrafollicular polyamine synthesis by inhibiting ODC gene and protein expression in the HF's companion layer in situ. These physiologically and clinically relevant data provide the first direct evidence that spermidine is a potent stimulator of human hair growth and a previously unknown modulator of human epithelial stem cell biology.",
+              "doi": "10.1371/journal.pone.0022564",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0e5c583a39920235e8e5ba0b71de673bd82f0d917d50282fde9a85acbe303b78"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC12A6 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC12A6 and SLC25A3 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC12A6', 'SLC25A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC12A6",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC12A6",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC12A6": {
+          "status": "unavailable",
+          "gene": "SLC12A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A3": {
+          "status": "ok",
+          "gene": "SLC25A3",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A3.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC12A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC12A6",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A3",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC12A6', 'SLC25A3']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC12A6(P(winner)=0.47) vs SLC25A3(P=0.47), 差=0.00；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A3",
+        "candidates": [
+          "SLC12A6",
+          "SLC25A3"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC12A6": 0.6,
+          "SLC25A3": 0.75
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC12A6': 1, 'W:SLC25A3': 2}，最终智能体辩论后裁决：winner=SLC25A3 answer=None conf=0.74；法官理由: Two independent LLM channels agree SLC25A3, a mitochondrial phosphate carrier central to OXPHOS/ATP, is likely core essential in eHAP CML; SLC12A6 is a redundant K-Cl cotransporter. Database evidence is association-level and E logistic is n。原证据通道判定: winner=SLC12A6 answer=None conf=0.465（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC12A6', 'SLC25A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] Kidney Cancer/OS→CML：虽然组织来源从实体瘤迁移到血液肿瘤，但SLC25A3的核心功能（线粒体磷酸转运、氧化磷酸化、ATP供给）是快速增殖细胞的通用依赖；CML细胞同样存在线粒体代谢/增殖依赖，因此其促瘤/必需性比SLC12A6的离子转运与迁移表型更可迁移。 | 直接CML图谱证据缺失，但跨癌种知识更强支持SLC25A3：其在Kidney Cancer中通过oxidative phosphorylation呈PROMOTION，在OS中作为miR-421靶点参与促增殖/成瘤；文献显示其是线粒体磷酸载体，影响氧化代谢、钙处理和细胞存活。SLC12A6主要在breast cancer中与migration相关，且证据偏离子转运/细胞体积调控，对CML增殖必需性的类比较弱。CRISPR语境下，若比较哪种基因被扰动后更可能抑制肿瘤生长，SLC25A3因线粒体能量代谢核心作用更可能是CML中的生长依赖基因；TIMER/KM不可用不改变这一跨癌种推断。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A3",
+        "candidates": [
+          "SLC12A6",
+          "SLC25A3"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC12A6": 0.6,
+          "SLC25A3": 0.75
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] Kidney Cancer/OS→CML：虽然组织来源从实体瘤迁移到血液肿瘤，但SLC25A3的核心功能（线粒体磷酸转运、氧化磷酸化、ATP供给）是快速增殖细胞的通用依赖；CML细胞同样存在线粒体代谢/增殖依赖，因此其促瘤/必需性比SLC12A6的离子转运与迁移表型更可迁移。 | 直接CML图谱证据缺失，但跨癌种知识更强支持SLC25A3：其在Kidney Cancer中通过oxidative phosphorylation呈PROMOTION，在OS中作为miR-421靶点参与促增殖/成瘤；文献显示其是线粒体磷酸载体，影响氧化代谢、钙处理和细胞存活。SLC12A6主要在breast cancer中与migration相关，且证据偏离子转运/细胞体积调控，对CML增殖必需性的类比较弱。CRISPR语境下，若比较哪种基因被扰动后更可能抑制肿瘤生长，SLC25A3因线粒体能量代谢核心作用更可能是CML中的生长依赖基因；TIMER/KM不可用不改变这一跨癌种推断。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Kidney Cancer",
+          "breast cancer(BC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC12A6', 'SLC25A3']",
+        "status": "ok",
+        "summary": "SLC25A3 encodes the mitochondrial phosphate carrier, which supports ATP synthesis and oxidative phosphorylation. Loss of SLC25A3 is more likely to impair proliferation and tumor growth in human CML cell-line CRISPR screens than SLC12A6, a potassium-chloride cotransporter with weaker direct essentiality for CML growth under these conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A3",
+        "candidates": [
+          "SLC12A6",
+          "SLC25A3"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A3 encodes the mitochondrial phosphate carrier, which supports ATP synthesis and oxidative phosphorylation. Loss of SLC25A3 is more likely to impair proliferation and tumor growth in human CML cell-line CRISPR screens than SLC12A6, a potassium-chloride cotransporter with weaker direct essentiality for CML growth under these conditions.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:00:50Z"
+  }
+}

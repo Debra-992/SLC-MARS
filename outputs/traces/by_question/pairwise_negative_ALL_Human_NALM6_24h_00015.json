@@ -1,0 +1,553 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_24h_00015",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC34A1 and SLCO1B3 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "winner": "SLC34A1"
+  },
+  "effective_genes": [
+    "SLC34A1",
+    "SLCO1B3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_24h_00015",
+      "status": "ok",
+      "summary": "检索到 4 类证据、19 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC34A1",
+        "SLCO1B3"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC34A1",
+              "protein_function": "Involved in actively transporting phosphate into cells via Na(+) cotransport in the renal brush border membrane.",
+              "aliases": "NPT2, SLC17A2, NPTIIa",
+              "transport_type": "C / Na, HPO42-"
+            },
+            {
+              "gene": "SLCO1B3",
+              "protein_function": "Mediates the Na(+)-independent uptake of organic anions. Shows broad substrate specificity, can transport both organic anions such as bile acid taurocholate and conjugated steroids, as well as eicosanoid leukotriene C4, prostaglandin E2 and L-thyroxine (T4).",
+              "aliases": "OATP1B3, OATP8, SLC21A8",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC34A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC34 Type II Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC34 Type II Na+-phosphate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC21 Organic anion  transporter family",
+              "target_properties": {
+                "name": "SLC21 Organic anion  transporter family"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLCO1B3|paclitaxel|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLCO1B3(OATP1B3) mediates cellular uptake of paclitaxel (Km 6.79µM). Loss of SLCO1B3 via epigenetic silencing drives taxane resistance in prostate cancer. High expression promotes drug accumulation and sensitivity.",
+                "paper": "Smith NF 2005 Cancer Biol Ther(OATP1B3→paclitaxel) PMID:16210916; de Morrée ES 2016 Br J Cancer(SLCO1B3 loss→taxane resistance) PMID:27537383",
+                "name": "SLCO1B3|paclitaxel|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.4161/cbt.4.8.1867\", \"10.1038/bjc.2016.251\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "paclitaxel"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLCO1B3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "OATP1B3",
+              "target_properties": {
+                "name": "OATP1B3"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLCO1B3",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Cervical cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLCO1B3",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLCO1B3",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLCO1B3",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "ovarian cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Foscarnet, an inhibitor of the sodium-phosphate cotransporter NaPi-IIa, inhibits phosphorylation of glycogen synthase kinase-3β by lithium in the rat kidney cortex.",
+              "abstract": "Lithium, which is used in the treatment of and prophylaxis for bipolar disease, inhibits glycogen synthase kinase-3β (GSK3β) by producing its phosphorylated form (p-GSK3β). GSK3β plays a role in apoptosis and some kinds of acute kidney injuries, and the formation of p-GSK3β is considered to contribute to protection against acute kidney injury. We previously reported that the sodium-phosphate cotransporter NaPi-IIa (SLC34A1) mediated the reabsorption of lithium in the rat kidney. In the present study, the phosphorylation status of GSK3β in the kidney cortex of rats administered lithium chloride and foscarnet, a typical inhibitor of NaPi-IIa, was examined using Western blotting. Under a 2-h infusion of lithium chloride, the plasma concentration of lithium was 1.06 mEq/l, and its renal clearance was calculated as 1.18 ml/min/kg, which was 29.6% of creatinine clearance. The abundance of p-GSK3β in the kidney cortex was augmented by the administration of lithium. The simultaneous infusion of foscarnet increased the renal clearance of lithium and its ratio to creatinine clearance as well as the urinary excretion of phosphate. Foscarnet also inhibited the lithium-induced phosphorylation of GSK3β. These results suggest that the reabsorption of lithium by NaPi-IIa triggers the phosphorylation of GSK3β in the rat kidney cortex.",
+              "doi": "10.1016/j.dmpk.2016.02.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7988b444ce0e2c099a998a3db2059776c92452f6650dd2327b3a10ccd967fba0"
+              }
+            },
+            {
+              "title": "Pharmacology and toxicology of mycophenolate in organ transplant recipients: an update.",
+              "abstract": "This review aims to provide an update of the literature on the pharmacology and toxicology of mycophenolate in solid organ transplant recipients. Mycophenolate is now the antimetabolite of choice in immunosuppressant regimens in transplant recipients. The active drug moiety mycophenolic acid (MPA) is available as an ester pro-drug and an enteric-coated sodium salt. MPA is a competitive, selective and reversible inhibitor of inosine-5'-monophosphate dehydrogenase (IMPDH), an important rate-limiting enzyme in purine synthesis. MPA suppresses T and B lymphocyte proliferation; it also decreases expression of glycoproteins and adhesion molecules responsible for recruiting monocytes and lymphocytes to sites of inflammation and graft rejection; and may destroy activated lymphocytes by induction of a necrotic signal. Improved long-term allograft survival has been demonstrated for MPA and may be due to inhibition of monocyte chemoattractant protein 1 or fibroblast proliferation. Recent research also suggested a differential effect of mycophenolate on the regulatory T cell/helper T cell balance which could potentially encourage immune tolerance. Lower exposure to calcineurin inhibitors (renal sparing) appears to be possible with concomitant use of MPA in renal transplant recipients without undue risk of rejection. MPA displays large between- and within-subject pharmacokinetic variability. At least three studies have now reported that MPA exhibits nonlinear pharmacokinetics, with bioavailability decreasing significantly with increasing doses, perhaps due to saturable absorption processes or saturable enterohepatic recirculation. The role of therapeutic drug monitoring (TDM) is still controversial and the ability of routine MPA TDM to improve long-term graft survival and patient outcomes is largely unknown. MPA monitoring may be more important in high-immunological recipients, those on calcineurin-inhibitor-sparing regimens and in whom unexpected rejection or infections have occurred. The majority of pharmacodynamic data on MPA has been obtained in patients receiving MMF therapy in the first year after kidney transplantation. Low MPA area under the concentration time from 0 to 12 h post-dose (AUC0-12) is associated with increased incidence of biopsy-proven acute rejection although AUC0-12 optimal cut-off values vary across study populations. IMPDH monitoring to identify individuals at increased risk of rejection shows some promise but is still in the experimental stage. A relationship between MPA exposure and adverse events was identified in some but not all studies. Genetic variants within genes involved in MPA metabolism (UGT1A9, UGT1A8, UGT2B7), cellular transportation (SLCOB1, SLCO1B3, ABCC2) and targets (IMPDH) have been reported to effect MPA pharmacokinetics and/or response in some studies; however, larger studies across different ethnic groups that take into account genetic linkage and drug interactions that can alter a patient's phenotype are needed before any clinical recommendations based on patient genotype can be formulated. There is little data on the pharmacology and toxicology of MPA in older and paediatric transplant recipients.",
+              "doi": "10.1007/s00204-014-1247-1",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO1B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8b39b783357123865a1d2473618804fc12dc89d2c280d5d17b5852cad500df16"
+              }
+            },
+            {
+              "title": "SLCO1B1 polymorphisms and plasma estrone conjugates in postmenopausal women with ER+ breast cancer: genome-wide association studies of the estrone pathway.",
+              "abstract": "Estrone (E1), the major circulating estrogen in postmenopausal women, promotes estrogen-receptor positive (ER+) breast tumor growth and proliferation. Two major reactions contribute to E1 plasma concentrations, aromatase (CYP19A1) catalyzed E1 synthesis from androstenedione and steroid sulfatase (STS) catalyzed hydrolysis of estrone conjugates (E1Cs). E1Cs have been associated with breast cancer risk and may contribute to tumor progression since STS is expressed in breast cancer where its activity exceeds that of aromatase. We performed genome-wide association studies (GWAS) to identify SNPs associated with variation in plasma concentrations of E1Cs, E1, and androstenedione in 774 postmenopausal women with resected early-stage ER+ breast cancer. Hormone concentrations were measured prior to aromatase inhibitor therapy. Multiple SNPs in SLCO1B1, a gene encoding a hepatic influx transporter, displayed genome-wide significant associations with E1C plasma concentrations and with the E1C/E1 ratio. The top SNP for E1C concentrations, rs4149056 (p = 3.74E-11), was a missense variant that results in reduced transporter activity. Patients homozygous for the variant allele had significantly higher average E1C plasma concentrations than did other patients. Furthermore, three other SLCO1B1 SNPs, not in LD with rs4149056, were associated with both E1C concentrations and the E1C/E1 ratio and were cis-eQTLs for SLCO1B3. GWAS signals of suggestive significance were also observed for E1, androstenedione, and the E1/androstenedione ratio. These results suggest a mechanism for genetic variation in E1C plasma concentrations as well as possible SNP biomarkers to identify ER+ breast cancer patients for whom STS inhibitors might be of clinical value.",
+              "doi": "10.1007/s10549-017-4243-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO1B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6ce63e9eadda132c61db7fac80a1c82a055bfd7e8c06cc65120e6c9a02e8fb26"
+              }
+            },
+            {
+              "title": "Construction of an Anoikis-Related Gene Prognostic Signature and Identification of ANGPTL4 as a Key Oncogene in Lung Adenocarcinoma.",
+              "abstract": "Anoikis plays an important role in cancer invasion and metastasis. However, the role of anoikis-related genes, AnRGs, in lung adenocarcinoma (LUAD) is not clear. First, anoikis-related genes (AnRGs) were obtained from the Genecard database. Second, the prognostic risk model of AnRGs was established by univariate Cox analysis, the Least Absolute Shrinkage and Selection Operator (LASSO) analysis, and multivariate Cox analysis. Finally, in vitro cell experiments were carried out to determine the expression and function of the key gene AnRGs. Three AnRGs (angiopoietin-like 4, ANGPTL4; Cyclin-Dependent Kinase Inhibitor 3, CDKN3; Solute Carrier Organic Anion Transporter Family Member 1B3, SLCO1B3) were screened for the construction of risk prediction model. Additionally, ANGPTL4 was significantly highly expressed in tumor cells, and the knockdown of ANGPTL4 expression on tumor cells could inhibit tumor cell migration and apoptosis. Constructing a risk model based on anoikis-related genes can effectively differentiate the prognosis of LUAD. ANGPTL4 can be used as a potential new target for LUAD treatment.",
+              "doi": "10.1007/s12033-023-01031-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO1B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5d49e3595846f605ff5aa2b89850804b2d08ea76b0caaf546737dc765974628f"
+              }
+            },
+            {
+              "title": "AMP-activated protein kinase re-sensitizes A549 to paclitaxel via up-regulating solute carrier organic anion transporter family member 1B3 expression.",
+              "abstract": "Paclitaxel (PTX) is a common antineoplastic drug whose functionality is often restricted by drug resistance. Solute carrier organic anion transporter family member 1B3 (SLCO1B3) is a PTX influx transporter and its low expression has been proved to be relevant with PTX resistance. It has been widely reported that AMP-activated protein kinase (AMPK) could re-sensitize tumor cells to PTX. Our gene array result demonstrates AMPK up-regulated SLCO1B3. In this paper, we have tried to explain the relationships between PTX, SLCO1B3 and AMPK. First, we have verified the proliferative inhibition of PTX on A549 and found that PTX could inhibit A549 cells proliferation. Then, we have explored the relationship between SLCO1B3 and PTX: SLCO1B3 expression significantly decreased when A549 cells were treated with PTX or in A549 PTX resistant cells (A549-PTX) and the intracellular PTX concentration in A549-PTX was also lower. When treated with metformin/LKB1, both SLCO1B3 expression and intracellular PTX concentration have increased. Knockdown of AMPK has induced decreased SLCO1B3 expression. Moreover, in vitro and in vivo experiments have showed that metformin not only obviously inhibited A549-PTX tumor xenograft and A549-PTX proliferation alone, but also enhanced PTX efficacy to A549-PTX and this may be relevant to SLCO1B3. To verify it, we have treated A549 cells with AMPK both activators and an inhibitor, and then found that AMPK activators could weaken the PTX effect in inhibiting SLCO1B3 while its inhibitor has opposite effect. With knockdown of SLCO1B3, the effect of AMPK in re-sensitizing A549 to paclitaxel has decreased. To sum up, activation of AMPK can up-regulate SLCO1B3 expression, enhance the sensitivity of A549 cells to PTX, providing a new way to re-sensitize PTX resistance.",
+              "doi": "10.1016/j.cellsig.2021.110215",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLCO1B3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "16247fbe09d36d4eacda40626394290ff347b9ad701ee038dd576c3340b23481"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC34A1 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC34A1 and SLCO1B3 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC34A1', 'SLCO1B3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC34A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLCO1B3",
+            "ppr_score": 5.192064790402098e-05,
+            "degree_corrected_score": 6.798139571846989e-05,
+            "graph_degree": 5,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC34A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC34A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC34A1": {
+          "status": "unavailable",
+          "gene": "SLC34A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLCO1B3": {
+          "status": "ok",
+          "gene": "SLCO1B3",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLCO1B3.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC34A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC34A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLCO1B3": {
+          "status": "unsupported_cancer",
+          "gene": "SLCO1B3",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLCO1B3']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLCO1B3(P(winner)=0.50) vs SLC34A1(P=0.45), 差=0.04；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC34A1",
+        "candidates": [
+          "SLC34A1",
+          "SLCO1B3"
+        ],
+        "confidence": 0.52,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35,
+          "SLCO1B3": 3.65
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLCO1B3': 1, 'W:SLC34A1': 2}，最终智能体辩论后裁决：winner=SLC34A1 answer=None conf=0.52；法官理由: Two independent LLMs favor SLC34A1: phosphate uptake is more directly tied to proliferation than SLCO1B3’s drug/anion transport. Graph evidence is only association-level and does not indicate CRISPR growth inhibition. Confidence remains mod。原证据通道判定: winner=SLCO1B3 answer=None conf=0.495（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLCO1B3']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLCO1B3(P(winner)=0.50) vs SLC34A1(P=0.45), 差=0.04；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC34A1",
+        "candidates": [
+          "SLC34A1",
+          "SLCO1B3"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35,
+          "SLCO1B3": 3.65
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLCO1B3': 1, 'W:SLC34A1': 2}，最终智能体辩论后裁决：winner=SLC34A1 answer=None conf=0.56；法官理由: Two independent LLM channels favor SLC34A1: phosphate uptake is more growth-relevant than SLCO1B3 xenobiotic transport. E’s SLCO1B3 edge is weak graph-proxy, not MAGeCK depletion; SLCO1B3 paclitaxel link is association-level.。原证据通道判定: winner=SLCO1B3 answer=None conf=0.495（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLCO1B3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC34A1",
+          "SLCO1B3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:00:28Z"
+  }
+}

@@ -1,0 +1,440 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_24h_00009",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC8A1 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC8A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_24h_00009",
+      "status": "ok",
+      "summary": "检索到 4 类证据、12 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC8A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC8A1",
+              "protein_function": "Mediates the exchange of one Ca2+ ion against three to four Na+ ions across the cell membrane, regulates cytoplasmic Ca2+ levels.",
+              "aliases": "NCX1, SLC8A3",
+              "transport_type": "E / Na+, Ca2+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC8A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC8 Na+/Ca2+  exchanger family",
+              "target_properties": {
+                "name": "SLC8 Na+/Ca2+  exchanger family"
+              }
+            },
+            {
+              "gene": "SLC8A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC8A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC8A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NCX1",
+              "target_properties": {
+                "name": "NCX1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC8A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC8A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "penile cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "CircRNA_SLC8A1 alleviates hypertrophic scar progression by mediating the Nrf2-ARE pathway.",
+              "abstract": "Hypertrophic scar (HS) is associated with cosmetic defects, mobility, and functional impairments, pruritus, and pain. Previous circRNA microarray analysis identified reduced expression of circRNA_SLC8A1 in HS tissues. Therefore, this study aims to investigate the role of circRNA_SLC8A1 in modulating the abnormal behavior of HS-derived fibroblasts (HSFs) in vitro. RT-qPCR and FISH assays were used to assess the differential expression and localization of circRNA_SLC8A1 in normal and HS tissues. Following modulation of circRNA_SLC8A1 expression, CCK-8, flow cytometry, Transwell, and wound healing assays were employed to evaluate the effects of circRNA_SLC8A1 on the biological behaviors of HSFs. The Starbase database, dual-luciferase reporter assays, and Ago2-RIP assays were utilized to predict and validate the interaction between circRNA_SLC8A1 and downstream miRNAs. CircRNA_SLC8A1 was found to be downregulated in HS tissues and was primarily localized in the cytoplasm. Overexpression of circRNA_SLC8A1 reduced cell viability, cell invasion, wound healing, and the expression of Vimentin, N-cadherin, Col I, and Col III, while enhancing apoptosis and E-cadherin expression in HSFs. CircRNA_SLC8A1 activates the Nrf2-ARE pathway by competitively binding to miRNA-27a-3p. miRNA-27a-3p and Nrf2 exhibited high and low expression, respectively in HS tissues, with an inverse correlation between their levels. Overexpression of miRNA-27a-3p counteracted the effects of circRNA_SLC8A1 in HSF proliferation, apoptosis, migration, EMT, collagen deposition, and Nrf2-ARE pathway activity. CircRNA_SLC8A1 inhibits the proliferation, migration, EMT, and collagen deposition of HSF through competitive binding with miRNA-27a-3p, thereby activating the Nrf2-ARE pathway. The circRNA_SLC8A1/miRNA-27a-3p/Nrf2-ARE axis may offer a promising molecular target for HS therapy.",
+              "doi": "10.1007/s11033-024-10018-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cac6eb8b5b7992f9a1348115abca24a70b3a759e19263b865e3f1c1fbd1389e9"
+              }
+            },
+            {
+              "title": "SLC8A1-AS1 inhibits oral squamous cell carcinoma by regulating the miR-1305/ESRRG axis.",
+              "abstract": "Solute carrier family 8 member A1 antisense RNA 1 (SLC8A1-AS1) is a long non-coding RNA (lncRNA) that has been identified in recent years and is implicated in the progression of various cancers, including glioma and thyroid cancer. However, its role in oral squamous cell carcinoma (OSCC) remains poorly understood. The aim of this study is to investigate the function of SLC8A1-AS1 in OSCC and to explore its potential mechanisms of action. The TCGA database was utilized to analyze the expression and prognostic significance of SLC8A1-AS1 in OSCC. QRT-PCR was employed to measure the gene expression levels of SLC8A1-AS1 and its target genes. CCK-8, EdU staining, wound healing, and Transwell assays were conducted to assess the effects of SLC8A1-AS1 on OSCC cells. Dual-luciferase reporter gene and RNA pull-down assays were performed to verify the interactions between SLC8A1-AS1 and its target genes. Student’s t-test or one-way analysis of variance (ANOVA) was applied for data analysis in this study. SLC8A1-AS1 was found to be downregulated in OSCC tissues and cell lines. Overexpression of SLC8A1-AS1 inhbited the proliferation, migration, and invasion of OSCC cells. Bioinformatics analyses predicted that miR-1305 is a target of SLC8A1-AS1, while ESRRG is a target of miR-1305. Furthermore, the inhibitory effects of SLC8A1-AS1 on the proliferation, migration, and invasion of OSCC cells were reversed by the introduction of miR-1305 mimics. SLC8A1-AS1 inhibits the progression of OSCC by modulating the miR-1305/ESRRG axis.",
+              "doi": "10.1007/s12672-025-03586-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3649e7c3176d3c482f5aba3dd1ab8ae93ada66b63b92030b5286b455a826616d"
+              }
+            },
+            {
+              "title": "{'sup': '2+', '#text': 'LncRNA ZNF503-AS1 acts as a tumor suppressor in bladder cancer by up-regulating Ca concentration via transcription factor GATA6.'}",
+              "abstract": "Ca homeostasis plays a pivotal role in regulating proliferation and apoptosis during cancer development. This study intended to examine the potential tumor-suppressing role of ZNF503 antisense RNA 1 (ZNF503-AS1) in bladder cancer, which may be implicated in the regulation of Ca homeostasis. Differentially expressed long non-coding RNAs (lncRNAs) related to bladder cancer were identified using microarray analysis, followed by the verification of transcription factors to which they bind. The relationship between ZNF503-AS1, GATA6 and SLC8A1 was assessed using dual luciferase reporter, RIP and ChIP assays. The expression levels of ZNF503-AS1, GATA6 and SLC8A1 were modulated to examine their effects on the tumorigenic potential, intracellular Ca concentration and Ca-ATPase activity in bladder cancer cells. The in vivo tumorigenic ability was validated in nude mice. Microarray-based expression profile analysis of the GEO GSE61615 dataset revealed that the expression of ZNF503-AS1 was decreased in bladder cancer. Subsequently, we found that ZNF503-AS1 can bind to the transcription factor GATA6 to up-regulate the expression of SLC8A1. ZNF503-AS1 and SLC8A1 were found to be down-regulated in both primary bladder cancer tissues and cells. Exogenous overexpression of ZNF503-AS1 or SLC8A1 attenuated bladder cancer cell proliferation, invasion and migration, but promoted their apoptosis, accompanied by decreased Ca-ATPase activities and increased intracellular Ca concentrations. Additional in vivo experiments validated the inhibitory effect of ZNF503-AS1 overexpression on the tumorigenic capacity of bladder cancer cells in nude mice. ZNF503-AS1 can recruit transcription factor GATA6 to up-regulate SLC8A1 expression, thereby increasing the intracellular Ca concentration and repressing the proliferation, invasion and migration, and enhancing the apoptosis of bladder cancer cells.",
+              "doi": "10.1007/s13402-020-00563-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2ddb05b7c7a8193fc982f33eedad295dc8981bb4c21d1743205f961313079736"
+              }
+            },
+            {
+              "title": "{'sup': '2+', '#text': 'The inhibition of SLC8A1 promotes Ca-dependent cell death in Gastric Cancer.'}",
+              "abstract": "Intracellular Ca homeostasis dysregulation, through the modulation of calcium permeable ion channels and transporters, is gaining attention in cancer research as an apoptosis evasion mechanism. Recently, we highlighted a prognostic role for several calcium permeable channels. Among them, here, we focused on the plasma membrane bidirectional Na/Ca exchanger SLC8A1. Data from Kaplan-Meier plotter and The Cancer Genome Atlas were used to evaluate in silico the association of SLC8A1 expression with Gastric Cancer (GC) patients' survival, and its levels in different patient subgroups. In vitro experiments were used to explore SLC8A1 as a possible target in GC. Interestingly, SLC8A1 expression was associated with a worst prognosis, and resulted up-regulated in diffuse/poorly-cohesive histological GC type, Genomically Stable samples and in advanced TNM stages. We demonstrated that SLC8A1 selective pharmacological inhibition, through CB-DMB, significantly reduced cancer proliferation and induced Ca-dependent cell death in GC cells, both alone and synergically with cisplatin treatment. SLC8A1 inhibition could represents a potential subgroup-specific therapeutic approach for GC patients based on its ability to induce Ca-dependent cell death.",
+              "doi": "10.1016/j.biopha.2024.117787",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af30b751c7963b05dd8fcd2a72e5ba83158cfadef7362ee65260ed6b1bd55744"
+              }
+            },
+            {
+              "title": "Knockdown of long non-coding RNA SLC8A1-AS1 attenuates cell invasion and migration in glioma via suppression of Wnt/β-catenin signaling pathways.",
+              "abstract": "As the most common aggressive malignant tumor in the central nervous system, glioma is still an insurmountable disease in the neural system. The mechanism of carcinogenesis in glioma remains largely unclear. In the present study, we identified a dysregulated long non-coding RNA (lncRNA) solute carrier family 8 member A1 antisense RNA 1 (SLC8A1-AS1) associated with glioma based on The Cancer Genome Atlas (TCGA) data. A validation experiment was conducted to confirm a high expression level of lncRNA SLC8A1-AS1 in glioma tissues. Down-regulation of lncRNA SLC8A1-AS1 suppressed the proliferation, colony formation, migration, and invasion of glioma cells in vitro and in vivo. Moreover, lncRNA SLC8A1-AS1 silencing decreased the activity of the Wnt/β-catenin pathway and suppressed the epithelial to mesenchymal transition (EMT) in glioma cells. These findings collectively provide novel insights into the function and mechanism of lncRNA SLC8A1-AS1 in the pathogenesis of glioma and highlight its potential as a therapeutic target for glioma intervention.",
+              "doi": "10.1016/j.brainresbull.2021.08.011",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "efb7f5f77fb5c1957180530b9578f3a38d5e7bb537264d89af24929d913a9749"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC8A1 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nIs SLC8A1 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC8A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC8A1",
+            "ppr_score": 2.9409273658623522e-05,
+            "degree_corrected_score": 6.0884154088491975e-05,
+            "graph_degree": 2,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC8A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC8A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC8A1": {
+          "status": "unavailable",
+          "gene": "SLC8A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC8A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC8A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC8A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.50 -> P(必需)=0.817 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC8A1"
+        ],
+        "confidence": 0.76,
+        "abstained": false,
+        "gene_scores": {
+          "SLC8A1": 2.5
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 2, 'A:False': 1}，最终智能体辩论后裁决：winner=None answer=True conf=0.76；法官理由: E's CRISPR essentiality score outweighs zero-evidence critique; SLC8A1 loss-of-function likely limits NALM6 growth, so inhibition inhibits ALL tumor growth.。原证据通道判定: winner=None answer=True conf=0.817（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC8A1 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.50 -> P(必需)=0.817 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC8A1"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC8A1": 2.5
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.62；法官理由: No direct NALM6 CRISPR dropout evidence; database observations are association-level. SLC8A1/NCX1 calcium handling is redundant, making essentiality unlikely. Two independent LLM false votes outweigh inferred essentiality.。原证据通道判定: winner=None answer=True conf=0.817（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC8A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T02:41:40Z"
+  }
+}

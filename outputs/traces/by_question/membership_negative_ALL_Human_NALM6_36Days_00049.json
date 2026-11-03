@@ -1,0 +1,454 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00049",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A29 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A29"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00049",
+      "status": "ok",
+      "summary": "检索到 4 类证据、13 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A29"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A29",
+              "protein_function": "Mitochondrial transporter of basic amino acids, with a preference for arginine and lysine. Involved in the import of basic amino acids into mitochondria for protein synthesis and amino acid degradation.",
+              "aliases": "C14orf69, Mitochondrial Carnitine/Acylcarnitine Carrier Protein CACL",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A29",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A29",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A29",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A29",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A29",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A29",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A29",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The prognostic and neuroendocrine implications of SLC25A29-mediated biomass signature in prostate cancer.",
+              "abstract": "Dysregulated solutes are linked to cancer progression, with associated carriers being potential targets for prognosis and treatment. Androgen deprivation therapy (ADT) is essential for prostate cancer (PCa) progression, but secondary resistance often leads to androgen-independent tumor growth, necessitating new prognostic biomarkers. Transcriptome-based datasets identify SLC25A29, an arginine carrier, as upregulated in PCa, correlating with metastatic features and serving as a high-risk prognostic factor, particularly in castration-resistant prostate cancer (CRPC). Molecular simulations indicate that SLC25A29-mediated pathways contribute to mitochondrial metabolism and redox homeostasis, implicating POLD1 regulation and suggesting a link to ferroptosis. Further analysis reveals that SLC25A29 may transactivate POLD1 via E2F1, as shown by RNA-seq profiling of E2F1 knockdown in CRPC-related cells, which demonstrated reduced POLD1 expression. Clinical and cellular studies confirm that SLC25A29, E2F1, and POLD1 levels positively correlate with pathological features, with their downstream effectors serving as prognosis signatures. The SLC25A29/E2F1/POLD1 axis is associated with neuroendocrine PCa (NEPC) development, indicating its role in response to androgen receptor inhibition. Downregulation of E2F1 not only decreases POLD1 levels but also reduces NEPC-related markers. These findings support the SLC25A29/E2F1/POLD1 axis as a prognostic tool for CRPC and NEPC, and targeting E2F1 may offer a therapeutic strategy to disrupt SLC25A29-mediated PCa progression.",
+              "doi": "10.1007/s11357-025-01538-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A29"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7c6b82f7391891921da54305db4b8690433e8d7aa1251d756f5ecb97c15adbd4"
+              }
+            },
+            {
+              "title": "Elevated mitochondrial SLC25A29 in cancer modulates metabolic status by increasing mitochondria-derived nitric oxide.",
+              "abstract": "Warburg effect has been recognized as a hallmark of cancer cells for many years, but its modulation mechanism remains a great focus. Our current study found a member of solute carrier family 25 (SLC25A29), the main arginine transporter on mitochondria, significantly elevated in various cancer cells. Knockout of SLC25A29 by CRISPR/Cas9 inhibited proliferation and migration of cancer cells both in vitro and in vivo. SLC25A29-knockout cells also showed an altered metabolic status with enhanced mitochondrial respiration and reduced glycolysis. All of above impacts could be reversed after rescuing SLC25A29 expression in SLC25A29-knockout cells. Arginine is transported into mitochondria partly for nitric oxide (NO) synthesis. Deletion of SLC25A29 resulted in severe decrease of NO production, indicating that the mitochondria is a significant source of NO. SLC25A29-knockout cells dramatically altered the variation of metabolic processes, whereas addition of arginine failed to reverse the effect, highlighting the necessity of transporting arginine into mitochondria by SLC25A29. In conclusion, aberrant elevated SLC25A29 in cancer functioned to transport more arginine into mitochondria, improved mitochondria-derived NO levels, thus modulated metabolic status to facilitate increased cancer progression.",
+              "doi": "10.1038/s41388-018-0139-x",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A29"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "48c0fa889cc14ef5b469f2b0ff5bcd288c5a8604e9079df98737962edd83520c"
+              }
+            },
+            {
+              "title": "Characterization of the equine skeletal muscle transcriptome identifies novel functional responses to exercise training.",
+              "abstract": "Digital gene expression profiling was used to characterize the assembly of genes expressed in equine skeletal muscle and to identify the subset of genes that were differentially expressed following a ten-month period of exercise training. The study cohort comprised seven Thoroughbred racehorses from a single training yard. Skeletal muscle biopsies were collected at rest from the gluteus medius at two time points: T(1) - untrained, (9 +/- 0.5 months old) and T(2) - trained (20 +/- 0.7 months old). The most abundant mRNA transcripts in the muscle transcriptome were those involved in muscle contraction, aerobic respiration and mitochondrial function. A previously unreported over-representation of genes related to RNA processing, the stress response and proteolysis was observed. Following training 92 tags were differentially expressed of which 74 were annotated. Sixteen genes showed increased expression, including the mitochondrial genes ACADVL, MRPS21 and SLC25A29 encoded by the nuclear genome. Among the 58 genes with decreased expression, MSTN, a negative regulator of muscle growth, had the greatest decrease.Functional analysis of all expressed genes using FatiScan revealed an asymmetric distribution of 482 Gene Ontology (GO) groups and 18 KEGG pathways. Functional groups displaying highly significant (P < 0.0001) increased expression included mitochondrion, oxidative phosphorylation and fatty acid metabolism while functional groups with decreased expression were mainly associated with structural genes and included the sarcoplasm, laminin complex and cytoskeleton. Exercise training in Thoroughbred racehorses results in coordinate changes in the gene expression of functional groups of genes related to metabolism, oxidative phosphorylation and muscle structure.",
+              "doi": "10.1186/1471-2164-11-398",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A29"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ad47019c5c04aade01e5450c4c39de7a4c6d16698a1ecfe4949a41672a069327"
+              }
+            },
+            {
+              "title": "Comprehensive bioinformatics analysis of the solute carrier family and preliminary exploration of SLC25A29 in lung adenocarcinoma.",
+              "abstract": "According to the latest epidemiological investigation, lung adenocarcinoma (LUAD) is one of the most fatal cancer among both men and women. Despite continuous advancements in treatment approaches in recent years, the prognosis for LUAD remains relatively poor. Given the crucial role of the solute carrier (SLC) family in maintaining cellular energy metabolism stability, we conducted a comprehensive analysis of the association between SLC genes and LUAD prognosis. In the present study, we identified 71 genes among the SLC family members, of which 32 were downregulated and 39 were upregulated in LUAD samples. Based on these differentially expressed genes, a prognostic risk scoring model was established that was composed of five genes (SLC16A7, SLC16A4, SLC16A3, SLC12A8, and SLC25A15) and clinical characteristics; this model could effectively predict the survival and prognosis of patients in the cohort. Notably, SLC2A1, SLC25A29, and SLC27A4 were identified as key genes associated with survival and tumor stage. Further analysis revealed that SLC25A29 was underexpressed in LUAD tissue and regulated the phenotype of endothelial cells. Endothelial cell proliferation and migration increased and apoptosis decreased with a decrease in SLC25A29 expression. Investigation of the upstream regulatory mechanisms of SLC25A29 revealed that SLC25A29 expression gradually decreased as the lactate concentration increased. This phenomenon suggested that the expression of SLC25A29 may be related to lactylation modification. ChIP-qPCR experiments confirmed the critical regulatory role played by H3K14la and H3K18la modifications in the promoter region of SLC25A29. In conclusion, this study confirmed the role of SLC family genes in LUAD prognosis and revealed the role of SLC25A29 in regulating endothelial cell phenotypes. These study results provided important clues to further understand LUAD pathogenesis and develop appropriate therapeutic strategies.",
+              "doi": "10.1186/s12935-023-03082-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A29"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e25021be63431c3694d68b247e80711f74607054a1225cef223309a5c57c64d2"
+              }
+            },
+            {
+              "title": "An extensive bioinformatics study on the role of mitochondrial solute carrier family 25 in PC and its mechanism behind affecting immune infiltration and tumor energy metabolism.",
+              "abstract": "Several metabolic disorders and malignancies are directly related to abnormal mitochondrial solute carrier family 25 (SLC25A) members activity. However, its biological role in pancreatic cancer (PC) is not entirely understood. The lasso method was used to create a novel prognostic risk model for PC based on SLC25A members, and its roles in tumor immunology and energy metabolism were explored. Furthermore, co-expression networks were constructed for SLC25A11, SLC25A29, and SLC25A44. Single-cell RNA sequencing (ScRNA-seq) revealed the distribution of gene expression in PC. Tumor immune infiltration was examined with the TIMER database. Lastly, drug sensitivity was investigated, and co-transcriptional factors were predicted. In the present study, a novel prognostic risk model was established and validated for PC based on SLC25A members. The high-risk group had a lower activation of oxidative phosphorylation and a more abundant immune infiltration phenotype than the low-risk group. According to co-expression network studies, SLC25A11, SLC25A29, and SLC25A44 were involved in the energy metabolism of PC and prevented tumor growth, invasion, and metastasis. ScRNA-seq research also pointed to their contribution to the tumor microenvironment. Moreover, the recruitment of numerous immune cells was positively correlated with SLC25A11 and SLC25A44 but negatively correlated with SLC25A29. Additionally, the sensitivity to 20 Food and Drug Administration-approved antineoplastic medicines was strongly linked to the aforementioned genes, where cisplatin sensitivity increased with the up-regulation of SLC25A29. Finally, the Scleraxis BHLH Transcription Factor (SCX) and other proteins were hypothesized to co-regulate the mRNA transcription of the genes. SLC25A members are crucial for tumor immune and energy metabolism in PC, and SLC25A11, SLC25A29, and SLC25A44 can be used as favorable prognostic markers. The use of these markers will provide new directions to unravel their action mechanisms in PC.",
+              "doi": "10.1186/s12967-022-03756-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A29"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "65d88ab34f00f326119b8986f774fe12edc3318ee204e310c2119ece47b0e4ac"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A29 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC25A29 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A29']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC25A29",
+            "ppr_score": 3.920432873892512e-05,
+            "degree_corrected_score": 6.62686877115584e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A29",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A29",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A29": {
+          "status": "unavailable",
+          "gene": "SLC25A29",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A29": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A29",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A29']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A29 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.00 -> P(必需)=0.820 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC25A29"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A29": 3.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 2, 'A:False': 1}，最终智能体辩论后裁决：winner=None answer=True conf=0.68；法官理由: E reports CRISPR essentiality (0.82); L1 independently affirms NALM6 depletion inhibits growth. Observations are association-level and not ALL-specific, but mitochondrial amino acid/carnitine transport plausibly supports viability; L2’s red。原证据通道判定: winner=None answer=True conf=0.82（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A29']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A29 is a mitochondrial arginine/lysine transporter; in multiple cancers it is aberrantly elevated and CRISPR knockout reduces proliferation/migration, indicating a growth-promoting/essential-like metabolic role. ALL/NALM6 lymphoblastoid cells share high proliferative demand and mitochondrial metabolic dependence, so loss of SLC25A29 is more likely to impair tumor growth than to be neutral. | Although ALL lacks direct evidence, cross-cancer literature supports SLC25A29 as a cancer-promoting mitochondrial arginine transporter: knockout inhibits cancer cell proliferation and migration in vitro and in vivo, while prostate/pancreatic evidence links it to mitochondrial metabolism, redox/NO modulation, and progression. This direction is more consistent with SLC25A29 inhibition suppressing ALL tumor growth than with it acting as a tumor suppressor. Confidence is moderate because association/expression and non-ALL knockout data do not fully prove CRISPR essentiality in NALM6.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A29"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A29": 3.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.68；法官理由: No direct ALL/NALM6 MAGeCK depletion evidence; database associations are not CRISPR readouts. Two independent zero-evidence votes agree false, outweighing weak cross-cancer analogy. SLC25A29 likely redundant mitochondrial carrier, not estab。原证据通道判定: winner=None answer=True conf=0.62（保留于溯源）。",
+        "analogy_cancers": [
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A29']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC25A29"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:43:03Z"
+  }
+}

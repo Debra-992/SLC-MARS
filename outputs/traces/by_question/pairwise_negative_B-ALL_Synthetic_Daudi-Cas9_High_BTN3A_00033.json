@@ -1,0 +1,600 @@
+{
+  "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00033",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC35F2 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "winner": "SLC25A1"
+  },
+  "effective_genes": [
+    "SLC25A1",
+    "SLC35F2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00033",
+      "status": "ok",
+      "summary": "检索到 4 类证据、25 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A1",
+        "SLC35F2"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "protein_function": "Mitochondrial electroneutral antiporter that exports citrate from the mitochondria into the cytosol in exchange for malate.",
+              "aliases": "CTP, CIC, SLC20A3",
+              "transport_type": "E / citrate-H+, malate"
+            },
+            {
+              "gene": "SLC35F2",
+              "protein_function": "Putative solute transporter.",
+              "aliases": "FLJ13018, Lung Squamous Cell Cancer Related Protein LSCC-3, Solute Carrier Family 35, Member F2",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC25A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC35F2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC25A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "apoptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "leukemia",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC25A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "liver cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "A comprehensive analysis of SLC25A1 expression and its oncogenic role in pan-cancer.",
+              "abstract": "The solute carrier family 25 member 1 (SLC25A1) is currently the only known human transporter for citrate in the mitochondrial membrane. However, its role in cancer development remains to be elucidated. We aim to analyze the expression profile, prognostic value, potential immunological significance, and effect on tumor growth of SLC25A1 at a pan-cancer level. Herein, the role of SLC25A1 in tumorigenesis and progression was investigated based on the Cancer Genome Atlas (TCGA), Gene Expression Omnibus (GEO), Genotype-Tissue Expression (GTEx), Clinical Proteomic Tumor Analysis Consortium (CPTAC), GeneMANIA, STRING and Cancer Dependency Map Project (DepMap) database via online websites or the R software. The protein expression levels were validated in tissue microarrays, and the effects on tumor cell lines were accessed through MTS and colony formation assays. The expression of SLC25A1 increased in most cancers, and the upregulation of SLC25A1 in colon adenocarcinoma and lung adenocarcinoma was further confirmed by immunohistochemistry. Meanwhile, SLC25A1 was linked to clinical outcomes across multiple tumor types, particularly in lung adenocarcinoma, where its high expression predicted poor prognosis. Moreover, SLC25A1 was positively associated with MSI, TMB, and CD276 and tightly correlated with tumor-infiltrating immune cells. Furthermore, the knockout of SLC25A1 demonstrated inhibitory effects in most cancer cell lines in the DepMap project. Cellular experiments showed that SLC25A1 knockdown significantly reduced the proliferation of lung adenocarcinoma cells. Our findings suggest the potential of SLC25A1 as a prognostic biomarker for cancers and a therapeutic target for precise antitumor strategy and cancer immunotherapy.",
+              "doi": "10.1007/s12672-023-00830-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "25a58e6f8cd4b81556e598931c1ac18969ab1a0d9ce670758ab2fb561ca85d2a"
+              }
+            },
+            {
+              "title": "SLC35F2 promotes the progression of NSCLC via regulating CREB1 expression.",
+              "abstract": "SLC35F2 has emerged as a potential oncogenic driver in non-small cell lung cancer (NSCLC), yet its mechanistic role in tumor progression remains poorly understood. This study aimed to explore the mechanism of SLC35F2 in mediating non-small cell lung cancer (NSCLC) progression through the cAMP signaling pathway. By analyzing TCGA and GEPIA databases, the present research found that SLC35F2 expression was significantly elevated in NSCLC tissues compared to normal lung tissues, with high SLC35F2 levels correlating with poor patient prognosis (P < 0.05). Functional enrichment analysis using R language revealed significant alterations in multiple pathways, including cAMP signaling, in SLC35F2-high NSCLC. Experimental validation through RT-qPCR and Western blot confirmed upregulated SLC35F2 expression in NSCLC cell lines. Knockdown of SLC35F2 inhibited cell proliferation, migration, and invasion while promoting apoptosis (P < 0.05), as demonstrated by CCK-8, EdU, colony formation, flow cytometry, TUNEL, scratch, and Transwell assays. Mechanistically, SLC35F2 suppression activated the cAMP signaling pathway, particularly through upregulation of the transcription factor CREB1. These findings suggest that SLC35F2 drives NSCLC progression by modulating the cAMP/CREB1 axis, highlighting its potential as a therapeutic target.",
+              "doi": "10.1007/s10616-025-00814-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "07ede985414275e908f66395ac608cfbd4d40ed9d4fd6f217cd801b473e5b5ed"
+              }
+            },
+            {
+              "title": "{'sup': 'Cdh1', '#text': 'E3 ubiquitin ligase APC/C regulates SLC35F2 protein turnover and inhibits cancer progression in HeLa cells.'}",
+              "abstract": "The solute carrier family 35 F2 (SLC35F2), belongs to membrane-bound carrier proteins that control various physiological functions and are activated in several cancers. However, the molecular mechanism regulating SLC35F2 protein turnover and its implication in cancer progression remains unexplored. Therefore, screening for E3 ligases that promote SLC35F2 protein degradation is essential during cancer progression. The immunoprecipitation and Duolink proximity ligation assays (PLA) were used to determine the interaction between APC/C and SLC35F2 proteins. A CRISPR/Cas9-mediated knockdown and rescue experiment were used to validate the functional significance of APC/C on SLC35F2 protein stabilization. The ubiquitination function of APC/C on SLC35F2 protein was validated using in vitro ubiquitination assay and half-life analysis. The role of APC/C regulating SLC35F2-mediated tumorigenesis was confirmed by in vitro oncogenic experiments in HeLa cells. Based on the E3 ligase screen and in vitro biochemical experiments, we identified that APC/C interacts with and reduces SLC35F2 protein level. APC/C promotes SLC35F2 ubiquitination and decreases the half-life of SLC35F2 protein. On the other hand, the CRISPR/Cas9-mediated depletion of APC/C increased SLC35F2 protein levels. The mRNA expression analysis revealed a negative correlation between APC/C and SLC35F2 across a panel of cancer cell lines tested. Additionally, we demonstrated that depletion in APC/C promotes SLC35F2-mediated cell proliferation, colony formation, migration, and invasion in HeLa cells. Our study highlights that APC/C is a critical regulator of SLC35F2 protein turnover and depletion of APC/C promotes SLC35F2-mediated tumorigenesis. Thus, we envision that APC/C-SLC35F2 axis might be a therapeutic target in cancer.",
+              "doi": "10.1016/j.bbagen.2023.130454",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0f804de8a7d4bdf01092e1b5f797e9038ca0d4703af03190c0a9bb3f13167537"
+              }
+            },
+            {
+              "title": "βTrCP1 promotes SLC35F2 protein ubiquitination and inhibits cancer progression in HeLa cells.",
+              "abstract": "The solute carrier family 35 F2 (SLC35F2) belongs to membrane-bound carrier proteins that are associated with multiple cancers. The main factor that determines cancer progression is the expression level of SLC35F2. Thus, identifying the E3 ligase that controls SLC35F2 protein abundance in cancer cells is critical. Here, we identified βTrCP1 interacting with and reducing the SLC35F2 protein level. βTrCP1 signals SLC35F2 protein ubiquitination and reduces SLC35F2 protein half-life. The mRNA expression pattern between βTrCP1 and SLC35F2 across a panel of cancer cell lines showed a negative correlation. Additionally, the depletion of βTrCP1 accumulated SLC35F2 protein and promoted SLC35F2-mediated cell growth, migration, invasion, and colony formation ability in HeLa cells. Overall, we demonstrate that βTrCP1 acts as a tumor suppressor by controlling SLC35F2 protein abundance in cancer cells. The depletion of βTrCP1 promotes SLC35F2-mediated carcinogenesis. Thus, we envision that βTrCP1 may be a potential target for cancer therapeutics.",
+              "doi": "10.1016/j.bbrc.2023.09.095",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa455c5dba52e59fe0c030f19db26113995cf5a12b8a6cddaf0f98dee57c5ef1"
+              }
+            },
+            {
+              "title": "Inhibition of Sp1-mediated survivin and MCL1 expression cooperates with SLC35F2 and myeloperoxidase to modulate YM155 cytotoxicity to human leukemia cells.",
+              "abstract": "Although YM155 is reported to suppress survivin (also known as BIRC5) expression in cancer cells, its cytotoxic mechanism in human acute myeloid leukemia (AML) cells has not been clearly resolved. In this study, we analyzed the mechanistic pathways that modulate the sensitivity of human AML U937 and HL-60 cells to YM155. YM155 induced apoptosis in AML cells, which was characterized by p38 MAPK phosphorylation and downregulation of survivin and MCL1 expression. Phosphorylated p38 MAPK causes autophagy-mediated Sp1 degradation, thereby inhibiting the transcription of survivin and MCL1. The reduction of survivin and MCL1 levels further facilitated Sp1 protein degradation through autophagy. The restoration of Sp1, survivin, or MCL1 expression protected U937 and HL-60 cells from YM155-mediated cytotoxicity. U937 and HL-60 cells were continuously exposed to hydroquinone (HQ) to generate U937/HQ and HL-60/HQ cells, which showed increased SLC35F2 expression. The increase in SLC35F2 expression led to an increase in the sensitivity of U937/HQ cells to YM155-mediated cytotoxicity, whereas no such effect was observed in HL-60/HQ cells. Of note, myeloperoxidase (MPO) activity in HL-60 and HL-60/HQ cells enhanced YM155 cytotoxicity in these cells, and the enforced expression of MPO also increased the sensitivity of U937 cells to YM155. Taken together, we conclude that p38 MAPK-modulated autophagy inhibits Sp1-mediated survivin and MCL1 expression, which, in turn, leads to the death of U937 and HL-60 cells following YM155 treatment. In addition, our data indicate that SLC35F2 increases the sensitivity of U937 cells to YM155-mediated cytotoxicity, whereas MPO enhances YM155 cytotoxicity in U937 and HL-60 cells.",
+              "doi": "10.1016/j.bcp.2021.114544",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35F2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e0143ce62df8451b4f4552f341646f4a0b48fd8eb3575f63ec248ee759ebc2e3"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A1 cancer=B-lymphoblastic leukaemia bucket=pairwise Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nWhich gene between SLC25A1 and SLC35F2 is more likely to inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A1', 'SLC35F2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC25A1",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A1",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A1": {
+          "status": "ok",
+          "gene": "SLC25A1",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC25A1.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC35F2": {
+          "status": "unavailable",
+          "gene": "SLC35F2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A1",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC35F2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35F2",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC35F2']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC25A1(P(winner)=0.55) vs SLC35F2(P=0.45), 差=0.10；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC35F2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC35F2": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A1': 3}，最终智能体辩论后裁决：winner=SLC25A1 answer=None conf=0.68；法官理由: SLC25A1 has citrate export/metabolic bottleneck and disease-pathway evidence; SLC35F2 is poorly annotated. Although evidence is associative and LLM reasoning speculative, three independent channels converge on SLC25A1 as more likely depleti。原证据通道判定: winner=SLC25A1 answer=None conf=0.551（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC35F2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A1 has glioma/pan-cancer evidence of promoting proliferation, stemness, chemotherapy resistance, and poor survival, and DepMap knockout is inhibitory in most cancer cell lines; these metabolic dependencies are transferable to highly proliferative B-lymphoblastic leukemia/lymphoma. SLC35F2 is mainly supported in NSCLC/HeLa epithelial contexts with no leukemia-adjacent functional evidence. | For B-lymphoblastic leukaemia, SLC25A1 is more likely to be a CRISPR target whose loss reduces tumor survival because it is a mitochondrial citrate exporter linked to lipogenesis, apoptosis suppression, proliferation, and pan-cancer dependency. TIMER/KM data are unavailable or unsupported for the target cancer, so the decision relies on cross-cancer biology: SLC25A1 has stronger pan-cancer knockout dependency and leukemia-adjacent plausibility than SLC35F2, whose evidence is less transferable from epithelial cancers to B-cell leukemia.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC35F2"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A1": 4.6,
+          "SLC35F2": 0.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "timer",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A1': 3}，最终智能体辩论后裁决：winner=SLC25A1 answer=None conf=0.66；法官理由: SLC25A1 supports citrate/acetyl-CoA metabolism and has pan-cancer/DepMap essentiality, matching MAGeCK cell-intrinsic viability. SLC35F2 evidence is weaker and BTN3A-glycosylation links are speculative, so SLC25A1 is more likely to inhibit 。原证据通道判定: winner=SLC25A1 answer=None conf=0.62（保留于溯源）。",
+        "analogy_cancers": [
+          "glioma",
+          "leukemia",
+          "liver cancer"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC25A1', 'SLC35F2']",
+        "status": "ok",
+        "summary": "SLC25A1 mediates mitochondrial citrate export to support cytosolic acetyl-CoA production, lipogenesis, histone acetylation, and proliferative metabolism in cancer cells. Knocking out or inhibiting SLC25A1 is therefore more likely to reduce tumor survival in B-lymphoblastic leukaemia cells such as Daudi-Cas9. SLC35F2 is involved in nucleotide-sugar transport/glycosylation, but its loss is generally less directly tied to core proliferative survival than SLC25A1.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A1",
+        "candidates": [
+          "SLC25A1",
+          "SLC35F2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A1 mediates mitochondrial citrate export to support cytosolic acetyl-CoA production, lipogenesis, histone acetylation, and proliferative metabolism in cancer cells. Knocking out or inhibiting SLC25A1 is therefore more likely to reduce tumor survival in B-lymphoblastic leukaemia cells such as Daudi-Cas9. SLC35F2 is involved in nucleotide-sugar transport/glycosylation, but its loss is generally less directly tied to core proliferative survival than SLC25A1.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T18:11:51Z"
+  }
+}

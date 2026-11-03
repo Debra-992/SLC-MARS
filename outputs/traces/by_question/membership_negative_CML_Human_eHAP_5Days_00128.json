@@ -1,0 +1,358 @@
+{
+  "qid": "membership_negative_CML_Human_eHAP_5Days_00128",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC16A9 inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC16A9"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_CML_Human_eHAP_5Days_00128",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC16A9"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC16A9",
+              "protein_function": "Extracellular pH-and Na(+)-sensitive low-affinity creatine transporter.",
+              "aliases": "MCT9",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC16A9",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC16 Monocarboxylate  transporter family",
+              "target_properties": {
+                "name": "SLC16 Monocarboxylate  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Metabolic switch regulates lineage plasticity and induces synthetic lethality in triple-negative breast cancer.",
+              "abstract": "Metabolic reprogramming is key for cancer development, yet the mechanism that sustains triple-negative breast cancer (TNBC) cell growth despite deficient pyruvate kinase M2 (PKM2) and tumor glycolysis remains to be determined. Here, we find that deficiency in tumor glycolysis activates a metabolic switch from glycolysis to fatty acid β-oxidation (FAO) to fuel TNBC growth. We show that, in TNBC cells, PKM2 directly interacts with histone methyltransferase EZH2 to coordinately mediate epigenetic silencing of a carnitine transporter, SLC16A9. Inhibition of PKM2 leads to impaired EZH2 recruitment to SLC16A9, and in turn de-represses SLC16A9 expression to increase intracellular carnitine influx, programming TNBC cells to an FAO-dependent and luminal-like cell state. Together, these findings reveal a new metabolic switch that drives TNBC from a metabolically heterogeneous-lineage plastic cell state to an FAO-dependent-lineage committed cell state, where dual targeting of EZH2 and FAO induces potent synthetic lethality in TNBC.",
+              "doi": "10.1016/j.cmet.2023.12.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0ab80097e905b7cb2a695cd0c4672cbb9d4a2dad4bc97214a1d186982e8f2a22"
+              }
+            },
+            {
+              "title": "YTHDF2 regulates the adriamycin (ADM) resistance in NKTCL by modulating the m6A modification of SLC16A9.",
+              "abstract": "Natural killer/T-cell lymphoma (NKTCL) is an aggressive malignancy with a high propensity for drug resistance, particularly to anthracyclines like adriamycin (ADM). The molecular mechanisms of ADM resistance in NKTCL are not fully understood. In this study, we aimed to elucidate the role of YTHDF2 in the regulation of SLC16A9 mRNA stability and its implications in ADM resistance in NKTCL. The study examined the expression changes of SLC16A9 under varying concentrations of ADM and manipulated the expression levels of SLC16A9 and YTHDF2 through overexpression and knockdown. By analyzing the levels of m6A modification, it was revealed that YTHDF2 regulates SLC16A9 expression via the m6A pathway, thereby influencing ADM resistance. This conclusion was further validated by in vivo experiments. Our results showed that overexpression of SLC16A9 enhanced ADM resistance, while knockdown of SLC16A9 increased sensitivity to ADM. Further investigation revealed that ADM treatment reduces m6A modification levels on SLC16A9 mRNA, which is associated with decreased binding of YTHDF2 to SLC16A9 mRNA, leading to increased SLC16A9 expression. We also found that overexpression of YTHDF2 reduced SLC16A9 expression and increased ADM sensitivity, whereas knockdown of YTHDF2 had the opposite effect. In vivo experiments using a nude mouse model further confirmed that SLC16A9 knockdown reduces tumor growth and enhances sensitivity to ADM. our study provides direct evidence that YTHDF2 modulates ADM resistance in NKTCL by regulating the m6A modification of SLC16A9. Targeting the YTHDF2-m6A-SLC16A9 axis may offer a novel therapeutic strategy to overcome chemotherapy resistance in NKTCL.",
+              "doi": "10.1016/j.tranon.2025.102448",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06e6f8549165458d2644ebfc633a1ae54d65d601326fb769dbc9cab7866c9b64"
+              }
+            },
+            {
+              "title": "BAY11 enhances OCT4 synthetic mRNA expression in adult human skin cells.",
+              "abstract": "The OCT4 transcription factor is involved in many cellular processes, including development, reprogramming, maintaining pluripotency and differentiation. Synthetic OCT4 mRNA was recently used (in conjunction with other reprogramming factors) to generate human induced pluripotent stem cells. Here, we discovered that BAY 11-7082 (BAY11), at least partially through an NF-κB-inhibition based mechanism, could significantly increase the expression of OCT4 following transfection of synthetic mRNA (synRNA) into adult human skin cells. We tested various chemical and molecular small molecules on their ability to suppress the innate immune response seen upon synthetic mRNA transfection. Three molecules - B18R, BX795, and BAY11 - were used in immunocytochemical and proliferation-based assays. We also utilized global transcriptional meta-analysis coupled with quantitative PCR to identify relative gene expression downstream of OCT4. We found that human skin cells cultured in the presence of BAY11 resulted in reproducible increased expression of OCT4 that did not inhibit normal cell proliferation. The increased levels of OCT4 resulted in significantly increased expression of genes downstream of OCT4, including the previously identified SPP1, DUSP4 and GADD45G, suggesting the expressed OCT4 was functional. We also discovered a novel OCT4 putative downstream target gene SLC16A9 which demonstrated significantly increased expression following elevation of OCT4 levels. For the first time we have shown that small molecule-based stabilization of synthetic mRNA expression can be achieved with use of BAY11. This small molecule-based inhibition of innate immune responses and subsequent robust expression of transfected synthetic mRNAs may have multiple applications for future cell-based research and therapeutics.",
+              "doi": "10.1186/scrt163",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f78b307795959762105982c35e37592a1f63c3e7e932b01f4fd09646394ce83c"
+              }
+            },
+            {
+              "title": "Acquired resistance to PI3K/mTOR inhibition is associated with mitochondrial DNA mutation and glycolysis.",
+              "abstract": "Acquired resistance (AQR) to drug treatment occurs frequently in cancer patients and remains an impediment to successful therapy. The aim of this study was to gain insight into how AQR arises following the application of PI3K/mTOR inhibitors. H1975 lung cancer cells with EGFR T790M mutations that confer resistance to EGFR inhibitors underwent prolonged treatment with the PI3K/mTOR inhibitor, BEZ235. Monoclonal cells with stable and increased resistance to BEZ235 were obtained after 8 months treatment. These AQR clones showed class-specific resistance to PI3K/mTOR inhibitors, reduced G1 cell cycle arrest and impedance of migration following PI3K/mTOR inhibition, reduced PTEN expression and increased Akt and S6RP phosphorylation. Transcriptome analysis revealed the AQR clones had increased expression of the metabolite transporters SLC16A9 and SLC16A7, suggestive of altered cell metabolism. Subsequent experiments revealed that AQR clones possess features consistent with elevated glycolysis, including increased levels of glucose, lactate, glutamine, glucose dependence, GLUT1 expression, and rates of post-glucose extracellular acidification, and decreased levels of reactive oxygen species and rates of oxygen consumption. Combination treatment of BEZ235 with the glycolysis inhibitor 3-bromopyruvate was synergistic in AQR clones, but only additive in parental cells. DNA sequencing revealed the presence of a mitochondrial DNA (mtDNA) MT-C01 variant in AQR but not parental cells. Depletion of mitochondrial DNA in parental cells induced resistance to BEZ235 and other PI3K/mTOR inhibitors, and was accompanied by increased glycolysis. The results of this study provide the first evidence that a metabolic switch associated with mtDNA mutation can be an underlying mechanism for AQR.",
+              "doi": "10.18632/oncotarget.22655",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cbfcfcad4c46cfb6b5e161510d603e716096b5e3d1c8c394f4cc8c466b1d65ae"
+              }
+            },
+            {
+              "title": "The tissue expression of MCT3, MCT8, and MCT9 genes in women with breast cancer.",
+              "abstract": "Breast cancer (BC) is a common malignancy with a high mortality rate. Malignant cell transformation is associated with metabolic changes. One group of proteins that are affected is the monocarboxylate transporters (MCTs-SLC16A). The MCTs comprise 14 members, and they play an important role in the growth, proliferation, and metabolism of cancer cells by transporting monocarboxylates such as lactate, pyruvate and thyroid hormones. We aimed to evaluate the expression of MCT3 (SLC16A8), MCT8 (SLC16A2) and MCT9 (SLC16A9) genes in breast cancer samples, comparing to normal adjacent tissues. Forty paired breast cancer tumor samples, the adjacent non-tumor and five healthy tissues were collected. Three cancer cell lines (MCF-7, MDA-MB-231, and SKBR3) were also analyzed. The expression of SLC16A8, SLC16A2 and SLC16A9 were assessed using quantitative real-time PCR. The relationship between gene expression with the pathological features of the tumors, and the hormone receptors status of the patient's tumors were also analyzed. There was a significantly lower expression of the MCT3 gene in tumor samples compared to adjacent normal tissue and healthy samples (p value < 0.05). There was a significant difference in the expression of all three candidate genes between the BC tissues and normal tissues, and for the, tissues with different hormone receptor status and the molecular subtypes. Altered MCT8 and MCT9 gene expression was associated with a reduced survival CONCLUSION: MCT3 expression is significantly downregulated in breast cancer tissue. MCT3 may represent a novel therapeutic target in breast cancer patients, or in some hormone receptor subgroups.",
+              "doi": "10.1007/s13258-021-01116-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC16A9"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "38707298821aa3491fa582129b179315b1af07cc2079418626ef0bfd95983149"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC16A9 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC16A9 inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC16A9']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC16A9",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC16A9",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC16A9": {
+          "status": "unavailable",
+          "gene": "SLC16A9",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC16A9": {
+          "status": "unsupported_cancer",
+          "gene": "SLC16A9",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A9']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC16A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A9"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A9": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC16A9 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A9']",
+        "status": "ok",
+        "summary": "[跨癌种类推] CML 缺乏直接图谱/组学证据；跨癌种中，SLC16A9 在 NKTCL 中敲低会降低肿瘤生长并增加 ADM 敏感性，提示其更可能促进肿瘤生长/耐药；在 TNBC 和肺癌代谢耐药模型中，SLC16A9 与 carnitine/FAO 代谢适应及耐药状态相关，也不支持其作为肿瘤生长抑制因子。CML 为 BCR-ABL 驱动的血液肿瘤，代谢适应基因通常支持增殖/存活，因此类比推断 SLC16A9 更可能是生长支持/代谢适应相关，而非抑制肿瘤生长。 | TIMER 与 KM 在 CML 上不可用，不能直接判断。现有文献一致将 SLC16A9 与代谢可塑性、FAO/肉碱摄取、耐药及肿瘤适应性生长联系起来；最直接的干预证据来自 NKTCL：SLC16A9 敲低减少肿瘤生长，说明该基因本身不是肿瘤生长抑制剂。将这一生物学方向迁移到 CML，虽然存在血液谱系和实验模型差异，但最合理的 membership 判断仍是 false：SLC16A9 不太可能抑制 CML 肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC16A9"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC16A9": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] CML 缺乏直接图谱/组学证据；跨癌种中，SLC16A9 在 NKTCL 中敲低会降低肿瘤生长并增加 ADM 敏感性，提示其更可能促进肿瘤生长/耐药；在 TNBC 和肺癌代谢耐药模型中，SLC16A9 与 carnitine/FAO 代谢适应及耐药状态相关，也不支持其作为肿瘤生长抑制因子。CML 为 BCR-ABL 驱动的血液肿瘤，代谢适应基因通常支持增殖/存活，因此类比推断 SLC16A9 更可能是生长支持/代谢适应相关，而非抑制肿瘤生长。 | TIMER 与 KM 在 CML 上不可用，不能直接判断。现有文献一致将 SLC16A9 与代谢可塑性、FAO/肉碱摄取、耐药及肿瘤适应性生长联系起来；最直接的干预证据来自 NKTCL：SLC16A9 敲低减少肿瘤生长，说明该基因本身不是肿瘤生长抑制剂。将这一生物学方向迁移到 CML，虽然存在血液谱系和实验模型差异，但最合理的 membership 判断仍是 false：SLC16A9 不太可能抑制 CML 肿瘤生长。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC16A9']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC16A9"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T06:30:54Z"
+  }
+}

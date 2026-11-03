@@ -1,0 +1,367 @@
+{
+  "qid": "membership_positive_ALL_Human_CUTLL1_7days_00000",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr Low-2V vs Crispr High-20V as the treatment condition, and MAGECK as the method.\nIs SLC8A2 promote acute lymphoblastic leukemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "acute lymphoblastic leukemia",
+    "cell_line": "CUTLL1",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low-2V vs Crispr High-20V"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC8A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_ALL_Human_CUTLL1_7days_00000",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC8A2"
+      ],
+      "requested_context": {
+        "cancer": "acute lymphoblastic leukemia",
+        "cell_line": "CUTLL1",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low-2V vs Crispr High-20V"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC8A2",
+              "protein_function": "Mediates the electrogenic exchange of Ca2+ against Na+ ions across the cell membrane, regulates cytoplasmic Ca2+ levels.",
+              "aliases": "NCX2, SLC8A3",
+              "transport_type": "E / Na+, Ca2+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC8A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC8 Na+/Ca2+  exchanger family",
+              "target_properties": {
+                "name": "SLC8 Na+/Ca2+  exchanger family"
+              }
+            },
+            {
+              "gene": "SLC8A2",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NCX2",
+              "target_properties": {
+                "name": "NCX2"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The Candidate Tumor Suppressor Gene SLC8A2 Inhibits Invasion, Angiogenesis and Growth of Glioblastoma.",
+              "abstract": "Glioblastoma is the most frequent and most aggressive brain tumor in adults. Solute carrier family 8 member 2 (SLC8A2) is only expressed in normal brain, but not present in other human normal tissues or in gliomas. Therefore, we hypothesized that SLC8A2 might be a glioma tumor suppressor gene and detected the role of SLC8A2 in glioblastoma and explored the underlying molecular mechanism. The glioblastoma U87MG cells stably transfected with the lentivirus plasmid containg SLC8A2 (U87MG-SLC8A2) and negative control (U87MG-NC) were constructed. In the present study, we found that the tumorigenicity of U87MG in nude mice was totally inhibited by SLC8A2. Overexpression of SLC8A2 had no effect on cell proliferation or cell cycle, but impaired the invasion and migration of U87MG cells, most likely through inactivating the extracellular signal-related kinases (ERK)1/2 signaling pathway, inhibiting the nuclear translocation and DNA binding activity of nuclear factor kappa B (NF-κB), reducing the level of matrix metalloproteinases (MMPs) and urokinase-type plasminogen activator (uPA)-its receptor (uPAR) system (ERK1/2-NF-κB-MMPs/uPA-uPAR), and altering the protein levels of epithelial to mesenchymal transitions (EMT)-associated proteins E-cardherin, vimentin and Snail. In addition, SLC8A2 inhibited the angiogenesis of U87MG cells, probably through combined inhibition of endothelium-dependent and endothelium-nondependent angiogenesis (vascular mimicry pattern). Totally, SLC8A2 serves as a tumor suppressor gene and inhibits invasion, angiogenesis and growth of glioblastoma.",
+              "doi": "10.14348/molcells.2017.0104",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0452ff44f93590cd814e40aaf2233167f30b288b887e28f0429af06693d57edf"
+              }
+            },
+            {
+              "title": "Identification and validation of calcium extrusion-related genes prognostic signature in colon adenocarcinoma.",
+              "abstract": "Disruptions in calcium homeostasis are associated with a wide range of diseases, and play a pivotal role in the development of cancer. However, the construction of prognostic models using calcium extrusion-related genes in colon adenocarcinoma (COAD) has not been well studied. We aimed to identify whether calcium extrusion-related genes serve as a potential prognostic biomarker in the COAD progression. We constructed a prognostic model based on the expression of calcium extrusion-related genes (SLC8A1, SLC8A2, SLC8A3, SLC8B1, SLC24A2, SLC24A3 and SLC24A4) in COAD. Subsequently, we evaluated the associations between the risk score calculated by calcium extrusion-related genes and mutation signature, immune cell infiltration, and immune checkpoint molecules. Then we calculated the immune score, stromal score, tumor purity and estimate score using the Estimation of STromal and Immune cells in MAlignant Tumor tissues using Expression data (ESTIMATE) algorithm. The response to immunotherapy was assessed using tumor immune dysfunction and exclusion (TIDE). Finally, colorectal cancer cells migration, growth and colony formation assays were performed in RKO cells with the overexpression or knockdown SLC8A3, SLC24A2, SLC24A3, or SLC24A4. We found that patients with high risk score of calcium extrusion-related genes tend to have a poorer prognosis than those in the low-risk group. Additionally, patients in high-risk group had higher rates of KRAS mutations and lower MUC16 mutations, implying a strong correlation between KRAS and MUC16 mutations and calcium homeostasis in COAD. Moreover, the high-risk group showed a higher infiltration of regulatory T cells (Tregs) in the tumor microenvironment. Finally, our study identified two previously unreported model genes (SLC8A3 and SLC24A4) that contribute to the growth and migration of colorectal cancer RKO cells. Altogether, we developed a prognostic risk model for predicting the prognosis of COAD patients based on the expression profiles of calcium extrusion-related genes, Furthermore, we validated two previously unreported tumor suppressor genes (SLC8A3 and SLC24A4) involved in colorectal cancer progression.",
+              "doi": "10.7717/peerj.17582",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ef8292e43041fc906527a574ba6eeed32cc67b82d21b46b626996c9d7941eeb0"
+              }
+            },
+            {
+              "title": "Identification of critical biomarkers and immune landscape patterns in glioma based on multi-database.",
+              "abstract": "Glioma is the most prevalent tumor of the central nervous system. The poor clinical outcomes and limited therapeutic efficacy underscore the urgent need for early diagnosis and an optimized prognostic approach for glioma. Therefore, the aim of this study was to identify sensitive biomarkers for glioma. Differentially expressed genes (DEGs) of glioma were downloaded from The Cancer Genome Atlas (TCGA) and Gene Expression Omnibus (GEO) databases. The potential biomarkers were identified using weighted gene co-expression network analysis (WGCNA) and least absolute shrinkage and selection operator (LASSO) regression. The prognostic ability of the potential biomarkers was evaluated by Cox regression and survival curve. CellMiner was used to access the correlation between the expression of potential biomarkers and anticancer drug sensitivity. We then explored the association of potential biomarkers and tumor immune infiltration by single-sample GSEA (ssGSEA) and CIBERSORT. Immune staining in glioma patient samples and cell experiments of potential biomarkers further verified their expression and function. Ultimately, we identified three potential biomarkers: SLC8A2, ATP2B3, and SRCIN1. These 3 genes were found significantly correlated with clinicopathological features (age, WHO grade, IDH mutation status, 1p19q codeletion status). Furthermore, the overall survival (OS), disease-specific survival (DSS), and progression-free survival (PFS) were found to be positively correlated with high expression of these 3 potential biomarkers. Besides, there was a substantial relationship between the sensitivity of anticancer drugs and these biomarkers expression. More importantly, the negative association between the 3 genes with most tumor immune cells was also established. Moreover, the decreased expression of the biomarkers was also verified in glioma patient samples. Finally, we confirmed that these 3 genes might promotes glioma proliferation and migration in vitro. SLC8A2, ATP2B3, and SRCIN1 were identified as underlying biomarkers for glioma associated with prognosis assessments and personal immunotherapy.",
+              "doi": "10.1007/s12672-024-01653-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "896bb6f1f6f0bfbdda7265c22316d94159d23d057c36a1c344b44cc96fb887d6"
+              }
+            },
+            {
+              "title": "Chronic fluoxetine treatment in socially-isolated rats modulates the prefrontal cortex synaptoproteome.",
+              "abstract": "Exposure to chronic social isolation (CSIS) and synapse dysfunction have been implicated in the etiology of major depressive disorder (MDD). Fluoxetine (Flx) has been widely used to treat MDD, but its mechanisms of action remain elusive. We employed comparative synaptoproteomics to investigate the changes in the levels of proteins and molecular signaling pathways in prefrontal cortical samples of adult male Wistar rats exposed to CSIS, a rat model of depression, and CSIS rats treated with chronic Flx and controls, using liquid chromatography coupled to tandem mass spectrometry. Flx-treated control rats showed a decreased level of proteins involved in vesicle-mediated transport, and a predominantly increased level of exocytosis-associated proteins. CSIS significantly reduced the level of proteins involved in the ATP metabolic process, clathrin-dependent endocytosis, and proteolysis. Flx treatment in CSIS rats stimulated synaptic vesicle trafficking by increasing the regulation of exo/endocytosis-associated proteins, proteins involved in synaptic plasticity including neurogenesis, Cox5a, mitochondria-associated proteins involved in oxidative phosphorylation, and ion transport proteins (Slc8a2, Atp1b2). Flx treatment resulted in an increased synaptic vesicle dynamic, plasticity and mitochondrial functionality, and a suppression of CSIS-induced impairment of these processes. BIOLOGICAL SIGNIFICANCE: Identifying biomarkers of MDD and treatment response is the goal of many studies. Contemporary studies have shown that many molecular alterations associated with the pathophysiology of MDD reside within the synapse. As part of this research, a growing importance is the use of proteomics, as monitoring the changes in protein levels enables the identification of (possible) biochemical pathways and processes of importance for the development of depressive-like behavior and the efficacy of antidepressant treatments. We profiled proteomic changes representative of the development of CSIS-induced depressive-like behavior and the antidepressant effects of Flx. Our study has identified synaptosomal proteins and altered molecular pathways that may be potential markers of prefrontal cortical synaptic dysfunction associated with depressive-like behavior, and further clarified the mechanisms of depressive-like behavior and mode of action of Flx. Our findings indicate potential PFC synaptic targets for antidepressant treatment.",
+              "doi": "10.1016/j.jprot.2023.104925",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC8A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9c7cd6a105266b9f5f59a077bfee1f1e865aed00f4b1e872484398ea25fd73c0"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC8A2 cancer=acute lymphoblastic leukemia bucket=membership Under the experimental conditions of acute lymphoblastic leukemia, using Human as the model organism, CUTLL1 from Cell line as the sample, with Crispr Low-2V vs Crispr High-20V as the treatment condition, and MAGECK as the method.\nIs SLC8A2 promote acute lymphoblastic leukemia's Tumor Survival?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC8A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC8A2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC8A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC8A2",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "acute lymphoblastic leukemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC8A2": {
+          "status": "unavailable",
+          "gene": "SLC8A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC8A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC8A2",
+          "cancer_type": "acute lymphoblastic leukemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC8A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC8A2"
+        ],
+        "confidence": 0.8,
+        "abstained": false,
+        "gene_scores": {
+          "SLC8A2": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.8；法官理由: Evidence lacks CUTLL1 T-ALL survival direction; SLC8A2 is reported tumor suppressor/inhibitor in glioblastoma. E's marginal necessity conflates loss-of-function essentiality with promotion. Two independent LLM votes favor false.。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC8A2/NCX2 is a brain-enriched Na+/Ca2+ exchanger; in glioblastoma/glioma it is reported as a candidate tumor suppressor whose overexpression inhibits growth/invasion/angiogenesis and whose higher expression associates with better prognosis. There is no direct ALL/CUTLL1 expression or dependency evidence, and lymphoblastic leukemia is a different lineage where neuronal NCX2-mediated Ca2+ extrusion is unlikely to be a core survival dependency. By analogy, SLC8A2 is more likely non-essential or tumor-suppressive rather than pro-survival in ALL. | Direct PPR/TIMER/KM evidence is unavailable, but the strongest literature signal points away from a tumor-promoting essential role: SLC8A2 suppresses invasion/growth in glioma and is not validated as a leukemia survival factor. Therefore, under CRISPR MAGeCK conditions in acute lymphoblastic leukemia, SLC8A2 is unlikely to promote tumor survival.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC8A2"
+        ],
+        "confidence": 0.45,
+        "abstained": false,
+        "gene_scores": {
+          "SLC8A2": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC8A2/NCX2 is a brain-enriched Na+/Ca2+ exchanger; in glioblastoma/glioma it is reported as a candidate tumor suppressor whose overexpression inhibits growth/invasion/angiogenesis and whose higher expression associates with better prognosis. There is no direct ALL/CUTLL1 expression or dependency evidence, and lymphoblastic leukemia is a different lineage where neuronal NCX2-mediated Ca2+ extrusion is unlikely to be a core survival dependency. By analogy, SLC8A2 is more likely non-essential or tumor-suppressive rather than pro-survival in ALL. | Direct PPR/TIMER/KM evidence is unavailable, but the strongest literature signal points away from a tumor-promoting essential role: SLC8A2 suppresses invasion/growth in glioma and is not validated as a leukemia survival factor. Therefore, under CRISPR MAGeCK conditions in acute lymphoblastic leukemia, SLC8A2 is unlikely to promote tumor survival. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC8A2']",
+        "status": "ok",
+        "summary": "SLC8A2 encodes the Na+/Ca2+ exchanger NCX2 and is not an established essential or pro-survival driver gene in human acute lymphoblastic leukemia. In CUTLL1 CRISPR screens analyzed by MAGeCK, tumor survival dependencies are more commonly associated with NOTCH1/PI3K signaling and core leukemia survival pathways, making SLC8A2 promotion of ALL tumor survival unlikely under the stated conditions.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC8A2"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC8A2 encodes the Na+/Ca2+ exchanger NCX2 and is not an established essential or pro-survival driver gene in human acute lymphoblastic leukemia. In CUTLL1 CRISPR screens analyzed by MAGeCK, tumor survival dependencies are more commonly associated with NOTCH1/PI3K signaling and core leukemia survival pathways, making SLC8A2 promotion of ALL tumor survival unlikely under the stated conditions.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T09:54:23Z"
+  }
+}

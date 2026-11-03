@@ -1,0 +1,423 @@
+{
+  "qid": "pairwise_positive_CML_Human_eHAP_7Days_00160",
+  "bucket": "pairwise",
+  "task_type": "pairwise_positive",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC20A1 and SLC4A3 is more likely to promote CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+  },
+  "ground_truth": {
+    "winner": "SLC20A1"
+  },
+  "effective_genes": [
+    "SLC20A1",
+    "SLC4A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_positive_CML_Human_eHAP_7Days_00160",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC20A1",
+        "SLC4A3"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 7Days vs Crispr High Growth 7Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC20A1",
+              "protein_function": "Sodium-phosphate symporter which preferentially transports the monovalent form of phosphate with a stoichiometry of two sodium ions per phosphate ion. May play a role in extracellular matrix and cartilage calcification as well as in vascular calcification. Essential for cell proliferation but this function is independent of its phosphate transporter activity.",
+              "aliases": "PiT-1, Gibbon Ape Leukemia Virus Receptor 1, Glvr-1, GLVR1, PiT1",
+              "transport_type": "C / Na+, H2PO4-"
+            },
+            {
+              "gene": "SLC4A3",
+              "protein_function": "Mediates electroneutral exchange of chloride for bicarbonate ions",
+              "aliases": "AE3",
+              "transport_type": "E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC20A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC20 Type III Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC20 Type III Na+-phosphate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC20A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "PiT-1",
+              "target_properties": {
+                "name": "PiT-1"
+              }
+            },
+            {
+              "gene": "SLC4A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC4 Bicarbonate  transporter family",
+              "target_properties": {
+                "name": "SLC4 Bicarbonate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC4A3",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "AE3",
+              "target_properties": {
+                "name": "AE3"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Identification and experimental validation of G protein alpha inhibiting activity polypeptide 2 (GNAI2) as a microRNA-138 target in tongue squamous cell carcinoma.",
+              "abstract": "MicroRNA deregulation is a critical event in tumor initiation and progression. The down-regulation of microRNA-138 has been frequently observed in various cancers, including tongue squamous cell carcinoma (TSCC). Our previous studies suggest that deregulation of miR-138 is associated with the enhanced proliferation and invasion in TSCC cells. Here, we seek to identify the targets of miR-138 in TSCC, and explore their functional relevance in tumorigenesis. Our genome-wide expression profiling experiments identified a panel of 194 unique transcripts that were significantly down-regulated in TSCC cells transfected with miR-138. A comprehensive screening using six different sequence-based microRNA target prediction algorithms revealed that 51 out of these 194 down-regulated transcripts are potential direct targets for miR-138. These targets include: chloride channel, nucleotide-sensitive, 1A (CLNS1A), G protein alpha inhibiting activity polypeptide 2 (GNAI2), solute carrier family 20, member 1 (SLC20A1), eukaryotic translation initiation factor 4E binding protein 1 (EIF4EBP1), and Rho-related GTP-binding protein C (RhoC). GNAI2 is a known proto-oncogene that is involved in the initiation and progression of several different types of tumors. Direct targeting of miR-138 to two candidate binding sequences located in the 3'-untranslated region of GNAI2 mRNA was confirmed using luciferase reporter gene assays. Knockdown of miR-138 in TSCC cells enhanced the expression of GNAI2 at both mRNA and protein levels. In contrast, ectopic transfection of miR-138 reduced the expression of GNAI2, which, in consequence, led to reduced proliferation, cell cycle arrest and apoptosis. In summary, we identified a number of high-confident miR-138 target genes, including proto-oncogene GNAI2, which may play an important role in TSCC initiation and progression.",
+              "doi": "10.1007/s00439-010-0915-3",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8ca9ca38d5dfc2465cd39cde9b9e89c6c87ab8126283a76477dfb1e3f74d3be1"
+              }
+            },
+            {
+              "title": "Comprehensive analyses of solute carrier family members identify SLC12A2 as a novel therapy target for colorectal cancer.",
+              "abstract": "As the largest transporter family impacting on tumor genesis and development, the prognostic value of solute carrier (SLC) members has not been elucidated in colorectal cancer (CRC). We aimed to identify a prognostic signature from the SLC members and comprehensively analyze their roles in CRC. Firstly, we downloaded transcriptome data and clinical information of CRC samples from GEO (GSE39582) and TCGA as training and testing dataset, respectively. We extracted the expression matrix of SLC genes and established a prognostic model by univariate and multivariate Cox regression. Afterwards, the low-risk and high-risk group were identified. Then, the differences of prognosis traits, transcriptome features, clinical characteristics, immune infiltration and drug sensitivity between the two groups were explored. Furthermore, molecular subtyping was also implemented by non-negative matrix factorization (NMF). Finally, we studied the expression of the screened SLC genes in CRC tumor tissues and normal tissues as well as investigated the role of SLC12A2 by loss of function and gain of function. As a result, we developed a prognostic risk model based on the screened 6-SLC genes (SLC39A8, SLC2A3, SLC39A13, SLC35B1, SLC4A3, SLC12A2). Both in the training and testing sets, CRC patients in the high-risk group had the poorer prognosis and were in the more advanced pathological stage. What's more, the high-risk group were enriched with CRC progression signatures and immune infiltration. Two groups showed different drug sensitivity. On the other hand, two distinct subclasses (C1 and C2) were identified based on the 6 SLC genes. CRC patients in the high-risk group and C1 subtype had a worse prognosis. Furthermore, we found and validated that SLC12A2 was steadily upregulated in CRC. A loss-of-function study showed that knockdown of SLC12A2 expression restrained proliferation and stemness of CRC cells while a gain-of-function study showed the contrary results. Hence, we provided a 6-SLC gene signature for prognosis prediction of CRC patients. At the same time, we identified that SLC12A2 could promote tumor progression in CRC, which may serve as a potential therapeutic target.",
+              "doi": "10.1038/s41598-024-55048-y",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "af64765362ef9350714716fdf2722f2329c7e8ff11c27b3bd7b336a4f69e6b5e"
+              }
+            },
+            {
+              "title": "Cellular abundance of sodium phosphate cotransporter SLC20A1/PiT1 and phosphate uptake are controlled post-transcriptionally by ESCRT.",
+              "abstract": "Inorganic phosphate is essential for human life. The widely expressed mammalian sodium/phosphate cotransporter SLC20A1/PiT1 mediates phosphate uptake into most cell types; however, while SLC20A1 is required for development, and elevated SLC20A1 expression is associated with vascular calcification and aggressive tumor growth, the mechanisms regulating SLC20A1 protein abundance are unknown. Here, we found that SLC20A1 protein expression is low in phosphate-replete cultured cells but is strikingly induced following phosphate starvation, whereas mRNA expression is high in phosphate-replete cells and only mildly increased by phosphate starvation. To identify regulators of SLC20A1 protein levels, we performed a genome-wide CRISPR-based loss-of-function genetic screen in phosphate-replete cells using SLC20A1 protein induction as readout. Our screen revealed that endosomal sorting complexes required for transport (ESCRT) machinery was essential for proper SLC20A1 protein downregulation in phosphate-replete cells. We show that SLC20A1 colocalizes with ESCRT and that ESCRT deficiency increases SLC20A1 protein and phosphate uptake into cells. We also found numerous additional candidate regulators of mammalian phosphate homeostasis, including genes modifying protein ubiquitination and the Krebs cycle and oxidative phosphorylation pathways. Many of these targets have not been previously implicated in this process. We present here a model in which SLC20A1 protein abundance and phosphate uptake are tonically negatively regulated post-transcriptionally in phosphate-replete cells through direct ESCRT-mediated SLC20A1 degradation. Moreover, our screening results provide a comprehensive resource for future studies to elucidate the mechanisms governing cellular phosphate homeostasis. We conclude that genome-wide CRISPR-based genetic screening is a powerful tool to discover proteins and pathways relevant to physiological processes.",
+              "doi": "10.1016/j.jbc.2022.101945",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cc9fc546e846fdaf642df9dbf07929b0fa8f4bb34f13fd190d374981d898f594"
+              }
+            },
+            {
+              "title": "High levels of the type III inorganic phosphate transporter PiT1 (SLC20A1) can confer faster cell adhesion.",
+              "abstract": "The inorganic phosphate transporter PiT1 (SLC20A1) is ubiquitously expressed in mammalian cells. We recently showed that overexpression of human PiT1 was sufficient to increase proliferation of two strict density-inhibited cell lines, murine fibroblastic NIH3T3 and pre-osteoblastic MC3T3-E1 cells, and allowed the cultures to grow to higher cell densities. In addition, upon transformation NIH3T3 cells showed increased ability to form colonies in soft agar. The cellular regulation of PiT1 expression supports that cells utilize the PiT1 levels to control proliferation, with non-proliferating cells showing the lowest PiT1 mRNA levels. The mechanism behind the role of PiT1 in increased cell proliferation is not known. We, however, found that compared to control cells, cultures of NIH3T3 cells overexpressing PiT1 upon seeding showed increased cell number after 24h and had shifted more cells from G0/G1 to S+G2/M within 12h, suggesting that an early event may play a role. We here show that expression of human PiT1 in NIH3T3 cells led to faster cell adhesion; this effect was not cell type specific in that it was also observed when expressing human PiT1 in MC3T3-E1 cells. We also show for NIH3T3 that PiT1 overexpression led to faster cell spreading. The final total numbers of attached cells did, however, not differ between cultures of PiT1 overexpressing cells and control cells of neither cell type. We suggest that the PiT1-mediated fast adhesion potentials allow the cells to go faster out of G0/G1 and thereby contribute to their proliferative advantage within the first 24h after seeding.",
+              "doi": "10.1016/j.yexcr.2014.05.014",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "12afcfa178b5ea459b90bd0bf85d67b81a238b44a80088babf3c57a4a2e8bfea"
+              }
+            },
+            {
+              "title": "Type III sodium-dependent inorganic phosphate transporters are required for the phenotypes in human brain microvascular endothelial cells.",
+              "abstract": "Inorganic phosphate (Pi) homeostasis in the brain is critical for the development of primary brain calcification (PBC). In the brains of patients with PBC, calcification occurs in the cerebral small vessels, and it is primarily caused by mutated SLC20A2, a gene that encodes a type III Pi transporter. A previous study founded that the SLC20 family, which includes SLC20A1 and SLC20A2, contributes to Pi homeostasis in the central nervous system. However, the impact of these Pi transporters on the brain vessel phenotype remains unknown. Thus, in this study, we aimed to investigate the effect of SLC20A1 or SLC20A2 depletion on the phenotype of human brain microvascular endothelial cells (hBMECs). We assessed the primary phenotypes of vascular endothelial cells, such as proliferation, tube formation, and VE-cadherin expression. The results showed that hBMECs silenced for SLC20A1 or SLC20A2 had decreased proliferative and angiogenic ability, as well as VE-cadherin expression. The intracellular Pi concentration ([Pi]) remained constant in SLC20A1-silenced hBMECs whereas it increased in SLC20A2-silenced cells. Tube formation ability was no change even at 3 mM, a concentration higher than [Pi] which was increased in SLC20A2-silenced hBMECs. Thus, increased [Pi] in SLC20A2-silenced hBMECs may have a small impact on phenotypic changes. In conclusion, abnormalities in Pi homeostasis caused by SLC20A2 depletion were suggested to play a minor role in PBC endothelial pathology.",
+              "doi": "10.1016/j.yexcr.2025.114556",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC20A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "143dd22139792f9957918663112f9573abf5b281102a8313b1e566e71bf51c33"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC20A1 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 7Days vs Crispr High Growth 7Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC20A1 and SLC4A3 is more likely to promote CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC20A1', 'SLC4A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC20A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC20A1",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC20A1": {
+          "status": "unavailable",
+          "gene": "SLC20A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC4A3": {
+          "status": "unavailable",
+          "gene": "SLC4A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC20A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC20A1",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC4A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC4A3",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC4A3']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC20A1 strength=0.10, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC20A1",
+        "candidates": [
+          "SLC20A1",
+          "SLC4A3"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC20A1": 0.1,
+          "SLC4A3": 0.1
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC20A1': 2}，最终智能体辩论后裁决：winner=SLC20A1 answer=None conf=0.74；法官理由: SLC20A1 is annotated as essential for cell proliferation and phosphate uptake, making its knockout more likely to reduce CML eHAP growth than SLC4A3, whose chloride/bicarbonate exchange role lacks comparable proliferation evidence. Two inde。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC4A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC20A1/PiT1 is a broadly expressed sodium-phosphate cotransporter with direct functional evidence supporting cell proliferation, faster G0/G1 exit, and aggressive tumor growth in non-CML models (e.g., fibroblast/pre-osteoblast overexpression, TSCC miR-138 target, ESCRT-regulated phosphate uptake). These proliferation/metabolic-demand phenotypes are plausibly transferable to CML, a BCR-ABL-driven hematopoietic malignancy with high proliferative and nutrient/phosphate demand. SLC4A3/AE3 is mainly an electroneutral Cl-/HCO3- exchanger with weaker functional growth evidence, appearing only as part of a CRC prognostic SLC signature and is less directly linked to leukemia-specific proliferation. | For CML tumor growth, SLC20A1 is more likely to be the growth-promoting gene because its known biology is tied to phosphate homeostasis, cell proliferation, and aggressive growth across multiple contexts, whereas SLC4A3 lacks comparable functional proliferation evidence and is more lineage/ion-exchange related. No CML-specific TIMER/KM evidence is available, so this judgment relies on cross-cancer biological plausibility and functional literature.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": "SLC20A1",
+        "candidates": [
+          "SLC20A1",
+          "SLC4A3"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC20A1": 0.1,
+          "SLC4A3": 0.1
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC20A1/PiT1 is a broadly expressed sodium-phosphate cotransporter with direct functional evidence supporting cell proliferation, faster G0/G1 exit, and aggressive tumor growth in non-CML models (e.g., fibroblast/pre-osteoblast overexpression, TSCC miR-138 target, ESCRT-regulated phosphate uptake). These proliferation/metabolic-demand phenotypes are plausibly transferable to CML, a BCR-ABL-driven hematopoietic malignancy with high proliferative and nutrient/phosphate demand. SLC4A3/AE3 is mainly an electroneutral Cl-/HCO3- exchanger with weaker functional growth evidence, appearing only as part of a CRC prognostic SLC signature and is less directly linked to leukemia-specific proliferation. | For CML tumor growth, SLC20A1 is more likely to be the growth-promoting gene because its known biology is tied to phosphate homeostasis, cell proliferation, and aggressive growth across multiple contexts, whereas SLC4A3 lacks comparable functional proliferation evidence and is more lineage/ion-exchange related. No CML-specific TIMER/KM evidence is available, so this judgment relies on cross-cancer biological plausibility and functional literature. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC20A1', 'SLC4A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC20A1",
+          "SLC4A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:49:27Z"
+  }
+}

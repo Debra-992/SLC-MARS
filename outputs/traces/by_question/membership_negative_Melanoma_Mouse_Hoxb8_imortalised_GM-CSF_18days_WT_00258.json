@@ -1,0 +1,464 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00258",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC2A4 inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC2A4"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00258",
+      "status": "ok",
+      "summary": "检索到 4 类证据、14 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC2A4"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC2A4",
+              "protein_function": "Insulin-regulated facilitative glucose transporter that plays a key role in removal of glucose from circulation.",
+              "aliases": "GLUT4",
+              "transport_type": "F"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC2A4",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC2 Facilitative  GLUT transporter family",
+              "target_properties": {
+                "name": "SLC2 Facilitative  GLUT transporter family"
+              }
+            },
+            {
+              "gene": "SLC2A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC2A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC2A4",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC2A4",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "GLUT4",
+              "target_properties": {
+                "name": "GLUT4"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC2A4",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioblastoma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A4",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "multiple myeloma (MM)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC2A4",
+              "pathway": "ferroptosis",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "multiple myeloma (MM)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Butyrate oxidation attenuates the butyrate-induced improvement of insulin sensitivity in myotubes.",
+              "abstract": "Skeletal muscle insulin resistance is a key pathophysiological process that precedes the development of type 2 diabetes. Whereas an overload of long-chain fatty acids can induce muscle insulin resistance, butyrate, a short-chain fatty acid (SCFA) produced from dietary fibre fermentation, prevents it. This preventive role of butyrate has been attributed to histone deacetylase (HDAC)-mediated transcription regulation and activation of mitochondrial fatty-acid oxidation. Here we address the interplay between butyrate and the long-chain fatty acid palmitate and investigate how transcription, signalling and metabolism are integrated to result in the butyrate-induced skeletal muscle metabolism remodelling. Butyrate enhanced insulin sensitivity in palmitate-treated, insulin-resistant C2C12 cells, as shown by elevated insulin receptor 1 (IRS1) and pAKT protein levels and Slc2a4 (GLUT4) mRNA, which led to a higher glycolytic capacity. Long-chain fatty-acid oxidation capacity and other functional respiration parameters were not affected. Butyrate did upregulate mitochondrial proteins involved in its own oxidation, as well as concentrations of butyrylcarnitine and hydroyxybutyrylcarnitine. By knocking down the gene encoding medium-chain 3-ketoacyl-CoA thiolase (MCKAT, Acaa2), butyrate oxidation was inhibited, which amplified the effects of the SCFA on insulin sensitivity and glycolysis. This response was associated with enhanced HDAC inhibition, based on histone 3 acetylation levels. Butyrate enhances insulin sensitivity and induces glycolysis, without the requirement of upregulated long-chain fatty acid oxidation. Butyrate catabolism functions as an escape valve that attenuates HDAC inhibition. Thus, inhibition of butyrate oxidation indirectly prevents insulin resistance and stimulates glycolytic flux in myotubes treated with butyrate, most likely via an HDAC-dependent mechanism.",
+              "doi": "10.1016/j.bbadis.2022.166476",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6d45e56f70fe45004ba38a8f279016639fc95798a35e88572abb55fad5295de0"
+              }
+            },
+            {
+              "title": "miR-335-5p aggravates type 2 diabetes by inhibiting SLC2A4 expression.",
+              "abstract": "Globally, type 2 diabetes (T2D) is the most common chronic disease. It affects approximately 500 million people worldwide. Dysregulation of the solute carrier family 2 member 4 (SLC2A4) gene and miR-335-5p has been associated with T2D progression. However, the mechanisms underlying this dysregulation are unclear. The levels of miR-335-5p and SLC2A4 in blood samples collected from patients with T2D (T2D blood samples) and pancreatic cell lines were measured by Real Time quantitative PCR (RT-qPCR). The relationship between miR-335-5p and SLC2A4 was investigated using a luciferase assay. The role of the miR-335-5p-SLC2A4 axis was detected by CCK8, BrdU, and caspase-3 assays in pancreatic cells treated with 25 mM glucose. Increased miR-335-5p and decreased SLC2A4 expression was observed in both T2D blood samples and pancreatic cell lines. The miR-335-5p mimic markedly suppressed proliferation and elevated apoptosis in glucose-treated pancreatic cells. SLC2A4 overexpression significantly enhanced proliferation but inhibited apoptosis in glucose-treated pancreatic cells. Moreover, miR-335-5p inhibited the expression of SLC2A4 in the pancreatic cells and suppressed the growth of these cells. The data indicated that miR-335-5p targeting of SLC2A4 could hamper the growth of T2D cell model by inhibiting their proliferation and elevating apoptosis. Collectively, our findings implicate miR-335-5p and SLC2A4 as potentially effective therapeutic targets for patients with T2D.",
+              "doi": "10.1016/j.bbrc.2021.04.011",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cb5fc70fbf895d6375b27347cacf472e0d9c8d796c96a2033d4a83f6eecd0d4f"
+              }
+            },
+            {
+              "title": "Development of GLUT4-selective antagonists for multiple myeloma therapy.",
+              "abstract": "Cancer cells consume more glucose to fuel metabolic programs fundamental to sustaining their survival, growth and proliferation. Among the fourteen SLC2A family members, GLUTs 1 and 4 are high-affinity glucose transporters. GLUT4 (SLC2A4) is highly expressed in muscle and adipose tissue. Basally retained within the cell, GLUT4 traffics to the plasma membrane (PM) in response to insulin and exercise-stimulation. The plasma cell malignancy multiple myeloma (MM) exhibits increased constitutive expression of GLUT4 on the PM, co-opting use of GLUT4 for survival and proliferation. GLUT4 inhibition by knockdown or treatment with the FDA-approved HIV protease inhibitor ritonavir leads to cytostatic and/or cytotoxic and chemosensitizing effects in tumor cells both in vitro and in vivo. We recently reported our generation of GLUT4 homology models and virtual high-throughput screening (vHTS) to identify multiple series of novel GLUT4 antagonists. In this report, we describe our initial hit-to-lead optimization to synthesize new analogs with improved potency and selectivity for GLUT4, and the biological characterization of these compounds in a variety of assays. We show that our lead compound (compound 20) decreases glucose uptake and cell proliferation as well as inhibits the expression of pro-survival MCL-1 in MM similar to the effect observed via knockdown of GLUT4 expression. Compound 20 is also effective at chemosensitizing multiple myeloma cell lines and patient samples to venetoclax, dexamethasone and melphalan. In sum, we report development of selective GLUT4 inhibitors lacking inhibitory activity against GLUT1 and GLUT8. We show that selective pharmacological inhibition of GLUT4 is feasible and this may represent a novel strategy for the treatment and chemosensitization of multiple myeloma to standard therapeutics.",
+              "doi": "10.1016/j.ejmech.2017.08.029",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "2024219ebb2baef712d02fcb88ba48f5af3e0487188f3cde188cf193a4a3cc4e"
+              }
+            },
+            {
+              "title": "Inhibitors of GLUT/SLC2A Enhance the Action of BCNU and Temozolomide against High-Grade Gliomas.",
+              "abstract": "Glucose transport across glioblastoma membranes plays a crucial role in maintaining the enhanced glycolysis typical of high-grade gliomas and glioblastoma. We tested the ability of two inhibitors of the glucose transporters GLUT/SLC2A superfamily, indinavir (IDV) and ritonavir (RTV), and of one inhibitor of the Na/glucose antiporter type 2 (SGLT2/SLC5A2) superfamily, phlorizin (PHZ), in decreasing glucose consumption and cell proliferation of human and murine glioblastoma cells. We found in vitro that RTV, active on at least three different GLUT/SLC2A transporters, was more effective than IDV, a specific inhibitor of GLUT4/SLC2A4, both in decreasing glucose consumption and lactate production and in inhibiting growth of U87MG and Hu197 human glioblastoma cell lines and primary cultures of human glioblastoma. PHZ was inactive on the same cells. Similar results were obtained when cells were grown in adherence or as 3D multicellular tumor spheroids. RTV treatment but not IDV treatment induced AMP-activated protein kinase (AMPKα) phosphorylation that paralleled the decrease in glycolytic activity and cell growth. IDV, but not RTV, induced an increase in GLUT1/SLC2A1 whose activity could compensate for the inhibition of GLUT4/SLC2A4 by IDV. RTV and IDV pass poorly the blood brain barrier and are unlikely to reach sufficient liquoral concentrations in vivo to inhibit glioblastoma growth as single agents. Isobologram analysis of the association of RTV or IDV and 1,3-bis(2-chloroethyl)-1-nitrosourea (BCNU) or 4-methyl-5-oxo-2,3,4,6,8-pentazabicyclo[4.3.0]nona-2,7,9-triene-9-carboxamide (TMZ) indicated synergy only with RTV on inhibition of glioblastoma cells. Finally, we tested in vivo the combination of RTV and BCNU on established GL261 tumors. This drug combination increased the overall survival and allowed a five-fold reduction in the dose of BCNU.",
+              "doi": "10.1016/j.neo.2017.02.009",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7089b5a362bf3efabf896b28c8d26c65cb9c12dda4ae12262a913f30a2304c1a"
+              }
+            },
+            {
+              "title": "Permanent cystathionine-β-Synthase gene knockdown promotes inflammation and oxidative stress in immortalized human adipose-derived mesenchymal stem cells, enhancing their adipogenic capacity.",
+              "abstract": "In the present study, we aimed to investigate the impact of permanent cystathionine-β-Synthase (CBS) gene knockdown in human telomerase reverse transcriptase (hTERT) immortalized human adipose-derived mesenchymal stem cells (ASC52telo) and in their capacity to differentiate into adipocytes. CBS gene KD in ASC52telo cells led to increased cellular inflammation (IL6, CXCL8, TNF) and oxidative stress markers (increased intracellular reactive oxygen species and decreased reduced glutathione levels) in parallel to decreased HS production and rejuvenation (LC3 and SIRT1)-related gene expression. In addition, CBS gene KD in ASC52telo cells resulted in altered mitochondrial respiratory function, characterised by decreased basal respiration (specifically proton leak) and spare respiratory capacity, without significant effects on cell viability and proliferation. In this context, shCBS-ASC52telo cells displayed enhanced adipogenic (FABP4, ADIPOQ, SLC2A4, CEBPA, PPARG)-, lipogenic (FASN, DGAT1)- and adipocyte (LEP, LBP)-related gene expression markers, decreased expression of proinflammatory cytokines, and increased intracellular lipid accumulation during adipocyte differentiation compared to control ASC52telo cells. Otherwise, the increased adipogenic potential of shCBS-ASC52telo cells was detrimental to the ability to differentiate into osteogenic linage. In conclusion, this study demonstrated that permanent CBS gene KD in ASC52telo cells promotes a cellular senescence phenotype with a very increased adipogenic potential, promoting a non-physiological enhanced adipocyte differentiation with excessive lipid storage.",
+              "doi": "10.1016/j.redox.2020.101668",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC2A4"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e91d5e7df8981c543a4fcede85a306939eaebde8992fcfff4d1fa3fe54237ca1"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC2A4 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC2A4 inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC2A4']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC2A4",
+            "ppr_score": 6.987660131368462e-05,
+            "degree_corrected_score": 7.426179451550504e-05,
+            "graph_degree": 3,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC2A4",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC2A4",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC2A4": {
+          "status": "unavailable",
+          "gene": "SLC2A4",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC2A4": {
+          "status": "unavailable",
+          "gene": "SLC2A4",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC2A4 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.820 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC2A4"
+        ],
+        "confidence": 0.65,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A4": 3.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.65；法官理由: E's essentiality score is association-level, not a melanoma CRISPR readout. GLUT4 is insulin-responsive muscle/adipose, with redundant GLUT1/3; no evidence SLC2A4 loss inhibits melanoma growth. Two independent LLM votes favor false.。原证据通道判定: winner=None answer=True conf=0.82（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A4']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC2A4 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=3.05 -> P(必需)=0.820 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC2A4"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC2A4": 3.05
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.74；法官理由: Two independent LLM channels agree SLC2A4/GLUT4 is not a melanoma tumor-growth inhibitor: low/redundant expression in Hoxb8 melanoma, no direct CRISPR readout. E's essentiality score is association-level and likely misapplied; false verdict。原证据通道判定: winner=None answer=True conf=0.82（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC2A4']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC2A4"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:36:44Z"
+  }
+}

@@ -1,0 +1,402 @@
+{
+  "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00280",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nIs SLC41A1 promote Osteosarcoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Osteosarcoma",
+    "cell_line": "U-2 OS",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC41A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00280",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC41A1"
+      ],
+      "requested_context": {
+        "cancer": "Osteosarcoma",
+        "cell_line": "U-2 OS",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "WT Crispr 96hours vs WT Crispr 96hours Etoposide"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC41A1",
+              "protein_function": "Na(+)/Mg(2+) ion exchanger that acts as a predominant Mg(2+) efflux system at the plasma membrane; regulates ATP-dependent enzymes.",
+              "aliases": "MgtE",
+              "transport_type": "Ch"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC41A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC41 MgtE-like magnesium   transporter family",
+              "target_properties": {
+                "name": "SLC41 MgtE-like magnesium   transporter family"
+              }
+            },
+            {
+              "gene": "SLC41A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC41A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "LPS-Induced Mitochondrial Damage via SLC41A1-Mediated Magnesium Ion Efflux Leads to the Pyroptosis of Dental Stem Cells.",
+              "abstract": "Although regenerative endodontics demonstrate promise for dental pulp regeneration, chronic inflammation often hinders the success. This study aims to explore the mechanism whereby lipopolysaccharide (LPS) induces dental pulp regeneration failure. Transcriptomic profiling of LPS-stimulated dental pulp stem cells (DPSCs) reveals dysregulated cation homeostasis and increased magnesium (Mg⁺) transmembrane transport. Mechanistically, LPS is observed to activate the transcription factor signal transducer and activator of transcription 5A (STAT5A), which binds to the solute carrier family 41 member 1 (SLC41A1) promoter, thereby upregulating the Mg⁺ efflux transporter and depleting intracellular Mg⁺ levels. Mg⁺ efflux destabilizes the mitochondrial permeability transition pore (mPTP), thus facilitating its opening via the interaction of oligomycin sensitivity-conferring protein (OSCP) and cyclophilin D (CypD), which releases reactive oxygen species (ROS) and mitochondrial DNA (mtDNA) and exacerbates oxidative stress. The released mtDNA activates the absent in melanoma 2 (AIM2) inflammasome, thereby amplifying gasdermin D (GSDMD)-mediated pyroptosis. Exogenous supplementation with Mg⁺ restores intracellular Mg⁺ homeostasis, suppresses mPTP opening, and reduces mtDNA and ROS leakage, thereby rescuing DPSCs viability and differentiation capacity. This study identifies SLC41A1-mediated Mg⁺ dysregulation as a pivotal driver of LPS-induced mitochondrial damage and demonstrates that Mg⁺ replenishment is a therapeutic strategy to counteract inflammation-driven regenerative failure.",
+              "doi": "10.1002/advs.202505666",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d1b452060472d164b1854ed6c3917d5097ce91b6c9c8c455353e27b37b96cc26"
+              }
+            },
+            {
+              "title": "{'sup': '2+', '#text': 'Downregulation of Mg Efflux Protein CNNM3 Predicts Poor Prognosis but Enhances Ferroptosis Sensitivity in Kidney Renal Clear Cell Carcinoma via NCOA4-Mediated Ferritinophagy.'}",
+              "abstract": "The kidneys play a pivotal role in the reabsorption of Mg within the human body. However, the precise functions of Mg and its transporters in the context of kidney renal clear cell carcinoma (KIRC) remain limited. In an effort to address this, we have employed bioinformatics analysis of the TCGA database to devise a novel scoring system, termed the Mg score, which we have used to establish a diagnosis and prognostication framework for KIRC. This score is predicated on the expression levels of nine Mg transporters. It was established that low expression of Mg transporters, including TRPM7, SLC41A1, MRS2, MAGT1, CNNM2, CNNM3, and CNNM4, is linked to a poor prognosis in KIRC. We observed that the expression levels of TRPM7, SLC41A1, MRS2, MAGT1, CNNM2, and CNNM3 were significantly reduced in advanced-stage KIRC patients compared to those in early-stage patients. CNNM3 knockdown promoted the proliferation and migration of KIRC cells in vitro, and interestingly, this effect was accompanied by an increase in both intracellular free Mg and Fe. Exogenous Mg supplementation has been shown to further sensitize KIRC cells to ferroptosis, under both basal conditions and in the presence of CNNM3 knockdown, with a significant enhancement of lipid peroxidation and ferroptosis being observed. At the subcellular level, CNNM3 knockdown has been shown to exacerbate RSL3-induced mitochondrial damage and mitochondrial ROS production. The study thus identifies a potential \"Mg-Fe\" homeostatic mechanism in KIRC cells, with CNNM3 serving as a critical regulatory component. The findings of the present study offer a new direction for further research, with the potential to develop novel and effective therapeutic strategies for KIRC patients exhibiting CNNM3 low expression and unfavorable clinical outcomes. The therapeutic targeting of ferroptosis may present a viable treatment approach for patients with KIRC who exhibit low CNNM3 expression and poor clinical outcomes.",
+              "doi": "10.1096/fj.202500808RR",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "bfc8eb11763507b7a10046f3d898a7259d8ee7c7ba4e75a23db382f920a407f1"
+              }
+            },
+            {
+              "title": "Magnesium Supplementation Attenuates Pulmonary Hypertension via Regulation of Magnesium Transporters.",
+              "abstract": "Pulmonary hypertension (PH) is characterized by profound vascular remodeling and altered Ca homeostasis in pulmonary arterial smooth muscle cells (PASMCs). Magnesium ion (Mg), a natural Ca antagonist and a cofactor for numerous enzymes, is crucial for regulating diverse cellular functions, but its roles in PH remains unclear. Here, we examined the roles of Mg and its transporters in PH development. Chronic hypoxia and monocrotaline induced significant PH in adult male rats. It was associated with a reduction of [Mg] in PASMCs, a significant increase in gene expressions of , , , , , , , , ,  and ; upregulation of SLC41A1, SLC41A2, CNNM2, and TRPM7 proteins; and downregulation of SLC41A3 mRNA and protein. Mg supplement attenuated pulmonary arterial pressure, right heart hypertrophy, and medial wall thickening of pulmonary arteries, and reversed the changes in the expression of Mg transporters. Incubation of PASMCs with a high concentration of Mg markedly inhibited PASMC proliferation and migration, and increased apoptosis, whereas a low level of Mg produced the opposite effects. siRNA targeting  attenuated PASMC proliferation and migration, but promoted apoptosis; and  overexpression also caused similar effects. Moreover, siRNA targeting  or high [Mg] incubation inhibited hypoxia-induced upregulation and nuclear translocation of NFATc3 in PASMCs. The results, for the first time, provide the supportive evidence that Mg transporters participate in the development of PH by modulating PASMC proliferation, migration, and apoptosis; and Mg supplementation attenuates PH through regulation of Mg transporters involving the NFATc3 signaling pathway.",
+              "doi": "10.1161/HYPERTENSIONAHA.120.14909",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c8d1f2a1fcc803e15630dd5c875db420c88b6b4878dc06039f512d0da845a993"
+              }
+            },
+            {
+              "title": "Magnesium transporter protein solute carrier family 41 member 1 suppresses human pancreatic ductal adenocarcinoma through magnesium-dependent Akt/mTOR inhibition and bax-associated mitochondrial apoptosis.",
+              "abstract": "The aim of this study was to identify the function of the Mg transporter protein solute carrier family 41 member 1 SLC41A1 in pancreatic ductal adenocarcinoma and the underlying mechanisms. A total of 27 solute carrier proteins were differentially expressed in pancreatic ductal adenocarcinoma. Three of these proteins were correlated with clinical outcomes in patients, among which SLC41A1 was downregulated in tumour. Overexpression of SLC41A1 suppressed orthotopic tumour growth in a mouse model and reduced the cell proliferation, colony formation, and invasiveness of KP3 and Panc-1 cells, which may have been associated with the increased population of apoptotic-prone cells. Overexpression of SLC41A1 reduced the mitochondrial membrane potential, induced Bax while suppressed Bcl-2 expression. Suppression of Bax abrogated the tumour-suppressive effects of SLC41A1. Furthermore, overexpression of SLC41A1 promoted Mg efflux and suppressed Akt/mTOR activity, which is the upstream regulator of Bax and Bcl-2. An increase in Akt activity and supplementation with Mg abolished SLC41A1-induced tumour suppression. The results of this study suggest that SLC41A1 may be a potential target for the treatment of pancreatic ductal adenocarcinoma.",
+              "doi": "10.18632/aging.101940",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ea042ba311aead9950ebdd23090ed49d299cc39b08e8eb862bc1d928082964a5"
+              }
+            },
+            {
+              "title": "SLC41A1 overexpression correlates with immune cell infiltration in HCC and promotes its malignant progression.",
+              "abstract": "Solute carrier 41 (SLC41) has been identified as a family of magnesium (Mg) transporters that participate in various diseases, including tumor development and progression. Recent studies revealed SLC41A3 acted as an oncogene and predicted poor survival for hepatocellular carcinoma (HCC) patients. However, the potential function of SLC41A1 in HCC remains unclear. In our study, we focused on the levels and putative mechanisms of SLC41A1 in HCC. Using bioinformatics techniques, we found SLC41A1 was upregulated in HCC, which was verified by immunostaining of HCC patients. SLC41A1 was correlated with clinicopathological characteristics, and could be utilized as independently diagnostic and prognostic markers for HCC. By exploring MethSurv website, DNA methylation was identified in SLC41A1, and several methylated CpG sites might affect overall survival of HCC patients. Using Gene Ontology (GO) , Kyoto Encyclopedia of Genes and Genomes (KEGG), gene set enrichment analysis (GSEA), protein-protein interaction (PPI) network, we found SLC41A1 overexpression was related to several tumor-promoting pathways and molecules, such as degradation of extracellular matrix, cell adhesion and O-linked glycosylation, and expression of CXCL1, CXCL5 and MUC1. The results of single-sample GSEA (ssGSEA) showed SLC41A1 might regulate infiltration of multiple immune cells, resulting in the imbalance between immune suppression and immune surveillance. Cellular experiments showed that knockdown of SLC41A1 inhibited proliferation, migration and invasion of HCC, whereas SLC41A1 overexpression exerted the tumor-promoting effects. Collectively, our results shed light on new insights into expression, putative roles and mechanisms of SLC41A1 in HCC, providing novel diagnostic biomarkers and therapeutic targets for HCC.",
+              "doi": "10.7150/ijms.100155",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC41A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1cfcc772b4405eb4d37b0a8bb2dd0f21187b6f24164e9311bfd0203684be04e7"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC41A1 cancer=Osteosarcoma bucket=membership Under the experimental conditions of Osteosarcoma, using Human as the model organism, U-2 OS from Cell line as the sample, with WT Crispr 96hours vs WT Crispr 96hours Etoposide as the treatment condition, and MAGECK as the method.\nIs SLC41A1 promote Osteosarcoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC41A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "Osteosarcoma(OS)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC41A1",
+            "ppr_score": 2.7238016096913486e-06,
+            "degree_corrected_score": 7.237617995997358e-06,
+            "graph_degree": 1,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC41A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC41A1",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "Osteosarcoma",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC41A1": {
+          "status": "unavailable",
+          "gene": "SLC41A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC41A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC41A1",
+          "cancer_type": "Osteosarcoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC41A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC41A1 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC41A1"
+        ],
+        "confidence": 0.83,
+        "abstained": false,
+        "gene_scores": {
+          "SLC41A1": 1.9
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 3}，最终智能体辩论后裁决：winner=None answer=False conf=0.83；法官理由: No direct U-2 OS etoposide MAGeCK evidence. SLC41A1 is a magnesium transporter with nonspecific/pancreatic/dental associations, not canonical etoposide resistance. E nonessential and two independent LLM votes agree false.。原证据通道判定: winner=None answer=False conf=0.427（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC41A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC41A1 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC41A1"
+        ],
+        "confidence": 0.427,
+        "abstained": false,
+        "gene_scores": {
+          "SLC41A1": 1.9
+        },
+        "basis": [
+          "kg_direction",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC41A1 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=1.90 -> P(必需)=0.427 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15] 法官缺席，多数票 A:False 与证据通道一致，采纳。票型 {'A:False': 2, 'A:True': 1}。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC41A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC41A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:42:28Z"
+  }
+}

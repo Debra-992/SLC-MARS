@@ -1,0 +1,218 @@
+{
+  "system": "autogen_topk",
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pred": [
+        "SLC7A5",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC38A1",
+        "SLC7A11"
+      ],
+      "ndcg5": 0.29825325270203323,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 827,
+        "completion": 398,
+        "total": 1225,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC38A1",
+        "SLC7A11"
+      ],
+      "ndcg5": 0.10858068818098127,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 827,
+        "completion": 296,
+        "total": 1123,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pred": [
+        "SLC25A1",
+        "SLC35F2",
+        "SLC25A11",
+        "SLC30A1",
+        "SLC25A51"
+      ],
+      "ndcg5": 0.9818559909792766,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 679,
+        "completion": 366,
+        "total": 1045,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pred": [
+        "SLC7A11",
+        "SLC7A5",
+        "SLC16A3",
+        "SLC9A1",
+        "SLC12A5"
+      ],
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 851,
+        "completion": 318,
+        "total": 1169,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pred": [
+        "SLC7A11",
+        "SLC9A1",
+        "SLC16A3",
+        "SLC7A5",
+        "SLC1A5"
+      ],
+      "ndcg5": 0.0,
+      "hit5": 0.0,
+      "tokens": {
+        "prompt": 854,
+        "completion": 329,
+        "total": 1183,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pred": [
+        "SLC16A3",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC25A4",
+        "SLC7A11"
+      ],
+      "ndcg5": 0.5131996566763876,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 869,
+        "completion": 301,
+        "total": 1170,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pred": [
+        "SLC2A1",
+        "SLC38A2",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC25A26"
+      ],
+      "ndcg5": 0.8029455636823465,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 646,
+        "completion": 322,
+        "total": 968,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC39A6"
+      ],
+      "ndcg5": 0.1950639905834524,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 874,
+        "completion": 323,
+        "total": 1197,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC1A5",
+        "SLC3A2",
+        "SLC16A1"
+      ],
+      "ndcg5": 0.0975319952917262,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 844,
+        "completion": 281,
+        "total": 1125,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pred": [
+        "SLC19A1",
+        "SLC25A32",
+        "SLC16A1",
+        "SLC35A1",
+        "SLC35A2"
+      ],
+      "ndcg5": 0.8354269234360794,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 676,
+        "completion": 317,
+        "total": 993,
+        "calls": 2
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC25A4",
+        "SLC7A5",
+        "SLCO4A1"
+      ],
+      "ndcg5": 0.07546105234758076,
+      "hit5": 1.0,
+      "tokens": {
+        "prompt": 884,
+        "completion": 323,
+        "total": 1207,
+        "calls": 2
+      },
+      "error": ""
+    }
+  ],
+  "total_tokens": 12405
+}

@@ -1,0 +1,1275 @@
+{
+  "system": "pure_llm_llmpool",
+  "hint": "none",
+  "seeds": [
+    42,
+    7,
+    13
+  ],
+  "thinking": "OFF",
+  "dry_run": false,
+  "n": 11,
+  "n_ok": 11,
+  "n_err": 0,
+  "elapsed_s": 53.88774013519287,
+  "results": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC16A1",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC2A1"
+      ],
+      "ppr_named": 9,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC3A2",
+        "SLC7A11"
+      ],
+      "ndcg5": 0.09302449288399815,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.3055555555555555,
+      "ppr": {
+        "ndcg5": 0.07546105234758076,
+        "kendall_tau": -0.4,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.2
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC3A2",
+            "SLC7A11"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 (LAT1) and its obligate partner SLC3A2 are critical for leucine u",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 174,
+            "total": 597,
+            "calls": 1
+          },
+          "ndcg5": 0.0975319952917262,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC38A1",
+            "SLC7A11"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC38A1\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 (LAT1) and SLC1A5 (ASCT2) are critical for glutamine uptake and ",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 179,
+            "total": 602,
+            "calls": 1
+          },
+          "ndcg5": 0.0975319952917262,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In ALL (specifically NALM6), tumor growth is heavily dependent on glutamine metabolism and ",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 163,
+            "total": 586,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 (LAT1) and its obligate partner SLC3A2 are critical for leucine u",
+      "tokens": {
+        "prompt": 1269,
+        "completion": 516,
+        "total": 1785,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "pool_size": 18,
+      "gt": [
+        "SLC5A3",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC33A1"
+      ],
+      "ppr_named": 9,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC3A2",
+        "SLC7A11"
+      ],
+      "ndcg5": 0.10356256349333776,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.3055555555555555,
+      "ppr": {
+        "ndcg5": 0.08400948806854203,
+        "kendall_tau": -0.4,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.2
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC3A2",
+            "SLC7A11"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 and SLC3A2 form the critical LAT1 complex for leucine uptake driv",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 161,
+            "total": 584,
+            "calls": 1
+          },
+          "ndcg5": 0.10858068818098127,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A11",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A11\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 (LAT1) and SLC1A5 (ASCT2) are critical for glutamine uptake and ",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 175,
+            "total": 598,
+            "calls": 1
+          },
+          "ndcg5": 0.10858068818098127,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A11 (cystine/glutamate antiporter) and SLC7A5/SLC1A5 (leucine/gluta",
+          "error": "",
+          "tokens": {
+            "prompt": 423,
+            "completion": 168,
+            "total": 591,
+            "calls": 1
+          },
+          "ndcg5": 0.09352631411805074,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC7A11\"\n  ],\n  \"rationale\": \"In NALM6 ALL cells, SLC7A5 and SLC3A2 form the critical LAT1 complex for leucine uptake driv",
+      "tokens": {
+        "prompt": 1269,
+        "completion": 504,
+        "total": 1773,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "pool_size": 20,
+      "gt": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC7A5",
+        "SLC2A1",
+        "SLC16A1",
+        "SLC7A11",
+        "SLC38A1"
+      ],
+      "ndcg5": 0.10604522203097838,
+      "kendall_tau": 0.0,
+      "precision5": 0.06666666666666667,
+      "hit5": 0.3333333333333333,
+      "mrr": 0.16666666666666666,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC2A1",
+            "SLC16A1",
+            "SLC7A11",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A11\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In B-ALL, SLC7A5 (LAT1) and SLC2A1 (GLUT1) are critical for amino acid uptake and glycolys",
+          "error": "",
+          "tokens": {
+            "prompt": 470,
+            "completion": 173,
+            "total": 643,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC25A1",
+            "SLC29A1",
+            "SLC38A1",
+            "SLC16A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC25A1\",\n    \"SLC29A1\",\n    \"SLC38A1\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is a critical driver of ferroptosis resistance and tumor survival in leuke",
+          "error": "",
+          "tokens": {
+            "prompt": 470,
+            "completion": 189,
+            "total": 659,
+            "calls": 1
+          },
+          "ndcg5": 0.31813566609293514,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC29A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC29A1\"\n  ],\n  \"rationale\": \"在B淋巴母细胞白血病中，肿瘤存活高度依赖代谢重编程与氧化应激防御；SLC7A11（谷胱甘肽合成关键转运体）和SLC2A1（葡萄糖摄取）是维持癌细胞生存的核心节点，其敲低显著抑制肿瘤生",
+          "error": "",
+          "tokens": {
+            "prompt": 470,
+            "completion": 165,
+            "total": 635,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A11\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In B-ALL, SLC7A5 (LAT1) and SLC2A1 (GLUT1) are critical for amino acid uptake and glycolys",
+      "tokens": {
+        "prompt": 1410,
+        "completion": 527,
+        "total": 1937,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "pool_size": 19,
+      "gt": [
+        "SLC11A2",
+        "SLC16A1",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "ppr_named": 8,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC3A2",
+        "SLC16A1"
+      ],
+      "ndcg5": 0.1380541090520165,
+      "kendall_tau": -0.3333333333333333,
+      "precision5": 0.26666666666666666,
+      "hit5": 1.0,
+      "mrr": 0.2333333333333333,
+      "ppr": {
+        "ndcg5": 0.15906783304646757,
+        "kendall_tau": 0.6,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.3333333333333333
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC3A2",
+            "SLC16A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"MCF7乳腺癌细胞高度依赖谷氨酰胺和葡萄糖代谢，敲除关键氨基酸转运体（SLC7A5/SLC3A2, SLC1A5）及主要葡萄糖转运体（SLC2A1）或乳酸输出体（SLC16A1）会严重",
+          "error": "",
+          "tokens": {
+            "prompt": 437,
+            "completion": 144,
+            "total": 581,
+            "calls": 1
+          },
+          "ndcg5": 0.12307167550948273,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.2
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC1A5",
+            "SLC39A7",
+            "SLC25A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC1A5\",\n    \"SLC39A7\",\n    \"SLC25A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC2A1 (GLUT1) are critical for ferroptosis resistance and glucose uptak",
+          "error": "",
+          "tokens": {
+            "prompt": 437,
+            "completion": 159,
+            "total": 596,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC39A7",
+            "SLC16A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC39A7\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC2A1 (GLUT1) are critical for ferroptosis resistance and glucose uptak",
+          "error": "",
+          "tokens": {
+            "prompt": 437,
+            "completion": 159,
+            "total": 596,
+            "calls": 1
+          },
+          "ndcg5": 0.20708116357802475,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC3A2\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"MCF7乳腺癌细胞高度依赖谷氨酰胺和葡萄糖代谢，敲除关键氨基酸转运体（SLC7A5/SLC3A2, SLC1A5）及主要葡萄糖转运体（SLC2A1）或乳酸输出体（SLC16A1）会严重",
+      "tokens": {
+        "prompt": 1311,
+        "completion": 462,
+        "total": 1773,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "pool_size": 20,
+      "gt": [
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "ppr_named": 7,
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC39A9",
+        "SLC16A1"
+      ],
+      "ndcg5": 0.07238712545398751,
+      "kendall_tau": 0.0,
+      "precision5": 0.06666666666666667,
+      "hit5": 0.3333333333333333,
+      "mrr": 0.08333333333333333,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.2,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.1111111111111111
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC39A9",
+            "SLC16A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC39A9\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and tamoxifen tolerance; SLC2A1/SLC7A5 fuel me",
+          "error": "",
+          "tokens": {
+            "prompt": 440,
+            "completion": 143,
+            "total": 583,
+            "calls": 1
+          },
+          "ndcg5": 0.21716137636196253,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC3A2",
+            "SLC7A5",
+            "SLC16A1",
+            "SLC2A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC3A2\",\n    \"SLC7A5\",\n    \"SLC16A1\",\n    \"SLC2A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC3A2 are key regulators of ferroptosis resistance and glutathione synth",
+          "error": "",
+          "tokens": {
+            "prompt": 440,
+            "completion": 151,
+            "total": 591,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A1",
+            "SLC3A2",
+            "SLC7A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC3A2\",\n    \"SLC7A5\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and drug efflux in breast cancer; SLC2A1 (GLUT1",
+          "error": "",
+          "tokens": {
+            "prompt": 440,
+            "completion": 162,
+            "total": 602,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC39A9\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and tamoxifen tolerance; SLC2A1/SLC7A5 fuel me",
+      "tokens": {
+        "prompt": 1320,
+        "completion": 456,
+        "total": 1776,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "pool_size": 17,
+      "gt": [
+        "SLC7A5",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "ppr_named": 6,
+      "pred": [
+        "SLC7A11",
+        "SLC16A3",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC1A5"
+      ],
+      "ndcg5": 0.3023476579915862,
+      "kendall_tau": -0.6666666666666666,
+      "precision5": 0.3333333333333333,
+      "hit5": 1.0,
+      "mrr": 0.38888888888888884,
+      "ppr": {
+        "ndcg5": 0.31813566609293514,
+        "kendall_tau": 0.6,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 0.5
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC16A3",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC16A3\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) mediates cystine uptake for glutathione synthesis, protecting CRC cells from ",
+          "error": "",
+          "tokens": {
+            "prompt": 429,
+            "completion": 178,
+            "total": 607,
+            "calls": 1
+          },
+          "ndcg5": 0.34023305187144526,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 0.5
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC7A5",
+            "SLC2A1",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) and SLC1A5/SLC7A5 are critical for glutamine/glutamate uptake and cystine imp",
+          "error": "",
+          "tokens": {
+            "prompt": 429,
+            "completion": 157,
+            "total": 586,
+            "calls": 1
+          },
+          "ndcg5": 0.25211655044962455,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A3",
+            "SLC7A5",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A3\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"In HCT116 colorectal cancer, SLC7A11 (cystine/glutamate antiporter) is critical for ferropt",
+          "error": "",
+          "tokens": {
+            "prompt": 429,
+            "completion": 166,
+            "total": 595,
+            "calls": 1
+          },
+          "ndcg5": 0.31469337165368877,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC16A3\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) mediates cystine uptake for glutathione synthesis, protecting CRC cells from ",
+      "tokens": {
+        "prompt": 1287,
+        "completion": 501,
+        "total": 1788,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "pool_size": 19,
+      "gt": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC7A5",
+        "SLC1A5",
+        "SLC29A1",
+        "SLC38A2",
+        "SLC22A5"
+      ],
+      "ndcg5": 0.09219988810602177,
+      "kendall_tau": 0.0,
+      "precision5": 0.20000000000000004,
+      "hit5": 1.0,
+      "mrr": 0.27777777777777773,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC29A1",
+            "SLC38A2",
+            "SLC22A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC29A1\",\n    \"SLC38A2\",\n    \"SLC22A5\"\n  ],\n  \"rationale\": \"In ATM-null DLBCL, tumor growth is heavily dependent on amino acid transporters (LAT1/SLC7",
+          "error": "",
+          "tokens": {
+            "prompt": 446,
+            "completion": 164,
+            "total": 610,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A11",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A11\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In ATM-null DLBCL, tumor growth is heavily dependent on metabolic reprogramming; SLC7A5 and",
+          "error": "",
+          "tokens": {
+            "prompt": 446,
+            "completion": 173,
+            "total": 619,
+            "calls": 1
+          },
+          "ndcg5": 0.10858068818098127,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC29A1",
+            "SLC7A5",
+            "SLC38A2",
+            "SLC16A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC29A1\",\n    \"SLC7A5\",\n    \"SLC38A2\",\n    \"SLC16A1\"\n  ],\n  \"rationale\": \"In ATM-null DLBCL, cells exhibit heightened oxidative stress and reliance on specific met",
+          "error": "",
+          "tokens": {
+            "prompt": 446,
+            "completion": 197,
+            "total": 643,
+            "calls": 1
+          },
+          "ndcg5": 0.08400948806854204,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC29A1\",\n    \"SLC38A2\",\n    \"SLC22A5\"\n  ],\n  \"rationale\": \"In ATM-null DLBCL, tumor growth is heavily dependent on amino acid transporters (LAT1/SLC7",
+      "tokens": {
+        "prompt": 1338,
+        "completion": 534,
+        "total": 1872,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "pool_size": 18,
+      "gt": [
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1",
+        "SLC7A11"
+      ],
+      "ppr_named": 9,
+      "pred": [
+        "SLC7A11",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC16A3",
+        "SLC9A1"
+      ],
+      "ndcg5": 0.27907347865199444,
+      "kendall_tau": -1.0,
+      "precision5": 0.4000000000000001,
+      "hit5": 1.0,
+      "mrr": 1.0,
+      "ppr": {
+        "ndcg5": 0.1950639905834524,
+        "kendall_tau": -0.6,
+        "precision5": 0.2,
+        "hit5": 1.0,
+        "mrr": 1.0
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC16A3",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC16A3\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is a primary driver of ferroptosis resistance and drug tolerance in melanoma;",
+          "error": "",
+          "tokens": {
+            "prompt": 443,
+            "completion": 169,
+            "total": 612,
+            "calls": 1
+          },
+          "ndcg5": 0.27907347865199444,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A1",
+            "SLC7A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) drives ferroptosis resistance and drug tolerance in melanoma; SLC2A1 (GLUT1) ",
+          "error": "",
+          "tokens": {
+            "prompt": 443,
+            "completion": 166,
+            "total": 609,
+            "calls": 1
+          },
+          "ndcg5": 0.27907347865199444,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 1.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC9A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 is the primary driver of ferroptosis resistance in melanoma; SLC1A5 and SLC7A5 suppo",
+          "error": "",
+          "tokens": {
+            "prompt": 443,
+            "completion": 139,
+            "total": 582,
+            "calls": 1
+          },
+          "ndcg5": 0.27907347865199444,
+          "kendall_tau": -1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 1.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC16A3\",\n    \"SLC9A1\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is a primary driver of ferroptosis resistance and drug tolerance in melanoma;",
+      "tokens": {
+        "prompt": 1329,
+        "completion": 474,
+        "total": 1803,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "pool_size": 18,
+      "gt": [
+        "SLC35B1",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "ppr_named": 7,
+      "pred": [
+        "SLC7A11",
+        "SLC7A5",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ndcg5": 0.0503073682317205,
+      "kendall_tau": 0.0,
+      "precision5": 0.13333333333333333,
+      "hit5": 0.6666666666666666,
+      "mrr": 0.13333333333333333,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.6,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.16666666666666666
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC38A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC38A2\"\n  ],\n  \"rationale\": \"These genes are critical for amino acid uptake (LAT1/CD98hc, SNAT2) and glucose transport (",
+          "error": "",
+          "tokens": {
+            "prompt": 427,
+            "completion": 118,
+            "total": 545,
+            "calls": 1
+          },
+          "ndcg5": 0.07546105234758076,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.2
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC16A3",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC16A3\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"These genes are critical metabolic transporters (glucose, amino acid, lactate) frequently i",
+          "error": "",
+          "tokens": {
+            "prompt": 427,
+            "completion": 117,
+            "total": 544,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC38A2"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC38A2\"\n  ],\n  \"rationale\": \"These genes are critical metabolic transporters (glutamate/cystine, glutamine, glucose, and",
+          "error": "",
+          "tokens": {
+            "prompt": 427,
+            "completion": 115,
+            "total": 542,
+            "calls": 1
+          },
+          "ndcg5": 0.07546105234758076,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.2
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC38A2\"\n  ],\n  \"rationale\": \"These genes are critical for amino acid uptake (LAT1/CD98hc, SNAT2) and glucose transport (",
+      "tokens": {
+        "prompt": 1281,
+        "completion": 350,
+        "total": 1631,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "pool_size": 19,
+      "gt": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "ppr_named": 0,
+      "pred": [
+        "SLC7A5",
+        "SLC2A1",
+        "SLC16A1",
+        "SLC7A11",
+        "SLC19A1"
+      ],
+      "ndcg5": 0.13120446733716176,
+      "kendall_tau": 0.3333333333333333,
+      "precision5": 0.20000000000000004,
+      "hit5": 0.6666666666666666,
+      "mrr": 0.19444444444444442,
+      "ppr": null,
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A5",
+            "SLC2A1",
+            "SLC16A1",
+            "SLC7A11",
+            "SLC19A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A11\",\n    \"SLC19A1\"\n  ],\n  \"rationale\": \"In B-ALL, SLC7A5 (LAT1) and SLC2A1 (GLUT1) are critical for amino acid uptake and glycolys",
+          "error": "",
+          "tokens": {
+            "prompt": 460,
+            "completion": 179,
+            "total": 639,
+            "calls": 1
+          },
+          "ndcg5": 0.2565998283381938,
+          "kendall_tau": 1.0,
+          "precision5": 0.4,
+          "hit5": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A5",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A11",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A11\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"在B淋巴母细胞白血病中，肿瘤存活高度依赖代谢重编程。SLC7A5和SLC1A5介导的氨基酸（亮氨酸、谷氨酰胺）摄取是mTOR信号激活和增殖的关键；SLC2A1驱动Warburg效应所",
+          "error": "",
+          "tokens": {
+            "prompt": 460,
+            "completion": 166,
+            "total": 626,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A5",
+            "SLC2A1",
+            "SLC7A11",
+            "SLC16A1",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC7A11\",\n    \"SLC16A1\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"In B-lymphoblastic leukemia, SLC7A5 (LAT1) and SLC2A1 (GLUT1) are critical for amino acid ",
+          "error": "",
+          "tokens": {
+            "prompt": 460,
+            "completion": 158,
+            "total": 618,
+            "calls": 1
+          },
+          "ndcg5": 0.13701357367329156,
+          "kendall_tau": 0.0,
+          "precision5": 0.2,
+          "hit5": 1.0,
+          "mrr": 0.25
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A5\",\n    \"SLC2A1\",\n    \"SLC16A1\",\n    \"SLC7A11\",\n    \"SLC19A1\"\n  ],\n  \"rationale\": \"In B-ALL, SLC7A5 (LAT1) and SLC2A1 (GLUT1) are critical for amino acid uptake and glycolys",
+      "tokens": {
+        "prompt": 1380,
+        "completion": 503,
+        "total": 1883,
+        "calls": 3
+      },
+      "error": ""
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "pool_size": 20,
+      "gt": [
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "ppr_named": 6,
+      "pred": [
+        "SLC7A11",
+        "SLC1A5",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC38A1"
+      ],
+      "ndcg5": 0.0,
+      "kendall_tau": 0.0,
+      "precision5": 0.0,
+      "hit5": 0.0,
+      "mrr": 0.0,
+      "ppr": {
+        "ndcg5": 0.0,
+        "kendall_tau": 0.8,
+        "precision5": 0.0,
+        "hit5": 0.0,
+        "mrr": 0.125
+      },
+      "seeds": [
+        42,
+        7,
+        13
+      ],
+      "n_seed_ok": 3,
+      "per_seed": [
+        {
+          "seed": 42,
+          "pred": [
+            "SLC7A11",
+            "SLC1A5",
+            "SLC2A1",
+            "SLC7A5",
+            "SLC38A1"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"These genes are critical for glutamine uptake (SLC1A5, SLC38A1), cystine/glutamate exchange",
+          "error": "",
+          "tokens": {
+            "prompt": 455,
+            "completion": 143,
+            "total": 598,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 7,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A3",
+            "SLC7A5",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A3\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"SLC7A11 (xCT) is critical for ferroptosis resistance and glutathione synthesis in CRC; SLC2",
+          "error": "",
+          "tokens": {
+            "prompt": 455,
+            "completion": 169,
+            "total": 624,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        },
+        {
+          "seed": 13,
+          "pred": [
+            "SLC7A11",
+            "SLC2A1",
+            "SLC16A3",
+            "SLC7A5",
+            "SLC1A5"
+          ],
+          "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC2A1\",\n    \"SLC16A3\",\n    \"SLC7A5\",\n    \"SLC1A5\"\n  ],\n  \"rationale\": \"These genes are critical for colorectal cancer survival via glutathione-mediated oxidative ",
+          "error": "",
+          "tokens": {
+            "prompt": 455,
+            "completion": 133,
+            "total": 588,
+            "calls": 1
+          },
+          "ndcg5": 0.0,
+          "kendall_tau": 0.0,
+          "precision5": 0.0,
+          "hit5": 0.0,
+          "mrr": 0.0
+        }
+      ],
+      "rationale": "{\n  \"ranking\": [\n    \"SLC7A11\",\n    \"SLC1A5\",\n    \"SLC2A1\",\n    \"SLC7A5\",\n    \"SLC38A1\"\n  ],\n  \"rationale\": \"These genes are critical for glutamine uptake (SLC1A5, SLC38A1), cystine/glutamate exchange",
+      "tokens": {
+        "prompt": 1365,
+        "completion": 445,
+        "total": 1810,
+        "calls": 3
+      },
+      "error": ""
+    }
+  ]
+}

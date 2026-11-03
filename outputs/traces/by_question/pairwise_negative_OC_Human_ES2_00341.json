@@ -1,0 +1,435 @@
+{
+  "qid": "pairwise_negative_OC_Human_ES2_00341",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC22A12 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "winner": "SLC22A12"
+  },
+  "effective_genes": [
+    "SLC22A12",
+    "SLC6A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_OC_Human_ES2_00341",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC22A12",
+        "SLC6A1"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC22A12",
+              "protein_function": "Electroneutral antiporter that translocates urate across the apical membrane of proximal tubular cells in exchange for monovalent organic or inorganic anions.",
+              "aliases": "URAT1, RST, Renal-Specific Transporter",
+              "transport_type": "E / organic anions"
+            },
+            {
+              "gene": "SLC6A1",
+              "protein_function": "Mediates transport of GABA together with sodium and chloride, responsible for the reuptake of GABA from the synapse.",
+              "aliases": "GAT1",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC22A12",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC22 Organic cation/anion/zwitterion  transporter family",
+              "target_properties": {
+                "name": "SLC22 Organic cation/anion/zwitterion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC22A12",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "URAT1",
+              "target_properties": {
+                "name": "URAT1"
+              }
+            },
+            {
+              "gene": "SLC6A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Metabolic crosstalk and therapeutic interplay between diabetes and hyperuricemia.",
+              "abstract": "Hyperuricemia and diabetes mellitus (DM) are prevalent metabolic disorders with high comorbidity, imposing a substantial global public health burden. Their coexistence is not merely additive but synergistic, exacerbating metabolic dysregulation through mechanisms such as insulin resistance and β-cell apoptosis, ultimately establishing a vicious cycle. Both disorders induce acute and chronic damage to vital organs, particularly the cardiovascular, renal systems. Hyperuricemia aggravates diabetic complications, notably diabetic cardiomyopathy, nephropathy and retinopathy via oxidative stress, inflammation, and metabolic dysregulation.Current urate-lowering therapies (ULTs), such as xanthine oxidase inhibitors and urate transporter 1 (URAT1, also known as SLC22A12) antagonists, demonstrate potential benefits in ameliorating diabetic complications but face challenges including safety concerns and dose adjustments. Similarly, several glucose-lowering drugs also exhibit the benefits of improving hyperuricemia. This review summarizes the metabolic crosstalk and therapeutic interplay between hyperuricemia and DM, examines the pathogenic role of uric acid in diabetic complications, and discusses the benefits and challenges of existing ULTs and glucose-lowering drugs in disrupting this cycle of metabolic dysregulation and concurrent organ damage. We hope our findings deepen the comprehension of the intricate metabolic crosstalk between glucose and urate homeostasis, providing novel therapeutic insights for patients with comorbid DM and hyperuricemia.",
+              "doi": "10.1016/j.diabres.2025.112204",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC22A12"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6771cad2f78f10869ee79aa449658695bd0fda3a7b8900918f63ccf112f8a7fa"
+              }
+            },
+            {
+              "title": "Overexpression of SLC6A1 associates with drug resistance and poor prognosis in prostate cancer.",
+              "abstract": "Solute Carrier Family 6 Member 1 (SLC6A1) has been identified as a cancer-promoting gene in various human cancers, such as clear cell renal cell carcinoma and ovarian cancer. However, its roles in prostate cancer (PCa) has not been fully elucidated. The aim of this study was to investigate the expression and clinical significance of SLC6A1 in PCa tissues and its effect on drug resistance to docetaxel in PCa. Expression patterns of SLC6A1 protein in PCa tissues were examined by immunohistochemistry based on Tissue microarray. Associations of SLC6A1 protein expression with various clinicopathological features and patients' prognosis of PCa were also statistically evaluated based on TCGA data. Roles of SLC6A1 deregulation in prostate carcinogenesis and drug resistance was further determined in vitro and in vivo experiments. Based on TCGA Dataset, SLC6A1 expression was markedly higher in patients with high Gleason score, advanced clinical stage and positive biochemical recurrence than those with control features (all P < 0.05). Both unvariate and multivariate analyses demonstrated that SLC6A1 expression was significantly associated with biochemical recurrence-free survival in PCa patients. In addition, enforced expression of SLC6A1 effectively promoted cell proliferation, migration and invasion of PCa cells in vitro. Moreover, the inhibition of SLC6A1 suppressed the tumor growth in vivo. Additionally, immunohistochemical notches of PCNA and MMP-9 in the low-expression cluster were pointedly lower compared to those of NC group. Finally, the cell viability revealed that the overexpression of SLC6A1 obviously promoted the PCa cell resistant to docetaxel (DTX), and the transplanted tumor in the overexpression group had no significant reduction compared with the untreated group. Our data suggest that SLC6A1 overexpression may be associated with aggressive progression and short biochemical recurrence-free survival of PCa, and may be related to the resistance to docetaxel therapy.",
+              "doi": "10.1186/s12885-020-06776-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "79a91be9a345f1bdf63811544c03e7a7d6f787c82c113e89a4d4970fe1aa931f"
+              }
+            },
+            {
+              "title": "SLC6A1-miR133a-CDX2 loop regulates SK-OV-3 ovarian cancer cell proliferation, migration and invasion.",
+              "abstract": "The present study assessed the expression of solute carrier 6 member 1 (SLC6A1) in ovarian cancer (OC) tissues and evaluated the effect of silencing SLC6A1 or caudal type homeobox 2 (CDX2) on the proliferation, migration, and invasion of SK-OV-3 OC cells. The levels of caudal type homeobox 2 (CDX2) and SLC6A1 mRNA were also examined in OC SK-OV-3, OVCAR3 and A2780 cell lines. The mRNA levels of CDX2 and SLC6A1 in SK-OV-3 OC cells were assessed following transection with microRNA (miR) 133a mimics; the mRNA and protein levels of SLC6A1 were determined following the silencing of CDX2, and the mRNA expression of CDX2 was gauged following the silencing of SLC6A1. A luciferase reporter assay was performed to assess the effect of miR133a on the CDX2 and SLC6A1 3'-untranslated regions (3'UTRs). The proliferation, migration and invasion rate of SK-OV-3 cells were then examined following the silencing of CDX2 or SLC6A1. The expression of SLC6A1 was increased in OC compared with adjacent tissue. The expression of CDX2 and SLC6A1 in SK-OV-3 and OVCAR3 cells was increased compared with A2780 cells (P<0.05). The level of CDX2 and SLC6A1 mRNA in SK-OV-3 cells decreased when the cells were transected with the miR133a mimics, compared with a negative control (P<0.05). Transfection with the miR133a mimics significantly reduced the luciferase activity of reporter plasmids with the SLC6A1 or CDX2 3'UTRs (P<0.05). The mRNA level of CDX2 was decreased subsequent to the silencing of SLC6A1; the mRNA and protein level of SLC6A1 were decreased when CDX2 was silenced (P<0.05). The proliferation, migration, and invasion of SK-OV-3 cells were significantly reduced following the silencing of CDX2 or SLC6A1 (P<0.05). CDX2 may therefore be inferred to promote the proliferation, migration and invasion in SK-OV-3 OC cells, acting as a competing endogenous RNA.",
+              "doi": "10.3892/ol.2018.9273",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "cfc60ea8e8d23aecfd25b96fe7b93c5bc5befd76735d5b87641b08bb4c036fe6"
+              }
+            },
+            {
+              "title": "MiR-200c-3p inhibits cell migration and invasion of clear cell renal cell carcinoma via regulating SLC6A1.",
+              "abstract": "In this study, we investigated the mechanism of miR-200c-3p and SLC6A1 in regulating cell activity of clear cell renal cell carcinoma (CCRCC). The mRNA and miRNA expressions of tissue specimens were analyzed by CapitalBio Corporation (Beijing, China). The expression of SLC6A1 in CCRCC cells was examined through qRT-PCR and western blot. The migration and invasion ability of 786-O cells was testified by transwell assay after transfected. 786-O cell proliferation ability was detected by MTT assay. Dual luciferase reporter assay verified the association between SLC6A1 and miR-200c-3p. SLC6A1 was high expressed and miR-200c-3p was low expressed in CCRCC tissues and cells. Besides, lower SLC6A1 expression indicated longer survival time and higher survival rate. MiR-200c-3p could directly target at SLC6A1 and reduce its expression. MiR-200c-3p inhibited the proliferation, migration and invasion in 786-O cells by down-regulating SLC6A1 expression. The results suggested that the miR-200c-3p served as a suppressor for CCRCC via down-regulating SLC6A1.",
+              "doi": "10.1080/15384047.2017.1394551",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa911ac74481279f0badf3cba3f3ebdc4017cd302fc79217c0417a1c53afe7d5"
+              }
+            },
+            {
+              "title": "Endoplasmic reticulum retention and degradation of a mutation in SLC6A1 associated with epilepsy and autism.",
+              "abstract": "Mutations in SLC6A1, encoding γ-aminobutyric acid (GABA) transporter 1 (GAT-1), have been recently associated with a spectrum of epilepsy syndromes, intellectual disability and autism in clinic. However, the pathophysiology of the gene mutations is far from clear. Here we report a novel SLC6A1 missense mutation in a patient with epilepsy and autism spectrum disorder and characterized the molecular defects of the mutant GAT-1, from transporter protein trafficking to GABA uptake function in heterologous cells and neurons. The heterozygous missense mutation (c1081C to A (P361T)) in SLC6A1 was identified by exome sequencing. We have thoroughly characterized the molecular pathophysiology underlying the clinical phenotypes. We performed EEG recordings and autism diagnostic interview. The patient had neurodevelopmental delay, absence epilepsy, generalized epilepsy, and 2.5-3 Hz generalized spike and slow waves on EEG recordings. The impact of the mutation on GAT-1 function and trafficking was evaluated by H GABA uptake, structural simulation with machine learning tools, live cell confocal microscopy and protein expression in mouse neurons and nonneuronal cells. We demonstrated that the GAT-1(P361T) mutation destabilizes the global protein conformation and reduces total protein expression. The mutant transporter protein was localized intracellularly inside the endoplasmic reticulum (ER) with a pattern of expression very similar to the cells treated with tunicamycin, an ER stress inducer. Radioactive H-labeled GABA uptake assay indicated the mutation reduced the function of the mutant GAT-1(P361T), to a level that is similar to the cells treated with GAT-1 inhibitors. In summary, this mutation destabilizes the mutant transporter protein, which results in retention of the mutant protein inside cells and reduction of total transporter expression, likely via excessive endoplasmic reticulum associated degradation. This thus likely causes reduced functional transporter number on the cell surface, which then could cause the observed reduced GABA uptake function. Consequently, malfunctioning GABA signaling may cause altered neurodevelopment and neurotransmission, such as enhanced tonic inhibition and altered cell proliferation in vivo. The pathophysiology due to severely impaired GAT-1 function may give rise to a wide spectrum of neurodevelopmental phenotypes including autism and epilepsy.",
+              "doi": "10.1186/s13041-020-00612-6",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ac54805b9ae7fce93cb3d6b07c9982f5ef9b4ca5e8525857cc64ba6382215d3e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC22A12 cancer=Ovarian cancer bucket=pairwise Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nWhich gene between SLC22A12 and SLC6A1 is more likely to inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=unavailable, km=ok, de=error）；候选基因=['SLC22A12', 'SLC6A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC22A12",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC6A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC22A12",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC22A12",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "stats_text": "P value: 0.4809",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC22A12_ovarian_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC22A12": {
+          "status": "unavailable",
+          "gene": "SLC22A12",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC22A12": {
+          "status": "ok",
+          "gene": "SLC22A12",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": "OV",
+          "stats_text": "P value: 0.4809",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC22A12_ovarian_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC6A1": {
+          "status": "unavailable",
+          "gene": "SLC6A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A12', 'SLC6A1']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC22A12 strength=0.42, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC6A1",
+        "candidates": [
+          "SLC22A12",
+          "SLC6A1"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A12": 0.4159,
+          "SLC6A1": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A1': 2}，最终智能体辩论后裁决：winner=SLC6A1 answer=None conf=0.58；法官理由: Evidence is indirect: SLC22A12 is kidney-specific urate transporter, unlikely essential in ES2; SLC6A1/GAT1 has broader metabolic relevance. Two independent LLM channels agree, providing weak but real signal for SLC6A1.。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A12', 'SLC6A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC6A1 has direct ovarian cancer functional evidence in SK-OV-3 cells: silencing SLC6A1 reduces proliferation, migration, and invasion, and it is also described as cancer-promoting in ovarian cancer and ccRCC/prostate cancer. SLC22A12 is mainly a renal urate transporter with no ovarian tumor-growth dependency signal; ovarian KM P=0.4809 is non-significant and TIMER/PPR are unavailable. | For ES2 ovarian cancer CRISPR/MAGECK, a gene whose knockdown reduces ovarian tumor cell growth is more likely to inhibit tumor growth. SLC6A1 is the better candidate because ovarian-specific loss-of-function literature supports a pro-tumorigenic role, whereas SLC22A12 lacks ovarian relevance and appears biologically tied to kidney/proximal tubule urate handling.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC6A1",
+        "candidates": [
+          "SLC22A12",
+          "SLC6A1"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC22A12": 0.4159,
+          "SLC6A1": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC6A1 has direct ovarian cancer functional evidence in SK-OV-3 cells: silencing SLC6A1 reduces proliferation, migration, and invasion, and it is also described as cancer-promoting in ovarian cancer and ccRCC/prostate cancer. SLC22A12 is mainly a renal urate transporter with no ovarian tumor-growth dependency signal; ovarian KM P=0.4809 is non-significant and TIMER/PPR are unavailable. | For ES2 ovarian cancer CRISPR/MAGECK, a gene whose knockdown reduces ovarian tumor cell growth is more likely to inhibit tumor growth. SLC6A1 is the better candidate because ovarian-specific loss-of-function literature supports a pro-tumorigenic role, whereas SLC22A12 lacks ovarian relevance and appears biologically tied to kidney/proximal tubule urate handling. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC22A12', 'SLC6A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC22A12",
+          "SLC6A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T14:56:43Z"
+  }
+}

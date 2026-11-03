@@ -1,0 +1,423 @@
+{
+  "qid": "pairwise_negative_Melanoma_Human_A375_00296",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC9C2 and SLC17A5 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "A375",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 6days vs Crispr 10days"
+  },
+  "ground_truth": {
+    "winner": "SLC17A5"
+  },
+  "effective_genes": [
+    "SLC9C2",
+    "SLC17A5"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Human_A375_00296",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC9C2",
+        "SLC17A5"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "A375",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 6days vs Crispr 10days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC17A5",
+              "protein_function": "Multifunctional anion transporter that operates via two distinct transport mechanisms, namely proton-coupled anion cotransport and membrane potential-dependent anion transport. Electroneutral proton-coupled acidic monosaccharide symporter, with a sugar to proton stoichiometry of 1:1. Exports glucuronic acid and free sialic acid derived from sialoglycoconjugate degradation out of lysosomes, driven by outwardly directed lysosomal pH gradient. May regulate lysosome function and metabolism of sialylated conjugates that impact oligodendrocyte lineage differentiation and myelinogenesis in the central nervous system. Electrogenic proton-coupled nitrate symporter that transports nitrate ions across the basolateral membrane of salivary gland acinar cells, with nitrate to proton stoichiometry of 2:1. Uses membrane potential to drive the uptake of acidic amino acids and peptides into synaptic vesicles. Responsible for synaptic vesicular storage of L-aspartate and L-glutamate in pinealocytes as well as vesicular uptake of N-acetyl-L-aspartyl-L-glutamate neuropeptide, relevant to aspartegic-associated glutamatergic neurotransmission and activation of metabotropic receptors that inhibit subsequent transmitter release. Receptor for CM101, a polysaccharide produced by group B Streptococcus with antipathoangiogenic properties.",
+              "aliases": "SIASD, SIALIN, ISSD, NSD, SLD, H(+)/Sialic Acid Cotransporter",
+              "transport_type": "C / H+"
+            },
+            {
+              "gene": "SLC9C2",
+              "protein_function": "Involved in pH regulation.",
+              "aliases": "SLC9A11, NHE11",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC17A5",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC17 Vesicular glutamate  transporter family",
+              "target_properties": {
+                "name": "SLC17 Vesicular glutamate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC9C2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Dietary nitrate maintains intestinal epithelia homeostasis in aged mice.",
+              "abstract": "The intestinal tract, which is the primary site of digestion and absorption of nutrients, is one of the most vulnerable organs during aging. Dietary nitrate, which is mainly derived from the diet and absorbed in the intestinal tract, is a key messenger that connecting oral and general health. However, whether dietary nitrate regulates intestinal tract homeostasis remains unclear. Our data revealed that the serum and salivary nitrate levels decreased during mice aging. The functional proteins of the epithelial barrier (E-cadherin, Claudin-1 and Zonula Occludens-1) in the colon tissues decreased during the aging process. Long-term nitrate supplement in drinking water restored the serum and salivary nitrate levels and increased the functional proteins expression of the colon epithelial barrier. Dietary nitrates increase the relative abundance of some intestinal probiotics, particularly those associated with the production of short-chain fatty acids, such as Blautia, Alloprevotella, Butyricicoccus, and Ruminococcaceae, while promoting the butyric acid production in the colon. Moreover, the expression of Sialin (encoded by Slc17a5), which is a nitrate transporter, increased in the colon epithelial cells by nitrate supplementation. The epithelial cell-conditional Slc17a5-knockout mutant mice (K14-cre; Slc17a5) revealed that the functional proteins expression of the colon epithelial barrier and the proliferation of PCNA-positive intestinal epithelial cells in the colon crypts was significantly decreased compared with those of the K14-cre; Slc17a5 mice. Taken together, our findings suggested that nitrate supplementations were associated with the increased expression of colonic epithelial barriers-related proteins and the increased Sialin expression. Nitrate may serve as a potential therapeutic approach in maintaining aged colonic homeostasis.",
+              "doi": "10.1007/s10522-024-10127-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "48ce39fe89b10049277b1e1d7c63fac2c520fdb0e3cce0b55e400e8f2f442114"
+              }
+            },
+            {
+              "title": "Identifying key genes and functionally enriched pathways in acute myeloid leukemia by weighted gene co-expression network analysis.",
+              "abstract": "Acute myeloid leukemia (AML) is characterized by the uncontrolled proliferation of myeloid leukemia cells in the bone marrow and other hematopoietic tissues and is highly heterogeneous. While with the progress of sequencing technology, understanding of the AML-related biomarkers is still incomplete. The purpose of this study is to identify potential biomarkers for prognosis of AML. Based on WGCNA analysis of gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases were employed for investigating potential biomarkers for the prognosis of AML. This study screened a total of 6153 genes by analyzing various changes in 103 acute myeloid leukemia (AML) samples, including gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases. Moreover, seven AML-related co-expression modules were mined by WGCNA analysis, and twelve biomarkers associated with the AML prognosis were identified from each top 10 genes of the seven co-expression modules. The AML samples were then classified into two subgroups, the prognosis of which is significantly different, based on the expression of these twelve genes. The differentially expressed 7 genes of two subgroups (HOXB-AS3, HOXB3, SLC9C2, CPNE8, MEG8, S1PR5, MIR196B) are mainly involved in glucose metabolism, glutathione biosynthesis, small G protein-mediated signal transduction, and the Rap1 signaling pathway. With the utilization of WGCNA mining, seven gene co-expression modules were identified from the TCGA database, and there are unreported genes that may be potential driver genes of AML and may be the direction to identify the possible molecular signatures to predict survival of AML patients and help guide experiments for potential clinical drug targets.",
+              "doi": "10.1007/s13353-024-00881-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11ee2a46d64d60350e43fff958f991225e20684b1f571930f8b5edb0b2c8fa1c"
+              }
+            },
+            {
+              "title": "Inorganic nitrate attenuates neuroinflammation after traumatic brain injury via Sialin.",
+              "abstract": "Traumatic brain injury (TBI) is a significant concern in neurosurgery due to its severe consequences. Neuroinflammation is a critical response following the initial brain insult, leading to cumulative neuronal damage and chronic neurodegeneration, with limited effective treatments available. Inorganic nitrate, an essential nutrient known for its anti-inflammatory properties, is widely utilized in disease prevention and treatment. This study investigated the short-term effects of inorganic nitrate on neuroinflammation and explored the role of Sialin in neuroprotection during the early phase post-TBI. Male C57BL/6 mice underwent TBI using an electrically controlled cortical impactor (eCCI) model. Animals were administered nitrate or sterile saline intragastrically twice daily for 1,3 or 7 days post-injury (dpi) until sacrifice. Neurobehavioral function was evaluated, and brain tissues were collected for morphological, histopathological, and molecular analyses. Nitrate enhanced neurobehavioral function recovery and improved neurological outcomes at 3 dpi. While nitrate did not significantly reduce structural damage, it did decrease neuronal loss and apoptosis in the early stages of TBI. RNA-seq of injured brains at 3 dpi revealed more genes and signaling pathways linked to immune processes following early nitrate treatment compared to the vehicle, indicating inflammation inhibition. This was further confirmed at the mRNA and protein levels. Specifically, key gene markers of inflammatory mediators were notably suppressed by early nitrate compared to the corresponding TBI vehicle groups. However, the knockdown of Slc17a5 reduced the effectiveness of nitrate on short-term neurobehavior in TBI mice and nullified its anti-inflammatory effects. Inorganic nitrate can improve neurological outcomes and attenuate neuroinflammation following TBI, attributed in part to the normalisation of the inflammatory response mediated by Sialin. The discovery lays a promising groundwork for the protective effects of nitrate in TBI conditions.",
+              "doi": "10.1016/j.tice.2025.102955",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0646ce271ef9ff9b76efd9ff2f8f3e72526fbf4f34e1a31b852fd5d4f31444a3"
+              }
+            },
+            {
+              "title": "Transcriptomic analysis following polystyrene nanoplastic stress in the Pacific white shrimp, Litopenaeus vannamei.",
+              "abstract": "Plastics are widely produced for industrial and domestic applications due to their unique properties, and studies on the toxic effects of nanoplastics (NPs) on aquatic animals are essential. In this study, we investigated the transcriptomic patterns of Litopenaeus vannamei after NPs exposure. We found that the lysosome pathway was activated when after NPs exposure, with up-regulated DEGs, including glucocerebrosidase (GBA), hexosaminidase A (HEXA), sphingomyelin phosphodiesterase-1 (SMPD1), and solute carrier family 17 member 5 (SLC17A5). In addition, the PI3K-Akt signaling pathway was strongly affected by NPs, and the upstream genes of PI3K-Akt, including epidermal growth factor receptor (EGFR), integrin subunit beta 1 (ITGB1) and heat shock protein 90 (HSP90) were up-regulation. Other genes involved in lipogenesis, such as sterol regulatory element binding transcription factor 1 (SREBP-1c), fatty acid synthase (FASN) and stearoyl-CoA desaturase (SCD-1), were down-regulated. However, the contents of triglycerides (TG) and total cholesterol (TCH) in L. vanname hepatopancreas were reduced, which indicated that the ingestion of NPs led to the disturbance of hepatic lipid metabolism. What more, NPs treatment of L. vannamei also caused oxidative stress. In addition, NPs can damage part of the tissue structure and affect the physiological function of shrimps. The results of this study provide valuable ecotoxicological data to improve the understanding of the biological fate and effects of nanoplastics in L. vannamei.",
+              "doi": "10.1016/j.fsi.2023.109207",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ea94dfc0b8fd1ee3ac2e9a3c69b04a84eec0e5d02582ea038776fa9e44a5ccc0"
+              }
+            },
+            {
+              "title": "Integration of transcriptomics, gut microbiota, and physiology reveals the toxic response of bensulfuron-methyl in Procambarus clarkii.",
+              "abstract": "Bensulfuron-methyl (BSM) enters the environment through agricultural practices, posing a threat to the health of aquatic organisms. Currently, the toxic mechanisms of BSM on crayfish (Procambarus clarkii) have not been thoroughly investigated. In this study, crayfish were exposed to BSM solutions at concentrations of 0, 5, and 10 mg/L for 48 h. The study integrated physiological, gut microbiota, and transcriptomic analyses to investigate the mechanisms of action. BSM exposure induced oxidative stress responses in crayfish, resulting in changes in superoxide dismutase (SOD), catalase (CAT), glutathione reductase (GSH) activity, and malondialdehyde (MDA) levels. Exposure to BSM caused damage to the intestinal tissues, reduced gut microbiota diversity, increased the abundance of harmful bacteria, and led to intestinal dysfunction. Analysis of the hepatopancreas revealed significant tissue damage. Transcriptomic data indicated that BSM affects the growth of crayfish through genes related to immune response (SLC17A5, CTSD, CTSB, NFKBIA, Mincle). The lysosomal pathway and NF-κB pathway were notably affected. This study analyzed the negative impacts of BSM on crayfish from various levels and provided detailed data to enhance our understanding of the toxic mechanisms of BSM in aquatic organisms.",
+              "doi": "10.1016/j.scitotenv.2024.177091",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC17A5"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8abfe702fe192175f5d74576c5e4376c4eb6252706f1cb2409ddfbd6439165b8"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC9C2 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC9C2 and SLC17A5 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC9C2', 'SLC17A5']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC9C2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC17A5",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC9C2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC9C2",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC17A5": {
+          "status": "unavailable",
+          "gene": "SLC17A5",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC17A5": {
+          "status": "unavailable",
+          "gene": "SLC17A5",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC9C2', 'SLC17A5']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC9C2 strength=0.35, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC17A5",
+        "candidates": [
+          "SLC9C2",
+          "SLC17A5"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9C2": 0.35,
+          "SLC17A5": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC17A5': 2}，最终智能体辩论后裁决：winner=SLC17A5 answer=None conf=0.66；法官理由: Two independent LLM channels favor SLC17A5: broadly expressed lysosomal transporter likely essential in A375, whereas SLC9C2 is testis-restricted and less relevant. Evidence channel abstained, so confidence moderate but agreement plus biolo。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC9C2', 'SLC17A5']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC17A5 is a broadly expressed lysosomal sialic acid/proton transporter implicated in epithelial homeostasis, lysosomal pathway stress responses, and neural/inflammatory metabolic regulation; melanoma cells, including A375, have high glycosylation/lysosomal turnover and neural-crest/epithelial-like dependencies, so loss of SLC17A5 can plausibly impair lysosomal recycling and sialic acid supply, reducing growth. SLC9C2 is a pH-regulating SLC9 member with AML co-expression evidence, but AML is a hematopoietic context and SLC9C2 is less likely to be a core melanoma dependency. | No melanoma PPR/TIMER/KM/DE evidence is available, so the decision is analogical rather than direct. SLC17A5 has stronger mechanistic relevance to cancer-relevant lysosomal transport, glycoconjugate metabolism, and sialic acid handling; CRISPR knockout would more likely produce depletion in a 6-10 day A375 MAGeCK screen. SLC9C2 evidence is mainly prognostic/co-expression in AML and not functional necessity, and pH regulation may be compensated by other SLC9 transporters. Therefore SLC17A5 is the more plausible gene whose disruption inhibits melanoma tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC17A5",
+        "candidates": [
+          "SLC9C2",
+          "SLC17A5"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC9C2": 0.35,
+          "SLC17A5": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC17A5 is a broadly expressed lysosomal sialic acid/proton transporter implicated in epithelial homeostasis, lysosomal pathway stress responses, and neural/inflammatory metabolic regulation; melanoma cells, including A375, have high glycosylation/lysosomal turnover and neural-crest/epithelial-like dependencies, so loss of SLC17A5 can plausibly impair lysosomal recycling and sialic acid supply, reducing growth. SLC9C2 is a pH-regulating SLC9 member with AML co-expression evidence, but AML is a hematopoietic context and SLC9C2 is less likely to be a core melanoma dependency. | No melanoma PPR/TIMER/KM/DE evidence is available, so the decision is analogical rather than direct. SLC17A5 has stronger mechanistic relevance to cancer-relevant lysosomal transport, glycoconjugate metabolism, and sialic acid handling; CRISPR knockout would more likely produce depletion in a 6-10 day A375 MAGeCK screen. SLC9C2 evidence is mainly prognostic/co-expression in AML and not functional necessity, and pH regulation may be compensated by other SLC9 transporters. Therefore SLC17A5 is the more plausible gene whose disruption inhibits melanoma tumor growth. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC9C2', 'SLC17A5']",
+        "status": "ok",
+        "summary": "SLC17A5 encodes sialin, a lysosomal sialic acid transporter involved in lysosomal function, autophagy, and nutrient sensing pathways that can influence melanoma cell proliferation. In an A375 CRISPR/MAGeCK context, knockdown or knockout of SLC17A5 is more plausibly associated with reduced tumor growth than SLC9C2, which is a sperm-associated Na+/H+ exchanger with limited known relevance to melanoma proliferation.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC17A5",
+        "candidates": [
+          "SLC9C2",
+          "SLC17A5"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC17A5 encodes sialin, a lysosomal sialic acid transporter involved in lysosomal function, autophagy, and nutrient sensing pathways that can influence melanoma cell proliferation. In an A375 CRISPR/MAGeCK context, knockdown or knockout of SLC17A5 is more plausibly associated with reduced tumor growth than SLC9C2, which is a sperm-associated Na+/H+ exchanger with limited known relevance to melanoma proliferation.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:54:37Z"
+  }
+}

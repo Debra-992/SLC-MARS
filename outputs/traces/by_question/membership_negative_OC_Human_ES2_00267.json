@@ -1,0 +1,313 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00267",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC13A1 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC13A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00267",
+      "status": "ok",
+      "summary": "检索到 4 类证据、4 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC13A1"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC13A1",
+              "protein_function": "Sodium:sulfate symporter that mediates sulfate reabsorption in the kidney and small intestine",
+              "aliases": "NAS1, NaSi-1",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC13A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC13 Human Na+-sulfate/carboxylate  cotransporter family",
+              "target_properties": {
+                "name": "SLC13 Human Na+-sulfate/carboxylate  cotransporter family"
+              }
+            },
+            {
+              "gene": "SLC13A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "NAS1",
+              "target_properties": {
+                "name": "NAS1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Role of sodium dependent SLC13 transporter inhibitors in various metabolic disorders.",
+              "abstract": "The sodium dependent SLC13 family transporters comprise of five genes SLC13A1, SLC13A2 (NaDC1), SLC13A3 (NaDC3), SLC13A4 and SLC13A5 (NaCT). Among them, NaDC1, NaDC3 and NaCT are sodium dependent transporters belonging to family of dicarboxylates (succinate, malate, α-ketoglutarate) and tricarboxylates (citrate). The mouse and the human NaCT structures have still not been crystallized, therefore structural information is taken from the related bacterial transporter of VcINDY. Citrate in the cytosol works as a precursor for the fatty acid synthesis, cholesterol, and low-density lipoproteins. The excess citrate from the matrix is translocated to the cytosol for fatty acid synthesis through these transporters and thus controls the energy balance by downregulating the glycolysis, tricarboxylic acid (TCA), and fatty acid breakdown. These transporters play an important role in regulating various metabolic diseases including cancer, diabetes, obesity, fatty liver diseases and CNS disorders. These di and tricarboxylate transporters are emerging as new targets for metabolic disorders such as obesity and diabetes. The mutation in the function of the NaCT causes several neurological diseases including neonatal epilepsy and impaired brain development whereas mutation of genes coding for citrate transport present in the liver may provide positive effect. Therefore, continued efforts from the earlier work on citrate transporters are required for the development of citrate inhibitors. This review discusses the structure, function, and regulation of the NaCT transporter. The review also highlights citrate role in diagnosing diseases such as cancer, diabetes, fatty liver, and diabetes. The therapeutic perspective of synthetic inhibitors against NaCT transporters is succinctly summarized.",
+              "doi": "10.1007/s11010-022-04618-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC13A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "01dd082f2d522a3596271074cba01f96657e6d7d56dd5f1e10452c0fbcf8e347"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC13A1 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC13A1 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC13A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC13A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC13A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC13A1",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC13A1": {
+          "status": "unavailable",
+          "gene": "SLC13A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC13A1": {
+          "status": "unavailable",
+          "gene": "SLC13A1",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC13A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC13A1"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC13A1": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: E’s marginal essentiality score lacks ES2-specific CRISPR evidence and direction. SLC13A1 is a kidney/intestinal sulfate transporter, not an established ovarian dependency. Two independent LLM channels agree false, so loss-of-function likel。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC13A1 is a kidney/intestinal Na+-dependent sulfate symporter with tissue-restricted transport function; ovarian cancer is an epithelial tumor lineage where sulfate reabsorption is unlikely to be a core growth dependency. Although the broader SLC13 family has metabolic/cancer relevance, that relevance is mainly linked to citrate/dicarboxylate transporters rather than SLC13A1-specific sulfate transport. | No direct ovarian cancer PPR/TIMER/KM/DE evidence is available, so the decision relies on biology and cross-cancer analogy. SLC13A1’s known role in sulfate homeostasis in kidney/small intestine is not plausibly essential for ES2 ovarian cancer cell proliferation. Inhibition/knockout of such a tissue-specific transporter in an ovarian epithelial model is therefore more likely to have little or no tumor-growth-suppressive effect than to strongly inhibit growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC13A1"
+        ],
+        "confidence": 0.32,
+        "abstained": false,
+        "gene_scores": {
+          "SLC13A1": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC13A1 is a kidney/intestinal Na+-dependent sulfate symporter with tissue-restricted transport function; ovarian cancer is an epithelial tumor lineage where sulfate reabsorption is unlikely to be a core growth dependency. Although the broader SLC13 family has metabolic/cancer relevance, that relevance is mainly linked to citrate/dicarboxylate transporters rather than SLC13A1-specific sulfate transport. | No direct ovarian cancer PPR/TIMER/KM/DE evidence is available, so the decision relies on biology and cross-cancer analogy. SLC13A1’s known role in sulfate homeostasis in kidney/small intestine is not plausibly essential for ES2 ovarian cancer cell proliferation. Inhibition/knockout of such a tissue-specific transporter in an ovarian epithelial model is therefore more likely to have little or no tumor-growth-suppressive effect than to strongly inhibit growth. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC13A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC13A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:53:24Z"
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00224",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC35A3 inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC35A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00224",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC35A3"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC35A3",
+              "protein_function": "Transports UDP-GlcNAc from the cytosol into the Golgi lumen. May supply UDP-GlcNAc as substrate for Golgi-resident glycosyltransferases.",
+              "aliases": "SLC35A3",
+              "transport_type": "E / UMP"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC35A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC35 Nucleoside-sugar  transporter family",
+              "target_properties": {
+                "name": "SLC35 Nucleoside-sugar  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Colorectal cancer with low SLC35A3 is associated with immune infiltrates and poor prognosis.",
+              "abstract": "The expression level of SLC35A3 is associated with the prognosis of many cancers, but its role in colorectal cancer (CRC) is unclear. The purpose of our study was to elucidate the role of SLC35A3 in CRC. The expression levels of SLC35A3 in CRC were evaluated through tumor immune resource assessment (TIMER), The Cancer Genome Atlas (TCGA), Gene Expression Omnibus (GEO), International Cancer Genome Consortium (ICGC), Human Protein Atlas (HPA), qRT-PCR, and immunohistochemical evaluation. TCGA, GEO, and ICGC databases were used to analyze the diagnostic and prognostic value of SLC35A3 in CRC. A overall survival (OS) model was constructed and validated based on the expression level of SLC35A3 and multivariable analysis results. The cBioPortal tool was used to analyze SLC35A3 mutation in CRC. The UALCAN tool was used to analyze the promoter methylation level of SLC35A3 in colorectal cancer. In addition, the role of SLC35A3 in CRC was determined through GO analysis, KEGG analysis, gene set enrichment analysis (GSEA), immune infiltration analysis, and immune checkpoint correlation analysis. In vitro experiments validated the function of SLC35A3 in colorectal cancer cells. Compared with adjacent normal tissues and colonic epithelial cells, the expression of SLC35A3 was decreased in CRC tissues and CRC cell lines. Low expression of SLC35A3 was associated with N stage, pathological stage, and lymphatic infiltration, and it was unfavorable for OS, disease-specific survival (DSS), recurrence-free survival (RFS), and post-progression survival (PPS). According to the Receiver Operating Characteristic (ROC) analysis, SLC35A3 is a potential important diagnostic biomarker for CRC patients. The nomograph based on the expression level of SLC35A3 showed a better predictive model for OS than single prognostic factors and TNM staging. SLC35A3 has multiple types of mutations in CRC, and its promoter methylation level is significantly decreased. GO and KEGG analysis indicated that SLC35A3 may be involved in transmembrane transport protein activity, cell communication, and interaction with neurotransmitter receptors. GSEA revealed that SLC35A3 may be involved in energy metabolism, DNA repair, and cancer pathways. In addition, SLC35A3 was closely related to immune cell infiltration and immune checkpoint expression. Immunohistochemistry confirmed the positive correlation between SLC35A3 and helper T cell infiltration. In vitro experiments showed that overexpression of SLC35A3 inhibited the proliferation and invasion capability of colorectal cancer cells and promoted apoptosis. The results of this study indicate that decreased expression of SLC35A3 is closely associated with poor prognosis and immune cell infiltration in colorectal cancer, and it can serve as a promising independent prognostic biomarker and potential therapeutic target.",
+              "doi": "10.1038/s41598-023-51028-w",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "821f081c37592711dd0d4660989178d049a1fa666ff233a4f1c761116de3590e"
+              }
+            },
+            {
+              "title": "O-GlcNAcylation regulates β1,4-GlcNAc-branched N-glycan biosynthesis via the OGT/SLC35A3/GnT-IV axis.",
+              "abstract": "N-Linked glycosylation and O-linked N-acetylglucosamine (O-GlcNAc) are important protein post-translational modifications that are orchestrated by a diverse set of gene products. Thus far, the relationship between these two types of glycosylation has remained elusive, and it is unclear whether one influences the other via UDP-GlcNAc, which is a common donor substrate. Theoretically, a decrease in O-GlcNAcylation may increase the products of GlcNAc-branched N-glycans. In this study, via examination by lectin blotting, HPLC, and mass spectrometry analysis, however, we found that the amounts of GlcNAc-branched tri-antennary N-glycans catalyzed by N-acetylglucosaminyltransferase IV (GnT-IV) and tetra-antennary N-glycans were significantly decreased in O-GlcNAc transferase knockdown cells (OGT-KD) compared with those in wild type cells. We examined this specific alteration by focusing on SLC35A3, which is the main UDP-GlcNAc transporter in mammals that is believed to modulate GnT-IV activation. It is interesting that a deficiency of SLC35A3 specifically leads to a decrease in the amounts of GlcNAc-branched tri- and tetra-antennary N-glycans. Furthermore, co-immunoprecipitation experiments have shown that SLC35A3 interacts with GnT-IV, but not with N-acetylglucosaminyltransferase V. Western blot and chemoenzymatic labeling assay have confirmed that OGT modifies SLC35A3 and that O-GlcNAcylation contributes to its stability. Furthermore, we found that SLC35A3-KO enhances cell spreading and suppresses both cell migration and cell proliferation, which is similar to the phenomena observed in the OGT-KD cells. Taken together, these data are the first to demonstrate that O-GlcNAcylation specifically governs the biosynthesis of tri- and tetra-antennary N-glycans via the OGT-SLC35A3-GnT-IV axis.",
+              "doi": "10.1096/fj.202101520R",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "60945c4e37f4644963c6ae87ad0bfcd844fccd175c0c95b220e038aa7c0d6ce9"
+              }
+            },
+            {
+              "title": "Mice lacking nucleotide sugar transporter SLC35A3 exhibit lethal chondrodysplasia with vertebral anomalies and impaired glycosaminoglycan biosynthesis.",
+              "abstract": "SLC35A3 is considered an uridine diphosphate N-acetylglucosamine (UDP-GlcNAc) transporter in mammals and regulates the branching of N-glycans. A missense mutation in SLC35A3 causes complex vertebral malformation (CVM) in cattle. However, the biological functions of SLC35A3 have not been fully clarified. To address these issues, we have established Slc35a3-/-mice using CRISPR/Cas9 genome editing system. The generated mutant mice were perinatal lethal and exhibited chondrodysplasia recapitulating CVM-like vertebral anomalies. During embryogenesis, Slc35a3 mRNA was expressed in the presomitic mesoderm of wild-type mice, suggesting that SLC35A3 transports UDP-GlcNAc used for the sugar modification that is essential for somite formation. In the growth plate cartilage of Slc35a3-/-embryos, extracellular space was drastically reduced, and many flat proliferative chondrocytes were reshaped. Proliferation, apoptosis and differentiation were not affected in the chondrocytes of Slc35a3-/-mice, suggesting that the chondrodysplasia phenotypes were mainly caused by the abnormal extracellular matrix quality. Because these histological abnormalities were similar to those observed in several mutant mice accompanying the impaired glycosaminoglycan (GAG) biosynthesis, GAG levels were measured in the spine and limbs of Slc35a3-/-mice using disaccharide composition analysis. Compared with control mice, the amounts of heparan sulfate, keratan sulfate, and chondroitin sulfate/dermatan sulfate, were significantly decreased in Slc35a3-/-mice. These findings suggest that SLC35A3 regulates GAG biosynthesis and the chondrodysplasia phenotypes were partially caused by the decreased GAG synthesis. Hence, Slc35a3-/- mice would be a useful model for investigating the in vivo roles of SLC35A3 and the pathological mechanisms of SLC35A3-associated diseases.",
+              "doi": "10.1371/journal.pone.0284292",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f5b72364e55ab12993f934fddba2db915ec30fbd98263fbd8060243f9874c62e"
+              }
+            },
+            {
+              "title": "Glycolysis-related genes predict prognosis and indicate immune microenvironment features in gastric cancer.",
+              "abstract": "Gastric cancer (GC) is a major contributor to cancer-related mortality. Glycolysis plays a pivotal role in tumor microenvironment (TME) reprogramming. In this research, the functions of glycolysis-associated genes (GRGs) were evaluated to predict the outcome and reveal the characteristics of the immune microenvironment in individuals with stomach cancer. The Cancer Genome Atlas (TCGA)-stomach adenocarcinoma (STAD) cohort provided gene expression and clinical data for gastric cancer (GC) patients, which were further authenticated using datasets sourced from the Gene Expression Omnibus (GEO). By referencing the Molecular Signatures Database (MSigDB), a total of 326 GRGs were pinpointed. The various subtypes of GC were outlined through consensus clustering, derived from the expression patterns of these GRGs. Utilizing multivariate Cox regression analysis, a multigene risk score model was formulated. Both the CIBERSORT and ESTIMATE algorithms played a pivotal role in assessing the immune microenvironment. To delve into the biological functions of the key genes, wound healing, transwell invasion, and MTT assays were conducted. Based on the expression patterns of GRGs, patients were categorized into two distinct groups: the metabolic subtype, designated as cluster A, and the immune subtype, labeled as cluster B. Patients belonging to cluster B exhibited a poorer prognosis. A prognostic risk score model, formulated upon the expression levels of six key GRGs - ME1, PLOD2, NUP50, CXCR4, SLC35A3, and SRD35A3 - emerged as a viable tool for predicting patient outcomes. The downregulation of CXCR4 notably diminished the glycolytic capacity of gastric cancer (GC) cells, alongside their migratory, invasive, and proliferative capabilities. Intriguingly, despite the adverse prognostic implications associated with both the immune subtype (cluster B) and the high-risk cohort, these groups exhibited a favorable immune microenvironment coupled with elevated expression of immune checkpoint genes. Our investigations revealed a positive correlation between high CXCR4 expression and low ME1 expression with the infiltration of CD8 T cells, as well as an enhanced responsiveness to treatment with an anti-PD-1 immune checkpoint inhibitor. In this study, we discovered that the expression profiles of GRGs hold the potential to forecast the prognosis of gastric cancer (GC) patients, thereby possibly aiding in clinical treatment decision-making.",
+              "doi": "10.1186/s12885-024-12747-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "fde5335bc12ecfe43180f15accdd2ec9cdcde0e377fff9bf53ee87ac9126dc5d"
+              }
+            },
+            {
+              "title": "Seven Glycolysis-Related Genes Predict the Prognosis of Patients With Pancreatic Cancer.",
+              "abstract": "To identify the key glycolysis-related genes (GRGs) in the occurrence and development of pancreatic ductal carcinoma (PDAC), and to construct a glycolysis-related gene model for predicting the prognosis of PDAC patients. Pancreatic ductal carcinoma (PDAC) data and that of normal individuals were downloaded from the TCGA database and Genotype-Tissue Expression database, respectively. GSEA analysis of glycolysis-related pathways was then performed on PDAC data to identify significantly enriched GRGs. The genes were combined with other patient's clinical information and used to construct a glycolysis-related gene model using cox regression analysis. The model was further evaluated using data from the validation group. Mutations in the model genes were subsequently identified using the cBioPortal. In the same line, the expression levels of glycolysis related model genes in PDAC were analyzed and verified using immunohistochemical images. Model prediction for PDAC patients with different clinical characteristics was then done and the relationship between gene expression level, clinical stage and prognosis further discussed. Finally, a nomogram map of the predictive model was constructed to evaluate the prognosis of patients with PDAC. GSEA results of the training set revealed that genes in the training set were significantly related to glycolysis pathway and iconic glycolysis pathway. There were 108 differentially expressed GRGs. Among them, 29 GRGs were closely related to prognosis based on clinical survival time. Risk regression analysis further revealed that there were seven significantly expressed glycolysis related genes. The genes were subsequently used to construct a predictive model. The model had an AUC value of more than 0.85. It was also significantly correlated with survival time. Further expression analysis revealed that CDK1, DSC2, ERO1A, MET, PYGL, and SLC35A3 were highly expressed in PDAC and CHST12 was highly expressed in normal pancreatic tissues. These results were confirmed using immunohistochemistry images of normal and diseases cells. The model could effectively evaluate the prognosis of PDAC patients with different clinical characteristics. The constructed glycolysis-related gene model effectively predicts the occurrence and development of PDAC. As such, it can be used as a prognostic marker to diagnose patients with PDAC.",
+              "doi": "10.3389/fcell.2021.647106",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC35A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b38f0c7f1b433e1a98a8dff68970cf68cac3c465c93b0935a3525a8055b48e1e"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC35A3 cancer=Lymphoma bucket=membership Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nIs SLC35A3 inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC35A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC35A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC35A3",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC35A3": {
+          "status": "unavailable",
+          "gene": "SLC35A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC35A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC35A3",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35A3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35A3"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A3": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 2, 'A:True': 1}，最终智能体辩论后裁决：winner=None answer=False conf=0.62；法官理由: No mouse ATM-null DLBCL CRISPR readout supports SLC35A3 inhibition; evidence channel shows low magnitude/no direction, and CRC expression data are not equivalent. L1’s claim is unsupported; L2 and evidence favor false.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC35A3 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC35A3"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC35A3": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:False': 2, 'A:True': 1}，最终智能体辩论后裁决：winner=None answer=False conf=0.58；法官理由: Only CRC association, no DLBCL CRISPR readout. Evidence channel gives P(essential)=0.42 (nonessential); L1 hallucinates depletion, L2 notes paralog buffering. Majority false with modest confidence.。原证据通道判定: winner=None answer=False conf=0.423（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC35A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC35A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T18:31:10Z"
+  }
+}

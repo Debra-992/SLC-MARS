@@ -1,0 +1,546 @@
+{
+  "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00243",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC4A7 inhibit Melanoma's Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "Hoxb8 imortalised GM-CSF",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days p95H"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC4A7"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00243",
+      "status": "ok",
+      "summary": "检索到 4 类证据、21 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC4A7"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC4A7",
+              "protein_function": "Mediates sodium-dependent bicarbonate transport",
+              "aliases": "NBC3",
+              "transport_type": "C"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC4A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC4 Bicarbonate  transporter family",
+              "target_properties": {
+                "name": "SLC4 Bicarbonate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A7",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC4A7",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Ras mutant pancreatic ductal adenocarcinom",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Ras mutant pancreatic ductal adenocarcinom",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Ras mutant pancreatic ductal adenocarcinom",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Ras mutant pancreatic ductal adenocarcinom",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A7",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Contribution of Na+,HCO3(-)-cotransport to cellular pH control in human breast cancer: a role for the breast cancer susceptibility locus NBCn1 (SLC4A7).",
+              "abstract": "Genome-wide association studies recently linked the locus for Na(+),HCO(3)(-)-cotransporter NBCn1 (SLC4A7) to breast cancer susceptibility, yet functional insights have been lacking. To determine whether NBCn1, by transporting HCO(3)(-) into cells, may dispose of acid produced during high metabolic activity, we studied the expression of NBCn1 and the functional impact of Na(+),HCO(3)(-)-cotransport in human breast cancer. We found that the plasmalemmal density of NBCn1 was 20-30% higher in primary breast carcinomas and metastases compared to matched normal breast tissue. The increase in NBCn1 density was similar in magnitude to that observed for Na(+)/H(+)-exchanger NHE1 (SLC9A1), a transporter previously implicated in cell migration, proliferation and malignancy. In primary breast carcinomas, the apparent molecular weight for NBCn1 was increased compared to normal tissue. Using pH-sensitive fluorophores, we showed that Na(+),HCO(3)(-)-cotransport is the predominant mechanism of acid extrusion and is inhibited 34 ± 9% by 200 μM 4,4'-diisothiocyanatostilbene-2,2'-disulfonic acid in human primary breast carcinomas. At intracellular pH (pH(i) ) levels >6.6, CO(2)/HCO(3)(-)-dependent mechanisms accounted for >90% of total net acid extrusion. Na(+)/H(+)-exchange activity was prominent only at lower pH(i) -values. Furthermore, steady-state pH(i) was 0.35 ± 0.06 units lower in the absence than in the presence of CO(2)/HCO(3)(-). In conclusion, expression of NBCn1 is upregulated in human primary breast carcinomas and metastases compared to normal breast tissue. Na(+),HCO(3)(-)-cotransport is a major determinant of pH(i) in breast cancer and the modest DIDS-sensitivity is consistent with NBCn1 being predominantly responsible. Hence, our results suggest a major pathophysiological role for NBCn1 that may be clinically relevant.",
+              "doi": "10.1002/ijc.27782",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "5bfda7c4ab0c0690195c3d853105ef7c0055c9216bc03fa43d11b9f98a864b25"
+              }
+            },
+            {
+              "title": "Inhibition of HIST1H2AB suppresses the proliferation of lung adenocarcinoma.",
+              "abstract": "Lung adenocarcinoma is one of the common causes of cancer-related deaths worldwide. Histone cluster 1 H2A family member b (HIST1H2AB) is a member of the histone H2A family. Bioinformatic analyses have revealed that HIST1H2AB is highly expressed in some cancers and might be an oncogene. However, information on the function of HIST1H2AB in lung adenocarcinoma is limited. The expression of HIST1H2AB was analyzed in normal lung, lung adenocarcinoma and paracancerous tissues from The Cancer Genome Atlas (TCGA) database and immunohistochemistry staining. It was further verified in the relative cell lines using real-time quantitative polymerase chain reaction (RT-qPCR). When the adenocarcinoma cells lines (A549 and H1299) were successfully transfected with shHIST1H2AB or an empty plasmid packaged into a lentivirus, cell proliferation was detected using Celigo fluorescence cell-counting, colony formation and annexin V-allophycocyanin assays. Twenty nude mice were subcutaneously injected with A549 cells transfected with shHIST1H2AB or empty plasmid; the tumor size was recorded on day 25 and then measured every 3 days thereafter. The final tumor weight was measured on day 37. Significantly differentially expressed genes were analyzed using a human gene expression array. Furthermore, the potentially relevant genes were verified using RT-qPCR and western blotting. HIST1H2AB was highly expressed in lung adenocarcinoma tissues from TCGA database and immunohistochemistry staining. Similar results were seen in the lung adenocarcinoma cells. When the cells were successfully transfected with shHIST1H2AB or an empty plasmid, downregulation of HIST1H2AB inhibited the growth and promoted the apoptosis of lung adenocarcinoma cells. The xenograft results suggested that HIST1H2AB downregulation delayed tumor growth and reduced tumor weight. Moreover, interferon signaling pathway and four genes (HMGB1, FOXM1, F2RL1 and SLC4A7) might be regulated by HIST1H2AB in the development of lung adenocarcinoma as indicated through gene expression array, RT-qPCR and western blotting analyses. HIST1H2AB acts as an oncogenic protein and HIST1H2AB inhibition suppresses the proliferation of lung adenocarcinoma cells. It may be a novel target for lung adenocarcinoma therapy.",
+              "doi": "10.1002/jgm.3469",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "e9145ea4f1f1709c5f7dd89b097a4d249d171332fe2020a02af6ed4db1886bd4"
+              }
+            },
+            {
+              "title": "Bicarbonate transporter SLC4A7 promotes EMT and metastasis of HNSCC by activating the PI3K/AKT/mTOR signaling pathway.",
+              "abstract": "Head and neck squamous cell carcinoma (HNSCC) is the sixth most common cancer worldwide. Currently, therapeutic modalities such as surgery, chemotherapy, radiotherapy, and immunotherapy are being used to treat HNSCC. However, the treatment outcomes of most patients are dismal because they are already in middle or advanced stage by the time of diagnosis and poorly responsive to treatments. It is therefore of great interest to clarify mechanisms that contribute to the metastasis of cells to identify possible targets for therapy. In this study, we identified the Na -coupled bicarbonate transporter, SLC4A7, play essential roles in the metastasis of HNSCC. Our results showed that the relative expression of SLC4A7 messenger RNA was highly expressed in HNSCCs samples from TCGA, and compared with precancerous cells of human oral mucosa (DOK), SLC4A7 was highly expressed in HNSCC cell lines. In vitro and in vivo experiments showed that dysregulation of SLC4A7 had minor influence on the proliferation of HNSCC but impacted HNSCC's migration and invasion. Meanwhile, SLC4A7 could promote epithelial-mesenchymal transition (EMT) in HNSCC. RNA-seq, KEGG pathway enrichment analysis and Western blot further revealed that downregulation of SLC4A7 in HNSCC cells inhibited the PI3K/AKT pathway. These findings were further validated via rescue experiments using a small molecule inhibitor of PI3K/mTOR (GDC-0980). Our findings suggest that SLC4A7 promotes EMT and metastasis of HNSCC through the PI3K/AKT/mTOR signaling pathway, which may be a valuable predictive biomarker and potential therapeutic target in HNSCC.",
+              "doi": "10.1002/mc.23511",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b58d51411aef0ca42782667a1b681ca798eeb8bd68f98ec1eccdab6f33f44fe1"
+              }
+            },
+            {
+              "title": "{'sup': ['+', '+', '+', '-'], 'sub': '3', '#text': 'Na/H-exchange inhibition by cariporide is compensated via Na,HCO-cotransport and has no net growth consequences for ErbB2-driven breast carcinomas.'}",
+              "abstract": "Defense against intracellular acidification of breast cancer tissue depends on net acid extrusion via Na,HCO-cotransporter NBCn1/Slc4a7 and Na/H-exchanger NHE1/Slc9a1. NBCn1 is increasingly recognized as breast cancer susceptibility protein and promising therapeutic target, whereas evidence for targeting NHE1 is discordant. Currently, selective small molecule inhibitors exist against NHE1 but not NBCn1. Cellular assays-with some discrepancies-link NHE1 activity to proliferation, migration, and invasion; and disrupted NHE1 expression can reduce triple-negative breast cancer growth. Studies on human breast cancer tissue associate high NHE1 expression with reduced metastasis and-in some molecular subtypes-improved patient survival. Here, we evaluate Na/H-exchange and therapeutic potential of the NHE1 inhibitor cariporide/HOE-642 in murine ErbB2-driven breast cancer. Ex vivo, cariporide inhibits net acid extrusion in breast cancer tissue (IC = 0.18 μM) and causes small decreases in steady-state intracellular pH (pH). In vivo, we deliver cariporide orally, by osmotic minipumps, and by intra- and peritumoral injections to address the low oral bioavailability and fast metabolism. Prolonged cariporide administration in vivo upregulates NBCn1 expression, shifts pH regulation towards CO/HCO-dependent mechanisms, and shows no net effect on the growth rate of ErbB2-driven primary breast carcinomas. Cariporide also does not influence proliferation markers in breast cancer tissue. Oral, but not parenteral, cariporide elevates serum glucose by ∼1.5 mM. In conclusion, acute administration of cariporide ex vivo powerfully inhibits net acid extrusion from breast cancer tissue but lowers steady-state pH minimally. Prolonged cariporide administration in vivo is compensated via NBCn1 and we observe no discernible effect on growth of ErbB2-driven breast carcinomas.",
+              "doi": "10.1016/j.bbadis.2024.167450",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "75ddb11ee5f0d0edb2db64d126a76163e6589bf1414e0bc0260ed4bc054d1c89"
+              }
+            },
+            {
+              "title": "Regulation of intracellular pH by electrogenic Na+/HCO3- co-transporters in embryonic neural stem cell-derived radial glia-like cells.",
+              "abstract": "A stroke causes a hypoxic brain microenvironment that alters neural cell metabolism resulting in cell membrane hyperpolarization and intracellular acidosis. We studied how intracellular pH (pH) is regulated in differentiated mouse neural progenitor cells during hyperpolarizing conditions, induced by prompt reduction of the extracellular K concentration. We found that the radial glia-like population in differentiating embryonic neural progenitor cells, but not neuronal cells, was rapidly acidified under these conditions. However, when extracellular calcium was removed, an instant depolarization and recovery of the pH, back to normal levels, took place. The rapid recovery phase seen in the absence of calcium, was dependent on extracellular bicarbonate and could be inhibited by S0859, a potent Na/HCO3 cotransporter inhibitor. Immunostaining and PCR data, showed that NBCe1 (SLC4A4) and NBCn1 (SLC4A7) were expressed in the cell population and that the pH recovery in the radial glial-like cells after calcium removal was mediated mainly by the electrogenic sodium bicarbonate transporter NBCe1 (SLC4A4). Our results indicate that extracellular calcium might hamper pH regulation and Na/HCO3 cotransporter activity in a brain injury microenvironment. Our findings show that the NBC-type transporters are the main pH regulating systems prevailing in glia-like progenitor cells and that these calcium sensitive transporters are important for neuronal progenitor cell proliferation, survival and neural stem cell differentiation.",
+              "doi": "10.1016/j.bbamem.2019.03.007",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ccee48e3d8ab25eb660b8d6d0db7365588334d0a679a64870a104dc474131332"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC4A7 cancer=Melanoma bucket=membership Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nIs SLC4A7 inhibit Melanoma's Tumor Drug Resistence?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC4A7']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC4A7",
+            "ppr_score": 4.944590802853907e-05,
+            "degree_corrected_score": 3.4401361445198544e-05,
+            "graph_degree": 7,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC4A7",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC4A7",
+        "cancer_type": "Melanoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC4A7": {
+          "status": "unavailable",
+          "gene": "SLC4A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC4A7": {
+          "status": "unavailable",
+          "gene": "SLC4A7",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC4A7 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=5.20 -> P(必需)=0.821 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A7"
+        ],
+        "confidence": 0.78,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A7": 5.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.78；法官理由: CRISPR essentiality shows loss-of-function depletion, not drug-resistance inhibition. No melanoma drug-resistance evidence; bicarbonate transporter likely supports stress/survival. Two independent LLM false votes outweigh E's direction-agno。原证据通道判定: winner=None answer=True conf=0.821（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A7']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC4A7/NBC3在RAS突变型胰腺癌中明确与增殖、迁移、凋亡抑制和化疗耐药促进相关；在乳腺癌/HNSCC中也通过碳酸氢盐转运、pH稳态、酸外排及PI3K/AKT/mTOR等通路支持肿瘤侵袭和压力耐受。黑色素瘤同样常依赖RAS/MAPK-PI3K/AKT信号、代谢酸应激和药物压力适应，因此跨癌种类推更支持SLC4A7促进而非抑制耐药。 | 目标癌种Melanoma缺乏直接CRISPR/表达证据，但候选基因的因果方向在邻近癌种中一致表现为肿瘤促生、促迁移和促耐药；若其在黑色素瘤中保留类似pH调节/生存适应功能，则更可能帮助肿瘤抵抗药物压力，而不是抑制Tumor Drug Resistance。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A7"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A7": 5.2
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC4A7/NBC3在RAS突变型胰腺癌中明确与增殖、迁移、凋亡抑制和化疗耐药促进相关；在乳腺癌/HNSCC中也通过碳酸氢盐转运、pH稳态、酸外排及PI3K/AKT/mTOR等通路支持肿瘤侵袭和压力耐受。黑色素瘤同样常依赖RAS/MAPK-PI3K/AKT信号、代谢酸应激和药物压力适应，因此跨癌种类推更支持SLC4A7促进而非抑制耐药。 | 目标癌种Melanoma缺乏直接CRISPR/表达证据，但候选基因的因果方向在邻近癌种中一致表现为肿瘤促生、促迁移和促耐药；若其在黑色素瘤中保留类似pH调节/生存适应功能，则更可能帮助肿瘤抵抗药物压力，而不是抑制Tumor Drug Resistance。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "Ras mutant pancreatic ductal adenocarcinom",
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A7']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC4A7"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T22:39:33Z"
+  }
+}

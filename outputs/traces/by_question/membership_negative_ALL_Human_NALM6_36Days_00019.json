@@ -1,0 +1,372 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00019",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC52A2 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC52A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00019",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC52A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC52A2",
+              "protein_function": "Mediates the uptake of riboflavin",
+              "aliases": "GPR172A",
+              "transport_type": "Na+, Cl-, pH-independent"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC52A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC52 Riboflavin  transporter family",
+              "target_properties": {
+                "name": "SLC52 Riboflavin  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Akkermansia muciniphila relieves inflammatory response in DSS-induced ulcerative colitis in mice through regulating macrophage polarization via SCFAs-SLC52A2/FFAR2 pathway.",
+              "abstract": "Ulcerative colitis (UC) remains an intractable and relapsing disease featured by intestinal inflammation. The anti-UC activity of Akkermansia muciniphila (AKK), an intestinal microorganism, has been widely investigated. The current work is to explore the impacts of AKK on UC and its possible reaction mechanism. In vivo UC model was induced by dextran sulfate sodium (DSS) and phorbol-12-myristate-13-acetate (PMA)-induced THP-1-M0 and raw264.7 macrophages were treated by lipopolysaccharide (LPS). H&E staining evaluated tissue damage. Inflammatory and oxidative stress levels were assessed by relevant kits. The high-throughput analysis of fatty acids was performed by the LC/MS method. RT-qPCR and Western blot detected related gene expression. Flow cytometry measured cell apoptosis and macrophage polarization. Energy metabolism was detected by ELISA, related assay kits, JC-1 staining, and Western blot. AKK reduced the pathological damage of mice colon tissues, alleviated oxidative stress and inflammatory response, upregulated the expression of Occludin-1 and SCFAs receptors, and stimulated M1 to M2 macrophage polarization in vivo. After FFAR2 was silenced, the promoting role of AKK in the viability and M1 to M2 macrophage polarization and the inhibitory role in oxidative stress, inflammation, apoptosis, energy metabolism disorder, necroptosis, and pyroptosis were both reverted. Conclusively, AKK might mediate SCFAs-SLC52A2/FFAR2 pathways to exert protective activities against intestinal inflammatory response in UC, suggesting that AKK might represent a novel and promising candidate for UC therapy.",
+              "doi": "10.1007/s00210-025-03787-8",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC52A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4735b6c2acd725511eeb2ed7323c550965dea28734a2437ae62a0926a958e5f2"
+              }
+            },
+            {
+              "title": "A Genome-Wide CRISPR/Cas9 Screen Reveals that Riboflavin Regulates Hydrogen Peroxide Entry into HAP1 Cells.",
+              "abstract": "Extracellular hydrogen peroxide can induce oxidative stress, which can cause cell death if unresolved. However, the cellular mediators of HO-induced cell death are unknown. We determined that HO-induced cytotoxicity is an iron-dependent process in HAP1 cells and conducted a CRISPR/Cas9-based survival screen that identified four genes that mediate HO-induced cell death:  (encoding cytochrome P450 oxidoreductase),  (retinol saturase),  (Kelch-like ECH-associated protein-1), and  (riboflavin transporter). Among these genes, only  also mediated methyl viologen dichloride hydrate (paraquat)-induced cell death. Because the identification of SLC52A2 as a mediator of HO was both novel and unexpected, we performed additional experiments to characterize the specificity and mechanism of its effect. These experiments showed that paralogs of SLC52A2 with lower riboflavin affinities could not mediate HO-induced cell death and that riboflavin depletion protected HAP1 cells from HO toxicity through a specific process that could not be rescued by other flavin compounds. Interestingly, riboflavin mediated cell death specifically by regulating HO entry into HAP1 cells, likely through an aquaporin channel. Our study results reveal the general and specific effectors of iron-dependent HO-induced cell death and also show for the first time that a vitamin can regulate membrane transport. Using a genetic screen, we discovered that riboflavin controls the entry of hydrogen peroxide into a white blood cell line. To our knowledge, this is the first report of a vitamin playing a role in controlling transport of a small molecule across the cell membrane.",
+              "doi": "10.1128/mBio.01704-20",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC52A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "3dcf5531b376e389ac90e495eca39645b206fbea6a967782dbda6f240648bd35"
+              }
+            },
+            {
+              "title": "A comprehensive study based on exosome-related immunosuppression genes and tumor microenvironment in hepatocellular carcinoma.",
+              "abstract": "Exosomes play an important role in the tumor microenvironment (TME) and the mechanisms of tumor immune escape in hepatocellular carcinoma (HCC). It is known that immunosuppressive genes, involved in the processes of tumor immunosuppression, are associated with cancer progression. This study aimed to explore the prognostic values of exosome-related immunosuppression genes (ERIGs) in HCC. The RNA-seq transcriptome data of 374 HCC patients were obtained from the Cancer Genome Atlas (TCGA) database. The TCGA cohort was randomly divided into the training cohort and validation cohort in a 1:1 ratio. WGCNA analysis and Pearson correlation analysis were used to identify ERIGs. The Lasso regression method was used to construct a 5-ERIG signature. The prognostic value of our signature was examined in the First Affiliated Hospital of Wenzhou Medical University (FAHWMU) cohort. Univariate Cox regression analysis was used to screen prognostic ERIGs. Subsequently, these prognostic ERIGs were included in Lasso regression analyses to identify 5 key ERIGs (ASAP1, IARS1, GTF3C2, TPD5L2 and SLC52A2) and construct a 5-ERIG signature. The patients in the low-risk group had better prognosis than those in the high-risk group. Univariate and multivariate cox regression revealed that risk score was an independent prognostic risk factor of HCC. Gene set enrichment analysis (GSEA) showed that this signature was highly associated with TME-related pathways. Subsequent analyses revealed the potential role of the signature in regulating the TME in HCC. In addition, a lower immunotherapy score was found in patients with high risk-score. Of note, this signature was confirmed to have a good performance in predicting HCC prognosis in the FAHWMU cohort. Moreover, knockdown of 5 ERIGs of this signature contributed to the suppression the Hep3B cell proliferation. We generated a novel prognostic 5-ERIG signature to accurately predict the prognosis of patients with HCC, and this signature may serve as an indicator of immunotherapy for HCC.",
+              "doi": "10.1186/s12885-022-10463-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC52A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "04a8243e1376428af8c706642f37d17c570244ab4fe8349bc32264f6cab88fc6"
+              }
+            },
+            {
+              "title": "Comprehensive analysis of cuproptosis-related genes and tumor microenvironment infiltration characterization in breast cancer.",
+              "abstract": "Cuproptosis is a newly discovered programmed cell death dependent on overload copper-induced mitochondrial respiration dysregulation. The positive response to immunotherapy, one of the most important treatments for invasive breast cancer, depends on the dynamic balance between tumor cells and infiltrating lymphocytes in the tumor microenvironment (TME). However, cuproptosis-related genes (CRGs) in clinical prognosis, immune cell infiltration, and immunotherapy response remain unclear in breast cancer progression. The expression and mutation patterns of 12 cuproptosis-related genes were systematically evaluated in the BRCA training group. Through unsupervised clustering analysis and developing a cuproptosis-related scoring system, we further explored the relationship between cuproptosis and breast cancer progression, prognosis, immune cell infiltration, and immunotherapy. We identified two distinct CuproptosisClusters, which were correlated with the different patterns between clinicopathological features, prognosis, and immune cell infiltration. Moreover, the differences of the three cuproptosis-related gene subtypes were evaluated based on the CuproptosisCluster-related DEGs. Then, a cuproptosis-related gene signature (PGK1, SLC52A2, SEC14L2, RAD23B, SLC16A6, CCL5, and MAL2) and the scoring system were constructed to quantify the cuproptosis pattern of BRCA patients in the training cohort, and the testing cohorts validated them. Specifically, patients from the low-CRG_score group were characterized by higher immune cell infiltration, immune checkpoint expression, immune checkpoint inhibitor (ICI) scores, and greater sensitivity to immunotherapy. Finally, we screened out RAD23B as a favorable target and indicated its expression was associated with breast cancer progression, drug resistance, and poor prognosis in BRCA patients by performing real-time RT-PCR, cell viability, and IC50 assay. Our results confirmed the essential function of cuproptosis in regulating the progression, prognosis, immune cell infiltration, and response to breast cancer immunotherapy. Quantifying cuproptosis patterns and constructing a CRG_score could help explore the potential molecular mechanisms of cuproptosis regulating BRCA advancement and provide more effective immunotherapy and chemotherapy targets.",
+              "doi": "10.3389/fimmu.2022.978909",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC52A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "9ad1a7ad926e37a2975e11f97e2368062d4855758e465089710cecd24b8fb2c7"
+              }
+            },
+            {
+              "title": "BVVLS2 overlooked for 3 years in a pediatric patient caused by novel compound heterozygous mutations in SLC52A2 gene.",
+              "abstract": "Brown-Vialetto-Van Laere syndrome-2 (BVVLS2) is a rare autosomal recessive neurological disorder caused by mutations in the SLC52A2 gene, which is characterized by early childhood onset of sensorineural hearing loss, bulbar palsy, peripheral neuropathy, and respiratory insufficiency. We aimed to investigate the genetic cause of a 4-year-old boy who suffered from BVVLS2 whose initial presentation was severe normocytic anemia and had been overlooked for three years in a local hospital. He was misdiagnosed with pure red cell aplasia (PRCA) and treated with hormones and chemotherapy drugs, but there was no obvious effect. The targeted capture of 927 genes associated with neuromuscular disorders and next-generation sequencing were performed. Sanger sequencing was employed to verify the variant mutations. The proband was found to be heterozygous for c.350T > C (p.L117P) in exon 3 and c.1135_1137delTGG (p.W379del) in exon 5 of SLC52A2 gene. His anemia and neurological symptoms improved significantly after treatment with low dose oral riboflavin. This study expands the mutational spectrum of SLC52A2 and phenotypic spectrum of BVVLS2, which provides a foundation for further investigations elucidating the SLC52A2 related mechanisms of BVVLS2. A low-dosage of riboflavin supplementation was used to obtain good curative effect, which provides further future references for the clinical treatments of BVVLS.",
+              "doi": "10.1016/j.cca.2021.10.031",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC52A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "47be29da4cb5c753ed0179903ee0caf0fbcd2d077851f275c5febf554295af3d"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC52A2 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC52A2 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC52A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC52A2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC52A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC52A2",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC52A2": {
+          "status": "unavailable",
+          "gene": "SLC52A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC52A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC52A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC52A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC52A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC52A2"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC52A2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC52A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC52A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC52A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC52A2"
+        ],
+        "confidence": 0.56,
+        "abstained": false,
+        "gene_scores": {
+          "SLC52A2": 0.35
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC52A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.35 -> P(必需)=0.560 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC52A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC52A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T23:34:35Z"
+  }
+}

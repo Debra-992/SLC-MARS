@@ -1,0 +1,304 @@
+{
+  "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC10A7 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC10A7"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060",
+      "status": "ok",
+      "summary": "检索到 4 类证据、4 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC10A7"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC10A7",
+              "protein_function": "Involved in teeth and skeletal development, essential role in the biosynthesis and trafficking of glycosaminoglycans and glycoproteins.",
+              "aliases": "NTCP7, Sodium/Bile Acid Cotransporter 7",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC10A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC10 Sodium bile  salt cotransport family",
+              "target_properties": {
+                "name": "SLC10 Sodium bile  salt cotransport family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Circular RNA circHECTD1 facilitates glioma progression by regulating the miR-296-3p/SLC10A7 axis.",
+              "abstract": "Glioma is the most common type of primary brain tumor. Treatment options for recurrent gliomas include surgery, chemotherapy, and radiation therapy, but the clinical outcome is usually limited. In recent years, circular RNAs have been found to play a vital role in several human cancers. Gene Expression Omnibus database was utilized to verify the differentially expressed circRNAs. Then we detected that the expression of circular RNA circHECTD1 was significantly increased. The expression and function of circHECDT1 has not yet been reported in glioma. Then we confirmed that the level of circHECTD1 was significantly increased both in glioma tissues and cell lines, which is negatively correlated with the overall survival of patients. Knockdown of circHECTD1 inhibited proliferation and invasion in vitro, and also reduced the growth of tumor and prolonged the prognosis in vivo. Knockdown of circHECTD1 significantly elevated the miR-296-3p expression in LN229 and T98G cells. Luciferase reports and RNA immunoprecipitation data indicated that miR-296-3p was a direct target of circHECTD1 and that the miR-296-3p expression negatively regulated SLC10A7. Rescue experiments showed that the overexpression of SLC10A7 could impede the effects of circHECTD1 silencing on the proliferation and invasion of glioma cells. In this study, we identified that circHECTD1 regulates SLC10A7 by interacting with miR-296-3p in glioma cells. In conclusion, this study investigated a novel biomarker panel consisting of the circHECTD1/miR-296-3p/SLC10A7 axis, which is critical for glioma tumorigenesis and invasiveness and may represent a novel therapeutic target for intervening in glioma progression.",
+              "doi": "10.1002/jcp.30277",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4e2ff693e6d8b6097e0ce4d69e6d499a00ff99939b920149d41164f2b8f0dba1"
+              }
+            },
+            {
+              "title": "Identification of a lipid homeostasis-related gene signature for predicting prognosis, immunity, and chemotherapeutic effect in patients with gastric cancer.",
+              "abstract": "Gastric cancer (GC) is one of the most common and deadliest cancers worldwide. Lipid homeostasis is essential for tumour development because lipid metabolism is one of the most important metabolic reprogramming pathways within tumours. Elucidating the mechanism of lipid homeostasis in GC might significantly improve treatment strategies and patient prognosis. GSE62254 was applied to construct a lipid homeostasis-related gene signature score (HGSscore) by multiple bioinformatic algorithms including weighted gene coexpression network analysis (WGCNA) and LASSO-Cox regression. A nomogram based on HGSscore and relevant clinical characteristics was constructed to predict the survival of patients with GC. TIMER and xCell were used to evaluate immune and stromal cell infiltration in the tumour microenvironment. Correlations between lipid homeostasis-related genes and chemotherapeutic efficacy were analysed in GSCAlite. RT‒qPCR and cell viability assays were applied to verify the findings in this study. HGSscore was constructed based on eighteen lipid homeostasis-related genes that were selected by WGCNA and LASSO-Cox regression. HGSscore was strongly associated with advanced TNM stage and showed satisfactory value in predicting GC prognosis in three independent cohorts. Furthermore, we found that HGSscore was associated with the tumour mutation burden (TMB) and immune/stromal cell infiltration, which are related to GC prognosis, indicating that lipid homeostasis impacts the formation of the tumour microenvironment (TME). With respect to the GSCAlite platform, PLOD2 and TGFB2 were shown to be positively related to chemotherapeutic resistance, while SLC10A7 was a favourable factor for chemotherapy efficacy. Cell viability assays showed that disrupted lipid homeostasis could attenuate GC cell viability. Moreover, RT‒qPCR revealed that lipid homeostasis could influence expression of specific genes. We identified a lipid homeostasis-related gene signature that correlated with survival, clinical characteristics, the TME, and chemotherapeutic efficacy in GC patients. This research provides a new perspective for improving prognosis and guiding individualized chemotherapy for patients with GC.",
+              "doi": "10.1038/s41598-024-52647-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC10A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1629f8d463810f29e558611b69371b88c81afcd8342fd88a18a78245347ef3a6"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC10A7 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC10A7 inhibit B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC10A7']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC10A7",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC10A7",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC10A7": {
+          "status": "unavailable",
+          "gene": "SLC10A7",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC10A7": {
+          "status": "unsupported_cancer",
+          "gene": "SLC10A7",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC10A7 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A7"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A7": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC10A7 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A7']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC10A7 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC10A7"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC10A7": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC10A7 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC10A7']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC10A7"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T01:23:52Z"
+  }
+}

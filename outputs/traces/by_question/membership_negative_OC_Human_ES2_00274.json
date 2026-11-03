@@ -1,0 +1,394 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00274",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC7A6 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC7A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00274",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A6"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC7A6",
+              "protein_function": "Heterotimer with SLC3A2, functions as an antiporter which operates as an efflux route by exporting cationic amino acids from inside the cells.",
+              "aliases": "Y+LAT-2, LAT-2, LAT3",
+              "transport_type": "E (preferentially intracellular cationic amino acid against extracellular neutral amino acid / Na+)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC7A6",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family",
+              "target_properties": {
+                "name": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family"
+              }
+            },
+            {
+              "gene": "SLC7A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "LAT3",
+              "target_properties": {
+                "name": "LAT3"
+              }
+            },
+            {
+              "gene": "SLC7A6",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "Y+LAT-2",
+              "target_properties": {
+                "name": "Y+LAT-2"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Baicalein improves the chemoresistance of ovarian cancer through regulation of CirSLC7A6.",
+              "abstract": "The present study aimed to investigate whether baicalein improves the sensitivity of resistant ovarian cancer cells to cisplatin. Transcriptomic sequencing and bioinformatics analysis were used to screen differentially expressed CirSLC7A6 in A2780 and A2780/CDDP cells. RT-qPCR was performed to examine the expression levels of CirSLC7A6, miR-2682-5p, and SLC7A6. Cell proliferation and apoptosis were examined using a Cell Counting Kit-8 assay and flow cytometry, and cell migration and invasion were analyzed using wound healing and Transwell assays. Cell suspensions were inoculated into the subcutaneous tissues of the bilateral interscapular region of nude mice. Saline, cisplatin, baicalein and cisplatin plus baicalein were intraperitoneally injected to observe the effects on tumor growth. Toxicity analyses in the liver and kidney were performed using H&E staining. RT-qPCR and immunohistochemistry were used to detect the expression of CirSLC7A6, miR-2682-5p, and SLC7A6 in tumor tissues, and western blot analysis was carried out to measure protein expression levels. CirSLC7A6 was markedly upregulated in A2780/CDDP cells compared with the A2780 cells. CirSLC7A6 knockdown notably increased the expression of miR-2682-5p and decreased SLC7A6 expression. The rates of inhibition and apoptosis in the group treated with a combination of cisplatin and baicalein were significantly higher than those of the cisplatin and baicalein groups of A2780/CDDP shCirSLC7A6 cells. In A2780/CDDP shCirSLC7A6 cells, migration and invasion were significantly higher in the cisplatin and baicalein groups, compared with the combined treatment group. In the A2780/CDDP shCirSLC7A6 cell xenograft, the tumor weight of the combined treatment group was significantly lower than that of the cisplatin and baicalein groups. In addition, the combination of cisplatin and baicalein did not induce higher levels of toxicity in the liver or kidney. Baicalein alone and in combination with cisplatin notably reduced the expression of CirSLC7A6 and SLC7A6, and increased the expression of miR-2682-5p in the A2780/CDDP shCirSLC7A6 cell xenograft. In A2780/CDDP shCirSLC7A6 cells, the expression levels of P-Akt, P-mTOR, P-Erk, Bcl-2 and MMP2 were lower in the combined treatment group than in the control group. Treatment with baicalein improved the sensitivity of ovarian cancer cells to cisplatin and inhibited cell proliferation, metastasis and tumor growth.",
+              "doi": "10.1186/s13048-023-01285-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A6"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "efafb92528827eaf1adc403a84976ab3cb196767996dc27b18fe8c08bcc9d9f7"
+              }
+            },
+            {
+              "title": "Identification of genomic regions contributing to etoposide-induced cytotoxicity.",
+              "abstract": "Etoposide is routinely used in combination-based chemotherapy for testicular cancer and small-cell lung cancer; however, myelosuppression, therapy-related leukemia and neurotoxicity limit its utility. To determine the genetic contribution to cellular sensitivity to etoposide, we evaluated cell growth inhibition in Centre d' Etude du Polymorphisme Humain lymphoblastoid cell lines from 24 multi-generational pedigrees (321 samples) following treatment with 0.02-2.5 microM etoposide for 72 h. Heritability analysis showed that genetic variation contributes significantly to the cytotoxic phenotypes (h (2) = 0.17-0.25, P = 4.9 x 10(-5)-7.3 x 10(-3)). Whole genome linkage scans uncovered 8 regions with peak LOD scores ranging from 1.57 to 2.55, with the most significant signals being found on chromosome 5 (LOD = 2.55) and chromosome 6 (LOD = 2.52). Linkage-directed association was performed on a subset of HapMap samples within the pedigrees to find 22 SNPs significantly associated with etoposide cytotoxicity at one or more treatment concentrations. UVRAG, a DNA repair gene, SEMA5A, SLC7A6 and PRMT7 are implicated from these unbiased studies. Our findings suggest that susceptibility to etoposide-induced cytotoxicity is heritable and using an integrated genomics approach we identified both genomic regions and SNPs associated with the cytotoxic phenotypes.",
+              "doi": "10.1007/s00439-008-0607-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "d94da205e4fdd0dea09b0a343aa79407c362e972bdc551b93af0f60c02908784"
+              }
+            },
+            {
+              "title": "Structural characterization and functional role of SLC7A6 in GSSG transport and Ferroptosis regulation.",
+              "abstract": "The role of solute carrier family 7 member 6 (SLC7A6) in cancer remains largely unexplored. In this study, we performed a comprehensive bioinformatics analysis to assess the expression profile, diagnostic potential, and prognostic significance of SLC7A6, and further validated its functional role in hepatocellular carcinoma (LIHC), cholangiocarcinoma (CHOL), and pancreatic cancer (PAAD). Integrative analyses using TCGA, and GTEx revealed dysregulated SLC7A6 expression across multiple cancer types with significant prognostic implications. In LIHC, SLC7A6-associated genes were identified through the STRING database and subjected to GO and KEGG enrichment analyses. Immunohistochemistry confirmed elevated SLC7A6 protein expression in LIHC, CHOL, and PAAD tissues. Functional assays, including CCK-8, colony formation, wound healing, and Transwell migration/invasion, demonstrated that SLC7A6 promotes proliferation, migration, and invasion of tumor cells. Mechanistically, AlphaFold 3 predicted a potential interaction between SLC7A6 and oxidized glutathione (GSSG), which was supported by biochemical assays showing altered intracellular levels of nitric oxide (NO), GSSG, and glutathione (GSH) upon SLC7A6 knockdown. These findings suggest that SLC7A6 contributes to tumor progression by regulating ferroptosis through disruption of redox homeostasis. Collectively, our study highlights SLC7A6 as a promising biomarker for cancer diagnosis and prognosis and provides experimental evidence supporting its functional role in driving tumor progression via ferroptosis modulation in LIHC, CHOL, and PAAD.",
+              "doi": "10.1016/j.ijbiomac.2025.148008",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "854b83bb1bd8121b2c09e0ce0d61fbb85255a58d606c18f2e6773dbb9c5f9ba3"
+              }
+            },
+            {
+              "title": "STAT5A modulates CDYL2/SLC7A6 pathway to inhibit the proliferation and invasion of hepatocellular carcinoma by targeting to mTORC1.",
+              "abstract": "Chromodomain Y-like 2 (CDYL2), as a member of CDY family known to be involved in spermatogenesis, has been reported to participate in breast cancer development recently, but its exact biological role in hepatocellular carcinoma (HCC) remains unclear. Here, we observed that CDYL2 was down-regulated in human primary HCC tissues and the low levels of CDYL2 expression were correlated with poor survival. Gain- and loss-of-function experiments showed that CDYL2 inhibited the proliferation and metastasis of HCC cells in vitro and in vivo. Mechanistically, CDYL2 down-regulates solute carrier family 7 member 6 (SLC7A6) by decreasing the enrichment of H3K4me3 on the promoter region of SLC7A6. Additionally, we also found that signal transducer and activator of transcription 5A (STAT5A) could directly and positively regulate the expression of CDYL2. Thus, CDYL2 was regulated by STAT5A, and suppressed the amino acid transportation through down-regulation of SLC7A6, and then inhibits the mTORC1/S6K pathway, a master regulator of cell growth. Consistently, CDYL2 expression correlated significantly with STAT5A and SLC7A6 expression in HCC. Collectively, we propose a model for a STAT5A/CDYL2/SLC7A6 axis that provides novel insight into CDYL2, which may serve as a potential factor for predicting prognosis and a therapeutic target for HCC patients.",
+              "doi": "10.1038/s41388-022-02273-2",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1e41957a753cb2507639b98eb3e02440c7375f1d886a66ac3bc8dfbf49e2b48a"
+              }
+            },
+            {
+              "title": "Circular RNA circ-SLC7A6 acts as a tumor suppressor in non-small cell lung cancer through abundantly sponging miR-21.",
+              "abstract": "Circular RNA (circRNA) is currently considered to be a key regulatory molecule in cancer biology. In the present study, we aimed to explore the functional and clinical roles of circ-SLC7A6 (a circRNA derived from SLC7A6 gene) in non-small cell lung cancer (NSCLC). Circ-SLC7A6 was significantly downregulated in NSCLC tissues in comparison to para-carcinoma tissues. Low circ-SLC7A6 was closely associated with larger tumor size, lymph node metastasis, advanced clinical stage and adverse outcome. Exogenous expression of circ-SLC7A6 evidently inhibited the proliferation and invasion of NSCLC cells. Further investigations revealed that miR-21 was the direct functional target of circ-SLC7A6, in which circ-SLC7A6 abundantly sponged miR-21 and elevated a cohort of tumor suppressors, thus inhibiting NSCLC progression. Interestingly, QKI, elevated by circ-SLC7A6, could directly bind to the introns flanking circ-SLC7A6 to facilitate circ-SLC7A6 production. Importantly,  xenograft tumor experiments showed that reintroduction of circ-SLC7A6 retarded tumor growth as well as decreased lung metastatic nodules. Overall, our study demonstrates that circ-SLC7A6 is a novel tumor suppressor in NSCLC, targeting circ-SLC7A6/miR-21 axis may be a promising treatment for NSCLC patients.",
+              "doi": "10.1080/15384101.2020.1806449",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b5299c0e88527b013bd92ae86821393b69987c8b99527e85d56e3545b5d58393"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A6 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC7A6 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC7A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC7A6",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC7A6",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC7A6",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A6": {
+          "status": "unavailable",
+          "gene": "SLC7A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A6": {
+          "status": "unavailable",
+          "gene": "SLC7A6",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A6']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.45 -> P(必需)=0.600 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC7A6"
+        ],
+        "confidence": 0.6,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A6": 0.45
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC7A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.45 -> P(必需)=0.600 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A6']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.45 -> P(必需)=0.600 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC7A6"
+        ],
+        "confidence": 0.6,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A6": 0.45
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC7A6 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.45 -> P(必需)=0.600 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A6']",
+        "status": "ok",
+        "summary": "SLC7A6 encodes a cationic amino acid transporter (CAT-3) that can support arginine uptake and metabolic pathways often associated with cancer cell proliferation. In ovarian cancer ES2 cells under CRISPR/MAGECK screening, if SLC7A6 loss reduces cell abundance from 0day to final time, it would indicate SLC7A6 promotes tumor fitness/growth rather than inhibiting tumor growth. Therefore, SLC7A6 itself is not best interpreted as an inhibitor of ovarian cancer tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A6"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC7A6 encodes a cationic amino acid transporter (CAT-3) that can support arginine uptake and metabolic pathways often associated with cancer cell proliferation. In ovarian cancer ES2 cells under CRISPR/MAGECK screening, if SLC7A6 loss reduces cell abundance from 0day to final time, it would indicate SLC7A6 promotes tumor fitness/growth rather than inhibiting tumor growth. Therefore, SLC7A6 itself is not best interpreted as an inhibitor of ovarian cancer tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:42:21Z"
+  }
+}

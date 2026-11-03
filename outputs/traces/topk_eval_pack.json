@@ -1,0 +1,1679 @@
+{
+  "packs": [
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_24h_00000",
+      "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit ALL's Tumor Growth.",
+      "constraints": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC5A3",
+        "SLC16A1",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC2A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC3A2",
+          0.01266700405265473
+        ],
+        [
+          "SLC27A2",
+          0.011400491770096796
+        ],
+        [
+          "SLC7A11",
+          0.006327327939087717
+        ],
+        [
+          "SLC1A5",
+          0.0002886215473650146
+        ],
+        [
+          "SLC7A5",
+          0.00027978957778917676
+        ],
+        [
+          "SLC2A1",
+          0.00021573748674904206
+        ],
+        [
+          "SLC16A1",
+          0.00018144554240705956
+        ],
+        [
+          "SLC38A1",
+          0.00016482515173462238
+        ],
+        [
+          "SLC5A8",
+          0.00015899137922910784
+        ],
+        [
+          "SLC6A14",
+          0.00014173364731594884
+        ],
+        [
+          "SLC34A2",
+          0.00013654024214573415
+        ],
+        [
+          "SLC38A5",
+          0.00012980715262014088
+        ],
+        [
+          "SLC25A5",
+          0.00012548757489327868
+        ],
+        [
+          "SLC22A5",
+          0.0001238564490725051
+        ],
+        [
+          "SLC5A2",
+          0.00011801297829000418
+        ],
+        [
+          "SLC39A4",
+          0.00011706154387276846
+        ],
+        [
+          "SLC31A1",
+          0.00011511979653979658
+        ],
+        [
+          "SLC13A5",
+          0.00011460586416549237
+        ],
+        [
+          "SLC25A6",
+          0.0001120255702816215
+        ],
+        [
+          "SLC22A8",
+          0.00011186962839539249
+        ],
+        [
+          "SLC16A3",
+          0.00011031897050968108
+        ],
+        [
+          "SLC40A1",
+          0.00011019121789591891
+        ],
+        [
+          "SLC29A1",
+          0.00010639136942480839
+        ],
+        [
+          "SLCO1B1",
+          0.00010399755264971767
+        ],
+        [
+          "SLC25A4",
+          0.00010288415152321951
+        ],
+        [
+          "SLC39A6",
+          0.00010246004331598175
+        ],
+        [
+          "SLC25A1",
+          0.00010216923703911309
+        ],
+        [
+          "SLC9A3",
+          0.00010061314498081638
+        ],
+        [
+          "SLC2A2",
+          9.979390711154587e-05
+        ],
+        [
+          "SLC25A11",
+          9.82775681756752e-05
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC3A2",
+        "SLC27A2",
+        "SLC7A11",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC2A1",
+        "SLC16A1",
+        "SLC38A1",
+        "SLC5A8",
+        "SLC6A14",
+        "SLC34A2",
+        "SLC38A5",
+        "SLC25A5",
+        "SLC22A5",
+        "SLC5A2",
+        "SLC5A3",
+        "SLC35B1",
+        "SLC25A19"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC5A3",
+          15
+        ],
+        [
+          "SLC16A1",
+          6
+        ],
+        [
+          "SLC35B1",
+          16
+        ],
+        [
+          "SLC25A19",
+          17
+        ],
+        [
+          "SLC2A1",
+          5
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    },
+    {
+      "qid": "topk_negative_ALL_Human_NALM6_36Days_00001",
+      "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit ALL's Tumor Growth.",
+      "constraints": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC5A3",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC2A1",
+        "SLC33A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC3A2",
+          0.01266700405265473
+        ],
+        [
+          "SLC27A2",
+          0.011400491770096796
+        ],
+        [
+          "SLC7A11",
+          0.006327327939087717
+        ],
+        [
+          "SLC1A5",
+          0.0002886215473650146
+        ],
+        [
+          "SLC7A5",
+          0.00027978957778917676
+        ],
+        [
+          "SLC2A1",
+          0.00021573748674904206
+        ],
+        [
+          "SLC16A1",
+          0.00018144554240705956
+        ],
+        [
+          "SLC38A1",
+          0.00016482515173462238
+        ],
+        [
+          "SLC5A8",
+          0.00015899137922910784
+        ],
+        [
+          "SLC6A14",
+          0.00014173364731594884
+        ],
+        [
+          "SLC34A2",
+          0.00013654024214573415
+        ],
+        [
+          "SLC38A5",
+          0.00012980715262014088
+        ],
+        [
+          "SLC25A5",
+          0.00012548757489327868
+        ],
+        [
+          "SLC22A5",
+          0.0001238564490725051
+        ],
+        [
+          "SLC5A2",
+          0.00011801297829000418
+        ],
+        [
+          "SLC39A4",
+          0.00011706154387276846
+        ],
+        [
+          "SLC31A1",
+          0.00011511979653979658
+        ],
+        [
+          "SLC13A5",
+          0.00011460586416549237
+        ],
+        [
+          "SLC25A6",
+          0.0001120255702816215
+        ],
+        [
+          "SLC22A8",
+          0.00011186962839539249
+        ],
+        [
+          "SLC16A3",
+          0.00011031897050968108
+        ],
+        [
+          "SLC40A1",
+          0.00011019121789591891
+        ],
+        [
+          "SLC29A1",
+          0.00010639136942480839
+        ],
+        [
+          "SLCO1B1",
+          0.00010399755264971767
+        ],
+        [
+          "SLC25A4",
+          0.00010288415152321951
+        ],
+        [
+          "SLC39A6",
+          0.00010246004331598175
+        ],
+        [
+          "SLC25A1",
+          0.00010216923703911309
+        ],
+        [
+          "SLC9A3",
+          0.00010061314498081638
+        ],
+        [
+          "SLC2A2",
+          9.979390711154587e-05
+        ],
+        [
+          "SLC25A11",
+          9.82775681756752e-05
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC3A2",
+        "SLC27A2",
+        "SLC7A11",
+        "SLC1A5",
+        "SLC7A5",
+        "SLC2A1",
+        "SLC16A1",
+        "SLC38A1",
+        "SLC5A8",
+        "SLC6A14",
+        "SLC34A2",
+        "SLC38A5",
+        "SLC25A5",
+        "SLC22A5",
+        "SLC5A2",
+        "SLC5A3",
+        "SLC25A19",
+        "SLC33A1"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC5A3",
+          15
+        ],
+        [
+          "SLC25A19",
+          16
+        ],
+        [
+          "SLC16A1",
+          6
+        ],
+        [
+          "SLC2A1",
+          5
+        ],
+        [
+          "SLC33A1",
+          17
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    },
+    {
+      "qid": "topk_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00002",
+      "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit B-lymphoblastic leukaemia's Tumor Survival.",
+      "constraints": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "gt_ranking": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "ppr_candidates": [],
+      "eval_pool": [
+        "SLC25A1",
+        "SLC30A1",
+        "SLC35F2",
+        "SLC25A51",
+        "SLC25A11"
+      ],
+      "error": "no PPR output",
+      "gt_in_pool": [
+        [
+          "SLC25A1",
+          0
+        ],
+        [
+          "SLC30A1",
+          1
+        ],
+        [
+          "SLC35F2",
+          2
+        ],
+        [
+          "SLC25A51",
+          3
+        ],
+        [
+          "SLC25A11",
+          4
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "fallback": "PPR unavailable, GT-only pool (PR@5 trivially 1.0, NDCG still varies)"
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_20Days_00004",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr 0Days vs Crispr 20Days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Breast Cancer's Tumor Growth.",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0Days vs Crispr 20Days"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC11A2",
+        "SLC16A1",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.01181630909804982
+        ],
+        [
+          "SLC9A1",
+          0.0029434868223055456
+        ],
+        [
+          "SLC38A7",
+          0.002937286362494984
+        ],
+        [
+          "SLC16A1",
+          0.002354296656472996
+        ],
+        [
+          "SLC16A7",
+          0.0020195559631891293
+        ],
+        [
+          "SLC7A5",
+          0.001774139759872317
+        ],
+        [
+          "SLC16A3",
+          0.0017533784763484035
+        ],
+        [
+          "SLC39A14",
+          0.0014637720698949899
+        ],
+        [
+          "SLC1A2",
+          0.0014636994466264075
+        ],
+        [
+          "SLC12A6",
+          0.0014382540562922384
+        ],
+        [
+          "SLC12A7",
+          0.0014311657072570644
+        ],
+        [
+          "SLCO1B1",
+          0.0013649120505444098
+        ],
+        [
+          "SLC12A5",
+          0.00133815422321108
+        ],
+        [
+          "SLC7A11",
+          0.0013016369784233537
+        ],
+        [
+          "SLC39A8",
+          0.0012330916078394701
+        ],
+        [
+          "SLC46A1",
+          0.0010889931472655495
+        ],
+        [
+          "SLC39A6",
+          0.0010411709612307045
+        ],
+        [
+          "SLC2A1",
+          0.0007847942085264047
+        ],
+        [
+          "SLC44A1",
+          0.0006583727783237667
+        ],
+        [
+          "SLC3A2",
+          0.00044060382965232066
+        ],
+        [
+          "SLC5A8",
+          0.00015201888743896267
+        ],
+        [
+          "SLC38A1",
+          0.00015105568615712505
+        ],
+        [
+          "SLC6A14",
+          0.00013617163904630172
+        ],
+        [
+          "SLC5A2",
+          0.00012974516302863902
+        ],
+        [
+          "SLC38A5",
+          0.00012874905449695426
+        ],
+        [
+          "SLC34A2",
+          0.00012610807568250052
+        ],
+        [
+          "SLC40A1",
+          0.00011485652209164874
+        ],
+        [
+          "SLC31A1",
+          0.00011362109565755185
+        ],
+        [
+          "SLC9A3",
+          0.00010937864363842333
+        ],
+        [
+          "SLC4A4",
+          0.00010858730060350741
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC1A5",
+        "SLC9A1",
+        "SLC38A7",
+        "SLC16A1",
+        "SLC16A7",
+        "SLC7A5",
+        "SLC16A3",
+        "SLC39A14",
+        "SLC1A2",
+        "SLC12A6",
+        "SLC12A7",
+        "SLCO1B1",
+        "SLC12A5",
+        "SLC7A11",
+        "SLC39A8",
+        "SLC11A2",
+        "SLC31A1",
+        "SLC25A38",
+        "SLC39A7"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC11A2",
+          15
+        ],
+        [
+          "SLC16A1",
+          3
+        ],
+        [
+          "SLC31A1",
+          16
+        ],
+        [
+          "SLC25A38",
+          17
+        ],
+        [
+          "SLC39A7",
+          18
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.13701357367329156
+    },
+    {
+      "qid": "topk_negative_BRCA_Human_MCF7_TAM_00005",
+      "question": "Under the experimental conditions of Breast Cancer, using Human as the model organism, MCF7 from Cell line as the sample, with Crispr vs Crispr TAM as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Breast Cancer's Tumor Drug Resistence.",
+      "constraints": {
+        "cancer": "Breast Cancer",
+        "cell_line": "MCF7",
+        "family": "Tumor Drug Resistence",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr vs Crispr TAM"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC1A5",
+          0.01181630909804982
+        ],
+        [
+          "SLC9A1",
+          0.0029434868223055456
+        ],
+        [
+          "SLC38A7",
+          0.002937286362494984
+        ],
+        [
+          "SLC16A1",
+          0.002354296656472996
+        ],
+        [
+          "SLC16A7",
+          0.0020195559631891293
+        ],
+        [
+          "SLC7A5",
+          0.001774139759872317
+        ],
+        [
+          "SLC16A3",
+          0.0017533784763484035
+        ],
+        [
+          "SLC39A14",
+          0.0014637720698949899
+        ],
+        [
+          "SLC1A2",
+          0.0014636994466264075
+        ],
+        [
+          "SLC12A6",
+          0.0014382540562922384
+        ],
+        [
+          "SLC12A7",
+          0.0014311657072570644
+        ],
+        [
+          "SLCO1B1",
+          0.0013649120505444098
+        ],
+        [
+          "SLC12A5",
+          0.00133815422321108
+        ],
+        [
+          "SLC7A11",
+          0.0013016369784233537
+        ],
+        [
+          "SLC39A8",
+          0.0012330916078394701
+        ],
+        [
+          "SLC46A1",
+          0.0010889931472655495
+        ],
+        [
+          "SLC39A6",
+          0.0010411709612307045
+        ],
+        [
+          "SLC2A1",
+          0.0007847942085264047
+        ],
+        [
+          "SLC44A1",
+          0.0006583727783237667
+        ],
+        [
+          "SLC3A2",
+          0.00044060382965232066
+        ],
+        [
+          "SLC5A8",
+          0.00015201888743896267
+        ],
+        [
+          "SLC38A1",
+          0.00015105568615712505
+        ],
+        [
+          "SLC6A14",
+          0.00013617163904630172
+        ],
+        [
+          "SLC5A2",
+          0.00012974516302863902
+        ],
+        [
+          "SLC38A5",
+          0.00012874905449695426
+        ],
+        [
+          "SLC34A2",
+          0.00012610807568250052
+        ],
+        [
+          "SLC40A1",
+          0.00011485652209164874
+        ],
+        [
+          "SLC31A1",
+          0.00011362109565755185
+        ],
+        [
+          "SLC9A3",
+          0.00010937864363842333
+        ],
+        [
+          "SLC4A4",
+          0.00010858730060350741
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC1A5",
+        "SLC9A1",
+        "SLC38A7",
+        "SLC16A1",
+        "SLC16A7",
+        "SLC7A5",
+        "SLC16A3",
+        "SLC39A14",
+        "SLC1A2",
+        "SLC12A6",
+        "SLC12A7",
+        "SLCO1B1",
+        "SLC12A5",
+        "SLC7A11",
+        "SLC39A8",
+        "SLC39A9",
+        "SLC25A3",
+        "SLC33A1",
+        "SLC7A7",
+        "SLC35B1"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC39A9",
+          15
+        ],
+        [
+          "SLC25A3",
+          16
+        ],
+        [
+          "SLC33A1",
+          17
+        ],
+        [
+          "SLC7A7",
+          18
+        ],
+        [
+          "SLC35B1",
+          19
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    },
+    {
+      "qid": "topk_negative_CRC_Human_HCT116_SLC16A1_KO_00006",
+      "question": "Under the experimental conditions of Colorectal cancer, using Human as the model organism, HCT116 from Cell line as the sample, with Crispr WT 5weeks vs SLC16A1.KO Crispr 5weeks as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Colorectal cancer's Tumor Survival.",
+      "constraints": {
+        "cancer": "Colorectal cancer",
+        "cell_line": "HCT116",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr WT 5weeks vs SLC16A1.KO Crispr 5weeks"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC7A5",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC48A1",
+          0.024034469450667915
+        ],
+        [
+          "SLC39A8",
+          0.01701869960153712
+        ],
+        [
+          "SLC41A2",
+          0.0015493523116767657
+        ],
+        [
+          "SLC5A8",
+          0.001449214643062964
+        ],
+        [
+          "SLC22A5",
+          0.001444780538386183
+        ],
+        [
+          "SLC1A5",
+          0.0014388101164856224
+        ],
+        [
+          "SLC4A2",
+          0.0012726121733275676
+        ],
+        [
+          "SLC7A5",
+          0.0012058654613510992
+        ],
+        [
+          "SLC16A1",
+          0.0011891586942613475
+        ],
+        [
+          "SLC25A4",
+          0.001166192753846364
+        ],
+        [
+          "SLC7A11",
+          0.0011606750112158363
+        ],
+        [
+          "SLC25A6",
+          0.0011006229245465542
+        ],
+        [
+          "SLC38A1",
+          0.0010574025782265105
+        ],
+        [
+          "SLC38A5",
+          0.0010173194011834383
+        ],
+        [
+          "SLC9A2",
+          0.0009286789871132428
+        ],
+        [
+          "SLC43A1",
+          0.000898497527576436
+        ],
+        [
+          "SLCO1B1",
+          0.0008947521212987243
+        ],
+        [
+          "SLC9A5",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9A8",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9A9",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9B2",
+          0.0008943964424912932
+        ],
+        [
+          "SLC16A8",
+          0.0008855618020394562
+        ],
+        [
+          "SLC4A4",
+          0.0007514201405437992
+        ],
+        [
+          "SLC39A6",
+          0.0006751172933329438
+        ],
+        [
+          "SLC6A2",
+          0.0006716081559110434
+        ],
+        [
+          "SLC38A2",
+          0.0006539461090819238
+        ],
+        [
+          "SLC22A7",
+          0.0005717684515822897
+        ],
+        [
+          "SLC13A3",
+          0.0005300237251363797
+        ],
+        [
+          "SLC25A22",
+          0.000499181129389118
+        ],
+        [
+          "SLC25A5",
+          0.0004875840551858874
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC48A1",
+        "SLC39A8",
+        "SLC41A2",
+        "SLC5A8",
+        "SLC22A5",
+        "SLC1A5",
+        "SLC4A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC25A4",
+        "SLC7A11",
+        "SLC25A6",
+        "SLC38A1",
+        "SLC38A5",
+        "SLC9A2",
+        "SLC25A1",
+        "SLC3A2",
+        "SLC35A2",
+        "SLC16A3"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC7A5",
+          7
+        ],
+        [
+          "SLC25A1",
+          15
+        ],
+        [
+          "SLC3A2",
+          16
+        ],
+        [
+          "SLC35A2",
+          17
+        ],
+        [
+          "SLC16A3",
+          18
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    },
+    {
+      "qid": "topk_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00008",
+      "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Lymphoma's Tumor Growth.",
+      "constraints": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "gt_ranking": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "ppr_candidates": [],
+      "eval_pool": [
+        "SLC25A26",
+        "SLC25A32",
+        "SLC33A1",
+        "SLC2A1",
+        "SLC38A2"
+      ],
+      "error": "no PPR output",
+      "gt_in_pool": [
+        [
+          "SLC25A26",
+          0
+        ],
+        [
+          "SLC25A32",
+          1
+        ],
+        [
+          "SLC33A1",
+          2
+        ],
+        [
+          "SLC2A1",
+          3
+        ],
+        [
+          "SLC38A2",
+          4
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "fallback": "PPR unavailable, GT-only pool (PR@5 trivially 1.0, NDCG still varies)"
+    },
+    {
+      "qid": "topk_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00009",
+      "question": "Under the experimental conditions of Melanoma, using Mouse as the model organism, Hoxb8 imortalised GM-CSF from Cell line as the sample, with Crispr 0day vs Crispr 18days p95H as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Melanoma's Tumor Drug Resistence.",
+      "constraints": {
+        "cancer": "Melanoma",
+        "cell_line": "Hoxb8 imortalised GM-CSF",
+        "family": "Tumor Drug Resistence",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days p95H"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1",
+        "SLC7A11"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC12A9",
+          0.05444001305367781
+        ],
+        [
+          "SLC5A3",
+          0.006044800268391601
+        ],
+        [
+          "SLC3A2",
+          0.0032938098922588757
+        ],
+        [
+          "SLC7A11",
+          0.0017101200589746163
+        ],
+        [
+          "SLC2A2",
+          0.000249570414190093
+        ],
+        [
+          "SLC2A1",
+          0.00020313249324161017
+        ],
+        [
+          "SLC7A5",
+          0.00016620538943330692
+        ],
+        [
+          "SLC1A4",
+          0.00015898497269719783
+        ],
+        [
+          "SLC38A2",
+          0.00015333229501476598
+        ],
+        [
+          "SLC12A2",
+          0.00015054251711425214
+        ],
+        [
+          "SLC39A6",
+          0.00014551156813216834
+        ],
+        [
+          "SLC5A8",
+          0.00012213211412277203
+        ],
+        [
+          "SLC25A22",
+          0.00011973920850450367
+        ],
+        [
+          "SLC38A5",
+          0.00011963352171612031
+        ],
+        [
+          "SLC1A5",
+          0.00011742846033806788
+        ],
+        [
+          "SLC22A16",
+          0.00011452077871533498
+        ],
+        [
+          "SLC9A5",
+          0.00010878167770951024
+        ],
+        [
+          "SLC9A8",
+          0.00010878167770951024
+        ],
+        [
+          "SLC9A9",
+          0.00010878167770951024
+        ],
+        [
+          "SLC9B2",
+          0.00010878167770951024
+        ],
+        [
+          "SLC35C2",
+          0.00010867950782209612
+        ],
+        [
+          "SLC51B",
+          0.00010867950782209612
+        ],
+        [
+          "SLC25A1",
+          9.957823821377752e-05
+        ],
+        [
+          "SLC16A1",
+          9.936647443234077e-05
+        ],
+        [
+          "SLC16A3",
+          9.581225860486941e-05
+        ],
+        [
+          "SLC38A1",
+          9.456092032501021e-05
+        ],
+        [
+          "SLC9A2",
+          9.081646110035922e-05
+        ],
+        [
+          "SLC16A7",
+          8.522347267644053e-05
+        ],
+        [
+          "SLC9A3",
+          8.221567365906826e-05
+        ],
+        [
+          "SLC6A2",
+          8.047969837131924e-05
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC12A9",
+        "SLC5A3",
+        "SLC3A2",
+        "SLC7A11",
+        "SLC2A2",
+        "SLC2A1",
+        "SLC7A5",
+        "SLC1A4",
+        "SLC38A2",
+        "SLC12A2",
+        "SLC39A6",
+        "SLC5A8",
+        "SLC25A22",
+        "SLC38A5",
+        "SLC1A5",
+        "SLC25A26",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC9A1"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC25A26",
+          15
+        ],
+        [
+          "SLC35B1",
+          16
+        ],
+        [
+          "SLC25A19",
+          17
+        ],
+        [
+          "SLC9A1",
+          18
+        ],
+        [
+          "SLC7A11",
+          3
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.08400948806854204
+    },
+    {
+      "qid": "topk_negative_OC_Human_ES2_00010",
+      "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to inhibit Ovarian cancer's Tumor Growth.",
+      "constraints": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "task_type": "topk_negative",
+      "gt_ranking": [
+        "SLC35B1",
+        "SLC25A19",
+        "SLC16A1",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC4A1",
+          0.009603704159544604
+        ],
+        [
+          "SLC9A3",
+          0.0068959254404994605
+        ],
+        [
+          "SLC7A5",
+          0.006686001441328757
+        ],
+        [
+          "SLC22A2",
+          0.005657293396075455
+        ],
+        [
+          "SLC28A1",
+          0.004979640429704908
+        ],
+        [
+          "SLCO1B3",
+          0.004467830332815786
+        ],
+        [
+          "SLC2A1",
+          0.003906303940807746
+        ],
+        [
+          "SLC40A1",
+          0.003145245207010517
+        ],
+        [
+          "SLC7A11",
+          0.002564087749930374
+        ],
+        [
+          "SLC1A5",
+          0.00023633608877980493
+        ],
+        [
+          "SLC16A3",
+          0.00023156683963240958
+        ],
+        [
+          "SLC16A1",
+          0.00020373549372257468
+        ],
+        [
+          "SLC3A2",
+          0.0002024784571392936
+        ],
+        [
+          "SLC5A2",
+          0.00015860447046093474
+        ],
+        [
+          "SLC6A14",
+          0.0001538976231932429
+        ],
+        [
+          "SLC34A2",
+          0.0001418735264646355
+        ],
+        [
+          "SLC38A5",
+          0.0001366163464667462
+        ],
+        [
+          "SLC16A4",
+          0.00013168789447360495
+        ],
+        [
+          "SLC5A8",
+          0.0001296299476665728
+        ],
+        [
+          "SLC38A1",
+          0.00012873676992564007
+        ],
+        [
+          "SLC2A2",
+          0.00012665758153033305
+        ],
+        [
+          "SLC4A4",
+          0.00011747060973895995
+        ],
+        [
+          "SLC39A6",
+          0.00011632125713153727
+        ],
+        [
+          "SLC2A5",
+          0.00011614382286216145
+        ],
+        [
+          "SLC5A1",
+          0.00011596542096674426
+        ],
+        [
+          "SLC25A11",
+          0.00011425002386000979
+        ],
+        [
+          "SLC13A5",
+          0.00011099846941924258
+        ],
+        [
+          "SLC29A1",
+          0.0001078787906030906
+        ],
+        [
+          "SLC4A7",
+          0.00010591473241333998
+        ],
+        [
+          "SLC1A2",
+          0.00010558959695034658
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC4A1",
+        "SLC9A3",
+        "SLC7A5",
+        "SLC22A2",
+        "SLC28A1",
+        "SLCO1B3",
+        "SLC2A1",
+        "SLC40A1",
+        "SLC7A11",
+        "SLC1A5",
+        "SLC16A3",
+        "SLC16A1",
+        "SLC3A2",
+        "SLC5A2",
+        "SLC6A14",
+        "SLC35B1",
+        "SLC25A19",
+        "SLC30A9",
+        "SLC38A2"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC35B1",
+          15
+        ],
+        [
+          "SLC25A19",
+          16
+        ],
+        [
+          "SLC16A1",
+          11
+        ],
+        [
+          "SLC30A9",
+          17
+        ],
+        [
+          "SLC38A2",
+          18
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    },
+    {
+      "qid": "topk_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00003",
+      "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to promote B-lymphoblastic leukaemia's Tumor Survival.",
+      "constraints": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "gt_ranking": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "ppr_candidates": [],
+      "eval_pool": [
+        "SLC35A1",
+        "SLC16A1",
+        "SLC19A1",
+        "SLC35A2",
+        "SLC25A32"
+      ],
+      "error": "no PPR output",
+      "gt_in_pool": [
+        [
+          "SLC35A1",
+          0
+        ],
+        [
+          "SLC16A1",
+          1
+        ],
+        [
+          "SLC19A1",
+          2
+        ],
+        [
+          "SLC35A2",
+          3
+        ],
+        [
+          "SLC25A32",
+          4
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "fallback": "PPR unavailable, GT-only pool (PR@5 trivially 1.0, NDCG still varies)"
+    },
+    {
+      "qid": "topk_positive_CRC_Human_HCT116_SLC6A8_KO_00007",
+      "question": "Under the experimental conditions of Colorectal cancer, using Human as the model organism, HCT116 from Cell line as the sample, with Crispr WT 5weeks vs SLC6A8.KO Crispr 5weeks as the treatment condition, and MAGECK as the method.\nplease provide the top-5 SLC family genes most likely to promote Colorectal cancer's Tumor Survival.",
+      "constraints": {
+        "cancer": "Colorectal cancer",
+        "cell_line": "HCT116",
+        "family": "Tumor Survival",
+        "k": 5,
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr WT 5weeks vs SLC6A8.KO Crispr 5weeks"
+      },
+      "task_type": "topk_positive",
+      "gt_ranking": [
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "ppr_candidates": [
+        [
+          "SLC48A1",
+          0.024034469450667915
+        ],
+        [
+          "SLC39A8",
+          0.01701869960153712
+        ],
+        [
+          "SLC41A2",
+          0.0015493523116767657
+        ],
+        [
+          "SLC5A8",
+          0.001449214643062964
+        ],
+        [
+          "SLC22A5",
+          0.001444780538386183
+        ],
+        [
+          "SLC1A5",
+          0.0014388101164856224
+        ],
+        [
+          "SLC4A2",
+          0.0012726121733275676
+        ],
+        [
+          "SLC7A5",
+          0.0012058654613510992
+        ],
+        [
+          "SLC16A1",
+          0.0011891586942613475
+        ],
+        [
+          "SLC25A4",
+          0.001166192753846364
+        ],
+        [
+          "SLC7A11",
+          0.0011606750112158363
+        ],
+        [
+          "SLC25A6",
+          0.0011006229245465542
+        ],
+        [
+          "SLC38A1",
+          0.0010574025782265105
+        ],
+        [
+          "SLC38A5",
+          0.0010173194011834383
+        ],
+        [
+          "SLC9A2",
+          0.0009286789871132428
+        ],
+        [
+          "SLC43A1",
+          0.000898497527576436
+        ],
+        [
+          "SLCO1B1",
+          0.0008947521212987243
+        ],
+        [
+          "SLC9A5",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9A8",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9A9",
+          0.0008943964424912932
+        ],
+        [
+          "SLC9B2",
+          0.0008943964424912932
+        ],
+        [
+          "SLC16A8",
+          0.0008855618020394562
+        ],
+        [
+          "SLC4A4",
+          0.0007514201405437992
+        ],
+        [
+          "SLC39A6",
+          0.0006751172933329438
+        ],
+        [
+          "SLC6A2",
+          0.0006716081559110434
+        ],
+        [
+          "SLC38A2",
+          0.0006539461090819238
+        ],
+        [
+          "SLC22A7",
+          0.0005717684515822897
+        ],
+        [
+          "SLC13A3",
+          0.0005300237251363797
+        ],
+        [
+          "SLC25A22",
+          0.000499181129389118
+        ],
+        [
+          "SLC25A5",
+          0.0004875840551858874
+        ]
+      ],
+      "ppr_candidate_count": 116,
+      "eval_pool": [
+        "SLC48A1",
+        "SLC39A8",
+        "SLC41A2",
+        "SLC5A8",
+        "SLC22A5",
+        "SLC1A5",
+        "SLC4A2",
+        "SLC7A5",
+        "SLC16A1",
+        "SLC25A4",
+        "SLC7A11",
+        "SLC25A6",
+        "SLC38A1",
+        "SLC38A5",
+        "SLC9A2",
+        "SLC25A1",
+        "SLC22A25",
+        "SLC36A1",
+        "SLC32A1",
+        "SLCO4A1"
+      ],
+      "gt_in_pool": [
+        [
+          "SLC25A1",
+          15
+        ],
+        [
+          "SLC22A25",
+          16
+        ],
+        [
+          "SLC36A1",
+          17
+        ],
+        [
+          "SLC32A1",
+          18
+        ],
+        [
+          "SLCO4A1",
+          19
+        ]
+      ],
+      "ndcg_ideal_dcg": 1.9832097460809304,
+      "ppr_baseline_ndcg5": 0.0
+    }
+  ],
+  "meta": {
+    "n": 11,
+    "description": "topk LLM re-rank eval data: PPR top-15 ∪ GT genes as eval pool. PPR baseline NDCG@5 shown for reference."
+  }
+}

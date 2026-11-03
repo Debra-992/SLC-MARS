@@ -1,0 +1,374 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00016",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A10 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC39A10"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00016",
+      "status": "ok",
+      "summary": "检索到 4 类证据、7 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC39A10"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC39A10",
+              "protein_function": "Zinc-influx transporter; mediates cellular zinc uptake and plays a role in epithelial-to-mesenchymal transition (EMT) and mitosis initiation.",
+              "aliases": "ZIP10, KIAA1265, ZRT/IRT-Like Protein 10",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC39A10",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "The Zinc Transporter SLC39A10 Plays an Essential Role in Embryonic Hematopoiesis.",
+              "abstract": "The role of zinc in hematopoiesis is currently unclear. Here, SLC39A10 (ZIP10) is identified as a key zinc transporter in hematopoiesis. The results show that in zebrafish, Slc39a10 is a key regulator of the response to zinc deficiency. Surprisingly, both slc39a10 mutant zebrafish and hematopoietic Slc39a10-deficient mice develop a more severe form of impaired hematopoiesis than animals lacking transferrin receptor 1, a well-characterized iron gatekeeper, indicating that zinc plays a larger role than iron in hematopoiesis, at least in early hematopoietic stem cells (HSCs). Furthermore, it is shown that loss of Slc39a10 causes zinc deficiency in fetal HSCs, which in turn leads to DNA damage, apoptosis, and G cell cycle arrest. Notably, zinc supplementation largely restores colony formation in HSCs derived from hematopoietic Slc39a10-deficient mice. In addition, inhibiting necroptosis partially restores hematopoiesis in mouse HSCs, providing mechanistic insights into the requirement for zinc in mediating hematopoiesis. Together, these findings indicate that SLC39A10 safeguards hematopoiesis by protecting against zinc deficiency-induced necroptosis, thus providing compelling evidence that SLC39A10 and zinc homeostasis promote the development of fetal HSCs. Moreover, these results suggest that SLC39A10 may serve as a novel therapeutic target for treating anemia and zinc deficiency-related disorders.",
+              "doi": "10.1002/advs.202205345",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "90c33bdb894d1d174035c1458377d77baae7e7335a197a047d591d059ca2fc4b"
+              }
+            },
+            {
+              "title": "Porphyromonas gingivalis-induced HuR upregulation suppresses SLC39A10-derived hsa_circ_0057552 in esophageal squamous cell carcinoma.",
+              "abstract": "Porphyromonas gingivalis (P. gingivalis) is one of the main risk factors of esophageal squamous cell carcinoma (ESCC). Circular RNAs (circRNAs) have been found to play a crucial role in many types of cancer. However, its functional involvement in P. gingivalis-infected ESCC remained understudied. In this study, we investigate that overexpression of hsa_circ_0057552 inhibited the proliferation and motility of ESCC cells in vitro and in vivo, whereas its silencing exerts the opposite effect. Hsa_circ_0057552 was found to be downregulated in P. gingivalis-infected ESCC tissues and cells, with the extent of downregulation correlating with both the dose and duration of P. gingivalis infection. Mechanistically, P. gingivalis infection significantly reduced the stability of hsa_circ_0057552 in ESCC cells, and Human Antigen R (HuR) was identified as a key regulator mediating this destabilization. The interaction between hsa_circ_0057552 and HuR was confirmed. Furthermore, hsa_circ_0057552 suppressed SLC39A10 mRNA expression by competitively inhibiting HuR binding to SLC39A10 transcripts. This study delineates a P. gingivalis-HuR-hsa_circ_0057552 axis that may modulate SLC39A10 availability through competitive RNA-protein interactions. This mechanistic framework suggests a dual therapeutic approach: microbial-targeted eradication of P. gingivalis combined with hsa_circ_0057552 restoration therapy to disrupt oncogenic signaling cascades.",
+              "doi": "10.1016/j.micinf.2025.105548",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "07281aef42ef3bdf3c53dc295e90630cecc77cf34565c3ea7fd4c4adf907be4d"
+              }
+            },
+            {
+              "title": "Dual inhibition of MYC and SLC39A10 by a novel natural product STAT3 inhibitor derived from Chaetomium globosum suppresses tumor growth and metastasis in gastric cancer.",
+              "abstract": "Gastric cancer remains one of the most common deadly diseases and lacks effective targeted therapies. In the present study, we confirmed that the signal transducer and activator of transcription 3 (STAT3) is highly expressed and associated with a poor prognosis in gastric cancer. We further identified a novel natural product inhibitor of STAT3, termed XYA-2, which interacts specifically with the SH2 domain of STAT3 (K= 3.29 μM) and inhibits IL-6-induced STAT3 phosphorylation at Tyr705 and nuclear translocation. XYA-2 inhibited the viability of seven human gastric cancer cell lines with 72-h IC values ranging from 0.5 to 0.7 μΜ. XYA-2 at 1 μΜ inhibited the colony formation and migration ability of MGC803 (72.6% and 67.6%, respectively) and MKN28 (78.5% and 96.6%, respectively) cells. In the in vivo studies, intraperitoneal administration of XYA-2 (10 mg/kg/day, 7 days/week) significantly suppressed 59.8% and 88.8% tumor growth in the MKN28-derived xenograft mouse model and MGC803-derived orthotopic mouse model, respectively. Similar results were obtained in a patient-derived xenograft (PDX) mouse model. Moreover, XYA-2 treatment extended the survival of mice bearing PDX tumors. The molecular mechanism studies based on transcriptomics and proteomics analyses indicated that XYA-2 might exert its anticancer activity by synergistically inhibiting the expression of MYC and SLC39A10, two downstream genes of STAT3 in vitro and in vivo. Together, these findings suggested that XYA-2 may be a potent STAT3 inhibitor for treating gastric cancer, and dual inhibition of MYC and SLC39A10 may be an effective therapeutic strategy for STAT3-activated cancer.",
+              "doi": "10.1016/j.phrs.2023.106703",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "700aeccc12a0e8dc35dcd4919f7a0ee9ce4fed5298f781abbcd7cea9c500c9f2"
+              }
+            },
+            {
+              "title": "SLC39A10 promotes malignant phenotypes of gastric cancer cells by activating the CK2-mediated MAPK/ERK and PI3K/AKT pathways.",
+              "abstract": "Solute carrier family 39 member 10 (SLC39A10) belongs to a subfamily of zinc transporters and plays a key role in B-cell development. Previous studies have reported that its upregulation promotes breast cancer metastasis by enhancing the influx of zinc ions (Zn); however, its role in gastric cancer remains totally unclear. Here, we found that SLC39A10 expression was frequently increased in gastric adenocarcinomas and that SLC39A10 upregulation was strongly associated with poor patient outcomes; in addition, we identified SLC39A10 as a direct target of c-Myc. Functional studies showed that ectopic expression of SLC39A10 in gastric cancer cells dramatically enhanced the proliferation, colony formation, invasiveness abilities of these gastric cancer cells and tumorigenic potential in nude mice. Conversely, SLC39A10 knockdown inhibited gastric cancer cell proliferation and colony formation. Mechanistically, SLC39A10 exerted its carcinogenic effects by increasing Zn availability and subsequently enhancing the enzyme activity of CK2 (casein kinase 2). As a result, the MAPK/ERK and PI3K/AKT pathways, two major downstream effectors of CK2, were activated, while c-Myc, a downstream target of these two pathways, formed a vicious feedback loop with SLC39A10 to drive the malignant progression of gastric cancer. Taken together, our data demonstrate that SLC39A10 is a functional oncogene in gastric cancer and suggest that targeting CK2 is an alternative therapeutic strategy for gastric cancer patients with high SLC39A10 expression.",
+              "doi": "10.1038/s12276-023-01062-5",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "94c21d67140533507d33f61e2078ae6fb1e03a04050816332dd270f70e335fa1"
+              }
+            },
+            {
+              "title": "Zinc transporter ZIP10 forms a heteromer with ZIP6 which regulates embryonic development and cell migration.",
+              "abstract": "There is growing evidence that zinc and its transporters are involved in cell migration during development and in cancer. In the present study, we show that zinc transporter ZIP10 (SLC39A10) stimulates cell motility and proliferation, both in mammalian cells and in the zebrafish embryo. This is associated with inactivation of GSK (glycogen synthase kinase)-3α and -3β and down-regulation of E-cadherin (CDH1). Morpholino-mediated knockdown of zip10 causes delayed epiboly and deformities of the head, eye, heart and tail. Furthermore, zip10 deficiency results in overexpression of cdh1, zip6 and stat3, the latter gene product driving transcription of both zip6 and zip10 The non-redundant requirement of Zip6 and Zip10 for epithelial to mesenchymal transition (EMT) is consistent with our finding that they exist as a heteromer. We postulate that a subset of ZIPs carrying prion protein (PrP)-like ectodomains, including ZIP6 and ZIP10, are integral to cellular pathways and plasticity programmes, such as EMT.",
+              "doi": "10.1042/BCJ20160388",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A10"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aaa565f9a6a26bb5e2fcd9194b23bff1ab1e1d10a8f1549ad74a24a632374ca7"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC39A10 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC39A10 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 2 项（ppr=ok, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC39A10']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC39A10",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC39A10",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A10.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC39A10",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC39A10": {
+          "status": "ok",
+          "gene": "SLC39A10",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A10.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC39A10": {
+          "status": "unsupported_cancer",
+          "gene": "SLC39A10",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A10']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC39A10 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.50 -> P(必需)=0.619 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC39A10"
+        ],
+        "confidence": 0.619,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A10": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC39A10 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.50 -> P(必需)=0.619 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A10']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC39A10在造血/早期HSC存活中是锌稳态与增殖相关的关键因子，且在胃癌等上皮肿瘤中表现为促增殖/促恶性表型的锌转运体；NALM6为B-ALL细胞系，血液肿瘤细胞通常依赖锌代谢、细胞周期和存活通路，因此跨血液谱系与跨癌种功能类比支持其抑制会削弱ALL肿瘤生长。 | 目标ALL缺乏直接PPR/TIMER/KM证据，但背景知识显示SLC39A10参与锌内流、EMT、有丝分裂启动和造血保护；敲除或功能丧失可致HSC锌缺乏、DNA损伤、凋亡/坏死性凋亡和细胞周期阻滞。胃癌证据中SLC39A10敲低抑制增殖、克隆形成和体内肿瘤生长，且其作为c-Myc/STAT3轴下游促癌因子被抑制可抑制肿瘤进展。NALM6属于B系ALL，与B细胞发育/造血存活生物学存在可迁移联系，因此在CRISPR 0h vs 24Days MAGeCK语境下，SLC39A10被抑制更可能表现为抑制ALL肿瘤生长。置信度受限于无ALL直接组学/邻近证据。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC39A10"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A10": 0.5
+        },
+        "basis": [
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC39A10在造血/早期HSC存活中是锌稳态与增殖相关的关键因子，且在胃癌等上皮肿瘤中表现为促增殖/促恶性表型的锌转运体；NALM6为B-ALL细胞系，血液肿瘤细胞通常依赖锌代谢、细胞周期和存活通路，因此跨血液谱系与跨癌种功能类比支持其抑制会削弱ALL肿瘤生长。 | 目标ALL缺乏直接PPR/TIMER/KM证据，但背景知识显示SLC39A10参与锌内流、EMT、有丝分裂启动和造血保护；敲除或功能丧失可致HSC锌缺乏、DNA损伤、凋亡/坏死性凋亡和细胞周期阻滞。胃癌证据中SLC39A10敲低抑制增殖、克隆形成和体内肿瘤生长，且其作为c-Myc/STAT3轴下游促癌因子被抑制可抑制肿瘤进展。NALM6属于B系ALL，与B细胞发育/造血存活生物学存在可迁移联系，因此在CRISPR 0h vs 24Days MAGeCK语境下，SLC39A10被抑制更可能表现为抑制ALL肿瘤生长。置信度受限于无ALL直接组学/邻近证据。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC39A10']",
+        "status": "ok",
+        "summary": "SLC39A10 encodes the zinc transporter ZIP10, which supports zinc uptake and cellular proliferation. In B-ALL models such as NALM6, loss of SLC39A10 via CRISPR screening is expected to impair zinc homeostasis and reduce leukemia cell growth/tumor progression, so its inhibition is consistent with suppressing ALL tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC39A10"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC39A10 encodes the zinc transporter ZIP10, which supports zinc uptake and cellular proliferation. In B-ALL models such as NALM6, loss of SLC39A10 via CRISPR screening is expected to impair zinc homeostasis and reduce leukemia cell growth/tumor progression, so its inhibition is consistent with suppressing ALL tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-27T03:50:08Z"
+  }
+}

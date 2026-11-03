@@ -1,0 +1,744 @@
+{
+  "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00275",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC6A14 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Lymphoma",
+    "cell_line": "ATM-null DLBCL",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Mouse",
+    "treatment": "Crispr 0day vs Crispr 18days"
+  },
+  "ground_truth": {
+    "winner": "SLC6A14"
+  },
+  "effective_genes": [
+    "SLC6A14",
+    "SLC6A6"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00275",
+      "status": "ok",
+      "summary": "检索到 4 类证据、38 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC6A14",
+        "SLC6A6"
+      ],
+      "requested_context": {
+        "cancer": "Lymphoma",
+        "cell_line": "ATM-null DLBCL",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Mouse",
+        "treatment": "Crispr 0day vs Crispr 18days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC6A14",
+              "protein_function": "Amino acid transporter that plays an important role in the absorption of amino acids in the intestinal tract.",
+              "aliases": "BMIQ11, ATB0+, S6A14",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC6A6",
+              "protein_function": "Mediates sodium- and chloride-dependent transport of taurine and beta-alanine.",
+              "aliases": "TAUT",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC6A14",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family",
+              "target_properties": {
+                "name": "SLC6 Sodium- and chloride-dependent  neurotransmitter transporter family"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC6A14",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "ferroptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "glycolysis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "oxidative stress",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "migration",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "malignt cancers",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "stemness",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC6A14",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC6A14 Drives Mitochondrial Fusion and Oxidative Phosphorylation to Promote Cancer Stemness and Early-Onset of Breast Cancer.",
+              "abstract": "Early-onset breast cancer (EOBC), diagnosed before the age of 45, is associated with poor therapeutic outcomes and limited survival, yet the underlying mechanisms remain poorly defined. Identifying environmental risk factors and actionable therapeutic targets is an urgent clinical need. Notably, the largest survival gap between younger and older patients occurs in luminal breast cancer, implicating potential endocrine disruption. Here, an association is identified between elevated levels of di(2-ethylhexyl)phthalate (DEHP) in hair, a widely used endocrine-disrupting plasticizer, and earlier age at diagnosis of breast cancer. Mechanistically, DEHP exposure promotes tumor initiation by enhancing cancer stemness through mitochondrial fusion and glutamine-driven oxidative phosphorylation. DEHP upregulates the glutamine transporter SLC6A14 to enhance glutamine uptake, while suppressing mitochondrial fission factor (MFF), which exacerbates mitochondrial fusion. High SLC6A14 expression correlates with cancer stemness signatures and earlier onset in patient cohorts. Inhibition of SLC6A14 reduces stemness, impairs tumor growth, and sensitizes tumors to chemotherapy. Collectively, the findings uncover a novel environmental-metabolic axis linking plasticizer exposure to EOBC and establish SLC6A14 as a promising metabolic vulnerability. These results provide a strong preclinical rationale for targeting SLC6A14 in young breast cancer patients and offer new insights into mitigating the oncogenic impact of environmental pollutants.",
+              "doi": "10.1002/advs.202510811",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "24e4487f851903e878164bcde8ac5b5513e34da247a2e700db1ed2f563da22b4"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'Taurine enhances the antitumor efficacy of PD-1 antibody by boosting CD8 T cell function.'}",
+              "abstract": "The functional state of CD8 T cells determines the therapeutic efficacy of PD-1 blockade antibodies in tumors. Amino acids are key nutrients for maintaining T cell antitumor immunity. In this study, we used samples from lung cancer patients treated with PD-1 blockade antibodies to assay the amino acids in their serum by mass spectrometry. We found that lung cancer patients with high serum taurine levels generally responded to PD-1 blockade antibody therapy, in parallel with the secretion of high levels of cytotoxic cytokines (IFN-γ and TNF-α). CD8 T cells cultured with exogenous taurine exhibited decreased apoptosis, enhanced proliferation, and increased secretion of cytotoxic cytokines. High SLC6A6 expression in CD8 T cells was positively associated with an effector T cell signature. SLC6A6 knockdown limited the function and proliferation of CD8 T cells. RNA sequencing revealed that SLC6A6 knockdown altered the calcium signaling pathway, oxidative phosphorylation, and T cell receptor signaling in CD8 T cells. Furthermore, taurine enhanced T cell proliferation and function in vitro by stimulation of PLCγ1-mediated calcium and MAPK signaling. Taurine plus immune checkpoint blockade antibody significantly attenuated tumor growth and markedly improved the function and proliferation of CD8 T cells in a mouse tumor model. Thus, our findings indicate that taurine is an important driver for improving CD8 T cell immune responses and could serve as a potential therapeutic agent for cancer patients.",
+              "doi": "10.1007/s00262-022-03308-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "aa0543d880aa3842529e24d47677bc24ea20198ed8009c4b1b99e0e86b2a4a98"
+              }
+            },
+            {
+              "title": "{'sup': '0,+', '#text': 'Resetting amino acid metabolism of cancer cells by ATB-targeted nanoparticles for enhanced anticancer therapy.'}",
+              "abstract": "Reprogramed cellular metabolism is one of the most significant hallmarks of cancer. All cancer cells exhibit increased demand for specific amino acids, and become dependent on either an exogenous supply or upregulated  synthesis. The resultant enhanced availability of amino acids supports the reprogramed metabolic pathways and fuels the malignant growth and metastasis of cancers by providing energy and critical metabolic intermediates, facilitating anabolism, and activating signaling networks related to cell proliferation and growth. Therefore, pharmacologic blockade of amino acid entry into cancer cells is likely to have a detrimental effect on cancer cell growth. Here we developed a nanoplatform (LJ@Trp-NPs) to therapeutically target two transporters, SLC6A14 (ATB) and SLC7A5 (LAT1), that are known to be essential for the sustenance of amino acid metabolism in most cancers. The LJ@Trp-NPs uses tryptophan to guide SLC6A14-targeted delivery of JPH203, a high-affinity inhibitor of SLC7A5. In the process, SLC6A14 is also down-regulated. We tested the ability of this strategy to synergize with the anticancer efficacy of lapatinib, an inhibitor of EGFR/HER1/HER2-assocated kinase. These studies show that blockade of amino acid entry amplifies the anticancer effect of lapatinib via interference with mTOR signaling, promotion of apoptosis, and suppression of cell proliferation and metastasis. This represents the first study to evaluate the impact of amino acid starvation on the anticancer efficacy of widely used kinase inhibitor.",
+              "doi": "10.1016/j.bioactmat.2021.07.009",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A14"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "1d0df584d27ae28de569ccce63e240487e38773c6f250900cb23c975d9112fea"
+              }
+            },
+            {
+              "title": "Unveiling the role of taurine and SLC6A6 in tumor immune evasion: Implications for gastric cancer therapy.",
+              "abstract": "Metabolic changes are key drivers of tumor progression. Understanding how metabolic reprogramming promotes tumor development and identifying key metabolic activities are essential for improving tumor diagnosis and treatment. Among the numerous transporters in the body, solute carriers (SLCs) are particularly significant, often overexpressed in cancer cells to meet the tumor's demand for nutrients and energy. While the role of SLCs in nutrient absorption within the gastrointestinal tract is well-established, their specific role in gastric cancer (GC) remains unclear. Recently, Xiaodi Zhao's team investigated the critical role of taurine and its transporter, SLC6A6, in anti-tumor immunity and clinical outcomes. Notably, this research marks the first instance of taurine exhibiting a dual role. It promotes tumor growth in immunodeficient mice while inhibiting it in immunocompetent mice. The study found that taurine exerts its anti-cancer effects by modulating CD8 T cells rather than directly inhibiting tumor cells, revealing the SP1-SLC6A6 axis as a key mechanism behind chemotherapy-induced immune evasion. Our work further explored the potential, advantages, and challenges of using taurine and SLC6A6 as biomarkers and therapeutic targets in gastric cancer. We aim to underscore their importance in both basic research and clinical applications, providing valuable insights and guidance for future investigations.",
+              "doi": "10.1016/j.biocel.2024.106661",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "992657d82d2b1b50c67e4a751e1650c5c5a838a4f377302e8ea8bcb53bc6e2fe"
+              }
+            },
+            {
+              "title": "Taurine, an osteocyte metabolite, protects against oxidative stress-induced cell death and decreases inhibitors of the Wnt/β-catenin signaling pathway.",
+              "abstract": "Taurine has been shown to have positive effects on bone mass, which are thought to be due in part to its cytoprotective effects on osteoblasts and here we show that taurine also protects osteocytes against cell death due to reactive oxygen species. Using the IDG-SW3 cell line, the expression of the taurine uptake transporter Taut/Slc6a6 is increased during osteoblast to osteocyte differentiation. Taurine had no effect on genes associated with osteoblast to osteocyte differentiation such as Dmp1, Phex or osteocalcin, even at high doses, but a slight yet significant inhibition of alkaline phosphatase was observed at the highest dose (50 mM). No effect was seen on the osteoclast regulatory genes Rankl and Opg, however the wnt antagonist Sost/sclerostin was potently and dose-dependently downregulated in response to taurine supplementation. Taurine also significantly inhibited Dkk1 mRNA expression, but only at 50 mM. Interestingly, osteocytes were found to also be able to synthesize taurine intracellularly, potentially as a self-protective mechanism, but do not secrete the metabolite. A highly significant increase in the expression of cysteine dioxygenase (Cdo), a key enzyme necessary for the production of taurine, was observed with osteoblast to osteocyte differentiation along with a decrease in methionine, the precursor of taurine. For the first time, we describe the synthesis of taurine by osteocytes, potentially to preserve viability and to regulate bone formation through inhibition of sclerostin.",
+              "doi": "10.1016/j.bone.2020.115374",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC6A6"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "76006161ff33bfd1e0ca717067ce48bc11b39b10106141dad3db2262f1d67641"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC6A14 cancer=Lymphoma bucket=pairwise Under the experimental conditions of Lymphoma, using Mouse as the model organism, ATM-null DLBCL from Cell line as the sample, with Crispr 0day vs Crispr 18days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC6A14 and SLC6A6 is more likely to inhibit Lymphoma's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=download_required）；候选基因=['SLC6A14', 'SLC6A6']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC6A14",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC6A14",
+        "cancer_type": "Lymphoma",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "download_required",
+        "cancer_type": "Lymphoma",
+        "tcga_code": "DLBC",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC6A14": {
+          "status": "unavailable",
+          "gene": "SLC6A14",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unavailable",
+          "gene": "SLC6A6",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC6A14": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A14",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC6A6": {
+          "status": "unsupported_cancer",
+          "gene": "SLC6A6",
+          "cancer_type": "Lymphoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC6A14', 'SLC6A6']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC6A14(P(winner)=0.62) vs SLC6A6(P=0.45), 差=0.17；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC6A6",
+        "candidates": [
+          "SLC6A14",
+          "SLC6A6"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A14": 8.3,
+          "SLC6A6": 0.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A14': 1, 'W:SLC6A6': 2}，最终智能体辩论后裁决：winner=SLC6A6 answer=None conf=0.64；法官理由: E's SLC6A14 vote is graph-association proxy, not CRISPR. Two independent LLM channels converge on SLC6A6: taurine transport supports ATM-null DLBCL redox/osmotic stress, making knockout more likely to suppress growth.。原证据通道判定: winner=SLC6A14 answer=None conf=0.624（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC6A14', 'SLC6A6']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC6A14(P(winner)=0.62) vs SLC6A6(P=0.45), 差=0.17；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC6A14",
+        "candidates": [
+          "SLC6A14",
+          "SLC6A6"
+        ],
+        "confidence": 0.64,
+        "abstained": false,
+        "gene_scores": {
+          "SLC6A14": 8.3,
+          "SLC6A6": 0.0
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC6A14': 2, 'W:SLC6A6': 1}，最终智能体辩论后裁决：winner=SLC6A14 answer=None conf=0.64；法官理由: Majority vote favors SLC6A14. Evidence channel and mechanistic reasoning link cationic amino-acid transport to proliferation/mTOR/polyamine support in DLBCL, whereas taurine transport is less essential. Database associations are proxy, so c。原证据通道判定: winner=SLC6A14 answer=None conf=0.624（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC6A14', 'SLC6A6']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC6A14",
+          "SLC6A6"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T17:52:08Z"
+  }
+}

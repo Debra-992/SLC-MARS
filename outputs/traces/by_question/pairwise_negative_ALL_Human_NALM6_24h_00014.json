@@ -1,0 +1,597 @@
+{
+  "qid": "pairwise_negative_ALL_Human_NALM6_24h_00014",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC34A1 and SLC29A1 is more likely to inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 36Days"
+  },
+  "ground_truth": {
+    "winner": "SLC29A1"
+  },
+  "effective_genes": [
+    "SLC34A1",
+    "SLC29A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_ALL_Human_NALM6_24h_00014",
+      "status": "ok",
+      "summary": "检索到 4 类证据、23 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC34A1",
+        "SLC29A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 36Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "protein_function": "Uniporter involved in the facilitative transport of nucleosides and nucleobases, and contributes to maintaining their cellular homeostasis.",
+              "aliases": "ENT1, Solute Carrier Family 29 (Equilibrative Nucleoside Transporter), Member 1, Equilibrative Nucleoside Transporter 1, Nucleoside Transporter, Es-Type, Es Nucleoside Transporter",
+              "transport_type": "F"
+            },
+            {
+              "gene": "SLC34A1",
+              "protein_function": "Involved in actively transporting phosphate into cells via Na(+) cotransport in the renal brush border membrane.",
+              "aliases": "NPT2, SLC17A2, NPTIIa",
+              "transport_type": "C / Na, HPO42-"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC29 Facilitative nucleoside  transporter family",
+              "target_properties": {
+                "name": "SLC29 Facilitative nucleoside  transporter family"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": "SLC29A1|5-FU|SUPPRESSION",
+              "target_properties": {
+                "abstract": "SLC29A1(ENT1) is an equilibrative nucleoside transporter that mediates cellular uptake of 5-fluorouracil (Km ~2.3mM). Reduced ENT1 expression decreases intracellular 5-FU accumulation, contributing to drug resistance in multiple cancer types. Higher ENT1 expression promotes 5-FU cytotoxicity.",
+                "paper": "Young JD 2013 Mol Aspects Med(ENT1) PMID:23506887",
+                "name": "SLC29A1|5-FU|SUPPRESSION",
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": "[\"10.1016/j.mam.2012.05.007\"]",
+                "rel_AB": "SUPPRESSION",
+                "drug": "5-FU"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC29A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ENT1",
+              "target_properties": {
+                "name": "ENT1"
+              }
+            },
+            {
+              "gene": "SLC34A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC34 Type II Na+-phosphate  cotransporter family",
+              "target_properties": {
+                "name": "SLC34 Type II Na+-phosphate  cotransporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "bladder cancer",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "hepatocellular carcinoma (HCC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC29A1",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "pancreatic cancer(PC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Impact of single nucleotide polymorphisms of cytarabine metabolic genes on drug toxicity in childhood acute lymphoblastic leukemia.",
+              "abstract": "Cytarabine (cytosine arabinoside, ara-C) is a chemotherapeutical agent used in the treatment of pediatric acute lymphoblastic leukemia (ALL). Adverse drug reactions, such as interpatient variability in sensitivity to ara-C, are considerable and may cause difficulties during chemotherapy. Single nucleotide polymorphisms (SNPs) can play a significant role in modifying nucleoside-drug pharmacokinetics and pharmacodynamics and thus the development of adverse effects. Our aim was to determine whether polymorphisms in genes encoding transporters and enzymes responsible for the metabolism of ara-C are associated with toxicity and clinical outcome in a patient population with childhood ALL. We studied 8 SNPs in the CDA, DCK, DCTD, SLC28A3, and SLC29A1 genes in 144 patients with childhood acute lymphoblastic leukemia treated according to ALLIC BFM 1990, 1995 and 2002 protocols. DCK rs12648166 and DCK rs4694362 SNPs were associated with hematologic toxicity (OR = 2.63, CI 95% = 1.37-5.04, P = 0.0036 and OR = 2.53, CI 95% = 1.34-4.80, P = 0.0044, respectively). Our results indicate that DCK polymorphisms might be important genetic risk factors for hematologic toxicity during ALL treatment with ara-C. Individualized chemotherapy based on genetic profiling may help to optimize ara-C dosing, leading to improvements in clinical outcome and reduced toxicity.",
+              "doi": "10.1002/pbc.25379",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7132c17c995f709105c38427582ca1faff7349c3621c78aa3eff710f2550b506"
+              }
+            },
+            {
+              "title": "Foscarnet, an inhibitor of the sodium-phosphate cotransporter NaPi-IIa, inhibits phosphorylation of glycogen synthase kinase-3β by lithium in the rat kidney cortex.",
+              "abstract": "Lithium, which is used in the treatment of and prophylaxis for bipolar disease, inhibits glycogen synthase kinase-3β (GSK3β) by producing its phosphorylated form (p-GSK3β). GSK3β plays a role in apoptosis and some kinds of acute kidney injuries, and the formation of p-GSK3β is considered to contribute to protection against acute kidney injury. We previously reported that the sodium-phosphate cotransporter NaPi-IIa (SLC34A1) mediated the reabsorption of lithium in the rat kidney. In the present study, the phosphorylation status of GSK3β in the kidney cortex of rats administered lithium chloride and foscarnet, a typical inhibitor of NaPi-IIa, was examined using Western blotting. Under a 2-h infusion of lithium chloride, the plasma concentration of lithium was 1.06 mEq/l, and its renal clearance was calculated as 1.18 ml/min/kg, which was 29.6% of creatinine clearance. The abundance of p-GSK3β in the kidney cortex was augmented by the administration of lithium. The simultaneous infusion of foscarnet increased the renal clearance of lithium and its ratio to creatinine clearance as well as the urinary excretion of phosphate. Foscarnet also inhibited the lithium-induced phosphorylation of GSK3β. These results suggest that the reabsorption of lithium by NaPi-IIa triggers the phosphorylation of GSK3β in the rat kidney cortex.",
+              "doi": "10.1016/j.dmpk.2016.02.003",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC34A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7988b444ce0e2c099a998a3db2059776c92452f6650dd2327b3a10ccd967fba0"
+              }
+            },
+            {
+              "title": "FLT3 is implicated in cytarabine transport by human equilibrative nucleoside transporter 1 in pediatric acute leukemia.",
+              "abstract": "FLT3 abnormalities are negative prognostic markers in acute leukemia. Infant leukemias are a subgroup with frequent MLL (KMT2A) rearrangements, FLT3 overexpression and high sensitivity to cytarabine, but dismal prognosis. Cytarabine is transported into cells by Human Equilibrative Nucleoside Transporter-1 (hENT1, SLC29A1), but the mechanisms that regulate hENT1 in acute leukemia have been scarcely studied.We explored the expression and functional link between FLT3 and main cytarabine transporters in 50 pediatric patients diagnosed with acute lymphoblastic leukemia and MLL rearrangement (ALL-MLL+) and other subtypes of leukemia, and in leukemia cell lines.A significant positive correlation was found between FLT3 and hENT1 expression in patients. Cytarabine uptake into cells was mediated mainly by hENT1, hENT2 and hCNT1. hENT1-mediated uptake of cytarabine was transiently abolished by the FLT3 inhibitor PKC412, and this effect was associated with decreased hENT1 mRNA and protein levels. Noticeably, the cytotoxicity of cytarabine was lower when cells were first exposed to FLT3 inhibitors (PKC412 or AC220), probably due to decreased hENT1 activity, but we observed a higher cytotoxic effect if FLT3 inhibitors were administered after cytarabine.FLT3 regulates hENT1 activity and thereby affects cytarabine cytotoxicity. The sequence of administration of cytarabine and FLT3 inhibitors is important to maintain their efficacy.",
+              "doi": "10.18632/oncotarget.10448",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "disease",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "479eb846f3591cbda95d987347f766b45c5a284d0e8570d8db735a5b71db958b"
+              }
+            },
+            {
+              "title": "miR-33-3p Regulates PC12 Cell Proliferation and Differentiation In Vitro by Targeting Slc29a1.",
+              "abstract": "MicroRNA-33-3p (miR-33-3p) has been widely investigated for its roles in lipid metabolism and mitochondrial function; however, there are few studies on miR-33-3p in the context of neurological diseases. In this study, we investigated the functional role of miR-33-3p in rat pheochromocytoma PC12 cells. A miR-33-3p mimic was transduced into PC12 cells, and its effects on proliferation, apoptosis, and differentiation were studied using the MTS assay, EdU labeling, flow cytometry, qRT-PCR, western blot, ELISA, and immunofluorescence. We found that miR-33-3p significantly suppressed PC12 cell proliferation, but had no effect on apoptosis. Furthermore, miR-33-3p promoted the differentiation of PC12 cells into Tuj1-positive and choline acetyltransferase-positive neuron-like cells. Mechanistically, miR-33-3p repressed the expression of Slc29a1 in PC12 cells. Importantly, knocking down Slc29a1 in PC12 cells inhibited proliferation and induced differentiation into neuron-like cells. In conclusion, this study showed that miR-33-3p regulated Slc29a1, which in turn controlled the proliferation and differentiation of PC12 cells. Thus, we hypothesize that the miR-33-3p/Slc29a1 axis could be a promising therapeutic target for recovering neurons and the cholinergic nervous system.",
+              "doi": "10.1007/s11064-021-03377-z",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "6ed39efd97542b12ec02b0899a5e4b252cb83950c2681f26b8f6f7a1ae9c60e8"
+              }
+            },
+            {
+              "title": "The role of alternative splicing in cancer: From oncogenesis to drug resistance.",
+              "abstract": "Alternative splicing is a tightly regulated process whereby non-coding sequences of pre-mRNA are removed and protein-coding segments are assembled in diverse combinations, ultimately giving rise to proteins with distinct or even opposing functions. In the past decade, whole genome/transcriptome sequencing studies revealed the high complexity of splicing regulation, which occurs co-transcriptionally and is influenced by chromatin status and mRNA modifications. Consequently, splicing profiles of both healthy and malignant cells display high diversity and alternative splicing was shown to be widely deregulated in multiple cancer types. In particular, mutations in pre-mRNA regulatory sequences, splicing regulators and chromatin modifiers, as well as differential expression of splicing factors are important contributors to cancer pathogenesis. It has become clear that these aberrations contribute to many facets of cancer, including oncogenic transformation, cancer progression, response to anticancer drug treatment as well as resistance to therapy. In this respect, alternative splicing was shown to perturb the expression a broad spectrum of relevant genes involved in drug uptake/metabolism (i.e. SLC29A1, dCK, FPGS, and TP), activation of nuclear receptor pathways (i.e. GR, AR), regulation of apoptosis (i.e. MCL1, BCL-X, and FAS) and modulation of response to immunotherapy (CD19). Furthermore, aberrant splicing constitutes an important source of novel cancer biomarkers and the spliceosome machinery represents an attractive target for a novel and rapidly expanding class of therapeutic agents. Small molecule inhibitors targeting SF3B1 or splice factor kinases were highly cytotoxic against a wide range of cancer models, including drug-resistant cells. Importantly, these effects are enhanced in specific cancer subsets, such as splicing factor-mutated and c-MYC-driven tumors. Furthermore, pre-clinical studies report synergistic effects of spliceosome modulators in combination with conventional antitumor agents. These strategies based on the use of low dose splicing modulators could shift the therapeutic window towards decreased toxicity in healthy tissues. Here we provide an extensive overview of the latest findings in the field of regulation of splicing in cancer, including molecular mechanisms by which cancer cells harness alternative splicing to drive oncogenesis and evade anticancer drug treatment as well as splicing-based vulnerabilities that can provide novel treatment opportunities. Furthermore, we discuss current challenges arising from genome-wide detection and prediction methods of aberrant splicing, as well as unravelling functional relevance of the plethora of cancer-related splicing alterations.",
+              "doi": "10.1016/j.drup.2020.100728",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC29A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4200253ffc07f83bfe06fe4e7a2e43c0c0e9d7c842b13103360fca9f1a43180a"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC34A1 cancer=ALL bucket=pairwise Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 36Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC34A1 and SLC29A1 is more likely to inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC34A1', 'SLC29A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC34A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC29A1",
+            "ppr_score": 9.614361405469086e-05,
+            "degree_corrected_score": 0.00010639136942480839,
+            "graph_degree": 7,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC34A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC34A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC34A1": {
+          "status": "unavailable",
+          "gene": "SLC34A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A1": {
+          "status": "unavailable",
+          "gene": "SLC29A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC34A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC34A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC29A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC29A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLC29A1']",
+        "status": "ok",
+        "summary": "[pairwise 图特征logistic·v10] SLC29A1(P(winner)=0.52) vs SLC34A1(P=0.45), 差=0.07；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC29A1",
+        "candidates": [
+          "SLC34A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.519,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35,
+          "SLC29A1": 4.6
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[pairwise 图特征logistic·v10] SLC29A1(P(winner)=0.52) vs SLC34A1(P=0.45), 差=0.07；依据 SLC→Pathway→Disease 拆细图特征经学习式 logistic 排序(留出准确率≈74%)。为关联方向代理，非 CRISPR 读数。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLC29A1']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC29A1的邻近证据虽多来自膀胱癌/HCC等上皮癌，但其核心生物学是核苷/核苷酸转运，且文献直接显示其介导细胞阿糖胞苷摄取并影响儿科急性白血病中阿糖胞苷细胞毒性；ALL为淋巴母细胞性血液肿瘤，对核苷转运和化疗药摄取高度相关。SLC34A1主要是肾脏NaPi-IIa磷酸盐共转运体，与ALL细胞谱系、核苷转运或肿瘤增殖缺乏可迁移联系。 | 在目标癌种ALL缺乏直接图谱/组学证据时，应优先选择具有跨癌种可迁移机制的候选。SLC29A1作为ENT1，参与核苷稳态和核苷类似物化疗药摄取；在急性白血病中与阿糖胞苷转运和细胞毒性相关，且其他癌种中其表达/敲低与增殖、凋亡和氧化磷酸化等肿瘤生长相关通路相连，提示其功能状态可影响ALL细胞生长或药物敏感性。相比之下，SLC34A1的肾小管磷酸盐转运功能与NALM6/ALL增殖环境不匹配，且无PPR、TIMER、KM或文献支持其在ALL中的作用。因此，SLC29A1更可能成为ALL肿瘤生长抑制相关的候选基因。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC29A1",
+        "candidates": [
+          "SLC34A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.63,
+        "abstained": false,
+        "gene_scores": {
+          "SLC34A1": 0.35,
+          "SLC29A1": 4.6
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[跨癌种类推] SLC29A1的邻近证据虽多来自膀胱癌/HCC等上皮癌，但其核心生物学是核苷/核苷酸转运，且文献直接显示其介导细胞阿糖胞苷摄取并影响儿科急性白血病中阿糖胞苷细胞毒性；ALL为淋巴母细胞性血液肿瘤，对核苷转运和化疗药摄取高度相关。SLC34A1主要是肾脏NaPi-IIa磷酸盐共转运体，与ALL细胞谱系、核苷转运或肿瘤增殖缺乏可迁移联系。 | 在目标癌种ALL缺乏直接图谱/组学证据时，应优先选择具有跨癌种可迁移机制的候选。SLC29A1作为ENT1，参与核苷稳态和核苷类似物化疗药摄取；在急性白血病中与阿糖胞苷转运和细胞毒性相关，且其他癌种中其表达/敲低与增殖、凋亡和氧化磷酸化等肿瘤生长相关通路相连，提示其功能状态可影响ALL细胞生长或药物敏感性。相比之下，SLC34A1的肾小管磷酸盐转运功能与NALM6/ALL增殖环境不匹配，且无PPR、TIMER、KM或文献支持其在ALL中的作用。因此，SLC29A1更可能成为ALL肿瘤生长抑制相关的候选基因。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "bladder cancer",
+          "hepatocellular carcinoma (HCC)",
+          "pancreatic cancer(PC)"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC34A1', 'SLC29A1']",
+        "status": "ok",
+        "summary": "在NALM6这类B-ALL细胞系中，SLC29A1编码核苷转运体ENT1，参与核苷摄取与细胞增殖代谢，更可能成为快速增殖白血病细胞的生长依赖；SLC34A1主要介导钠依赖磷酸转运，在B-ALL中表达与功能相关性通常较弱，因此更可能抑制ALL肿瘤生长的是SLC29A1。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC29A1",
+        "candidates": [
+          "SLC34A1",
+          "SLC29A1"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "在NALM6这类B-ALL细胞系中，SLC29A1编码核苷转运体ENT1，参与核苷摄取与细胞增殖代谢，更可能成为快速增殖白血病细胞的生长依赖；SLC34A1主要介导钠依赖磷酸转运，在B-ALL中表达与功能相关性通常较弱，因此更可能抑制ALL肿瘤生长的是SLC29A1。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:58:41Z"
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00021",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC4A2 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC4A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00021",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC4A2"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC4A2",
+              "protein_function": "Sodium-independent anion exchanger",
+              "aliases": "EPB3L1, AE2",
+              "transport_type": "E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC4A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC4 Bicarbonate  transporter family",
+              "target_properties": {
+                "name": "SLC4 Bicarbonate  transporter family"
+              }
+            },
+            {
+              "gene": "SLC4A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC4A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC4A2",
+              "pathway": "proliferation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC4A2",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Bisphenol S exacerbates CRC progression through dual mechanisms of immune microenvironment reprogramming and SLC4A2-mediated EMT activation.",
+              "abstract": "Bisphenol S (BPS) is frequently utilized in the domain of food packaging materials as well as in the sphere of industrial plastic manufacturing. Although existing studies suggest potential associations between BPS exposure and the development of various malignancies, the exact biological function of BPS in colorectal cancer (CRC) advancement is still not fully understood. This research intends to thoroughly explore how BPS influences the malignant characteristics of CRC at the molecular level, particularly its impact on the epithelial-mesenchymal transition (EMT) in tumor cells. This study employed a LASSO regression model to screen key genes associated with BPS exposure in CRC progression and constructed a prognostic prediction model. The ESTIMATE algorithm was employed to evaluate the stromal and immune scores within the tumor microenvironment, while the CIBERSORT technique was applied to examine the infiltration profiles of 22 distinct immune cell subsets. The impact of BPS on HCT8 cell proliferation, migratory ability, and EMT progression were systematically evaluated through Western blot, CCK-8 proliferation assays, scratch wound healing experiments, and Transwell assays for migration and invasion. BPS exposure within the concentration range of 10⁻¹ ⁰ to 10⁻⁶ M did not significantly inhibit HCT8 cell viability but markedly enhanced migration and invasion capabilities, accompanied by EMT progression. A prognostic model constructed from nine key genes linked to BPS and determined via LASSO regression exhibited robust predictive efficacy. Tumor microenvironment analysis indicated a substantial association between SLC4A2 gene expression and activated memory CD4 + T lymphocyte infiltration. Notably, BPS exposure specifically induced SLC4A2 upregulation, while siRNA-mediated SLC4A2 knockdown significantly suppressed BPS-induced cell migrationand reversed EMT phenotypes. This study first demonstrates that BPS promotes CRC cell migration by activating the EMT signaling pathway via SLC4A2 upregulation. SLC4A2, being a key player in BPS-induced tumorigenesis, could function as a promising biomarker and therapeutic target for CRC. These findings not only elucidate the molecular mechanisms underlying environmental pollutant-induced carcinogenesis but also provide experimental evidence for developing prevention strategies targeting BPS-associated CRC risks.",
+              "doi": "10.1016/j.tox.2025.154236",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "923b1c85b5c941ef9e7ba7a40939feb7837a42bf5ca1d7d884c9f5c3f24315be"
+              }
+            },
+            {
+              "title": "HCO3-/Cl- anion exchanger SLC4A2 is required for proper osteoclast differentiation and function.",
+              "abstract": "As the only cell capable of bone resorption, the osteoclast is a central mediator of skeletal homeostasis and disease. To efficiently degrade mineralized tissue, these multinucleated giant cells secrete acid into a resorption lacuna formed between their apical membrane and the bone surface. For each proton pumped into this extracellular compartment, one bicarbonate ion remains in the cytoplasm. To prevent alkalinization of the cytoplasm, a basolateral bicarbonate/chloride exchanger provides egress for intracellular bicarbonate. However, the identity of this exchanger is unknown. Here, we report that the bicarbonate/chloride exchanger, solute carrier family 4, anion exchanger, member 2 (SLC4A2), is up-regulated during osteoclast differentiation. Suppression of Slc4a2 expression by RNA interference inhibits the ability of RAW cells, a mouse macrophage cell line, to differentiate into osteoclasts and resorb mineralized matrix in vitro. Accordingly, Slc4a2-deficient mice fail to remodel the primary, cartilaginous skeletal anlagen. Abnormal multinucleated giant cells are present in the bone marrow of Slc4a2-deficient mice. Though these cells express the osteoclast markers CD68, cathepsin K, and NFATc1, compared with their wild-type (WT) counterparts they are larger, fail to express tartrate-resistant acid phosphatase (TRAP) activity, and display a propensity to undergo apoptosis. In vitro Slc4a2-deficient osteoclasts are unable to resorb mineralized tissue and cannot form an acidified, extracellular resorption compartment. These data highlight SLC4A2 as a critical mediator of osteoclast differentiation and function in vitro and in vivo.",
+              "doi": "10.1073/pnas.0808763105",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c46947dd9cc62a43bcef65d9b079e3305a23157f2478f5e7e1bf050625484ba1"
+              }
+            },
+            {
+              "title": "CD8+ T cells undergo activation and programmed death-1 repression in the liver of aged Ae2a,b-/- mice favoring autoimmune cholangitis.",
+              "abstract": "Primary biliary cirrhosis (PBC) is a chronic cholestatic disease of unknown etiopathogenesis showing progressive autoimmune-mediated cholangitis. In PBC patients, the liver and lymphocytes exhibit diminished expression of AE2/SLC4A2, a Cl-/HCO3- anion exchanger involved in biliary bicarbonate secretion and intracellular pH regulation. Decreased AE2 expression may be pathogenic as Ae2a,b(-/-) mice reproduce hepatobiliary and immunological features resembling PBC. To understand the role of AE2 deficiency for autoimmunity predisposition we focused on the phenotypic changes of T cells that occur over the life-span of Ae2a,b(-/-) mice. At early ages (1-9 months), knockout mice had reduced numbers of intrahepatic T cells, which exhibited increased activation, programmed-cell-death (PD)-1 expression, and apoptosis. Moreover, young knockouts had upregulated PD-1 ligand (PD-L1) on bile-duct cells, and administration of neutralizing anti-PD-L1 antibodies prevented their intrahepatic T-cell deletion. Older (≥ 10 months) knockouts, however, showed intrahepatic accumulation of cytotoxic CD8(+) T cells with downregulated PD-1 and diminished apoptosis. In-vitro DNA demethylation with 5-aza-2'-deoxycytidine partially reverted PD-1 downregulation of intrahepatic CD8(+) T cells from aged knockouts. Early in life, AE2 deficiency results in intrahepatic T-cell activation and PD-1/PD-L1 mediated deletion. With aging, intrahepatic CD8+ T cells epigenetically suppress PD-1, and their consequential expansion and further activation favor autoimmune cholangitis.",
+              "doi": "10.18632/oncotarget.5665",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4e66fcffc87d176fe72c9cd3cb392fb00a662f168b55b4844b1b5f120c0d8889"
+              }
+            },
+            {
+              "title": "Targeting the anion exchanger 2 with specific peptides as a new therapeutic approach in B lymphoid neoplasms.",
+              "abstract": "Regulatory T (Treg) cells can weaken antitumor immune responses, and inhibition of their function appears to be a promising therapeutic approach in cancer patients. Mice with targeted deletion of the gene encoding the Cl/HCO anion exchanger AE2 (also termed SLC4A2), a membrane-bound carrier involved in intracellular pH regulation, showed a progressive decrease in the number of Treg cells. We therefore challenged AE2 as a potential target for tumor therapy, and generated linear peptides designed to bind the third extracellular loop of AE2, which is crucial for its exchange activity. Peptide p17AE2 exhibited optimal interaction ability and indeed promoted apoptosis in mouse and human Treg cells, while activating effector T-cell function. Interestingly, this linear peptide also induced apoptosis in different types of human leukemia, lymphoma and multiple myeloma cell lines and primary malignant samples, while it showed only moderate effects on normal B lymphocytes. Finally, a macrocyclic AE2 targeting peptide exhibiting increased stability  was effective in mice xenografted with B-cell lymphoma. These data suggest that targeting the anion exchanger AE2 with specific peptides may represent an effective therapeutic approach in B-cell malignancies.",
+              "doi": "10.3324/haematol.2017.175687",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0cbfb4ae249f42e7511f77b8704ce4b8f39c517e65af73920f822eef2e65f81c"
+              }
+            },
+            {
+              "title": "TMPRSS3 regulates cell viability and apoptosis processes of HEI-OC1 cells via regulation of the circ-Slc4a2, miR-182 and Akt cascade.",
+              "abstract": "The present study aimed to investigate the functions and regulation mechanism of the transmembrane protease, serine 3 (TMPRSS3), which plays an important role in sensorineural hearing loss. House Ear Institute-Organ of Corti 1 (HEI-OC1) cells, comprising auditory-related cells, were used in the present study. An overexpression vector and small hairpin RNA target on TMPRSS3 were designed and transfected into HEI-OC1 cells. Circular RNA (circRNA) sequencing was conducted and expression profiles were obtained. The circular structure of circRNAs was validated with a polymerase chain reaction and Sanger sequencing using convergent and divergent primers. Overexpression of TMPRSS3 increased cell viability, whereas suppression of TMPRSS3 increased the percentage of apoptotic cells and decreased cell viability, compared to the control group. circRNA sequencing provided expression profiles indicating that the overexpression of TMPRSS3 increased the expression level of 195 circRNAs. Results of GO (Gene Ontology) and KEGG (Kyoto Encyclopedia of Genes and Genomes) studies indicated that the circRNAs are focused on the RAS signaling pathway. The pathway, circ-Slc41a2 (chr10: 82744115|82767120), miR-182 and Akt, might comprise one of the key cascades of TMPRSS3. TMPRSS3 is an important molecule in the regulation of cell viability and cell apoptosis of HEI-OC1 cells. Its functions are dependent on the circ-Slc41a2, miR-182 and Akt cascade.",
+              "doi": "10.1002/jgm.3118",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC4A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "465820e4e06c164cf59664a6dc26bb84d422af2bdaf9f22b3609805223c7ef3a"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC4A2 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC4A2 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC4A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC4A2",
+            "ppr_score": 2.0704136032197107e-05,
+            "degree_corrected_score": 4.286245974945261e-05,
+            "graph_degree": 2,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC4A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC4A2",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC4A2": {
+          "status": "unavailable",
+          "gene": "SLC4A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC4A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC4A2",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC4A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A2"
+        ],
+        "confidence": 0.441,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A2": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC4A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] CRC/osteoclast/B-lymphoid malignancy evidence → ALL B-cell lineage: SLC4A2/AE2 supports proliferation, migration/EMT-like phenotypes in CRC, is required for osteoclast differentiation, and AE2-targeting peptides induce apoptosis in leukemia/lymphoma/myeloma cells; NALM6 is a B-ALL line, so inhibiting SLC4A2 is more likely to impair survival/growth than to be neutral. | There is no direct ALL CRISPR or TIMER/KM evidence, but the available cross-cancer knowledge is directionally anti-growth when SLC4A2 is inhibited: CRC shows SLC4A2 promotion of proliferation/migration, and B-cell malignancy literature shows AE2/SLC4A2 targeting can kill malignant lymphoid cells while sparing normal B cells relatively. The low PPR proximity and missing ALL-specific omics lower confidence, but do not justify a negative call because association/absence of evidence is not equivalent to non-essentiality. Given the B-lymphoid relevance and promotion effect in related cancers, membership answer is true.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A2"
+        ],
+        "confidence": 0.72,
+        "abstained": false,
+        "gene_scores": {
+          "SLC4A2": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.72；法官理由: No direct NALM6 MAGeCK depletion evidence; CRC/peptide associations are cross-cancer and not CRISPR readouts. Two independent LLM channels agree SLC4A2 unlikely essential/bottleneck for ALL growth, outweighing weak true vote.。原证据通道判定: winner=None answer=True conf=0.58（保留于溯源）。",
+        "analogy_cancers": [
+          "colorectal cancer(CRC)"
+        ],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC4A2']",
+        "status": "ok",
+        "summary": "SLC4A2 is an anion exchanger/transporter more commonly associated with pH regulation and proliferation support in cancer contexts, rather than being a well-established tumor growth inhibitor in ALL. In a CRISPR screen, depletion of SLC4A2 would suggest it supports growth, not inhibits it; therefore it is unlikely to be classified as an inhibitor of ALL tumor growth.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC4A2"
+        ],
+        "confidence": 0.45,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC4A2 is an anion exchanger/transporter more commonly associated with pH regulation and proliferation support in cancer contexts, rather than being a well-established tumor growth inhibitor in ALL. In a CRISPR screen, depletion of SLC4A2 would suggest it supports growth, not inhibits it; therefore it is unlikely to be classified as an inhibitor of ALL tumor growth.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T13:47:01Z"
+  }
+}

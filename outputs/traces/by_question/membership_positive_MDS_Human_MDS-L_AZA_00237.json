@@ -1,0 +1,306 @@
+{
+  "qid": "membership_positive_MDS_Human_MDS-L_AZA_00237",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nIs SLC25A42 promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+  "constraints": {
+    "cancer": "MDS(Myelodysplastic Neoplasms)",
+    "cell_line": "MDS-L",
+    "family": "Tumor Drug Resistence",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC25A42"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_MDS_Human_MDS-L_AZA_00237",
+      "status": "ok",
+      "summary": "检索到 4 类证据、4 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC25A42"
+      ],
+      "requested_context": {
+        "cancer": "MDS(Myelodysplastic Neoplasms)",
+        "cell_line": "MDS-L",
+        "family": "Tumor Drug Resistence",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr DMSO vs Crispr 0.3uM AZA"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A42",
+              "protein_function": "Mitochondrial carrier mediating the transport of coenzyme A (CoA) in mitochondria in exchange for intramitochondrial (deoxy)adenine nucleotides and adenosine 3',5'-diphosphate.",
+              "aliases": "Mitochondrial Coenzyme A Transporter SLC25A42, Mitochondrial Coenzyme A Transporter, MECREN",
+              "transport_type": "E"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A42",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "SLC25A42 promotes gastric cancer growth by conferring ferroptosis resistance through enhancing CPT2-mediated fatty acid oxidation.",
+              "abstract": "Accumulating evidence has shown that the dysfunction of mitochondria, the multifunctional organelles in various cellular processes, is a pivotal event in the development of various diseases, including human cancers. Solute Carrier Family 25 Member 42 (SLC25A42) is a mitochondrial protein governing the transport of coenzyme A (CoA). However, the biological roles of SLC25A42 in human cancers are still unexplored. Here we uncovered that SLC25A42 is upregulated and correlated with a worse prognosis in GC patients. SLC25A42 promotes the proliferation of gastric cancer (GC) cells while suppresses apoptosis in vitro and in vivo. Mechanistically, SLC25A42 promotes the growth and inhibits apoptosis of GC cells by reprograming lipid metabolism. On the one hand, SLC25A42 enhances fatty acid oxidation-mediated mitochondrial respiration to provide energy for cell survival. On the other hand, SLC25A42 decreases the levels of free fatty acids and ROS to inhibit ferroptosis. Moreover, we found that SLC25A42 reprograms lipid metabolism in GC cells by upregulating the acetylation and thus the expression of CPT2. Collectively, our data reveal a critical oncogenic role of SLC25A42 in GCs and suggest that SLC25A42 represent a promising therapeutic target for GC.",
+              "doi": "10.1038/s41419-025-07644-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A42"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "caab3c2c20a7b148464da052bc78c1432334a10035a24592110881be765c960f"
+              }
+            },
+            {
+              "title": "SLC25A42-associated mitochondrial encephalomyopathy: Report of additional founder cases and functional characterization of a novel deletion.",
+              "abstract": "SLC25A42 is the main transporter of coenzyme A (CoA) into mitochondria. To date, 15 individuals have been reported to have one of two bi-allelic homozygous missense variants in the  as the cause of mitochondrial encephalomyopathy, of which 14 of them were of Saudi origin and share the same founder variant, c.871A > G:p.Asn291Asp. The other subject was of German origin with a variant at canonical splice site, c.380 + 2 T > A. Here, we describe the clinical manifestations and the disease course in additional six Saudi patients from four unrelated consanguineous families. While five patients have the Saudi founder p.Asn291Asp variant, one subject has a novel deletion. Functional analyses on fibroblasts obtained from this patient revealed that the deletion causes significant decrease in mitochondrial oxygen consumption and ATP production compared to healthy individuals. Moreover, extracellular acidification rate revealed significantly reduced glycolysis, glycolytic capacity, and glycolytic reserve as compared to control individuals. There were no changes in the mitochondrial DNA (mtDNA) content of patient fibroblasts. Immunoblotting experiments revealed significantly diminished protein expression due to the deletion. In conclusion, we report additional patients with SLC25A42-associated mitochondrial encephalomyopathy. Our study expands the molecular spectrum of this condition and provides further evidence of mitochondrial dysfunction as a central cause of pathology. We therefore propose that this disorder should be included in the differential diagnosis of any patient with an unexplained motor and speech delay, recurrent encephalopathy with metabolic acidosis, intermittent or persistent dystonia, lactic acidosis, basal ganglia lesions and, especially, of Arab ethnicity. Finally, deep brain stimulation should be considered in the management of patients with life altering dystonia.",
+              "doi": "10.1002/jmd2.12218",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A42"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "32dde2eaf5987c99bbfab7de0f51ee7f49f1421c4a27ce5888a9212cde011bb4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC25A42 cancer=MDS(Myelodysplastic Neoplasms) bucket=membership Under the experimental conditions of MDS(Myelodysplastic Neoplasms), using Human as the model organism, MDS-L from Cell line as the sample, with Crispr DMSO vs Crispr 0.3uM AZA as the treatment condition, and MAGECK as the method.\nIs SLC25A42 promote MDS(Myelodysplastic Neoplasms)'s Tumor Drug Resistence?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC25A42']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC25A42",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC25A42",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC25A42": {
+          "status": "unavailable",
+          "gene": "SLC25A42",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC25A42": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A42",
+          "cancer_type": "MDS(Myelodysplastic Neoplasms)",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A42']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC25A42 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A42"
+        ],
+        "confidence": 0.423,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A42": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC25A42 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.05 -> P(必需)=0.423 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A42']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A42 作为线粒体 CoA 转运体，在胃癌中被报道通过增强 CPT2 介导的脂肪酸氧化、维持线粒体能量代谢并降低 ROS/游离脂肪酸，从而抑制凋亡和铁死亡、促进肿瘤生长。MDS-L 属于髓系肿瘤细胞模型，在 AZA 处理下细胞面临氧化应激、代谢压力与分化/凋亡诱导；若 SLC25A42 保留或增强线粒体代谢韧性，则可能降低 AZA 诱导的细胞毒性，支持耐药克隆存活。因此，虽然 KG 未给出 MDS 邻近癌种，但从线粒体代谢保护机制向髓系肿瘤药物耐药的迁移是合理的。 | 目标癌种 MDS 缺乏直接 TIMER/KM/图谱邻近证据，但不应将缺证据解释为阴性。SLC25A42 的功能证据显示其为线粒体 CoA 转运体，参与脂肪酸氧化与能量代谢，并在胃癌中呈现促存活、抗凋亡、抗铁死亡的oncogenic role；AZA 耐药/耐受常与代谢重编程、线粒体功能维持和氧化应激保护相关。MDS-L 在 DMSO vs AZA 的 CRISPR 筛选背景下，SLC25A42 更可能通过维持线粒体代谢稳态促进细胞在药物压力下的存活，从而表现为 promote tumor drug resistance。因跨癌种类推且无 MDS 直接表达/预后证据，置信度设为中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A42"
+        ],
+        "confidence": 0.74,
+        "abstained": false,
+        "gene_scores": {
+          "SLC25A42": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.74；法官理由: No MDS-L/AZA MAGeCK evidence links SLC25A42 to resistance. Gastric ferroptosis/FAO analogy is associative and cross-cancer, not CRISPR readout. Two independent LLM channels reject support; database lacks direct enrichment. Claim is unsuppor。原证据通道判定: winner=None answer=True conf=0.62（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm+triad+crit16",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC25A42']",
+        "status": "ok",
+        "summary": "SLC25A42 encodes a mitochondrial FAD/riboflavin-related transporter and is not a well-established driver of azacitidine/MDS tumor drug resistance. Under CRISPR screening in MDS-L cells comparing DMSO versus low-dose AZA, there is no strong prior evidence that SLC25A42 promotes resistance; loss of mitochondrial metabolic function would more plausibly sensitize cells rather than enhance drug resistance.",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC25A42"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC25A42 encodes a mitochondrial FAD/riboflavin-related transporter and is not a well-established driver of azacitidine/MDS tumor drug resistance. Under CRISPR screening in MDS-L cells comparing DMSO versus low-dose AZA, there is no strong prior evidence that SLC25A42 promotes resistance; loss of mitochondrial metabolic function would more plausibly sensitize cells rather than enhance drug resistance.",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T05:09:55Z"
+  }
+}

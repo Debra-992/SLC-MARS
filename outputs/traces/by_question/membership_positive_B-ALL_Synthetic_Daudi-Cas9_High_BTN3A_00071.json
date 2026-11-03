@@ -1,0 +1,482 @@
+{
+  "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00071",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC43A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+  "constraints": {
+    "cancer": "B-lymphoblastic leukaemia",
+    "cell_line": "Daudi-Cas9 cells",
+    "family": "Tumor Survival",
+    "method": "MAGECK",
+    "species": "Synthetic construct",
+    "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC43A3"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00071",
+      "status": "ok",
+      "summary": "检索到 4 类证据、17 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC43A3"
+      ],
+      "requested_context": {
+        "cancer": "B-lymphoblastic leukaemia",
+        "cell_line": "Daudi-Cas9 cells",
+        "family": "Tumor Survival",
+        "method": "MAGECK",
+        "species": "Synthetic construct",
+        "treatment": "Crispr BTN3A low vs Crispr BTN3A high"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC43A3",
+              "protein_function": "Sodium-independent purine-selective nucleobase transporter which mediates the equilibrative transport of extracellular purine nucleobases such as adenine, guanine, and hypoxanthine.",
+              "aliases": "SEEEG-1, FOAP-13, PRO1659, Eeg1, Likely Ortholog Of Mouse Embryonic Epithelial Gene 1",
+              "transport_type": "O"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC43A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC43 Na+-independent, system-L-like  amino acid transporter family",
+              "target_properties": {
+                "name": "SLC43 Na+-independent, system-L-like  amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC43A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            },
+            {
+              "gene": "SLC43A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC43A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC43A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC43A3",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "SUPPRESSION",
+                "paper_dois": [],
+                "rel_AB": "SUPPRESSION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC43A3",
+              "pathway": "proliferation",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC43A3",
+              "pathway": "oxidative phosphorylation",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC43A3",
+              "pathway": "migration",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC43A3",
+              "pathway": "apoptosis",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "SUPPRESSION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC43A3",
+              "pathway": "chemotherapy resistance",
+              "rel_AB": "SUPPRESSION",
+              "rel_BC": "SUPPRESSION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "glioma",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Lipid metabolism-related gene signature predicts prognosis and unveils novel anti-tumor drugs in specific type of diffuse large B cell lymphoma.",
+              "abstract": "Diffuse large B-cell lymphoma (DLBCL) is the most common type of lymphoma which possess highly aggressive and heterogeneous. Despite advances in understanding heterogeneity and development of novel targeted agents, the prognosis of DLBCL patients remains unsatisfied. Lipids are crucial components of biological membranes and signal transduction while accumulating evidence has supported the vital roles of abnormal lipid metabolism in tumorigenesis. Furthermore, some related pathways could serve as prognostic biomarkers and potential therapeutic targets. However, the clinical significance of abnormal lipid metabolism reprogramming in DLBCL has not been investigated. In the current study, we developed a prognostic risk model for DLBCL based on the abnormal expressed lipid metabolism genes and moreover based on our risk model we classified patients with DLBCL into novel subtypes and identified potential drugs for DLBCL patients with certain lipid metabolism profiles. We utilized univariate Cox regression analysis to identify the prognosis-related lipid metabolism genes, and then performed LASSO Cox regression to identify prognostic related lipid metabolism related genes. Multivariate cox regression was used to establish the prognostic model. Patients were divided in to high and low risk groups based on the median risk score. Immune cell infiltration and GSEA were used to identify the pathways between high and low risk groups. Oncopredict algorithm was utilized to identify potential drug for high-risk patients. In vitro cell apoptosis and viability analysis were employed to verify the specific tumor inhibition effects of AZD5153. Nineteen survival related lipid metabolism genes TMEM176B, LAYN, RAB6B, MMP9, ATAD3B, SLC2A11, CD3E, SLIT2, SLC2A13, SLC43A3, CD6, SIRPG, NEK6, LCP2, CTTN, CXCL2, SNX22, BCL6 and FABP4 were identified and subjected to build the prognostic model which was further verified in four external microarray cohorts and one RNA seq cohorts. Tumor immune microenvironment analysis and GSEA results showed that the activation of MYC targets genes rather than immunosuppression contribute to the poor survival outcome of patients in the high-risk group. AZD5153, a novel bivalent BET bromodomain inhibitor which could inhibit the transcription of MYC and E2F exhibited specific antitumor function for cells with high-risk score. Our results provide the first lipid metabolism-based gene signature for predicting the survival of patients with DLBCL. Furthermore, by determining novel subtypes with our lipid metabolism prognostic model we illustrated that drugs that compromising MYC target genes rather than immune checkpoint inhibitors may be beneficial to DLBCL patients with certain lipid metabolism profiles.",
+              "doi": "10.1186/s10020-024-00988-4",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC43A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "c9e14e4a2d1e2790b8b11428cf9fcc090fd24cecd9c8ad7cfb49fb85390f0cee"
+              }
+            },
+            {
+              "title": "Activation of protein kinase C decreases equilibrative nucleobase transporter 1-mediated substrate uptake via phosphorylation of threonine 231.",
+              "abstract": "Protein kinase C (PKC) signalling has been shown to be dysregulated in various cancers including acute lymphoblastic leukemia (ALL). We have previously determined that changes in the expression levels of SLC43A3-encoded equilibrative nucleobase transporter 1 (ENBT1) can significantly alter 6-mercaptopurine (6-MP) toxicity in ALL cells. 6-MP is a common drug used in ALL chemotherapy. Furthermore, it has been reported that activation of PKC by phorbol 12-myristate 13-acetate (PMA) impacts nucleobase uptake via an ENBT1-like transporter in Lilly Laboratories Culture-Porcine Kidney 1 (LLC-PK1) cells. We hypothesized that activation of PKC would also alter ENBT1-mediated uptake of nucleobases in leukemia cell models. Using MOLT-4, SUP-B15, and K562 cells, we incubated the cells with PMA or its inactive isoform 4α-PMA for 30 min and determined changes to ENBT1-mediated substrate uptake. All of the cell lines tested showed decreased ENBT1-mediated substrate uptake when exposed PMA, relative to that observed using 4α-PMA. Pre-incubation with the broad-spectrum PKC inhibitor, Gö6983, reversed the decrease caused by PMA. Finally, to determine the residue responsible for this PKC-mediated effect, we transiently transfected HEK293 cells (which do not express endogenous ENBT1) with wild-type SLC43A3 transcript or constructs mutated to modify the predicted PKC sites in ENBT1. We found that the mutation of threonine 231 to alanine prevents the decrease in ENBT1-mediated uptake following incubation with PMA, suggesting its involvement. This study shows that activation of PKC decreases ENBT1-mediated uptake, suggesting that aberrant activation of PKC in ALL could decrease ENBT1-mediated 6-MP uptake potentially leading to decreased therapeutic efficacy.",
+              "doi": "10.1016/j.bbagen.2025.130765",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC43A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ba63aebb55110318a9f799d90b46c451337c6117a834e8bac7bc72c5e017a8fc"
+              }
+            },
+            {
+              "title": "Impact of the loss of slc43a3 on 6-mercaptopurine absorption and tissue distribution in mice.",
+              "abstract": "6-Mercaptopurine (6-MP) is a nucleobase analog used in the therapy of acute lymphoblastic leukemia and inflammatory bowel disease. It is associated with numerous side effects including myelotoxicity, hepatotoxicity, and gastrointestinal complications, which can lead to patient adherence issues or discontinuation of treatment. This is further complicated by the wide variability in plasma levels of 6-MP and the therapeutic response to a standard dose. Although a number of enzyme polymorphisms have been linked to therapeutic response, it is unclear what factors underlie the variability in plasma levels. We have established that SLC43A3-encoded equilibrative nucleobase transporter 1 mediates the transport of 6-MP into cells in both mice and humans. To determine whether this transporter is critical for 6-MP absorption and biodistribution, we examined the effect of the genetic deletion of slc43a3 in mice on the absorption and tissue distribution of orally administered 6-MP. A high-performance liquid chromatography method was developed to measure tissue levels of 6-MP and its key metabolites, 6-methylmercaptoprine, 6-thiourate, and 6-thioguanine nucleotides. The results of this study show that loss of slc43a3 dramatically reduces the absorption of 6-MP from the gastrointestinal tract and attenuates the levels achieved in peripheral tissues. Furthermore, the loss of slc43a3 decreases the tissue:blood concentration ratios of 6-MP and its metabolites, particularly in those tissues that show high levels of expression of slc43a3, such as the heart and lungs. Therefore, it is possible that differences in SLC43A3 expression in humans may contribute to the variability seen in 6-MP plasma levels and therapeutic response. SIGNIFICANCE STATEMENT: The loss of slc43a3 in mice dramatically reduces the absorption and the biodistribution of the chemotherapeutic drug 6-mercaptopurine. These data suggest that variations in SLC43A3 expression in humans may contribute to the variability in plasma levels that have been reported when using this drug therapeutically.",
+              "doi": "10.1016/j.dmd.2025.100054",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC43A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": false,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "0f2435cf25ee391d9bb0d64b58708bcd66015cd125a51f7776d2715187403d09"
+              }
+            },
+            {
+              "title": "Multi-omics analysis reveals the association between specific solute carrier proteins gene expression patterns and the immune suppressive microenvironment in glioma.",
+              "abstract": "Glioma is the most prevalent malignant brain tumour. Currently, reshaping its tumour microenvironment has emerged as an appealing strategy to enhance therapeutic efficacy. As the largest group of transmembrane transport proteins, solute carrier proteins (SLCs) are responsible for the transmembrane transport of various metabolites and ions. They play a crucial role in regulating the metabolism and functions of malignant cells and immune cells within the tumour microenvironment, making them a promising target in cancer therapy. Through multidimensional data analysis and experimental validation, we investigated the genetic landscape of SLCs in glioma. We established a classification system comprising 7-SLCs to predict the prognosis of glioma patients and their potential responses to immunotherapy and chemotherapy. Our findings unveiled specific SLC expression patterns and their correlation with the immune-suppressive microenvironment and metabolic status. The 7-SLC classification system was validated in distinguishing subgroups within the microenvironment, specifically identifying subsets involving malignant cells and tumour-associated macrophages. Furthermore, the orphan protein SLC43A3, a core member of the 7-SLC classification system, was identified as a key facilitator of tumour cell proliferation and migration, suggesting its potential as a novel target for cancer therapy.",
+              "doi": "10.1111/jcmm.18339",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC43A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "59cd8799f357e125578929173340323bafcfb4379e2d7541ee7d601809b47caf"
+              }
+            },
+            {
+              "title": "NUP160-SLC43A3 is a novel recurrent fusion oncogene in angiosarcoma.",
+              "abstract": "Angiosarcoma is a malignant vascular tumor originating from endothelial cells of blood vessels or lymphatic vessels. The specific driver mutations in angiosarcoma remain unknown. In this study, we investigated this issue by transcriptome sequencing of patient-derived angiosarcoma cells (ISO-HAS), identifying a novel fusion gene NUP160-SLC43A3 found to be expressed in 9 of 25 human angiosarcoma specimens that were examined. In tumors harboring the fusion gene, the duration between the onset of symptoms and the first hospital visit was significantly shorter, suggesting more rapid tumor progression. Stable expression of the fusion gene in nontransformed human dermal microvascular endothelial cells elicited a gene-expression pattern mimicking ISO-HAS cells and increased cell proliferation, an effect traced in part to NUP160 truncation. Conversely, RNAi-mediated attenuation of NUP160 in ISO-HAS cells decreased cell number. Confirming the oncogenic effects of the fusion protein, subcutaneous implantation of NUP160-SLC43A3-expressing fibroblasts induced tumors resembling human angiosarcoma. Collectively, our findings advance knowledge concerning the genetic causes of angiosarcoma, with potential implications for new diagnostic and therapeutic approaches.",
+              "doi": "10.1158/0008-5472.CAN-15-0418",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC43A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "93af83be3b9e361fee9488e5491403e8869f8c8d5009850ebf93d87d1174f846"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC43A3 cancer=B-lymphoblastic leukaemia bucket=membership Under the experimental conditions of B-lymphoblastic leukaemia, using Synthetic construct as the model organism, Daudi-Cas9 cells from Cell line as the sample, with Crispr BTN3A low vs Crispr BTN3A high as the treatment condition, and MAGECK as the method.\nIs SLC43A3 promote B-lymphoblastic leukaemia's Tumor Survival?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC43A3']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC43A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC43A3",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "B-lymphoblastic leukaemia",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC43A3": {
+          "status": "unavailable",
+          "gene": "SLC43A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC43A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC43A3",
+          "cancer_type": "B-lymphoblastic leukaemia",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC43A3']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC43A3 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC43A3"
+        ],
+        "confidence": 0.819,
+        "abstained": false,
+        "gene_scores": {
+          "SLC43A3": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC43A3 极性矛盾=1 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.80 -> P(必需)=0.819 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC43A3']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC43A3在glioma中表现为促进增殖/迁移、抑制凋亡的肿瘤促进因子；在DLBCL等B细胞恶性肿瘤的代谢/预后模型中也作为生存相关基因出现。B-lymphoblastic leukaemia与DLBCL同属B细胞谱系恶性肿瘤，且常依赖MYC驱动的高增殖代谢状态，因此SLC43A3介导的嘌呤碱基/脂质代谢相关转运更可能支持肿瘤细胞存活与增殖，而非抑制。 | 目标癌种缺少直接PPR/TIMER/KM/DE证据，不能据此判阴性。跨癌种证据显示SLC43A3/ENBT1在glioma中促进proliferation、migration和oxidative phosphorylation，并抑制apoptosis；在B细胞淋巴瘤DLBCL的脂质代谢预后模型中也被纳入生存相关基因，且高风险与MYC target activation相关。B-ALL/Daudi样B细胞肿瘤同样具有高增殖、代谢重编程和MYC通路依赖的特征。SLC43A3作为钠非依赖嘌呤碱基转运体，可能通过维持核苷酸/嘌呤代谢底物供应支持快速增殖细胞存活。因此最可能方向为promote tumor survival；但由于文献中SLC43A3也参与6-MP摄取，其作用可能受药物暴露条件影响，且B-ALL直接CRISPR必需性证据缺失，置信度仅中等偏低。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": true,
+        "winner": null,
+        "candidates": [
+          "SLC43A3"
+        ],
+        "confidence": 0.55,
+        "abstained": false,
+        "gene_scores": {
+          "SLC43A3": 2.8
+        },
+        "basis": [
+          "kg_direction",
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC43A3在glioma中表现为促进增殖/迁移、抑制凋亡的肿瘤促进因子；在DLBCL等B细胞恶性肿瘤的代谢/预后模型中也作为生存相关基因出现。B-lymphoblastic leukaemia与DLBCL同属B细胞谱系恶性肿瘤，且常依赖MYC驱动的高增殖代谢状态，因此SLC43A3介导的嘌呤碱基/脂质代谢相关转运更可能支持肿瘤细胞存活与增殖，而非抑制。 | 目标癌种缺少直接PPR/TIMER/KM/DE证据，不能据此判阴性。跨癌种证据显示SLC43A3/ENBT1在glioma中促进proliferation、migration和oxidative phosphorylation，并抑制apoptosis；在B细胞淋巴瘤DLBCL的脂质代谢预后模型中也被纳入生存相关基因，且高风险与MYC target activation相关。B-ALL/Daudi样B细胞肿瘤同样具有高增殖、代谢重编程和MYC通路依赖的特征。SLC43A3作为钠非依赖嘌呤碱基转运体，可能通过维持核苷酸/嘌呤代谢底物供应支持快速增殖细胞存活。因此最可能方向为promote tumor survival；但由于文献中SLC43A3也参与6-MP摄取，其作用可能受药物暴露条件影响，且B-ALL直接CRISPR必需性证据缺失，置信度仅中等偏低。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [
+          "glioma"
+        ],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC43A3']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC43A3"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T16:14:29Z"
+  }
+}

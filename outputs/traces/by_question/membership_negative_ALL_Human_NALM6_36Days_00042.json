@@ -1,0 +1,387 @@
+{
+  "qid": "membership_negative_ALL_Human_NALM6_36Days_00042",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC7A1 inhibit ALL's Tumor Growth?",
+  "constraints": {
+    "cancer": "ALL",
+    "cell_line": "NALM6",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0h vs Crispr 24Days"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC7A1"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_ALL_Human_NALM6_36Days_00042",
+      "status": "ok",
+      "summary": "检索到 4 类证据、8 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC7A1"
+      ],
+      "requested_context": {
+        "cancer": "ALL",
+        "cell_line": "NALM6",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0h vs Crispr 24Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC7A1",
+              "protein_function": "High-affinity, low capacity permease involved in the transport of the cationic amino acids (arginine, lysine and ornithine) in non-hepatic tissues.",
+              "aliases": "CAT-1, REC1L, HCAT1, ATRC1, ERR",
+              "transport_type": "F (non-obligatory E)"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC7A1",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family",
+              "target_properties": {
+                "name": "SLC7 Cationic amino acid   transporter/glycoprotein-associated family"
+              }
+            },
+            {
+              "gene": "SLC7A1",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "CAT-1",
+              "target_properties": {
+                "name": "CAT-1"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Oocyte-specific deletion of eukaryotic translation initiation factor 5 causes apoptosis of mouse oocytes within the early-growing follicles by mitochondrial fission defect-reactive oxygen species-DNA damage.",
+              "abstract": "Mutations in several translation initiation factors are closely associated with premature ovarian insufficiency (POI), but the underlying pathogenesis remains largely unknown. We generated eukaryotic translation initiation factor 5 (Eif5) conditional knockout mice aiming to investigate the function of eIF5 during oocyte growth and follicle development. Here, we demonstrated that Eif5 deletion in mouse primordial and growing oocytes both resulted in the apoptosis of oocytes within the early-growing follicles. Further studies revealed that Eif5 deletion in oocytes downregulated the levels of mitochondrial fission-related proteins (p-DRP1, FIS1, MFF and MTFR) and upregulated the levels of the integrated stress response-related proteins (AARS1, SHMT2 and SLC7A1) and genes (Atf4, Ddit3 and Fgf21). Consistent with this, Eif5 deletion in oocytes resulted in mitochondrial dysfunction characterized by elongated form, aggregated distribution beneath the oocyte membrane, decreased adenosine triphosphate content and mtDNA copy numbers, and excessive accumulation of reactive oxygen species (ROS) and mitochondrial superoxide. Meanwhile, Eif5 deletion in oocytes led to a significant increase in the levels of DNA damage response proteins (γH2AX, p-CHK2 and p-p53) and proapoptotic proteins (PUMA and BAX), as well as a significant decrease in the levels of anti-apoptotic protein BCL-xL. These findings indicate that Eif5 deletion in mouse oocytes results in the apoptosis of oocytes within the early-growing follicles via mitochondrial fission defects, excessive ROS accumulation and DNA damage. This study provides new insights into pathogenesis, genetic diagnosis and potential therapeutic targets for POI. Eif5 deletion in oocytes leads to arrest in oocyte growth and follicle development. Eif5 deletion in oocytes impairs the translation of mitochondrial fission-related proteins, followed by mitochondrial dysfunction. Depletion of Eif5 causes oocyte apoptosis via ROS accumulation and DNA damage response pathway.",
+              "doi": "10.1002/ctm2.1791",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "8343f248cb1a1298b5f9d2c3da5be2d2a9abd1caefacf9fd38f531fe86205298"
+              }
+            },
+            {
+              "title": "Hypoxia-Inducible Factor HIF1α Regulates the Expression of SLC7A1 to Mediate Erastin-Induced Ferroptosis in Cervical Cancer Cells.",
+              "abstract": "This study aims to investigate the regulation of hypoxia-inducible factor 1α (HIF1α) on cationic amino acid transporter 1 (SLC7A1) expression and its potential mechanism YTH N6-methyladenosine RNA binding protein 1 (YTHDF1) in Erastin-induced ferroptosis in human cervical cancer (CaCx) cells. Human CaCx cell lines (HeLa and SiHa) were cultured in vitro under normoxic or hypoxic conditions and treated with Erastin (30 μM, a stimulator of ferroptosis) before cell transfection with small interfering RNAs against HIF1α, YTHDF1, or SLC7A1 (si-HIF1α, si-YTHDF1 or si-SLC7A1). Cell viability and the levels of malondialdehyde (MDA), reactive oxygen species (ROS), glutathione (GSH), and Fe were measured, followed by transmission electron microscopy for ferroptosis-associated mitochondrial morphological changes in CaCx cells. The interaction of HIF1α in YTHDF1 was determined by JASPAR database and dual-luciferase reporter assay. Chromatin immunoprecipitation (ChIP) was performed to determine the enrichment of HIF1α at YTHDF1 promoter. The N6-methyladenosine (m6A) methylation level of SLC7A1 was detected using Methylated RNA Immunoprecipitation (MeRIP) assay. In vivo experiments were conducted on nude mice via injection of HeLa or SiHa cells. Erastin repressed cell growth and induced ferroptosis in CaCx cells, while hypoxia pretreatment partly reversed the Erastin-induced cytotoxicity and ferroptosis in CaCx cells. Erastin caused low HIF1α levels in CaCx cells, while hypoxia pretreatment partially counteracted this downregulation. Knockdown of HIF1α and YTHDF1 downregulated SLC7A1 expression and promoted Erastin-induced ferroptosis in hypoxic CaCx cells. Additionally, HIF1α regulated YTHDF1 expression, leading to increased m6A methylation and activation of SLC7A1. The in vivo xenograft model further validated that Erastin inhibited tumor growth in CaCx, while the antitumor effect of Erastin was partially reversed by HIF1α overexpression. HIF1α regulates the expression of YTHDF1, thereby enhancing the m6A modification level of SLC7A1, promoting its expression, and ultimately inhibiting Erastin-induced ferroptosis in CaCx cells.",
+              "doi": "10.1002/jgm.70027",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "89f0e8fac55db7000f7024d01d64837e474428920379743296e355dccdb9bd7f"
+              }
+            },
+            {
+              "title": "The functions and clinical implications of hsa_circ_0032462-miR-488-3p-SLC7A1 axis in human osteosarcoma.",
+              "abstract": "Osteosarcoma, as the most common primary malignant bone tumor, has become one of the main causes of cancer-related deaths in adolescents and children. This study thus proposes new biomarkers for OS based on whole-transcriptome re-analysis and experimental confirmation. We find two circRNA dataset related to OS, from tissue and cell perspectives respectively, from the GEO database. Analysis of the tumor group and control group data used GEO2R, to obtain the differentially expressed (DE) circRNAs and take the intersection. The downstream miRNAs were predicted and subsequently the targeted mRNAs for these miRNAs were collected. These targeted mRNAs intersected with prognostic mRNAs reported in previous literature. CircRNA/miRNA/mRNA and circRNA/miRNA/mRNA/key pathway networks were constructed and GO and KEGG analyses were done. The prognostic values of hsa_circ_0032462, miR-488-3p, and SLC7A were confirmed in OS using Kaplan-Meier analyses and univariate/multivariate analyses. And the cellular functions of these three factors in OS were further explored through cell experiments. Five DEcircRNAs were obtained, targeting 42 miRNAs and linking 67 prognostic-related mRNA. GO analysis and KEGG analysis indicate that the mRNAs in the network were involved in various biological processes and signaling pathways related to OS. The luciferase report validated the targeting relationship of hsa_circ_0032462, miR-488-3p, and SLC7A. Cell survival, migration, and invasion experiments found that hsa_circ_0032462 and SLC7A promoted OS, while miR-488-3p inhibited OS. Aberrantly expressed circRNAs in OS are involved in OS progression via the ceRNA network. Hsa_circ_0032462-miR-488-3p-SLC7A1 axis can be developed to be alternative therapeutic targets for OS.",
+              "doi": "10.1016/j.bone.2024.117333",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "15d059af947a52627e397b3dfffd66a9db0346563fb276d81be9776a8f40352f"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'In\\xa0vivo CRISPR screening reveals nutrient signaling processes underpinning CD8 T\\xa0cell fate decisions.'}",
+              "abstract": "How early events in effector T cell (T) subsets tune memory T cell (T) responses remains incompletely understood. Here, we systematically investigated metabolic factors in fate determination of T and T cells using in vivo pooled CRISPR screening, focusing on negative regulators of T responses. We found that amino acid transporters Slc7a1 and Slc38a2 dampened the magnitude of T differentiation, in part through modulating mTORC1 signaling. By integrating genetic and systems approaches, we identified cellular and metabolic heterogeneity among T cells, with terminal effector differentiation associated with establishment of metabolic quiescence and exit from the cell cycle. Importantly, Pofut1 (protein-O-fucosyltransferase-1) linked GDP-fucose availability to downstream Notch-Rbpj signaling, and perturbation of this nutrient signaling axis blocked terminal effector differentiation but drove context-dependent T proliferation and T development. Our study establishes that nutrient uptake and signaling are key determinants of T cell fate and shape the quantity and quality of T responses.",
+              "doi": "10.1016/j.cell.2021.02.021",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06f3772572b42d86e63788fa09a469bf548db353b7ea44192d52e2c19801888a"
+              }
+            },
+            {
+              "title": "GCN2 inhibition sensitizes arginine-deprived hepatocellular carcinoma cells to senolytic treatment.",
+              "abstract": "Hepatocellular carcinoma (HCC) is a typically fatal malignancy exhibiting genetic heterogeneity and limited therapy responses. We demonstrate here that HCCs consistently repress urea cycle gene expression and thereby become auxotrophic for exogenous arginine. Surprisingly, arginine import is uniquely dependent on the cationic amino acid transporter SLC7A1, whose inhibition slows HCC cell growth in vitro and in vivo. Moreover, arginine deprivation engages an integrated stress response that promotes HCC cell-cycle arrest and quiescence, dependent on the general control nonderepressible 2 (GCN2) kinase. Inhibiting GCN2 in arginine-deprived HCC cells promotes a senescent phenotype instead, rendering these cells vulnerable to senolytic compounds. Preclinical models confirm that combined dietary arginine deprivation, GCN2 inhibition, and senotherapy promote HCC cell apoptosis and tumor regression. These data suggest novel strategies to treat human liver cancers through targeting SLC7A1 and/or a combination of arginine restriction, inhibition of GCN2, and senolytic agents.",
+              "doi": "10.1016/j.cmet.2022.06.010",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC7A1"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "4e1c652fdb14e57d30e6eaa64872730d61c2c0438d46c09ba8bef0750cfeae7a"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC7A1 cancer=ALL bucket=membership Under the experimental conditions of ALL, using Human as the model organism, NALM6 from Cell line as the sample, with Crispr 0h vs Crispr 24Days as the treatment condition, and MAGECK as the method.\nIs SLC7A1 inhibit ALL's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC7A1']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "acute lymphoblastic leukemia (ALL)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC7A1",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC7A1",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC7A1",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "ALL",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC7A1": {
+          "status": "unavailable",
+          "gene": "SLC7A1",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC7A1": {
+          "status": "unsupported_cancer",
+          "gene": "SLC7A1",
+          "cancer_type": "ALL",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A1"
+        ],
+        "confidence": 0.66,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A1": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.66；法官理由: No direct NALM6 CRISPR depletion evidence; E’s essentiality is weak and directionally mismatched. Two independent LLM votes agree SLC7A1 loss is likely buffered, so claim lacks support.。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A1']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC7A1 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.40 -> P(必需)=0.581 -> 必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC7A1"
+        ],
+        "confidence": 0.62,
+        "abstained": false,
+        "gene_scores": {
+          "SLC7A1": 0.4
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "ppr",
+          "ppr_rank",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'A:True': 1, 'A:False': 2}，最终智能体辩论后裁决：winner=None answer=False conf=0.62；法官理由: No direct NALM6 MAGeCK readout supports SLC7A1 knockout inhibiting ALL growth; E only weakly predicts essentiality and lacks direction. Two independent LLM votes agree the claim is unsupported.。原证据通道判定: winner=None answer=True conf=0.581（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC7A1']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC7A1"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-28T19:58:42Z"
+  }
+}

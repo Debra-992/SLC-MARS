@@ -1,0 +1,436 @@
+{
+  "qid": "pairwise_negative_Melanoma_Human_A375_00292",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC39A7 and SLC9C2 is more likely to inhibit Melanoma's Tumor Growth?",
+  "constraints": {
+    "cancer": "Melanoma",
+    "cell_line": "A375",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 6days vs Crispr 10days"
+  },
+  "ground_truth": {
+    "winner": "SLC39A7"
+  },
+  "effective_genes": [
+    "SLC39A7",
+    "SLC9C2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_Melanoma_Human_A375_00292",
+      "status": "ok",
+      "summary": "检索到 4 类证据、10 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC39A7",
+        "SLC9C2"
+      ],
+      "requested_context": {
+        "cancer": "Melanoma",
+        "cell_line": "A375",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 6days vs Crispr 10days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC39A7",
+              "protein_function": "Transports Zn(2+) from the endoplasmic reticulum (ER)/Golgi apparatus to the cytosol, playing an essential role in the regulation of cytosolic zinc levels. Acts as a gatekeeper of zinc release from intracellular stores, requiring post-translational activation by phosphorylation, resulting in activation of multiple downstream pathways leading to cell growth and proliferation.",
+              "aliases": "RING5, ZIP7, D6S2244E, H2-KE4, HKE4, KE4, Solute Carrier Family 39 (Zinc Transporter), Member 7, HLA Class II Region Expressed Gene KE42, Really Interesting New Gene 5, Protein Histidine-Rich Membrane Protein Ke4, Zinc Transporter SLC39A7, Zrt-, Irt-Like Protein 7, Zinc Transporter 7, Ke4 Gene, Mouse, Human Homolog Of ZRT/IRT-Like Protein 7, D6S115E, AGM9",
+              "transport_type": ""
+            },
+            {
+              "gene": "SLC9C2",
+              "protein_function": "Involved in pH regulation.",
+              "aliases": "SLC9A11, NHE11",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC39A7",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC39 Metal ion  transporter family",
+              "target_properties": {
+                "name": "SLC39 Metal ion  transporter family"
+              }
+            },
+            {
+              "gene": "SLC39A7",
+              "relationship": "PROTEIN_ALIASES",
+              "target_labels": [
+                "Protein"
+              ],
+              "target": "ZIP7",
+              "target_properties": {
+                "name": "ZIP7"
+              }
+            },
+            {
+              "gene": "SLC9C2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC9 Na+/H+  exchanger family",
+              "target_properties": {
+                "name": "SLC9 Na+/H+  exchanger family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "PSMB8 as a Candidate Marker of Responsiveness to Preoperative Radiation Therapy in Rectal Cancer Patients.",
+              "abstract": "The ability to predict individual responsiveness to cancer therapy is urgently needed. This is particularly true for patients with locally advanced rectal cancer (LARC) because a large proportion are resistant to preoperative chemoradiation therapy (CRT). In this study, we sought to identify markers that could predict response by comparing the gene expression profiles of the tumors of patients who received preoperative CRT. The basal gene expression profiles of tumors from 22 LARC patients who were responders (n=9) and nonresponders (n=13) to preoperative CRT were analyzed using RNA sequencing (RNA-Seq). To validate the RNA-Seq findings, real-time reverse transcriptase polymerase chain reaction (RT-PCR) was performed on tumor samples from an additional 40 LARC patients (n=20 responders; n=20 nonresponders). Candidate genes were stably overexpressed or knocked down in colorectal cancer (CRC) cell lines, and the effect on response to radiation was tested in vitro and also in vivo in a mouse xenograft model. Eight differentially expressed (>16-fold) genes (B3GALT4, HSPA1B, KRBOX1, PPBP, PPP1R18, PSMB8, SLC39A7, and TAP2) associated with the preoperative CRT response were identified (P<.0005). Among these genes, real-time RT-PCR showed that PSMB8 and SLC39A7 were upregulated in the responsive group of the additional 40 LARC patients. In CRC cell lines, PSMB8 overexpression significantly reduced colony formation and increased the apoptosis-inducing molecules cleaved caspase-3 and cleaved PARP after 6-Gy irradiation. PSMB8 knockdown increased colony formation and decreased caspase-3 activation and cleaved PARP levels after irradiation. SLC39A7 overexpression had no significant effects on irradiated CSC cells. After irradiation of the xenografted mice, tumors that arose from CRC cell line HCT116 overexpressing PSMB8 grew more slowly than did those from HCT116 with vector alone. These results suggest that PSMB8 is a predictive marker of preoperative radiosensitivity in LARC patients. Clinical validation in a larger cohort is now required.",
+              "doi": "10.1016/j.ijrobp.2017.03.023",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "345a370e5505e8fd9ebc06c6d387da154f91be6ee561644ac749bc2e985203ba"
+              }
+            },
+            {
+              "title": "Identifying key genes and functionally enriched pathways in acute myeloid leukemia by weighted gene co-expression network analysis.",
+              "abstract": "Acute myeloid leukemia (AML) is characterized by the uncontrolled proliferation of myeloid leukemia cells in the bone marrow and other hematopoietic tissues and is highly heterogeneous. While with the progress of sequencing technology, understanding of the AML-related biomarkers is still incomplete. The purpose of this study is to identify potential biomarkers for prognosis of AML. Based on WGCNA analysis of gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases were employed for investigating potential biomarkers for the prognosis of AML. This study screened a total of 6153 genes by analyzing various changes in 103 acute myeloid leukemia (AML) samples, including gene mutation expression, methylation level distribution, mRNA expression, and AML-related genes in public databases. Moreover, seven AML-related co-expression modules were mined by WGCNA analysis, and twelve biomarkers associated with the AML prognosis were identified from each top 10 genes of the seven co-expression modules. The AML samples were then classified into two subgroups, the prognosis of which is significantly different, based on the expression of these twelve genes. The differentially expressed 7 genes of two subgroups (HOXB-AS3, HOXB3, SLC9C2, CPNE8, MEG8, S1PR5, MIR196B) are mainly involved in glucose metabolism, glutathione biosynthesis, small G protein-mediated signal transduction, and the Rap1 signaling pathway. With the utilization of WGCNA mining, seven gene co-expression modules were identified from the TCGA database, and there are unreported genes that may be potential driver genes of AML and may be the direction to identify the possible molecular signatures to predict survival of AML patients and help guide experiments for potential clinical drug targets.",
+              "doi": "10.1007/s13353-024-00881-0",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC9C2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": false,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "11ee2a46d64d60350e43fff958f991225e20684b1f571930f8b5edb0b2c8fa1c"
+              }
+            },
+            {
+              "title": "Requirement of Zinc Transporter SLC39A7/ZIP7 for Dermal Development to Fine-Tune Endoplasmic Reticulum Function by Regulating Protein Disulfide Isomerase.",
+              "abstract": "Skin is the first area that manifests zinc deficiency. However, the molecular mechanisms by which zinc homeostasis affects skin development remain largely unknown. Here, we show that zinc-regulation transporter-/iron-regulation transporter-like protein 7 (ZIP7) localized to the endoplasmic reticulum plays critical roles in connective tissue development. Mice lacking the Slc39a7/Zip7 gene in collagen 1-expressing tissue exhibited dermal dysplasia. Ablation of ZIP7 in mesenchymal stem cells inhibited cell proliferation thereby preventing proper dermis formation, indicating that ZIP7 is required for dermal development. We also found that mesenchymal stem cells lacking ZIP7 accumulated zinc in the endoplasmic reticulum, which triggered zinc-dependent aggregation and inhibition of protein disulfide isomerase, leading to endoplasmic reticulum dysfunction. These results suggest that ZIP7 is necessary for endoplasmic reticulum function in mesenchymal stem cells and, as such, is essential for dermal development.",
+              "doi": "10.1016/j.jid.2017.03.031",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b95dea97267f8bf7935eafd634e2a1c32d4c98ccde437a2fc2378847d2f2512c"
+              }
+            },
+            {
+              "title": "Discovery of a ZIP7 inhibitor from a Notch pathway screen.",
+              "abstract": "The identification of activating mutations in NOTCH1 in 50% of T cell acute lymphoblastic leukemia has generated interest in elucidating how these mutations contribute to oncogenic transformation and in targeting the pathway. A phenotypic screen identified compounds that interfere with trafficking of Notch and induce apoptosis via an endoplasmic reticulum (ER) stress mechanism. Target identification approaches revealed a role for SLC39A7 (ZIP7), a zinc transport family member, in governing Notch trafficking and signaling. Generation and sequencing of a compound-resistant cell line identified a V430E mutation in ZIP7 that confers transferable resistance to the compound NVS-ZP7-4. NVS-ZP7-4 altered zinc in the ER, and an analog of the compound photoaffinity labeled ZIP7 in cells, suggesting a direct interaction between the compound and ZIP7. NVS-ZP7-4 is the first reported chemical tool to probe the impact of modulating ER zinc levels and investigate ZIP7 as a novel druggable node in the Notch pathway.",
+              "doi": "10.1038/s41589-018-0200-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "01b9bee14f6c95d130f84ae72e65b608c7a94442f62d1c1dc7a3d3aaed8b29af"
+              }
+            },
+            {
+              "title": "SLC39A7, regulated by miR-139-5p, induces cell proliferation, migration and inhibits apoptosis in gastric cancer via Akt/mTOR signaling pathway.",
+              "abstract": "As a zinc transporter, SLC39A7 (zip7) is vital in intestinal epithelial self-renewal, and recent studies suggested that SLC39A7 was related to cancer progression. Whereas, little is known about the role of SLC39A7 in gastric cancer (GC). In the present study, qRT-PCR analysis demonstrated that SLC39A7 mRNA level was increased in both GC tissues and cell lines. Overexpressing SLC39A7 boosted cell proliferation and migration, while inhibited apoptosis in GC. It was also found that si-SLC39A7 suppressed Akt/mTOR pathway and activation of Akt/mTOR pathway reversed the effects of si-SLC39A7 on GC development. Through prediction website, we found that SLC39A7 was directly regulated by miR-139-5p. miR-139-5p mimic had adverse effects on SLC39A7 expression and influence in the GC cell proliferation, migration and apoptosis by Akt/mTOR signaling pathway, while miR-139-5p inhibitor showed opposite effects. To conclude, our studies showed that SLC39A7 was negatively regulated by miR-139-5p. Besides, SLC39A7 positively regulated GC development through Akt/mTOR signaling pathway. These results indicate that SLC39A7 may be a candidate target gene for GC treatment.",
+              "doi": "10.1042/BSR20200041",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC39A7"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7f20694606250fcad857924376c6d42da9a3a5cf5175851436e654b86bdb50c9"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC39A7 cancer=Melanoma bucket=pairwise Under the experimental conditions of Melanoma, using Human as the model organism, A375 from Cell line as the sample, with Crispr 6days vs Crispr 10days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC39A7 and SLC9C2 is more likely to inhibit Melanoma's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 3 项（ppr=ok, timer=ok, km=ok, de=error）；候选基因=['SLC39A7', 'SLC9C2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 2,
+        "seed_names": [
+          "Melanoma",
+          "uveal melanoma (UVM)"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC39A7",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          },
+          {
+            "gene": "SLC9C2",
+            "ppr_score": null,
+            "degree_corrected_score": null,
+            "graph_degree": null,
+            "in_graph": false
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC39A7",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A7.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "ok",
+        "gene": "SLC39A7",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "stats_text": "P value: 0.0332",
+        "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC39A7_melanoma_km_only.png",
+        "evidence_scope": "plot_and_stats"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Melanoma",
+        "tcga_code": "SKCM",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC39A7": {
+          "status": "ok",
+          "gene": "SLC39A7",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC39A7.png",
+          "evidence_scope": "plot_only"
+        },
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC39A7": {
+          "status": "ok",
+          "gene": "SLC39A7",
+          "cancer_type": "Melanoma",
+          "tcga_code": "SKCM",
+          "stats_text": "P value: 0.0332",
+          "plot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\km_plots\\SLC39A7_melanoma_km_only.png",
+          "evidence_scope": "plot_and_stats"
+        },
+        "SLC9C2": {
+          "status": "unavailable",
+          "gene": "SLC9C2",
+          "cancer_type": "Melanoma",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC39A7', 'SLC9C2']",
+        "status": "ok",
+        "summary": "[方向+量级+旁系综合] best=SLC39A7(combined=0.62 pol=+0 buf=+0.00 strength=0.62) vs SLC9C2(combined=0.20)，证据: ['kg_neighbor', 'km', 'ppr', 'ppr_rank', 'timer']。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC39A7",
+        "candidates": [
+          "SLC39A7",
+          "SLC9C2"
+        ],
+        "confidence": 0.263,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A7": 0.6239,
+          "SLC9C2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[方向+量级+旁系综合] best=SLC39A7(combined=0.62 pol=+0 buf=+0.00 strength=0.62) vs SLC9C2(combined=0.20)，证据: ['kg_neighbor', 'km', 'ppr', 'ppr_rank', 'timer']。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC39A7', 'SLC9C2']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC39A7/ZIP7 has direct functional evidence in dermal development, mesenchymal cell proliferation, ER zinc homeostasis, ER stress, and Notch trafficking; these are more transferable to melanoma (a skin-derived tumor with strong proliferation/ER stress/Notch-related dependencies) than SLC9C2's pH-regulation/AML co-expression biomarker signal. | No direct Melanoma A375 CRISPR evidence is available, so the decision relies on cross-cancer biology. SLC39A7 is a zinc transporter whose loss perturbs ER function, proliferation, and survival pathways; it is chemically inhibitable and linked to apoptosis/ER stress in T-ALL, and to dermal development/proliferation. In contrast, SLC9C2 is mainly tied to pH regulation and an AML co-expression module, with no direct proliferation/essentiality evidence. The weak KM signal for SLC39A7 is not decisive, but the mechanistic analogy is stronger. Therefore, knocking out or inhibiting SLC39A7 is more likely than SLC9C2 to suppress Melanoma tumor growth in A375 CRISPR screens.",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC39A7",
+        "candidates": [
+          "SLC39A7",
+          "SLC9C2"
+        ],
+        "confidence": 0.61,
+        "abstained": false,
+        "gene_scores": {
+          "SLC39A7": 0.6239,
+          "SLC9C2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "km",
+          "ppr",
+          "ppr_rank",
+          "timer"
+        ],
+        "rationale": "[跨癌种类推] SLC39A7/ZIP7 has direct functional evidence in dermal development, mesenchymal cell proliferation, ER zinc homeostasis, ER stress, and Notch trafficking; these are more transferable to melanoma (a skin-derived tumor with strong proliferation/ER stress/Notch-related dependencies) than SLC9C2's pH-regulation/AML co-expression biomarker signal. | No direct Melanoma A375 CRISPR evidence is available, so the decision relies on cross-cancer biology. SLC39A7 is a zinc transporter whose loss perturbs ER function, proliferation, and survival pathways; it is chemically inhibitable and linked to apoptosis/ER stress in T-ALL, and to dermal development/proliferation. In contrast, SLC9C2 is mainly tied to pH regulation and an AML co-expression module, with no direct proliferation/essentiality evidence. The weak KM signal for SLC39A7 is not decisive, but the mechanistic analogy is stronger. Therefore, knocking out or inhibiting SLC39A7 is more likely than SLC9C2 to suppress Melanoma tumor growth in A375 CRISPR screens. ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC39A7', 'SLC9C2']",
+        "status": "ok",
+        "summary": "SLC39A7/ZIP7参与锌稳态、ER应激和增殖相关信号，在多种癌症包括黑色素瘤中更常与细胞生长和存活相关；敲低或CRISPR敲除更可能抑制A375黑色素瘤肿瘤生长。SLC9C2主要见于神经元相关转运功能，在黑色素瘤生长中的证据和表达相关性较弱。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC39A7",
+        "candidates": [
+          "SLC39A7",
+          "SLC9C2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC39A7/ZIP7参与锌稳态、ER应激和增殖相关信号，在多种癌症包括黑色素瘤中更常与细胞生长和存活相关；敲低或CRISPR敲除更可能抑制A375黑色素瘤肿瘤生长。SLC9C2主要见于神经元相关转运功能，在黑色素瘤生长中的证据和表达相关性较弱。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T04:53:43Z"
+  }
+}

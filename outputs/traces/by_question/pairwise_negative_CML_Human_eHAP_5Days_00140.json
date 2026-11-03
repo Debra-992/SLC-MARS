@@ -1,0 +1,401 @@
+{
+  "qid": "pairwise_negative_CML_Human_eHAP_5Days_00140",
+  "bucket": "pairwise",
+  "task_type": "pairwise_negative",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC45A3 and SLC25A25 is more likely to inhibit CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "winner": "SLC45A3"
+  },
+  "effective_genes": [
+    "SLC45A3",
+    "SLC25A25"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=pairwise_negative_CML_Human_eHAP_5Days_00140",
+      "status": "ok",
+      "summary": "检索到 4 类证据、9 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC45A3",
+        "SLC25A25"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC25A25",
+              "protein_function": "Involved in the transport of Mg-ATP in exchange for phosphate, and likely responsible for the net uptake or efflux of adenine nucleotides into or from the mitochondria.",
+              "aliases": "MCSC, SCAMC2, SCaMC-2, Short Calcium-Binding Mitochondrial Carrier 2, Small Calcium-Binding Mitochondrial Carrier 2, Mitochondrial ATP-Mg/Pi Carrier Protein 3",
+              "transport_type": "O"
+            },
+            {
+              "gene": "SLC45A3",
+              "protein_function": "Proton-associated sucrose transporter. May be able to transport also glucose and fructose.",
+              "aliases": "Prostein, PCANAP6, IPCA-6, Prostate Cancer Associated Protein 6",
+              "transport_type": "C / H+ [PMID: 25164149]"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC25A25",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC25 Mitochondrial  carrier family",
+              "target_properties": {
+                "name": "SLC25 Mitochondrial  carrier family"
+              }
+            },
+            {
+              "gene": "SLC45A3",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC45 H+/sugar  cotransporter family",
+              "target_properties": {
+                "name": "SLC45 H+/sugar  cotransporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Long non-coding RNA SLC25A25-AS1 exhibits oncogenic roles in non-small cell lung cancer by regulating the microRNA-195-5p/ITGA2 axis.",
+              "abstract": "Long non-coding RNA SLC25A25 antisense RNA 1 (SLC25A25-AS1) exerts antitumour activity in colorectal cancer. The present study investigated whether SLC25A25-AS1 is implicated in the aggressiveness of non-small cell lung cancer (NSCLC) and the possible underlying mechanism. SLC25A25-AS1 expression in NSCLC was determined by reverse transcription-quantitative PCR. The proliferation, apoptosis, migration and invasion of NSCLC cells were tested  through cell counting kit-8 assay, flow cytometry analysis, Transwell migration and invasion assays, followed by  validation using animal experiments. Additionally, the competitive endogenous RNA theory for SLC25A25-AS1, microRNA-195-5p (miR-195-5p) and integrin α2 (ITGA2) was identified using subcellular fractionation, bioinformatics analysis, reverse transcription-quantitative PCR, western blotting, a luciferase assay and RNA immunoprecipitation. As compared with normal lung tissues, increased expression of SLC25A25-AS1 was demonstrated in NSCLC tissues using The Cancer Genome Atlas database.. In addition, SLC25A25-AS1 was overexpressed in both NSCLC tissues and cell lines. High SLC25A25-AS1 expression was markedly associated with shorter overall survival time of patients with NSCLC. SLC25A25-AS1 silencing impeded NSCLC cell proliferation and triggered apoptosis, while restricting cell migration and invasion. Tumour growth  was also impaired by SLC25A25-AS1 silencing. Mechanistically, SLC25A25-AS1 was demonstrated to be an miR-195-5p sponge in NSCLC cells. miR-195-5p mimics decreased ITGA2 expression in NSCLC cells by directly targeting ITGA2, and SLC25A25-AS1 interference decreased ITGA2 expression by sequestering miR-195-5p. Furthermore, the antitumour effects of SLC25A25-AS1 silencing on malignant behaviours were counteracted when ITGA2 was restored or when miR-195-5p was silenced. In summary, by controlling the miR-195-5p/ITGA2 axis, SLC25A25-AS1 served tumour-promoting roles in NSCLC cells. Therefore, the SLC25A25-AS1/miR-195-5p/ITGA2 signalling pathway might be an attractive target for future therapeutic options in NSCLC.",
+              "doi": "10.3892/ol.2021.12790",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A25"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "ec6ea04b9d8673b32524c41a69fc52f7c96df5042eaf3416c4c592b1cc298e89"
+              }
+            },
+            {
+              "title": "SLC45A3-ELK4 functions as a long non-coding chimeric RNA.",
+              "abstract": "Gene fusions in cancer typically lead to the expression of a fusion protein or disrupt the expression of one of the parental genes. Here we report a new phenomenon whereby a fusion transcript functions as a long non-coding chimeric RNA (lnccRNA). This fusion RNA, SLC45A3-ELK4, generated by cis-splicing between neighboring genes, was found in prostate cancer. The fusion RNA encodes the same protein as ELK4. Intriguingly, we found that the fusion RNA level is less than 1% of wild type ELK4, unlikely to perturb the general pool of ELK4 protein. Nonetheless, when the fusion RNA, but not ELK4 is silenced, cell proliferation is inhibited in both androgen-dependent and castration-resistant prostate cancer cells. This growth arrest can be rescued by exogenous expression of the fusion and a mutant designed to prevent translation of the ELK4 protein. In the same setting, the mutant could also suppress CDKN1A and several other targets of SLC45A3-ELK4. In addition, similar to many long non-coding RNAs, the fusion RNA is enriched in the nuclear fraction. Altogether, these results indicate that SLC45A3-ELK4 regulates cancer cell proliferation by its transcript, not translated protein.",
+              "doi": "10.1016/j.canlet.2017.07.007",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "720a7db52bf01e3c71dad9024d0216e5773d12e42729440318ebadc50afb90e9"
+              }
+            },
+            {
+              "title": "In vivo miR-138-5p inhibition alleviates monocrotaline-induced pulmonary hypertension and normalizes pulmonary KCNK3 and SLC45A3 expression.",
+              "abstract": "The pathogenesis of pulmonary arterial hypertension (PAH) involves many signalling pathways. MicroRNAs are potential candidates involved in simultaneously coordinating multiple genes under such multifactorial conditions. MiR-138-5p is overexpressed in pulmonary arterial smooth muscle cells (PASMCs) from PAH patients and in lungs from rats with monocrotaline-induced pulmonary hypertension (MCT-PH). MiR-138-5p is predicted to regulate the expression of the potassium channel KCNK3, whose loss is associated with the development and progression of PAH. We hypothesized that, in vivo, miR-138-5p inhibition would restore KCNK3 lung expression and subsequently alleviate PAH. Nebulization-based delivery of anti-miR-138-5p to rats with established MCT-PH significantly reduced the right ventricular systolic pressure and significantly improved the pulmonary arterial acceleration time (PAAT). These haemodynamic improvements were related to decrease pulmonary vascular remodelling, lung inflammation and pulmonary vascular cell proliferation in situ. In vivo inhibition of miR-138-5p restored KCNK3 mRNA expression and SLC45A3 protein expression in the lungs. We confirmed that in vivo inhibition of miR-138-5p reduces the development of PH in experimental MCT-PH. The possible curative mechanisms involve at least the normalization of lung KCNK3 as well as SLC45A3 expression.",
+              "doi": "10.1186/s12931-020-01444-7",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "de848fbe898b779d51b472da3a23583b171c70ca24b63544d6710cf812d49873"
+              }
+            },
+            {
+              "title": "Lipocalin 2 over-expression facilitates progress of castration-resistant prostate cancer via improving androgen receptor transcriptional activity.",
+              "abstract": "Castration-resistant prostate cancer (CRPC) is the lethal phenotype of prostate cancer. Lipocalin 2 (LCN2) is aberrantly expressed in many cancers including primary prostate cancer (PCa), but its role in CRPC has not been reported. LCN2 expression was upregulated in human primary PCa and CRPC tissues. Overexpression of LCN2 promoted C4-2B and 22RV1 cell proliferation while knockdown of LCN2 markedly inhibited C4-2B and 22RV1 cell growth. LCN2 overexpression led to increased AR downstream gene SLC45A3 without upregulating AR expression. In the xenograft model, overexpression of LCN2 significantly promoted tumor growth. LCN2 expression was detected in primary PCa and CRPC tissues and cell lines C4-2B and 22RV1 using immunohistochemistry and western blotting, respectively. Serum LCN2 level was detected vi ELISA. Lentiviruses-mediated over-expression of LCN2 and LCN2 knockdown were performed in CRPC cell lines. Expressions of androgen receptor (AR) downstream genes was examined in cell lines, in CRPC tissues, and in animal models. LCN2 could facilitate cell proliferation of CRPC via AR transcriptional activity. LCN2 could be a novel target in CRPC.",
+              "doi": "10.18632/oncotarget.11790",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC45A3"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "f2f8b80e7131fbc05cee5dfd406587be9059b0b25a39389c8c6a88cfa67cb024"
+              }
+            },
+            {
+              "title": "Decreased expression of LncRNA SLC25A25-AS1 promotes proliferation, chemoresistance, and EMT in colorectal cancer cells.",
+              "abstract": "Increasing evidence suggests that long non-coding RNAs (lncRNAs) are aberrantly expressed in colorectal cancer (CRC); however, only few CRC-related lncRNAs have been characterized. In this study, we aimed to dig out potential dysregulated lncRNAs that are highly involved in CRC development. Using a lncRNA-mining approach, we performed lncRNA expression profiling in a large CRC cohort from Gene Expression Ominus (GEO), GSE39582 test series (N = 585). We identified 31 downregulated lncRNAs and 16 upregulated lncRNAs from the GSE39582 test series patients (566 tumor patients and 19 normal controls). The reliability of lncRNA expression profiles was further confirmed by RT-qPCR in carcinoma tissues and paired adjacent normal tissues from 30 CRC patients, also in the serum from 109 CRC patients, and 99 normal individuals. We demonstrated that the expression of SLC25A25-AS1, which has not been reported previously, was significantly decreased in both the tumor tissues (27 out of 30) and serum of CRC patients. SLC25A25-AS1 overexpression significantly inhibited proliferation and colony formation in colorectal cancer cell lines, and downregulation of SLC25A25-AS1 obviously enhanced chemoresistance and promoted EMT process in vitro associated with Erk and p38 signaling pathway activation. Therefore, SLC25A25-AS1 was determined to play a tumor suppressive role in CRC. Our results might provide a lncRNA-based target for CRC treatment.",
+              "doi": "PMID:27553025",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC25A25"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "b26d3610355608478e51a10d5e5c01fdaa5b10d3836cc5f64b78c025470a30ec"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC45A3 cancer=CML bucket=pairwise Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nWhich gene between SLC45A3 and SLC25A25 is more likely to inhibit CML's Tumor Growth?",
+      "status": "unavailable",
+      "summary": "计算候选完成：可用工具 0 项（ppr=no_seed, timer=unavailable, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC45A3', 'SLC25A25']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC45A3",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC45A3",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC45A3": {
+          "status": "unavailable",
+          "gene": "SLC45A3",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A25": {
+          "status": "unavailable",
+          "gene": "SLC25A25",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC45A3": {
+          "status": "unsupported_cancer",
+          "gene": "SLC45A3",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        },
+        "SLC25A25": {
+          "status": "unsupported_cancer",
+          "gene": "SLC25A25",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC25A25']",
+        "status": "ok",
+        "summary": "方向/量级/旁系缓冲证据均不足(best=SLC25A25 strength=0.05, pol=0, buf=0)，弃答不伪造。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A25",
+        "candidates": [
+          "SLC45A3",
+          "SLC25A25"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {
+          "SLC45A3": 0.05,
+          "SLC25A25": 0.05
+        },
+        "basis": [
+          "kg_neighbor",
+          "llm_judge",
+          "triad_vote"
+        ],
+        "rationale": "[三通道表决+交叉批评·v16] 票型 {'W:SLC25A25': 2}，最终智能体辩论后裁决：winner=SLC25A25 answer=None conf=0.68；法官理由: E abstained, but two independent LLM votes favor SLC25A25. Its mitochondrial ATP-Mg/Pi carrier role suggests broader essentiality and CRISPR depletion in eHAP/CML, whereas SLC45A3 is prostate-associated and less likely to inhibit tumor grow。原证据通道判定: winner=None answer=None conf=0.0（保留于溯源）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic+triad+crit16",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC25A25']",
+        "status": "ok",
+        "summary": "[跨癌种类推] SLC25A25/SLC25A25-AS1 在 NSCLC 中表现为促肿瘤生长相关：其敲低抑制细胞增殖、迁移、侵袭和体内肿瘤生长；同时 SLC25A25 是线粒体 ATP-Mg/Pi 载体，参与腺嘌呤核苷酸转运。CML 虽为血液系统肿瘤，但白血病细胞高度依赖线粒体能量代谢和增殖信号，因此跨癌种可类比到代谢/线粒体依赖型肿瘤生长抑制。相比之下，SLC45A3 主要与前列腺癌、AR 下游表达和前列腺谱系相关，CML 缺乏这种组织/转录因子背景，证据可迁移性较弱。 | 目标癌种 CML 没有直接 TIMER/KM 或图谱邻近证据，因此需依赖跨癌种生物学推理。SLC25A25 的文献证据虽主要来自 SLC25A25-AS1 而非蛋白编码基因本身，但其与肿瘤生长抑制的干预关系较强，且 SLC25A25 的线粒体 ATP/Pi 转运功能与快速增殖细胞的能量代谢依赖更契合 CML 的潜在脆弱性。SLC45A3 的癌症证据集中在前列腺癌/AR 通路及融合 lncRNA，谱系特异性较强，向 CML 迁移的不确定性更高。综合功能、表达背景和类比可迁移性，SLC25A25 更可能在 CML 中敲除后抑制肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": "SLC25A25",
+        "candidates": [
+          "SLC45A3",
+          "SLC25A25"
+        ],
+        "confidence": 0.58,
+        "abstained": false,
+        "gene_scores": {
+          "SLC45A3": 0.05,
+          "SLC25A25": 0.05
+        },
+        "basis": [
+          "kg_neighbor"
+        ],
+        "rationale": "[跨癌种类推] SLC25A25/SLC25A25-AS1 在 NSCLC 中表现为促肿瘤生长相关：其敲低抑制细胞增殖、迁移、侵袭和体内肿瘤生长；同时 SLC25A25 是线粒体 ATP-Mg/Pi 载体，参与腺嘌呤核苷酸转运。CML 虽为血液系统肿瘤，但白血病细胞高度依赖线粒体能量代谢和增殖信号，因此跨癌种可类比到代谢/线粒体依赖型肿瘤生长抑制。相比之下，SLC45A3 主要与前列腺癌、AR 下游表达和前列腺谱系相关，CML 缺乏这种组织/转录因子背景，证据可迁移性较弱。 | 目标癌种 CML 没有直接 TIMER/KM 或图谱邻近证据，因此需依赖跨癌种生物学推理。SLC25A25 的文献证据虽主要来自 SLC25A25-AS1 而非蛋白编码基因本身，但其与肿瘤生长抑制的干预关系较强，且 SLC25A25 的线粒体 ATP/Pi 转运功能与快速增殖细胞的能量代谢依赖更契合 CML 的潜在脆弱性。SLC45A3 的癌症证据集中在前列腺癌/AR 通路及融合 lncRNA，谱系特异性较强，向 CML 迁移的不确定性更高。综合功能、表达背景和类比可迁移性，SLC25A25 更可能在 CML 中敲除后抑制肿瘤生长。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=pairwise candidates=['SLC45A3', 'SLC25A25']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "pairwise",
+        "task_type": "pairwise_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC45A3",
+          "SLC25A25"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T10:06:45Z"
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "qid": "membership_positive_CML_Human_eHAP_5Days_00132",
+  "bucket": "membership",
+  "task_type": "membership_positive",
+  "question": "Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC46A2 promote CML's Tumor Growth?",
+  "constraints": {
+    "cancer": "CML",
+    "cell_line": "eHAP",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+  },
+  "ground_truth": {
+    "answer": false
+  },
+  "effective_genes": [
+    "SLC46A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_positive_CML_Human_eHAP_5Days_00132",
+      "status": "ok",
+      "summary": "检索到 4 类证据、3 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC46A2"
+      ],
+      "requested_context": {
+        "cancer": "CML",
+        "cell_line": "eHAP",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr Low Growth 5Days vs Crispr High Growth 5Days"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC46A2",
+              "protein_function": "Proton-coupled transporter that delivers pathogen-associated or danger-associated molecular patterns to cytosolic pattern recognition receptors.",
+              "aliases": "Ly110, TSCOT, Thymic Stromal Cotransporter Homolog",
+              "transport_type": ""
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC46A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC46 Folate  transporter family",
+              "target_properties": {
+                "name": "SLC46 Folate  transporter family"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Plant-derived miR166a-3p packaged into exosomes to cross-kingdom inhibit mammary cell proliferation and promote apoptosis by targeting APLNR gene.",
+              "abstract": "Plant-derived microRNAs (miRNAs) have attracted significant attention for their potential in cross-kingdom gene regulation, but the mechanisms of their entry, stability, and function in animal bodies need further investigation. We provided an in-depth analysis of tissue-specific miRNA expression in dairy cows, identifying 347 miRNAs, including 16 novel candidates, across 21 normal tissues. Our findings revealed that specific miRNAs, such as miR-192, miR-143, miR-148a, miR-486, and miR-21-5p, showed distinct tissue enrichment. In addition, a total of 167 maize-derived miRNAs were identified in dairy cow tissues, particularly in the rumen, mammary glands, serum, and exosomes. These exogenous miRNAs, which are abundant and conserved among plants, may be absorbed by the SLC46A2 transporter in the rumen epithelium during feeding and distributed to other tissues via exosomal encapsulation. The maize-derived miR166a-3p was highly abundant. Transfection experiments confirmed that miR166a-3p reduces the expression of proliferation markers (PCNA, Cyclin D, and Cyclin E) and the anti-apoptotic gene Bcl2, while upregulating the pro-apoptotic gene Bax. Moreover, exosomes derived from bovine serum were found to mediate these effects, as miR166a-3p-enriched exosomes inhibited cell proliferation and promoted apoptosis, further supporting the cross-kingdom role of plant-derived miRNAs in regulating biological processes. This study enhances the understanding of miRNA regulatory mechanisms, particularly the absorption and systemic transport of plant-derived miRNAs in dairy cows. The findings underscore the potential for using exogenous miRNAs, like miR166a-3p, in agricultural and medical contexts, warranting further investigation into their functions and cross-species interactions.",
+              "doi": "10.1016/j.ijbiomac.2024.138470",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC46A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "19727bc874d6d282d31f6d1798f8c241f0d6fbb16326fbaeb74ea26cefded2d0"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC46A2 cancer=CML bucket=membership Under the experimental conditions of CML, using Human as the model organism, eHAP from Cell line as the sample, with Crispr Low Growth 5Days vs Crispr High Growth 5Days as the treatment condition, and MAGECK as the method.\nIs SLC46A2 promote CML's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=no_seed, timer=ok, km=unsupported_cancer, de=unsupported_cancer）；候选基因=['SLC46A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "no_seed",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 0,
+        "seed_names": [],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "ok",
+        "gene": "SLC46A2",
+        "row_count": 0,
+        "rows": [],
+        "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC46A2.png",
+        "evidence_scope": "plot_only"
+      },
+      "survival": {
+        "status": "unsupported_cancer",
+        "gene": "SLC46A2",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "unsupported_cancer",
+        "cancer_type": "CML",
+        "tcga_code": null,
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC46A2": {
+          "status": "ok",
+          "gene": "SLC46A2",
+          "row_count": 0,
+          "rows": [],
+          "boxplot_path": "<SLC_ROOT>\\outputs\\tool-cache\\KMTIMER\\timer_cache\\boxplot_SLC46A2.png",
+          "evidence_scope": "plot_only"
+        }
+      },
+      "survival_by_gene": {
+        "SLC46A2": {
+          "status": "unsupported_cancer",
+          "gene": "SLC46A2",
+          "cancer_type": "CML",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC46A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC46A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC46A2"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC46A2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC46A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC46A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC46A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC46A2"
+        ],
+        "confidence": 0.493,
+        "abstained": false,
+        "gene_scores": {
+          "SLC46A2": 0.2
+        },
+        "basis": [
+          "kg_neighbor",
+          "timer"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC46A2 极性矛盾=0 方向证据=0 旁系孤儿=0 缓冲冗余=0 量级=0.20 -> P(必需)=0.493 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词promote）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC46A2']",
+        "status": "ok",
+        "summary": "SLC46A2 主要编码质子偶联寡肽/药物转运体，不是 CML 已知的核心增殖驱动基因；在 Human eHAP 的 CRISPR Low Growth vs High Growth 5Days 筛选背景下，没有可靠参数化证据表明敲除 SLC46A2 会导致生长降低，因此不认为其促进 CML 肿瘤生长。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_positive",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC46A2"
+        ],
+        "confidence": 0.68,
+        "abstained": false,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "SLC46A2 主要编码质子偶联寡肽/药物转运体，不是 CML 已知的核心增殖驱动基因；在 Human eHAP 的 CRISPR Low Growth vs High Growth 5Days 筛选背景下，没有可靠参数化证据表明敲除 SLC46A2 会导致生长降低，因此不认为其促进 CML 肿瘤生长。",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": true,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "correct"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T00:27:13Z"
+  }
+}

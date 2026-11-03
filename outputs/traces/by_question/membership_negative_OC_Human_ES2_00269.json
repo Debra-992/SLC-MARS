@@ -1,0 +1,423 @@
+{
+  "qid": "membership_negative_OC_Human_ES2_00269",
+  "bucket": "membership",
+  "task_type": "membership_negative",
+  "question": "Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC38A2 inhibit Ovarian cancer's Tumor Growth?",
+  "constraints": {
+    "cancer": "Ovarian cancer",
+    "cell_line": "ES2",
+    "family": "Tumor Growth",
+    "method": "MAGECK",
+    "species": "Human",
+    "treatment": "Crispr 0day vs Crispr Final Time"
+  },
+  "ground_truth": {
+    "answer": true
+  },
+  "effective_genes": [
+    "SLC38A2"
+  ],
+  "supply": {
+    "kg": {
+      "knowledge_type": "background_kg",
+      "question": "qid=membership_negative_OC_Human_ES2_00269",
+      "status": "ok",
+      "summary": "检索到 4 类证据、11 行背景知识（来源独立性=NOT_ESTABLISHED）。",
+      "source": "project Neo4j and MongoDB via MCP",
+      "error": null,
+      "candidates": [
+        "SLC38A2"
+      ],
+      "requested_context": {
+        "cancer": "Ovarian cancer",
+        "cell_line": "ES2",
+        "family": "Tumor Growth",
+        "method": "MAGECK",
+        "species": "Human",
+        "treatment": "Crispr 0day vs Crispr Final Time"
+      },
+      "evidence": [
+        {
+          "operation": "gene_profile",
+          "rows": [
+            {
+              "gene": "SLC38A2",
+              "protein_function": "Symporter that cotransports neutral amino acids and sodium ions from the extracellular to the intracellular side of the cell membrane. The transport is pH-sensitive, Li(+)-intolerant, electrogenic, driven by the Na(+) electrochemical gradient and cotransports of neutral amino acids and sodium ions with a stoichiometry of 1:1. May function in the transport of amino acids at the blood-brain barrier, in the supply of maternal nutrients to the fetus through the placenta, in maintaining a key metabolic glutamine/glutamate balance, and in osteoblast differentiation and bone formation during bone development.",
+              "aliases": "SNAT2, SAT2, ATA2, KIAA1382, Sodium-Coupled Neutral Amino Acid Transporter 2, Sodium-Coupled Neutral Amino Acid Symporter 2, System A Amino Acid Transporter 2, System N Amino Acid Transporter 2, Amino Acid Transporter A2, System A Transporter 1 Protein 40-9-1, Solute Carrier Family 38, Member 2, Amino Acid Transporter 2, PRO1068",
+              "transport_type": "C / Na+"
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene) WHERE g.name IN $genes RETURN g.name AS gene, g.ProteinFunction AS protein_function, g.ProteinAliases AS aliases, g.Transport_type AS transport_type ORDER BY g.name LIMIT 8",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_neighbors",
+          "rows": [
+            {
+              "gene": "SLC38A2",
+              "relationship": "BELONGS_TO",
+              "target_labels": [
+                "SLCFamily"
+              ],
+              "target": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family",
+              "target_properties": {
+                "name": "SLC38 System A and System N sodium-coupled  neutral amino acid transporter family"
+              }
+            },
+            {
+              "gene": "SLC38A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            },
+            {
+              "gene": "SLC38A2",
+              "relationship": "IS_SOURCE",
+              "target_labels": [
+                "RelaEvent"
+              ],
+              "target": null,
+              "target_properties": {
+                "rel_BC": "PROMOTION",
+                "paper_dois": [],
+                "rel_AB": "PROMOTION"
+              }
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[r]-(n) WHERE g.name IN $genes AND type(r)<>'HAS_SEQUENCE' RETURN g.name AS gene,type(r) AS relationship,labels(n) AS target_labels,n.name AS target,properties(n) AS target_properties ORDER BY g.name,type(r),n.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "gene_disease_paths",
+          "rows": [
+            {
+              "gene": "SLC38A2",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "Gastric cancer (GC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            },
+            {
+              "gene": "SLC38A2",
+              "pathway": "stemness",
+              "rel_AB": "PROMOTION",
+              "rel_BC": "PROMOTION",
+              "gene_disease_effect": "PROMOTION",
+              "disease": "colorectal cancer(CRC)",
+              "disease_sort": "cancers",
+              "paper_dois": []
+            }
+          ],
+          "cypher": "MATCH (g:SLCGene)-[:IS_SOURCE]->(e:RelaEvent)<-[:IS_TARGET]-(d:Disease) WHERE g.name IN $genes OPTIONAL MATCH (p:Pathway)-[:IS_MEDIATOR]->(e) RETURN g.name AS gene, p.name AS pathway, e.rel_AB AS rel_AB, e.rel_BC AS rel_BC, CASE WHEN e.rel_AB = e.rel_BC THEN 'PROMOTION' ELSE 'SUPPRESSION' END AS gene_disease_effect, d.name AS disease, d.diseaseSort AS disease_sort, e.paper_dois AS paper_dois ORDER BY CASE WHEN toLower(d.name) CONTAINS toLower($cancer) THEN 0 ELSE 1 END, d.name, g.name LIMIT 16",
+          "status": "ok"
+        },
+        {
+          "operation": "literature",
+          "rows": [
+            {
+              "title": "Oncogenic KRAS mutations enhance amino acid uptake by colorectal cancer cells via the hippo signaling effector YAP1.",
+              "abstract": "Oncogenic KRAS mutations develop unique metabolic dependencies on nutrients to support tumor metabolism and cell proliferation. In particular, KRAS mutant cancer cells exploit amino acids (AAs) such as glutamine and leucine, to accelerate energy metabolism, redox balance through glutathione synthesis and macromolecule biosynthesis. However, the identities of the amino acid transporters (AATs) that are prominently upregulated in KRAS mutant cancer cells, and the mechanism regulating their expression have not yet been systematically investigated. Here, we report that the majority of the KRAS mutant colorectal cancer (CRC) cells upregulate selected AATs (SLC7A5/LAT1, SLC38A2/SNAT2, and SLC1A5/ASCT2), which correlates with enhanced uptake of AAs such as glutamine and leucine. Consistently, knockdown of oncogenic KRAS downregulated the expression of AATs, thereby decreasing the levels of amino acids taken up by CRC cells. Moreover, overexpression of mutant KRAS upregulated the expression of AATs (SLC7A5/LAT1, SLC38A2/SNAT2, and SLC1A5/ASCT2) in KRAS wild-type CRC cells and mouse embryonic fibroblasts. In addition, we show that the YAP1 (Yes-associated protein 1) transcriptional coactivator accounts for increased expression of AATs and mTOR activation in KRAS mutant CRC cells. Specific knockdown of AATs by shRNAs or pharmacological blockage of AATs effectively inhibited AA uptake, mTOR activation, and cell proliferation. Collectively, we conclude that oncogenic KRAS mutations enhance the expression of AATs via the hippo effector YAP1, leading to mTOR activation and CRC cell proliferation.",
+              "doi": "10.1002/1878-0261.12999",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "35c9b3e225f7226429f309c75cb7328f5b99fa9958907e27b31ca7302d8d3025"
+              }
+            },
+            {
+              "title": "Deficiency in the α1 subunit of Na+/K+-ATPase enhances the anti-proliferative effect of high osmolality in nucleus pulposus intervertebral disc cells.",
+              "abstract": "Intervertebral disc cells are constantly exposed to a hyperosmotic environment. Among cellular responses towards this stress is the inhibition of proliferation through the activation of p38 MAPK and p53. In an effort to further elucidate the biochemical pathways triggered by hyperosmotic stress, we assessed the high osmolality-induced transcriptional changes of bovine nucleus pulposus cells using whole-genome arrays. A 5- and a 24-h hyperosmotic treatment led to the differential expression of >100 and >200 genes, respectively, including nine genes encoding transporters (SLC4A11, SLC5A3, ATP1A1, SLC38A2, KCNK17, KCTD20, KCTD11, SLC7A5, and CLCA2). Differences in the transcriptional profile of these selected genes, as indicated by the microarrays experiments, were validated by qRT-PCR in 2D and 3D cell cultures, under hyperosmolar salt and sorbitol conditions, revealing the presence of a common triggering signal for osmotic adaptation. The key signaling molecules p38 MAPK and p53 were demonstrated to differently participate in the regulation of the aforementioned transporters. Finally, siRNA-mediated knocking-down of each one of the three transporters with the highest and sustained over-expression (i.e., SLC4A11, SLC5A3, and ATP1A1) had a distinct outcome on the transcriptional profile of the other transporters, on p38 MAPK and p53 phosphorylation and consequently on cell cycle progression. The inhibition of ATP1A1 had the most prominent effect on the transcription of the rest of the transporters and was found to enhance the anti-proliferative effect of hyperosmotic conditions through an increased G2/M cell cycle block, ascribing to this pump a central role in the osmoregulatory response of nucleus pulposus cells.",
+              "doi": "10.1002/jcp.25040",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "305a6b8c646cdbe79b4b19d68652d42a8a114845e8e1e718e01976f51b0fba05"
+              }
+            },
+            {
+              "title": "Regulation of glutamine carrier proteins by RNF5 determines breast cancer response to ER stress-inducing chemotherapies.",
+              "abstract": "Many tumor cells are fueled by altered metabolism and increased glutamine (Gln) dependence. We identify regulation of the L-glutamine carrier proteins SLC1A5 and SLC38A2 (SLC1A5/38A2) by the ubiquitin ligase RNF5. Paclitaxel-induced ER stress to breast cancer (BCa) cells promotes RNF5 association, ubiquitination, and degradation of SLC1A5/38A2. This decreases Gln uptake, levels of TCA cycle components, mTOR signaling, and proliferation while increasing autophagy and cell death. Rnf5-deficient MMTV-PyMT mammary tumors were less differentiated and showed elevated SLC1A5 expression. Whereas RNF5 depletion in MDA-MB-231 cells promoted tumorigenesis and abolished paclitaxel responsiveness, SLC1A5/38A2 knockdown elicited opposing effects. Inverse RNF5(hi)/SLC1A5/38A2(lo) expression was associated with positive prognosis in BCa. Thus, RNF5 control of Gln uptake underlies BCa response to chemotherapies.",
+              "doi": "10.1016/j.ccell.2015.02.006",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "197a6b00b12e5a6eef29819de30094e7a87072e17a58f99a76aa38bf7378fb7c"
+              }
+            },
+            {
+              "title": "{'sup': '+', '#text': 'In\\xa0vivo CRISPR screening reveals nutrient signaling processes underpinning CD8 T\\xa0cell fate decisions.'}",
+              "abstract": "How early events in effector T cell (T) subsets tune memory T cell (T) responses remains incompletely understood. Here, we systematically investigated metabolic factors in fate determination of T and T cells using in vivo pooled CRISPR screening, focusing on negative regulators of T responses. We found that amino acid transporters Slc7a1 and Slc38a2 dampened the magnitude of T differentiation, in part through modulating mTORC1 signaling. By integrating genetic and systems approaches, we identified cellular and metabolic heterogeneity among T cells, with terminal effector differentiation associated with establishment of metabolic quiescence and exit from the cell cycle. Importantly, Pofut1 (protein-O-fucosyltransferase-1) linked GDP-fucose availability to downstream Notch-Rbpj signaling, and perturbation of this nutrient signaling axis blocked terminal effector differentiation but drove context-dependent T proliferation and T development. Our study establishes that nutrient uptake and signaling are key determinants of T cell fate and shape the quantity and quality of T responses.",
+              "doi": "10.1016/j.cell.2021.02.021",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "06f3772572b42d86e63788fa09a469bf548db353b7ea44192d52e2c19801888a"
+              }
+            },
+            {
+              "title": "ALDH2 deficiency aggravates vascular injury-induced restenosis by enhancing vascular smooth muscle cell proliferation through SLC38A2-mediated upregulation of glutamine uptake.",
+              "abstract": "Vascular injury-induced restenosis is an important cause of poor long-term prognosis in patients with coronary artery disease (CAD). Although aldehyde dehydrogenase 2 (ALDH2) deficiency has been linked to poor outcomes in CAD patients, the precise mechanisms through which ALDH2 influences vascular injury-induced restenosis remain elusive. Herein, we attempted to explore the role of ALDH2 in modulating vascular smooth muscle cell (VSMC) proliferation and vascular injury-induced restenosis. Immunofluorescence and immunoblotting revealed that ALDH2 expression was significantly decreased in VSMCs in human stenotic coronary segments and injured mouse femoral and carotid arteries. Global ALDH2 knockout and VSMC-specific ALDH2 knockout exacerbated injury-induced neointima formation, whereas VSMC-specific ALDH2 overexpression reduced neointima formation. Endothelial cell (EC)-specific ALDH2 knockout had little effect on injury-induced neointima formation. Mechanistic studies revealed that ALDH2 deficiency facilitated VSMC proliferation by upregulating the expression of the glutamine transporter SLC38A2, which is a novel ALDH2 target gene. Further bioinformatics analysis, luciferase assays, and ChIP-qPCR revealed that ALDH2 deficiency increased SLC38A2 expression via activating transcription factor 4 (ATF4) and that ATF4 knockdown largely reversed the ability of ALDH2 deficiency to promote VSMC proliferation. Moreover, ALDH2 deficiency promoted the accumulation of 4-HNE adducted proteins, thereby activating ATF4, which subsequently increased SLC28A2 transcriptional activity in VSMCs. Importantly, downregulation of SLC38A2 by adeno-associated virus serotype 2 (AAV2) shRNA or by the inhibitor MeAIB has promising therapeutic potential in limiting VSMC proliferation and neointima formation. Finally, we demonstrated that VSMC proliferation was aggravated and that neointima formation occurred in ALDH2 mutant mice. Our study elucidates a novel mechanism through which ALDH2 deficiency aggravates neointimal formation by enhancing VSMC proliferation through an increase in glutamine uptake, suggesting a promising translational strategy for the prevention of vascular injury-induced restenosis.",
+              "doi": "10.1016/j.metabol.2025.156411",
+              "normalized_doi": "",
+              "retrieval": {
+                "version": "task-literature-v4-opt-in",
+                "matched_genes": [
+                  "SLC38A2"
+                ],
+                "context_match": "none",
+                "intervention_lexeme": true,
+                "outcome_lexeme": true,
+                "scientific_support": "not_assessed",
+                "source_independence": "not_assessed",
+                "source_text_sha256": "7bd61edaa2d4c05d1dabe79b4896e68b76bf91f78a7128572c901007b9dd6aa4"
+              }
+            }
+          ],
+          "cypher": null,
+          "status": "ok"
+        }
+      ],
+      "cypher": "",
+      "cypher_rows": [],
+      "schema_used": null,
+      "public_web_used": false,
+      "source_independence": "NOT_ESTABLISHED"
+    },
+    "ck": {
+      "knowledge_type": "candidate_data",
+      "question": "gene=SLC38A2 cancer=Ovarian cancer bucket=membership Under the experimental conditions of Ovarian cancer, using Human as the model organism, ES2 from Cell line as the sample, with Crispr 0day vs Crispr Final Time as the treatment condition, and MAGECK as the method.\nIs SLC38A2 inhibit Ovarian cancer's Tumor Growth?",
+      "status": "ok",
+      "summary": "计算候选完成：可用工具 1 项（ppr=ok, timer=unavailable, km=unavailable, de=error）；候选基因=['SLC38A2']；未路由/未知：['paralog:no_expression_panel']。未知不代表阴性。",
+      "source": null,
+      "error": null,
+      "graph_computation": {
+        "status": "ok",
+        "algorithm": "weighted_disease_seeded_degree_corrected_ppr",
+        "alpha": 0.6,
+        "beta": 0.5,
+        "seed_count": 1,
+        "seed_names": [
+          "ovarian cancer"
+        ],
+        "node_count": 1115,
+        "edge_count": 2657,
+        "graph_sha256": "4ea6e36c0aa0626ee326a55d04dc8aa3f276c33ce482f83f84cb16c9f3bb4847",
+        "candidates": [
+          {
+            "gene": "SLC38A2",
+            "ppr_score": 1.7120172957245838e-05,
+            "degree_corrected_score": 3.5897434562834406e-05,
+            "graph_degree": 2,
+            "in_graph": true
+          }
+        ],
+        "interpretation": "Network proximity only; not signed inhibition/promotion, not CRISPR measurement, missing/zero score is not negative outcome"
+      },
+      "expression": {
+        "status": "unavailable",
+        "gene": "SLC38A2",
+        "row_count": null,
+        "rows": [],
+        "boxplot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "survival": {
+        "status": "unavailable",
+        "gene": "SLC38A2",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": null,
+        "stats_text": null,
+        "plot_path": null,
+        "evidence_scope": "unknown"
+      },
+      "differential_expression": {
+        "status": "error",
+        "cancer_type": "Ovarian cancer",
+        "tcga_code": "OV",
+        "gene_family": "SLC",
+        "analysis_method": null,
+        "contrast": "tumor/normal",
+        "significant_count": null,
+        "top_genes": [],
+        "sample_counts": {},
+        "family_tested_count": null
+      },
+      "expression_by_gene": {
+        "SLC38A2": {
+          "status": "unavailable",
+          "gene": "SLC38A2",
+          "row_count": null,
+          "rows": [],
+          "boxplot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "survival_by_gene": {
+        "SLC38A2": {
+          "status": "unavailable",
+          "gene": "SLC38A2",
+          "cancer_type": "Ovarian cancer",
+          "tcga_code": null,
+          "stats_text": null,
+          "plot_path": null,
+          "evidence_scope": "unknown"
+        }
+      },
+      "paralog_redundancy": {},
+      "paralog_partners": {},
+      "skipped_tools": [
+        "paralog:no_expression_panel"
+      ]
+    }
+  },
+  "systems": {
+    "pipeline_heuristic": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC38A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC38A2"
+        ],
+        "confidence": 0.441,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A2": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC38A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "pipeline_auto": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A2']",
+        "status": "ok",
+        "summary": "[R2 必需性重排·v20] SLC38A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。",
+        "source": null,
+        "error": null,
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": false,
+        "winner": null,
+        "candidates": [
+          "SLC38A2"
+        ],
+        "confidence": 0.441,
+        "abstained": false,
+        "gene_scores": {
+          "SLC38A2": 2.45
+        },
+        "basis": [
+          "kg_direction_against",
+          "kg_disease_path",
+          "kg_neighbor",
+          "ppr",
+          "ppr_rank"
+        ],
+        "rationale": "[R2 必需性重排·v20] SLC38A2 极性矛盾=0 方向证据=1 旁系孤儿=0 缓冲冗余=0 量级=2.45 -> P(必需)=0.441 -> 非必需（construct=CRISPR loss-of-function 必需性，非促/抑方向；动词inhibit）。 ｜[三通道·v15 一致] 证据通道与纯LLM票1同向，多数已定，不再走批评/表决（零额外成本）。",
+        "analogy_cancers": [],
+        "decision_mode": "heuristic",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "wrong"
+    },
+    "baseline": {
+      "answer": {
+        "knowledge_type": "answer",
+        "question": "bucket=membership candidates=['SLC38A2']",
+        "status": "unavailable",
+        "summary": "",
+        "source": null,
+        "error": "TimeoutError",
+        "bucket": "membership",
+        "task_type": "membership_negative",
+        "answer": null,
+        "winner": null,
+        "candidates": [
+          "SLC38A2"
+        ],
+        "confidence": 0.0,
+        "abstained": true,
+        "gene_scores": {},
+        "basis": [],
+        "rationale": "[原生 MetaGPT baseline 需要可用 LLM；本次调用失败: TimeoutError]",
+        "analogy_cancers": [],
+        "decision_mode": "llm",
+        "used_llm": false,
+        "evidence_integrity": "unknown!=negative",
+        "conformal_threshold": null
+      },
+      "outcome": "abstain"
+    }
+  },
+  "provenance": {
+    "dataset": "clean",
+    "trace_version": "20",
+    "baseline_llm": true,
+    "ts": "2026-10-29T14:53:50Z"
+  }
+}

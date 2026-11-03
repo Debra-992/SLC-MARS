@@ -1,0 +1,8819 @@
+{
+  "generated_at": "2026-10-28T16:31:11Z",
+  "dataset_a_n": 489,
+  "counters": {
+    "stable": 223,
+    "novel": 123,
+    "unstable": 142,
+    "probe_error": 1,
+    "missing_input": 0
+  },
+  "template_version": "2",
+  "reused_rows": 438,
+  "probe_model": "qwen3.8-flash",
+  "note": "GT 仅在此标注工具内读取对照；B := novel ∪ unstable",
+  "labels": [
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00002",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_CUTLL1_Low-2V_00003",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00004",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00005",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00006",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00007",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00008",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00009",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00010",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00011",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00012",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_24h_00013",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00014",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00015",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00016",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00017",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00018",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00019",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00020",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00021",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00022",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00023",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00024",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00025",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00026",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00027",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00028",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00029",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00030",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00031",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00032",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00033",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00034",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00035",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00036",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00037",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00038",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00039",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00040",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00041",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00042",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00043",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00044",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00045",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00046",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00047",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00048",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00049",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00050",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_ALL_Human_NALM6_36Days_00051",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00063",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00065",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00069",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00072",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00073",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00074",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00076",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00078",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00079",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00084",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00085",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00086",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00087",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00088",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00089",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00090",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00091",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00092",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00093",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00094",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_20Days_00095",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00096",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00097",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00098",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00099",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00100",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00101",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00102",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_26Days_00103",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00104",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_ICI_00105",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00106",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00107",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00108",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00109",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00110",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00111",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00112",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_JQ1_00113",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00115",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00116",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00118",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00120",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00121",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00122",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00123",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00124",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_BRCA_Human_MCF7_TAM_00126",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00128",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00129",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00130",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00133",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00134",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00135",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00136",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_5Days_00137",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00140",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00141",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00142",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00143",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00144",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_CML_Human_eHAP_7Days_00145",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_COAD_Mouse_MC38-Ova_T-cell_00148",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_COAD_Mouse_MC38-Ova_T-cell_00149",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_GSC_NSC_00212",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_GSC_NSC_00213",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_Neural_stem_cells_NSC_00214",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_Neural_stem_cells_NSC_00215",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_Neural_stem_cells_NSC_00216",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_GBM_Human_Neural_stem_cells_NSC_00217",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00218",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00219",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00220",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00221",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00222",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00224",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00225",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00226",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00227",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00228",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00229",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00230",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00231",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Human_A375_00238",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Human_A375_00239",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Human_A375_00240",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Human_A375_00241",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00258",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00259",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00260",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00261",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00262",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00263",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00264",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00265",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00242",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00243",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00244",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00245",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00246",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00247",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00248",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00249",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00250",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00251",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00252",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00253",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00254",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00255",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00256",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00257",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00266",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00267",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00268",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00269",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00270",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00271",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00272",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00273",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00274",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_OC_Human_ES2_00275",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00276",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00277",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_RCA_Human_769P_P53-binding-library_00282",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_RCA_Human_769P_P53-binding-library_00283",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_negative_TNBC_Human_MCF7_35days_00286",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_negative_TNBC_Human_MCF7_35days_00287",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_ALL_Human_CUTLL1_7days_00000",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_ALL_Human_CUTLL1_7days_00001",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00057",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00058",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00062",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00064",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00066",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00067",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00068",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00070",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00071",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00075",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00080",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00081",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00082",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00083",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_BRCA_Human_MCF7_TAM_00114",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_BRCA_Human_MCF7_TAM_00117",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_BRCA_Human_MCF7_TAM_00125",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_BRCA_Human_MCF7_TAM_00127",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_5Days_00131",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_5Days_00132",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_7Days_00138",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CML_Human_eHAP_7Days_00139",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_COAD_Mouse_CT26-HA_T-cell_00146",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_COAD_Mouse_CT26-HA_T-cell_00147",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CRC_Human_HT29_Remdesivir_00208",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_CRC_Human_HT29_Remdesivir_00209",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_CRC_Human_HT30_HCQ_00210",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_CRC_Human_HT30_HCQ_00211",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00232",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": false,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00233",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00234",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00235",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00236",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": false,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "membership_positive_MDS_Human_MDS-L_AZA_00237",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00280",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00281",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00278",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "true",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00279",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": null,
+        "correct": null
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "probe_error"
+    },
+    {
+      "qid": "membership_positive_STAD_Human_OE19_Lapatinib_00284",
+      "bucket": "membership",
+      "gt": {
+        "answer": false
+      },
+      "probe1": {
+        "answer": true,
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "membership_positive_STAD_Human_OE19_Lapatinib_00285",
+      "bucket": "membership",
+      "gt": {
+        "answer": true
+      },
+      "probe1": {
+        "answer": true,
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "false",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_CUTLL1_Low-2V_00001",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC20A1"
+      },
+      "probe1": {
+        "answer": "SLC1A4",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00002",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00003",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00004",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC5A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00005",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC5A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00006",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC5A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00007",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00008",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00009",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00010",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00011",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00012",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC29A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00013",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00014",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC29A1"
+      },
+      "probe1": {
+        "answer": "SLC29A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC29A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00015",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC34A1"
+      },
+      "probe1": {
+        "answer": "SLC34A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC34A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_24h_00016",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC29A1"
+      },
+      "probe1": {
+        "answer": "SLC29A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC29A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00017",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00018",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00019",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC5A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00020",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC38A9",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A9",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00021",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC5A3"
+      },
+      "probe1": {
+        "answer": "SLC5A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC5A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00022",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00023",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00024",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A9",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00025",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00026",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00027",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00028",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC44A2",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00029",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC23A1"
+      },
+      "probe1": {
+        "answer": "SLC38A9",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A9",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00030",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC23A1"
+      },
+      "probe1": {
+        "answer": "SLC44A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC44A2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_ALL_Human_NALM6_36Days_00031",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC44A2"
+      },
+      "probe1": {
+        "answer": "SLC38A9",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00032",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00033",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC35F2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00034",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00035",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00036",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00037",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35F2"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00038",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00039",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00040",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00041",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35F2"
+      },
+      "probe1": {
+        "answer": "SLC35F2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00042",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35F2"
+      },
+      "probe1": {
+        "answer": "SLC35F2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00043",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35F2"
+      },
+      "probe1": {
+        "answer": "SLC35F2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00044",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC41A3"
+      },
+      "probe1": {
+        "answer": "SLC39A6",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00045",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC41A3"
+      },
+      "probe1": {
+        "answer": "SLC41A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC41A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00046",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A6"
+      },
+      "probe1": {
+        "answer": "SLC39A6",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A6",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00062",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A38",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00063",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC31A1"
+      },
+      "probe1": {
+        "answer": "SLC31A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC31A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00064",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A38"
+      },
+      "probe1": {
+        "answer": "SLC22A23",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A38",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00065",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A38"
+      },
+      "probe1": {
+        "answer": "SLC39A10",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A10",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00066",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A38"
+      },
+      "probe1": {
+        "answer": "SLC25A38",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A38",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00067",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC31A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC31A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00068",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC11A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00069",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC39A10",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A10",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00070",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC11A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00071",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC31A1"
+      },
+      "probe1": {
+        "answer": "SLC31A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC31A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00072",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC31A1"
+      },
+      "probe1": {
+        "answer": "SLC39A10",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC31A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00073",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC31A1"
+      },
+      "probe1": {
+        "answer": "SLC31A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC31A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00074",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A10"
+      },
+      "probe1": {
+        "answer": "SLC39A10",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A10",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00075",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC22A23"
+      },
+      "probe1": {
+        "answer": "SLC22A23",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC24A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_20Days_00076",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A10"
+      },
+      "probe1": {
+        "answer": "SLC39A10",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A10",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00077",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00078",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00079",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00080",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00081",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00082",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00083",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00084",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00085",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00086",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00087",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00088",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A51"
+      },
+      "probe1": {
+        "answer": "SLC25A51",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A51",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00089",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A28"
+      },
+      "probe1": {
+        "answer": "SLC25A28",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A28",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00090",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC11A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_26Days_00091",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC11A2"
+      },
+      "probe1": {
+        "answer": "SLC11A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A28",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_ICI_00092",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC39A9",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A9",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00093",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00094",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00095",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLCO4A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00096",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00097",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00098",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00099",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00100",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00101",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00102",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00103",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00104",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A1"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00105",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A18"
+      },
+      "probe1": {
+        "answer": "SLCO4A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLCO4A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00106",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A6"
+      },
+      "probe1": {
+        "answer": "SLCO4A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLCO4A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_JQ1_00107",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A6"
+      },
+      "probe1": {
+        "answer": "SLC1A6",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC6A18",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00108",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A9",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00109",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC7A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A9",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00110",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC39A9",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A9",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00111",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC37A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00112",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A9"
+      },
+      "probe1": {
+        "answer": "SLC39A9",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A9",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00113",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A7",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00114",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00115",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC37A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00116",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00117",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A7"
+      },
+      "probe1": {
+        "answer": "SLC7A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00118",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A7"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC37A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00119",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A7"
+      },
+      "probe1": {
+        "answer": "SLC7A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00120",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC4A11"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC4A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00121",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC10A6"
+      },
+      "probe1": {
+        "answer": "SLC4A11",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC10A6",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_BRCA_Human_MCF7_TAM_00122",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC10A6"
+      },
+      "probe1": {
+        "answer": "SLC37A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC37A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00129",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00130",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00131",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00132",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00133",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A25",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00134",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00135",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00136",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00137",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00138",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC2A8",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A8",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00139",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC1A6",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC45A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00140",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC25A25",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A25",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00141",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A6"
+      },
+      "probe1": {
+        "answer": "SLC2A8",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC2A8",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00142",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A8"
+      },
+      "probe1": {
+        "answer": "SLC25A25",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A25",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_5Days_00143",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A6"
+      },
+      "probe1": {
+        "answer": "SLC25A25",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A25",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00145",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00146",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00147",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35C1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00148",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00149",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00150",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00151",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00152",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC3A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00153",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC3A2"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC3A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00154",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC35C1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35C1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00155",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC12A6",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC12A6",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00156",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC45A3"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00157",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC12A6"
+      },
+      "probe1": {
+        "answer": "SLC35C1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35C1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00158",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35C1"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35C1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_CML_Human_eHAP_7Days_00159",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC12A6"
+      },
+      "probe1": {
+        "answer": "SLC25A3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_COAD_Mouse_MC38-Ova_T-cell_00162",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A32",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_GSC_NSC_00254",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC30A7"
+      },
+      "probe1": {
+        "answer": "SLC30A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC30A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00255",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00256",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A2"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00257",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A2"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00258",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00259",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00260",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC28A3"
+      },
+      "probe1": {
+        "answer": "SLC28A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC22A15",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00261",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00262",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A32",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00263",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC33A1"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F4",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00264",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC33A1"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC33A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00265",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC33A1"
+      },
+      "probe1": {
+        "answer": "SLC33A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00266",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A32",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00267",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F4",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00268",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00269",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00270",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F4",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00271",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A32",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00272",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00273",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A14"
+      },
+      "probe1": {
+        "answer": "SLC35F4",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F4",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00274",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A6"
+      },
+      "probe1": {
+        "answer": "SLC6A6",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35F4",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00275",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A14"
+      },
+      "probe1": {
+        "answer": "SLC6A6",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00291",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC39A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A7",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00292",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A7"
+      },
+      "probe1": {
+        "answer": "SLC39A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00293",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC39A7"
+      },
+      "probe1": {
+        "answer": "SLC39A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC39A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00294",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00295",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Human_A375_00296",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC17A5"
+      },
+      "probe1": {
+        "answer": "SLC17A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC17A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00312",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00313",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00314",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00315",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00316",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A11"
+      },
+      "probe1": {
+        "answer": "SLC7A11",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A11",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00317",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC35B2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00318",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B2"
+      },
+      "probe1": {
+        "answer": "SLC35B2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00319",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B2"
+      },
+      "probe1": {
+        "answer": "SLC35B3",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B3",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00320",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B2"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B2",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00321",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00322",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00323",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00324",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC4A3"
+      },
+      "probe1": {
+        "answer": "SLC4A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B3",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00325",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC38A5"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00326",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC38A5"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B3",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00297",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00298",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00299",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC9A1"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00300",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC9A1"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00301",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC9A1"
+      },
+      "probe1": {
+        "answer": "SLC9A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC9A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00302",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00303",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC22A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00304",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC4A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00305",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC22A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00306",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00307",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC4A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00308",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC22A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00309",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC4A7"
+      },
+      "probe1": {
+        "answer": "SLC22A7",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC4A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00310",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC22A7"
+      },
+      "probe1": {
+        "answer": "SLC22A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00311",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC4A7"
+      },
+      "probe1": {
+        "answer": "SLC4A7",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC4A7",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00327",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00328",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00329",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00330",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00331",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC16A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00332",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00333",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00334",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00335",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B1"
+      },
+      "probe1": {
+        "answer": "SLC35B1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00336",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A4",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00337",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00338",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A19"
+      },
+      "probe1": {
+        "answer": "SLC25A19",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A19",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00339",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A4"
+      },
+      "probe1": {
+        "answer": "SLC25A4",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A4",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00340",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A4"
+      },
+      "probe1": {
+        "answer": "SLC25A4",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A4",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_OC_Human_ES2_00341",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC22A12"
+      },
+      "probe1": {
+        "answer": "SLC6A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC22A12",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00342",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35B2"
+      },
+      "probe1": {
+        "answer": "SLC35B2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35B2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_RCA_Human_769P_P53-binding-library_00345",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_negative_TNBC_Human_MCF7_35days_00347",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC6A17"
+      },
+      "probe1": {
+        "answer": "SLC25A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_ALL_Human_CUTLL1_7days_00000",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC7A5"
+      },
+      "probe1": {
+        "answer": "SLC7A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC7A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00047",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00048",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00049",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A2"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00050",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A2"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00051",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A2"
+      },
+      "probe1": {
+        "answer": "SLC35A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC50A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC16A1"
+      },
+      "probe1": {
+        "answer": "SLC16A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC35A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00057",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC35A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00058",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC35A1"
+      },
+      "probe1": {
+        "answer": "SLC35A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC35A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC50A1"
+      },
+      "probe1": {
+        "answer": "SLC50A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC50A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC17A3"
+      },
+      "probe1": {
+        "answer": "SLC17A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC50A1"
+      },
+      "probe1": {
+        "answer": "SLC50A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC50A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00123",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC43A2",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC43A2",
+        "correct": false,
+        "error": null
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00124",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC43A2"
+      },
+      "probe1": {
+        "answer": "SLC43A2",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC43A2",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00125",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC43A2"
+      },
+      "probe1": {
+        "answer": "SLC25A39",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00126",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC26A9",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00127",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A39",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_BRCA_Human_MCF7_TAM_00128",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A39"
+      },
+      "probe1": {
+        "answer": "SLC25A39",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC26A9",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_CML_Human_eHAP_5Days_00144",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC2A1"
+      },
+      "probe1": {
+        "answer": "SLC2A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_CML_Human_eHAP_7Days_00160",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC20A1"
+      },
+      "probe1": {
+        "answer": "SLC20A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC20A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_COAD_Mouse_CT26-HA_T-cell_00161",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A32"
+      },
+      "probe1": {
+        "answer": "SLC25A32",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A32",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_CRC_Human_HT29_Remdesivir_00252",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC29A3"
+      },
+      "probe1": {
+        "answer": "SLC29A3",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC29A3",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_CRC_Human_HT30_HCQ_00253",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC44A4"
+      },
+      "probe1": {
+        "answer": "SLC44A4",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC44A4",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00276",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00277",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00278",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC38A5"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00279",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC38A5"
+      },
+      "probe1": {
+        "answer": "SLC38A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC38A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00280",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC38A5"
+      },
+      "probe1": {
+        "answer": "SLC25A16",
+        "correct": false
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "novel"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00281",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC19A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00282",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00283",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC1A5",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00284",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC1A5"
+      },
+      "probe1": {
+        "answer": "SLC1A5",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A16",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00285",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00286",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00287",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC19A1"
+      },
+      "probe1": {
+        "answer": "SLC19A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A16",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00288",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLCO5A1"
+      },
+      "probe1": {
+        "answer": "SLCO5A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC17A1",
+        "correct": false,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00289",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A16"
+      },
+      "probe1": {
+        "answer": "SLC25A16",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A16",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_MDS_Human_MDS-L_AZA_00290",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A16"
+      },
+      "probe1": {
+        "answer": "SLC25A16",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A16",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    },
+    {
+      "qid": "pairwise_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00344",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC38A1",
+        "correct": false
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC25A26",
+        "correct": true,
+        "error": null
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00343",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC25A26"
+      },
+      "probe1": {
+        "answer": "SLC25A26",
+        "correct": true
+      },
+      "probe2": {
+        "ok": false,
+        "answer": null,
+        "correct": null,
+        "error": "TimeoutError: "
+      },
+      "class": "unstable"
+    },
+    {
+      "qid": "pairwise_positive_STAD_Human_OE19_Lapatinib_00346",
+      "bucket": "pairwise",
+      "gt": {
+        "winner": "SLC30A1"
+      },
+      "probe1": {
+        "answer": "SLC30A1",
+        "correct": true
+      },
+      "probe2": {
+        "ok": true,
+        "answer": "SLC30A1",
+        "correct": true,
+        "error": null
+      },
+      "class": "stable"
+    }
+  ]
+}
