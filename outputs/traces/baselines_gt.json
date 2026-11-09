@@ -1,0 +1,1469 @@
+{
+ "membership_negative_ALL_Human_CUTLL1_Low-2V_00002": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_CUTLL1_Low-2V_00003": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00004": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00005": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00006": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00007": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00008": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00009": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00010": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00011": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00012": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_24h_00013": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00014": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00015": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00016": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00017": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00018": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00019": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00020": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00021": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00022": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00023": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00024": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00025": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00026": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00027": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00028": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00029": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00030": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00031": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00032": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00033": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00034": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00035": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00036": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00037": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00038": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00039": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00040": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00041": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00042": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00043": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00044": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00045": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00046": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00047": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00048": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00049": {
+  "answer": false
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00050": {
+  "answer": true
+ },
+ "membership_negative_ALL_Human_NALM6_36Days_00051": {
+  "answer": false
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060": {
+  "answer": false
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00063": {
+  "answer": true
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00065": {
+  "answer": true
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00069": {
+  "answer": false
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00072": {
+  "answer": false
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00073": {
+  "answer": true
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00074": {
+  "answer": false
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00076": {
+  "answer": true
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00078": {
+  "answer": true
+ },
+ "membership_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00079": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00084": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00085": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00086": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00087": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00088": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00089": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00090": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00091": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00092": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00093": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00094": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_20Days_00095": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00096": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00097": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00098": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00099": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00100": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00101": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00102": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_26Days_00103": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_ICI_00104": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_ICI_00105": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00106": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00107": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00108": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00109": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00110": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00111": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00112": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_JQ1_00113": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00115": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00116": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00118": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00119": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00120": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00121": {
+  "answer": true
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00122": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00123": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00124": {
+  "answer": false
+ },
+ "membership_negative_BRCA_Human_MCF7_TAM_00126": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00128": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00129": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00130": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00133": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00134": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00135": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00136": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_5Days_00137": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00140": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00141": {
+  "answer": true
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00142": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00143": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00144": {
+  "answer": false
+ },
+ "membership_negative_CML_Human_eHAP_7Days_00145": {
+  "answer": true
+ },
+ "membership_negative_COAD_Mouse_MC38-Ova_T-cell_00148": {
+  "answer": false
+ },
+ "membership_negative_COAD_Mouse_MC38-Ova_T-cell_00149": {
+  "answer": true
+ },
+ "membership_negative_GBM_Human_GSC_NSC_00212": {
+  "answer": true
+ },
+ "membership_negative_GBM_Human_GSC_NSC_00213": {
+  "answer": false
+ },
+ "membership_negative_GBM_Human_Neural_stem_cells_NSC_00214": {
+  "answer": true
+ },
+ "membership_negative_GBM_Human_Neural_stem_cells_NSC_00215": {
+  "answer": false
+ },
+ "membership_negative_GBM_Human_Neural_stem_cells_NSC_00216": {
+  "answer": false
+ },
+ "membership_negative_GBM_Human_Neural_stem_cells_NSC_00217": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00218": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00219": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00220": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00221": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00222": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00223": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00224": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00225": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00226": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00227": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00228": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00229": {
+  "answer": true
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00230": {
+  "answer": false
+ },
+ "membership_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00231": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Human_A375_00238": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Human_A375_00239": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Human_A375_00240": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Human_A375_00241": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00258": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00259": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00260": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00261": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00262": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00263": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00264": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00265": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00242": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00243": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00244": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00245": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00246": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00247": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00248": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00249": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00250": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00251": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00252": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00253": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00254": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00255": {
+  "answer": true
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00256": {
+  "answer": false
+ },
+ "membership_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00257": {
+  "answer": false
+ },
+ "membership_negative_OC_Human_ES2_00266": {
+  "answer": true
+ },
+ "membership_negative_OC_Human_ES2_00267": {
+  "answer": false
+ },
+ "membership_negative_OC_Human_ES2_00268": {
+  "answer": false
+ },
+ "membership_negative_OC_Human_ES2_00269": {
+  "answer": true
+ },
+ "membership_negative_OC_Human_ES2_00270": {
+  "answer": false
+ },
+ "membership_negative_OC_Human_ES2_00271": {
+  "answer": true
+ },
+ "membership_negative_OC_Human_ES2_00272": {
+  "answer": true
+ },
+ "membership_negative_OC_Human_ES2_00273": {
+  "answer": true
+ },
+ "membership_negative_OC_Human_ES2_00274": {
+  "answer": false
+ },
+ "membership_negative_OC_Human_ES2_00275": {
+  "answer": false
+ },
+ "membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00276": {
+  "answer": false
+ },
+ "membership_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00277": {
+  "answer": true
+ },
+ "membership_negative_RCA_Human_769P_P53-binding-library_00282": {
+  "answer": true
+ },
+ "membership_negative_RCA_Human_769P_P53-binding-library_00283": {
+  "answer": false
+ },
+ "membership_negative_TNBC_Human_MCF7_35days_00286": {
+  "answer": true
+ },
+ "membership_negative_TNBC_Human_MCF7_35days_00287": {
+  "answer": false
+ },
+ "membership_positive_ALL_Human_CUTLL1_7days_00000": {
+  "answer": false
+ },
+ "membership_positive_ALL_Human_CUTLL1_7days_00001": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00057": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00058": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00062": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00064": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00066": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00067": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00068": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00070": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00071": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00075": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00077": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00080": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00081": {
+  "answer": true
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00082": {
+  "answer": false
+ },
+ "membership_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00083": {
+  "answer": false
+ },
+ "membership_positive_BRCA_Human_MCF7_TAM_00114": {
+  "answer": true
+ },
+ "membership_positive_BRCA_Human_MCF7_TAM_00117": {
+  "answer": true
+ },
+ "membership_positive_BRCA_Human_MCF7_TAM_00125": {
+  "answer": false
+ },
+ "membership_positive_BRCA_Human_MCF7_TAM_00127": {
+  "answer": false
+ },
+ "membership_positive_CML_Human_eHAP_5Days_00131": {
+  "answer": true
+ },
+ "membership_positive_CML_Human_eHAP_5Days_00132": {
+  "answer": false
+ },
+ "membership_positive_CML_Human_eHAP_7Days_00138": {
+  "answer": true
+ },
+ "membership_positive_CML_Human_eHAP_7Days_00139": {
+  "answer": false
+ },
+ "membership_positive_COAD_Mouse_CT26-HA_T-cell_00146": {
+  "answer": false
+ },
+ "membership_positive_COAD_Mouse_CT26-HA_T-cell_00147": {
+  "answer": true
+ },
+ "membership_positive_CRC_Human_HT29_Remdesivir_00208": {
+  "answer": false
+ },
+ "membership_positive_CRC_Human_HT29_Remdesivir_00209": {
+  "answer": true
+ },
+ "membership_positive_CRC_Human_HT30_HCQ_00210": {
+  "answer": false
+ },
+ "membership_positive_CRC_Human_HT30_HCQ_00211": {
+  "answer": true
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00232": {
+  "answer": true
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00233": {
+  "answer": true
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00234": {
+  "answer": false
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00235": {
+  "answer": true
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00236": {
+  "answer": false
+ },
+ "membership_positive_MDS_Human_MDS-L_AZA_00237": {
+  "answer": false
+ },
+ "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00280": {
+  "answer": false
+ },
+ "membership_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00281": {
+  "answer": true
+ },
+ "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00278": {
+  "answer": false
+ },
+ "membership_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00279": {
+  "answer": true
+ },
+ "membership_positive_STAD_Human_OE19_Lapatinib_00284": {
+  "answer": false
+ },
+ "membership_positive_STAD_Human_OE19_Lapatinib_00285": {
+  "answer": true
+ },
+ "pairwise_negative_ALL_Human_CUTLL1_Low-2V_00001": {
+  "winner": "SLC20A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00002": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00003": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00004": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00005": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00006": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00007": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00008": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00009": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00010": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00011": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00012": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00013": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00014": {
+  "winner": "SLC29A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00015": {
+  "winner": "SLC34A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_24h_00016": {
+  "winner": "SLC29A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00017": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00018": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00019": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00020": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00021": {
+  "winner": "SLC5A3"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00022": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00023": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00024": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00025": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00026": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00027": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00028": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00029": {
+  "winner": "SLC23A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00030": {
+  "winner": "SLC23A1"
+ },
+ "pairwise_negative_ALL_Human_NALM6_36Days_00031": {
+  "winner": "SLC44A2"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00032": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00033": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00034": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00035": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00036": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00037": {
+  "winner": "SLC35F2"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00038": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00039": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00040": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00041": {
+  "winner": "SLC35F2"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00042": {
+  "winner": "SLC35F2"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00043": {
+  "winner": "SLC35F2"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00044": {
+  "winner": "SLC41A3"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00045": {
+  "winner": "SLC41A3"
+ },
+ "pairwise_negative_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00046": {
+  "winner": "SLC39A6"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00062": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00063": {
+  "winner": "SLC31A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00064": {
+  "winner": "SLC25A38"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00065": {
+  "winner": "SLC25A38"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00066": {
+  "winner": "SLC25A38"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00067": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00068": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00069": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00070": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00071": {
+  "winner": "SLC31A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00072": {
+  "winner": "SLC31A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00073": {
+  "winner": "SLC31A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00074": {
+  "winner": "SLC39A10"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00075": {
+  "winner": "SLC22A23"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_20Days_00076": {
+  "winner": "SLC39A10"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00077": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00078": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00079": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00080": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00081": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00082": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00083": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00084": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00085": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00086": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00087": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00088": {
+  "winner": "SLC25A51"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00089": {
+  "winner": "SLC25A28"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00090": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_26Days_00091": {
+  "winner": "SLC11A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_ICI_00092": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00093": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00094": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00095": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00096": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00097": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00098": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00099": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00100": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00101": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00102": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00103": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00104": {
+  "winner": "SLC25A1"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00105": {
+  "winner": "SLC6A18"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00106": {
+  "winner": "SLC1A6"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_JQ1_00107": {
+  "winner": "SLC1A6"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00108": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00109": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00110": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00111": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00112": {
+  "winner": "SLC39A9"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00113": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00114": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00115": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00116": {
+  "winner": "SLC25A3"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00117": {
+  "winner": "SLC7A7"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00118": {
+  "winner": "SLC7A7"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00119": {
+  "winner": "SLC7A7"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00120": {
+  "winner": "SLC4A11"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00121": {
+  "winner": "SLC10A6"
+ },
+ "pairwise_negative_BRCA_Human_MCF7_TAM_00122": {
+  "winner": "SLC10A6"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00129": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00130": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00131": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00132": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00133": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00134": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00135": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00136": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00137": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00138": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00139": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00140": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00141": {
+  "winner": "SLC1A6"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00142": {
+  "winner": "SLC2A8"
+ },
+ "pairwise_negative_CML_Human_eHAP_5Days_00143": {
+  "winner": "SLC1A6"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00145": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00146": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00147": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00148": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00149": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00150": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00151": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00152": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00153": {
+  "winner": "SLC3A2"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00154": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00155": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00156": {
+  "winner": "SLC45A3"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00157": {
+  "winner": "SLC12A6"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00158": {
+  "winner": "SLC35C1"
+ },
+ "pairwise_negative_CML_Human_eHAP_7Days_00159": {
+  "winner": "SLC12A6"
+ },
+ "pairwise_negative_COAD_Mouse_MC38-Ova_T-cell_00162": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_negative_GBM_Human_GSC_NSC_00254": {
+  "winner": "SLC30A7"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00255": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00256": {
+  "winner": "SLC35A2"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00257": {
+  "winner": "SLC35A2"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00258": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00259": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_GBM_Human_Neural_stem_cells_NSC_00260": {
+  "winner": "SLC28A3"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00261": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00262": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00263": {
+  "winner": "SLC33A1"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00264": {
+  "winner": "SLC33A1"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00265": {
+  "winner": "SLC33A1"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00266": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00267": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00268": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00269": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00270": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00271": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00272": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00273": {
+  "winner": "SLC6A14"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00274": {
+  "winner": "SLC6A6"
+ },
+ "pairwise_negative_Lymphoma_Mouse_ATM-null_DLBCL_18days_00275": {
+  "winner": "SLC6A14"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00291": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00292": {
+  "winner": "SLC39A7"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00293": {
+  "winner": "SLC39A7"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00294": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00295": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Human_A375_00296": {
+  "winner": "SLC17A5"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00312": {
+  "winner": "SLC7A11"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00313": {
+  "winner": "SLC7A11"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00314": {
+  "winner": "SLC7A11"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00315": {
+  "winner": "SLC7A11"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00316": {
+  "winner": "SLC7A11"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00317": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00318": {
+  "winner": "SLC35B2"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00319": {
+  "winner": "SLC35B2"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00320": {
+  "winner": "SLC35B2"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00321": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00322": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00323": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00324": {
+  "winner": "SLC4A3"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00325": {
+  "winner": "SLC38A5"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_WT_00326": {
+  "winner": "SLC38A5"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00297": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00298": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00299": {
+  "winner": "SLC9A1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00300": {
+  "winner": "SLC9A1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00301": {
+  "winner": "SLC9A1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00302": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00303": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00304": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00305": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00306": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00307": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00308": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00309": {
+  "winner": "SLC4A7"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00310": {
+  "winner": "SLC22A7"
+ },
+ "pairwise_negative_Melanoma_Mouse_Hoxb8_imortalised_GM-CSF_18days_p95H_00311": {
+  "winner": "SLC4A7"
+ },
+ "pairwise_negative_OC_Human_ES2_00327": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_OC_Human_ES2_00328": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_OC_Human_ES2_00329": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_OC_Human_ES2_00330": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_OC_Human_ES2_00331": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_negative_OC_Human_ES2_00332": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_OC_Human_ES2_00333": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_OC_Human_ES2_00334": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_OC_Human_ES2_00335": {
+  "winner": "SLC35B1"
+ },
+ "pairwise_negative_OC_Human_ES2_00336": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_OC_Human_ES2_00337": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_OC_Human_ES2_00338": {
+  "winner": "SLC25A19"
+ },
+ "pairwise_negative_OC_Human_ES2_00339": {
+  "winner": "SLC25A4"
+ },
+ "pairwise_negative_OC_Human_ES2_00340": {
+  "winner": "SLC25A4"
+ },
+ "pairwise_negative_OC_Human_ES2_00341": {
+  "winner": "SLC22A12"
+ },
+ "pairwise_negative_Osteosarcoma_Human_U-2_OS_p53_KO_00342": {
+  "winner": "SLC35B2"
+ },
+ "pairwise_negative_RCA_Human_769P_P53-binding-library_00345": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_negative_TNBC_Human_MCF7_35days_00347": {
+  "winner": "SLC6A17"
+ },
+ "pairwise_positive_ALL_Human_CUTLL1_7days_00000": {
+  "winner": "SLC7A5"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00047": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00048": {
+  "winner": "SLC35A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00049": {
+  "winner": "SLC35A2"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00050": {
+  "winner": "SLC35A2"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00051": {
+  "winner": "SLC35A2"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00052": {
+  "winner": "SLC35A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00053": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00054": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00055": {
+  "winner": "SLC16A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00056": {
+  "winner": "SLC35A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00057": {
+  "winner": "SLC35A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00058": {
+  "winner": "SLC35A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00059": {
+  "winner": "SLC50A1"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00060": {
+  "winner": "SLC17A3"
+ },
+ "pairwise_positive_B-ALL_Synthetic_Daudi-Cas9_High_BTN3A_00061": {
+  "winner": "SLC50A1"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00123": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00124": {
+  "winner": "SLC43A2"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00125": {
+  "winner": "SLC43A2"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00126": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00127": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_BRCA_Human_MCF7_TAM_00128": {
+  "winner": "SLC25A39"
+ },
+ "pairwise_positive_CML_Human_eHAP_5Days_00144": {
+  "winner": "SLC2A1"
+ },
+ "pairwise_positive_CML_Human_eHAP_7Days_00160": {
+  "winner": "SLC20A1"
+ },
+ "pairwise_positive_COAD_Mouse_CT26-HA_T-cell_00161": {
+  "winner": "SLC25A32"
+ },
+ "pairwise_positive_CRC_Human_HT29_Remdesivir_00252": {
+  "winner": "SLC29A3"
+ },
+ "pairwise_positive_CRC_Human_HT30_HCQ_00253": {
+  "winner": "SLC44A4"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00276": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00277": {
+  "winner": "SLC19A1"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00278": {
+  "winner": "SLC38A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00279": {
+  "winner": "SLC38A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00280": {
+  "winner": "SLC38A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00281": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00282": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00283": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00284": {
+  "winner": "SLC1A5"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00285": {
+  "winner": "SLC19A1"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00286": {
+  "winner": "SLC19A1"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00287": {
+  "winner": "SLC19A1"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00288": {
+  "winner": "SLCO5A1"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00289": {
+  "winner": "SLC25A16"
+ },
+ "pairwise_positive_MDS_Human_MDS-L_AZA_00290": {
+  "winner": "SLC25A16"
+ },
+ "pairwise_positive_Osteosarcoma_Human_U-2_OS_WT_Etoposide_00344": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_positive_Osteosarcoma_Human_U-2_OS_p53_KO_Etoposide_00343": {
+  "winner": "SLC25A26"
+ },
+ "pairwise_positive_STAD_Human_OE19_Lapatinib_00346": {
+  "winner": "SLC30A1"
+ }
+}

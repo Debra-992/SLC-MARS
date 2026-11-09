@@ -1,0 +1,31 @@
+# Pipeline, all 489 questions, stratified   A(all)=n489  B(anti-memorization)=n265  (mem=230 pw=259)
+  released configuration (R2 on), evaluated on the full 489: trace-store hit 489/489
+
+===== released configuration (R2 on)  (trace_version=20) =====
+  -- pipeline_heuristic --
+    slice              n   ok  err  abs miss      cov  acc(all)  acc(ans)
+    A-all            489  347  142   0   0  100.0%    71.0%    71.0%
+    A-membership     230  156   74   0   0  100.0%    67.8%    67.8%
+    A-pairwise       259  191   68   0   0  100.0%    73.7%    73.7%
+    B-anti-mem       265  144  121   0   0  100.0%    54.3%    54.3%
+    B-membership     138   78   60   0   0  100.0%    56.5%    56.5%
+    B-pairwise       127   66   61   0   0  100.0%    52.0%    52.0%
+  -- pipeline_auto --
+    slice              n   ok  err  abs miss      cov  acc(all)  acc(ans)
+    A-all            489  344  145   0   0  100.0%    70.3%    70.3%
+    A-membership     230  155   75   0   0  100.0%    67.4%    67.4%
+    A-pairwise       259  189   70   0   0  100.0%    73.0%    73.0%
+    B-anti-mem       265  139  126   0   0  100.0%    52.5%    52.5%
+    B-membership     138   72   66   0   0  100.0%    52.2%    52.2%
+    B-pairwise       127   67   60   0   0  100.0%    52.8%    52.8%
+
+===== baseline reference (same A/B split, accuracy over answered; n = answered count of that slice)
+    system      A-all  answered/acc         B-anti-mem  answered/acc
+    metagpt   n487/489  66.7%       n264/265  47.0%
+    autogen   n485/489  66.3%       n262/265  46.4%
+    pure_llm  n489/489  64.1%       n265/265  33.7%
+    mdagents  n239/489  63.0%       n136/265  54.4%
+    lit_rag   n489/489  58.1%       n265/265  40.3%
+
+
+[written] outputs/traces/pipeline_full489_report.txt

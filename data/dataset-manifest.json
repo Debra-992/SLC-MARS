@@ -1,0 +1,26 @@
+{
+  "schema_version": "slc-formal-dataset-v1",
+  "protocol": "formal-647-v1",
+  "source_sha256": "e3009750115e7a4052ff5acff5a8ed731e5102a336fc8cfaef3c79f98e96c7d9",
+  "questions_sha256": "1705c55cfc7c65b78a30c399023b033765f116dd3437f979208e759d2e533f13",
+  "ground_truth_sha256": "adb85078ead94cd301fe62572a32cb16b95007907f38a61f7e88dbfef68f2c5b",
+  "question_count": 647,
+  "task_counts": {
+    "membership": 288,
+    "pairwise": 348,
+    "topk": 11
+  },
+  "task_type_counts": {
+    "membership_negative": 210,
+    "membership_positive": 78,
+    "pairwise_negative": 266,
+    "pairwise_positive": 82,
+    "topk_negative": 9,
+    "topk_positive": 2
+  },
+  "membership_labels": {
+    "false": 144,
+    "true": 144
+  },
+  "ordering": "qid-lexicographic-v1"
+}

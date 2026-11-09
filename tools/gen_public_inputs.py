@@ -1,0 +1,61 @@
+# -*- coding: utf-8 -*-
+"""Convert every question in data/questions.jsonl into the MCP project_knowledge public whitelist file.
+
+slc_benchmark_context_mcp._public_item reads {"cases":[{"item": SanitizedQuestion,...}]} and
+validates each entry with SanitizedQuestion at load time (extra=forbid / constraints restricted to
+whitelisted keys / the task_type prefix must match task_bucket). This script reproduces exactly the
+same validation locally: a single invalid entry would make the server fail to load the whole file,
+which rejects every qid, so everything is validated before anything is written.
+
+Usage:  python tools/gen_public_inputs.py  [output path]
+"""
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = ROOT / "data" / "questions.jsonl"
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else (ROOT / "outputs" / "mcp-public-inputs-all647.json")
+
+PUBLIC_CONSTRAINTS = {"cancer", "species", "cell_line", "treatment", "method", "family", "k"}
+TASK_BUCKETS = ("topk", "pairwise", "membership")
+ITEM_FIELDS = {"qid", "question", "task_type", "task_bucket", "constraints"}
+
+
+def validate(item: dict) -> None:
+    """Mirror the model + validator constraints of SanitizedQuestion."""
+    if set(item) - ITEM_FIELDS:
+        raise ValueError(f"extra fields: {sorted(set(item) - ITEM_FIELDS)}")
+    if not item.get("qid") or not item.get("question") or not item.get("task_type"):
+        raise ValueError("empty required field")
+    bucket = next((b for b in TASK_BUCKETS if item["task_type"].startswith(b)), "other")
+    if bucket != item.get("task_bucket"):
+        raise ValueError(f"task_type {item['task_type']!r} != bucket {item.get('task_bucket')!r}")
+    unknown = set(item.get("constraints", {})) - PUBLIC_CONSTRAINTS
+    if unknown:
+        raise ValueError(f"non-public constraints: {sorted(unknown)}")
+
+
+def main() -> None:
+    cases = []
+    seen = set()
+    with SRC.open(encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            item = json.loads(line)
+            validate(item)
+            if item["qid"] in seen:
+                raise SystemExit(f"duplicate public qid: {item['qid']}")
+            seen.add(item["qid"])
+            cases.append({"item": item})
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(json.dumps({"cases": cases}, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {len(cases)} cases -> {OUT}")
+
+
+if __name__ == "__main__":
+    main()

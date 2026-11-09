@@ -1,0 +1,19 @@
+# Baseline final values on the clean set  [frozen run 2026-10-28 18:34]  489-question evaluation
+# set (pw 259 / mem 230).  answered = questions the system returned a verdict for.
+  sys       answered  acc(ans) acc(all)     pw       mem    mean tok
+  pure_llm     489     64.1%    63.8%     70.7%    56.6%      2385
+  lit_rag      489     58.1%    57.9%     64.3%    51.1%      2782
+  autogen      485     66.3%    65.6%     68.3%    64.0%      3689
+  metagpt      487     66.7%    66.5%     71.7%    61.1%      2530
+
+# Same-question alignment with the pipeline: the 100-question sample drawn from set A intersects
+# the 489-question set in exactly those 100 questions, so every row below is scored on one common
+# sample.  "pipeline (auto, ...)" is the released configuration; the second row is the same run
+# with the R2 membership re-ranking switched off.
+  arm                          answered     acc
+  pipeline (auto, released)       100    73.0%
+  pipeline (auto, no R2)           99    70.7%
+  pure_llm                         99    64.6%
+  lit_rag                         100    58.0%
+  autogen                         100    67.0%
+  metagpt                         100    64.0%
